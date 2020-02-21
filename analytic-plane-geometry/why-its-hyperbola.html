@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Why is $y=\frac{1}{x}$ a hyperbola?
+</title>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] },
+    TeX: {
+      Macros: {
+        // awesome, i have latex inside javascript inside html inside python
+        // https://xkcd.com/1638/
+        red: [ "\\color{red}{#1}", 1 ],
+        blue: [ "\\color{blue}{#1}", 1 ],
+        green: [ "\\color{green}{#1}", 1 ],
+        maroon: [ "\\color{maroon}{#1}", 1 ],
+        olive: [ "\\color{olive}{#1}", 1 ],
+        purple: [ "\\color{purple}{#1}", 1 ],
+        black: [ "\\color{black}{#1}", 1 ],
+        rcancel: [ "\\require{cancel}\\red{\\cancel{\\black{#1}}}", 1],
+        implies: [ "\\Rightarrow", 0 ]
+      }
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><b>Why is $y=\frac{1}{x}$ a hyperbola?
+</b></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
+<h1 id="why-is-y-frac-1-x-a-hyperbola">Why is $y=\frac{1}{x}$ a hyperbola?<a class="headerlink" href="#why-is-y-frac-1-x-a-hyperbola" title="Link to this title">¶</a></h1><p>On this site, a hyperbola <b>means</b> anything that
+we can get from the curve $x^2-y^2 = 1$ by shifting, stretching and rotating it.</p>
+
+<p><img width="340" height="311" class="asymptote" src="../asymptote/648f0bf830ed61407984babbad42614b.svg" /></p><p>However, if someone says the word "hyperbola", the first thing that comes to my mind is $y=\frac{1}{x}$.</p>
+
+<p><img width="310" height="309" class="asymptote" src="../asymptote/f28bf5a067984c201052eca7d385b4da.svg" /></p><p>These two curves look similar, and it looks like $y=\frac{1}{x}$
+could be something that we can get from $x^2-y^2=1$ by stretching and rotating;
+that is, it could be a hyperbola.
+Next we'll prove that it really is a hyperbola.
+We only show this for the "right halves" of these curves, because the other halves are similar.</p>
+
+<p>We start by rewriting $y=\frac{1}{x}$ as $xy=1$.
+Consider any point $P$ and the area of a rectangle like in the following picture:</p>
+
+<p><img width="367" height="366" class="asymptote" src="../asymptote/a80bea99531a99e2eaff44ac5fe409ea.svg" /></p><p>The area of the rectangle is width times height; that is, $P_xP_y$.
+The equation $xy=1$ means that this area is $1$, no matter which point on $y=\frac{1}{x}$ we choose.</p>
+
+<p>Our goal is to find a hyperbola that also gives $1$ for similar rectangle areas.
+We choose the hyperbola
+$$
+\left(\frac{x}{\sqrt{2}}\right)^2 - \left(\frac{y}{\sqrt{2}}\right)^2 = 1.
+$$
+Let $P=(P_x,P_y)$ be any point on the hyperbola.
+We also draw the two lines $y=x$ and $y=-x$.
+These lines are perpendicular (the product of their slopes is $-1$),
+so we can use them for drawing the rectangle.</p>
+
+<p><img width="570" height="651" class="asymptote" src="../asymptote/c8536b730374b532bde7d777aa17086e.svg" /></p><p>We write the equations of the lines as
+$$
+1x+(-1)y+0=0 \qquad \text{and} \qquad 1x+1y+0=0.
+$$
+TODO: add derivation of the formula used here:
+Now we can use the formula for distance between line and point, and we get
+$$
+\begin{align}
+a &= \frac{|1P_x + (-1)P_y + 0|}{\sqrt{1^2 + (-1)^2}} = \frac{|P_x-P_y|}{\sqrt{2}}, \\
+b &= \frac{|1P_x + 1P_y + 0|}{\sqrt{1^2 + 1^2}} = \frac{|P_x+P_y|}{\sqrt{2}}.
+\end{align}
+$$
+This means that the area is
+$$
+ab = \frac{|(P_x-P_y)(P_x+P_y)|}{\sqrt{2}\sqrt{2}} = \frac{|P_x^2-P_y^2|}{2}.
+$$
+Because $P$ is on the hyperbola, it must satisfy the equation of the hyperbola:
+$$
+\begin{align}
+\left(\frac{P_x}{\sqrt{2}}\right)^2 - \left(\frac{P_y}{\sqrt{2}}\right)^2 &= 1 \\
+\frac{P_x^2}{2} - \frac{P_y^2}{2} &= 1 \\
+P_x^2 - P_y^2 &= 2 \\
+\end{align}
+$$
+Plugging this in, we get
+$$
+ab = \frac{|2|}{2} = 1.
+$$</p>
+
+<p>So, the area of the rectangle is $1$ for any point $P$ on the "right half" of the hyperbola.
+This means that the "right half" of the hyperbola must be just like the "right half" of $y=\frac{1}{x}$,
+but rotated, so $y=\frac{1}{x}$ is a hyperbola.
+</p>
+
+</div>
+</body>
+</html>

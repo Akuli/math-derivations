@@ -1,0 +1,136 @@
+# Why is $y=\frac{1}{x}$ a hyperbola?
+
+On this site, a hyperbola **means** anything that
+we can get from the curve $x^2-y^2 = 1$ by shifting, stretching and rotating it.
+
+asymptote:
+    unitsize(1cm);
+    real size = 5;
+    real f1(real x) { return sqrt(x**2 - 1); }
+    real f2(real x) { return -sqrt(x**2 - 1); }
+
+    axises(-size, size, -size, size);
+    draw(graph(f1, 1, size), blue);
+    draw(graph(f2, 1, size), blue);
+    draw(graph(f1, -size, -1), blue);
+    draw(graph(f2, -size, -1), blue);
+    label(rotate(45)*"$x^2-y^2=1$", (5,4), blue);
+
+    dot((1,0), p=dotpen, L="$(1,0)$", align=NE);
+    dot((-1,0), p=dotpen, L="$(-1,0)$", align=NW);
+
+However, if someone says the word "hyperbola", the first thing that comes to my mind is $y=\frac{1}{x}$.
+
+asymptote:
+    unitsize(1cm);
+    real size = 5;
+    real f(real x) { return 1/x; }
+
+    axises(-size, size, -size, size);
+    draw(graph(f, 1/size, size), blue);
+    draw(graph(f, -size, -1/size), blue);
+    label("$y=\frac{1}{x}$", (-2,-1.5), blue);
+    dot((1,1), p=dotpen, L="$(1,1)$", align=NE);
+
+These two curves look similar, and it looks like $y=\frac{1}{x}$
+could be something that we can get from $x^2-y^2=1$ by stretching and rotating;
+that is, it could be a hyperbola.
+Next we'll prove that it really is a hyperbola.
+We only show this for the "right halves" of these curves, because the other halves are similar.
+
+We start by rewriting $y=\frac{1}{x}$ as $xy=1$.
+Consider any point $P$ and the area of a rectangle like in the following picture:
+
+asymptote:
+    unitsize(3cm);
+    real size = 3;
+    real f(real x) { return 1/x; }
+
+    real xval = 0.5;
+
+    axises(-1, size, -1, size);
+    draw(graph(f, 1/size, size), blue);
+    label("$y=\frac{1}{x}$", (2,0.8), blue);
+
+    filldraw((xval,0)--(xval,1/xval)--(0,1/xval)--(0,0)--cycle, fillpen=gray);
+    dot((xval,1/xval), p=dotpen, L="$P$", align=NE);
+
+The area of the rectangle is width times height; that is, $P_xP_y$.
+The equation $xy=1$ means that this area is $1$, no matter which point on $y=\frac{1}{x}$ we choose.
+
+Our goal is to find a hyperbola that also gives $1$ for similar rectangle areas.
+We choose the hyperbola
+$$
+\left(\frac{x}{\sqrt{2}}\right)^2 - \left(\frac{y}{\sqrt{2}}\right)^2 = 1.
+$$
+Let $P=(P_x,P_y)$ be any point on the hyperbola.
+We also draw the two lines $y=x$ and $y=-x$.
+These lines are perpendicular (the product of their slopes is $-1$),
+so we can use them for drawing the rectangle.
+
+asymptote:
+    unitsize(5cm);
+    real size = 2.2;
+    real f1(real x) { return sqrt(x**2 - 2); }
+    real f2(real x) { return -sqrt(x**2 - 2); }
+    real sqrt2 = sqrt(2) + 0.001;
+    real line1(real x) { return x; }
+    real line2(real x) { return -x; }
+
+    axises(-0.5, size, -size, size);
+    draw(graph(f1, sqrt2, size), blue);
+    draw(graph(f2, sqrt2, size), blue);
+    draw(graph(line2, -0.5, size), deepgreen);
+    draw(graph(line1, -0.5, size), deepgreen);
+
+    label("$\left(\frac{x}{\sqrt{2}}\right)^2 - \left(\frac{y}{\sqrt{2}}\right)^2 = 1$",
+        (size,1.7), blue, align=E);
+    label(rotate(45)*"$y=x$", (size/2,size/2), deepgreen, align=NW);
+    label(rotate(-45)*"$y=-x$", (size/2,-size/2), deepgreen, align=SW);
+
+    dot((sqrt(2),0), p=dotpen, L="$(\sqrt{2},0)$", align=NE);
+
+    pair P = (1.8,f1(1.8));
+    real a = abs(P.x - P.y)/sqrt(2);
+    real b = abs(P.x + P.y)/sqrt(2);
+    pair P1 = (a,0)*expi(-pi/4);
+    pair P2 = (0,b)*expi(-pi/4);
+
+    filldraw(P1--P--P2--(0,0)--cycle, fillpen=gray);
+    dot(P, p=dotpen, L="$P$", align=E);
+
+    label((P + P1)/2, L="$b$", align=SE);
+    label((P + P2)/2, L="$a$", align=NE);
+
+We write the equations of the lines as
+$$
+1x+(-1)y+0=0 \qquad \text{and} \qquad 1x+1y+0=0.
+$$
+TODO: add derivation of the formula used here:
+Now we can use the formula for distance between line and point, and we get
+$$
+\begin{align}
+a &= \frac{|1P_x + (-1)P_y + 0|}{\sqrt{1^2 + (-1)^2}} = \frac{|P_x-P_y|}{\sqrt{2}}, \\
+b &= \frac{|1P_x + 1P_y + 0|}{\sqrt{1^2 + 1^2}} = \frac{|P_x+P_y|}{\sqrt{2}}.
+\end{align}
+$$
+This means that the area is
+$$
+ab = \frac{|(P_x-P_y)(P_x+P_y)|}{\sqrt{2}\sqrt{2}} = \frac{|P_x^2-P_y^2|}{2}.
+$$
+Because $P$ is on the hyperbola, it must satisfy the equation of the hyperbola:
+$$
+\begin{align}
+\left(\frac{P_x}{\sqrt{2}}\right)^2 - \left(\frac{P_y}{\sqrt{2}}\right)^2 &= 1 \\
+\frac{P_x^2}{2} - \frac{P_y^2}{2} &= 1 \\
+P_x^2 - P_y^2 &= 2 \\
+\end{align}
+$$
+Plugging this in, we get
+$$
+ab = \frac{|2|}{2} = 1.
+$$
+
+So, the area of the rectangle is $1$ for any point $P$ on the "right half" of the hyperbola.
+This means that the "right half" of the hyperbola must be just like the "right half" of $y=\frac{1}{x}$,
+but rotated, so $y=\frac{1}{x}$ is a hyperbola.

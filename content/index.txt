@@ -1,1 +1,22 @@
-hi
+# Math Derivations
+
+This site contains derivations of math results that are commonly used in high school math.
+
+
+## Goals and non-goals
+
+The purpose of this site is to share nice ways to understand
+why high school math works like teachers claim.
+As far as I know, the only <strike>people</strike> person reading this is a student,
+but some of this could be useful for teachers as well.
+Most of the derivations are created by [me](https://github.com/Akuli),
+but in most cases, I'm quite sure that I'm not the first person who finds the derivation.
+
+The goal is **not** to start with a set of axioms,
+and then prove everything from the axioms and only from the axioms.
+Instead of axioms, I tend to use things that are intuitively clear.
+For example, consider how I [derive the equation of a line](analytic-plane-geometry/line-eq-normal.html).
+Instead of giving a long list of axioms about lines,
+I write so that it convinces you if you think about what lines look like.
+I also tend to prefer visual things over long calculations,
+although I do the calculations and symbol manipulations when needed.

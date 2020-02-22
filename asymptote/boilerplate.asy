@@ -1,6 +1,11 @@
 // just for convenience in other files
 import graph;
 
+texpreamble("\newcommand{\Vec}[1]{\overrightarrow{#1}}");
+texpreamble("\newcommand{\I}{\vec i}");
+texpreamble("\newcommand{\J}{\vec j}");
+texpreamble("\newcommand{\K}{\vec k}");
+
 // TODO: get rid of corner90 and bracedistance because picture-specific
 //       values turned out to be a better idea
 // TODO: stop using a weird mixture of mm and raw numbers?
@@ -11,7 +16,6 @@ pen darkorange = rgb(0.9,0.4,0);
 real corner90 = 0.3;    // side length of 90° corner boxes
 real vectorarrowsize = 0.7cm;
 real bracedistance = 0.2;
-real tau = 2*pi;
 
 void grid(real xmin, real xmax, real ymin, real ymax) {
     pen thingray = defaultpen() + 1pt + gray;

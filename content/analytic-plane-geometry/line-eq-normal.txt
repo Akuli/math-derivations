@@ -1,0 +1,168 @@
+# Equation of Line in Normal Form
+
+On this page, we'll derive the equation of a line.
+It will be an equation containing the variables $x$ and $y$
+that is true if $(x,y)$ is a point on the line, and false otherwise.
+
+Note that a line is infinitely long.
+However, when drawing lines, we only draw a finitely long part of the line,
+because I can't make an image file with infinitely many pixels and attach it to this site.
+If you want a "finitely long line", it's called a **line segment**.
+
+A **normal vector** of a line is a nonzero vector that is perpendicular to the line.
+
+asymptote:
+    unitsize(1cm);
+
+    real slope = 0.5;
+    real f(real x) { return slope*x + 4; }
+
+    pair draw_normal(real x, real offset) {
+        pair A = (x, f(x));
+        pair B = (x+offset, f(x) - 1/slope * offset);
+        draw(A--B, arrow=Arrow(vectorarrowsize));
+        draw(shift(A)*rrotate(atan(slope))*scale(-0.5 * offset / abs(offset))*((1,0)--(1,1)--(0,1)));
+        return B;
+    }
+
+    draw((-5, f(-5))--(3,f(3)), blue, L="line");
+
+    pair B1 = draw_normal(-1, -1);
+    pair B2 = draw_normal(1, 2);
+
+    label(B1, L="normal vector", align=N);
+    label(B2, L="another normal vector", align=S);
+
+Note that each line has infinitely many different normal vectors.
+
+Consider any line, and let $\vec n$ be one of its normal vectors.
+Let's draw $\vec n$ such that it aligns with the origin $O=(0,0)$.
+
+asymptote:
+    unitsize(1.5cm);
+
+    real slope = 0.5;
+    real h = 4;
+    real f(real x) { return slope*x + h; }
+
+    pair draw_normal(real x, real offset) {
+        pair A = (x, f(x));
+        pair B = (x+offset, f(x) - 1/slope * offset);
+        draw(A--B, arrow=Arrow(vectorarrowsize));
+        draw(shift(A)*rrotate(atan(slope))*scale(-0.5 * offset / abs(offset))*((1,0)--(1,1)--(0,1)));
+        return B;
+    }
+
+    draw((-3, f(-3))--(4.5,f(4.5)), blue);
+
+    real q_offset = -0.8;
+    pair P = (2,f(2));
+    pair Q = (4,f(4) + q_offset);
+
+    real normal_start_x = -h/(slope + 1/slope);
+    real q_line_x = (-h-q_offset)/(slope + 1/slope);
+    pair normal_end = draw_normal(normal_start_x, -1);
+    label("$\vec n$", normal_end, align=N);
+    draw((normal_start_x, f(normal_start_x))--(0,0), p=deepred+smalldashes);
+    label("$p$", (normal_start_x, f(normal_start_x)) / 2, p=deepred, align=W);
+
+    draw((0,0)--P, p=heavygreen, arrow=Arrow(vectorarrowsize), L=Label("$\Vec{OP}$"), align=W);
+    draw((0,0)--Q, p=gray, arrow=Arrow(vectorarrowsize), L=Label("$\Vec{OQ}$"));
+    draw((q_line_x, -1/slope*q_line_x)--Q, p=gray+smalldashes);
+
+    dot((0,0), p=dotpen, L="$O$");
+    dot(P, p=dotpen, L="$P$", align=NW);
+    dot(Q, p=dotpen, L="$Q$");
+
+We notice that the projection of $\Vec{OP}$ onto $\vec n$ is the same for any point $P$ on the line.
+We call this projection $p$.
+In the picture, we have a positive $p$,
+but it could also be zero for a line going through origin,
+or negative in case $\vec n$ points toward the origin.
+
+We also notice that for a point $Q$ not on the line,
+the projection of $\Vec{OQ}$ onto the line will be something else than $p$.
+In the picture, it's less than $p$,
+but it would be greater than $p$ if $Q$ was on the other side of the line.
+
+From these observations, we know that the equation of the line can be written as
+$$
+(\text{projection of (vector from $O$ to $(x,y)$) onto $\vec n$}) = p.
+$$
+The vector from $O$ to $(x,y)$ is $x\I + y\J$.
+Let $a$ and $b$ be the components of $\vec n$; that is, $\vec n = a\I + b\J$.
+From dot products, we know that the projection used above is
+$$
+\frac{(x\I + y\J) \cdot \vec n}{|\vec n|}
+=\frac{(x\I + y\J) \cdot (a\I + b\J)}{|\vec n|}
+=\frac{ax+by}{|\vec n|}.
+$$
+(We can divide by $|\vec n|$ because $\vec n$ is a normal vector,
+and earlier we said that normal vectors are not zero vectors.)
+This means that the equation of the line is
+$$
+\frac{ax+by}{|\vec n|} = p,
+$$
+which can be written as
+$$
+ax+by = p|\vec n|,
+$$
+or
+$$
+ax+by\underbrace{{}-p|\vec n|}_{\text{call this $c$}}=0.
+$$
+By letting $c=-p|\vec n|$, we get the following result.
+
+graybox:
+    Any line has an equation $ax+by+c=0$, where $a\I + b\J$ is a normal vector of the line.
+
+The above equation is called the **normal form** of a line equation,
+because the normal vector appears in it.
+
+Does this go the other way? Is any $ax+by+c=0$ the equation of some line?
+This is **not** the case if both $a$ and $b$ are zero,
+because this corresponds to $\vec n$ being zero vector above;
+that would mean that the equation is just $c=0$,
+which is true for all $(x,y)$ points or for no $(x,y)$ points depending on the value of $c$.
+Hence it's not the equation of any line.
+
+However, **if** we assume that at least one of $a$ and $b$ is nonzero, then
+we can choose a line so that $\vec n=a\I + b\J$ is one of its normal vectors,
+and the line is located so that the projection $p$ above is $-\frac{c}{|\vec n|}$.
+By the above, its equation will then be
+$$
+ax+by-\underbrace{\left( -\frac{c}{|\vec n|} \right)}_p|\vec n| = 0,
+$$
+which simplifies to $ax+by+c=0$.
+
+graybox:
+    If at least one of $a$ and $b$ is nonzero, then $ax+by+c=0$ is the equation of a line,
+    where $a\I + b\J$ is a normal vector of the line.
+
+Examples:
+<ul><li>
+    The equation $3x+4y+5=0$ defines a line. One of its normal vectors is $3\I+4\J$.
+</li><li>
+    Multiplying the equation of the above example by $2$ on both sides gives $6x+8y+10=0$,
+    so $6\I+8\J$ is also a normal vector of the line.
+    This makes sense, because these normal vectors go in the same direction.
+</li><li>
+    We can think of $x$ axis as a line whose equation is $y=0$.
+    That can be rewritten as $0x+1y+0=0$, so $0\I+1\J$ is a normal vector of $x$ axis, which makes sense.
+</li><li>
+    Let's find a line with normal vector $2\I-3\J$ going through point $(4,5)$.
+    The equation of the line is $2x+(-3)y+c=0$, where $c$ is some number.
+    Because the line goes through $(4,5)$, that point must satisfy the equation of the line:
+    $$
+    2 \cdot 4 + (-3) \cdot 5 + c = 0
+    $$
+    From here we can solve $c=7$, so the equation of the line is $2x-3y+7=0$.
+</li></ul>
+
+Notice how in the last example, we used two things for finding the equation of the line:
+the normal vector, and one known point.
+More generally, to find the equation of a line,
+you almost always need to use information about
+what direction the line should go in and where should the line be.
+In this case, the normal vector gives the direction of the line,
+and the known point tells where the line should go.

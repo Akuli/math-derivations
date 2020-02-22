@@ -1,4 +1,4 @@
-# Why is $y=\frac{1}{x}$ a hyperbola?
+# Why is y=1/x a hyperbola?
 
 On this site, a hyperbola **means** anything that
 we can get from the curve $x^2-y^2 = 1$ by shifting, stretching and rotating it.

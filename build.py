@@ -56,7 +56,16 @@ def _create_sidebar_thingy(thisfile, maintitle, folder, names, extra=''):
         if path == thisfile:
             result += '<b>' + titletext + '</b>'
         else:
-            result += '<a href="%s/%s.html">%s</a>' % (folder, name, titletext)
+            # this is an ugly piece of shit, but it works
+            result += '<a href="%s/%s.html">%s</a>' % (
+                os.path.relpath(
+                    folder, os.path.dirname(
+                        os.path.relpath(thisfile, 'content')
+                    )
+                ).replace(os.sep, '/'),
+                name,
+                titletext
+            )
         result += '</li>'
 
     result += '</ul>'
@@ -74,7 +83,7 @@ def get_sidebar_content(txtfile):
     thingy = functools.partial(_create_sidebar_thingy, txtfile)
     return ''.join([
         thingy("Analytic plane geometry", 'analytic-plane-geometry',
-               ['why-its-hyperbola']),
+               ['line-eq-normal', 'line-eq-slope', 'why-its-hyperbola']),
         thingy("", None, '', indexlink),
     ])
 
@@ -95,6 +104,11 @@ builder.get_head_extras = lambda filename: '''
       Macros: {
         // awesome, i have latex inside javascript inside html inside python
         // https://xkcd.com/1638/
+        Vec: [ "\\\\overrightarrow{#1}", 1 ],
+        I: [ "\\\\vec{i}", 0 ],
+        J: [ "\\\\vec{j}", 0 ],
+        K: [ "\\\\vec{k}", 0 ],
+
         red: [ "\\\\color{red}{#1}", 1 ],
         blue: [ "\\\\color{blue}{#1}", 1 ],
         green: [ "\\\\color{green}{#1}", 1 ],

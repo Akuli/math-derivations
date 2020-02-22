@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="style.css">
-<title>hi
+<title>Math Derivations
 </title>
 
 <script type="text/x-mathjax-config">
@@ -19,6 +19,11 @@
       Macros: {
         // awesome, i have latex inside javascript inside html inside python
         // https://xkcd.com/1638/
+        Vec: [ "\\overrightarrow{#1}", 1 ],
+        I: [ "\\vec{i}", 0 ],
+        J: [ "\\vec{j}", 0 ],
+        K: [ "\\vec{k}", 0 ],
+
         red: [ "\\color{red}{#1}", 1 ],
         blue: [ "\\color{blue}{#1}", 1 ],
         green: [ "\\color{green}{#1}", 1 ],
@@ -37,9 +42,28 @@
 </head>
 <body>
 <div id="content">
-<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?
+<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="analytic-plane-geometry/line-eq-normal.html">Equation of Line in Normal Form
+</a></li><li><a href="analytic-plane-geometry/line-eq-slope.html">Equation of Line with Slope
+</a></li><li><a href="analytic-plane-geometry/why-its-hyperbola.html">Why is y=1/x a hyperbola?
 </a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul></div></div>
-<p>hi
+<h1 id="math-derivations">Math Derivations<a class="headerlink" href="#math-derivations" title="Link to this title">¶</a></h1><p>This site contains derivations of math results that are commonly used in high school math.
+</p>
+
+<h2 id="goals-and-non-goals">Goals and non-goals<a class="headerlink" href="#goals-and-non-goals" title="Link to this title">¶</a></h2><p>The purpose of this site is to share nice ways to understand
+why high school math works like teachers claim.
+As far as I know, the only <strike>people</strike> person reading this is a student,
+but some of this could be useful for teachers as well.
+Most of the derivations are created by <a href="https://github.com/Akuli">me</a>,
+but in most cases, I'm quite sure that I'm not the first person who finds the derivation.</p>
+
+<p>The goal is <b>not</b> to start with a set of axioms,
+and then prove everything from the axioms and only from the axioms.
+Instead of axioms, I tend to use things that are intuitively clear.
+For example, consider how I <a href="analytic-plane-geometry/line-eq-normal.html">derive the equation of a line</a>.
+Instead of giving a long list of axioms about lines,
+I write so that it convinces you if you think about what lines look like.
+I also tend to prefer visual things over long calculations,
+although I do the calculations and symbol manipulations when needed.
 </p>
 
 </div>

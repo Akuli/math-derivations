@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Why is $y=\frac{1}{x}$ a hyperbola?
+<title>Why is y=1/x a hyperbola?
 </title>
 
 <script type="text/x-mathjax-config">
@@ -19,6 +19,11 @@
       Macros: {
         // awesome, i have latex inside javascript inside html inside python
         // https://xkcd.com/1638/
+        Vec: [ "\\overrightarrow{#1}", 1 ],
+        I: [ "\\vec{i}", 0 ],
+        J: [ "\\vec{j}", 0 ],
+        K: [ "\\vec{k}", 0 ],
+
         red: [ "\\color{red}{#1}", 1 ],
         blue: [ "\\color{blue}{#1}", 1 ],
         green: [ "\\color{green}{#1}", 1 ],
@@ -37,9 +42,11 @@
 </head>
 <body>
 <div id="content">
-<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><b>Why is $y=\frac{1}{x}$ a hyperbola?
+<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="./line-eq-normal.html">Equation of Line in Normal Form
+</a></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</a></li><li><b>Why is y=1/x a hyperbola?
 </b></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
-<h1 id="why-is-y-frac-1-x-a-hyperbola">Why is $y=\frac{1}{x}$ a hyperbola?<a class="headerlink" href="#why-is-y-frac-1-x-a-hyperbola" title="Link to this title">¶</a></h1><p>On this site, a hyperbola <b>means</b> anything that
+<h1 id="why-is-y-1-x-a-hyperbola">Why is y=1/x a hyperbola?<a class="headerlink" href="#why-is-y-1-x-a-hyperbola" title="Link to this title">¶</a></h1><p>On this site, a hyperbola <b>means</b> anything that
 we can get from the curve $x^2-y^2 = 1$ by shifting, stretching and rotating it.</p>
 
 <p><img width="340" height="311" class="asymptote" src="../asymptote/648f0bf830ed61407984babbad42614b.svg" /></p><p>However, if someone says the word "hyperbola", the first thing that comes to my mind is $y=\frac{1}{x}$.</p>

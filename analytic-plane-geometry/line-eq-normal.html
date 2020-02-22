@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Equation of Line in Normal Form
+</title>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] },
+    TeX: {
+      Macros: {
+        // awesome, i have latex inside javascript inside html inside python
+        // https://xkcd.com/1638/
+        Vec: [ "\\overrightarrow{#1}", 1 ],
+        I: [ "\\vec{i}", 0 ],
+        J: [ "\\vec{j}", 0 ],
+        K: [ "\\vec{k}", 0 ],
+
+        red: [ "\\color{red}{#1}", 1 ],
+        blue: [ "\\color{blue}{#1}", 1 ],
+        green: [ "\\color{green}{#1}", 1 ],
+        maroon: [ "\\color{maroon}{#1}", 1 ],
+        olive: [ "\\color{olive}{#1}", 1 ],
+        purple: [ "\\color{purple}{#1}", 1 ],
+        black: [ "\\color{black}{#1}", 1 ],
+        rcancel: [ "\\require{cancel}\\red{\\cancel{\\black{#1}}}", 1],
+        implies: [ "\\Rightarrow", 0 ]
+      }
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><b>Equation of Line in Normal Form
+</b></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</a></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
+</a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
+<h1 id="equation-of-line-in-normal-form">Equation of Line in Normal Form<a class="headerlink" href="#equation-of-line-in-normal-form" title="Link to this title">¶</a></h1><p>On this page, we'll derive the equation of a line.
+It will be an equation containing the variables $x$ and $y$
+that is true if $(x,y)$ is a point on the line, and false otherwise.</p>
+
+<p>Note that a line is infinitely long.
+However, when drawing lines, we only draw a finitely long part of the line,
+because I can't make an image file with infinitely many pixels and attach it to this site.
+If you want a "finitely long line", it's called a <b>line segment</b>.</p>
+
+<p>A <b>normal vector</b> of a line is a nonzero vector that is perpendicular to the line.</p>
+
+<p><img width="342" height="197" class="asymptote" src="../asymptote/ca2de384cfec9fc25c3a6caec090f1fd.svg" /></p><p>Note that each line has infinitely many different normal vectors.</p>
+
+<p>Consider any line, and let $\vec n$ be one of its normal vectors.
+Let's draw $\vec n$ such that it aligns with the origin $O=(0,0)$.</p>
+
+<p><img width="329" height="279" class="asymptote" src="../asymptote/71649294eb504d9502e7d5223185d1fd.svg" /></p><p>We notice that the projection of $\Vec{OP}$ onto $\vec n$ is the same for any point $P$ on the line.
+We call this projection $p$.
+In the picture, we have a positive $p$,
+but it could also be zero for a line going through origin,
+or negative in case $\vec n$ points toward the origin.</p>
+
+<p>We also notice that for a point $Q$ not on the line,
+the projection of $\Vec{OQ}$ onto the line will be something else than $p$.
+In the picture, it's less than $p$,
+but it would be greater than $p$ if $Q$ was on the other side of the line.</p>
+
+<p>From these observations, we know that the equation of the line can be written as
+$$
+(\text{projection of (vector from $O$ to $(x,y)$) onto $\vec n$}) = p.
+$$
+The vector from $O$ to $(x,y)$ is $x\I + y\J$.
+Let $a$ and $b$ be the components of $\vec n$; that is, $\vec n = a\I + b\J$.
+From dot products, we know that the projection used above is
+$$
+\frac{(x\I + y\J) \cdot \vec n}{|\vec n|}
+=\frac{(x\I + y\J) \cdot (a\I + b\J)}{|\vec n|}
+=\frac{ax+by}{|\vec n|}.
+$$
+(We can divide by $|\vec n|$ because $\vec n$ is a normal vector,
+and earlier we said that normal vectors are not zero vectors.)
+This means that the equation of the line is
+$$
+\frac{ax+by}{|\vec n|} = p,
+$$
+which can be written as
+$$
+ax+by = p|\vec n|,
+$$
+or
+$$
+ax+by\underbrace{{}-p|\vec n|}_{\text{call this $c$}}=0.
+$$
+By letting $c=-p|\vec n|$, we get the following result.</p>
+
+<div class="box graybox"><p>Any line has an equation $ax+by+c=0$, where $a\I + b\J$ is a normal vector of the line.
+</p>
+
+</div><p>The above equation is called the <b>normal form</b> of a line equation,
+because the normal vector appears in it.</p>
+
+<p>Does this go the other way? Is any $ax+by+c=0$ the equation of some line?
+This is <b>not</b> the case if both $a$ and $b$ are zero,
+because this corresponds to $\vec n$ being zero vector above;
+that would mean that the equation is just $c=0$,
+which is true for all $(x,y)$ points or for no $(x,y)$ points depending on the value of $c$.
+Hence it's not the equation of any line.</p>
+
+<p>However, <b>if</b> we assume that at least one of $a$ and $b$ is nonzero, then
+we can choose a line so that $\vec n=a\I + b\J$ is one of its normal vectors,
+and the line is located so that the projection $p$ above is $-\frac{c}{|\vec n|}$.
+By the above, its equation will then be
+$$
+ax+by-\underbrace{\left( -\frac{c}{|\vec n|} \right)}_p|\vec n| = 0,
+$$
+which simplifies to $ax+by+c=0$.</p>
+
+<div class="box graybox"><p>If at least one of $a$ and $b$ is nonzero, then $ax+by+c=0$ is the equation of a line,
+where $a\I + b\J$ is a normal vector of the line.
+</p>
+
+</div><p>Examples:
+<ul><li>
+    The equation $3x+4y+5=0$ defines a line. One of its normal vectors is $3\I+4\J$.
+</li><li>
+    Multiplying the equation of the above example by $2$ on both sides gives $6x+8y+10=0$,
+    so $6\I+8\J$ is also a normal vector of the line.
+    This makes sense, because these normal vectors go in the same direction.
+</li><li>
+    We can think of $x$ axis as a line whose equation is $y=0$.
+    That can be rewritten as $0x+1y+0=0$, so $0\I+1\J$ is a normal vector of $x$ axis, which makes sense.
+</li><li>
+    Let's find a line with normal vector $2\I-3\J$ going through point $(4,5)$.
+    The equation of the line is $2x+(-3)y+c=0$, where $c$ is some number.
+    Because the line goes through $(4,5)$, that point must satisfy the equation of the line:
+    $$
+    2 \cdot 4 + (-3) \cdot 5 + c = 0
+    $$
+    From here we can solve $c=7$, so the equation of the line is $2x-3y+7=0$.
+</li></ul></p>
+
+<p>Notice how in the last example, we used two things for finding the equation of the line:
+the normal vector, and one known point.
+More generally, to find the equation of a line,
+you almost always need to use information about
+what direction the line should go in and where should the line be.
+In this case, the normal vector gives the direction of the line,
+and the known point tells where the line should go.
+</p>
+
+</div>
+</body>
+</html>

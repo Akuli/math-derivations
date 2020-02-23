@@ -20,6 +20,7 @@
         // awesome, i have latex inside javascript inside html inside python
         // https://xkcd.com/1638/
         Vec: [ "\\overrightarrow{#1}", 1 ],
+        abs: [ "\\left| {#1} \\right|", 1 ],
         I: [ "\\vec{i}", 0 ],
         J: [ "\\vec{j}", 0 ],
         K: [ "\\vec{k}", 0 ],
@@ -43,7 +44,9 @@
 <body>
 <div id="content">
 <div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><b>Equation of Line in Normal Form
-</b></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</b></li><li><a href="./distance-line-point.html">Distance between Line and Point
+</a></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</a></li><li><a href="./angle-between-lines.html">Angle Between Lines
 </a></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
 </a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
 <h1 id="equation-of-line-in-normal-form">Equation of Line in Normal Form<a class="headerlink" href="#equation-of-line-in-normal-form" title="Link to this title">¶</a></h1><p>On this page, we'll derive the equation of a line.
@@ -117,7 +120,7 @@ Hence it's not the equation of any line.</p>
 <p>However, <b>if</b> we assume that at least one of $a$ and $b$ is nonzero, then
 we can choose a line so that $\vec n=a\I + b\J$ is one of its normal vectors,
 and the line is located so that the projection $p$ above is $-\frac{c}{|\vec n|}$.
-By the above, its equation will then be
+Its equation will then be
 $$
 ax+by-\underbrace{\left( -\frac{c}{|\vec n|} \right)}_p|\vec n| = 0,
 $$
@@ -150,10 +153,9 @@ where $a\I + b\J$ is a normal vector of the line.
 <p>Notice how in the last example, we used two things for finding the equation of the line:
 the normal vector, and one known point.
 More generally, to find the equation of a line,
-you almost always need to use information about
-what direction the line should go in and where should the line be.
-In this case, the normal vector gives the direction of the line,
-and the known point tells where the line should go.
+you almost always need one known point of the line,
+and some information about what direction the line should go in.
+In this case, the normal vector gives the direction of the line.
 </p>
 
 </div>

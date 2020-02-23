@@ -20,6 +20,7 @@
         // awesome, i have latex inside javascript inside html inside python
         // https://xkcd.com/1638/
         Vec: [ "\\overrightarrow{#1}", 1 ],
+        abs: [ "\\left| {#1} \\right|", 1 ],
         I: [ "\\vec{i}", 0 ],
         J: [ "\\vec{j}", 0 ],
         K: [ "\\vec{k}", 0 ],
@@ -43,7 +44,9 @@
 <body>
 <div id="content">
 <div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="./line-eq-normal.html">Equation of Line in Normal Form
+</a></li><li><a href="./distance-line-point.html">Distance between Line and Point
 </a></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</a></li><li><a href="./angle-between-lines.html">Angle Between Lines
 </a></li><li><b>Why is y=1/x a hyperbola?
 </b></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
 <h1 id="why-is-y-1-x-a-hyperbola">Why is y=1/x a hyperbola?<a class="headerlink" href="#why-is-y-1-x-a-hyperbola" title="Link to this title">¶</a></h1><p>On this site, a hyperbola <b>means</b> anything that
@@ -77,8 +80,7 @@ so we can use them for drawing the rectangle.</p>
 $$
 1x+(-1)y+0=0 \qquad \text{and} \qquad 1x+1y+0=0.
 $$
-TODO: add derivation of the formula used here:
-Now we can use the formula for distance between line and point, and we get
+Now we can use <a href="distance-line-point.html">the formula for distance between line and point</a>, and we get
 $$
 \begin{align}
 a &= \frac{|1P_x + (-1)P_y + 0|}{\sqrt{1^2 + (-1)^2}} = \frac{|P_x-P_y|}{\sqrt{2}}, \\

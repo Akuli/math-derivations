@@ -20,6 +20,7 @@
         // awesome, i have latex inside javascript inside html inside python
         // https://xkcd.com/1638/
         Vec: [ "\\overrightarrow{#1}", 1 ],
+        abs: [ "\\left| {#1} \\right|", 1 ],
         I: [ "\\vec{i}", 0 ],
         J: [ "\\vec{j}", 0 ],
         K: [ "\\vec{k}", 0 ],
@@ -43,17 +44,19 @@
 <body>
 <div id="content">
 <div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="./line-eq-normal.html">Equation of Line in Normal Form
+</a></li><li><a href="./distance-line-point.html">Distance between Line and Point
 </a></li><li><b>Equation of Line with Slope
-</b></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
+</b></li><li><a href="./angle-between-lines.html">Angle Between Lines
+</a></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
 </a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
-<h1 id="equation-of-line-with-slope">Equation of Line with Slope<a class="headerlink" href="#equation-of-line-with-slope" title="Link to this title">¶</a></h1><p>Here are the results of <a href="line-eq-normal.html">the previous derivation</a>:
+<h1 id="equation-of-line-with-slope">Equation of Line with Slope<a class="headerlink" href="#equation-of-line-with-slope" title="Link to this title">¶</a></h1><p>Here's what we know about <a href="line-eq-normal.html">line equation in normal form</a>:
 <ul><li>
 The equation of any line can be written as $ax+by+c=0$, where at least one of $a$ and $b$ is nonzero.
 </li><li>
 Any equation $ax+by+c=0$, where at least one of $a$ and $b$ is nonzero, is the equation of a line.
 </li><li>
 $ax+by+c=0$ is called the normal form of the line equation,
-because $a\I+b\J$ is the normal vector of the line in that.
+because $a\I+b\J$ is the normal vector of the line, and it appears in the equation.
 </li></ul></p>
 
 <p>Let's solve the normal form line equation $ax+by+c=0$ for $y$:
@@ -105,9 +108,10 @@ any normal vector of a vertical line is horizontal and hence has no $\J$ compone
 
 </div><h2 id="meaning-of-s-and-h">Meaning of $s$ and $h$<a class="headerlink" href="#meaning-of-s-and-h" title="Link to this title">¶</a></h2><p>Next we figure out what properties the numbers $s$ and $h$ have in $y=sx+h$.
 By plugging in $x=0$, we get $y=s \cdot 0 + h=h$, so $(0,h)$ is a point on the line.
-This gives an easy way to understand what the $+h$ part of the line equation does.</p>
+This gives an easy way to understand what the $+h$ part of the line equation does:
+it sets the height at which the line intersects the $y$ axis.</p>
 
-<p><img width="214" height="324" class="asymptote" src="../asymptote/1e73e128a8d8fe70bf9a25f355df3c8f.svg" /></p><p>If $h$ is negative, then $(0,h)$ is below the origin.</p>
+<p><img width="214" height="324" class="asymptote" src="../asymptote/01a944f07f59e3599356d69f92a36089.svg" /></p><p>If $h$ is negative, then $(0,h)$ is below the origin.</p>
 
 <p>Next we'll figure out the meaning of $s$, which is called the <b>slope</b> of the line.
 By plugging in $x=1$, we get $y=s1+h=s+h$, so $(1,s+h)$ is also a point on the line.

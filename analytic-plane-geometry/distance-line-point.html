@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Distance between Line and Point
+</title>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] },
+    TeX: {
+      Macros: {
+        // awesome, i have latex inside javascript inside html inside python
+        // https://xkcd.com/1638/
+        Vec: [ "\\overrightarrow{#1}", 1 ],
+        abs: [ "\\left| {#1} \\right|", 1 ],
+        I: [ "\\vec{i}", 0 ],
+        J: [ "\\vec{j}", 0 ],
+        K: [ "\\vec{k}", 0 ],
+
+        red: [ "\\color{red}{#1}", 1 ],
+        blue: [ "\\color{blue}{#1}", 1 ],
+        green: [ "\\color{green}{#1}", 1 ],
+        maroon: [ "\\color{maroon}{#1}", 1 ],
+        olive: [ "\\color{olive}{#1}", 1 ],
+        purple: [ "\\color{purple}{#1}", 1 ],
+        black: [ "\\color{black}{#1}", 1 ],
+        rcancel: [ "\\require{cancel}\\red{\\cancel{\\black{#1}}}", 1],
+        implies: [ "\\Rightarrow", 0 ]
+      }
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="./line-eq-normal.html">Equation of Line in Normal Form
+</a></li><li><b>Distance between Line and Point
+</b></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</a></li><li><a href="./angle-between-lines.html">Angle Between Lines
+</a></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
+</a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
+<h1 id="distance-between-line-and-point">Distance between Line and Point<a class="headerlink" href="#distance-between-line-and-point" title="Link to this title">¶</a></h1><p>On this page, we'll derive the formula for distance between a line and a point,
+given the equation of the line and the coordinates of the point.
+First of all, I <b>don't</b> mean something like this:</p>
+
+<p><img width="228" height="225" class="asymptote" src="../asymptote/b12162a0d34d6a35f07e807618acd47f.svg" /></p><p>The distance must be perpendicularly to the line, like this:</p>
+
+<p><img width="216" height="225" class="asymptote" src="../asymptote/ca6b5f5b15a7719ce8e0fdfb0e420b7e.svg" /></p><p>Let's find the distance between any point $Q$ and any line.
+From <a href="line-eq-normal.html">this line equation derivation</a>,
+we know that the equation of any line can be written as $ax+by+c=0$.
+Here $\vec n = a\I+b\J$ is a normal vector of the line, and
+for any point $P$ on the line, the projection of $\Vec{OP}$ onto $\vec n$ is the same.
+We called it $p$, and we got $c = -p|\vec n|$.
+Let $q$ denote the projection of $\Vec{OQ}$ onto $\vec n$.</p>
+
+<p><img width="401" height="354" class="asymptote" src="../asymptote/944494edb53a6474f0014dadf41cdfc9.svg" /></p><p>In the picture, the distance is $p-q$, but
+if $Q$ was on the other side of the line, it would be $q-p$ instead, because the distance isn't negative.
+In either case, the distance can be written as $|q-p|$.
+This means that we need to calculate $q$ and $p$, and then we'll calculate $|q-p|$ and be done.</p>
+
+<p>Let's start by finding $p$ using $c=-p|\vec n|$,
+which is one of the results we got in the line equation derivation.
+$$
+\begin{align}
+c &= -p|\vec n| \\
+-c &= p|\vec n| \\
+-\frac{c}{|\vec n|} &= p
+\end{align}
+$$
+To find $Q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$ with a dot product:
+$$
+q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
+= \frac{aQ_x+bQ_y}{|\vec n|}
+$$
+Now we can calculate the distance:
+$$
+\begin{align}
+|q-p|
+&= \left|\frac{aQ_x+bQ_y}{|\vec n|} - \left( -\frac{c}{|\vec n|} \right)\right| \\
+&= \left|\frac{aQ_x+bQ_y}{|\vec n|} + \frac{c}{|\vec n|} \right| \\
+&= \left|\frac{aQ_x+bQ_y+c}{|\vec n|} \right| \\
+&= \left|\frac{aQ_x+bQ_y+c}{|a\I+b\J|} \right| \\
+&= \left|\frac{aQ_x+bQ_y+c}{\sqrt{a^2+b^2}} \right| \\
+&= \frac{|aQ_x+bQ_y+c|}{\sqrt{a^2+b^2}}
+\end{align}
+$$
+In the last step, we noticed that it's enough to take the absolute value of the top,
+because the bottom is a square root, which can't be negative.</p>
+
+<div class="box graybox"><p>The distance between a point $Q$ and a line $ax+by+c=0$ is
+$$
+\frac{aQ_x+bQ_y+c}{\sqrt{a^2+b^2}}.
+$$
+</p>
+
+</div><p>Notice how the top of this formula is the coordinates of $Q$ plugged into $ax+by+c$,
+and the bottom is the length of the normal vector $a\I+b\J$.
+This is an easy way to remember the formula.
+</p>
+
+</div>
+</body>
+</html>

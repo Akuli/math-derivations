@@ -26,6 +26,17 @@ asymptote:
 
 Of course, you can take the absolute value if you don't care about the direction of the angle.
 
+Also, note that I'm always drawing the angle to the right of the lines,
+which is **not** same as e.g. this:
+
+asymptote:
+    unitsize(2cm);
+    real s1 = -1, s2 = 1/2;
+
+    draw(-1.5(1,s1)--1.5(1,s1), p=blue, L=rrotate(atan(s1))*Label("line 1", position=Relative(0.2)));
+    draw(-2(1,s2)--2(1,s2), p=deepred, L=rrotate(atan(s2))*Label("line 2", position=Relative(0.2)));
+    draw(rarc((0,0), 0.4, atan(s1)+pi, atan(s2)), L="angle", align=N);
+
 The angle between the lines is always in the open interval $(-180^\circ,180^\circ)$; that is,
 always between $\pm 180^\circ$ but never equal to $\pm 180^\circ$.
 To see why, observe that we get the largest and smallest possible angles in situations like this:
@@ -224,7 +235,7 @@ $$
 }
 = \frac{s_2-s_1}{1+s_1s_2}
 $$
-Recall that we have name for $\frac{\sin}{\cos}$; it's called $\tan$.
+Recall that we have a name for $\frac{\sin}{\cos}$; it's called $\tan$.
 
 graybox:
     The angle $\alpha$
@@ -243,7 +254,6 @@ I mentioned this in the very beginning of this page.
 
 Another obvious issue is division by zero.
 If the lines are perpendicular, we have $s_1s_2 = -1$, and so $1 + s_1s_2 = 0$.
-In this case, the angle should be $\pm 90^\circ$.
 The situation looks like this:
 
 asymptote:
@@ -260,8 +270,9 @@ and the angle from line 1 to line 2 is $90^\circ$
 (it's positive, because it goes counter-clockwise).
 If $s_1$ is positive and $s_2$ is negative, then the angle is $-90^\circ$.
 In either case, the angle is $\pm 90^\circ$, where the sign of the angle is the sign of $s_2$.
-It must be the case that one of the slopes is positive and the other is negative,
-because $s_1 s_2 = -1$; see [perpendicularness check](#perpendicularness-check) above.
+It must be the case that one of the slopes is positive and the other is negative, because $s_1 s_2 = -1$;
+the only way how a product can be negative is that
+one of the numbers being multiplied is positive and the other is negative.
 
 A less obvious issue is that the period of $\tan$ is 180 degrees.
 It means that $\tan$ can't distinguish angles that are 180 degrees apart;

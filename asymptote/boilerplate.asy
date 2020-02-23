@@ -6,16 +6,17 @@ texpreamble("\newcommand{\I}{\vec i}");
 texpreamble("\newcommand{\J}{\vec j}");
 texpreamble("\newcommand{\K}{\vec k}");
 
-// TODO: get rid of corner90 and bracedistance because picture-specific
-//       values turned out to be a better idea
 // TODO: stop using a weird mixture of mm and raw numbers?
 defaultpen(0.8mm + fontsize(25pt));
 pen dotpen = defaultpen() + 0.3cm;
 pen smalldashes = linetype(new real[] {4, 4});
 pen darkorange = rgb(0.9,0.4,0);
-real corner90 = 0.3;    // side length of 90° corner boxes
 real vectorarrowsize = 0.7cm;
-real bracedistance = 0.2;
+
+path brace_with_space(pair a, pair b, real distance) {
+    pair offset = (b-a) / length(b-a) * (0,1) * distance;
+    return brace(a+offset, b+offset);
+}
 
 void grid(real xmin, real xmax, real ymin, real ymax) {
     pen thingray = defaultpen() + 1pt + gray;
@@ -37,14 +38,6 @@ void axises(real xmin, real xmax, real ymin, real ymax,
         draw((0,ymin)--(0,ymax), p=ypen, arrow=Arrow(size=0.7cm));
         label((0,ymax), p=ypen, L=ylabel, align=(ymin < ymax ? NE : SE));
     }
-}
-
-void abctriangle(real x, real y, pen fillcolor=mediumblue) {
-    fill((0,0)--(x,0)--(x,y)--cycle, fillcolor);
-    draw((x-corner90, 0)--(x-corner90, sgn(y)*corner90)--(x, sgn(y)*corner90));
-    draw((0,0)--(x,0), L="$a$", align=(y > 0 ? S : N));
-    draw((x,0)--(x,y), L="$b$", align=E);
-    draw((x,y)--(0,0), L="$c$", align=(y > 0 ? N : S));
 }
 
 /*

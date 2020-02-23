@@ -1,0 +1,127 @@
+# Distance between Line and Point
+
+On this page, we'll derive the formula for distance between a line and a point,
+given the equation of the line and the coordinates of the point.
+First of all, I **don't** mean something like this:
+
+asymptote:
+    unitsize(1.5cm);
+
+    pair f(real x) {
+        return (x, x/2);
+    }
+    pair P = (0,3);
+
+    draw(f(-3)--f(2), p=blue, L=rrotate(atan(1/2))*"line");
+    dot(P, p=dotpen, L="point", align=N);
+    draw(brace_with_space(f(-1), P, 0.2), L="distance", align=W);
+
+The distance must be perpendicularly to the line, like this:
+
+asymptote:
+    unitsize(1.5cm);
+
+    pair f(real x) {
+        return (x, x/2);
+    }
+    pair P = (0,3);
+
+    real perp_x = (1/(f(1).y-f(0).y)*P.x+P.y-f(0).y) / ((f(1).y-f(0).y)+1/(f(1).y-f(0).y));
+
+    draw(f(-3)--f(2), p=blue, L=rrotate(atan(1/2))*"line");
+    draw(P--f(perp_x), p=gray+smalldashes);
+    draw(brace_with_space(f(perp_x), P, 0.4), L="distance", align=W);
+    draw( shift(f(perp_x)) * scale(0.3) * rrotate(atan(f(1).y-f(0).y)) * ((1,0)--(1,1)--(0,1)) );
+
+    dot(P, p=dotpen, L="point", align=N);
+
+Let's find the distance between any point $Q$ and any line.
+From [this line equation derivation](line-eq-normal.html),
+we know that the equation of any line can be written as $ax+by+c=0$.
+Here $\vec n = a\I+b\J$ is a normal vector of the line, and
+for any point $P$ on the line, the projection of $\Vec{OP}$ onto $\vec n$ is the same.
+We called it $p$, and we got $c = -p|\vec n|$.
+Let $q$ denote the projection of $\Vec{OQ}$ onto $\vec n$.
+
+asymptote:
+    unitsize(1.5cm);
+
+    real slope = 0.5;
+    real h = 4;
+    real f(real x) { return slope*x + h; }
+
+    pair draw_normal(real x, real offset) {
+        pair A = (x, f(x));
+        pair B = (x+offset, f(x) - 1/slope * offset);
+        draw(A--B, arrow=Arrow(vectorarrowsize));
+        draw(shift(A)*rrotate(atan(slope))*scale(-0.5 * offset / abs(offset))*((1,0)--(1,1)--(0,1)));
+        return B;
+    }
+
+    draw((-3, f(-3))--(4.5,f(4.5)), blue,
+        L=rrotate(atan(slope))*Label("$ax+by+c=0$", position=Relative(0.9)), align=N);
+
+    real q_offset = -0.8;
+    pair P = (2,f(2));
+    pair Q = (4,f(4) + q_offset);
+
+    real normal_start_x = -h/(slope + 1/slope);
+    real q_line_x = (-h-q_offset)/(slope + 1/slope);
+    pair normal_end = draw_normal(normal_start_x, -1);
+    label("$\vec n$", normal_end, align=N);
+    draw((normal_start_x, f(normal_start_x))--(0,0), p=smalldashes);
+
+    draw(brace_with_space((0,0), (normal_start_x, f(normal_start_x)), 0.9), L="$p$", align=W, p=deepred);
+    draw(brace_with_space((0,0), (q_line_x, -1/slope*q_line_x), 0.2), L="$q$", align=W, p=gray);
+
+    draw((0,0)--P, p=heavygreen, arrow=Arrow(vectorarrowsize), L=Label("$\Vec{OP}$"), align=W);
+    draw((0,0)--Q, p=gray, arrow=Arrow(vectorarrowsize), L=Label("$\Vec{OQ}$"));
+    draw((q_line_x, -1/slope*q_line_x)--Q, p=gray+smalldashes);
+
+    dot((0,0), p=dotpen, L="$O=(0,0)$");
+    dot(P, p=dotpen, L="$P$", align=NW);
+    dot(Q, p=dotpen, L="$Q$");
+
+In the picture, the distance is $p-q$, but
+if $Q$ was on the other side of the line, it would be $q-p$ instead, because the distance isn't negative.
+In either case, the distance can be written as $|q-p|$.
+This means that we need to calculate $q$ and $p$, and then we'll calculate $|q-p|$ and be done.
+
+Let's start by finding $p$ using $c=-p|\vec n|$,
+which is one of the results we got in the line equation derivation.
+$$
+\begin{align}
+c &= -p|\vec n| \\
+-c &= p|\vec n| \\
+-\frac{c}{|\vec n|} &= p
+\end{align}
+$$
+To find $Q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$ with a dot product:
+$$
+q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
+= \frac{aQ_x+bQ_y}{|\vec n|}
+$$
+Now we can calculate the distance:
+$$
+\begin{align}
+|q-p|
+&= \left|\frac{aQ_x+bQ_y}{|\vec n|} - \left( -\frac{c}{|\vec n|} \right)\right| \\
+&= \left|\frac{aQ_x+bQ_y}{|\vec n|} + \frac{c}{|\vec n|} \right| \\
+&= \left|\frac{aQ_x+bQ_y+c}{|\vec n|} \right| \\
+&= \left|\frac{aQ_x+bQ_y+c}{|a\I+b\J|} \right| \\
+&= \left|\frac{aQ_x+bQ_y+c}{\sqrt{a^2+b^2}} \right| \\
+&= \frac{|aQ_x+bQ_y+c|}{\sqrt{a^2+b^2}}
+\end{align}
+$$
+In the last step, we noticed that it's enough to take the absolute value of the top,
+because the bottom is a square root, which can't be negative.
+
+graybox:
+    The distance between a point $Q$ and a line $ax+by+c=0$ is
+    $$
+    \frac{aQ_x+bQ_y+c}{\sqrt{a^2+b^2}}.
+    $$
+
+Notice how the top of this formula is the coordinates of $Q$ plugged into $ax+by+c$,
+and the bottom is the length of the normal vector $a\I+b\J$.
+This is an easy way to remember the formula.

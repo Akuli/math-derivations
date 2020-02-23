@@ -129,7 +129,7 @@ Hence it's not the equation of any line.
 However, **if** we assume that at least one of $a$ and $b$ is nonzero, then
 we can choose a line so that $\vec n=a\I + b\J$ is one of its normal vectors,
 and the line is located so that the projection $p$ above is $-\frac{c}{|\vec n|}$.
-By the above, its equation will then be
+Its equation will then be
 $$
 ax+by-\underbrace{\left( -\frac{c}{|\vec n|} \right)}_p|\vec n| = 0,
 $$
@@ -162,7 +162,6 @@ Examples:
 Notice how in the last example, we used two things for finding the equation of the line:
 the normal vector, and one known point.
 More generally, to find the equation of a line,
-you almost always need to use information about
-what direction the line should go in and where should the line be.
-In this case, the normal vector gives the direction of the line,
-and the known point tells where the line should go.
+you almost always need one known point of the line,
+and some information about what direction the line should go in.
+In this case, the normal vector gives the direction of the line.

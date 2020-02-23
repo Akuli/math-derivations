@@ -1,13 +1,13 @@
 # Equation of Line with Slope
 
-Here are the results of [the previous derivation](line-eq-normal.html):
+Here's what we know about [line equation in normal form](line-eq-normal.html):
 <ul><li>
 The equation of any line can be written as $ax+by+c=0$, where at least one of $a$ and $b$ is nonzero.
 </li><li>
 Any equation $ax+by+c=0$, where at least one of $a$ and $b$ is nonzero, is the equation of a line.
 </li><li>
 $ax+by+c=0$ is called the normal form of the line equation,
-because $a\I+b\J$ is the normal vector of the line in that.
+because $a\I+b\J$ is the normal vector of the line, and it appears in the equation.
 </li></ul>
 
 Let's solve the normal form line equation $ax+by+c=0$ for $y$:
@@ -78,7 +78,7 @@ asymptote:
         align=N, p=blue);
 
     dot((0,f(0)), L="$(0,h)$", p=dotpen, align=NW);
-    draw(brace((0.1, f(0)), (0.1, 0)), L="$h$", align=E, p=purple);
+    draw(brace_with_space((0, f(0)), (0, 0), 0.1), L="$h$", align=E, p=purple);
 
 If $h$ is negative, then $(0,h)$ is below the origin.
 

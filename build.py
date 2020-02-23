@@ -83,7 +83,9 @@ def get_sidebar_content(txtfile):
     thingy = functools.partial(_create_sidebar_thingy, txtfile)
     return ''.join([
         thingy("Analytic plane geometry", 'analytic-plane-geometry',
-               ['line-eq-normal', 'line-eq-slope', 'why-its-hyperbola']),
+               ['line-eq-normal', 'distance-line-point',
+                'line-eq-slope',
+                'why-its-hyperbola']),
         thingy("", None, '', indexlink),
     ])
 
@@ -252,7 +254,9 @@ def canvaswrapper_link(match, filename):
 
 
 builder.run()
-linkcheck.run(builder.outputdir)
+
+# FIXME: linkcheck doesn't understand relative stuff, it's annoying
+#linkcheck.run(builder.outputdir)
 
 # tell github pages to do the right thing
 open(os.path.join(builder.outputdir, '.nojekyll'), 'x').close()

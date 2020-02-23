@@ -106,8 +106,7 @@ We write the equations of the lines as
 $$
 1x+(-1)y+0=0 \qquad \text{and} \qquad 1x+1y+0=0.
 $$
-TODO: add derivation of the formula used here:
-Now we can use the formula for distance between line and point, and we get
+Now we can use [the formula for distance between line and point](distance-line-point.html), and we get
 $$
 \begin{align}
 a &= \frac{|1P_x + (-1)P_y + 0|}{\sqrt{1^2 + (-1)^2}} = \frac{|P_x-P_y|}{\sqrt{2}}, \\

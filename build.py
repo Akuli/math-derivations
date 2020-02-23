@@ -84,7 +84,7 @@ def get_sidebar_content(txtfile):
     return ''.join([
         thingy("Analytic plane geometry", 'analytic-plane-geometry',
                ['line-eq-normal', 'distance-line-point',
-                'line-eq-slope',
+                'line-eq-slope', 'angle-between-lines',
                 'why-its-hyperbola']),
         thingy("", None, '', indexlink),
     ])
@@ -107,6 +107,7 @@ builder.get_head_extras = lambda filename: '''
         // awesome, i have latex inside javascript inside html inside python
         // https://xkcd.com/1638/
         Vec: [ "\\\\overrightarrow{#1}", 1 ],
+        abs: [ "\\\\left| {#1} \\\\right|", 1 ],
         I: [ "\\\\vec{i}", 0 ],
         J: [ "\\\\vec{j}", 0 ],
         K: [ "\\\\vec{k}", 0 ],

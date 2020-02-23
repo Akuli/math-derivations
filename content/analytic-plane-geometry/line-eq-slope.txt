@@ -62,7 +62,8 @@ graybox:
 
 Next we figure out what properties the numbers $s$ and $h$ have in $y=sx+h$.
 By plugging in $x=0$, we get $y=s \cdot 0 + h=h$, so $(0,h)$ is a point on the line.
-This gives an easy way to understand what the $+h$ part of the line equation does.
+This gives an easy way to understand what the $+h$ part of the line equation does:
+it sets the height at which the line intersects the $y$ axis.
 
 asymptote:
     unitsize(3cm);

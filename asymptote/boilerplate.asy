@@ -76,5 +76,9 @@ path rarc(pair c, real r, real angle1, real angle2) { return arc(c, r, degrees(a
 transform rrotate(real angle) { return rotate(degrees(angle)); }
 transform rrotate(real angle, pair z) { return rotate(degrees(angle), z); }
 
+pair cis(real angle) {
+    return (cos(angle), sin(angle));
+}
+
 // from python
 real e = 2.718281828459045;

@@ -89,7 +89,7 @@ $$
 where $|\alpha|$ is the angle between the vectors.
 We need absolute value here, because the angle between two vectors can't be negative,
 but $\alpha$ can be negative, and that just means that it goes in a different direction (see above).
-Solving the above for $\cos(\abs{\alpha})$, we get
+Solving for $\cos(\abs{\alpha})$, we get
 $$
 \begin{align}
 \cos(\abs{\alpha})

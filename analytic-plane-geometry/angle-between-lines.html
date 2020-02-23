@@ -46,6 +46,7 @@
 <div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="./line-eq-normal.html">Equation of Line in Normal Form
 </a></li><li><a href="./distance-line-point.html">Distance between Line and Point
 </a></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</a></li><li><a href="./line-eq-slope-and-point.html">Equation of Line from Known Slope and Point
 </a></li><li><b>Angle Between Lines
 </b></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
 </a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
@@ -59,7 +60,10 @@ we need to go in the opposite direction and our angle is <b>negative</b>:</p>
 
 <p><img width="404" height="173" class="asymptote" src="../asymptote/5ddba4d143ca743a323c59987221a61d.svg" /></p><p>Of course, you can take the absolute value if you don't care about the direction of the angle.</p>
 
-<p>The angle between the lines is always in the open interval $(-180^\circ,180^\circ)$; that is,
+<p>Also, note that I'm always drawing the angle to the right of the lines,
+which is <b>not</b> same as e.g. this:</p>
+
+<p><img width="230" height="173" class="asymptote" src="../asymptote/8f1a82ee5a4a480e199000c14db9ca7d.svg" /></p><p>The angle between the lines is always in the open interval $(-180^\circ,180^\circ)$; that is,
 always between $\pm 180^\circ$ but never equal to $\pm 180^\circ$.
 To see why, observe that we get the largest and smallest possible angles in situations like this:</p>
 
@@ -191,7 +195,7 @@ $$
 }
 = \frac{s_2-s_1}{1+s_1s_2}
 $$
-Recall that we have name for $\frac{\sin}{\cos}$; it's called $\tan$.</p>
+Recall that we have a name for $\frac{\sin}{\cos}$; it's called $\tan$.</p>
 
 <div class="box graybox"><p>The angle $\alpha$
 from a non-vertical line with slope $s_1$ to a non-vertical line with slope $s_2$ satisfies
@@ -207,7 +211,6 @@ I mentioned this in the very beginning of this page.</p>
 
 <p>Another obvious issue is division by zero.
 If the lines are perpendicular, we have $s_1s_2 = -1$, and so $1 + s_1s_2 = 0$.
-In this case, the angle should be $\pm 90^\circ$.
 The situation looks like this:</p>
 
 <p><img width="433" height="241" class="asymptote" src="../asymptote/10fed7a02b807f6fb469e58d4fc8e681.svg" /></p><p>In this picture, $s_1$ is negative and $s_2$ is positive,
@@ -215,8 +218,9 @@ and the angle from line 1 to line 2 is $90^\circ$
 (it's positive, because it goes counter-clockwise).
 If $s_1$ is positive and $s_2$ is negative, then the angle is $-90^\circ$.
 In either case, the angle is $\pm 90^\circ$, where the sign of the angle is the sign of $s_2$.
-It must be the case that one of the slopes is positive and the other is negative,
-because $s_1 s_2 = -1$; see <a href="#perpendicularness-check">perpendicularness check</a> above.</p>
+It must be the case that one of the slopes is positive and the other is negative, because $s_1 s_2 = -1$;
+the only way how a product can be negative is that
+one of the numbers being multiplied is positive and the other is negative.</p>
 
 <p>A less obvious issue is that the period of $\tan$ is 180 degrees.
 It means that $\tan$ can't distinguish angles that are 180 degrees apart;

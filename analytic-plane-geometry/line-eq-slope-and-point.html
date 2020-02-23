@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Equation of Line from Known Slope and Point
+</title>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] },
+    TeX: {
+      Macros: {
+        // awesome, i have latex inside javascript inside html inside python
+        // https://xkcd.com/1638/
+        Vec: [ "\\overrightarrow{#1}", 1 ],
+        abs: [ "\\left| {#1} \\right|", 1 ],
+        I: [ "\\vec{i}", 0 ],
+        J: [ "\\vec{j}", 0 ],
+        K: [ "\\vec{k}", 0 ],
+
+        red: [ "\\color{red}{#1}", 1 ],
+        blue: [ "\\color{blue}{#1}", 1 ],
+        green: [ "\\color{green}{#1}", 1 ],
+        maroon: [ "\\color{maroon}{#1}", 1 ],
+        olive: [ "\\color{olive}{#1}", 1 ],
+        purple: [ "\\color{purple}{#1}", 1 ],
+        black: [ "\\color{black}{#1}", 1 ],
+        rcancel: [ "\\require{cancel}\\red{\\cancel{\\black{#1}}}", 1],
+        implies: [ "\\Rightarrow", 0 ]
+      }
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="./line-eq-normal.html">Equation of Line in Normal Form
+</a></li><li><a href="./distance-line-point.html">Distance between Line and Point
+</a></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</a></li><li><b>Equation of Line from Known Slope and Point
+</b></li><li><a href="./angle-between-lines.html">Angle Between Lines
+</a></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
+</a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
+<h1 id="equation-of-line-from-known-slope-and-point">Equation of Line from Known Slope and Point<a class="headerlink" href="#equation-of-line-from-known-slope-and-point" title="Link to this title">¶</a></h1><p>Let's find the equation of a line with slope $2$ going through the point $(3,5)$.
+The equation is $y = 2x+h$, where $h$ is an unknown number.
+The point $(3,4)$ must be on the line, so it must satisfy the equation of the line:
+$$
+5 = 2 \cdot 3 + h
+$$
+From here we can solve $h = -1$, so the equation is $y = 2x-1$.</p>
+
+<p>While this method works, it involves solving an equation, although the equation is very simple.
+We can improve on this a little bit by doing the above work more generally,
+and then just using the results later.</p>
+
+<p>Let's find the equation of a line with slope $s$ going through the point $P=(P_x,P_y)$.
+The equation is $y = sx+h$, where $h$ is an unknown number
+The point $P$ must be on the line, so it must satisfy the equation of the line:
+$$
+\begin{align}
+P_y &= sP_x + h \\
+P_y - sP_x &= h
+\end{align}
+$$
+We can plug this into the line equation:
+$$
+\begin{align}
+y &= sx+h \\
+y &= sx+P_y-sP_x \\
+y-P_y &= sx-sP_x \\
+y-P_y &= s(x-P_x)
+\end{align}
+$$</p>
+
+<div class="box graybox"><p>The equation of a line with slope $s$ going through point $P$ is
+$$
+y-P_y = s(x-P_x).
+$$
+</p>
+
+</div><p>Let me show a different way to think about this formula.
+From <a href="line-eq-slope.html">the slope line equation derivation</a>,
+we know that a nonzero vector $\vec d$ goes in the direction of the line
+if and only if $\frac{d_y}{d_x} = s$.
+We also see that a point $(x,y)$ is on the line
+if and only if the vector from $P$ to $(x,y)$ is in the direction of the line.</p>
+
+<p><img width="287" height="171" class="asymptote" src="../asymptote/e9c21b69613cb3d7e6fc485f6c9ef090.svg" /></p><p><img width="287" height="168" class="asymptote" src="../asymptote/ba06238153b784a8e9f7c6f2a29027e7.svg" /></p><p>The vector from $P$ to $(x,y)$ is $(x-P_x)\I + (y-P_y)\J$.
+By combining these results, we see that $(x,y)$ is on the line if and only if
+$$
+\frac{y-P_y}{x-P_x} = s,
+$$
+which can be rewritten as
+$$
+y - P_y = s(x - P_x).
+$$
+The above derivation doesn't work for $x = P_x$, because then it divides by zero.
+In that case, the right side of the resulting equation is zero, and so the equation becomes just $y = P_y$,
+which is indeed true if and only if $P$ is a point on the line
+(the line isn't vertical, because it has a slope).</p>
+
+<p><img width="457" height="172" class="asymptote" src="../asymptote/8ba61cddeb26c72a6b4472dfdb713dca.svg" /></p></div>
+</body>
+</html>

@@ -63,7 +63,7 @@ asymptote:
     draw(shift(0.6,0.5) * ((0,0)--(1,s2)), L="$\vec b$", align=N,
         arrow=Arrow(vectorarrowsize));
 
-Next we consider the dot product $a \cdot b$.
+Next we consider the dot product $\vec a \cdot \vec b$.
 We know that the dot product is zero if and only if $\vec a$ and $\vec b$ are perpendicular to each other.
 These vectors go in the directions of the lines, so
 here's the condition for the perpendicularity of the lines:
@@ -84,7 +84,7 @@ graybox:
 
 Another thing that we know about dot products is that
 $$
-\vec a \cdot \vec b = \abs{\vec a} \abs{\vec b} \cos(\alpha),
+\vec a \cdot \vec b = \abs{\vec a} \abs{\vec b} \cos(\abs{\alpha}),
 $$
 where $|\alpha|$ is the angle between the vectors.
 We need absolute value here, because the angle between two vectors can't be negative,
@@ -173,7 +173,7 @@ $$
 = \abs{\vec a} \abs{\vec b} \sin(\abs{\alpha}).
 $$
 This equation also holds if we remove both absolute value bars.
-Explaining why is quite straight-forward and not very interesting, so we'll skip that.
+Explaining why is straight-forward but also somewhat long and boring, so we'll skip that.
 Let me know if you are interested in the skipped details.
 $$
 \det\begin{bmatrix}

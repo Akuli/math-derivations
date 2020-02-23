@@ -65,7 +65,7 @@ $$
 $$
 Let $P=(P_x,P_y)$ be any point on the hyperbola.
 We also draw the two lines $y=x$ and $y=-x$.
-These lines are perpendicular (the product of their slopes is $-1$),
+These lines are perpendicular ([the product of their slopes is $-1$](angle-between-lines.html#perpendicularness-check)),
 so we can use them for drawing the rectangle.
 
 asymptote:

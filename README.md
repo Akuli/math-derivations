@@ -19,4 +19,4 @@ $ . env/bin/activate
 Run these commands from the virtualenv as needed:
 
 - Building into `html` directory: `python3 build.py`
-- Publishing to github pages: build first, then run `python3 publish.py`
+- Publishing to github pages: `python3 publish.py`

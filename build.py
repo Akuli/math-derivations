@@ -84,7 +84,8 @@ def get_sidebar_content(txtfile):
     return ''.join([
         thingy("Analytic plane geometry", 'analytic-plane-geometry',
                ['line-eq-normal', 'distance-line-point',
-                'line-eq-slope', 'angle-between-lines',
+                'line-eq-slope', 'line-eq-slope-and-point',
+                'angle-between-lines',
                 'why-its-hyperbola']),
         thingy("", None, '', indexlink),
     ])

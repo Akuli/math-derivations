@@ -183,7 +183,7 @@ $$
 \end{bmatrix}}
 = \abs{\vec a} \abs{\vec b} \sin(\abs{\alpha}).
 $$
-This equation also holds if we remove both absolute value bars.
+This equation also holds if we remove both absolute values.
 Explaining why is straight-forward but also somewhat long and boring, so we'll skip that.
 Let me know if you are interested in the skipped details.
 $$
@@ -263,7 +263,7 @@ asymptote:
     draw(-2(1,s1)--2(1,s1), p=blue, L=rrotate(atan(s1))*Label("line 1", position=Relative(0.2)));
     draw(-2(1,s2)--2(1,s2), p=deepred, L=rrotate(atan(s2))*Label("line 2", position=Relative(0.2)));
     draw(rrotate(atan(s1) + pi)*scale(0.5)*((0,1)--(1,1)--(1,0)));
-    draw(rarc((0,0), 0.7, atan(s1), atan(s2)), L="angle between line 1 and line 2", align=E, arrow=Arrow(0.3cm));
+    draw(rarc((0,0), 0.7, atan(s1), atan(s2)), L="angle from line 1 to line 2", align=E, arrow=Arrow(0.3cm));
 
 In this picture, $s_1$ is negative and $s_2$ is positive,
 and the angle from line 1 to line 2 is $90^\circ$

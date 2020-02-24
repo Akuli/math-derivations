@@ -86,6 +86,7 @@ def get_sidebar_content(txtfile):
                ['line-eq-normal', 'distance-line-point',
                 'line-eq-slope', 'line-eq-slope-and-point',
                 'angle-between-lines',
+                'line-eq-determinant',
                 'why-its-hyperbola']),
         thingy("", None, '', indexlink),
     ])

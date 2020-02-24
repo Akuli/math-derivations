@@ -1,0 +1,111 @@
+# Equation of Line with Determinant
+
+Let's say that we want the equation of a line going through point $P$
+in the direction of a nonzero vector $\vec d$.
+We know that the [slope of the line](line-eq-slope.html) is $\frac{d_y}{d_x}$,
+so by plugging into [this result](line-eq-slope-and-point.html), we get
+$$
+y - P_y = \frac{d_y}{d_x}(x - P_x).
+$$
+This method doesn't work if $d_x = 0$; that is, when $\vec d$ is vertical.
+In that case, the line is also vertical, so its equation is simply $x = P_x$.
+On this page, we'll use determinants to find the line equation in a way that works the same in both cases.
+
+We see that a point $(x,y)$ is on the line
+if and only if the vector from $P$ to $(x,y)$ is in the direction of the line.
+
+asymptote:
+    unitsize(2.5cm);
+
+    real slope = 1/2;
+    pair xy = 2(1,slope);
+
+    draw(-1(1,slope)--3(1,slope), p=blue);
+    dot((0,0), L="$P$", align=NW, p=dotpen);
+    dot(xy, L="$(x,y)$", align=NW, p=dotpen);
+
+    draw(((0,0) + 0.1(1, -1/slope))--(xy + 0.1(1, -1/slope)), p=deepgreen, arrow=Arrow(5mm),
+        L=rrotate(atan2(xy.y, xy.x))*Label("vector from $P$ to $(x,y)$"));
+
+asymptote:
+    unitsize(2.5cm);
+
+    real slope = 1/2;
+    pair xy = 2(1,slope-0.2);
+
+    draw(-1(1,slope)--3(1,slope), p=blue);
+    dot((0,0), L="$P$", align=NW, p=dotpen);
+    dot(xy, L="$(x,y)$", align=NE, p=dotpen);
+
+    draw(((0,0) + 0.1(1, -1/slope))--(xy + 0.1(1, -1/slope)), p=deepred, arrow=Arrow(5mm),
+        L=rrotate(atan2(xy.y, xy.x))*Label("vector from $P$ to $(x,y)$"));
+
+Let $\vec d$ be any nonzero vector going in the direction of the line.
+Now the vector from $P$ to $(x,y)$ goes in the direction of the line
+if and only if it's collinear with $\vec d$.
+That's true if and only if the parallelogram created by $\vec d$
+and the vector from $P$ to $(x,y)$ is "flat".
+
+asymptote:
+    unitsize(2.5cm);
+
+    real slope = 1/2;
+    pair xy = 2(1,slope-0.2);
+
+    draw(-1(1,slope)--3(1,slope), p=blue);
+    dot((0,0), L="$P$", align=NW, p=dotpen);
+    dot(xy, L="$(x,y)$", align=NE, p=dotpen);
+
+    pair offset = 0.3(1, -1/slope);
+    pair d_end = (1, slope);
+
+    fill(offset--(d_end + offset)--(d_end + xy + offset)--(xy + offset)--cycle, lightgreen);
+    draw(offset--(xy + offset), p=deepred, arrow=Arrow(5mm),
+        L=rrotate(atan2(xy.y, xy.x))*Label("vector from $P$ to $(x,y)$"));
+    draw(offset--(d_end + offset), arrow=Arrow(5mm), L="$\vec d$", align=N);
+
+asymptote:
+    unitsize(2.5cm);
+
+    real slope = 1/2;
+    pair xy = 2(1,slope);
+
+    draw(-1(1,slope)--3(1,slope), p=blue);
+    dot((0,0), L="$P$", align=NW, p=dotpen);
+    dot(xy, L="$(x,y)$", align=NW, p=dotpen);
+
+    pair offset = 0.3(1, -1/slope);
+    pair d_end = (1, slope);
+
+    fill(offset--(d_end + offset)--(d_end + xy + offset)--(xy + offset)--cycle, lightgreen);
+    draw(offset--(xy + offset), p=deepred, arrow=Arrow(5mm),
+        L=rrotate(atan2(xy.y, xy.x))*Label("vector from $P$ to $(x,y)$"));
+    draw(offset--(d_end + offset), arrow=Arrow(5mm), L="$\vec d$", align=N);
+
+The parallelogram is "flat" if and only if the determinant with the vectors as rows is zero.
+The vector from $P$ to $(x,y)$ is $(x-P_x)\I + (y-P_y)\J$.
+From all this, we see that $(x,y)$ is on the line if and only if
+$$
+\det\begin{bmatrix} x-P_x & y-P_y \\ d_x & d_y \end{bmatrix} = 0.
+$$
+
+graybox:
+    The equation of a line going in direction of a nonzero vector $\vec d$ through point $P$ is
+    $$
+    \det\begin{bmatrix} x-P_x & y-P_y \\ d_x & d_y \end{bmatrix} = 0.
+    $$
+
+If we know two points of the line, $P$ and $Q$, then we can choose
+$$
+\vec d = \Vec{PQ} = (Q_x-P_x)\I + (Q_y-P_y)\J.
+$$
+This must not be the zero vector, so we need $P \ne Q$.
+
+graybox:
+    The equation of a line going through two different points $P$ and $Q$ is
+    $$
+    \det\begin{bmatrix} x-P_x & y-P_y \\ Q_x-P_x & Q_y-P_y \end{bmatrix} = 0.
+    $$
+
+The line going through $P$ and $Q$ is same as the line going through $Q$ and $P$.
+This means that in the above result, it doesn't matter which point is $P$ and which is $Q$.

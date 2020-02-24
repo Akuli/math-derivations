@@ -1,6 +1,14 @@
 #!/bin/bash
 
-while true; do
-    inotifywait -e CLOSE_WRITE content/*.txt content/*/*.txt *.py asymptote/*.asy
+build()
+{
     python3 build.py
-done
+}
+
+wait()
+{
+    inotifywait -e CLOSE_WRITE content/*.txt content/*/*.txt *.py asymptote/*.asy
+}
+
+build
+while wait; do build; done

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Equation of Line with Determinant
+</title>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] },
+    TeX: {
+      Macros: {
+        // awesome, i have latex inside javascript inside html inside python
+        // https://xkcd.com/1638/
+        Vec: [ "\\overrightarrow{#1}", 1 ],
+        abs: [ "\\left| {#1} \\right|", 1 ],
+        I: [ "\\vec{i}", 0 ],
+        J: [ "\\vec{j}", 0 ],
+        K: [ "\\vec{k}", 0 ],
+
+        red: [ "\\color{red}{#1}", 1 ],
+        blue: [ "\\color{blue}{#1}", 1 ],
+        green: [ "\\color{green}{#1}", 1 ],
+        maroon: [ "\\color{maroon}{#1}", 1 ],
+        olive: [ "\\color{olive}{#1}", 1 ],
+        purple: [ "\\color{purple}{#1}", 1 ],
+        black: [ "\\color{black}{#1}", 1 ],
+        rcancel: [ "\\require{cancel}\\red{\\cancel{\\black{#1}}}", 1],
+        implies: [ "\\Rightarrow", 0 ]
+      }
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="./line-eq-normal.html">Equation of Line in Normal Form
+</a></li><li><a href="./distance-line-point.html">Distance between Line and Point
+</a></li><li><a href="./line-eq-slope.html">Equation of Line with Slope
+</a></li><li><a href="./line-eq-slope-and-point.html">Equation of Line from Known Slope and Point
+</a></li><li><a href="./angle-between-lines.html">Angle Between Lines
+</a></li><li><b>Equation of Line with Determinant
+</b></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
+</a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
+<h1 id="equation-of-line-with-determinant">Equation of Line with Determinant<a class="headerlink" href="#equation-of-line-with-determinant" title="Link to this title">¶</a></h1><p>Let's say that we want the equation of a line going through point $P$
+in the direction of a nonzero vector $\vec d$.
+We know that the <a href="line-eq-slope.html">slope of the line</a> is $\frac{d_y}{d_x}$,
+so by plugging into <a href="line-eq-slope-and-point.html">this result</a>, we get
+$$
+y - P_y = \frac{d_y}{d_x}(x - P_x).
+$$
+This method doesn't work if $d_x = 0$; that is, when $\vec d$ is vertical.
+In that case, the line is also vertical, so its equation is simply $x = P_x$.
+On this page, we'll use determinants to find the line equation in a way that works the same in both cases.</p>
+
+<p>We see that a point $(x,y)$ is on the line
+if and only if the vector from $P$ to $(x,y)$ is in the direction of the line.</p>
+
+<p><img width="287" height="171" class="asymptote" src="../asymptote/e9c21b69613cb3d7e6fc485f6c9ef090.svg" /></p><p><img width="287" height="168" class="asymptote" src="../asymptote/ba06238153b784a8e9f7c6f2a29027e7.svg" /></p><p>Let $\vec d$ be any nonzero vector going in the direction of the line.
+Now the vector from $P$ to $(x,y)$ goes in the direction of the line
+if and only if it's collinear with $\vec d$.
+That's true if and only if the parallelogram created by $\vec d$
+and the vector from $P$ to $(x,y)$ is "flat".</p>
+
+<p><img width="307" height="197" class="asymptote" src="../asymptote/6d056fcbea76e9e43090661aa003c0c1.svg" /></p><p><img width="307" height="199" class="asymptote" src="../asymptote/3d0bc32e8bcc9c92922621207ca425d5.svg" /></p><p>The parallelogram is "flat" if and only if the determinant with the vectors as rows is zero.
+The vector from $P$ to $(x,y)$ is $(x-P_x)\I + (y-P_y)\J$.
+From all this, we see that $(x,y)$ is on the line if and only if
+$$
+\det\begin{bmatrix} x-P_x & y-P_y \\ d_x & d_y \end{bmatrix} = 0.
+$$</p>
+
+<div class="box graybox"><p>The equation of a line going in direction of a nonzero vector $\vec d$ through point $P$ is
+$$
+\det\begin{bmatrix} x-P_x & y-P_y \\ d_x & d_y \end{bmatrix} = 0.
+$$
+</p>
+
+</div><p>If we know two points of the line, $P$ and $Q$, then we can choose
+$$
+\vec d = \Vec{PQ} = (Q_x-P_x)\I + (Q_y-P_y)\J.
+$$
+This must not be the zero vector, so we need $P \ne Q$.</p>
+
+<div class="box graybox"><p>The equation of a line going through two different points $P$ and $Q$ is
+$$
+\det\begin{bmatrix} x-P_x & y-P_y \\ Q_x-P_x & Q_y-P_y \end{bmatrix} = 0.
+$$
+</p>
+
+</div><p>The line going through $P$ and $Q$ is same as the line going through $Q$ and $P$.
+This means that in the above result, it doesn't matter which point is $P$ and which is $Q$.
+</p>
+
+</div>
+</body>
+</html>

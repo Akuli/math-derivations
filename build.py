@@ -76,7 +76,7 @@ def get_sidebar_content(txtfile):
         dropdown("Analytic plane geometry", join([
             dropdown("Line", join([
                 link("Equation in normal form",
-                     'analytic-plane-geometry/line-eq-slope'),
+                     'analytic-plane-geometry/line-eq-normal'),
                 link("Distance between line and point",
                      'analytic-plane-geometry/distance-line-point'),
                 link("Equation with slope",
@@ -137,15 +137,28 @@ stylesheet">
 
     <script>
     // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => a.href === window.location.href.split('#')[0]);
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
     </script>
     '''
+    return result
 
 
 builder.get_sidebar_content = get_sidebar_content
-
-
-builder.get_head_extras = lambda filename: '''
-'''
+builder.get_head_extras = get_head_extras
 
 
 @builder.converter.add_inliner(r'\\\*')

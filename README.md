@@ -7,9 +7,10 @@ that are used in high school math.
 
 ## Commands for writing stuff to this site
 
-Environment setup:
+Environment setup (I have no idea what you should do if you don't have `apt`):
 
 ```
+$ sudo apt install asymptote
 $ python3 -m pip install --user wheel
 $ python3 -n venv env
 $ . env/bin/activate

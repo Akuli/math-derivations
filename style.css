@@ -2,10 +2,6 @@ body {
     margin: 10px 10px 10px 10px;
 }
 
-iframe {
-    border-width: 0px;
-}
-
 .headerlink {
     color: #eee;
 }
@@ -34,19 +30,6 @@ a:hover {
 .graybox { background-color: #ccc; }
 .redbox { background-color: #f88; }
 
-#sidebar {
-    width: 220px;
-    float: right;
-
-    border: 5px solid #fff;
-    border-radius: 10px;
-    background-color: #888;
-    color: white;
-    margin-left: 10px;
-    margin-right: -15px;
-    padding: 12px;
-}
-
 div.MathJax_Display {
     width: calc(100% - 220px);  /* for side bar */
 }
@@ -67,37 +50,11 @@ div.MathJax_Display {
     }
 }
 
-.inlinemath {
-    vertical-align: middle;
-}
-
-img.blockmath {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-div.highlight {
-    padding: 1px 0px 1px 10px;
-    border-radius: 10px;
-}
-
-code {
-    white-space: nowrap;
-    background-color: #eee;
-    padding: 2px;
-    border-radius: 5px;
-    font-size: 0.9em;
-}
-.graybox code, .redbox code {
-    background-color: #bbb;
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-family: Quicksand;
 }
 
-p, li {
+p, li, #sidebar {
     font-family: Cabin;
     font-size: 1em;
     line-height: 140%;
@@ -109,15 +66,6 @@ small {
 
 .indent {
     margin-left: 2em;
-}
-
-.floatingbox {
-    float: right;
-    width: 35%;
-    padding: 10px;
-    border-radius: 10px;
-    margin-left: 10px;
-    background-color: #fe9;
 }
 
 table {
@@ -137,25 +85,17 @@ th, td {
     margin: 15px;
 }
 
-/* https://stackoverflow.com/a/1636635 */
-ol.parenlist {
-    counter-reset: list;
-}
-ol.parenlist > li {
-    list-style: none;
-    position: relative;
-}
-ol.parenlist > li:before {
-    counter-increment: list;
-    content: "(" counter(list, decimal) "):";
-    position: absolute;
-    left: -2em;
-}
-
 #sidebar {
+    width: 220px;
+    float: right;
+
+    border: 5px solid #fff;
+    margin-left: 10px;
+    margin-right: -15px;
+
     padding: 20px;
-    border-radius: 10px;
-    background-color: #ccc;
+    border-radius: 15px;
+    background-color: #4af;
 }
 
 #sidebar, #sidebar .dropdown {
@@ -167,18 +107,29 @@ ol.parenlist > li:before {
     margin-left: 20px;
 }
 
-#sidebar input:checked {
-    background-color: black;
-}
-
 #sidebar label, #sidebar a {
     margin: 2px;
     padding: 2px;
     border-radius: 3px;
-    color: black;
+    color: white;
     text-decoration: none;   /* no underline */
 
     border: 1px solid transparent;   /* avoid stuff moving slightly when actual borders are added */
+}
+
+#sidebar label {
+    user-select: none;
+}
+
+#sidebar label:after {
+    content: '❭';
+    position: absolute;
+    right: 40px;
+}
+
+#sidebar input:checked + label:after {
+    display: inline-block;   /* https://stackoverflow.com/a/9782047 */
+    transform: rotate(90deg);
 }
 
 #sidebar a:focus,
@@ -187,12 +138,11 @@ ol.parenlist > li:before {
 #sidebar label:hover
 {
     color: white;
-    background-color: #888;
+    background-color: #08f;
 }
 
 #sidebar .this-page-or-section {
-    background-color: #bbb;
-    border: 1px solid black;
+    background-color: #8bf;
     font-weight: bold;
 }
 
@@ -208,8 +158,3 @@ ol.parenlist > li:before {
 /* https://supfort.com/pure-css-accordion-without-javascript */
 #sidebar input + label + .dropdown { display: none; }
 #sidebar input:checked + label + .dropdown { display: flex; }
-
-#sidebar label {
-    user-select: none;
-}
-

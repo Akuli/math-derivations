@@ -89,7 +89,7 @@ def get_sidebar_content(txtfile):
                      'analytic-plane-geometry/line-eq-determinant'),
             ])),
             dropdown("Hyperbola", join([
-                link("Why is y=1/x a hyperbola?",
+                link(r"Why is $y=\frac{1}{x}$ a hyperbola?",
                      'analytic-plane-geometry/why-its-hyperbola'),
             ])),
         ])),
@@ -97,7 +97,6 @@ def get_sidebar_content(txtfile):
 
 
 def get_head_extras(filename):
-    print(filename)
     result = '''
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -136,6 +135,7 @@ def get_head_extras(filename):
 stylesheet">
 
     <script>
+    // mark the selected page and open the menus leading to it
     // this is easier to write in javascript than in python
     document.addEventListener('DOMContentLoaded', () => {
         const [selectedLink] = [...document.querySelectorAll('#sidebar a')]

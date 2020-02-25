@@ -6,51 +6,81 @@
 <title>Equation of Line with Slope
 </title>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-    },
-    "HTML-CSS": { availableFonts: ["TeX"] },
-    TeX: {
-      Macros: {
-        // awesome, i have latex inside javascript inside html inside python
-        // https://xkcd.com/1638/
-        Vec: [ "\\overrightarrow{#1}", 1 ],
-        abs: [ "\\left| {#1} \\right|", 1 ],
-        I: [ "\\vec{i}", 0 ],
-        J: [ "\\vec{j}", 0 ],
-        K: [ "\\vec{k}", 0 ],
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
 
-        red: [ "\\color{red}{#1}", 1 ],
-        blue: [ "\\color{blue}{#1}", 1 ],
-        green: [ "\\color{green}{#1}", 1 ],
-        maroon: [ "\\color{maroon}{#1}", 1 ],
-        olive: [ "\\color{olive}{#1}", 1 ],
-        purple: [ "\\color{purple}{#1}", 1 ],
-        black: [ "\\color{black}{#1}", 1 ],
-        rcancel: [ "\\require{cancel}\\red{\\cancel{\\black{#1}}}", 1],
-        implies: [ "\\Rightarrow", 0 ]
-      }
-    }
-  });
-</script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
-</head>
+            red: [ "\\color{red}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            maroon: [ "\\color{maroon}{#1}", 1 ],
+            olive: [ "\\color{olive}{#1}", 1 ],
+            purple: [ "\\color{purple}{#1}", 1 ],
+            black: [ "\\color{black}{#1}", 1 ],
+            implies: [ "\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => a.href === window.location.href.split('#')[0]);
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
 <body>
 <div id="content">
-<div id="sidebar"><div class="sidebarblock"><h3>Analytic plane geometry</h3><ul><li><a href="./line-eq-normal.html">Equation of Line in Normal Form
-</a></li><li><a href="./distance-line-point.html">Distance between Line and Point
-</a></li><li><b>Equation of Line with Slope
-</b></li><li><a href="./line-eq-slope-and-point.html">Equation of Line from Known Slope and Point
-</a></li><li><a href="./angle-between-lines.html">Angle Between Lines
-</a></li><li><a href="./line-eq-determinant.html">Equation of Line with Determinant
-</a></li><li><a href="./why-its-hyperbola.html">Why is y=1/x a hyperbola?
-</a></li></ul></div><div class="sidebarblock"><h3></h3><ul></ul><h3><a href="../index.html">Back to front page</a></h3></div></div>
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Line</label>
+        <div class="dropdown">
+            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Hyperbola</label>
+        <div class="dropdown">
+            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        </div>
 <h1 id="equation-of-line-with-slope">Equation of Line with Slope<a class="headerlink" href="#equation-of-line-with-slope" title="Link to this title">¶</a></h1><p>Here's what we know about <a href="line-eq-normal.html">line equation in normal form</a>:
 <ul><li>
 The equation of any line can be written as $ax+by+c=0$, where at least one of $a$ and $b$ is nonzero.

@@ -35,7 +35,11 @@ def cache_put(tempfilename, cachefilename):
 builder = Builder()
 
 builder.infiles = sorted(
-    glob.glob('content/*.txt') + glob.glob('content/*/*.txt'))
+    glob.glob('content/*.txt')
+    + glob.glob('content/*/*.txt')
+    + glob.glob('content/*/*/*.txt')
+)
+
 builder.infile2outfile = lambda infile: os.path.join(
     builder.outputdir,
     os.path.splitext(infile.replace('content' + os.sep, '', 1))[0] + '.html')
@@ -43,111 +47,110 @@ builder.infile2outfile = lambda infile: os.path.join(
 builder.converter.pygments_style = 'friendly'
 
 
-def _create_sidebar_thingy(thisfile, maintitle, folder, names, extra=''):
-    result = '<div class="sidebarblock">'
-    result += '<h3>' + maintitle + '</h3>'
-    result += '<ul>'
-
-    for name in names:
-        result += '<li>'
-        path = os.path.join('content', folder, name + '.txt')
-
-        titletext = builder.get_title(path)
-        if path == thisfile:
-            result += '<b>' + titletext + '</b>'
-        else:
-            # this is an ugly piece of shit, but it works
-            result += '<a href="%s/%s.html">%s</a>' % (
-                os.path.relpath(
-                    folder, os.path.dirname(
-                        os.path.relpath(thisfile, 'content')
-                    )
-                ).replace(os.sep, '/'),
-                name,
-                titletext
-            )
-        result += '</li>'
-
-    result += '</ul>'
-    result += extra
-    result += '</div>'
-    return result
-
-
 def get_sidebar_content(txtfile):
-    if txtfile == os.path.join('content', 'index.txt'):
-        indexlink = ''
-    else:
-        indexlink = '<h3><a href="../index.html">Back to front page</a></h3>'
+    def link(text, target):
+        return '<a href="%s.html">%s</a>' % (
+            os.path.relpath(
+                target, os.path.dirname(os.path.relpath(txtfile, 'content'))
+            ).replace(os.sep, '/'),
+            text,
+        )
 
-    thingy = functools.partial(_create_sidebar_thingy, txtfile)
-    return ''.join([
-        thingy("Analytic plane geometry", 'analytic-plane-geometry',
-               ['line-eq-normal', 'distance-line-point',
-                'line-eq-slope', 'line-eq-slope-and-point',
-                'angle-between-lines',
-                'line-eq-determinant',
-                'why-its-hyperbola']),
-        thingy("", None, '', indexlink),
+    id_counter = itertools.count()
+
+    def dropdown(title, content):
+        checkbox_id = 'sidebar-checkbox-' + str(next(id_counter))
+        return '''
+        <input type="checkbox" id="%s" />
+        <label for="%s">%s</label>
+        <div class="dropdown">
+            %s
+        </div>
+        ''' % (checkbox_id, checkbox_id, title, content)
+
+    join = ''.join
+
+#    return '<div id="sidebar">%s</div>' % join([
+    return join([
+        link("Front page", 'index'),
+        dropdown("Analytic plane geometry", join([
+            dropdown("Line", join([
+                link("Equation in normal form",
+                     'analytic-plane-geometry/line-eq-slope'),
+                link("Distance between line and point",
+                     'analytic-plane-geometry/distance-line-point'),
+                link("Equation with slope",
+                     'analytic-plane-geometry/line-eq-slope'),
+                link("Equation from known slope and point",
+                     'analytic-plane-geometry/line-eq-slope-and-point'),
+                link("Angle between lines",
+                     'analytic-plane-geometry/angle-between-lines'),
+                link("Equation with determinant",
+                     'analytic-plane-geometry/line-eq-determinant'),
+            ])),
+            dropdown("Hyperbola", join([
+                link("Why is y=1/x a hyperbola?",
+                     'analytic-plane-geometry/why-its-hyperbola'),
+            ])),
+        ])),
     ])
+
+
+def get_head_extras(filename):
+    print(filename)
+    result = '''
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\\\overrightarrow{#1}", 1 ],
+            abs: [ "\\\\left| {#1} \\\\right|", 1 ],
+            I: [ "\\\\vec{i}", 0 ],
+            J: [ "\\\\vec{j}", 0 ],
+            K: [ "\\\\vec{k}", 0 ],
+
+            red: [ "\\\\color{red}{#1}", 1 ],
+            blue: [ "\\\\color{blue}{#1}", 1 ],
+            green: [ "\\\\color{green}{#1}", 1 ],
+            maroon: [ "\\\\color{maroon}{#1}", 1 ],
+            olive: [ "\\\\color{olive}{#1}", 1 ],
+            purple: [ "\\\\color{purple}{#1}", 1 ],
+            black: [ "\\\\color{black}{#1}", 1 ],
+            implies: [ "\\\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs\
+/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="\
+stylesheet">
+
+    <script>
+    // this is easier to write in javascript than in python
+    </script>
+    '''
+
 
 builder.get_sidebar_content = get_sidebar_content
 
 
 builder.get_head_extras = lambda filename: '''
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-    },
-    "HTML-CSS": { availableFonts: ["TeX"] },
-    TeX: {
-      Macros: {
-        // awesome, i have latex inside javascript inside html inside python
-        // https://xkcd.com/1638/
-        Vec: [ "\\\\overrightarrow{#1}", 1 ],
-        abs: [ "\\\\left| {#1} \\\\right|", 1 ],
-        I: [ "\\\\vec{i}", 0 ],
-        J: [ "\\\\vec{j}", 0 ],
-        K: [ "\\\\vec{k}", 0 ],
-
-        red: [ "\\\\color{red}{#1}", 1 ],
-        blue: [ "\\\\color{blue}{#1}", 1 ],
-        green: [ "\\\\color{green}{#1}", 1 ],
-        maroon: [ "\\\\color{maroon}{#1}", 1 ],
-        olive: [ "\\\\color{olive}{#1}", 1 ],
-        purple: [ "\\\\color{purple}{#1}", 1 ],
-        black: [ "\\\\color{black}{#1}", 1 ],
-        rcancel: [ "\\\\require{cancel}\\\\red{\\\\cancel{\\\\black{#1}}}", 1],
-        implies: [ "\\\\Rightarrow", 0 ]
-      }
-    }
-  });
-</script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mat\
-hjax/2.7.2/MathJax.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="styl\
-esheet">
 '''
 
 
 @builder.converter.add_inliner(r'\\\*')
 def escaped_star(match, filename):
     return r'*'
-
-
-# this is really just a convenience thing
-@builder.converter.add_multiliner(r'^align:')
-def multiline_math(match, filename):
-    math = textwrap.dedent(match.string[match.end():]).strip()
-
-    # allow line continuations with \ but insert \\ elsewhere
-    lines = (line.replace('\\\n', ' ')
-             for line in re.split(r'(?<!\\)\n', math))
-    yield r'$$\begin{align}%s\end{align}$$' % (r' \\' + '\n').join(lines)
 
 
 @builder.converter.add_multiliner(r'^indent2:\n')
@@ -159,18 +162,6 @@ def indent2_handler(match, filename):
     yield from builder.converter.convert(markup, filename)
     yield '</div>'
     yield '</div>'
-
-
-# for multiline code inside a graybox, pygments hard-codes too much
-@builder.converter.add_multiliner(r'^darkcode:(.*)\n')
-def dark_code(match, filename):
-    code = textwrap.dedent(match.string[match.end():])
-    html = tags.multiline_code(code, match.group(1).strip() or 'text',
-                               builder.converter.pygments_style)
-    soup = BeautifulSoup(html, 'html.parser')
-    first_div = soup.find('div')
-    first_div['style'] = first_div['style'].replace('#f0f0f0', '#a9a9a9')
-    return str(soup)
 
 
 asyboilerplates = collections.defaultdict(str)
@@ -224,36 +215,6 @@ def asymptote(match, filename):
 
     html = tags.image(relative.replace(os.sep, '/'), match.group(2))
     return html.replace('<img', '<img %s class="asymptote"' % extrainfo, 1)
-
-
-# TODO: don't hard-code width and height?
-@builder.converter.add_multiliner(r'^canvasdemo:\n')
-def canvasdemo(match, filename, *,
-               idcounts=collections.defaultdict(lambda: itertools.count(1))):
-    canvas_id = 'canvas' + str(next(idcounts[filename]))
-    code = "var screen = new CanvasWrapper(%r);\n\n" % canvas_id
-    code += textwrap.dedent(match.string[match.end():])
-
-    jsfile = os.path.join(builder.outputdir, 'canvaswrapper.js')
-    htmlfile = builder.infile2outfile(filename)
-    relative = os.path.relpath(jsfile, os.path.dirname(htmlfile))
-
-    yield ('<script type="text/javascript" src="%s"></script>'
-           % relative.replace(os.sep, '/'))
-    yield ('<canvas id="%s" width="600" height="400" tabindex="1"></canvas>'
-           % canvas_id)
-    yield '<script>'
-    yield code
-    yield '</script>'
-    yield "<p>Here's the code:</p>"
-    yield tags.multiline_code(code, 'javascript',
-                              builder.converter.pygments_style)
-
-
-@builder.converter.add_inliner(r'\bcanvaswrapper.js\b')
-def canvaswrapper_link(match, filename):
-    return ('<a href="https://github.com/Akuli/math-tutorial/blob/master/'
-            'canvaswrapper.js">canvaswrapper.js</a>')
 
 
 builder.run()

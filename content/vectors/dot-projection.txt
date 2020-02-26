@@ -1,0 +1,85 @@
+# Dot Product with Projection
+
+On this page, I'll introduce the **dot product** to you.
+It is an operation that takes in any two 2D vectors $\vec v$ and $\vec w$,
+and results in a **number**, denoted $\vec v \cdot \vec w$.
+Dot product is called dot product, because
+it's written with the multiplication dot, like $\vec v \cdot \vec w$,
+and it behaves like multiplication of numbers in some ways (more about this soon).
+
+Rest of this page explains one way to think about what that number is,
+and I'll show many other ways in other dot product derivations.
+Of course, I'll also show you how all these ways are connected to each other.
+Each of the different ways has its own strenghts and weaknesses,
+and the true power of dot products lies in combining these different ways, as we'll see.
+When writing this site, I needed to choose one of these ways to start with, and I chose what's on this page.
+
+To tell you what number comes out of the dot product $\vec v \cdot \vec w$,
+I'll first tell about projection.
+Let's draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:
+
+asymptote:
+    unitsize(3cm);
+    transform T = rotate(20);
+
+    pair w = (3,0);
+    pair v = (0.8,2);
+
+    draw(T*((0,0)--w), arrow=Arrow(5mm), L="$\vec w$", align=N, p=deepred);
+    draw(T*((0,0)--v), arrow=Arrow(5mm), L="$\vec v$", align=NW, p=blue);
+
+    draw(T*(v--(v.x,0)), p=gray+smalldashes);
+    draw(T*shift(v.x,0)*scale(0.2)*((0,1)--(1,1)--(1,0)));
+    draw(T*brace_with_space((v.x,0), (0,0), 0.1), L=T*Label("positive projection"), align=T*S);
+
+In the above picture, the projection is positive, but
+if you need to "extend" $\vec v$ for drawing the line, then the projection is negative:
+
+asymptote:
+    unitsize(3cm);
+    transform T = rotate(20);
+
+    pair w = (3,0);
+    pair v = (-1.5,2);
+
+    draw(T*((0,0)--w), arrow=Arrow(5mm), L="$\vec w$", align=N, p=deepred);
+    draw(T*((0,0)--v), arrow=Arrow(5mm), L="$\vec v$", align=NE, p=blue);
+
+    draw(T*(v--(v.x,0)--(0,0)), p=gray+smalldashes);
+    draw(T*shift(v.x,0)*scale(0.2)*((0,1)--(1,1)--(1,0)));
+    draw(T*brace_with_space((0,0), (v.x,0), 0.1), L=T*Label("negative projection"), align=T*S);
+
+The dot product is not quite the projection;
+it's the projection multiplied by the length of the vector being projected onto.
+This is the first way to think about dot product.
+
+graybox:
+    Let $p$ be the projection of $\vec v$ onto $\vec w$.
+    Then $\vec v \cdot \vec w = p\abs{\vec w}$.
+
+Notice that this was **not** a formula derivation;
+it's more like a long definition, because I'm telling you what dot product is,
+not deriving some result about how it behaves.
+
+Examples:
+<ul><li>
+The projection of $\vec0$ onto any vector $\vec w$ is $0$, so we have
+$\vec w \cdot \vec0 = 0\abs{\vec w} = 0$.
+</li><li>
+This also works the other way, $\vec0 \cdot \vec w = 0$.
+It's not at all clear what the projection of something onto $\vec0$ should be,
+but it doesn't matter, because that projection gets multiplied by $\abs{\vec 0} = 0$ anyway.
+</li><li>
+The projection of $\vec i+\vec j$ onto $\vec i$ is $1$, so $\vec i \cdot \vec j = \vec 0$.
+
+</li></ul>
+
+TODO: animation
+
+You might be wondering how you can calculate something like the projection of $2\I+3\J$ onto $4\I+5\J$.
+Let's solve $\vec v \cdot \vec w = p \abs{\vec w}$ for $p$.
+
+graybox:
+    The projection of $\vec v$ onto $\vec w$ is $\displaystyle\frac{\vec v \cdot \vec w}{\abs{\vec w}}$.
+
+Soon we will figure out how to calculate the dot product easily.

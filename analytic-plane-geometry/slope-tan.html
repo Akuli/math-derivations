@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Slope and Tan
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{red}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            maroon: [ "\\color{maroon}{#1}", 1 ],
+            olive: [ "\\color{olive}{#1}", 1 ],
+            purple: [ "\\color{purple}{#1}", 1 ],
+            black: [ "\\color{black}{#1}", 1 ],
+            implies: [ "\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => a.href === window.location.href.split('#')[0]);
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Line</label>
+        <div class="dropdown">
+            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="slope-tan.html">Slope and tan</a><a href="line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Hyperbola</label>
+        <div class="dropdown">
+            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="slope-and-tan">Slope and Tan<a class="headerlink" href="#slope-and-tan" title="Link to this title">¶</a></h1><p>In <a href="angle-between-lines.html">the previous derivation</a>, we saw that
+if $\alpha$ is the angle from a line with slope $s_1$ to a line with slope $s_2$, then we have
+$$
+\tan(\alpha) = \frac{s_2 - s_1}{1 + s_1s_2}.
+$$
+Let's consider a special case: the angle from $x$ axis to a line with slope $s$.</p>
+
+<p><img width="224" height="267" class="asymptote" src="../asymptote/2badb625bff506ae44bb061b3988d433.svg" /></p><p><img width="224" height="281" class="asymptote" src="../asymptote/a2fe3253079476e1153f882f436e8861.svg" /></p><p>The equation of the $x$ axis is just $y=0$, which can be rewritten as $y=0x+0$,
+so the slope of $x$ axis is $0$.
+We want the angle from $x$ axis to the line with slope $s$,
+so we plug in $s_1 = 0$ and $s_2 = s$, and we get
+$$
+\tan(\alpha) = \frac{s - 0}{1 + 0s} = s.
+$$</p>
+
+<div class="box graybox"><p>Let $\alpha$ be the angle from $x$ axis to a line with slope $s$.
+Then $s = \tan(\alpha)$.
+</p>
+
+</div><p>There's a different, possibly more enlightening way to arrive at this result.
+Let's draw a non-vertical line with slope $s$ and angle $\alpha$.
+Let's also draw a unit circle around a point on the line.
+Let $\vec d$ be the vector from the center of the unit circle to where the unit circle intersects the line.</p>
+
+<p><img width="389" height="309" class="asymptote" src="../asymptote/53f6cb0fc9dcf7de7374550a6325f59e.svg" /></p><p>From trig, we know that
+$$
+\vec d = \cos(\alpha)\I + \sin(\alpha)\J.
+$$
+On the other hand, $\vec d$ is a vector in the direction of the line, so
+from <a href="line-eq-slope.html#meaning-of-s-and-h">this derivation</a> we get
+$$
+s = \frac{d_y}{d_x} = \frac{\sin(\alpha)}{\cos(\alpha)} = \tan(\alpha).
+$$
+</p>
+
+<h2 id="using-slope-for-trig">Using Slope for Trig<a class="headerlink" href="#using-slope-for-trig" title="Link to this title">¶</a></h2><p>This is not only a new way to think about slope, but also a new way to think about tan:
+$\tan(\alpha)$ is a slope of a line with angle $\alpha$.</p>
+
+<p>For example, consider a line with slope $\tan(\alpha)$, going through $(0,0)$ for simplicity.
+Its equation is $y = \tan(\alpha)x + h$, where plugging in $x=y=0$ reveals that $h=0$.
+Reflecting the line to the other side of the $x$ axis gives a line
+whose equation is $y=-\tan(\alpha)x$ (TODO).</p>
+
+<p><img width="310" height="312" class="asymptote" src="../asymptote/3149563c0337df7f0d32666b1a747163.svg" /></p><p>Mirroring the line flips the sign of the angle, so the slope of the mirrored line is $\tan(-\alpha)$.
+On the other hand, we can see from the equation of the line that its slope is $-\tan(\alpha)$,
+so we get
+$$
+\tan(-\alpha) = -\tan(\alpha).
+$$</p>
+
+<p>For a more complex example,
+consider two lines with angles $\alpha$ and $\beta$.
+By the above result, their slopes are $\tan(\alpha)$ and $\tan(\beta)$.</p>
+
+<p><img width="323" height="423" class="asymptote" src="../asymptote/5a0e4d5bb4f9c6646b882ce95f0ce3ff.svg" /></p><p>Let $\theta$ denote the angle from the $\alpha$ line to the $\beta$ line. Then we have
+$$
+\alpha + \theta = \beta,
+$$
+which gives $\theta=\beta-\alpha$.
+On the other hand, we can use the <a href="angle-between-lines.html">formula for angle between lines</a> to get
+$$
+\tan(\theta) = \frac{s_2-s_1}{1 + s_1s_2},
+$$
+where $s_1=\tan(\alpha)$ and $s_2=\tan(\beta)$ are slopes. Plugging everything in gives
+$$
+\tan(\beta-\alpha) = \frac{\tan(\beta)-\tan(\alpha)}{1 + \tan(\alpha)\tan(\beta)},
+$$
+which is a well-known trig formula.</p>
+
+<p>In fact, the usual way to derive the formula for angle between lines is to
+start with the connection between slope and tan (deriving it differently, of course),
+and then use the above trig formula to find $\tan(\theta)$.</p>
+
+<p>We can get other well-known trig formulas as special cases of this one
+(this kind of thing happens a lot in trig).
+For example, by choosing $\alpha = -\beta$, we get
+$$
+\tan(\beta-(-\beta)) = \frac{\tan(\beta) - \tan(-\beta)}{1 + \tan(-\beta)\tan(\beta)}.
+$$
+By applying $\tan(-\beta)=-\tan(\beta)$, which we derived above, this simplifies to
+$$
+\tan(2\beta) = \frac{2\tan(\beta)}{1 - \tan^2(\beta)},
+$$
+which is also a well-known trig formula.
+</p>
+
+</div>
+</body>
+</html>

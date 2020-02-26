@@ -72,7 +72,6 @@ With a very similar calculation, we get
 $$
 (a\I + b\J) \cdot (y\J) = by.
 $$
-I'll leave the details as an exercise for you.
 Putting it all together, we have
 $$
 (a\I+b\J) \cdot (x\I + y\J)
@@ -92,7 +91,7 @@ I like to call this "$\I$'s with $\I$'s, $\J$'s with $\J$'s", or "iwi jwj" for s
 This is yet another way to think about the dot product.
 I'm sorry about the above wall of math with no pictures, but that's mostly the nature of this result;
 it's something that we can calculate easily, not something that we can visualize easily.
-The true power is in combining this with all the visual things that we know about dot product,
+The true power is in using this result together with all the visual things that we know about dot product,
 which is what we'll do next.
 
 

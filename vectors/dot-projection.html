@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Dot Product with Projection
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{red}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            maroon: [ "\\color{maroon}{#1}", 1 ],
+            olive: [ "\\color{olive}{#1}", 1 ],
+            purple: [ "\\color{purple}{#1}", 1 ],
+            black: [ "\\color{black}{#1}", 1 ],
+            implies: [ "\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => a.href === window.location.href.split('#')[0]);
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Dot product</label>
+        <div class="dropdown">
+            <a href="dot-projection.html">Projection</a><a href="angle-between-vectors.html">Angle between vectors</a><a href="iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="dot-product-with-projection">Dot Product with Projection<a class="headerlink" href="#dot-product-with-projection" title="Link to this title">¶</a></h1><p>On this page, I'll introduce the <b>dot product</b> to you.
+It is an operation that takes in any two 2D vectors $\vec v$ and $\vec w$,
+and results in a <b>number</b>, denoted $\vec v \cdot \vec w$.
+Dot product is called dot product, because
+it's written with the multiplication dot, like $\vec v \cdot \vec w$,
+and it behaves like multiplication of numbers in some ways (more about this soon).</p>
+
+<p>Rest of this page explains one way to think about what that number is,
+and I'll show many other ways in other dot product derivations.
+Of course, I'll also show you how all these ways are connected to each other.
+Each of the different ways has its own strenghts and weaknesses,
+and the true power of dot products lies in combining these different ways, as we'll see.
+When writing this site, I needed to choose one of these ways to start with, and I chose what's on this page.
+</p>
+
+<h2 id="defining-dot-product">Defining Dot Product<a class="headerlink" href="#defining-dot-product" title="Link to this title">¶</a></h2><p>To tell you what number comes out of the dot product $\vec v \cdot \vec w$,
+I'll first tell about projection.
+Let's draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:</p>
+
+<p><img width="291" height="252" class="asymptote" src="../asymptote/1cfd2d1f98ccc35ae3958bb7c6e012c5.svg" /></p><p>In the above picture, the projection is positive, but
+if you need to "extend" $\vec v$ for drawing the line, then the projection is negative:</p>
+
+<p><img width="422" height="228" class="asymptote" src="../asymptote/12b5f0c9c29af2ebce44bb9425668711.svg" /></p><p>The dot product is not quite the projection;
+it's the projection multiplied by the length of the vector being projected onto.
+This is the first way to think about dot product.</p>
+
+<div class="box graybox"><p>Let $p$ be the projection of $\vec v$ onto $\vec w$.
+Then $\vec v \cdot \vec w = p\abs{\vec w}$.
+</p>
+
+</div><p>Notice that this was <b>not</b> a formula derivation;
+it's a definition, because I'm telling you what dot product is,
+not deriving some result about how it behaves.</p>
+
+<p>TODO: animation</p>
+
+<p>Examples:
+<ul><li>
+The projection of $\vec0$ onto any vector $\vec w$ is $0$, so we have
+$\vec0 \cdot \vec w = 0\abs{\vec w} = 0$.
+</li><li>
+This also works the other way, $\vec w \cdot \vec0 = 0$.
+It's not at all clear what the projection of something onto $\vec0$ should be,
+but it doesn't matter, because that projection gets multiplied by $\abs{\vec 0} = 0$ anyway.
+</li><li>
+The projection of $\vec i+\vec j$ onto $2\vec i$ is $1$, so $(\vec i + \vec j) \cdot (2\vec i) = 1\abs{2\vec i} = 2$.</p>
+
+<p><img width="194" height="155" class="asymptote" src="../asymptote/51cab90f3b85576be5ff490c9ed003b2.svg" /></p><p></li><li>
+The projection of any vector onto itself is simply the length of the vector,
+so $\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} = \abs{\vec v}^2$,
+where the first $\abs{\vec v}$ is the projection,
+and the second $\abs{\vec v}$ is the length of the $\vec v$
+being projected onto.
+</li><li>
+The projection of $\vec j$ onto $\vec i$ is zero, so $\vec j \cdot \vec i = 0$.</p>
+
+<p><img width="108" height="120" class="asymptote" src="../asymptote/87b44050f1c7ff507b70c4b53f94ca5e.svg" /></p><p></li></ul></p>
+
+<p>You might be wondering how to calculate something like
+the projection of $2\I+3\J$ onto $4\I+5\J$.
+It's easiest to <b>first</b> calculate the dot product of these vectors,
+using a handy way to calculate dot products that I'll show soon.
+Then you know everything in $\vec v \cdot \vec w = p\abs{\vec w}$ except $p$,
+and you can solve the projection $p$.
+</p>
+
+<h2 id="perpendicularness">Perpendicularness<a class="headerlink" href="#perpendicularness" title="Link to this title">¶</a></h2><p>In the last example above,
+notice that dot product of two nonzero vectors can be zero!
+This is different from the product of numbers.
+In fact, if $\vec v$ and $\vec w$ are nonzero and perpendicular,
+then the projection of $\vec v$ onto $\vec w$ is zero,
+and so $\vec v \cdot \vec w = 0\abs{\vec w} = 0$.
+If the vectors are nonzero and not perpendicular,
+then the projection is nonzero,
+and the dot product is also nonzero:
+$$
+\vec v \cdot \vec w
+= (\underbrace{\text{projection}}_{\ne 0}) \underbrace{\abs{\vec w}}_{\ne 0}
+\ne 0
+$$</p>
+
+<div class="box graybox"><p>The dot product of two nonzero vectors is zero if and only if
+the vectors are perpendicular.
+</p>
+
+</div><p>Many books say that the zero vector is perpendicular to any vector,
+because that makes the above result for all vectors,
+not just for nonzero vectors.
+I won't use that convention in these derivations,
+but you will likely see it elsewhere.
+</p>
+
+<h2 id="dot-product-and-sum">Dot Product and Sum<a class="headerlink" href="#dot-product-and-sum" title="Link to this title">¶</a></h2><p>We know that the multiplication of numbers behaves so that
+for all $a,b,c \in \mathbb{R}$, we have $(a+b)c = ac+bc$.
+We expect anything called "product" to behave similarly.
+Next I'll show you why dot product behaves like that, which justifies calling it a product.</p>
+
+<p>Let $\vec a$, $\vec b$ and $\vec c$ be vectors, and suppose that $\vec c$ is nonzero.
+Let $p(\vec v)$ denote the projection of any vector $\vec v$ onto $\vec c$.
+We know that the dot product $\vec v \cdot \vec c$ is this projection
+multiplied by the length of the vector being projected onto, so
+$$
+\vec v \cdot \vec c = p(\vec v) \abs{\vec c},
+$$
+which leads to
+$$
+p(\vec v) = \frac{\vec v \cdot \vec c}{\abs{\vec c}}.
+$$
+(We can divide by $\abs{\vec c}$ because $\vec c$ is a nonzero vector.)
+In the following picture, we have $p(\vec a + \vec b) = p(\vec a) + p(\vec b)$.</p>
+
+<p><img width="618" height="414" class="asymptote" src="../asymptote/bf6d0f4907f192f2f8d61c7312858f84.svg" /></p><p>In this picture, we have $p(\vec a) > 0$, $p(\vec b) < 0$ and $p(\vec a) + p(\vec b) > 0$.
+However, this works similarly in all other cases too;
+pictures look different, but we always get $p(\vec a + \vec b) = p(\vec a) + p(\vec b)$.
+Plugging into the formula for $p(\vec v)$, we get
+$$
+\frac{(\vec a + \vec b) \cdot \vec c}{\abs{\vec c}}
+= \frac{\vec a \cdot \vec c}{\abs{\vec c}} + \frac{\vec b \cdot \vec c}{\abs{\vec c}}.
+$$
+Multiplying both sides by $\vec c$ gives
+$$
+(\vec a + \vec b) \cdot \vec c = \vec a \cdot \vec c + \vec b \cdot \vec c.
+$$
+We started by assuming that $\vec c$ is nonzero, but this formula also holds for $\vec c = \vec0$;
+then the dot products on both sides are zero and it's just $0=0$.</p>
+
+<div class="box graybox"><p>For all vectors $\vec a$, $\vec b$ and $\vec c$, we have
+$$
+(\vec a + \vec b) \cdot \vec c = \vec a \cdot \vec c + \vec b \cdot \vec c.
+$$
+</p>
+
+</div><h2 id="dot-product-and-number-times-vector">Dot Product and Number Times Vector<a class="headerlink" href="#dot-product-and-number-times-vector" title="Link to this title">¶</a></h2><p>There's another important property that we expect multiplications to have.
+We know that for all numbers $a$, $b$ and $c$, we have $(ab)c = a(bc)$.
+The same rule also works if $c$ is a vector; for example, $(4 \cdot 5)\I = 20\I = 4(5\I)$.
+Next I'll show you that a similar thing works with dot products.</p>
+
+<p>Let $\vec v$ and $\vec w$ be nonzero vectors, and let $r$ be a positive number.
+Let $p$ be the projection of $\vec v$ onto $\vec w$.
+The projection of $\vec v$ onto $\vec w \, r$ is also $p$,
+because $\vec v$ and $\vec w \, r$ go in the same direction.</p>
+
+<p><img width="344" height="170" class="asymptote" src="../asymptote/1a98eeb7cc48bae73e71c8eba73644fd.svg" /></p><p>Now we get
+$$
+\vec v \cdot (\vec w \, r) = p\abs{\vec w \, r} = p\abs{\vec w}\abs{r}.
+$$
+Here $r$ is positive, so $\abs{r} = r$,
+and $p\abs{\vec w}$ is the dot product $\vec v \cdot \vec w$, so we have
+$$
+\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r
+$$</p>
+
+<p>We needed the positiviness of $r$ above, but let's see what happens for zero and negative values of $r$.
+For negative $r$, things get a bit weird, because
+the projection of $\vec v$ onto $\vec w$ and the projection of $\vec v$ onto $\vec w \, r$ are different:</p>
+
+<p><img width="230" height="164" class="asymptote" src="../asymptote/78b672ff24cb4f22921544d2d5729bb4.svg" /></p><p><img width="201" height="164" class="asymptote" src="../asymptote/227fd0e8f011e0918fe558e8d03b9e48.svg" /></p><p>One of the vectors $\vec w$ and $\vec w \, r$ needs to be "extended",
+and the other one doesn't need to.
+In the picture, $\vec w \, r$ had to be extended and $\vec w$ wasn't extended,
+but this could also be vice versa.
+This means that one of the projections is positive and the other is negative,
+although they have the same absolute value.
+So, if the projection onto $\vec w$ is $p$,
+then the projection onto $\vec w \, r$ is $p$ with the opposite sign, which is $-p$.
+We get
+$$
+\vec v \cdot (\vec w \, r)
+= (-p) \abs{\vec w \, r}
+= (-p) \abs{\vec w} \abs{r}
+= \underbrace{p\abs{\vec w}}_{\vec v \cdot \vec w} \, \underbrace{(-\abs{r})}_{r},
+$$
+and again, we have
+$$
+\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w) r.
+$$</p>
+
+<p>The above equation also works for $r=0$, because then it just says $0=0$.
+This is also the case if $\vec v = \vec0$ or $\vec w = \vec0$.</p>
+
+<div class="box graybox"><p>For all vectors $\vec v$ and $\vec w$, and for all numbers $r \in \mathbb{R}$, we have
+$$
+\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w) r.
+$$
+</p>
+
+</div><p>The above result also means that we can write $\vec v \cdot \vec w \, r$ without parentheses,
+because no matter how parentheses are added, the result is the same either way
+</p>
+
+<h2 id="does-order-matter">Does Order Matter?<a class="headerlink" href="#does-order-matter" title="Link to this title">¶</a></h2><p>Can we also do the addition thing on the left side of the dot product? Something like this:
+$$
+\vec a \cdot (\vec b + \vec c) \mathop{=}^{?} \vec a \cdot \vec b + \vec a \cdot \vec c
+$$
+How about the number multiplication thing?
+$$
+(r\vec a) \cdot \vec b \mathop{=}^{?} r(\vec a \cdot \vec b)
+$$
+The answer will be clear to you after reading <a href="angle-between-vectors.html">the next derivation</a>.
+</p>
+
+</div>
+</body>
+</html>

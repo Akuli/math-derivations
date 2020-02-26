@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Equation of Line from Known Slope and Point
+<title>i's with i's, j's with j's
 </title>
 
     <script type="text/x-mathjax-config">
@@ -70,7 +70,7 @@
         <input type="checkbox" id="sidebar-checkbox-0" />
         <label for="sidebar-checkbox-0">Dot product</label>
         <div class="dropdown">
-            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+            <a href="dot-projection.html">Projection</a><a href="angle-between-vectors.html">Angle between vectors</a><a href="iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
         </div>
         
         </div>
@@ -82,75 +82,47 @@
         <input type="checkbox" id="sidebar-checkbox-2" />
         <label for="sidebar-checkbox-2">Line</label>
         <div class="dropdown">
-            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="line-eq-determinant.html">Equation with determinant</a>
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-3" />
         <label for="sidebar-checkbox-3">Hyperbola</label>
         <div class="dropdown">
-            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
         </div>
         
         </div>
         </div>
-<h1 id="equation-of-line-from-known-slope-and-point">Equation of Line from Known Slope and Point<a class="headerlink" href="#equation-of-line-from-known-slope-and-point" title="Link to this title">¶</a></h1><p>Let's find the equation of a line with slope $2$ going through the point $(3,5)$.
-The equation is $y = 2x+h$, where $h$ is an unknown number.
-The point $(3,4)$ must be on the line, so it must satisfy the equation of the line:
-$$
-5 = 2 \cdot 3 + h
-$$
-From here we can solve $h = -1$, so the equation is $y = 2x-1$.</p>
+<h1 id="i-s-with-i-s-j-s-with-j-s">i's with i's, j's with j's<a class="headerlink" href="#i-s-with-i-s-j-s-with-j-s" title="Link to this title">¶</a></h1><p>Here are some results that we got with
+<a href="dot-projection.html">projections</a> and <a href="angle-between-vectors.html">angle between vectors</a>:</p>
 
-<p>While this method works, it involves solving an equation, although the equation is very simple.
-We can improve on this a little bit by doing the above work more generally,
-and then just using the results later.</p>
-
-<p>Let's find the equation of a line with slope $s$ going through the point $P=(P_x,P_y)$.
-The equation is $y = sx+h$, where $h$ is an unknown number
-The point $P$ must be on the line, so it must satisfy the equation of the line:
+<p><ul><li>
+Dot product behaves like multiplication of numbers in some ways:
+for all vectors $\vec a,\vec b,\vec c,\vec v,\vec w$ and numbers $r \in \mathbb{R}$, we have
 $$
 \begin{align}
-P_y &= sP_x + h \\
-P_y - sP_x &= h
+\tag{1} \label{commutative}     \vec v \cdot \vec w &= \vec w \cdot \vec v, \\
+\tag{2} \label{distributive}    (\vec a + \vec b) \cdot \vec c &= \vec a \cdot \vec c + \vec b \cdot \vec c, \\
+\tag{3} \label{associative}     \vec v \cdot (\vec w \, r) &= (\vec v \cdot \vec w) r.
 \end{align}
 $$
-We can plug this into the line equation:
+</li><li>
+Dot product of vectors is zero if and only if
+at least one of the vectors is $\vec0$ or the vectors are perpendicular.
+</li></ul></p>
+
+<p>With all these nice results in mind,
+we can figure out how to calculate any dot product $(a\I + b\J) \cdot (x\I + y\J)$.
+Let's start with a simpler case:
 $$
 \begin{align}
-y &= sx+h \\
-y &= sx+P_y-sP_x \\
-y-P_y &= sx-sP_x \\
-y-P_y &= s(x-P_x)
+(a\I + b\J) \cdot \I
+&= (a\I) \cdot \I + (b\J) \cdot I \\
+&= 
 \end{align}
-$$</p>
-
-<div class="box graybox"><p>The equation of a line with slope $s$ going through point $P$ is
-$$
-y-P_y = s(x-P_x).
 $$
 </p>
 
-</div><p>Let me show a different way to think about this formula.
-From <a href="line-eq-slope.html">the slope line equation derivation</a>,
-we know that a nonzero vector $\vec d$ goes in the direction of the line
-if and only if $\frac{d_y}{d_x} = s$.
-We also see that a point $(x,y)$ is on the line
-if and only if the vector from $P$ to $(x,y)$ is in the direction of the line.</p>
-
-<p><img width="287" height="171" class="asymptote" src="../asymptote/e9c21b69613cb3d7e6fc485f6c9ef090.svg" /></p><p><img width="287" height="168" class="asymptote" src="../asymptote/ba06238153b784a8e9f7c6f2a29027e7.svg" /></p><p>The vector from $P$ to $(x,y)$ is $(x-P_x)\I + (y-P_y)\J$.
-By combining these results, we see that $(x,y)$ is on the line if and only if
-$$
-\frac{y-P_y}{x-P_x} = s,
-$$
-which can be rewritten as
-$$
-y - P_y = s(x - P_x).
-$$
-The above derivation doesn't work for $x = P_x$, because then it divides by zero.
-In that case, the right side of the resulting equation is zero, and so the equation becomes just $y = P_y$,
-which is indeed true if and only if $P$ is a point on the line
-(the line isn't vertical, because it has a slope).</p>
-
-<p><img width="457" height="172" class="asymptote" src="../asymptote/8ba61cddeb26c72a6b4472dfdb713dca.svg" /></p></div>
+</div>
 </body>
 </html>

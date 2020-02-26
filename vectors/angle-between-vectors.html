@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Angle Between Vectors
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{red}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            maroon: [ "\\color{maroon}{#1}", 1 ],
+            olive: [ "\\color{olive}{#1}", 1 ],
+            purple: [ "\\color{purple}{#1}", 1 ],
+            black: [ "\\color{black}{#1}", 1 ],
+            implies: [ "\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => a.href === window.location.href.split('#')[0]);
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Dot product</label>
+        <div class="dropdown">
+            <a href="dot-projection.html">Projection</a><a href="angle-between-vectors.html">Angle between vectors</a><a href="iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="angle-between-vectors">Angle Between Vectors<a class="headerlink" href="#angle-between-vectors" title="Link to this title">¶</a></h1><p>Let $\vec v$ and $\vec w$ be nonzero vectors.
+By the angle between them, I mean an angle $\theta$ between 0 and 180 degrees like this:</p>
+
+<p><img width="282" height="80" class="asymptote" src="../asymptote/6d471790d89b0ae6a17ad29d95e5f14c.svg" /></p><p>Let's draw a circle of radius $\abs{\vec v}$ around the "beginning" of $\vec v$ and $\vec w$.
+Let's also draw axises centered on that point so that $\vec w$ goes along one of the axises.
+These might not the same as the $x$ and $y$ axises that we use most of the time,
+because these axises can be rotated depending on how $\vec w$ is rotated,
+so I'll call them $t$ and $u$ axises instead of $x$ and $y$.</p>
+
+<p><img width="395" height="341" class="asymptote" src="../asymptote/432cfaf695dce2fc4a2ad552f2cdbc48.svg" /></p><p>From non-unit-circle trig (TODO),
+we know that the $t$ and $u$ coordinates of the tip of $\vec v$ are
+$$
+(t,u) = \Bigl( \abs{\vec v} \cos(\theta), \abs{\vec v} \sin (\theta) \Bigr).
+$$
+The $t$ coordinate $\abs{\vec v} \cos(\theta)$ is
+the projection of $\vec v$ onto $\vec w$ (this also works if it's negative).
+Recall from <a href="dot-projection.html">the previous page</a> that
+the dot product $\vec v \cdot \vec w$ is this projection
+multiplied by $\abs{\vec w}$, the length of the vector being projected onto.
+With this, we get
+$$
+\vec v \cdot \vec w = ( \text{projection} ) \abs{\vec w}
+= \abs{\vec v} \cos(\theta) \abs{\vec w}.
+$$
+This equation also holds if one or both of the vectors is $\vec 0$;
+in that case, both sides of the equation are zero,
+regardless of how we define the angle between $\vec 0$ and other vectors.</p>
+
+<div class="box graybox"><p>Let $\theta$ be the angle between the vectors $\vec v$ and $\vec w$.
+Then $\vec v \cdot \vec w = \abs{\vec v} \abs{\vec w} \cos(\theta)$.
+</p>
+
+</div><p>This is a different way to think about the dot product.
+Using this formula, you can think about dot product without
+doing anything with projections.</p>
+
+<p>With this way to think about the dot product,
+we get easily some of the results that we derived on the previous page:
+<ul><li>
+The angle between any vector and the vector itself is zero, so
+$$
+\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} \underbrace{\cos(0)}_1 = \abs{\vec v}^2.
+$$
+We already got this result earlier on this page.
+</li><li>
+Let's check when the dot product is zero:
+$$
+\begin{align}
+\vec v \cdot \vec w &= 0 \\
+\abs{\vec v} \abs{\vec w} \cos(\theta) &= 0 \\
+\abs{\vec v}=0 \text{ or }  \abs{\vec w}=0 & \text{ or } \cos(\theta)=0
+\end{align}
+$$
+We see that there are two ways how the dot product can be zero:
+<ul><li>
+One of the vectors being dot producted is the zero vector.
+</li><li>
+The cosine of the angle between the vectors is zero.
+90 degrees is the only angle between 0 and 180 degrees whose cosine is zero,
+so this means that the angle between the vectors is 90 degrees; that is, the vectors are perpendicular.
+</li></ul>
+</li></ul>
+</p>
+
+<h2 id="order-doesn-t-matter">Order Doesn't Matter<a class="headerlink" href="#order-doesn-t-matter" title="Link to this title">¶</a></h2><p>Let $\theta$ be the angle between two vectors $\vec v$ and $\vec w$.
+It's also the angle between $\vec w$ and $\vec v$;
+the angle doesn't depend on which vector is which.
+Using this along with the formula we derived above, we get
+$$
+\vec v \cdot \vec w
+= \abs{\vec v} \abs{\vec w} \cos(\theta)
+= \abs{\vec w} \abs{\vec v} \cos(\theta)
+= \vec w \cdot \vec v.
+$$
+It's fine to swap the vector lengths in the middle,
+because they are numbers, and we know that the order doesn't matter when multiplying numbers.</p>
+
+<div class="box graybox"><p>For all vectors $\vec v$ and $\vec w$, we have $\vec v \cdot \vec w = \vec w \cdot \vec v$.
+</p>
+
+</div><p>Going back to projections, it's not at all clear that
+projecting one vector onto the other and multiplying by the length of the vector being projected onto
+(that is, calculating dot product) doesn't depend on which vector is which,
+even though it was quite easy to see from the $\cos(\theta)$ formula.
+</p>
+
+</div>
+</body>
+</html>

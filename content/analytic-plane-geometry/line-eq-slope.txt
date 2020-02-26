@@ -119,7 +119,7 @@ $$
 $$
 This leads to
 $$
-\frac{d_y}{d_x} = \frac{as}{a} = s,
+s = \frac{as}{a} = \frac{d_y}{d_x},
 $$
 where $d_y$ and $d_x$ denote the components of $\vec d = d_x\I + d_y\J$.
 

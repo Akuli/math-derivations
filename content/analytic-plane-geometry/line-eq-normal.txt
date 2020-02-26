@@ -126,14 +126,20 @@ that would mean that the equation is just $c=0$,
 which is true for all $(x,y)$ points or for no $(x,y)$ points depending on the value of $c$.
 Hence it's not the equation of any line.
 
-However, **if** we assume that at least one of $a$ and $b$ is nonzero, then
-we can choose a line so that $\vec n=a\I + b\J$ is one of its normal vectors,
-and the line is located so that the projection $p$ above is $-\frac{c}{|\vec n|}$.
-Its equation will then be
+Let's say that we have any equation $ax+by+c=0$, with at least one of $a$ and $b$ nonzero.
+We'll try to choose a line such that when we calculate the equation of the line, we get $ax+by+c=0$;
+this would show that any $ax+by+c=0$ equation is the equation of some line.
+For choosing a line, we can choose two things:
+which direction we want the line to go in, and where we want to locate the line.
+For direction, we choose the direction perpendicular to $a\I + b\J \ne \vec0$,
+and for location of the line, we cleverly locate the line so that
+what we called $p$ above ends up being $-\frac{c}{|\vec n|}$,
+where the $c$ came from our $ax+by+c=0$ equation.
+The equation of this carefully chosen line is then
 $$
 ax+by-\underbrace{\left( -\frac{c}{|\vec n|} \right)}_p|\vec n| = 0,
 $$
-which simplifies to $ax+by+c=0$.
+which simplifies to $ax+by+c=0$, so our $ax+by+c=0$ equation is indeed the equation of some line.
 
 graybox:
     If at least one of $a$ and $b$ is nonzero, then $ax+by+c=0$ is the equation of a line,

@@ -20,19 +20,6 @@
 </defs>
 <g id='page1'>
 <g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>
-<path d='M 227.263 -82.717L 0 0' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
-</g>
-<g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>
-<path d='M 240.632 -87.5827L 225.959 -86.2991L 228.567 -79.135L 240.632 -87.5827Z' fill='#800000'/>
-</g>
-<g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>
-<path d='M 240.632 -87.5827L 225.959 -86.2991L 228.567 -79.135L 240.632 -87.5827Z' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
-</g><g fill='#800000'>
-<use x='349.499' xlink:href='#g0-126' y='120.026'/>
-<use x='346.442' xlink:href='#g0-119' y='120.026'/>
-</g>
-
-<g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>
 <path d='M -166.791 -108.854L 0 0' fill='none' stroke='#0000ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>
@@ -43,6 +30,19 @@
 </g><g fill='#0000ff'>
 <use x='150.861' xlink:href='#g0-126' y='107.746'/>
 <use x='151.849' xlink:href='#g0-118' y='107.746'/>
+</g>
+
+<g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>
+<path d='M 227.263 -82.717L 0 0' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+</g>
+<g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>
+<path d='M 240.632 -87.5827L 225.959 -86.2991L 228.567 -79.135L 240.632 -87.5827Z' fill='#800000'/>
+</g>
+<g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>
+<path d='M 240.632 -87.5827L 225.959 -86.2991L 228.567 -79.135L 240.632 -87.5827Z' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+</g><g fill='#800000'>
+<use x='349.499' xlink:href='#g0-126' y='120.026'/>
+<use x='346.442' xlink:href='#g0-119' y='120.026'/>
 </g>
 
 <g transform='matrix(0.996264 0 0 0.996264 235.58 171.186)'>

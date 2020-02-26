@@ -11,14 +11,14 @@
 </defs>
 <g id='page1'>
 <g transform='matrix(0.996264 0 0 0.996264 57.5433 168.378)'>
-<path d='M 213.396 0L 0 0' fill='none' stroke='#0000ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+<path d='M 213.396 0L 0 0' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 57.5433 168.378)'>
-<path d='M 227.622 0L 213.396 -3.81195L 213.396 3.81195L 227.622 0Z' fill='#0000ff'/>
+<path d='M 227.622 0L 213.396 -3.81195L 213.396 3.81195L 227.622 0Z' fill='#800000'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 57.5433 168.378)'>
-<path d='M 227.622 0L 213.396 -3.81195L 213.396 3.81195L 227.622 0Z' fill='none' stroke='#0000ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
-</g><g fill='#0000ff'>
+<path d='M 227.622 0L 213.396 -3.81195L 213.396 3.81195L 227.622 0Z' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+</g><g fill='#800000'>
 <use x='164.982' xlink:href='#g0-126' y='160.846'/>
 <use x='161.925' xlink:href='#g0-119' y='160.846'/>
 </g>

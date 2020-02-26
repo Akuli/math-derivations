@@ -26,14 +26,14 @@
 </g>
 
 <g transform='matrix(0.996264 0 0 0.996264 170.929 168.378)'>
-<path d='M -99.5846 -0L 0 0' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+<path d='M -99.5846 -0L 0 0' fill='none' stroke='#0000ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 170.929 168.378)'>
-<path d='M -113.811 -0L -99.5846 3.81195L -99.5846 -3.81195L -113.811 -0Z' fill='#800000'/>
+<path d='M -113.811 -0L -99.5846 3.81195L -99.5846 -3.81195L -113.811 -0Z' fill='#0000ff'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 170.929 168.378)'>
-<path d='M -113.811 -0L -99.5846 3.81195L -99.5846 -3.81195L -113.811 -0Z' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
-</g><g fill='#800000'>
+<path d='M -113.811 -0L -99.5846 3.81195L -99.5846 -3.81195L -113.811 -0Z' fill='none' stroke='#0000ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+</g><g fill='#0000ff'>
 <use x='100.417' xlink:href='#g1-126' y='160.846'/>
 <use x='97.3605' xlink:href='#g1-119' y='160.846'/>
 <use x='119.508' xlink:href='#g1-114' y='160.846'/>

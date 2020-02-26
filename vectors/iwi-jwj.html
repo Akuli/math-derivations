@@ -101,28 +101,171 @@ Dot product behaves like multiplication of numbers in some ways:
 for all vectors $\vec a,\vec b,\vec c,\vec v,\vec w$ and numbers $r \in \mathbb{R}$, we have
 $$
 \begin{align}
-\tag{1} \label{commutative}     \vec v \cdot \vec w &= \vec w \cdot \vec v, \\
-\tag{2} \label{distributive}    (\vec a + \vec b) \cdot \vec c &= \vec a \cdot \vec c + \vec b \cdot \vec c, \\
-\tag{3} \label{associative}     \vec v \cdot (\vec w \, r) &= (\vec v \cdot \vec w) r.
+\tag{1} \label{1}   \vec v \cdot \vec w &= \vec w \cdot \vec v, \\
+\tag{2} \label{2}   (\vec a + \vec b) \cdot \vec c &= \vec a \cdot \vec c + \vec b \cdot \vec c, \\
+\tag{3} \label{3}   \vec v \cdot (\vec w \, r) &= (\vec v \cdot \vec w) r.
 \end{align}
 $$
 </li><li>
-Dot product of vectors is zero if and only if
-at least one of the vectors is $\vec0$ or the vectors are perpendicular.
+$\I \cdot \J = \J \cdot \I = 0$ (the vectors are perpendicular).
+</li><li>
+$\I \cdot \I = \J \cdot \J = 1$.
 </li></ul></p>
+
+<p>First of all, let's notice that by combining \eqref{1} with \eqref{2},
+we get equation \eqref{2} but the other way;
+order doesn't matter with dot products in general, so it doesn't matter how we do it in \eqref{2}.
+With more detail, we get
+$$
+\tag{2'} \label{2'}
+\vec a \cdot (\vec b + \vec c)
+    \mathop{=}^{\eqref{1}}
+(\vec b + \vec c) \cdot \vec a
+    \mathop{=}^{\eqref{2}}
+\vec b \cdot \vec a + \vec c \cdot \vec a
+    \mathop{=}^{\eqref{1}}
+\vec a \cdot \vec b + \vec a \cdot \vec c.
+$$</p>
+
+<p>Similarly, by combining \eqref{1} with \eqref{3}, we get
+$$
+\tag{3'} \label{3'}
+(r \vec v) \cdot \vec w
+    \mathop{=}^{\eqref{1}}
+\vec w \cdot (r \vec v)
+    =
+\vec w \cdot (\vec v \, r)
+    \mathop{=}^{\eqref{3}}
+(\vec w \cdot \vec v)r
+    \mathop{=}^{\eqref{1}}
+(\vec v \cdot \vec w)r
+    =
+r(\vec v \cdot \vec w).
+$$</p>
 
 <p>With all these nice results in mind,
 we can figure out how to calculate any dot product $(a\I + b\J) \cdot (x\I + y\J)$.
 Let's start with a simpler case:
 $$
-\begin{align}
 (a\I + b\J) \cdot \I
-&= (a\I) \cdot \I + (b\J) \cdot I \\
-&= 
-\end{align}
+\mathop{=}^{\eqref{2}}
+(a\I) \cdot \I + (b\J) \cdot \I
+\mathop{=}^{\eqref{3'}}
+a\underbrace{(\I \cdot \I)}_1 + b\underbrace{(\J \cdot \I)}_0
+= a
+$$
+Based on this, we get
+$$
+(a\I + b\J) \cdot (x\I)
+= (a\I + b\J) \cdot (\I\, x)
+\mathop{=}^{\eqref{3}}
+\underbrace{\Bigl((a\I + b\J) \cdot \I\Bigr)}_ax = ax.
+$$
+With a very similar calculation, we get
+$$
+(a\I + b\J) \cdot (y\J) = by.
+$$
+I'll leave the details as an exercise for you.
+Putting it all together, we have
+$$
+(a\I+b\J) \cdot (x\I + y\J)
+\mathop{=}^{\eqref{2'}}
+\underbrace{(a\I+b\J) \cdot (x\I)}_{ax} +
+\underbrace{(a\I+b\J) \cdot (y\J)}_{by}.
+$$</p>
+
+<div class="box graybox"><p>For all vectors $a\I+b\J$ and $x\I+y\J$, we have
+$$
+(a\I+b\J) \cdot (x\I+y\J) = ax+by.
 $$
 </p>
 
-</div>
+</div><p>I like to call this "$\I$'s with $\I$'s, $\J$'s with $\J$'s", or "iwi jwj" for short.</p>
+
+<p>This is yet another way to think about the dot product.
+I'm sorry about the above wall of math with no pictures, but that's mostly the nature of this result;
+it's something that we can calculate easily, not something that we can visualize easily.
+The true power is in combining this with all the visual things that we know about dot product,
+which is what we'll do next.
+</p>
+
+<h2 id="example-pythagorean-theorem-proof">Example: Pythagorean Theorem Proof<a class="headerlink" href="#example-pythagorean-theorem-proof" title="Link to this title">¶</a></h2><p>Let's prove the Pythagorean theorem.
+We haven't needed it for any of the dot product stuff yet,
+so we can use everything we know about dot products in our proof.
+However, we used the Pythagorean theorem to derive the formula for length of a vector (TODO),
+so we can't use the vector length formula.</p>
+
+<p>Consider any triangle with a 90 degree corner.
+Let's first rotate and move the triangle so that it's on the $x$ axis like this:</p>
+
+<p><img width="310" height="205" class="asymptote" src="../asymptote/e4b8a708af98645bd06b457f690213d5.svg" /></p><p>We have also seen that for any vector $\vec v$, we have $\vec v \cdot \vec v = \abs{\vec v}^2$.
+As a reminder, here are two ways to see it without the Pythagorean theorem:</p>
+
+<p><ul><li>
+With <a href="angle-between-vectors.html">angle between vectors</a>:
+    The angle between $\vec v$ and $\vec v$ (that is, the angle between the vector and itself) is zero,
+    so $\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} \cos(0)$, where $\cos(0) = 1$.
+</li><li>
+With <a href="dot-projection.html">projection</a>:
+    The projection of $\vec v$ onto itself is $\abs{\vec v}$.
+    The dot product is that multiplied by the length of the vector being projected onto,
+    which is also $\abs{\vec v}$.
+</li></ul></p>
+
+<p>Combining this with the "$\I$'s with $\I$'s, $\J$'s with $\J$'s" rule, we get
+$$
+\abs{a\I + b\J}^2 = (a\I + b\J) \cdot (a\I + b\J) = a^2 + b^2,
+$$
+and letting $c = \abs{a\I+b\J}$ denote the length of the longest side of the triangle
+gives the Pythagorean theorem.</p>
+
+<p>Also, square rooting both sides above (and noticing that vector length isn't negative) gives
+$$
+\abs{a\I + b\J} = \sqrt{a^2 + b^2},
+$$
+which proves the vector length formula.
+We used a picture with positive $a$ and $b$, but this works similarly in other cases (TODO).
+</p>
+
+<h2 id="example-calculating-projection">Example: Calculating Projection<a class="headerlink" href="#example-calculating-projection" title="Link to this title">¶</a></h2><p>Let's calculate some things with $\vec v = 2\I+3\J$ and $\vec w = 4\I+5\J$.
+Their dot product is
+$$
+2 \cdot 4 + 3 \cdot 5 = 8 + 15 = 23,
+$$
+and by the vector length formula (derived above), their lengths are
+$$
+\abs{\vec v} = \sqrt{2^2+3^2} = \sqrt{13}
+\quad \text{and} \quad
+\abs{\vec w} = \sqrt{4^2+5^2} = \sqrt{41}.
+$$</p>
+
+<p>Let $p$ be the projection of $\vec v$ onto $\vec w$.
+Then, with <a href="dot-projection.html">projection stuff</a>, we get
+$$
+\vec v \cdot \vec w = p\abs{\vec w},
+$$
+so
+$$
+p = \frac{\vec v \cdot \vec w}{\abs{\vec w}} = \frac{23}{\sqrt{41}}.
+$$
+</p>
+
+<h2 id="example-calculating-angle-between-vectors">Example: Calculating Angle Between Vectors<a class="headerlink" href="#example-calculating-angle-between-vectors" title="Link to this title">¶</a></h2><p>Let $\vec v$ and $\vec w$ be as above, and let $\theta$ be the angle between them.
+Then, with <a href="angle-between-vectors.html">angle stuff</a>, we get
+$$
+\vec v \cdot \vec w = \abs{\vec v} \abs{\vec w} \cos(\theta),
+$$
+which leads to
+$$
+\cos(\theta) = \frac{\vec v \cdot \vec w}{\abs{\vec v} \abs{\vec w}} = \frac{23}{\sqrt{13}\sqrt{41}}.
+$$
+To find $\theta$ from here,
+use a button named $\arccos$, $\operatorname{acos}$ or $\cos^{-1}$ on your calculator:
+$$
+\theta = \arccos\left( \frac{23}{\sqrt{13}\sqrt{41}} \right) \approx 4.9697^\circ
+$$
+That's quite a small angle; we all know how much 90 degrees is, and this is about 20 times smaller than that.</p>
+
+<p><img width="251" height="341" class="asymptote" src="../asymptote/1324bb76de91fe8617975dae33e8e3dd.svg" /></p></div>
 </body>
 </html>

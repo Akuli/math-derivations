@@ -112,10 +112,10 @@ When writing this site, I needed to choose one of these ways to start with, and 
 I'll first tell about projection.
 Let's draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:</p>
 
-<p><img width="291" height="252" class="asymptote" src="../asymptote/1cfd2d1f98ccc35ae3958bb7c6e012c5.svg" /></p><p>In the above picture, the projection is positive, but
+<p><img width="291" height="252" class="asymptote" src="../asymptote/28e538977c5389d5f0cd0f495d9a49ca.svg" /></p><p>In the above picture, the projection is positive, but
 if you need to "extend" $\vec v$ for drawing the line, then the projection is negative:</p>
 
-<p><img width="422" height="228" class="asymptote" src="../asymptote/12b5f0c9c29af2ebce44bb9425668711.svg" /></p><p>The dot product is not quite the projection;
+<p><img width="422" height="228" class="asymptote" src="../asymptote/13e422845f51578efeb0f4ec5fcec357.svg" /></p><p>The dot product is not quite the projection;
 it's the projection multiplied by the length of the vector being projected onto.
 This is the first way to think about dot product.</p>
 
@@ -140,7 +140,7 @@ but it doesn't matter, because that projection gets multiplied by $\abs{\vec 0} 
 </li><li>
 The projection of $\vec i+\vec j$ onto $2\vec i$ is $1$, so $(\vec i + \vec j) \cdot (2\vec i) = 1\abs{2\vec i} = 2$.</p>
 
-<p><img width="194" height="155" class="asymptote" src="../asymptote/51cab90f3b85576be5ff490c9ed003b2.svg" /></p><p></li><li>
+<p><img width="194" height="155" class="asymptote" src="../asymptote/bedd75949427d4e1bb07628e26c9f296.svg" /></p><p></li><li>
 The projection of any vector onto itself is simply the length of the vector,
 so $\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} = \abs{\vec v}^2$,
 where the first $\abs{\vec v}$ is the projection,
@@ -154,7 +154,7 @@ The projection of $\vec j$ onto $\vec i$ is zero, so $\vec j \cdot \vec i = 0$.<
 <p>You might be wondering how to calculate something like
 the projection of $2\I+3\J$ onto $4\I+5\J$.
 It's easiest to <b>first</b> calculate the dot product of these vectors,
-using a handy way to calculate dot products that I'll show soon.
+using a handy way to calculate dot products that I'll show <a href="iwi-jwj.html">soon</a>.
 Then you know everything in $\vec v \cdot \vec w = p\abs{\vec w}$ except $p$,
 and you can solve the projection $p$.
 </p>
@@ -188,7 +188,7 @@ but you will likely see it elsewhere.
 <h2 id="dot-product-and-sum">Dot Product and Sum<a class="headerlink" href="#dot-product-and-sum" title="Link to this title">¶</a></h2><p>We know that the multiplication of numbers behaves so that
 for all $a,b,c \in \mathbb{R}$, we have $(a+b)c = ac+bc$.
 We expect anything called "product" to behave similarly.
-Next I'll show you why dot product behaves like that, which justifies calling it a product.</p>
+Next I'll show you why dot product behaves like that too, which justifies calling it a product.</p>
 
 <p>Let $\vec a$, $\vec b$ and $\vec c$ be vectors, and suppose that $\vec c$ is nonzero.
 Let $p(\vec v)$ denote the projection of any vector $\vec v$ onto $\vec c$.
@@ -204,7 +204,7 @@ $$
 (We can divide by $\abs{\vec c}$ because $\vec c$ is a nonzero vector.)
 In the following picture, we have $p(\vec a + \vec b) = p(\vec a) + p(\vec b)$.</p>
 
-<p><img width="618" height="414" class="asymptote" src="../asymptote/bf6d0f4907f192f2f8d61c7312858f84.svg" /></p><p>In this picture, we have $p(\vec a) > 0$, $p(\vec b) < 0$ and $p(\vec a) + p(\vec b) > 0$.
+<p><img width="618" height="414" class="asymptote" src="../asymptote/4b48ac525e6a86cbbc8ae5b68205c764.svg" /></p><p>In this picture, we have $p(\vec a) > 0$, $p(\vec b) < 0$ and $p(\vec a) + p(\vec b) > 0$.
 However, this works similarly in all other cases too;
 pictures look different, but we always get $p(\vec a + \vec b) = p(\vec a) + p(\vec b)$.
 Plugging into the formula for $p(\vec v)$, we get
@@ -233,7 +233,7 @@ Next I'll show you that a similar thing works with dot products.</p>
 <p>Let $\vec v$ and $\vec w$ be nonzero vectors, and let $r$ be a positive number.
 Let $p$ be the projection of $\vec v$ onto $\vec w$.
 The projection of $\vec v$ onto $\vec w \, r$ is also $p$,
-because $\vec v$ and $\vec w \, r$ go in the same direction.</p>
+because $\vec v$ and $\vec w \, r$ go in the same direction ($r$ is positive).</p>
 
 <p><img width="344" height="170" class="asymptote" src="../asymptote/1a98eeb7cc48bae73e71c8eba73644fd.svg" /></p><p>Now we get
 $$
@@ -245,11 +245,11 @@ $$
 \vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r
 $$</p>
 
-<p>We needed the positiviness of $r$ above, but let's see what happens for zero and negative values of $r$.
+<p>We needed the positiviness of $r$ above, but let's see what happens for other values of $r$.
 For negative $r$, things get a bit weird, because
 the projection of $\vec v$ onto $\vec w$ and the projection of $\vec v$ onto $\vec w \, r$ are different:</p>
 
-<p><img width="230" height="164" class="asymptote" src="../asymptote/78b672ff24cb4f22921544d2d5729bb4.svg" /></p><p><img width="201" height="164" class="asymptote" src="../asymptote/227fd0e8f011e0918fe558e8d03b9e48.svg" /></p><p>One of the vectors $\vec w$ and $\vec w \, r$ needs to be "extended",
+<p><img width="230" height="164" class="asymptote" src="../asymptote/465668d1b315b74ae3f4735f05cf3a2f.svg" /></p><p><img width="201" height="164" class="asymptote" src="../asymptote/6d362933ec478fe59b2dc896c96bc5f7.svg" /></p><p>One of the vectors $\vec w$ and $\vec w \, r$ needs to be "extended",
 and the other one doesn't need to.
 In the picture, $\vec w \, r$ had to be extended and $\vec w$ wasn't extended,
 but this could also be vice versa.
@@ -279,7 +279,7 @@ $$
 </p>
 
 </div><p>The above result also means that we can write $\vec v \cdot \vec w \, r$ without parentheses,
-because no matter how parentheses are added, the result is the same either way
+because no matter how parentheses are added, the result is the same either way.
 </p>
 
 <h2 id="does-order-matter">Does Order Matter?<a class="headerlink" href="#does-order-matter" title="Link to this title">¶</a></h2><p>Can we also do the addition thing on the left side of the dot product? Something like this:

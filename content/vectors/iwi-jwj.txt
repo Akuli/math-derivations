@@ -194,7 +194,7 @@ use a button named $\arccos$, $\operatorname{acos}$ or $\cos^{-1}$ on your calcu
 $$
 \theta = \arccos\left( \frac{23}{\sqrt{13}\sqrt{41}} \right) \approx 4.9697^\circ
 $$
-That's quite a small angle; we all know how much 90 degrees is, and this is about 20 times smaller than that.
+That's a small angle; we all know how much 90 degrees is, and this is about 20 times smaller than that.
 
 asymptote:
     unitsize(2cm);

@@ -93,6 +93,7 @@ def get_sidebar_content(txtfile):
                      'analytic-plane-geometry/line-eq-slope-and-point'),
                 link("Angle between lines",
                      'analytic-plane-geometry/angle-between-lines'),
+                link("Slope and tan", 'analytic-plane-geometry/slope-tan'),
                 link("Equation with determinant",
                      'analytic-plane-geometry/line-eq-determinant'),
             ])),

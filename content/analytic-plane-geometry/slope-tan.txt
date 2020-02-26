@@ -1,0 +1,171 @@
+# Slope and Tan
+
+In [the previous derivation](angle-between-lines.html), we saw that
+if $\alpha$ is the angle from a line with slope $s_1$ to a line with slope $s_2$, then we have
+$$
+\tan(\alpha) = \frac{s_2 - s_1}{1 + s_1s_2}.
+$$
+Let's consider a special case: the angle from $x$ axis to a line with slope $s$.
+
+asymptote:
+    unitsize(2cm);
+    axises(-1,2.5,-1,3);
+
+    real f(real x) {
+        return 1.5*x - 0.5;
+    }
+
+    real fzerohere = -f(0) / (f(1)-f(0));
+
+    draw(graph(f, -0.5, 2), p=blue, L=rrotate(atan(f(1)-f(0)))*Label("slope $s$", position=Relative(0.8)),
+            align=rotate(90)*unit(( 1, f(1)-f(0) )) );
+    draw(rarc( (fzerohere, 0), 0.5, 0, atan(f(1)-f(0)) ), p=deepgreen, L="$\alpha > 0$", arrow=Arrow(4mm));
+
+asymptote:
+    unitsize(2cm);
+    axises(-1,2.5,-1,3);
+
+    real f(real x) {
+        return -1.5*x + 1.5;
+    }
+
+    real fzerohere = -f(0) / (f(1)-f(0));
+
+    draw(graph(f, -0.5, 2), p=blue, L=rrotate(atan(f(1)-f(0)))*Label("slope $s$", position=Relative(0.4)),
+            align=rotate(90)*unit(( 1, f(1)-f(0) )) );
+    draw(rarc( (fzerohere, 0), 0.5, 0, atan(f(1)-f(0)) ), p=deepgreen,
+            L=Label("$\alpha < 0$", position=Relative(0.7)), arrow=Arrow(4mm), align=E);
+
+The equation of the $x$ axis is just $y=0$, which can be rewritten as $y=0x+0$,
+so the slope of $x$ axis is $0$.
+We want the angle from $x$ axis to the line with slope $s$,
+so we plug in $s_1 = 0$ and $s_2 = s$, and we get
+$$
+\tan(\alpha) = \frac{s - 0}{1 + 0s} = s.
+$$
+
+graybox:
+    Let $\alpha$ be the angle from $x$ axis to a line with slope $s$.
+    Then $s = \tan(\alpha)$.
+
+There's a different, possibly more enlightening way to arrive at this result.
+Let's draw a non-vertical line with slope $s$ and angle $\alpha$.
+Let's also draw a unit circle around a point on the line.
+Let $\vec d$ be the vector from the center of the unit circle to where the unit circle intersects the line.
+
+asymptote:
+    unitsize(4cm);
+    axises(-0.2,3,-1,1.5);
+
+    real f(real x) {
+        return 0.8*x - 1;
+    }
+
+    real fzerohere = -f(0) / (f(1)-f(0));
+
+    draw(graph(f, 0.2, 3), p=blue, L=rrotate(atan(f(1)-f(0)))*Label("slope $s$", position=Relative(0.8)),
+            align=rotate(90)*unit(( 1, f(1)-f(0) )) );
+
+    draw(shift(fzerohere,0)*unitcircle);
+    draw(rarc( (fzerohere, 0), 0.5, 0, atan(f(1)-f(0)) ), p=deepgreen, L="$\alpha$", arrow=Arrow(4mm));
+    draw(shift(fzerohere,0)*rrotate(atan(f(1)-f(0)))*((0,0.1)--(1,0.1)), p=deepred, arrow=Arrow(5mm),
+        L="$\vec d$", align=NW);
+
+From trig, we know that
+$$
+\vec d = \cos(\alpha)\I + \sin(\alpha)\J.
+$$
+On the other hand, $\vec d$ is a vector in the direction of the line, so
+from [this derivation](line-eq-slope.html#meaning-of-s-and-h) we get
+$$
+s = \frac{d_y}{d_x} = \frac{\sin(\alpha)}{\cos(\alpha)} = \tan(\alpha).
+$$
+
+
+## Using Slope for Trig
+
+This is not only a new way to think about slope, but also a new way to think about tan:
+$\tan(\alpha)$ is a slope of a line with angle $\alpha$.
+
+For example, consider a line with slope $\tan(\alpha)$, going through $(0,0)$ for simplicity.
+Its equation is $y = \tan(\alpha)x + h$, where plugging in $x=y=0$ reveals that $h=0$.
+Reflecting the line to the other side of the $x$ axis gives a line
+whose equation is $y=-\tan(\alpha)x$ (TODO).
+
+asymptote:
+    unitsize(4cm);
+    axises(-0.5,2,-1,1.3);
+
+    real alpha = 0.55;
+
+    real f1(real x) { return tan(alpha)*x; }
+    real f2(real x) { return -tan(alpha)*x; }
+
+    draw(graph(f1, -0.5, 1.8), p=blue,
+        L=rrotate(alpha)*Label("$y=\tan(\alpha)x$"), align=N);
+    draw(graph(f2, -0.5, 1.8), p=deepred,
+        L=rrotate(-alpha)*Label("$y=-\tan(\alpha)x$"), align=S);
+
+    draw(rarc((0,0), 0.4, 0, alpha), p=blue, L="$\alpha$", arrow=Arrow(4mm), align=E);
+    draw(rarc((0,0), 0.4, 0, -alpha), p=deepred, L="$-\alpha$", arrow=Arrow(4mm), align=E);
+
+Mirroring the line flips the sign of the angle, so the slope of the mirrored line is $\tan(-\alpha)$.
+On the other hand, we can see from the equation of the line that its slope is $-\tan(\alpha)$,
+so we get
+$$
+\tan(-\alpha) = -\tan(\alpha).
+$$
+
+For a more complex example,
+consider two lines with angles $\alpha$ and $\beta$.
+By the above result, their slopes are $\tan(\alpha)$ and $\tan(\beta)$.
+
+asymptote:
+    unitsize(4cm);
+    axises(-0.5,2,-1,2.5);
+
+    real alpha = 0.55;   // radians
+    real beta = 0.9;   // radians
+
+    real f1(real x) { return tan(alpha)*x; }
+    real f2(real x) { return tan(beta)*x; }
+
+    draw(graph(f1, -0.5, 1.8), p=blue,
+        L=rrotate(alpha)*Label("slope $\tan(\alpha)$", position=Relative(0.95)));
+    draw(graph(f2, -0.5, 1.8), p=deepred,
+        L=rrotate(beta)*Label("slope $\tan(\beta)$", align=NW, position=Relative(0.7)));
+
+    draw(rarc((0,0), 0.4, 0, alpha), arrow=Arrow(4mm), L="$\alpha$", p=blue);
+    draw(rarc((0,0), 1, 0, beta), arrow=Arrow(4mm), L=Label("$\beta$", position=Relative(0.4)), p=deepred);
+    draw(rarc((0,0), 0.6, alpha, beta), arrow=Arrow(4mm), L="$\theta$", p=deepgreen);
+
+Let $\theta$ denote the angle from the $\alpha$ line to the $\beta$ line. Then we have
+$$
+\alpha + \theta = \beta,
+$$
+which gives $\theta=\beta-\alpha$.
+On the other hand, we can use the [formula for angle between lines](angle-between-lines.html) to get
+$$
+\tan(\theta) = \frac{s_2-s_1}{1 + s_1s_2},
+$$
+where $s_1=\tan(\alpha)$ and $s_2=\tan(\beta)$ are slopes. Plugging everything in gives
+$$
+\tan(\beta-\alpha) = \frac{\tan(\beta)-\tan(\alpha)}{1 + \tan(\alpha)\tan(\beta)},
+$$
+which is a well-known trig formula.
+
+In fact, the usual way to derive the formula for angle between lines is to
+start with the connection between slope and tan (deriving it differently, of course),
+and then use the above trig formula to find $\tan(\theta)$.
+
+We can get other well-known trig formulas as special cases of this one
+(this kind of thing happens a lot in trig).
+For example, by choosing $\alpha = -\beta$, we get
+$$
+\tan(\beta-(-\beta)) = \frac{\tan(\beta) - \tan(-\beta)}{1 + \tan(-\beta)\tan(\beta)}.
+$$
+By applying $\tan(-\beta)=-\tan(\beta)$, which we derived above, this simplifies to
+$$
+\tan(2\beta) = \frac{2\tan(\beta)}{1 - \tan^2(\beta)},
+$$
+which is also a well-known trig formula.

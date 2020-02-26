@@ -84,7 +84,7 @@ $$
 
 ## Using Slope for Trig
 
-This is not only a new way to think about slope, but also a new way to think about tan:
+This is not only a way to think about slope, but also a way to think about tan:
 $\tan(\alpha)$ is a slope of a line with angle $\alpha$.
 
 For example, consider a line with slope $\tan(\alpha)$, going through $(0,0)$ for simplicity.

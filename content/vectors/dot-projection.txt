@@ -14,6 +14,9 @@ Each of the different ways has its own strenghts and weaknesses,
 and the true power of dot products lies in combining these different ways, as we'll see.
 When writing this site, I needed to choose one of these ways to start with, and I chose what's on this page.
 
+
+## Defining Dot Product
+
 To tell you what number comes out of the dot product $\vec v \cdot \vec w$,
 I'll first tell about projection.
 Let's draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:
@@ -22,11 +25,11 @@ asymptote:
     unitsize(3cm);
     transform T = rotate(20);
 
-    pair w = (3,0);
     pair v = (0.8,2);
+    pair w = (3,0);
 
-    draw(T*((0,0)--w), arrow=Arrow(5mm), L="$\vec w$", align=N, p=deepred);
     draw(T*((0,0)--v), arrow=Arrow(5mm), L="$\vec v$", align=NW, p=blue);
+    draw(T*((0,0)--w), arrow=Arrow(5mm), L="$\vec w$", align=N, p=deepred);
 
     draw(T*(v--(v.x,0)), p=gray+smalldashes);
     draw(T*shift(v.x,0)*scale(0.2)*((0,1)--(1,1)--(1,0)));
@@ -39,11 +42,11 @@ asymptote:
     unitsize(3cm);
     transform T = rotate(20);
 
-    pair w = (3,0);
     pair v = (-1.5,2);
+    pair w = (3,0);
 
-    draw(T*((0,0)--w), arrow=Arrow(5mm), L="$\vec w$", align=N, p=deepred);
     draw(T*((0,0)--v), arrow=Arrow(5mm), L="$\vec v$", align=NE, p=blue);
+    draw(T*((0,0)--w), arrow=Arrow(5mm), L="$\vec w$", align=N, p=deepred);
 
     draw(T*(v--(v.x,0)--(0,0)), p=gray+smalldashes);
     draw(T*shift(v.x,0)*scale(0.2)*((0,1)--(1,1)--(1,0)));
@@ -58,28 +61,246 @@ graybox:
     Then $\vec v \cdot \vec w = p\abs{\vec w}$.
 
 Notice that this was **not** a formula derivation;
-it's more like a long definition, because I'm telling you what dot product is,
+it's a definition, because I'm telling you what dot product is,
 not deriving some result about how it behaves.
+
+TODO: animation
 
 Examples:
 <ul><li>
 The projection of $\vec0$ onto any vector $\vec w$ is $0$, so we have
-$\vec w \cdot \vec0 = 0\abs{\vec w} = 0$.
+$\vec0 \cdot \vec w = 0\abs{\vec w} = 0$.
 </li><li>
-This also works the other way, $\vec0 \cdot \vec w = 0$.
+This also works the other way, $\vec w \cdot \vec0 = 0$.
 It's not at all clear what the projection of something onto $\vec0$ should be,
 but it doesn't matter, because that projection gets multiplied by $\abs{\vec 0} = 0$ anyway.
 </li><li>
-The projection of $\vec i+\vec j$ onto $\vec i$ is $1$, so $\vec i \cdot \vec j = \vec 0$.
+The projection of $\vec i+\vec j$ onto $2\vec i$ is $1$, so $(\vec i + \vec j) \cdot (2\vec i) = 1\abs{2\vec i} = 2$.
+
+asymptote:
+    unitsize(3cm);
+    draw((0,0)--(2,0), arrow=Arrow(5mm), L="$2\I$", p=deepred);
+    draw((0,0)--(0,1), arrow=Arrow(5mm), L="$\J$", align=W);
+    draw((0,0)--(1,1), arrow=Arrow(5mm), p=blue, L=Label("$\I+\J$", position=Relative(1), align=NE));
+    draw((1,0)--(1,1), gray+smalldashes);
+
+</li><li>
+The projection of any vector onto itself is simply the length of the vector,
+so $\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} = \abs{\vec v}^2$,
+where the first $\abs{\vec v}$ is the projection,
+and the second $\abs{\vec v}$ is the length of the $\vec v$
+being projected onto.
+</li><li>
+The projection of $\vec j$ onto $\vec i$ is zero, so $\vec j \cdot \vec i = 0$.
+
+asymptote:
+    unitsize(3cm);
+    draw((0,0)--(1,0), arrow=Arrow(5mm), L="$\I$", p=deepred);
+    draw((0,0)--(0,1), arrow=Arrow(5mm), L="$\J$", align=W, p=blue);
 
 </li></ul>
 
-TODO: animation
+You might be wondering how to calculate something like
+the projection of $2\I+3\J$ onto $4\I+5\J$.
+It's easiest to **first** calculate the dot product of these vectors,
+using a handy way to calculate dot products that I'll show [soon](iwi-jwj.html).
+Then you know everything in $\vec v \cdot \vec w = p\abs{\vec w}$ except $p$,
+and you can solve the projection $p$.
 
-You might be wondering how you can calculate something like the projection of $2\I+3\J$ onto $4\I+5\J$.
-Let's solve $\vec v \cdot \vec w = p \abs{\vec w}$ for $p$.
+
+## Perpendicularness
+
+In the last example above,
+notice that dot product of two nonzero vectors can be zero!
+This is different from the product of numbers.
+In fact, if $\vec v$ and $\vec w$ are nonzero and perpendicular,
+then the projection of $\vec v$ onto $\vec w$ is zero,
+and so $\vec v \cdot \vec w = 0\abs{\vec w} = 0$.
+If the vectors are nonzero and not perpendicular,
+then the projection is nonzero,
+and the dot product is also nonzero:
+$$
+\vec v \cdot \vec w
+= (\underbrace{\text{projection}}_{\ne 0}) \underbrace{\abs{\vec w}}_{\ne 0}
+\ne 0
+$$
 
 graybox:
-    The projection of $\vec v$ onto $\vec w$ is $\displaystyle\frac{\vec v \cdot \vec w}{\abs{\vec w}}$.
+    The dot product of two nonzero vectors is zero if and only if
+    the vectors are perpendicular.
 
-Soon we will figure out how to calculate the dot product easily.
+Many books say that the zero vector is perpendicular to any vector,
+because that makes the above result for all vectors,
+not just for nonzero vectors.
+I won't use that convention in these derivations,
+but you will likely see it elsewhere.
+
+
+## Dot Product and Sum
+
+We know that the multiplication of numbers behaves so that
+for all $a,b,c \in \mathbb{R}$, we have $(a+b)c = ac+bc$.
+We expect anything called "product" to behave similarly.
+Next I'll show you why dot product behaves like that too, which justifies calling it a product.
+
+Let $\vec a$, $\vec b$ and $\vec c$ be vectors, and suppose that $\vec c$ is nonzero.
+Let $p(\vec v)$ denote the projection of any vector $\vec v$ onto $\vec c$.
+We know that the dot product $\vec v \cdot \vec c$ is this projection
+multiplied by the length of the vector being projected onto, so
+$$
+\vec v \cdot \vec c = p(\vec v) \abs{\vec c},
+$$
+which leads to
+$$
+p(\vec v) = \frac{\vec v \cdot \vec c}{\abs{\vec c}}.
+$$
+(We can divide by $\abs{\vec c}$ because $\vec c$ is a nonzero vector.)
+In the following picture, we have $p(\vec a + \vec b) = p(\vec a) + p(\vec b)$.
+
+asymptote:
+    unitsize(3cm);
+
+    pair c=(4,0);
+    pair a=(3,2);
+    pair b = (-2,1);
+
+    draw((0,0)--c, arrow=Arrow(5mm), L="$\vec c$", p=deepred, align=N);
+    draw(a--(a+c), arrow=Arrow(5mm), L="$\vec c$", p=deepred, align=N);
+    draw((0,0)--a, arrow=Arrow(5mm), L="$\vec a$", p=deepgreen);
+    draw(a--(a+b), arrow=Arrow(5mm), L="$\vec b$", p=blue);
+    draw((0,0)--(a+b), arrow=Arrow(5mm), L="$\vec a + \vec b$", p=purple, align=W);
+
+    draw((a.x,-0.8)--a, p=gray+smalldashes);
+    draw((b+a)--((b+a).x,0), p=gray+smalldashes);
+    draw(((b.x,0)+a)--a, p=gray+smalldashes);
+
+    draw(brace_with_space((a.x,0), (0,0), 1), L="$p(\vec a)>0$", p=deepgreen, align=S);
+    draw(brace_with_space((a.x,0), (a.x+b.x,0), 0.1), L="$p(\vec b)<0$", p=blue, align=S);
+    draw(brace_with_space((a.x+b.x,0), (0,0), 0.1), L="$p(\vec a) + p(\vec b)$", p=purple, align=S);
+
+In this picture, we have $p(\vec a) > 0$, $p(\vec b) < 0$ and $p(\vec a) + p(\vec b) > 0$.
+However, this works similarly in all other cases too;
+pictures look different, but we always get $p(\vec a + \vec b) = p(\vec a) + p(\vec b)$.
+Plugging into the formula for $p(\vec v)$, we get
+$$
+\frac{(\vec a + \vec b) \cdot \vec c}{\abs{\vec c}}
+= \frac{\vec a \cdot \vec c}{\abs{\vec c}} + \frac{\vec b \cdot \vec c}{\abs{\vec c}}.
+$$
+Multiplying both sides by $\vec c$ gives
+$$
+(\vec a + \vec b) \cdot \vec c = \vec a \cdot \vec c + \vec b \cdot \vec c.
+$$
+We started by assuming that $\vec c$ is nonzero, but this formula also holds for $\vec c = \vec0$;
+then the dot products on both sides are zero and it's just $0=0$.
+
+graybox:
+    For all vectors $\vec a$, $\vec b$ and $\vec c$, we have
+    $$
+    (\vec a + \vec b) \cdot \vec c = \vec a \cdot \vec c + \vec b \cdot \vec c.
+    $$
+
+
+## Dot Product and Number Times Vector
+
+There's another important property that we expect multiplications to have.
+We know that for all numbers $a$, $b$ and $c$, we have $(ab)c = a(bc)$.
+The same rule also works if $c$ is a vector; for example, $(4 \cdot 5)\I = 20\I = 4(5\I)$.
+Next I'll show you that a similar thing works with dot products.
+
+Let $\vec v$ and $\vec w$ be nonzero vectors, and let $r$ be a positive number.
+Let $p$ be the projection of $\vec v$ onto $\vec w$.
+The projection of $\vec v$ onto $\vec w \, r$ is also $p$,
+because $\vec v$ and $\vec w \, r$ go in the same direction ($r$ is positive).
+
+asymptote:
+    unitsize(2cm);
+
+    pair v=(1.5,2);
+    pair w=(4,0);
+
+    draw((0,0)--w, arrow=Arrow(5mm), L="$\vec w$", p=deepred, align=N);
+    draw((0,0)--v, arrow=Arrow(5mm), L="$\vec v$", p=deepgreen, align=W);
+    draw(shift(0,-0.2)*((0,0)--1.5w), arrow=Arrow(5mm), L="$\vec w \, r$", p=deepred);
+    draw(v--(v.x,0), p=gray+smalldashes);
+    draw(brace_with_space((v.x,0), (0,0), 0.3), L="$p$", align=S);
+
+Now we get
+$$
+\vec v \cdot (\vec w \, r) = p\abs{\vec w \, r} = p\abs{\vec w}\abs{r}.
+$$
+Here $r$ is positive, so $\abs{r} = r$,
+and $p\abs{\vec w}$ is the dot product $\vec v \cdot \vec w$, so we have
+$$
+\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r
+$$
+
+We needed the positiviness of $r$ above, but let's see what happens for other values of $r$.
+For negative $r$, things get a bit weird, because
+the projection of $\vec v$ onto $\vec w$ and the projection of $\vec v$ onto $\vec w \, r$ are different:
+
+asymptote:
+    unitsize(2cm);
+
+    pair v=(1.5,2);
+    pair w=(4,0);
+
+    draw((0,0)--w, arrow=Arrow(5mm), L="$\vec w$", p=deepred, align=N);
+    draw((0,0)--v, arrow=Arrow(5mm), L="$\vec v$", p=deepgreen, align=W);
+    draw(v--(v.x,0), p=gray+smalldashes);
+    draw(brace_with_space((v.x,0), (0,0), 0.1), L="$p>0$", align=S);
+
+asymptote:
+    unitsize(2cm);
+
+    pair v=(1.5,2);
+    pair w=(4,0);
+
+    draw((0,0)--v, arrow=Arrow(5mm), L="$\vec v$", p=deepgreen, align=W);
+    draw((0,0)--(-0.5w), arrow=Arrow(5mm), L="$\vec w \, r$", p=blue);
+    draw(v--(v.x,0)--(0,0), p=gray+smalldashes);
+    draw(brace_with_space((v.x,0), (0,0), 0.1), L="$-p<0$", align=S);
+
+One of the vectors $\vec w$ and $\vec w \, r$ needs to be "extended",
+and the other one doesn't need to.
+In the picture, $\vec w \, r$ had to be extended and $\vec w$ wasn't extended,
+but this could also be vice versa.
+This means that one of the projections is positive and the other is negative,
+although they have the same absolute value.
+So, if the projection onto $\vec w$ is $p$,
+then the projection onto $\vec w \, r$ is $p$ with the opposite sign, which is $-p$.
+We get
+$$
+\vec v \cdot (\vec w \, r)
+= (-p) \abs{\vec w \, r}
+= (-p) \abs{\vec w} \abs{r}
+= \underbrace{p\abs{\vec w}}_{\vec v \cdot \vec w} \, \underbrace{(-\abs{r})}_{r},
+$$
+and again, we have
+$$
+\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w) r.
+$$
+
+The above equation also works for $r=0$, because then it just says $0=0$.
+This is also the case if $\vec v = \vec0$ or $\vec w = \vec0$.
+
+graybox:
+    For all vectors $\vec v$ and $\vec w$, and for all numbers $r \in \mathbb{R}$, we have
+    $$
+    \vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w) r.
+    $$
+
+The above result also means that we can write $\vec v \cdot \vec w \, r$ without parentheses,
+because no matter how parentheses are added, the result is the same either way.
+
+
+## Does Order Matter?
+
+Can we also do the addition thing on the left side of the dot product? Something like this:
+$$
+\vec a \cdot (\vec b + \vec c) \mathop{=}^{?} \vec a \cdot \vec b + \vec a \cdot \vec c
+$$
+How about the number multiplication thing?
+$$
+(r\vec a) \cdot \vec b \mathop{=}^{?} r(\vec a \cdot \vec b)
+$$
+The answer will be clear to you after reading [the next derivation](angle-between-vectors.html).

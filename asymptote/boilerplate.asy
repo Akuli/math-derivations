@@ -28,15 +28,16 @@ void grid(real xmin, real xmax, real ymin, real ymax) {
 
 void axises(real xmin, real xmax, real ymin, real ymax,
             string xlabel="$x$", string ylabel="$y$",
-            pen xpen=defaultpen(), pen ypen=defaultpen()) {
+            pen xpen=defaultpen(), pen ypen=defaultpen(),
+            transform T=shift(0,0)) {
     // TODO: come up with a nice way to add numbers along the axises
     if (xmin != 0 || xmax != 0) {
-        draw((xmin,0)--(xmax,0), p=xpen, arrow=Arrow(size=0.7cm));
-        label((xmax,0), p=xpen, L=xlabel, align=E);
+        draw(T*( (xmin,0)--(xmax,0) ), p=xpen, arrow=Arrow(size=0.7cm));
+        label(T*(xmax,0), p=xpen, L=xlabel, align=E);
     }
     if (ymin != 0 || ymax != 0) {
-        draw((0,ymin)--(0,ymax), p=ypen, arrow=Arrow(size=0.7cm));
-        label((0,ymax), p=ypen, L=ylabel, align=(ymin < ymax ? NE : SE));
+        draw(T*( (0,ymin)--(0,ymax) ), p=ypen, arrow=Arrow(size=0.7cm));
+        label(T*(0,ymax), p=ypen, L=ylabel, align=(ymin < ymax ? NE : SE));
     }
 }
 

@@ -1,0 +1,223 @@
+# i's with i's, j's with j's
+
+Here are some results that we got with
+[projections](dot-projection.html) and [angle between vectors](angle-between-vectors.html):
+
+<ul><li>
+Dot product behaves like multiplication of numbers in some ways:
+for all vectors $\vec a,\vec b,\vec c,\vec v,\vec w$ and numbers $r \in \mathbb{R}$, we have
+$$
+\begin{align}
+\tag{1} \label{1}   \vec v \cdot \vec w &= \vec w \cdot \vec v, \\
+\tag{2} \label{2}   (\vec a + \vec b) \cdot \vec c &= \vec a \cdot \vec c + \vec b \cdot \vec c, \\
+\tag{3} \label{3}   \vec v \cdot (\vec w \, r) &= (\vec v \cdot \vec w) r.
+\end{align}
+$$
+</li><li>
+$\I \cdot \J = \J \cdot \I = 0$ (the vectors are perpendicular).
+</li><li>
+$\I \cdot \I = \J \cdot \J = 1$.
+</li></ul>
+
+First of all, let's notice that by combining \eqref{1} with \eqref{2},
+we get equation \eqref{2} but the other way;
+order doesn't matter with dot products in general, so it doesn't matter how we do it in \eqref{2}.
+With more detail, we get
+$$
+\tag{2'} \label{2'}
+\vec a \cdot (\vec b + \vec c)
+    \mathop{=}^{\eqref{1}}
+(\vec b + \vec c) \cdot \vec a
+    \mathop{=}^{\eqref{2}}
+\vec b \cdot \vec a + \vec c \cdot \vec a
+    \mathop{=}^{\eqref{1}}
+\vec a \cdot \vec b + \vec a \cdot \vec c.
+$$
+
+Similarly, by combining \eqref{1} with \eqref{3}, we get
+$$
+\tag{3'} \label{3'}
+(r \vec v) \cdot \vec w
+    \mathop{=}^{\eqref{1}}
+\vec w \cdot (r \vec v)
+    =
+\vec w \cdot (\vec v \, r)
+    \mathop{=}^{\eqref{3}}
+(\vec w \cdot \vec v)r
+    \mathop{=}^{\eqref{1}}
+(\vec v \cdot \vec w)r
+    =
+r(\vec v \cdot \vec w).
+$$
+
+With all these nice results in mind,
+we can figure out how to calculate any dot product $(a\I + b\J) \cdot (x\I + y\J)$.
+Let's start with a simpler case:
+$$
+(a\I + b\J) \cdot \I
+\mathop{=}^{\eqref{2}}
+(a\I) \cdot \I + (b\J) \cdot \I
+\mathop{=}^{\eqref{3'}}
+a\underbrace{(\I \cdot \I)}_1 + b\underbrace{(\J \cdot \I)}_0
+= a
+$$
+Based on this, we get
+$$
+(a\I + b\J) \cdot (x\I)
+= (a\I + b\J) \cdot (\I\, x)
+\mathop{=}^{\eqref{3}}
+\underbrace{\Bigl((a\I + b\J) \cdot \I\Bigr)}_ax = ax.
+$$
+With a very similar calculation, we get
+$$
+(a\I + b\J) \cdot (y\J) = by.
+$$
+I'll leave the details as an exercise for you.
+Putting it all together, we have
+$$
+(a\I+b\J) \cdot (x\I + y\J)
+\mathop{=}^{\eqref{2'}}
+\underbrace{(a\I+b\J) \cdot (x\I)}_{ax} +
+\underbrace{(a\I+b\J) \cdot (y\J)}_{by}.
+$$
+
+graybox:
+    For all vectors $a\I+b\J$ and $x\I+y\J$, we have
+    $$
+    (a\I+b\J) \cdot (x\I+y\J) = ax+by.
+    $$
+
+I like to call this "$\I$'s with $\I$'s, $\J$'s with $\J$'s", or "iwi jwj" for short.
+
+This is yet another way to think about the dot product.
+I'm sorry about the above wall of math with no pictures, but that's mostly the nature of this result;
+it's something that we can calculate easily, not something that we can visualize easily.
+The true power is in combining this with all the visual things that we know about dot product,
+which is what we'll do next.
+
+
+## Example: Pythagorean Theorem Proof
+
+Let's prove the Pythagorean theorem.
+We haven't needed it for any of the dot product stuff yet,
+so we can use everything we know about dot products in our proof.
+However, we used the Pythagorean theorem to derive the formula for length of a vector (TODO),
+so we can't use the vector length formula.
+
+Consider any triangle with a 90 degree corner.
+Let's first rotate and move the triangle so that it's on the $x$ axis like this:
+
+asymptote:
+    unitsize(2cm);
+    pair v=(3,2);
+
+    fill((0,0)--(v.x,0)--v--cycle, p=lightgreen);   // axises go on top of this
+    axises(-1,4,-1,2);
+
+    draw((v.x, 0)--v);
+
+    label((v.x/2, 0), L="$a$", align=S);
+    label((v.x, v.y/2), L="$b$", align=E);
+    draw((0,0)--v, p=deepred, L=rrotate(atan2(v.y, v.x))*Label("$a\I+b\J$"), arrow=Arrow(5mm),
+        align=rotate(90)*unit(v));
+
+    dot(v, L="$(a,b)$", p=blue+dotpen, align=NE);
+    draw(shift(v.x, 0)*scale(0.3)*rotate(90)*((1,0)--(1,1)--(0,1)));
+
+We have also seen that for any vector $\vec v$, we have $\vec v \cdot \vec v = \abs{\vec v}^2$.
+As a reminder, here are two ways to see it without the Pythagorean theorem:
+
+<ul><li>
+With [angle between vectors](angle-between-vectors.html):
+    The angle between $\vec v$ and $\vec v$ (that is, the angle between the vector and itself) is zero,
+    so $\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} \cos(0)$, where $\cos(0) = 1$.
+</li><li>
+With [projection](dot-projection.html):
+    The projection of $\vec v$ onto itself is $\abs{\vec v}$.
+    The dot product is that multiplied by the length of the vector being projected onto,
+    which is also $\abs{\vec v}$.
+</li></ul>
+
+Combining this with the "$\I$'s with $\I$'s, $\J$'s with $\J$'s" rule, we get
+$$
+\abs{a\I + b\J}^2 = (a\I + b\J) \cdot (a\I + b\J) = a^2 + b^2,
+$$
+and letting $c = \abs{a\I+b\J}$ denote the length of the longest side of the triangle
+gives the Pythagorean theorem.
+
+Also, square rooting both sides above (and noticing that vector length isn't negative) gives
+$$
+\abs{a\I + b\J} = \sqrt{a^2 + b^2},
+$$
+which proves the vector length formula.
+We used a picture with positive $a$ and $b$, but this works similarly in other cases (TODO).
+
+
+## Example: Calculating Projection
+
+Let's calculate some things with $\vec v = 2\I+3\J$ and $\vec w = 4\I+5\J$.
+Their dot product is
+$$
+2 \cdot 4 + 3 \cdot 5 = 8 + 15 = 23,
+$$
+and by the vector length formula (derived above), their lengths are
+$$
+\abs{\vec v} = \sqrt{2^2+3^2} = \sqrt{13}
+\quad \text{and} \quad
+\abs{\vec w} = \sqrt{4^2+5^2} = \sqrt{41}.
+$$
+
+Let $p$ be the projection of $\vec v$ onto $\vec w$.
+Then, with [projection stuff](dot-projection.html), we get
+$$
+\vec v \cdot \vec w = p\abs{\vec w},
+$$
+so
+$$
+p = \frac{\vec v \cdot \vec w}{\abs{\vec w}} = \frac{23}{\sqrt{41}}.
+$$
+
+
+## Example: Calculating Angle Between Vectors
+
+Let $\vec v$ and $\vec w$ be as above, and let $\theta$ be the angle between them.
+Then, with [angle stuff](angle-between-vectors.html), we get
+$$
+\vec v \cdot \vec w = \abs{\vec v} \abs{\vec w} \cos(\theta),
+$$
+which leads to
+$$
+\cos(\theta) = \frac{\vec v \cdot \vec w}{\abs{\vec v} \abs{\vec w}} = \frac{23}{\sqrt{13}\sqrt{41}}.
+$$
+To find $\theta$ from here,
+use a button named $\arccos$, $\operatorname{acos}$ or $\cos^{-1}$ on your calculator:
+$$
+\theta = \arccos\left( \frac{23}{\sqrt{13}\sqrt{41}} \right) \approx 4.9697^\circ
+$$
+That's quite a small angle; we all know how much 90 degrees is, and this is about 20 times smaller than that.
+
+asymptote:
+    unitsize(2cm);
+
+    draw(shift(0,0)*((0,0)--(1,0)), L="$\I$", p=gray, arrow=Arrow(5mm));
+    draw(shift(1,0)*((0,0)--(1,0)), L="$\I$", p=gray, arrow=Arrow(5mm));
+    draw(shift(2,0)*((0,0)--(1,0)), L="$\I$", p=gray, arrow=Arrow(5mm));
+    draw(shift(3,0)*((0,0)--(1,0)), L="$\I$", p=gray, arrow=Arrow(5mm));
+    draw(shift(2,0)*((0,0)--(0,1)), L="$\J$", p=gray, arrow=Arrow(5mm));
+
+    draw(shift(2,1)*((0,0)--(0,1)), L="$\J$", p=gray, arrow=Arrow(5mm));
+    draw(shift(2,2)*((0,0)--(0,1)), L="$\J$", p=gray, arrow=Arrow(5mm));
+
+    draw(shift(4,0)*((0,0)--(0,1)), L="$\J$", p=gray, arrow=Arrow(5mm));
+    draw(shift(4,1)*((0,0)--(0,1)), L="$\J$", p=gray, arrow=Arrow(5mm));
+    draw(shift(4,2)*((0,0)--(0,1)), L="$\J$", p=gray, arrow=Arrow(5mm));
+    draw(shift(4,3)*((0,0)--(0,1)), L="$\J$", p=gray, arrow=Arrow(5mm));
+    draw(shift(4,4)*((0,0)--(0,1)), L="$\J$", p=gray, arrow=Arrow(5mm));
+
+    pair v = (2,3);
+    pair w = (4,5);
+
+    draw((0,0)--v, L=rrotate(atan2(v.y,v.x))*"$\vec v=2\I+3\J$",
+        p=deepred, align=NW, arrow=Arrow(5mm));
+    draw((0,0)--w, L=rrotate(atan2(w.y,w.x))*Label("$\vec w=4\I+5\J$", position=Relative(0.8)),
+        p=blue, align=NW, arrow=Arrow(5mm));

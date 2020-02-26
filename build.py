@@ -76,6 +76,9 @@ def get_sidebar_content(txtfile):
         dropdown("Vectors", join([
             dropdown("Dot product", join([
                 link("Projection", 'vectors/dot-projection'),
+                link("Angle between vectors", 'vectors/angle-between-vectors'),
+                link("$\I$'s with $\I$'s, $\J$'s with $\J$'s",
+                     'vectors/iwi-jwj'),
             ])),
         ])),
         dropdown("Analytic plane geometry", join([
@@ -180,6 +183,12 @@ def indent2_handler(match, filename):
     yield from builder.converter.convert(markup, filename)
     yield '</div>'
     yield '</div>'
+
+
+# without this, two underlines in math make the latex code get <ul> tags
+@builder.converter.add_inliner(r'\$\$\n[\S\s]*?\n\$\$')
+def math_handler(match, filename):
+    return match.group(0)
 
 
 asyboilerplates = collections.defaultdict(str)

@@ -147,8 +147,13 @@ stylesheet">
     // mark the selected page and open the menus leading to it
     // this is easier to write in javascript than in python
     document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
         const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
-            .filter(a => a.href === window.location.href.split('#')[0]);
+            .filter(a => (a.href === thisPage));
         selectedLink.classList.add('this-page-or-section');
 
         let dropdown = selectedLink.parentElement;

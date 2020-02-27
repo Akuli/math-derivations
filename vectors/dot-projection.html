@@ -44,8 +44,13 @@
     // mark the selected page and open the menus leading to it
     // this is easier to write in javascript than in python
     document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
         const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
-            .filter(a => a.href === window.location.href.split('#')[0]);
+            .filter(a => (a.href === thisPage));
         selectedLink.classList.add('this-page-or-section');
 
         let dropdown = selectedLink.parentElement;
@@ -59,7 +64,11 @@
         }
     });
     </script>
-    </head>
+    
+        <script src="../js/vendor/three.js"></script>
+        <script src="../js/common.js"></script>
+        <script src="../js/projection-demo.js"></script>
+        </head>
 <body>
 <div id="content">
 <div id="sidebar"><a href="../index.html">Front page</a>
@@ -110,12 +119,19 @@ When writing this site, I needed to choose one of these ways to start with, and 
 
 <h2 id="defining-dot-product">Defining Dot Product<a class="headerlink" href="#defining-dot-product" title="Link to this title">¶</a></h2><p>To tell you what number comes out of the dot product $\vec v \cdot \vec w$,
 I'll first tell about projection.
-Let's draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:</p>
+Let's draw $\vec v$ and $\vec w$ so that their "beginnings" are in the same place.
+Then we draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:</p>
 
-<p><img width="291" height="252" class="asymptote" src="../asymptote/28e538977c5389d5f0cd0f495d9a49ca.svg" /></p><p>In the above picture, the projection is positive, but
+<p><img width="291" height="252" class="asymptote" src="../asymptote/28e538977c5389d5f0cd0f495d9a49ca.svg" /></p><p>The projection is then the distance from the "beginnings" of the vectors to
+where this line touches $\vec w$.
+In the above picture, the projection is positive, but
 if you need to "extend" $\vec v$ for drawing the line, then the projection is negative:</p>
 
-<p><img width="422" height="228" class="asymptote" src="../asymptote/13e422845f51578efeb0f4ec5fcec357.svg" /></p><p>The dot product is not quite the projection;
+<p><img width="422" height="228" class="asymptote" src="../asymptote/13e422845f51578efeb0f4ec5fcec357.svg" /></p><p>Here's an animation showing this.</p>
+
+<p><canvas id="canvas" width=500 height=250></canvas></p>
+
+<p>The dot product is not quite the projection;
 it's the projection multiplied by the length of the vector being projected onto.
 This is the first way to think about dot product.</p>
 
@@ -126,8 +142,6 @@ Then $\vec v \cdot \vec w = p\abs{\vec w}$.
 </div><p>Notice that this was <b>not</b> a formula derivation;
 it's a definition, because I'm telling you what dot product is,
 not deriving some result about how it behaves.</p>
-
-<p>TODO: animation</p>
 
 <p>Examples:
 <ul><li>
@@ -240,9 +254,10 @@ $$
 \vec v \cdot (\vec w \, r) = p\abs{\vec w \, r} = p\abs{\vec w}\abs{r}.
 $$
 Here $r$ is positive, so $\abs{r} = r$,
-and $p\abs{\vec w}$ is the dot product $\vec v \cdot \vec w$, so we have
+and $p\abs{\vec w}$ is the dot product $\vec v \cdot \vec w$.
+Plugging these in gives
 $$
-\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r
+\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r.
 $$</p>
 
 <p>We needed the positiviness of $r$ above, but let's see what happens for other values of $r$.

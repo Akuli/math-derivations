@@ -44,8 +44,13 @@
     // mark the selected page and open the menus leading to it
     // this is easier to write in javascript than in python
     document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
         const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
-            .filter(a => a.href === window.location.href.split('#')[0]);
+            .filter(a => (a.href === thisPage));
         selectedLink.classList.add('this-page-or-section');
 
         let dropdown = selectedLink.parentElement;
@@ -93,84 +98,58 @@
         
         </div>
         </div>
-<h1 id="i-s-with-i-s-j-s-with-j-s">i's with i's, j's with j's<a class="headerlink" href="#i-s-with-i-s-j-s-with-j-s" title="Link to this title">¶</a></h1><p>Here are some results that we got with
-<a href="dot-projection.html">projections</a> and <a href="angle-between-vectors.html">angle between vectors</a>:</p>
+<h1 id="i-s-with-i-s-j-s-with-j-s">i's with i's, j's with j's<a class="headerlink" href="#i-s-with-i-s-j-s-with-j-s" title="Link to this title">¶</a></h1><p>Let's figure out how to calculate any dot product like $(a\I+b\J) \cdot (x\I+y\J)$.
+Notice that the projection of any vector $a\I+b\J$ onto $\I$ is $a$.</p>
 
-<p><ul><li>
-Dot product behaves like multiplication of numbers in some ways:
-for all vectors $\vec a,\vec b,\vec c,\vec v,\vec w$ and numbers $r \in \mathbb{R}$, we have
-$$
-\begin{align}
-\tag{1} \label{1}   \vec v \cdot \vec w &= \vec w \cdot \vec v, \\
-\tag{2} \label{2}   (\vec a + \vec b) \cdot \vec c &= \vec a \cdot \vec c + \vec b \cdot \vec c, \\
-\tag{3} \label{3}   \vec v \cdot (\vec w \, r) &= (\vec v \cdot \vec w) r.
-\end{align}
-$$
-</li><li>
-$\I \cdot \J = \J \cdot \I = 0$ (the vectors are perpendicular).
-</li><li>
-$\I \cdot \I = \J \cdot \J = 1$.
-</li></ul></p>
+<p><img width="211" height="274" class="asymptote" src="../asymptote/3b4041ea6b670e547037e9d59c0aa807.svg" /></p><p>This also works if $a$ is negative, because then the projection is also negative.</p>
 
-<p>First of all, let's notice that by combining \eqref{1} with \eqref{2},
-we get equation \eqref{2} but the other way;
-order doesn't matter with dot products in general, so it doesn't matter how we do it in \eqref{2}.
-With more detail, we get
+<p><img width="184" height="192" class="asymptote" src="../asymptote/af17c1ec943223d7dd056db12db8de7d.svg" /></p><p>The dot product $(a\I+b\J) \cdot \I$ is the projection $a$ multiplied by the length of $\I$, which is $1$,
+and multiplying by $1$ does nothing.
+This leads to
 $$
-\tag{2'} \label{2'}
-\vec a \cdot (\vec b + \vec c)
-    \mathop{=}^{\eqref{1}}
-(\vec b + \vec c) \cdot \vec a
-    \mathop{=}^{\eqref{2}}
-\vec b \cdot \vec a + \vec c \cdot \vec a
-    \mathop{=}^{\eqref{1}}
-\vec a \cdot \vec b + \vec a \cdot \vec c.
-$$</p>
-
-<p>Similarly, by combining \eqref{1} with \eqref{3}, we get
+(a\I+b\J) \cdot \I = a.
 $$
-\tag{3'} \label{3'}
-(r \vec v) \cdot \vec w
-    \mathop{=}^{\eqref{1}}
-\vec w \cdot (r \vec v)
-    =
-\vec w \cdot (\vec v \, r)
-    \mathop{=}^{\eqref{3}}
-(\vec w \cdot \vec v)r
-    \mathop{=}^{\eqref{1}}
-(\vec v \cdot \vec w)r
-    =
-r(\vec v \cdot \vec w).
-$$</p>
-
-<p>With all these nice results in mind,
-we can figure out how to calculate any dot product $(a\I + b\J) \cdot (x\I + y\J)$.
-Let's start with a simpler case:
+With <a href="dot-projection.html#dot-product-and-number-times-vector">projections</a>, we derived the formula
 $$
-(a\I + b\J) \cdot \I
-\mathop{=}^{\eqref{2}}
-(a\I) \cdot \I + (b\J) \cdot \I
-\mathop{=}^{\eqref{3'}}
-a\underbrace{(\I \cdot \I)}_1 + b\underbrace{(\J \cdot \I)}_0
-= a
+\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w) r,
 $$
-Based on this, we get
+which works with any vectors $\vec v, \vec w$ and any number $r$.
+Applying that here gives
 $$
-(a\I + b\J) \cdot (x\I)
-= (a\I + b\J) \cdot (\I\, x)
-\mathop{=}^{\eqref{3}}
-\underbrace{\Bigl((a\I + b\J) \cdot \I\Bigr)}_ax = ax.
+(a\I+b\J) \cdot (x\I)
+= (a\I+b\J) \cdot (\I \, x)
+= \underbrace{\Bigl( (a\I+b\J) \cdot \I \Bigr)}_a x
+= ax.
 $$
-With a very similar calculation, we get
+By doing a very similar calculation with $\J$ instead of $\I$, we see that
 $$
-(a\I + b\J) \cdot (y\J) = by.
+(a\I+b\J) \cdot (y\J) = by.
 $$
-Putting it all together, we have
+Let's calculate $(a\I+b\J) \cdot (x\I+y\J)$,
+where on the right side, we don't have just $x\I$ or $y\J$, but their sum.
+With <a href="dot-projection.html#dot-product-and-sum">projections</a>, we got
 $$
-(a\I+b\J) \cdot (x\I + y\J)
-\mathop{=}^{\eqref{2'}}
-\underbrace{(a\I+b\J) \cdot (x\I)}_{ax} +
-\underbrace{(a\I+b\J) \cdot (y\J)}_{by}.
+(\vec a + \vec b) \cdot \vec c = \vec a \cdot \vec c + \vec b \cdot \vec c
+\qquad \text{for all vectors $\vec a, \vec b, \vec c$},
+$$
+and with <a href="angle-between-vectors.html#order-doesn-t-matter">angle between vectors</a>, we got
+$$
+\vec v \cdot \vec w = \vec w \cdot \vec v
+\qquad \text{for all vectors $\vec v, \vec w$}.
+$$
+The first result says that if we have a dot product with vectors added on the left side,
+then it can be expanded, just like the product of numbers.
+The second formula says that order doesn't matter with dot product.
+By combining these, we see that if we have a dot product with vectors added on the <i>right</i> side,
+then that can also be expanded, just like the product of numbers,
+$$
+\vec c \cdot (\vec a + \vec b) = \vec c \cdot \vec a + \vec c \cdot \vec b
+\qquad \text{for all vectors $\vec a, \vec b, \vec c$.}
+$$
+Applying this gives
+$$
+(a\I + b\J) \cdot (x\I+y\J)
+= \underbrace{(a\I + b\J) \cdot (x\I)}_{ax} + \underbrace{(a\I + b\J) \cdot (y\J)}_{by}.
 $$</p>
 
 <div class="box graybox"><p>For all vectors $a\I+b\J$ and $x\I+y\J$, we have
@@ -182,7 +161,8 @@ $$
 </div><p>I like to call this "$\I$'s with $\I$'s, $\J$'s with $\J$'s", or "iwi jwj" for short.</p>
 
 <p>This is yet another way to think about the dot product.
-I'm sorry about the above wall of math with no pictures, but that's mostly the nature of this result;
+I'm sorry about the above wall of math with lots of formulas and only a couple pictures,
+but that's mostly the nature of this result;
 it's something that we can calculate easily, not something that we can visualize easily.
 The true power is in using this result together with all the visual things that we know about dot product,
 which is what we'll do next.
@@ -222,7 +202,7 @@ gives the Pythagorean theorem.</p>
 $$
 \abs{a\I + b\J} = \sqrt{a^2 + b^2},
 $$
-which proves the vector length formula.
+which is the vector length formula.
 We used a picture with positive $a$ and $b$, but this works similarly in other cases (TODO).
 </p>
 
@@ -259,7 +239,7 @@ $$
 \cos(\theta) = \frac{\vec v \cdot \vec w}{\abs{\vec v} \abs{\vec w}} = \frac{23}{\sqrt{13}\sqrt{41}}.
 $$
 To find $\theta$ from here,
-use a button named $\arccos$, $\operatorname{acos}$ or $\cos^{-1}$ on your calculator:
+use a button named $\arccos$, $\text{acos}$ or $\cos^{-1}$ on your calculator:
 $$
 \theta = \arccos\left( \frac{23}{\sqrt{13}\sqrt{41}} \right) \approx 4.9697^\circ
 $$

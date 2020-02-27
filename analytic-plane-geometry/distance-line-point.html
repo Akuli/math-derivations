@@ -44,8 +44,13 @@
     // mark the selected page and open the menus leading to it
     // this is easier to write in javascript than in python
     document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
         const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
-            .filter(a => a.href === window.location.href.split('#')[0]);
+            .filter(a => (a.href === thisPage));
         selectedLink.classList.add('this-page-or-section');
 
         let dropdown = selectedLink.parentElement;
@@ -121,7 +126,8 @@ c &= -p|\vec n| \\
 -\frac{c}{|\vec n|} &= p
 \end{align}
 $$
-To find $Q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$ with a dot product:
+To find $q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$
+with a <a href="../vectors/iwi-jwj.html#example-calculating-projection">dot product</a>:
 $$
 q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
 = \frac{aQ_x+bQ_y}{|\vec n|}

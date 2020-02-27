@@ -44,8 +44,13 @@
     // mark the selected page and open the menus leading to it
     // this is easier to write in javascript than in python
     document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
         const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
-            .filter(a => a.href === window.location.href.split('#')[0]);
+            .filter(a => (a.href === thisPage));
         selectedLink.classList.add('this-page-or-section');
 
         let dropdown = selectedLink.parentElement;
@@ -128,7 +133,7 @@ s = \frac{d_y}{d_x} = \frac{\sin(\alpha)}{\cos(\alpha)} = \tan(\alpha).
 $$
 </p>
 
-<h2 id="using-slope-for-trig">Using Slope for Trig<a class="headerlink" href="#using-slope-for-trig" title="Link to this title">¶</a></h2><p>This is not only a new way to think about slope, but also a new way to think about tan:
+<h2 id="using-slope-for-trig">Using Slope for Trig<a class="headerlink" href="#using-slope-for-trig" title="Link to this title">¶</a></h2><p>This is not only a way to think about slope, but also a way to think about tan:
 $\tan(\alpha)$ is a slope of a line with angle $\alpha$.</p>
 
 <p>For example, consider a line with slope $\tan(\alpha)$, going through $(0,0)$ for simplicity.

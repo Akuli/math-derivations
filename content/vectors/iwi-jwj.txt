@@ -37,11 +37,6 @@ This leads to
 $$
 (a\I+b\J) \cdot \I = a.
 $$
-By doing the exactly same steps with $\J$ instead of $\I$, we get
-$$
-(a\I+b\J) \cdot \J = b.
-$$
-
 With [projections](dot-projection.html#dot-product-and-number-times-vector), we derived the formula
 $$
 \vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w) r,
@@ -54,7 +49,7 @@ $$
 = \underbrace{\Bigl( (a\I+b\J) \cdot \I \Bigr)}_a x
 = ax.
 $$
-Again, by doing the same calculation with $\J$, we see that
+By doing a very similar calculation with $\J$ instead of $\I$, we see that
 $$
 (a\I+b\J) \cdot (y\J) = by.
 $$

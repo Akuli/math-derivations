@@ -96,7 +96,8 @@ c &= -p|\vec n| \\
 -\frac{c}{|\vec n|} &= p
 \end{align}
 $$
-To find $Q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$ with a dot product:
+To find $q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$
+with a [dot product](../vectors/iwi-jwj.html#example-calculating-projection):
 $$
 q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
 = \frac{aQ_x+bQ_y}{|\vec n|}

@@ -91,7 +91,8 @@ $$
 $$
 The vector from $O$ to $(x,y)$ is $x\I + y\J$.
 Let $a$ and $b$ be the components of $\vec n$; that is, $\vec n = a\I + b\J$.
-From dot products, we know that the projection used above is
+From [dot products](../vectors/iwi-jwj.html#example-calculating-projection),
+we know that the projection used above is
 $$
 \frac{(x\I + y\J) \cdot \vec n}{|\vec n|}
 =\frac{(x\I + y\J) \cdot (a\I + b\J)}{|\vec n|}

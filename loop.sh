@@ -7,7 +7,7 @@ build()
 
 wait()
 {
-    inotifywait -e CLOSE_WRITE content/{*,*/*}.txt *.{py,css} asymptote/*.asy
+    inotifywait -e CLOSE_WRITE content/{*,*/*}.txt *.{py,css} js/*.js asymptote/*.asy
 }
 
 build

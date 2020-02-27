@@ -44,7 +44,7 @@ builder.infile2outfile = lambda infile: os.path.join(
     builder.outputdir,
     os.path.splitext(infile.replace('content' + os.sep, '', 1))[0] + '.html')
 
-builder.converter.pygments_style = 'friendly'
+builder.additional_files.append('js')
 
 
 def get_sidebar_content(txtfile):
@@ -163,6 +163,14 @@ stylesheet">
     });
     </script>
     '''
+
+    if filename == 'content/vectors/dot-projection.txt':
+        result += '''
+        <script src="../js/vendor/three.js"></script>
+        <script src="../js/common.js"></script>
+        <script src="../js/projection-demo.js"></script>
+        '''
+
     return result
 
 

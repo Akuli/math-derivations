@@ -19,7 +19,8 @@ When writing this site, I needed to choose one of these ways to start with, and 
 
 To tell you what number comes out of the dot product $\vec v \cdot \vec w$,
 I'll first tell about projection.
-Let's draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:
+Let's draw $\vec v$ and $\vec w$ so that their "beginnings" are in the same place.
+Then we draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:
 
 asymptote:
     unitsize(3cm);
@@ -35,6 +36,8 @@ asymptote:
     draw(T*shift(v.x,0)*scale(0.2)*((0,1)--(1,1)--(1,0)));
     draw(T*brace_with_space((v.x,0), (0,0), 0.1), L=T*Label("positive projection"), align=T*S);
 
+The projection is then the distance from the "beginnings" of the vectors to
+where this line touches $\vec w$.
 In the above picture, the projection is positive, but
 if you need to "extend" $\vec v$ for drawing the line, then the projection is negative:
 
@@ -52,6 +55,10 @@ asymptote:
     draw(T*shift(v.x,0)*scale(0.2)*((0,1)--(1,1)--(1,0)));
     draw(T*brace_with_space((0,0), (v.x,0), 0.1), L=T*Label("negative projection"), align=T*S);
 
+Here's an animation showing this.
+
+<canvas id="canvas" width=500 height=250></canvas>
+
 The dot product is not quite the projection;
 it's the projection multiplied by the length of the vector being projected onto.
 This is the first way to think about dot product.
@@ -63,8 +70,6 @@ graybox:
 Notice that this was **not** a formula derivation;
 it's a definition, because I'm telling you what dot product is,
 not deriving some result about how it behaves.
-
-TODO: animation
 
 Examples:
 <ul><li>
@@ -229,9 +234,10 @@ $$
 \vec v \cdot (\vec w \, r) = p\abs{\vec w \, r} = p\abs{\vec w}\abs{r}.
 $$
 Here $r$ is positive, so $\abs{r} = r$,
-and $p\abs{\vec w}$ is the dot product $\vec v \cdot \vec w$, so we have
+and $p\abs{\vec w}$ is the dot product $\vec v \cdot \vec w$.
+Plugging these in gives
 $$
-\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r
+\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r.
 $$
 
 We needed the positiviness of $r$ above, but let's see what happens for other values of $r$.

@@ -1,0 +1,469 @@
+# Increasing and Decreasing Functions
+
+redbox:
+    On this page, the word "function" means a function that takes in a real number as its only argument,
+    and evaluates to another real number.
+    Some real numbers might not be valid inputs of the function; for example,
+    square root is a function that accepts only nonnegative inputs.
+
+
+## Definition of Strictly Increasing
+
+A function $f$ is called **strictly increasing**, if for all numbers $a$ and $b$ satisfying $a < b$,
+we have $f(a) < f(b)$.
+If the function $f$ is not defined for all numbers,
+then we only require that this happens for all numbers $a,b$ for which $f(a)$ and $f(b)$ are defined.
+
+Examples:
+
+<ul>
+<li>
+    Let $f(x) = x+1$.
+    This **is** a strictly increasing function,
+    because for all numbers $a$ and $b$ with $a < b$, we have $a+1 < b+1$.
+    Because $f(a)=a+1$ and $f(b)=b+1$, this means that we have $f(a) < f(b)$.
+</li>
+<li>
+    Let $f(x) = 3$.
+    This is **not** a strictly increasing function, because
+    that would mean that for all numbers $a$ and $b$ with $a < b$, we have $3 < 3$,
+    which is not true.
+</li>
+<li>
+    Let $f(x) = x^2$.
+    This is **not** a strictly increasing function, because $-2 < -1$ but $f(-2) > f(-1)$.
+</li>
+</ul>
+
+Next, let's talk about what this looks like in a graph.
+Let $f$ be a function, and consider the graph $y=f(x)$.
+Let $a$ and $b$ be numbers for which $f(a)$ and $f(b)$ are defined and $a < b$.
+The condition $a < b$ means that if $a$ and $b$ are drawn on the $x$ axis,
+then $a$ is on the left side of $b$.
+
+asymptote:
+    unitsize(1.5cm);
+
+    real f(real x) { return sin(x) + x + 1; }
+    real a = 1.3;
+    real b = 2.8;
+
+    axises(-2,6,-3,5);
+    draw(graph(f, -2, 5), p=blue, L=Label("$y=f(x)$", position=Relative(0.9)));
+
+    dot((a,0), L="$a$", align=S, p=dotpen+deepgreen);
+    dot((b,0), L="$b$", align=S, p=dotpen+deepred);
+    
+    draw((a,0)--(a,f(a)), p=deepgreen+smalldashes, L="$f(a)$");
+    draw((b,0)--(b,f(b)), p=deepred+smalldashes, L="$f(b)$");
+
+Now the condition $f(a) < f(b)$ means that the graph is higher at $b$ than it is at $a$;
+in other words, the value of the function increases if you go from $a$ to $b$.
+When defining what strictly increasing means,
+we require that this happens for **all** $a$ and $b$ with $a < b$.
+
+
+## Definition of Strictly Decreasing
+
+A function $f$ is called **strictly decreasing**, if for all numbers $a$ and $b$ satisfying $a < b$,
+we have $f(a) > f(b)$.
+If the function $f$ is not defined for all numbers,
+then we only require that this happens for all numbers $a,b$ for which $f(a)$ and $f(b)$ are defined.
+
+The definition is otherwise the same as for strictly increasing, but
+the sign between $f(a)$ and $f(b)$ is $ > $ instead of $ < $.
+This means that in the graph of $f$, going from $a$ to $b$ will give a decrease in the $y$ value.
+
+asymptote:
+    unitsize(1.5cm);
+
+    real f(real x) { return sin(x) + -x + 4; }
+    real a = 1.3;
+    real b = 2.8;
+
+    axises(-2,6,-3,5);
+    draw(graph(f, -2, 5), p=blue, L=Label("$y=f(x)$", position=Relative(0.9)));
+
+    dot((a,0), L="$a$", align=S, p=dotpen+deepgreen);
+    dot((b,0), L="$b$", align=S, p=dotpen+deepred);
+    
+    draw((a,0)--(a,f(a)), p=deepgreen+smalldashes, L="$f(a)$", align=W);
+    draw((b,0)--(b,f(b)), p=deepred+smalldashes, L="$f(b)$", align=W);
+
+
+## The Function $f(x)=sx+h$
+
+From [line equation with slope](../analytic-plane-geometry/line-eq-slope.html#meaning-of-s-and-h),
+we know that if $s$ and $h$ are any numbers,
+then $y=sx+h$ is the equation of some non-vertical line, with the vector $\I+s\J$ going along the line.
+The vector $\I$ is horizontal, of course, but the effect of the ${}+s\J$ part depends on the value of $s$:
+
+<ul><li>
+    If $s$ is positive, then $s\J$ goes up.
+</li><li>
+    If $s$ is zero, then $s\J$ is the zero vector.
+</li><li>
+    If $s$ is negative, then $s\J$ goes down.
+</li></ul>
+
+The following pictures show what this looks like:
+
+asymptote:
+    unitsize(2cm);
+    real f(real x) { return 1.2x + 1; }
+    draw(graph(f, -0.5, 3), L=rrotate(atan(f(1)-f(0)))*Label("$y=sx+h, ~~ s>0$", position=Relative(0.8)),
+        p=deepred);
+    draw((0,f(0))--(1,f(0)), arrow=Arrow(5mm), L="$\I$");
+    draw((1,f(0))--(1,f(1)), arrow=Arrow(5mm), L="$s\J$", p=deepred);
+
+asymptote:
+    unitsize(2cm);
+    real f(real x) { return 0x + 1; }
+    draw(graph(f, -0.5, 3), L=rrotate(atan(f(1)-f(0)))*Label("$y=0x+h$", position=Relative(0.8)),
+        p=rgb(0.4,0.4,0.4));
+    draw((0,f(0)+0.1)--(1,f(0)+0.1), arrow=Arrow(5mm), L="$\I$", align=N);
+
+asymptote:
+    unitsize(2cm);
+    real f(real x) { return -1.2x + 1; }
+    draw(graph(f, -0.5, 3), L=rrotate(atan(f(1)-f(0)))*Label("$y=sx+h, ~~ s<0$", position=Relative(0.8)),
+        p=blue);
+    draw((0,f(0))--(1,f(0)), arrow=Arrow(5mm), L="$\I$");
+    draw((1,f(0))--(1,f(1)), arrow=Arrow(5mm), L="$s\J$", p=blue, align=E);
+
+The above lines are graphs of the function $f(x)=sx+h$.
+We get the following result by comparing these graphs with the graphs I drew when
+explaining the definitions of strictly increasing and strictly decreasing.
+
+graybox:
+    The function $f(x) = sx+h$ is strictly increasing if and only if $s > 0$,
+    and strictly decreasing if and only if $s < 0$.
+
+If $s=0$, we get the function $f(x)=h$, which is neither strictly increasing nor strictly decreasing.
+
+
+## Definition of Inverse Function
+
+The inverse function of $f$ is a function that takes in a value of $f$ as an argument,
+and it answers the question "which input did $f$ take when it gave this value".
+In other words,
+$$
+(\text{inverse function of $f$})(f(x)) = x
+$$
+for all numbers $x$ for which $f(x)$ is defined.
+
+For example, let $f(x) = 2x$ and $g(x) = \frac{x}{2}$.
+Now $g$ is the inverse function of $f$, because
+$$
+g(f(x)) = \frac{2x}{2} = x
+$$
+for all numbers $x$.
+
+One problem with inverse functions is that they might not be defined for all numbers,
+even if the original function is defined for all numbers.
+For example, let $f(x) = 2^x$ and $g(x) = \log_2(x)$.
+Now $f(x)$ is defined for all numbers $x$.
+From logarithms, we know that $g(f(x)) = \log_2(2^x) = x$, so $g$ is the inverse function of $f$.
+However, $g(-1)$ is undefined, because $f(x)=2^x$ is always positive;
+there is no number $x$ for which $f(x) = -1$, which is what $g(-1)$ means.
+
+Another problem is that not all functions have an inverse function.
+For example, let $f(x) = x^2$.
+Now we have $f(2) = 4 = f(-2)$, so what should $(\text{inverse function of $f$})(4)$ do?
+Should that evaluate to $2$ or $-2$?
+We don't want to just pick one choice randomly, so instead we say that it's undefined.
+However, there is an inverse function if this problem doesn't occur; that is,
+if $f(a) \ne f(b)$ for all numbers $a,b$ satisfying $a \ne b$.
+
+The inverse function of $f$ is often denoted with $f^{-1}$.
+Be careful to not confuse this with powers.
+For example, $3^{-1} = \frac{1}{3}$ is a number, but
+if $f(x) = 2x$, then $f^{-1}$ is a function, given by $f^{-1}(x)=\frac{x}{2}$.
+
+
+## Inverse of Strictly Increasing/Decreasing Function
+
+Here are some example functions that we looked into above, or at least are very similar to what we had:
+
+<ul><li>
+    The function $f(x)=2x$ is strictly increasing, and
+    it has an inverse function given by $f^{-1}(x) = \frac{x}{2}$.
+</li><li>
+    The function is strictly decreasing, and
+    it has an inverse function given by $g^{-1}(x) = \frac{x}{-2}$.
+</li><li>
+    The function $h(x)=x^2$ is neither strictly increasing nor strictly decreasing, and
+    it does **not** have an inverse function.
+</li></ul>
+
+In these examples, the only strictly increasing function $f$ has an inverse function.
+Let's figure out whether **any** strictly increasing function $f$ has an inverse function.
+The only thing that could go wrong is getting the same $f$ values for two different inputs;
+that is, $a \ne b$ but $f(a)=f(b)$.
+This can't happen with a strictly increasing $f$, because
+
+<ul><li>
+    if $a < b$, then $f(a) < f(b)$;
+</li><li>
+    if $a > b$, then $b < a$ and so $f(b) < f(a)$.
+</li></ul>
+
+Either way, we get $f(a) \ne f(b)$ whenever $a \ne b$.
+A similar proof works for strictly decreasing functions.
+
+graybox:
+    A strictly increasing or strictly decreasing function has an inverse function.
+
+This does not go the other way:
+there are functions that have an inverse function but are
+neither strictly increasing nor strictly decreasing.
+TODO: example $f(x)=1/x$ with $f(0)=0$
+
+The inverse of $f(x)=2x$ is $f^{-1}(x) = \frac{x}{2} = \frac 1 2 x$,
+which itself is also a strictly increasing function.
+Next we'll prove that the inverse of any strictly increasing function is also strictly increasing.
+
+Let $f$ be a strictly increasing function, and
+let $a$ and $b$ be numbers such that $a < b$, $f^{-1}(a)$ is defined, and $f^{-1}(b)$ is defined.
+Now we need to show that $f^{-1}(a) < f^{-1}(b)$, which will then prove that $f^{-1}$ is strictly increasing.
+
+Because $f^{-1}(a)$ and $f^{-1}(b)$ are defined, we know that $a$ and $b$ must be values of $f$,
+corresponding to some input numbers that have been given to $f$.
+We call these input numbers $A$ and $B$, so we have $f(A)=a$ and $f(B)=b$.
+
+asymptote:
+    texpreamble("\usepackage{xcolor}");
+
+    // latex doesn't know asymptote's deepred color
+    texpreamble(
+        "\definecolor{deepred}{rgb}{" +
+            string(colors(deepred)[0]) + "," +
+            string(colors(deepred)[1]) + "," +
+            string(colors(deepred)[2]) + "}"
+    );
+
+    unitsize(1.5cm);   // adjust this to make "a < b" part look good
+    real height = 2.5;
+    real space = 0;
+
+    label((0,height), L="$A$", align=N, p=blue);
+    label((1,height), L="$B$", align=N, p=deepred);
+    label((0.5,0), L="$\color{blue}a \color{black}< \color{deepred}b$", align=S);
+
+    void draw_mapsto_arrow(real x, pen p) {
+        real mapsto_size = 0.05;
+        draw((x,height)--(x,0), arrow=Arrow(5mm), L="$f$", align=E, p=p);
+        draw(shift(x, height)*( (-mapsto_size,0)--(mapsto_size,0) ), p=p);
+    }
+
+    draw_mapsto_arrow(0, blue);
+    draw_mapsto_arrow(1, deepred);
+
+Combining some of the things we have so far, we get
+$$
+f^{-1}(a) = f^{-1}(f(A)) = A,
+$$
+where we started by substituting $a=f(A)$,
+and then we used the definition of inverse function.
+Similarly $f^{-1}(b) = B$.
+So, we just need to show that $A < B$ and we'll be done.
+
+To show that $A < B$, we show that all other options are impossible:
+
+<ul><li>
+    If $A=B$, then $a = f(A) = f(B) = b$.
+    However, we started by assuming $a < b$, so this is impossible;
+    $a$ and $b$ can't be the same number.
+</li><li>
+    If $A > B$, then $a = f(A) > f(B) = b$, where in the middle,
+    we used the assumption that $f$ is strictly increasing.
+    This is also impossible because we have $a < b$.
+</li></ul>
+
+graybox:
+    The inverse function of a strictly increasing function is strictly increasing.
+
+Again, there's a similar proof for strictly decreasing functions.
+
+graybox:
+    The inverse function of a strictly decreasing function is strictly decreasing.
+
+
+## Equivalence and Equations
+
+Let's talk about equivalence, also known as "if and only if", or $\iff$.
+In general, $A \iff B$ means that if one of $A$ and $B$ is true, then the other one is also true.
+Also, if one of $A$ and $B$ is false, then the other is also false;
+for example, if $A$ is false, then $B$ can't be true because that would imply that $A$ is also true.
+
+At a higher level, $A$ and $B$ have the same "truth value", either both true or both false.
+This means that we can solve an equation like this:
+
+$$
+\begin{align}
+\text{equation we want to solve}
+&\iff \text{something} \\
+&\iff \text{something} \\
+&\qquad \vdots \\
+&\iff \text{something} \\
+&\iff x = 5 \text{ or } x = 7
+\end{align}
+$$
+
+This guarantees that $x=5$ and $x=7$ are the solutions of the equation, and there are no other solutions;
+the original equation is true if $x$ is $5$ or $7$, and otherwise it's false.
+For this reason, we always solve equations so that we have equivalence at each step.
+It is very common to teach students to do this without writing down the equivalence signs.
+
+Common things that can be done to an equality so that we get equivalence:
+
+<ul><li>
+    Adding a number on both sides: $x=y \iff x+z=y+z$.
+</li><li>
+    Subtracting a number on both sides.
+</li><li>
+    Multiplying both sides by a nonzero number: if $z \ne 0$, then $x=y \iff xz=yz$.
+    We need a nonzero $z$ for this, because we also want to say that if $xz=yz$, then $x=y$;
+    this doesn't work if $z=0$.
+    For example, $3 \cdot 0 = 4 \cdot 0$, but $3 \ne 4$.
+</li><li>
+    Dividing both sides by a nonzero number: if $z \ne 0$, then $x=y \iff \frac{x}{z} = \frac{y}{z}$.
+    This is actually a special case of the previous one, because
+    dividing by $z$ is same as multiplying by $\frac{1}{z}$; we have
+    $$
+    \frac{x}{z} = \frac{1}{z} x, \quad \frac{y}{z} = \frac{1}{z} y.
+    $$
+</li></ul>
+
+Notice that squaring both sides is **not** one of the things that can be done; for example,
+$-2 \ne 2$ but $(-2)^2 = 4 = 2^2$, and hence $-2 = 2$ is not equivalent with $(-2)^2 = 2^2$.
+To see an example where doing this gives wrong results, consider the equation $x=x+1$,
+which has no solutions because we always have $x < x+1$.
+Squaring both sides gives
+$$
+\begin{align}
+x^2 = (x+1)^2
+&\iff x^2 = x^2+2x+1 \\
+&\iff 0 = 2x+1 \\
+&\iff x = -\frac{1}{2},
+\end{align}
+$$
+which is not what we want for solving $x = x+1$.
+
+
+## Inverse Functions and Equations
+
+If $f$ is a function and $x = y$, then clearly $f(x) = f(y)$;
+$x = y$ means that we can replace $x$ with $y$ whenever we see $x$.
+This doesn't always go in the other direction;
+we saw this earlier with $f(-2)=f(2)$ but $2 \ne 2$, with the function $f(x) = x^2$.
+However, if $f$ has an inverse function and $f(x) = f(y)$, then
+$f^{-1}(f(x)) = f^{-1}(f(y))$.
+By the definition of inverse function, we have $f^{-1}(f(x)) = x$ and $f^{-1}(f(y)) = y$,
+so $x = y$.
+
+We have shown that if a function $f$ has an inverse function, then $x=y \iff f(x)=f(y)$.
+This means that we can apply $f$ on both sides while solving an equation.
+
+graybox:
+    If $f$ is a function that has an inverse function, then
+    $f$ can be applied on both sides while solving an equation.
+
+Above, we proved that any strictly increasing or strictly decreasing function has an inverse function.
+
+graybox:
+    Any strictly increasing or strictly decreasing function
+    can be applied on both sides while solving an equation.
+
+
+## Equivalence and Inequalities
+
+For solving inequalities, we do a similar thing:
+we rewrite the inequality in equivalent ways until we are left with the solution.
+Let's figure out what happens to the usual rules of doing something on both sides.
+
+Next we will prove that if $f$ is a strictly increasing function,
+then we can apply it on both sides of an inequality with a $ < $ sign
+(we will consider other kinds of equations and inequalities soon):
+$$
+x < y \iff f(x) < f(y)
+$$
+
+If $x < y$, then $f(x) < f(y)$, because $f$ is strictly increasing.
+However, this is just half of equivalence; we still need to show that if $f(x) < f(y)$, then $x < y$.
+Above we showed that the inverse of a strictly increasing function is also strictly increasing, so
+if $f(x) < f(y)$, then we have
+$$
+f^{-1}(f(x)) < f^{-1}(f(y)),
+$$
+and by definition of inverse function, $f^{-1}(f(x))=x$ and $f^{-1}(f(y))=y$, so $x < y$.
+
+graybox:
+    A strictly increasing function can be applied on both sides when solving an inequality with $ < $ sign.
+
+Of course, this works similarly for inequalities with $ > $ instead of $ < $.
+It even works for inequalities having $\le$ or $\ge$, because
+$$
+\begin{align}
+x \le y
+&\iff \text{we do NOT have $\underbrace{x > y}_{\substack{\text{equivalent} \\ \text{with:} \\ f(x) > f(y)}}$} \\
+&\iff \text{we do NOT have $f(x) > f(y)$} \\
+&\iff f(x) \le f(y).
+\end{align}
+$$
+Here we can replace $x > y$ with the equivalent $f(x) > f(y)$;
+equivalence means that those two things have the same truth value (either both true, or both false),
+which is all that matters.
+
+graybox:
+    A strictly increasing function can be applied on both sides when solving any inequality.
+
+Again, a similar calculation for strictly decreasing functions shows that we get similar results,
+but this time, the sign must be flipped;
+this comes from the definition of strictly decreasing,
+because there we had different signs in $a < b$ and $f(a) > f(b)$.
+
+graybox:
+    A strictly increasing function can be applied on both sides when solving any inequality,
+    and the sign must be flipped.
+
+As special cases of these results, we let $a$ be any number, and we consider the functions
+$f(x) = x+a$, $g(x) = x-a$, $h(x) = ax$ and $i(x) = \frac{x}{a}$:
+
+<ul><li>
+    The functions $f$ and $g$ are strictly increasing (graph is a line with slope $1$, which is positive).
+    This means that they can be applied on both sides of any inequality, without flipping sign.
+    Applying $f$ looks like adding $a$ on both sides, and
+    applying $g$ looks like subtracting $a$ on both sides.
+</li><li>
+    The graph of $h$ is a line with slope $a$, and
+    <ul><li>
+        if $a > 0$, then $h$ is strictly increasing;
+    </li><li>
+        if $a < 0$, then $h$ is strictly decreasing;
+    </li><li>
+        if $a = 0$, then $h$ is neither strictly nor strictly decreasing.
+    </li></ul>
+    Applying $h$ on both sides of an inequality looks like multiplying by $a$.
+</li><li>
+    The function $i$ can be written as
+    $$
+    i(x) = \frac{1}{a} x,
+    $$
+    so the graph of $i$ is a line with slope $\frac{1}{a}$.
+    That's positive if $a$ is positive, and negative if $a$ is negative.
+    This means that $i$ is strictly increasing for positive $a$, and strictly decreasing for negative $a$.
+    If $a=0$, then $i(x)$ is undefined for all $x$.
+</li></ul>
+
+Combining all this with the previous result, we get the following.
+
+graybox:
+    When solving an inequality, we can
+    <ul><li>
+        add or subtract a number on both sides without flipping sign,
+    </li><li>
+        multiply or divide by a positive number on both sides without flipping sign, and
+    </li><li>
+        multiply or divide by a negative number on both sides and flip the sign.
+    </li></ul>

@@ -73,6 +73,10 @@ def get_sidebar_content(txtfile):
 #    return '<div id="sidebar">%s</div>' % join([
     return join([
         link("Front page", 'index'),
+        dropdown("Equations and functions", join([
+            link("Increasing and decreasing functions",
+                 'eqs-and-funcs/incdec-funcs'),
+        ])),
         dropdown("Vectors", join([
             dropdown("Dot product", join([
                 link("Projection", 'vectors/dot-projection'),

@@ -124,7 +124,6 @@
     createVectorPath,
     createArrow3,
     createParallelogram3,
-    round,
     setTextLocation2,
     setTextLocation3,
   };

@@ -16,7 +16,7 @@ asymptote:
 
 Let's draw a circle of radius $\abs{\vec v}$ around the "beginning" of $\vec v$ and $\vec w$.
 Let's also draw axises centered on that point so that $\vec w$ goes along one of the axises.
-These might not the same as the $x$ and $y$ axises that we use most of the time,
+These might not be the same as the $x$ and $y$ axises that we use most of the time,
 because these axises can be rotated depending on how $\vec w$ is rotated,
 so I'll call them $t$ and $u$ axises instead of $x$ and $y$.
 

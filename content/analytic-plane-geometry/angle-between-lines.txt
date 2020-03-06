@@ -95,7 +95,8 @@ graybox:
 
 ## First Ugly Angle Formula
 
-For [calculating the angle between vectors](iwi-jwj.html#example-calculating-angle-between-vectors),
+For [calculating the
+angle between vectors](../vectors/iwi-jwj.html#example-calculating-angle-between-vectors),
 we write
 $$
 \vec a \cdot \vec b = \abs{\vec a} \abs{\vec b} \cos(\abs{\alpha}),

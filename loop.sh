@@ -3,6 +3,7 @@
 build()
 {
     python3 build.py
+    linkchecker html/*.html html/*/*.html
 }
 
 wait()

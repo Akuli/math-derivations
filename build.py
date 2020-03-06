@@ -275,8 +275,5 @@ def asymptote(match, filename):
 
 builder.run()
 
-# FIXME: linkcheck doesn't understand relative stuff, it's annoying
-#linkcheck.run(builder.outputdir)
-
 # tell github pages to do the right thing
 open(os.path.join(builder.outputdir, '.nojekyll'), 'x').close()

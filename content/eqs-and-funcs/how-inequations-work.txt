@@ -1,17 +1,17 @@
-# How does Solving Inequalities Work?
+# How does Solving Inequations Work?
 
 Recall from [solving equations](how-equations-work.html) that
 we solve equations by rewriting them with $\iff$ at each step,
 and if $f$ is a function that has an inverse function, then we can apply it on both sides.
 
-For solving inequalities, we do a similar thing,
+For solving inequations, we do a similar thing,
 but we can't just apply any function with some inverse function on both sides.
 For example, the function $f(x) = -2x$ has an inverse function, but
-applying it on both sides of the inequality $1 < 2$ gives $-2 < -4$, which is false.
+applying it on both sides of the inequation $1 < 2$ gives $-2 < -4$, which is false.
 
 Next we will prove that if $f$ is a [strictly increasing](incdec-funcs.html) function,
-then we can apply it on both sides of an inequality with a $ < $ sign, and it will work correctly
-(we will consider other kinds of inequalities soon):
+then we can apply it on both sides of an inequation with a $ < $ sign, and it will work correctly
+(we will consider other kinds of inequations soon):
 $$
 x < y \iff f(x) < f(y)
 $$
@@ -30,10 +30,10 @@ and the first and last equality came from definition of inverse function.
 This shows that $x < y$, which is what we wanted.
 
 graybox:
-    A strictly increasing function can be applied on both sides when solving an inequality with $ < $ sign.
+    A strictly increasing function can be applied on both sides when solving an inequation with $ < $ sign.
 
-Of course, this works similarly for inequalities with $ > $ instead of $ < $.
-It even works for inequalities having $\le$ or $\ge$, because
+Of course, this works similarly for inequations with $ > $ instead of $ < $.
+It even works for inequations having $\le$ or $\ge$, because
 $$
 \begin{align}
 x \ge y
@@ -48,7 +48,7 @@ It means that they have the same truth value (either both true, or both false),
 so we can replace one with the other.
 
 graybox:
-    A strictly increasing function can be applied on both sides when solving any inequality.
+    A strictly increasing function can be applied on both sides when solving any inequation.
 
 Again, a similar calculation for strictly decreasing functions shows that we get similar results,
 but this time, the sign must be flipped;
@@ -56,7 +56,7 @@ this comes from the definition of strictly decreasing,
 because there we had different signs in $a < b$ and $f(a) > f(b)$.
 
 graybox:
-    A strictly decreasing function can be applied on both sides when solving any inequality,
+    A strictly decreasing function can be applied on both sides when solving any inequation,
     and the sign must be flipped.
 
 As special cases of these results, we let $a$ be any number, and we consider the functions
@@ -64,9 +64,9 @@ $f(x) = x+a$, $g(x) = x-a$, $h(x) = ax$ and $i(x) = \frac{x}{a}$:
 
 <ul><li>
     The functions $f$ and $g$ are strictly increasing (graph is a line with slope $1$, which is positive).
-    This means that they can be applied on both sides of any inequality, without flipping sign.
-    Applying $f$ on both sides of an inequality is adding $a$ on both sides, and
-    applying $g$ on both sides of an inequality is subtracting $a$ on both sides.
+    This means that they can be applied on both sides of any inequation, without flipping sign.
+    Applying $f$ on both sides of an inequation is adding $a$ on both sides, and
+    applying $g$ on both sides of an inequation is subtracting $a$ on both sides.
 </li><li>
     The graph of $h$ is a line with slope $a$, and
     <ul><li>
@@ -76,19 +76,19 @@ $f(x) = x+a$, $g(x) = x-a$, $h(x) = ax$ and $i(x) = \frac{x}{a}$:
     </li><li>
         if $a = 0$, then $h$ is neither strictly nor strictly decreasing.
     </li></ul>
-    Applying $h$ on both sides of an inequality is multiplying both sides by $a$.
+    Applying $h$ on both sides of an inequation is multiplying both sides by $a$.
 </li><li>
     If $a = 0$, then $i(x)$ is undefined for any $x$. Suppose that $a$ is nonzero.
     Now $i$ is the inverse function of $h$,
     so it is strictly increasing whenever $h$ is strictly increasing,
     and strictly decreasing whenever $h$ is strictly decreasing.
-    Applying $i$ on both sides of an inequality is dividing both sides $a$.
+    Applying $i$ on both sides of an inequation is dividing both sides $a$.
 </li></ul>
 
 Combining all this with the previous results, we get the following.
 
 graybox:
-    When solving an inequality, we can
+    When solving an inequation, we can
     <ul><li>
         add or subtract a number on both sides without flipping sign,
     </li><li>

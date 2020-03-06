@@ -81,7 +81,7 @@ def get_sidebar_content(txtfile):
             link("Strictly increasing/decreasing functions",
                  'eqs-and-funcs/incdec-funcs'),
             link("How solving inequalities works",
-                 'eqs-and-funcs/how-inequalities-work'),
+                 'eqs-and-funcs/how-inequations-work'),
         ])),
         dropdown("Vectors", join([
             dropdown("Dot product", join([

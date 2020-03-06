@@ -1,0 +1,92 @@
+# How does Solving Equations Work?
+
+Let's talk about equivalence, also known as "if and only if", or $\Leftrightarrow$.
+It is a combination of $\Leftarrow$ and $\Rightarrow$, as you might expect:
+
+<ul><li>
+    $A \Leftarrow B$ means that if $B$ is true, then $A$ is true.
+</li><li>
+    $A \Rightarrow B$ means that if $A$ is true, then $B$ is true.
+</li><li>
+    $A \Leftrightarrow B$ means that we have both $A \Rightarrow B$ and $A \Leftarrow B$;
+    if one of $A$ and $B$ is true, then the other one is also true.
+</li></ul>
+
+If one of $A$ and $B$ is **false** and we have $A \Leftrightarrow B$, then the other is also false;
+for example, if $A$ is false, then $B$ can't be true because that would imply that $A$ is also true.
+
+At a higher level, $A$ and $B$ have the same "truth value", either both true or both false.
+This means that we can solve an equation like this:
+$$
+\begin{align}
+\text{equation we want to solve}
+&\iff \text{something} \\
+&\iff \text{something} \\
+&\qquad \vdots \\
+&\iff \text{something} \\
+&\iff x = 5 \text{ or } x = 7
+\end{align}
+$$
+This guarantees that $x=5$ and $x=7$ are the solutions of the equation, and there are no other solutions;
+the original equation is true if $x$ is $5$ or $7$, and otherwise it's false.
+For this reason, we always solve equations so that we have equivalence at each step.
+It is very common to teach students to do this without writing down the equivalence signs.
+
+graybox:
+    When solving an equation, we rewrite the equation in equivalent ways until we arrive at the solutions.
+
+Common things that can be done to an equality so that we get equivalence:
+
+<ul><li>
+    Adding a number on both sides: $x=y \iff x+z=y+z$.
+</li><li>
+    Subtracting a number on both sides.
+</li><li>
+    Multiplying both sides by a nonzero number: if $z \ne 0$, then $x=y \iff xz=yz$.
+    We need a nonzero $z$ for this, because we also want to say that if $xz=yz$, then $x=y$;
+    this doesn't work if $z=0$.
+    For example, $3 \cdot 0 = 4 \cdot 0$, but $3 \ne 4$.
+</li><li>
+    Dividing both sides by a nonzero number: if $z \ne 0$, then $x=y \iff \frac{x}{z} = \frac{y}{z}$.
+</li></ul>
+
+I'll start by justifying the first item of the list, why adding a number on both sides gives equivalence.
+If $x = y$, then we of course have $x+z = y+z$, because $x=y$ means that $x$ and $y$ are the same;
+we can substitute $x$ for $y$ wherever we want.
+This proves the $\Rightarrow$ part of $\Leftrightarrow$, and for the $\Leftarrow$ part,
+suppose that $x + z = y + z$.
+Now we get
+$$
+x = (x+z)-z = (y+z)-z = y,
+$$
+where we substituted in the assumption $x+z = y+z$ in the middle step.
+
+Other items of the list can be justified in a very similar way.
+For the $\Leftarrow$ part, we need something that cancels the effect of doing something on both sides.
+Above we canceled the addition of $z$ by subtracting $z$.
+We can similarly cancel
+a subtraction of $z$ with adding $z$,
+a multiplication by $z$ with dividing by $z$, or
+a division by $z$ with multiplying by $z$.
+
+More generally, if $f$ is a function that has an [inverse function](inverse-funcs.html),
+then we can apply $f$ on both sides of the equation, as in
+$$
+x = y \iff f(x) = f(y).
+$$
+Again, the $\Rightarrow$ part of $\Leftrightarrow$ is just substitution,
+and for the other direction, we can use the inverse function $f^{-1}$ as follows:
+if $f(x) = f(y)$, then
+$$
+x = f^{-1}(f(x)) = f^{-1}(f(y)) = y,
+$$
+where the first and last equality sign use the definition of inverse function,
+and the middle equality comes from substituting the assumption $f(x)=f(y)$.
+
+graybox:
+    If the function $f$ has an inverse function, then
+    $f$ can be applied on both sides while solving an equation.
+
+The above rules are actually special cases of this with different functions;
+for example, the rule for adding $z$ on both sides uses the function $f(x)=x+z$,
+which has the inverse function $f^{-1}(x)=x-z$.

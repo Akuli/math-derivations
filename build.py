@@ -74,8 +74,14 @@ def get_sidebar_content(txtfile):
     return join([
         link("Front page", 'index'),
         dropdown("Equations and functions", join([
-            link("Increasing and decreasing functions",
+            link("Inverse functions",
+                 'eqs-and-funcs/inverse-funcs'),
+            link("How solving equations works",
+                 'eqs-and-funcs/how-equations-work'),
+            link("Strictly increasing/decreasing functions",
                  'eqs-and-funcs/incdec-funcs'),
+            link("How solving inequalities works",
+                 'eqs-and-funcs/how-inequalities-work'),
         ])),
         dropdown("Vectors", join([
             dropdown("Dot product", join([
@@ -209,21 +215,26 @@ def math_handler(match, filename):
     return match.group(0)
 
 
-asyboilerplates = collections.defaultdict(str)
-
-
-@builder.converter.add_multiliner(r'^asyboilerplate(3d)?:(.*)\n')
-def add_more_asymptote_boilerplate(match, filename):
-    code = textwrap.dedent(match.string[match.end():])
-    asyboilerplates[(filename, match.group(1))] += code + '\n'
-    return ''
+@builder.converter.add_multiliner(r'^insert-function-warning-here\n')
+def function_warning(match, filename):
+    return '''
+    <div class="box redbox">
+    <p>
+        On this page, the word "function" means a function that
+        takes in a real number as its only argument,
+        and evaluates to another real number.
+        Some real numbers might not be valid inputs of the function;
+        for example, square root is a function that
+        accepts only nonnegative inputs.
+    </p>
+    </div>
+    '''
 
 
 @builder.converter.add_multiliner(r'^asymptote(3d)?:(.*)\n')
 def asymptote(match, filename):
     format = 'png' if match.group(1) else 'svg'     # 3d svg's dont work :(
     fullcode = ('import boilerplate%s;\n' % (match.group(1) or '')) + (
-        asyboilerplates[(filename, match.group(1))] +
         textwrap.dedent(match.string[match.end():]))
     fullfilename = (hashlib.md5(fullcode.encode('utf-8')).hexdigest()
                     + '.' + format)

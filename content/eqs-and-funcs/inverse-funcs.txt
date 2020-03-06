@@ -1,0 +1,42 @@
+# Inverse Functions
+
+insert-function-warning-here
+
+The inverse function of a function $f$ is a function that takes in a value of $f$ as an argument,
+and it answers the question "which input did $f$ take when it gave this value".
+In other words,
+$$
+(\text{inverse function of $f$})(f(x)) = x
+$$
+for all numbers $x$ for which $f(x)$ is defined.
+
+For example, let $f(x) = 2x$ and $g(x) = \frac{x}{2}$.
+Now $g$ is the inverse function of $f$, because
+$$
+g(f(x)) = \frac{2x}{2} = x
+$$
+for all numbers $x$.
+
+The inverse function of $f$ is often denoted with $f^{-1}$.
+Be careful to not confuse this notation with powers.
+For example, $3^{-1} = \frac{1}{3}$ is a number, but
+if $f(x) = 2x$, then $f^{-1}$ is a function, given by $f^{-1}(x)=\frac{x}{2}$.
+
+
+## Issues
+
+One problem with inverse functions is that they might not be defined for all numbers,
+even if the original function is defined for all numbers.
+For example, let $f(x) = 2^x$ and $g(x) = \log_2(x)$.
+Now $f(x)$ is defined for all numbers $x$.
+From logarithms, we know that $g(f(x)) = \log_2(2^x) = x$, so $g$ is the inverse function of $f$.
+However, $g(-1)$ is undefined, because $f(x)=2^x$ is always positive;
+there is no number $x$ for which $f(x) = -1$, which is what $g(-1)$ means.
+
+Another problem is that not all functions have an inverse function.
+For example, let $f(x) = x^2$.
+Now we have $f(2) = 4 = f(-2)$, so what should $(\text{inverse function of $f$})(4)$ do?
+Should that evaluate to $2$ or $-2$?
+We don't want to just pick one choice randomly, so instead we say that it's undefined.
+However, there is an inverse function if this problem doesn't occur; that is,
+if $f(a) \ne f(b)$ for all numbers $a,b$ satisfying $a \ne b$.

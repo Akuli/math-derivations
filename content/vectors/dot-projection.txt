@@ -191,12 +191,12 @@ $$
 \frac{(\vec a + \vec b) \cdot \vec c}{\abs{\vec c}}
 = \frac{\vec a \cdot \vec c}{\abs{\vec c}} + \frac{\vec b \cdot \vec c}{\abs{\vec c}}.
 $$
-Multiplying both sides by $\vec c$ gives
+Multiplying both sides by $\abs{\vec c}$ gives
 $$
 (\vec a + \vec b) \cdot \vec c = \vec a \cdot \vec c + \vec b \cdot \vec c.
 $$
 We started by assuming that $\vec c$ is nonzero, but this formula also holds for $\vec c = \vec0$;
-then the dot products on both sides are zero and it's just $0=0$.
+then the dot products on both sides are zero and it's just $0=0+0$.
 
 graybox:
     For all vectors $\vec a$, $\vec b$ and $\vec c$, we have

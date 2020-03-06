@@ -69,7 +69,6 @@ The angle between any vector and the vector itself is zero, so
 $$
 \vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} \underbrace{\cos(0)}_1 = \abs{\vec v}^2.
 $$
-We already got this result earlier on this page.
 </li><li>
 Let's check when the dot product is zero:
 $$

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>How does Solving Inequations Work?
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{red}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            maroon: [ "\\color{maroon}{#1}", 1 ],
+            olive: [ "\\color{olive}{#1}", 1 ],
+            purple: [ "\\color{purple}{#1}", 1 ],
+            black: [ "\\color{black}{#1}", 1 ],
+            implies: [ "\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="inverse-funcs.html">Inverse functions</a><a href="how-equations-work.html">How solving equations works</a><a href="incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="how-does-solving-inequations-work">How does Solving Inequations Work?<a class="headerlink" href="#how-does-solving-inequations-work" title="Link to this title">¶</a></h1><p>Recall from <a href="how-equations-work.html">solving equations</a> that
+we solve equations by rewriting them with $\iff$ at each step,
+and if $f$ is a function that has an inverse function, then we can apply it on both sides.</p>
+
+<p>For solving inequations, we do a similar thing,
+but we can't just apply any function with some inverse function on both sides.
+For example, the function $f(x) = -2x$ has an inverse function, but
+applying it on both sides of the inequation $1 < 2$ gives $-2 < -4$, which is false.</p>
+
+<p>Next we will prove that if $f$ is a <a href="incdec-funcs.html">strictly increasing</a> function,
+then we can apply it on both sides of an inequation with a $ < $ sign, and it will work correctly
+(we will consider other kinds of inequations soon):
+$$
+x < y \iff f(x) < f(y)
+$$</p>
+
+<p>The $\Rightarrow$ direction is easy;
+if $x < y$, then $f(x) < f(y)$, by the definition of strictly increasing.
+We still need the $\Leftarrow$ direction: we need to show that if $f(x) < f(y)$, then $x < y$.
+We have proved that <a href="incdec-funcs.html#is-the-inverse-strictly-increasing-decreasing">the inverse of a strictly increasing function
+is also strictly increasing</a>, so
+if $f(x) < f(y)$, then we have
+$$
+x = f^{-1}(f(x)) < f^{-1}(f(y)) = y,
+$$
+where in the middle, we used the definition of strictly increasingness for the function $f^{-1}$,
+and the first and last equality came from definition of inverse function.
+This shows that $x < y$, which is what we wanted.</p>
+
+<div class="box graybox"><p>A strictly increasing function can be applied on both sides when solving an inequation with $ < $ sign.
+</p>
+
+</div><p>Of course, this works similarly for inequations with $ > $ instead of $ < $.
+It even works for inequations having $\le$ or $\ge$, because
+$$
+\begin{align}
+x \ge y
+&\iff \text{we do NOT have $\underbrace{x < y}_{\substack{\text{equivalent} \\ \text{with:} \\ f(x) < f(y)}}$} \\
+&\iff \text{we do NOT have $f(x) < f(y)$} \\
+&\iff f(x) \ge f(y).
+\end{align}
+$$
+We assumed that the function $f$ is strictly increasing, so
+by the previous result, $x < y$ and $f(x) < f(y)$ are equivalent.
+It means that they have the same truth value (either both true, or both false),
+so we can replace one with the other.</p>
+
+<div class="box graybox"><p>A strictly increasing function can be applied on both sides when solving any inequation.
+</p>
+
+</div><p>Again, a similar calculation for strictly decreasing functions shows that we get similar results,
+but this time, the sign must be flipped;
+this comes from the definition of strictly decreasing,
+because there we had different signs in $a < b$ and $f(a) > f(b)$.</p>
+
+<div class="box graybox"><p>A strictly decreasing function can be applied on both sides when solving any inequation,
+and the sign must be flipped.
+</p>
+
+</div><p>As special cases of these results, we let $a$ be any number, and we consider the functions
+$f(x) = x+a$, $g(x) = x-a$, $h(x) = ax$ and $i(x) = \frac{x}{a}$:</p>
+
+<p><ul><li>
+    The functions $f$ and $g$ are strictly increasing (graph is a line with slope $1$, which is positive).
+    This means that they can be applied on both sides of any inequation, without flipping sign.
+    Applying $f$ on both sides of an inequation is adding $a$ on both sides, and
+    applying $g$ on both sides of an inequation is subtracting $a$ on both sides.
+</li><li>
+    The graph of $h$ is a line with slope $a$, and
+    <ul><li>
+        if $a > 0$, then $h$ is strictly increasing;
+    </li><li>
+        if $a < 0$, then $h$ is strictly decreasing;
+    </li><li>
+        if $a = 0$, then $h$ is neither strictly nor strictly decreasing.
+    </li></ul>
+    Applying $h$ on both sides of an inequation is multiplying both sides by $a$.
+</li><li>
+    If $a = 0$, then $i(x)$ is undefined for any $x$. Suppose that $a$ is nonzero.
+    Now $i$ is the inverse function of $h$,
+    so it is strictly increasing whenever $h$ is strictly increasing,
+    and strictly decreasing whenever $h$ is strictly decreasing.
+    Applying $i$ on both sides of an inequation is dividing both sides $a$.
+</li></ul></p>
+
+<p>Combining all this with the previous results, we get the following.</p>
+
+<div class="box graybox"><p>When solving an inequation, we can
+<ul><li>
+    add or subtract a number on both sides without flipping sign,
+</li><li>
+    multiply or divide by a positive number on both sides without flipping sign, and
+</li><li>
+    multiply or divide by a negative number on both sides and flip the sign.
+</li></ul>
+</p>
+
+</div></div>
+</body>
+</html>

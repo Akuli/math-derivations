@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>How does Solving Equations Work?
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{red}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            maroon: [ "\\color{maroon}{#1}", 1 ],
+            olive: [ "\\color{olive}{#1}", 1 ],
+            purple: [ "\\color{purple}{#1}", 1 ],
+            black: [ "\\color{black}{#1}", 1 ],
+            implies: [ "\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="inverse-funcs.html">Inverse functions</a><a href="how-equations-work.html">How solving equations works</a><a href="incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="how-does-solving-equations-work">How does Solving Equations Work?<a class="headerlink" href="#how-does-solving-equations-work" title="Link to this title">¶</a></h1><p>Let's talk about equivalence, also known as "if and only if", or $\Leftrightarrow$.
+It is a combination of $\Leftarrow$ and $\Rightarrow$, as you might expect:</p>
+
+<p><ul><li>
+    $A \Leftarrow B$ means that if $B$ is true, then $A$ is true.
+</li><li>
+    $A \Rightarrow B$ means that if $A$ is true, then $B$ is true.
+</li><li>
+    $A \Leftrightarrow B$ means that we have both $A \Rightarrow B$ and $A \Leftarrow B$;
+    if one of $A$ and $B$ is true, then the other one is also true.
+</li></ul></p>
+
+<p>If one of $A$ and $B$ is <b>false</b> and we have $A \Leftrightarrow B$, then the other is also false;
+for example, if $A$ is false, then $B$ can't be true because that would imply that $A$ is also true.</p>
+
+<p>At a higher level, $A$ and $B$ have the same "truth value", either both true or both false.
+This means that we can solve an equation like this:
+$$
+\begin{align}
+\text{equation we want to solve}
+&\iff \text{something} \\
+&\iff \text{something} \\
+&\qquad \vdots \\
+&\iff \text{something} \\
+&\iff x = 5 \text{ or } x = 7
+\end{align}
+$$
+This guarantees that $x=5$ and $x=7$ are the solutions of the equation, and there are no other solutions;
+the original equation is true if $x$ is $5$ or $7$, and otherwise it's false.
+For this reason, we always solve equations so that we have equivalence at each step.
+It is very common to teach students to do this without writing down the equivalence signs.</p>
+
+<div class="box graybox"><p>When solving an equation, we rewrite the equation in equivalent ways until we arrive at the solutions.
+</p>
+
+</div><p>Common things that can be done to an equality so that we get equivalence:</p>
+
+<p><ul><li>
+    Adding a number on both sides: $x=y \iff x+z=y+z$.
+</li><li>
+    Subtracting a number on both sides.
+</li><li>
+    Multiplying both sides by a nonzero number: if $z \ne 0$, then $x=y \iff xz=yz$.
+    We need a nonzero $z$ for this, because we also want to say that if $xz=yz$, then $x=y$;
+    this doesn't work if $z=0$.
+    For example, $3 \cdot 0 = 4 \cdot 0$, but $3 \ne 4$.
+</li><li>
+    Dividing both sides by a nonzero number: if $z \ne 0$, then $x=y \iff \frac{x}{z} = \frac{y}{z}$.
+</li></ul></p>
+
+<p>I'll start by justifying the first item of the list, why adding a number on both sides gives equivalence.
+If $x = y$, then we of course have $x+z = y+z$, because $x=y$ means that $x$ and $y$ are the same;
+we can substitute $x$ for $y$ wherever we want.
+This proves the $\Rightarrow$ part of $\Leftrightarrow$, and for the $\Leftarrow$ part,
+suppose that $x + z = y + z$.
+Now we get
+$$
+x = (x+z)-z = (y+z)-z = y,
+$$
+where we substituted in the assumption $x+z = y+z$ in the middle step.</p>
+
+<p>Other items of the list can be justified in a very similar way.
+For the $\Leftarrow$ part, we need something that cancels the effect of doing something on both sides.
+Above we canceled the addition of $z$ by subtracting $z$.
+We can similarly cancel
+a subtraction of $z$ with adding $z$,
+a multiplication by $z$ with dividing by $z$, or
+a division by $z$ with multiplying by $z$.</p>
+
+<p>More generally, if $f$ is a function that has an <a href="inverse-funcs.html">inverse function</a>,
+then we can apply $f$ on both sides of the equation, as in
+$$
+x = y \iff f(x) = f(y).
+$$
+Again, the $\Rightarrow$ part of $\Leftrightarrow$ is just substitution,
+and for the other direction, we can use the inverse function $f^{-1}$ as follows:
+if $f(x) = f(y)$, then
+$$
+x = f^{-1}(f(x)) = f^{-1}(f(y)) = y,
+$$
+where the first and last equality sign use the definition of inverse function,
+and the middle equality comes from substituting the assumption $f(x)=f(y)$.</p>
+
+<div class="box graybox"><p>If the function $f$ has an inverse function, then
+$f$ can be applied on both sides while solving an equation.
+</p>
+
+</div><p>The above rules are actually special cases of this with different functions;
+for example, the rule for adding $z$ on both sides uses the function $f(x)=x+z$,
+which has the inverse function $f^{-1}(x)=x-z$.
+</p>
+
+</div>
+</body>
+</html>

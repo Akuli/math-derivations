@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Equation of Line from Known Slope and Point
+<title>Inverse Functions
 </title>
 
     <script type="text/x-mathjax-config">
@@ -71,7 +71,7 @@
         <input type="checkbox" id="sidebar-checkbox-0" />
         <label for="sidebar-checkbox-0">Equations and functions</label>
         <div class="dropdown">
-            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+            <a href="inverse-funcs.html">Inverse functions</a><a href="how-equations-work.html">How solving equations works</a><a href="incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="how-inequations-work.html">How solving inequalities works</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-2" />
@@ -93,75 +93,66 @@
         <input type="checkbox" id="sidebar-checkbox-3" />
         <label for="sidebar-checkbox-3">Line</label>
         <div class="dropdown">
-            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="slope-tan.html">Slope and tan</a><a href="line-eq-determinant.html">Equation with determinant</a>
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-4" />
         <label for="sidebar-checkbox-4">Hyperbola</label>
         <div class="dropdown">
-            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
         </div>
         
         </div>
         </div>
-<h1 id="equation-of-line-from-known-slope-and-point">Equation of Line from Known Slope and Point<a class="headerlink" href="#equation-of-line-from-known-slope-and-point" title="Link to this title">¶</a></h1><p>Let's find the equation of a line with slope $2$ going through the point $(3,5)$.
-The equation is $y = 2x+h$, where $h$ is an unknown number.
-The point $(3,4)$ must be on the line, so it must satisfy the equation of the line:
+<h1 id="inverse-functions">Inverse Functions<a class="headerlink" href="#inverse-functions" title="Link to this title">¶</a></h1>
+    <div class="box redbox">
+    <p>
+        On this page, the word "function" means a function that
+        takes in a real number as its only argument,
+        and evaluates to another real number.
+        Some real numbers might not be valid inputs of the function;
+        for example, square root is a function that
+        accepts only nonnegative inputs.
+    </p>
+    </div>
+    <p>The inverse function of a function $f$ is a function that takes in a value of $f$ as an argument,
+and it answers the question "which input did $f$ take when it gave this value".
+In other words,
 $$
-5 = 2 \cdot 3 + h
+(\text{inverse function of $f$})(f(x)) = x
 $$
-From here we can solve $h = -1$, so the equation is $y = 2x-1$.</p>
+for all numbers $x$ for which $f(x)$ is defined.</p>
 
-<p>While this method works, it involves solving an equation, although the equation is very simple.
-We can improve on this a little bit by doing the above work more generally,
-and then just using the results later.</p>
+<p>For example, let $f(x) = 2x$ and $g(x) = \frac{x}{2}$.
+Now $g$ is the inverse function of $f$, because
+$$
+g(f(x)) = \frac{2x}{2} = x
+$$
+for all numbers $x$.</p>
 
-<p>Let's find the equation of a line with slope $s$ going through the point $P=(P_x,P_y)$.
-The equation is $y = sx+h$, where $h$ is an unknown number.
-The point $P$ must be on the line, so it must satisfy the equation of the line:
-$$
-\begin{align}
-P_y &= sP_x + h \\
-P_y - sP_x &= h
-\end{align}
-$$
-We can plug this into the line equation:
-$$
-\begin{align}
-y &= sx+h \\
-y &= sx+P_y-sP_x \\
-y-P_y &= sx-sP_x \\
-y-P_y &= s(x-P_x)
-\end{align}
-$$</p>
-
-<div class="box graybox"><p>The equation of a line with slope $s$ going through point $P$ is
-$$
-y-P_y = s(x-P_x).
-$$
+<p>The inverse function of $f$ is often denoted with $f^{-1}$.
+Be careful to not confuse this notation with powers.
+For example, $3^{-1} = \frac{1}{3}$ is a number, but
+if $f(x) = 2x$, then $f^{-1}$ is a function, given by $f^{-1}(x)=\frac{x}{2}$.
 </p>
 
-</div><p>Let me show a different way to think about this formula.
-From <a href="line-eq-slope.html">the slope line equation derivation</a>,
-we know that a nonzero vector $\vec d$ goes in the direction of the line
-if and only if $\frac{d_y}{d_x} = s$.
-We also see that a point $(x,y)$ is on the line
-if and only if the vector from $P$ to $(x,y)$ is in the direction of the line.</p>
+<h2 id="issues">Issues<a class="headerlink" href="#issues" title="Link to this title">¶</a></h2><p>One problem with inverse functions is that they might not be defined for all numbers,
+even if the original function is defined for all numbers.
+For example, let $f(x) = 2^x$ and $g(x) = \log_2(x)$.
+Now $f(x)$ is defined for all numbers $x$.
+From logarithms, we know that $g(f(x)) = \log_2(2^x) = x$, so $g$ is the inverse function of $f$.
+However, $g(-1)$ is undefined, because $f(x)=2^x$ is always positive;
+there is no number $x$ for which $f(x) = -1$, which is what $g(-1)$ means.</p>
 
-<p><img width="287" height="171" class="asymptote" src="../asymptote/e9c21b69613cb3d7e6fc485f6c9ef090.svg" /></p><p><img width="287" height="168" class="asymptote" src="../asymptote/ba06238153b784a8e9f7c6f2a29027e7.svg" /></p><p>The vector from $P$ to $(x,y)$ is $(x-P_x)\I + (y-P_y)\J$.
-By combining these results, we see that $(x,y)$ is on the line if and only if
-$$
-\frac{y-P_y}{x-P_x} = s,
-$$
-which can be rewritten as
-$$
-y - P_y = s(x - P_x).
-$$
-The above derivation doesn't work for $x = P_x$, because then it divides by zero.
-In that case, the right side of the resulting equation is zero, and so the equation becomes just $y = P_y$,
-which is indeed true if and only if $P$ is a point on the line
-(the line isn't vertical, because it has a slope).</p>
+<p>Another problem is that not all functions have an inverse function.
+For example, let $f(x) = x^2$.
+Now we have $f(2) = 4 = f(-2)$, so what should $(\text{inverse function of $f$})(4)$ do?
+Should that evaluate to $2$ or $-2$?
+We don't want to just pick one choice randomly, so instead we say that it's undefined.
+However, there is an inverse function if this problem doesn't occur; that is,
+if $f(a) \ne f(b)$ for all numbers $a,b$ satisfying $a \ne b$.
+</p>
 
-<p><img width="457" height="172" class="asymptote" src="../asymptote/8ba61cddeb26c72a6b4472dfdb713dca.svg" /></p></div>
+</div>
 </body>
 </html>

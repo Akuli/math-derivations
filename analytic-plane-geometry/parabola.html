@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Equation of Parabola
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{red}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            maroon: [ "\\color{maroon}{#1}", 1 ],
+            olive: [ "\\color{olive}{#1}", 1 ],
+            purple: [ "\\color{purple}{#1}", 1 ],
+            black: [ "\\color{black}{#1}", 1 ],
+            implies: [ "\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="reflect.html">Reflecting</a><a href="shift.html">Shifting</a><a href="stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="slope-tan.html">Slope and tan</a><a href="line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="equation-of-parabola">Equation of Parabola<a class="headerlink" href="#equation-of-parabola" title="Link to this title">¶</a></h1><p>In the past (TODO), we have seen parabolas in the context of solving quadratics.
+We said that a parabola is the graphs given by the equation
+$$
+y = ax^2+bx+c,
+$$
+where $a$ is nonzero;
+if $a = 0$, then this is just $y = bx+c$,
+which is <a href="line-eq-slope.html">the equation of a line</a>.
+</p>
+
+<h2 id="peak-at-origin">Peak at Origin<a class="headerlink" href="#peak-at-origin" title="Link to this title">¶</a></h2><p>Let's start by finding all parabolas whose peaks are at the origin $(0,0)$.
+First of all, there are $y=ax^2+bx+c$ parabolas with peaks elsewhere.
+For example:</p>
+
+<p><img width="326" height="452" class="asymptote" src="../asymptote/5fc2a407ec5b70e335824312ddded66d.svg" /></p><p>If the peak of a parabola is at the origin,
+then the origin $(0,0)$ must be a point on the parabola,
+which means that it must satisfy the equation of the parabola:
+$$
+\begin{align}
+y &= ax^2+bx+c \\
+0 &= a \cdot 0^2 + b \cdot 0+c \\
+0 &= c
+\end{align}
+$$
+So, if a parabola $y=ax^2+bx+c$ has its peak at origin, then it must have $c=0$,
+that is, the parabola is actually just $y=ax^2+bx$.</p>
+
+<p>This is still not enough to guarantee that the peak of the parabola is at $(0,0)$:</p>
+
+<p><img width="285" height="336" class="asymptote" src="../asymptote/afe85c084da9e6e837019c5157b4505c.svg" /></p><p>We see that if the peak of a parabola is at $(0,0)$, then
+that must be the <b>only</b> place where the parabola touches the $x$ axis, like this:</p>
+
+<p><img width="281" height="294" class="asymptote" src="../asymptote/1007d4f58a9dfacdfcce0dd18f201cc6.svg" /></p><p>We can find all touching places by setting $y=0$ in the parabola equation $y=ax^2+bx$.
+$$
+\begin{align}
+0 = ax^2+bx& \\
+0 = (ax+b)x& \\
+ax+b = 0 \text{ or }& x=0 \\
+ax = -b \text{ or }& x=0 \\
+x = -\frac{b}{a} \text{ or }& x=0
+\end{align}
+$$
+(We can divide by $a$ because $a$ is nonzero; see the beginning of this page.)
+If the peak is at $(0,0)$, then there should be only one solution,
+which means that these two solutions should actually be the same solution:
+$$
+\begin{align}
+-\frac{b}{a} &= 0 \\
+b &= 0
+\end{align}
+$$
+So, what remains from our parabola equation is just $y = ax^2$.</p>
+
+<p>Is the peak of all $y = ax^2$ parabolas at the origin $(0,0)$?
+We know that the peak of $y = x^2$ is at the origin:</p>
+
+<p><img width="281" height="294" class="asymptote" src="../asymptote/42217305ce0ccc6d040bfe3b74fcd2df.svg" /></p><p>From <a href="stretch.html">stretching curves</a>, we know that
+if we stretch the parabola in the $y$ direction by any nonzero number $a$,
+the tip of the parabola stays at $(0,0)$,
+and if $a$ is negative, we also flip the parabola.
+To do that, we just replace the $y$ of $y=x^2$ with $\frac{y}{a}$, which gives
+$$
+\frac{y}{a} = x^2.
+$$
+This can be written as $y = ax^2$, which we recognize as a parabola equation with $b=c=0$.
+If $a$ is negative, we ended up reflecting the $y=x^2$ parabola about the $x$ axis,
+and now it opens down instead of opening up.</p>
+
+<p><img width="301" height="409" class="asymptote" src="../asymptote/7d8d1b75d0f6eed0a90d115803288414.svg" /></p><div class="box graybox"><p>Consider a parabola that opens up or down.
+The tip of the parabola is at $(0,0)$ if and only if
+the equation of the parabola can be written as $y=ax^2$, where $a$ is a nonzero number.
+Here
+<ul><li>
+    $a$ is positive, if the parabola opens up, and
+</li><li>
+    $a$ is negative, if the parabola opens down.
+</li></ul>
+</p>
+
+</div><h2 id="shifting-the-parabola">Shifting the Parabola<a class="headerlink" href="#shifting-the-parabola" title="Link to this title">¶</a></h2><p>All $y=ax^2+bx+c$ parabolas look quite similar;
+even though some are more stretched than others, and some open up while others open down,
+they still look very similar.
+Let's figure out whether we can create any $y=ax^2+bx+c$ parabola from $y=x^2$
+by just shifting and stretching.
+The plan is to start shifting and stretching $y = x^2$ in various ways,
+and see if we can get to $y = ax^2 + bx + c$.</p>
+
+<p>Let $a,b,c$ be any numbers, and suppose that $a$ is nonzero.
+Above we saw that stretching $y=x^2$ by $a$ in the $y$ direction gives $y = ax^2$.
+Let's try <a href="shift.html">shifting</a> this parabola in the $x$ direction by any "shifting number" $s$,
+positive if we shift right, and negative if we shift left.
+This gives
+$$
+y = a(x-s)^2 = a(x^2 - 2xs + s^2) = ax^2 + (-2as)x + as^2.
+$$
+Let's choose $s$ such that we have $-2as=b$; that is,
+$$
+s = -\frac{b}{2a}.
+$$
+(We can divide by $a$ because it's nonzero.)
+This gives us
+$$
+y = ax^2 + bx + as^2,
+$$
+which is almost what we want; we just want $c$ instead of $as^2$.
+We can get that by shifting vertically by $c-as^2$, because that gives
+$$
+y-(c-as^2) = ax^2 + bx + as^2,
+$$
+which can be written as
+$$
+y = ax^2 + bx + as^2 + c - as^2.
+$$
+This cancels to $y = ax^2 + bx + c$.</p>
+
+<div class="box graybox"><p>Any parabola $y = ax^2+bx+c$ is $y = ax^2$ but shifted.
+</p>
+
+</div><p>Let's look at what happens to the peak when we shift the parabola.</p>
+
+<p><img width="590" height="306" class="asymptote" src="../asymptote/21f8ce0f84bc7feb4c2be8b24a28c685.svg" /></p><p>The peak of $y = ax^2$ is at $(0,0)$, so the peak of $y = ax^2+bx+c$ is at $(s, c-as^2)$.
+Plugging in $s=-\frac{b}{2a}$ gives
+$$
+\begin{align}
+\text{peak}
+&= (s, c-as^2) \\
+&= \left( -\frac{b}{2a}, c-a\left( -\frac{b}{2a} \right)^2 \right) \\
+&= \left( -\frac{b}{2a}, c-a\frac{b^2}{4a^2} \right) \\
+&= \left( -\frac{b}{2a}, c-\frac{b^2}{4a} \right).
+\end{align}
+$$</p>
+
+<div class="box graybox"><p>The peak of the parabola $y = ax^2 + bx + c$ is at
+$$
+\left( -\frac{b}{2a}, c-\frac{b^2}{4a} \right).
+$$
+</p>
+
+</div><p>If you already know the peak $x$,
+you can find the peak $y$ by using the fact that the peak is a point on the parabola;
+that is, you get the peak $y$ by plugging in the peak $x$ to the parabola equation $y = ax^2+bx+c$.
+$$
+\begin{align}
+y
+&= a\left( -\frac{b}{2a} \right)^2+b\left( -\frac{b}{2a} \right)+c \\
+&= a\frac{b^2}{4a^2}-\frac{b^2}{2a}+c \\
+&= \frac{b^2}{4a}-\frac{2b^2}{4a}+c \\
+&= \frac{b^2-2b^2}{4a}+c \\
+&= \frac{-b^2}{4a}+c \\
+&= c-\frac{b^2}{4a}
+\end{align}
+$$
+This is the same result as what we got above with shifts.
+</p>
+
+<h2 id="sideways-parabola">Sideways Parabola<a class="headerlink" href="#sideways-parabola" title="Link to this title">¶</a></h2><p>The $y = ax^2 + bx + c$ parabolas discussed above can, depending on the sign of $a$, open up or down.
+Either way, these parabolas open in the direction of $y$ axis.</p>
+
+<p>An equation $x = ay^2 + by + c$ also defines a parabola.
+These parabolas open in the direction of the $x$ axis, so left or right,
+because with $x$ and $y$ swapped, we would get parabolas that open in direction of the $y$ axis.</p>
+
+<p><img width="367" height="224" class="asymptote" src="../asymptote/42e6ab6a5df64826648f1da50cb050b3.svg" /></p><p>Everything we know about $y = ax^2 + bx + c$ parabolas works similarly for $x = ay^2 + by + c$ parabolas,
+but of course, with $x$ and $y$ coordinates swapped.
+</p>
+
+</div>
+</body>
+</html>

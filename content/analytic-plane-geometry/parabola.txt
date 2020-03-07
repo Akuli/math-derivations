@@ -221,6 +221,22 @@ y
 $$
 This is the same result as what we got above with shifts.
 
+If we know the peak of the parabola, let's call it $P$,
+we can simply shift $y = ax^2$ horizontally by $P_x$ and vertically by $P_y$ to get the parabola equation.
+This gives the following result.
+
+graybox:
+    If a parabola opens up or down, and its peak is at $P=(P_x,P_y)$, then the equation of the parabola is
+    $$
+    y-P_y = a(x-P_x)^2,
+    $$
+    where $a$ is a nonzero number, and
+    <ul><li>
+        $a$ is positive, if the parabola opens up;
+    </li><li>
+        $a$ is negative, if the parabola opens down.
+    </li></ul>
+
 
 ## Sideways Parabola
 

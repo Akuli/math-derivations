@@ -47,9 +47,14 @@ and that's true if and only if the equation of the original curve is satisfied a
 
 graybox:
     Replacing $x$ with $-x$ in the equation of a curve reflects the curve about the $y$ axis.
+
+Of course, we can do the exactly same things with $y$ instead of $x$.
+This gives the following result.
+
+graybox:
     Replacing $y$ with $-y$ in the equation of a curve reflects the curve about the $x$ axis.
 
-As usual, here's an example showing what this looks like.
+Here's an example showing what this looks like.
 The blue parabola at top right has no reflections done to it, and
 the purple parabola at bottom left has both of the above reflections combined.
 

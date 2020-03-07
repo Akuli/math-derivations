@@ -92,6 +92,11 @@ def get_sidebar_content(txtfile):
             ])),
         ])),
         dropdown("Analytic plane geometry", join([
+            dropdown("Transforming curves", join([
+                link("Reflecting", 'analytic-plane-geometry/reflect'),
+                link("Shifting", 'analytic-plane-geometry/shift'),
+                link("Stretching", 'analytic-plane-geometry/stretch'),
+            ])),
             dropdown("Line", join([
                 link("Equation in normal form",
                      'analytic-plane-geometry/line-eq-normal'),

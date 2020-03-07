@@ -5,6 +5,7 @@ texpreamble("\newcommand{\Vec}[1]{\overrightarrow{#1}}");
 texpreamble("\newcommand{\I}{\vec i}");
 texpreamble("\newcommand{\J}{\vec j}");
 texpreamble("\newcommand{\K}{\vec k}");
+texpreamble("\newcommand{\abs}[1]{\left| {#1} \right|}");
 
 // TODO: stop using a weird mixture of mm and raw numbers?
 defaultpen(0.8mm + fontsize(25pt));

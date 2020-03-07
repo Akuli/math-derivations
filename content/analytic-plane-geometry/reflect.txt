@@ -1,0 +1,75 @@
+# Reflecting
+
+This is also known as mirroring and flipping.
+
+To reflect a point to the other side of the $y$ axis,
+simply flip the sign of the $x$ coordinate:
+
+asymptote:
+    unitsize(1.5cm);
+    axises(-4, 4, -2, 4);
+
+    dot((2,3), p=dotpen+deepgreen, L="$(2,3)$");
+    dot((-2,3), p=dotpen+deepgreen, L="$(-2,3)$");
+
+    dot((3,-1), p=dotpen+deepred, L="$(3,-1)$");
+    dot((-3,-1), p=dotpen+deepred, L="$(-3,-1)$");
+
+In general, reflecting a point $P=(P_x, P_y)$ gives the point $(-P_x, P_y)$,
+because $-P_x$ is what we get by flipping the sign of $P_x$.
+
+Let's consider what happens to the equation of a curve
+when we reflect the whole curve to the other side of the $y$ axis.
+To figure out whether a point $P$ is on the reflected curve,
+we can simply check whether its reflection $(-P_x, P_y)$ is on the original curve.
+In the below picture, $P_x$ and $Q_x$ are negative, so $-P_x$ and $-Q_x$ are positive.
+
+asymptote:
+    unitsize(1.2cm);
+    real f(real x) { return x**3 - 11*x**2 + 37*x - 33; }
+
+    axises(-7, 7, -1, 7);
+    path G = graph(f, 1.3, 5.9);
+
+    draw(G, p=blue, L=Label("original curve", position=Relative(0.69)), align=S);
+    draw(scale(-1, 1)*G, p=deepred, L=Label("reflected curve", position=Relative(0.69)), align=S);
+
+    pair P = (-5.3,f(5.3));
+    pair Q = shift(-1.5, 2)*P;
+    dot(P, p=dotpen, L="$P$");
+    dot(Q, p=dotpen, L="$Q$");
+    dot((-P.x, P.y), p=dotpen, L="$(-P_x, P_y)$");
+    dot((-Q.x, Q.y), p=dotpen, L="$(-Q_x, Q_y)$");
+
+To find the equation of the reflected curve, we do this for the point $(x,y)$;
+it is on the reflected curve if and only if its reflection $(-x, y)$ is on the original curve,
+and that's true if and only if the equation of the original curve is satisfied after replacing $x$ with $-x$.
+
+graybox:
+    Replacing $x$ with $-x$ in the equation of a curve reflects the curve about the $y$ axis.
+    Replacing $y$ with $-y$ in the equation of a curve reflects the curve about the $x$ axis.
+
+As usual, here's an example showing what this looks like.
+The blue parabola at top right has no reflections done to it, and
+the purple parabola at bottom left has both of the above reflections combined.
+
+asymptote:
+    unitsize(1.2cm);
+    axises(-7, 7, -9, 9);
+
+    real f(real x) { return x^2-8x+18; }
+    real g(real x) { return f(-x); }
+    real h(real x) { return -f(x); }
+    real i(real x) { return -f(-x); }
+
+    real a = 1.5, b = 8-a;
+
+    draw(graph(f, a, b), p=blue, L=Label("$y=x^2-8x+18$", position=Relative(0.5)));
+    draw(graph(g, -b, -a), p=deepred, L=Label("$y=(-x)^2-8(-x)+18$", position=Relative(0.5)));
+    draw(graph(h, b, a), p=deepgreen, L=Label("$-y=x^2-8x+18$", position=Relative(0.5)));
+    draw(graph(i, -a, -b), p=purple, L=Label("$-y=(-x)^2-8(-x)+18$", position=Relative(0.5)));
+
+    dot((2,6), L="$(2,6)$", p=dotpen, align=E);
+    dot((2,-6), L="$(2,-6)$", p=dotpen, align=E);
+    dot((-2,6), L="$(-2,6)$", p=dotpen, align=W);
+    dot((-2,-6), L="$(-2,-6)$", p=dotpen, align=W);

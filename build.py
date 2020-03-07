@@ -112,6 +112,10 @@ def get_sidebar_content(txtfile):
                 link("Equation with determinant",
                      'analytic-plane-geometry/line-eq-determinant'),
             ])),
+            dropdown("Parabola", join([
+                link("Equation of parabola",
+                     'analytic-plane-geometry/parabola'),
+            ])),
             dropdown("Hyperbola", join([
                 link(r"Why is $y=\frac{1}{x}$ a hyperbola?",
                      'analytic-plane-geometry/why-its-hyperbola'),

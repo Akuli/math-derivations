@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Why is y=1/x a hyperbola?
+<title>Stretching
 </title>
 
     <script type="text/x-mathjax-config">
@@ -110,66 +110,75 @@
         
         </div>
         </div>
-<h1 id="why-is-y-1-x-a-hyperbola">Why is y=1/x a hyperbola?<a class="headerlink" href="#why-is-y-1-x-a-hyperbola" title="Link to this title">¶</a></h1><p>On this site, a hyperbola <b>means</b> anything that
-we can get from the curve $x^2-y^2 = 1$ by shifting, stretching and rotating it.</p>
+<h1 id="stretching">Stretching<a class="headerlink" href="#stretching" title="Link to this title">¶</a></h1><p>When I say that a curve is stretched in $x$ direction by some positive number $a$,
+I mean that $x$ coordinate of each point on the curve gets multiplied by $a$.</p>
 
-<p><img width="340" height="311" class="asymptote" src="../asymptote/648f0bf830ed61407984babbad42614b.svg" /></p><p>However, if someone says the word "hyperbola", the first thing that comes to my mind is $y=\frac{1}{x}$.</p>
+<p><img width="334" height="203" class="asymptote" src="../asymptote/ac147324e6ec867675d6838dd4325fe6.svg" /></p><p><img width="570" height="217" class="asymptote" src="../asymptote/ec0aa26428c2714dd06cc63dce4519fe.svg" /></p><p>So, stretching in $x$ direction by $2$ means that all $x$ coordinates get doubled.
+This doubles all distances from the $y$ axis, because that's what $x$ coordinates are
+(except that $x$ coordinates can be negative, as is the case in the above pictures).
+In other words, if $P=(P_x, P_y)$ is a point on the original curve,
+then the stretched curve contains a corresponding point $(aP_x, P_y)$.</p>
 
-<p><img width="310" height="309" class="asymptote" src="../asymptote/f28bf5a067984c201052eca7d385b4da.svg" /></p><p>These two curves look similar, and it looks like $y=\frac{1}{x}$
-could be something that we can get from $x^2-y^2=1$ by stretching and rotating;
-that is, it could be a hyperbola.
-Next we'll prove that it really is a hyperbola.
-We only show this for the "right halves" of these curves, because the other halves are similar.</p>
+<p>If we first stretch a point $P=(P_x,P_y)$ by $a$, we get $(aP_x,P_y)$,
+and stretching this by $\frac{1}{a}$ gives the point
+$$
+\left( \frac{1}{a} (aP_x), P_y \right) = (P_x,P_y) = P.
+$$
+This is very similar to shifting, where shifting left was used to cancel shifting right;
+now we can just stretch by $\frac{1}{a}$ to cancel stretching by $a$.
+By doing all the same things as we did in <a href="shift.html">the shifting derivation</a>,
+we get the following result.</p>
 
-<p>We start by rewriting $y=\frac{1}{x}$ as $xy=1$.
-Consider any point $P$ and the area of a rectangle like in the following picture:</p>
-
-<p><img width="367" height="366" class="asymptote" src="../asymptote/a80bea99531a99e2eaff44ac5fe409ea.svg" /></p><p>The area of the rectangle is width times height; that is, $P_xP_y$.
-The equation $xy=1$ means that this area is $1$, no matter which point on $y=\frac{1}{x}$ we choose.</p>
-
-<p>Our goal is to find a hyperbola that also gives $1$ for similar rectangle areas.
-We choose the hyperbola
-$$
-\left(\frac{x}{\sqrt{2}}\right)^2 - \left(\frac{y}{\sqrt{2}}\right)^2 = 1.
-$$
-Let $P=(P_x,P_y)$ be any point on the hyperbola.
-We also draw the two lines $y=x$ and $y=-x$.
-These lines are perpendicular (<a href="angle-between-lines.html#perpendicularness-check">the product of their slopes is $-1$</a>),
-so we can use them for drawing the rectangle.</p>
-
-<p><img width="570" height="651" class="asymptote" src="../asymptote/c8536b730374b532bde7d777aa17086e.svg" /></p><p>We write the equations of the lines as
-$$
-1x+(-1)y+0=0 \qquad \text{and} \qquad 1x+1y+0=0.
-$$
-Now we can use <a href="distance-line-point.html">the formula for distance between line and point</a>, and we get
-$$
-\begin{align}
-a &= \frac{|1P_x + (-1)P_y + 0|}{\sqrt{1^2 + (-1)^2}} = \frac{|P_x-P_y|}{\sqrt{2}}, \\
-b &= \frac{|1P_x + 1P_y + 0|}{\sqrt{1^2 + 1^2}} = \frac{|P_x+P_y|}{\sqrt{2}}.
-\end{align}
-$$
-This means that the area is
-$$
-ab = \frac{|(P_x-P_y)(P_x+P_y)|}{\sqrt{2}\sqrt{2}} = \frac{|P_x^2-P_y^2|}{2}.
-$$
-Because $P$ is on the hyperbola, it must satisfy the equation of the hyperbola:
-$$
-\begin{align}
-\left(\frac{P_x}{\sqrt{2}}\right)^2 - \left(\frac{P_y}{\sqrt{2}}\right)^2 &= 1 \\
-\frac{P_x^2}{2} - \frac{P_y^2}{2} &= 1 \\
-P_x^2 - P_y^2 &= 2 \\
-\end{align}
-$$
-Plugging this in, we get
-$$
-ab = \frac{|2|}{2} = 1.
-$$</p>
-
-<p>So, the area of the rectangle is $1$ for any point $P$ on the "right half" of the hyperbola.
-This means that the "right half" of the hyperbola must be just like the "right half" of $y=\frac{1}{x}$,
-but rotated, so $y=\frac{1}{x}$ is a hyperbola.
+<div class="box graybox"><p>If $a$ is a positive number, then
+replacing $x$ with $\frac{x}{a}$ in the equation of a curve
+stretches the curve in the $x$ direction by $a$, and
+replacing $y$ with $\frac{y}{a}$ in the equation of a curve
+stretches the curve in the $y$ direction by $a$.
 </p>
 
-</div>
+</div><p>Finally, here are some pictures to show what stretches in $x$ and $y$ directions look like.</p>
+
+<p><img width="192" height="211" class="asymptote" src="../asymptote/f7701f258c2594960278f27bf95b6255.svg" /></p><p><img width="452" height="211" class="asymptote" src="../asymptote/492694f05ea1acca90417b37bfe1fbe2.svg" /></p><p><img width="202" height="567" class="asymptote" src="../asymptote/438686da35bcac0c9ca0a6b0513ac4af.svg" /></p><p>Notice how the "tip" of all these parabolas is at the origin $(0,0)$.
+This is true in general; stretching the point $(0,0)$ does not change it,
+because the coordinates get multiplied by a number, and multiplying $0$ by something does nothing.
+</p>
+
+<h2 id="stretching-by-a-negative-number">Stretching by a Negative Number<a class="headerlink" href="#stretching-by-a-negative-number" title="Link to this title">¶</a></h2><p>The above result works for positive numbers $a$, but what happens for other numbers?
+If $a$ is zero, we end up replacing $x$ with $\frac{x}{0}$; we don't want to divide by zero.
+Let $a$ be a negative number.</p>
+
+<p>Replacing $\frac{x}{a}$ is same as
+first replacing $x$ with $\frac{x}{\abs{a}}$ and then replacing $x$ with $-x$;
+every occurence of $x$ first turns into $\frac{x}{\abs{a}}$ and then into
+$$
+\frac{-x}{\abs{a}} = -\frac{x}{\abs{a}} = \frac{x}{-\abs{a}} = \frac{x}{a}.
+$$
+Here we used the fact that $a$ is negative, which means that $a = -\abs{a}$.</p>
+
+<p>Above we saw that replacing $x$ with $\frac{x}{\abs{a}}$ means stretching by $\abs{a}$, and
+in <a href="reflect.html">this derivation</a>, we saw that replacing $x$ with $-x$ means reflecting about the $y$ axis.
+In this sense, stretching by a negative number $a$ is same as stretching by $\abs{a}$ and then reflecting.</p>
+
+<div class="box graybox"><p>Let $a$ be a nonzero number.
+Replacing $x$ with $\frac{x}{a}$ in the equation of a curve
+<ul><li>
+    stretches the curve in $x$ direction by $a$, if $a$ is positive;
+</li><li>
+    stretches the curve in $x$ direction by $\abs{a}$ and reflects about the $y$ axis,
+    if $a$ is negative.
+</li></ul></p>
+
+<p>Replacing $y$ with $\frac{y}{a}$ in the equation of a curve
+<ul><li>
+    stretches the curve in $y$ direction by $a$, if $a$ is positive;
+</li><li>
+    stretches the curve in $y$ direction by $\abs{a}$ and reflects about the $x$ axis,
+    if $a$ is negative.
+</li></ul>
+</p>
+
+</div><p>It looks like this:</p>
+
+<p><img width="237" height="265" class="asymptote" src="../asymptote/9ab4ed08a473f92fcd7fda0ecb782253.svg" /></p><p><img width="395" height="265" class="asymptote" src="../asymptote/bc43dd8f4cf2acd216a0051428d825c8.svg" /></p><p><img width="503" height="318" class="asymptote" src="../asymptote/78d7aa0a14967fee1c138eb0f9955a21.svg" /></p></div>
 </body>
 </html>

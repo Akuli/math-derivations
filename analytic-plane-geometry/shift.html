@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Why is y=1/x a hyperbola?
+<title>Shifting
 </title>
 
     <script type="text/x-mathjax-config">
@@ -110,64 +110,95 @@
         
         </div>
         </div>
-<h1 id="why-is-y-1-x-a-hyperbola">Why is y=1/x a hyperbola?<a class="headerlink" href="#why-is-y-1-x-a-hyperbola" title="Link to this title">¶</a></h1><p>On this site, a hyperbola <b>means</b> anything that
-we can get from the curve $x^2-y^2 = 1$ by shifting, stretching and rotating it.</p>
+<h1 id="shifting">Shifting<a class="headerlink" href="#shifting" title="Link to this title">¶</a></h1><p>When I say that a curve has been shifted right by some positive number $a$,
+I mean that the shifted curve consists of the points of the original curve,
+with $a$ added to the $x$ component of each point.
+For example, shifting the below blue parabola right by $5$ gives the red parabola:</p>
 
-<p><img width="340" height="311" class="asymptote" src="../asymptote/648f0bf830ed61407984babbad42614b.svg" /></p><p>However, if someone says the word "hyperbola", the first thing that comes to my mind is $y=\frac{1}{x}$.</p>
+<p><img width="473" height="260" class="asymptote" src="../asymptote/121ed5138cd445b2b26ef73ebb4809e1.svg" /></p><p>Let's shift any curve right by some positive number $a$.
+How to figure out whether a point $P=(P_x,P_y)$ is on the shifted curve?
+We start by shifting the point $P$ <b>left</b> by $a$; this of course gives the point $(P_x-a, P_y)$.
+Next, we notice that $P$ is on the shifted curve if and only if
+the left-shifted point is on the original curve.</p>
 
-<p><img width="310" height="309" class="asymptote" src="../asymptote/f28bf5a067984c201052eca7d385b4da.svg" /></p><p>These two curves look similar, and it looks like $y=\frac{1}{x}$
-could be something that we can get from $x^2-y^2=1$ by stretching and rotating;
-that is, it could be a hyperbola.
-Next we'll prove that it really is a hyperbola.
-We only show this for the "right halves" of these curves, because the other halves are similar.</p>
+<p><img width="543" height="204" class="asymptote" src="../asymptote/71ede545ea54da0a3b5d80ad8ff6f0f1.svg" /></p><p>If the original curve is given with an equation, then
+the point $(P_x-a, P_y)$ is on that curve if and only if
+replacing $x$ with $P_x-a$ and replacing $y$ with $P_y$ makes the equation true.</p>
 
-<p>We start by rewriting $y=\frac{1}{x}$ as $xy=1$.
-Consider any point $P$ and the area of a rectangle like in the following picture:</p>
+<p>To find the equation of the shifted curve, we simply need to do this with the point $(x,y)$;
+it is on the shifted curve if and only if $(x-a, y)$ is a point on the original curve,
+which is true if and only if replacing $x$ with $x-a$ (and replacing $y$ with $y$, which does nothing)
+satisfies the equation of the original curve.</p>
 
-<p><img width="367" height="366" class="asymptote" src="../asymptote/a80bea99531a99e2eaff44ac5fe409ea.svg" /></p><p>The area of the rectangle is width times height; that is, $P_xP_y$.
-The equation $xy=1$ means that this area is $1$, no matter which point on $y=\frac{1}{x}$ we choose.</p>
+<div class="box graybox"><p>If $a$ is a positive number, then
+replacing $x$ with $x-a$ in the equation of a curve shifts the curve right by $a$.
+</p>
 
-<p>Our goal is to find a hyperbola that also gives $1$ for similar rectangle areas.
-We choose the hyperbola
-$$
-\left(\frac{x}{\sqrt{2}}\right)^2 - \left(\frac{y}{\sqrt{2}}\right)^2 = 1.
-$$
-Let $P=(P_x,P_y)$ be any point on the hyperbola.
-We also draw the two lines $y=x$ and $y=-x$.
-These lines are perpendicular (<a href="angle-between-lines.html#perpendicularness-check">the product of their slopes is $-1$</a>),
-so we can use them for drawing the rectangle.</p>
+</div><p>It feels a bit weird that <b>subtracting</b> moves the curve <b>right</b>.
+To make it feel intuitive, here's the same picture as in the beginning of this page,
+with the parabola equations shown.
+Try plugging in the points $(4,2)$ and $(9,2)$ to the equations
+to see how replacing $x$ with $x-5$ really shifts right.</p>
 
-<p><img width="570" height="651" class="asymptote" src="../asymptote/c8536b730374b532bde7d777aa17086e.svg" /></p><p>We write the equations of the lines as
-$$
-1x+(-1)y+0=0 \qquad \text{and} \qquad 1x+1y+0=0.
-$$
-Now we can use <a href="distance-line-point.html">the formula for distance between line and point</a>, and we get
-$$
-\begin{align}
-a &= \frac{|1P_x + (-1)P_y + 0|}{\sqrt{1^2 + (-1)^2}} = \frac{|P_x-P_y|}{\sqrt{2}}, \\
-b &= \frac{|1P_x + 1P_y + 0|}{\sqrt{1^2 + 1^2}} = \frac{|P_x+P_y|}{\sqrt{2}}.
-\end{align}
-$$
-This means that the area is
-$$
-ab = \frac{|(P_x-P_y)(P_x+P_y)|}{\sqrt{2}\sqrt{2}} = \frac{|P_x^2-P_y^2|}{2}.
-$$
-Because $P$ is on the hyperbola, it must satisfy the equation of the hyperbola:
-$$
-\begin{align}
-\left(\frac{P_x}{\sqrt{2}}\right)^2 - \left(\frac{P_y}{\sqrt{2}}\right)^2 &= 1 \\
-\frac{P_x^2}{2} - \frac{P_y^2}{2} &= 1 \\
-P_x^2 - P_y^2 &= 2 \\
-\end{align}
-$$
-Plugging this in, we get
-$$
-ab = \frac{|2|}{2} = 1.
-$$</p>
+<p><img width="562" height="271" class="asymptote" src="../asymptote/4f5e3d7c55e94de1292cdf28a519a5f8.svg" /></p><p>How to shift a curve left?
+Shifting left is cancelled by shifting right by the same amount, and in fact,
+shifting left is the <b>only</b> thing that can be cancelled by shifting right.
+So, if we find a way to do something to a curve so that shifting the result right gives the original curve,
+then we have found a way to shift left.</p>
 
-<p>So, the area of the rectangle is $1$ for any point $P$ on the "right half" of the hyperbola.
-This means that the "right half" of the hyperbola must be just like the "right half" of $y=\frac{1}{x}$,
-but rotated, so $y=\frac{1}{x}$ is a hyperbola.
+<p>If we first replace $x$ with $x + a$ and then replace $x$ with $x - a$,
+then all occurences of $x$ become first $x+a$ and then $(x-a)+a$;
+that's same as just $x$, so we end up doing nothing.
+By the above result, replacing $x$ with $x-a$ shifts the curve right by $a$.
+So, we did something by replacing $x$ with $x+a$, and then shifted right to get the original curve back.</p>
+
+<div class="box graybox"><p>If $a$ is a positive number, then
+replacing $x$ with $x+a$ in the equation of a curve shifts the curve left by $a$.
+</p>
+
+</div><p>If $a$ is negative, then we can write $a = -\abs{a}$.
+Now
+$$
+x-a = x - (-\abs{a}) = x + \abs{a},
+$$
+so replacing $x$ with $x-a$ is same as replacing $x$ with $x+\abs{a}$.
+In this sense, shifting a curve right by a negative number $a$ is same as shifting it left by $\abs{a}$.</p>
+
+<div class="box graybox"><p>If $a$ is a number, then replacing $x$ with $x-a$ in the equation of a curve
+<ul><li>
+    shifts the curve right by $a$, if $a > 0$;
+</li><li>
+    shifts the curve left by $\abs{a}$, if $a < 0$;
+</li><li>
+    does nothing, if $a=0$.
+</li></ul>
+</p>
+
+</div><p>Of course, we can do all the same steps with $y$ instead of $x$, and we get the following result that way.</p>
+
+<div class="box graybox"><p>If $a$ is a number, then replacing $y$ with $y-a$ in the equation of a curve
+<ul><li>
+    shifts the curve up by $a$, if $a > 0$;
+</li><li>
+    shifts the curve down by $\abs{a}$, if $a < 0$;
+</li><li>
+    does nothing, if $a=0$.
+</li></ul>
+</p>
+
+</div><p>There's another common way to shift curves up or down.
+For example, to shift $y=x^2$ up by 3 units, you can do $y = x^2 + 3$;
+to shift down, you would add a negative number (i.e. subtract a positive number).</p>
+
+<p><img width="267" height="366" class="asymptote" src="../asymptote/eeeb67c5eb50b8f6a88c889314eca3f1.svg" /></p><p>This follows from the above result, because according to that,
+the equation of the shifted curve is whatever we get by replacing $y$ with $y-3$.
+That gives $y-3 = x^2$, which can be written as $y = x^2 + 3$.</p>
+
+<p>This works for any $y = f(x)$ curve,
+where $f(x)$ is some expression containing the variable $x$ but not containing $y$.
+However, this doesn't work for any curve;
+if the equation of the curve can't be written in the form $y = f(x)$,
+then we can't easily write $y = f(x) + 3$, even though we can easily replace $y$ with $y-3$.
 </p>
 
 </div>

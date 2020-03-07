@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Definition of Limit
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{red}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            maroon: [ "\\color{maroon}{#1}", 1 ],
+            olive: [ "\\color{olive}{#1}", 1 ],
+            purple: [ "\\color{purple}{#1}", 1 ],
+            black: [ "\\color{black}{#1}", 1 ],
+            implies: [ "\\Rightarrow", 0 ]
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="definition-of-limit">Definition of Limit<a class="headerlink" href="#definition-of-limit" title="Link to this title">¶</a></h1><p>Limit is a very important concept in calculus.
+There are two common ways to introduce it:
+teaching students to calculate limits without talk much about why they work like they do (high schools), and
+proving all the properties of limits needed very carefully with somewhat difficult proofs (university).
+I will aim for something in the middle;
+my goal is to show you how limits work without doing anything too difficult.
+</p>
+
+<h2 id="the-idea">The Idea<a class="headerlink" href="#the-idea" title="Link to this title">¶</a></h2><p>Let's get started by plugging some numbers into the function
+$$
+f(x) = \frac{x^3-1}{x-1}.
+$$
+We notice that $f(1)$ is undefined, because that gives division by zero.
+However, if we plug in some values that are just a little bit greater than $1$, we get this:
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$1$</td><td>undefined</td>
+</tr><tr>
+    <td>$1.1$</td><td>$3.31000\dots$</td>
+</tr><tr>
+    <td>$1.01$</td><td>$3.03010\dots$</td>
+</tr><tr>
+    <td>$1.001$</td><td>$3.00300\dots$</td>
+</tr><tr>
+    <td>$1.0001$</td><td>$3.00030\dots$</td>
+</tr><tr>
+    <td>$1.00001$</td><td>$3.00003\dots$</td>
+</tr></table></p>
+
+<p>The values of $f$ seem to be quite close to $3$.</p>
+
+<p>We notice a similar thing if we plug in values that are just a little bit less than $1$:
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$0.9$</td><td>$2.71000\dots$</td>
+</tr><tr>
+    <td>$0.99$</td><td>$2.97010\dots$</td>
+</tr><tr>
+    <td>$0.999$</td><td>$2.99700\dots$</td>
+</tr><tr>
+    <td>$0.9999$</td><td>$2.99970\dots$</td>
+</tr><tr>
+    <td>$0.99999$</td><td>$2.99997\dots$</td>
+</tr></table></p>
+
+<p>In this situation, we say that the limit of $f(x)$ as $x \to 1$ (read: $x$ approaches $1$, $x$ goes to $1$)
+is $3$, and we write
+$$
+\lim_{x \to 3} f(x) = 3.
+$$
+We will work with limits a lot, and that will include proving some things about limits.
+Even though plugging in a bunch of numbers is a good way to make a guess about the limit,
+it won't suffice anymore when we want to do something more generally and we can't just plug in numbers.
+For that, we need a better definition of limit.</p>
+
+<p>The above lim notation is somewhat tall, so if it's somewhere in the middle of text,
+it's often written with the $x \to 3$ part off to the side,
+like $\lim_{x \to 3} f(x)$.
+</p>
+
+<h2 id="introducing-intervals">Introducing Intervals<a class="headerlink" href="#introducing-intervals" title="Link to this title">¶</a></h2><p>Consider the open interval $(2.99, 3.01)$; that is,
+the set of all numbers between $2.99$ and $3.01$.
+The ends of this interval are $3 \pm 0.01$.
+The interval is open, which means that the end points are not included in the interval,
+$2.99 \notin (2.99, 3.01)$ and $3.01 \notin (2.99, 3.01)$.</p>
+
+<p><img width="344" height="82" class="asymptote" src="../asymptote/ca8c039de22f5399366fdb7c308b6699.svg" /></p><p>By plugging in more numbers, we notice that
+$$
+f(0.997) = 2.991009 \in (2.99, 3.01)
+$$
+and
+$$
+f(1.003) = 3.009009 \in (2.99, 3.01).
+$$
+Let's see what happens for numbers between $0.997$ and $1.003$.
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$0.997$</td><td>$2.991009 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$0.998$</td><td>$2.994004 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$0.999$</td><td>$2.997001 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$1.000$</td><td>undefined</td>
+</tr><tr>
+    <td>$1.001$</td><td>$3.003001 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$1.002$</td><td>$3.006004 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$1.003$</td><td>$3.009009 \in (2.99, 3.01)$</td>
+</tr></table></p>
+
+<p>Of course, we can't check every number between $0.997$ and $1.003$ with a calculator,
+but what seems to be happening is that
+$$
+f(\text{any number between $0.997$ and $1.003$ except $1$}) \in (2.99,3.01).
+$$</p>
+
+<p>The graph of this function looks like this:</p>
+
+<p><img width="310" height="480" class="asymptote" src="../asymptote/65b8a6e417e61208e6fc90f063c912c5.svg" /></p><p>Let's zoom onto the square that I marked with red.
+The interval $(2.99, 3.01)$ is for the values of the function, so I'll draw it on the $y$ axis,
+but $0.997$ and $1.003$ are inputs of the function, so I'll draw them on the $x$ axis.
+The axises should actually be quite far away from the red square,
+but I'm drawing them anyway because I want something to mark intervals and numbers onto.</p>
+
+<p><img width="331" height="562" class="asymptote" src="../asymptote/3e5b2610471c81dc35821ea657f80a38.svg" /></p><p>There's a hole in the graph because $f(1)$ is undefined.
+The dashed lines are showing how taking any number between $0.997$ and $1.003$ except $1$
+gives a corresponding $f$ value between $2.99$ and $3.01$.
+Note that the values of $f$ that we get by plugging in numbers between $0.997$ and $1.003$
+don't "fill" all of the interval $(2.99, 3.01)$, but that doesn't matter;
+what matters is that they all go somewhere inside the interval $(2.99, 3.01)$.</p>
+
+<p>Letting $I_x=(0.997,1.003)$ denote the interval on the $x$ axis
+and $I_y=(2.99,3.01)$ denote the interval on $y$ axis,
+we get
+$$
+f(\text{any number in $I_x$ except $1$}) \in I_y.
+$$
+</p>
+
+<h2 id="the-definition">The Definition<a class="headerlink" href="#the-definition" title="Link to this title">¶</a></h2><p>Now we are ready to define what a limit is without using a calculator to plug in a bunch of numbers.
+We write $\lim_{x \to 1} f(x) = 3$, if
+for <b>any</b> open interval $I_y$ centered around $3$,
+there is <b>some</b> open interval $I_x$ centered around $1$ such that
+$$
+f(\text{any number in $I_x$ except $1$}) \in I_y.
+$$
+This is the definition of $\lim_{x \to 1} f(x) = 3$.</p>
+
+<p>Above we found that for the function $f$ that we have been using on the rest of this page,
+and for $I_y = (2.99,3.01)$, we may choose $I_x = (0.997,1.003)$, and stuff works.
+Writing $\lim_{x \to 1} f(x) = 3$ means that for any interval $I_y$ around $3$, no matter how small,
+we can find a corresponding interval $I_x$.
+So, the above calculations don't actually prove that $\lim_{x \to 1} f(x) = 3$,
+because for that, we should prove that a similar thing works for all open intervals centered around $3$,
+not just for the one example interval $(2.99,3.01)$ that I chose.</p>
+
+<p>Note that usually the $I_x$ interval depends on which $I_y$ interval we are considering.
+For example, for $I_y = (2.99999,3.00001)$, we will likely need a smaller $I_x$ interval than
+we needed for $I_y = (2.99, 3.01)$.
+The definition just says that there has to be some interval;
+it doesn't matter how small it is, as long as there is one.</p>
+
+<p>Notice that $f(1)$ is not used at all.
+This makes sense, because limits are all about what happens <b>around</b> $x=1$,
+not at all about what happens at exactly $x=1$.</p>
+
+<p>Of course, we can have any other numbers instead of $1$ and $3$ in the definition of limit.
+That results in the following definition.</p>
+
+<div class="box graybox"><p>The limit is defined as follows:
+we write $\lim_{x \to a} f(x) = b$, if
+for any open interval $I_y$ centered around $b$,
+there is some open interval $I_x$ centered around $a$ such that
+$$
+f(\text{any number in $I_x$ except $a$}) \in I_y.
+$$
+</p>
+
+</div><p>This definition is usually written in a slightly different way,
+and that's called the $\epsi,\delta$ definition of a limit.
+The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$,
+and the delta letter $\delta$ to denote the size of $I_x$.
+</p>
+
+</div>
+</body>
+</html>

@@ -78,14 +78,14 @@ asymptote:
     unitsize(300cm);
     draw((2.98,0)--(3.02,0), arrow=Arrow(5mm));
 
-    draw((2.99,0)--(3.01,0), p=lightblue+5);
+    draw((2.99,0)--(3.01,0), p=deepgreen+5);
 
     dot((2.99,0), p=dotpen, L="$2.99$", align=S);
     dot((3,0), p=dotpen, L="$3$", align=S);
     dot((3.01,0), p=dotpen, L="$3.01$", align=S);
 
-    draw(brace_with_space((2.99, 0), (3, 0), 0.002), L="$0.01$", align=N, p=deepgreen);
-    draw(brace_with_space((3, 0), (3.01, 0), 0.002), L="$0.01$", align=N, p=deepgreen);
+    draw(brace_with_space((2.99, 0), (3, 0), 0.002), L="$0.01$", align=N, p=deepred);
+    draw(brace_with_space((3, 0), (3.01, 0), 0.002), L="$0.01$", align=N, p=deepred);
 
 By plugging in more numbers, we notice that
 $$
@@ -244,8 +244,8 @@ asymptote:
     draw(T*graph(f, 1.007, 1.0071), p=blue);
     draw(T*graph(f, 1.008, 1.0081), p=blue);
 
-    draw(Ty*( (0,2.99)--(0,3.01) ), p=purple+5, L="$I_y$", align=W);
-    draw(Tx*( (0.997,0)--(1.003,0) ), p=deepgreen+5, L="$I_x$", align=N);
+    draw(Ty*( (0,2.99)--(0,3.01) ), p=deepgreen+5, L="$I_y$", align=W);
+    draw(Tx*( (0.997,0)--(1.003,0) ), p=deepred+5, L="$I_x$", align=N);
 
     draw( (Tx*(0.997, 0)) -- (T*(0.997,f(0.997))) -- (Ty*(0,f(0.997))), p=gray+smalldashes);
     draw( (Tx*(1.003, 0)) -- (T*(1.003,f(1.003))) -- (Ty*(0,f(1.003))), p=gray+smalldashes);

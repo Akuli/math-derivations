@@ -227,22 +227,14 @@ asymptote:
         return x^2+x+1;
     }
 
-    axises(0.003, 0.03, 0.003, 0.06);
+    axises(0.003, 0.03, 0.003, 0.05);
 
     transform T = shift(-0.985, -2.97);
     transform Tx = scale(1,0)*T;   // send everything onto the x axis
     transform Ty = scale(0,1)*T;   // send everything onto the y axis
 
-    draw(T*graph(f, 0.992, 0.9921), p=blue);
-    draw(T*graph(f, 0.993, 0.9931), p=blue);
-    draw(T*graph(f, 0.994, 0.9941), p=blue);
-
-    draw(T*graph(f, 0.995, 1.005), p=blue);
+    draw(T*graph(f, 0.989, 1.006), p=blue);
     dot(T*(1,f(1)), p=white+dotpen);
-
-    draw(T*graph(f, 1.006, 1.0061), p=blue, L="$y=f(x)$");
-    draw(T*graph(f, 1.007, 1.0071), p=blue);
-    draw(T*graph(f, 1.008, 1.0081), p=blue);
 
     draw(Ty*( (0,2.99)--(0,3.01) ), p=deepgreen+5, L="$I_y$", align=W);
     draw(Tx*( (0.997,0)--(1.003,0) ), p=deepred+5, L="$I_x$", align=N);

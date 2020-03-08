@@ -20,7 +20,7 @@
 <path d='M 342.571 -26.3391L 328.345 -30.151L 328.345 -22.5271L 342.571 -26.3391Z' fill='none' stroke='#000000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 56.4094 135.253)'>
-<path d='M 86.4964 -26.3391L 257.213 -26.3391' fill='none' stroke='#8080ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='5.01875'/>
+<path d='M 86.4964 -26.3391L 257.213 -26.3391' fill='none' stroke='#008000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='5.01875'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 56.4094 135.253)'>
 <circle cx='86.4964' cy='-26.3391' r='4.26791' fill='#000000'/>
@@ -41,8 +41,8 @@
 <use x='321.61' xlink:href='#g1-49' y='132.402'/>
 
 <g transform='matrix(0.996264 0 0 0.996264 56.4094 135.253)'>
-<path d='M 86.4964 -43.4107C 88.6711 -49.3858 99.3279 -49.3858 107.836 -49.3858C 115.957 -49.3858 125.726 -49.3858 129.176 -55.3609C 132.625 -49.3858 142.394 -49.3858 150.515 -49.3858C 159.023 -49.3858 169.68 -49.3858 171.855 -43.4107' fill='none' stroke='#008000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
-</g><g fill='#008000'>
+<path d='M 86.4964 -43.4107C 88.6711 -49.3858 99.3279 -49.3858 107.836 -49.3858C 115.957 -49.3858 125.726 -49.3858 129.176 -55.3609C 132.625 -49.3858 142.394 -49.3858 150.515 -49.3858C 159.023 -49.3858 169.68 -49.3858 171.855 -43.4107' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+</g><g fill='#800000'>
 <use x='164.684' xlink:href='#g1-48' y='72.5669'/>
 <use x='176.009' xlink:href='#g0-58' y='72.5669'/>
 <use x='182.726' xlink:href='#g1-48' y='72.5669'/>
@@ -54,6 +54,6 @@
 </g>
 
 <g transform='matrix(0.996264 0 0 0.996264 56.4094 135.253)'>
-<path d='M 171.855 -43.4107C 174.029 -49.3858 184.686 -49.3858 193.194 -49.3858C 201.316 -49.3858 211.084 -49.3858 214.534 -55.3609C 217.983 -49.3858 227.752 -49.3858 235.873 -49.3858C 244.381 -49.3858 255.038 -49.3858 257.213 -43.4107' fill='none' stroke='#008000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+<path d='M 171.855 -43.4107C 174.029 -49.3858 184.686 -49.3858 193.194 -49.3858C 201.316 -49.3858 211.084 -49.3858 214.534 -55.3609C 217.983 -49.3858 227.752 -49.3858 235.873 -49.3858C 244.381 -49.3858 255.038 -49.3858 257.213 -43.4107' fill='none' stroke='#800000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g></g>
 </svg>

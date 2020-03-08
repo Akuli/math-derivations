@@ -25,14 +25,7 @@
             J: [ "\\vec{j}", 0 ],
             K: [ "\\vec{k}", 0 ],
 
-            red: [ "\\color{red}{#1}", 1 ],
-            blue: [ "\\color{blue}{#1}", 1 ],
-            green: [ "\\color{green}{#1}", 1 ],
-            maroon: [ "\\color{maroon}{#1}", 1 ],
-            olive: [ "\\color{olive}{#1}", 1 ],
-            purple: [ "\\color{purple}{#1}", 1 ],
-            black: [ "\\color{black}{#1}", 1 ],
-            implies: [ "\\Rightarrow", 0 ]
+            epsi: [ "\\varepsilon", 0 ],
           }
         }
       });
@@ -115,6 +108,18 @@
         </div>
         
         </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-properties.html">Limit properties</a>
+        </div>
+        
+        </div>
         </div>
 <h1 id="definition-of-limit">Definition of Limit<a class="headerlink" href="#definition-of-limit" title="Link to this title">¶</a></h1><p>Limit is a very important concept in calculus.
 There are two common ways to introduce it:
@@ -180,13 +185,13 @@ it's often written with the $x \to 3$ part off to the side,
 like $\lim_{x \to 3} f(x)$.
 </p>
 
-<h2 id="introducing-intervals">Introducing Intervals<a class="headerlink" href="#introducing-intervals" title="Link to this title">¶</a></h2><p>Consider the open interval $(2.99, 3.01)$; that is,
+<h2 id="definition-with-intervals">Definition with Intervals<a class="headerlink" href="#definition-with-intervals" title="Link to this title">¶</a></h2><p>Consider the open interval $(2.99, 3.01)$; that is,
 the set of all numbers between $2.99$ and $3.01$.
-The ends of this interval are $3 \pm 0.01$.
+The ends of this interval are $3 \pm 0.01$, and the center of the interval is $3$.
 The interval is open, which means that the end points are not included in the interval,
 $2.99 \notin (2.99, 3.01)$ and $3.01 \notin (2.99, 3.01)$.</p>
 
-<p><img width="344" height="82" class="asymptote" src="../asymptote/ca8c039de22f5399366fdb7c308b6699.svg" /></p><p>By plugging in more numbers, we notice that
+<p><img width="344" height="82" class="asymptote" src="../asymptote/e50661b0a7f9f631fae245839e4d180e.svg" /></p><p>By plugging in more numbers, we notice that
 $$
 f(0.997) = 2.991009 \in (2.99, 3.01)
 $$
@@ -218,59 +223,22 @@ Let's see what happens for numbers between $0.997$ and $1.003$.
 but what seems to be happening is that
 $$
 f(\text{any number between $0.997$ and $1.003$ except $1$}) \in (2.99,3.01).
-$$</p>
-
-<p>The graph of this function looks like this:</p>
-
-<p><img width="310" height="480" class="asymptote" src="../asymptote/65b8a6e417e61208e6fc90f063c912c5.svg" /></p><p>Let's zoom onto the square that I marked with red.
-The interval $(2.99, 3.01)$ is for the values of the function, so I'll draw it on the $y$ axis,
-but $0.997$ and $1.003$ are inputs of the function, so I'll draw them on the $x$ axis.
-The axises should actually be quite far away from the red square,
-but I'm drawing them anyway because I want something to mark intervals and numbers onto.</p>
-
-<p><img width="331" height="562" class="asymptote" src="../asymptote/3e5b2610471c81dc35821ea657f80a38.svg" /></p><p>There's a hole in the graph because $f(1)$ is undefined.
-The dashed lines are showing how taking any number between $0.997$ and $1.003$ except $1$
-gives a corresponding $f$ value between $2.99$ and $3.01$.
-Note that the values of $f$ that we get by plugging in numbers between $0.997$ and $1.003$
-don't "fill" all of the interval $(2.99, 3.01)$, but that doesn't matter;
-what matters is that they all go somewhere inside the interval $(2.99, 3.01)$.</p>
-
-<p>Letting $I_x=(0.997,1.003)$ denote the interval on the $x$ axis
-and $I_y=(2.99,3.01)$ denote the interval on $y$ axis,
-we get
+$$
+Let $I_x=(0.997,1.003)$ denote the interval of numbers that we plug into the function, and
+let $I_y=(2.99,3.01)$   denote the interval containing the values of the function.
+We started with $I_y=(2.99,3.01)$, and then found an interval $I_x$ such that
 $$
 f(\text{any number in $I_x$ except $1$}) \in I_y.
 $$
-</p>
-
-<h2 id="the-definition">The Definition<a class="headerlink" href="#the-definition" title="Link to this title">¶</a></h2><p>Now we are ready to define what a limit is without using a calculator to plug in a bunch of numbers.
-We write $\lim_{x \to 1} f(x) = 3$, if
-for <b>any</b> open interval $I_y$ centered around $3$,
-there is <b>some</b> open interval $I_x$ centered around $1$ such that
+The definition of $\lim_{x \to 1} f(x) = 3$ is that we always find some $I_x$ interval,
+no matter which $I_y$ interval we choose.
+So, the definition goes as follows:
+for any open interval $I_y$ centered around $3$,
+there is some open interval $I_x$ centered around $1$ such that
 $$
 f(\text{any number in $I_x$ except $1$}) \in I_y.
 $$
-This is the definition of $\lim_{x \to 1} f(x) = 3$.</p>
-
-<p>Above we found that for the function $f$ that we have been using on the rest of this page,
-and for $I_y = (2.99,3.01)$, we may choose $I_x = (0.997,1.003)$, and stuff works.
-Writing $\lim_{x \to 1} f(x) = 3$ means that for any interval $I_y$ around $3$, no matter how small,
-we can find a corresponding interval $I_x$.
-So, the above calculations don't actually prove that $\lim_{x \to 1} f(x) = 3$,
-because for that, we should prove that a similar thing works for all open intervals centered around $3$,
-not just for the one example interval $(2.99,3.01)$ that I chose.</p>
-
-<p>Note that usually the $I_x$ interval depends on which $I_y$ interval we are considering.
-For example, for $I_y = (2.99999,3.00001)$, we will likely need a smaller $I_x$ interval than
-we needed for $I_y = (2.99, 3.01)$.
-The definition just says that there has to be some interval;
-it doesn't matter how small it is, as long as there is one.</p>
-
-<p>Notice that $f(1)$ is not used at all.
-This makes sense, because limits are all about what happens <b>around</b> $x=1$,
-not at all about what happens at exactly $x=1$.</p>
-
-<p>Of course, we can have any other numbers instead of $1$ and $3$ in the definition of limit.
+Of course, we can have any other numbers instead of $1$ and $3$ in the definition of limit.
 That results in the following definition.</p>
 
 <div class="box graybox"><p>The limit is defined as follows:
@@ -282,10 +250,66 @@ f(\text{any number in $I_x$ except $a$}) \in I_y.
 $$
 </p>
 
-</div><p>This definition is usually written in a slightly different way,
+</div><p>So far we have worked with $a=1$ and $b=3$.
+</p>
+
+<h2 id="things-to-note">Things to Note<a class="headerlink" href="#things-to-note" title="Link to this title">¶</a></h2><p>Explaining the above definition with words, it says that
+if we want to get the values of a function into any open interval around $b$ (no matter how small),
+then there is an interval around $a$ that allows us to do so.</p>
+
+<p>The calculations we did with a calculator and our example function $f$
+don't prove that $\lim_{x \to 1} f(x) = 3$.
+To actually prove it, we should check all the infinitely many $I_y$ intervals
+instead of just $(2.99, 3.01)$.</p>
+
+<p>The definition of a limit doesn't use $f(a)$ at all.
+In our example, we had $a=1$, and $f(a)$ was undefined;
+even that didn't matter, because we never needed to calculate $f(a)$.
+This makes sense, because limits are all about what happens <b>around</b> $a$,
+not at all about what happens at exactly $x=a$.</p>
+
+<p>If we pick a smaller $I_y$ interval that the values of the function must fit into,
+then we likely also need more restrictions for which values of the function we are considering,
+which we can do by choosing a smaller $I_x$ interval.
+This is fine; the choice of the interval $I_x$ may depend on the interval $I_y$ being used.</p>
+
+<p>The openness of the intervals isn't needed for anything.
+The same definition could be presented with closed intervals, which would include the end points,
+but open intervals are much more commonly used for this so I did it that way too.</p>
+
+<p>This definition is usually written in a slightly different way,
 and that's called the $\epsi,\delta$ definition of a limit.
-The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$,
-and the delta letter $\delta$ to denote the size of $I_x$.
+The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$, so that
+$$
+I_y = (b-\epsi,b+\epsi),
+$$
+and using the delta letter $\delta$ to denote the size of $I_x$ similarly,
+$$
+I_x = (a-\delta,a+\delta).
+$$
+</p>
+
+<h2 id="graph">Graph<a class="headerlink" href="#graph" title="Link to this title">¶</a></h2><p>Let's figure out what the definition of the limit looks like in the graph of a function.
+We'll continue with the same example that we had earlier on this page; that is,
+$$
+f(x) = \frac{x^3-1}{x-1}, \quad
+I_y = (2.99, 3.01), \quad
+I_x = (0.997, 1.003).
+$$
+The graph of $f$ looks like this:</p>
+
+<p><img width="253" height="480" class="asymptote" src="../asymptote/0d28672af5bc7f354ad7396cf8fc030c.svg" /></p><p>Let's zoom onto the square that I marked with red.
+The interval $I_y=(2.99, 3.01)$ is for the values of the function, so I'll draw it on the $y$ axis,
+and $I_x=(0.997,1.003)$ is for the inputs of the function, so I'll draw that on the $x$ axis.
+The axises should actually be quite far away from the red square that we're zooming into,
+but I'm drawing them anyway because I want something to mark intervals and numbers onto.</p>
+
+<p><img width="331" height="562" class="asymptote" src="../asymptote/2747f48c7c5a0630f764cdb2e29318c3.svg" /></p><p>There's a hole in the graph because $f(1)$ is undefined.
+The dashed lines are showing which $f$ values we get
+for inputs in $I_x$.
+Note that the values of $f$ that we get by plugging in numbers from $I_x$
+don't "fill" all of $I_y$, but that doesn't matter;
+what matters is that they all go somewhere inside $I_y$.
 </p>
 
 </div>

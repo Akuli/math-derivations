@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Inverse Functions
+<title>Limit Properties
 </title>
 
     <script type="text/x-mathjax-config">
@@ -64,7 +64,7 @@
         <input type="checkbox" id="sidebar-checkbox-0" />
         <label for="sidebar-checkbox-0">Equations and functions</label>
         <div class="dropdown">
-            <a href="inverse-funcs.html">Inverse functions</a><a href="how-equations-work.html">How solving equations works</a><a href="incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="how-inequations-work.html">How solving inequalities works</a>
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-2" />
@@ -116,58 +116,69 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-properties.html">Limit properties</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-properties.html">Limit properties</a>
         </div>
         
         </div>
         </div>
-<h1 id="inverse-functions">Inverse Functions<a class="headerlink" href="#inverse-functions" title="Link to this title">¶</a></h1>
-    <div class="box redbox">
-    <p>
-        On this page, the word "function" means a function that
-        takes in a real number as its only argument,
-        and evaluates to another real number.
-        Some real numbers might not be valid inputs of the function;
-        for example, square root is a function that
-        accepts only nonnegative inputs.
-    </p>
-    </div>
-    <p>The inverse function of a function $f$ is a function that takes in a value of $f$ as an argument,
-and it answers the question "which input did $f$ take when it gave this value".
-In other words,
-$$
-(\text{inverse function of $f$})(f(x)) = x
-$$
-for all numbers $x$ for which $f(x)$ is defined.</p>
-
-<p>For example, let $f(x) = 2x$ and $g(x) = \frac{x}{2}$.
-Now $g$ is the inverse function of $f$, because
-$$
-g(f(x)) = \frac{2x}{2} = x
-$$
-for all numbers $x$.</p>
-
-<p>The inverse function of $f$ is often denoted with $f^{-1}$.
-Be careful to not confuse this notation with powers.
-For example, $3^{-1} = \frac{1}{3}$ is a number, but
-if $f(x) = 2x$, then $f^{-1}$ is a function, given by $f^{-1}(x)=\frac{x}{2}$.
+<h1 id="limit-properties">Limit Properties<a class="headerlink" href="#limit-properties" title="Link to this title">¶</a></h1><p>Make sure that you know the <a href="limit-def.html">definition of the limit</a>.
 </p>
 
-<h2 id="issues">Issues<a class="headerlink" href="#issues" title="Link to this title">¶</a></h2><p>One problem with inverse functions is that they might not be defined for all numbers,
-even if the original function is defined for all numbers.
-For example, let $f(x) = 2^x$ and $g(x) = \log_2(x)$.
-Now $f(x)$ is defined for all numbers $x$.
-From logarithms, we know that $g(f(x)) = \log_2(2^x) = x$, so $g$ is the inverse function of $f$.
-However, $g(-1)$ is undefined, because $f(x)=2^x$ is always positive;
-there is no number $x$ for which $f(x) = -1$, which is what $g(-1)$ means.</p>
+<h2 id="simple-example">Simple Example<a class="headerlink" href="#simple-example" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to 3} 2x = 6$.</p>
 
-<p>Another problem is that not all functions have an inverse function.
-For example, let $f(x) = x^2$.
-Now we have $f(2) = 4 = f(-2)$, so what should $(\text{inverse function of $f$})(4)$ do?
-Should that evaluate to $2$ or $-2$?
-We don't want to just pick one choice randomly, so instead we say that it's undefined.
-However, there is an inverse function if this problem doesn't occur; that is,
-if $f(a) \ne f(b)$ for all numbers $a,b$ satisfying $a \ne b$.
+<p>Let $f(x) = 2x$.
+Now we want to show that for any open interval $I_y$ centered at $6$,
+there is some open interval $I_x$ centered at $3$ such that
+$$
+f(\text{any number in $I_x$ except $3$}) \in I_y.
+$$
+Let $I_y$ be any open interval centered at $6$.
+We can write it as
+$$
+I_y = (6-r, 6+r),
+$$
+where $r > 0$ is the "radius" of $I_y$.</p>
+
+<p><img width="386" height="78" class="asymptote" src="../asymptote/fe8f7249de84fb8e5b5adb0fcd2ac920.svg" /></p><p>We need to show that there is some open interval $I_x$ centered at $3$ such that something happens.
+This means that we can choose $I_x$ however we want.
+I'll choose
+$$
+I_x = \left( 3 - \frac{r}{2}, 3 + \frac{r}{2} \right),
+$$
+which is an open interval centered around $3$.</p>
+
+<p><img width="325" height="452" class="asymptote" src="../asymptote/ab6253b7c3c5e2f7f6fa1b4387babfa2.svg" /></p><p>Now we need to show that
+$$
+f(\text{any number in $I_x$ except $3$}) \in I_y.
+$$
+Let $x$ be any number in $I_x$ except $3$.
+This means that
+$$
+3 - \frac{r}{2} < x < 3 + \frac{r}{2}, \quad x \ne 3.
+$$
+By multiplying both sides of the inequality by $2$, we get
+$$
+6 - r < \underbrace{2x}_{f(x)} < 6 + r,
+$$
+which shows that $f(x) \in I_y$.
+So, if $x$ is any number in $I_x$ except $3$, then $f(x)$ is in $I_y$.
+This concludes the proof.</p>
+
+<p>If this proof feels too difficult, don't give up now;
+we will find much easier ways to calculate limits later, and that will make math fun again.
+</p>
+
+<h2 id="limit-might-not-exist">Limit Might Not Exist<a class="headerlink" href="#limit-might-not-exist" title="Link to this title">¶</a></h2><p>Not all functions have a limit!
+For example, let
+$$
+f(x) = \begin{cases}
+    1, & \text{if $x \ge 0$}; \\
+    -1, & \text{if $x < 0$}.
+\end{cases}
+$$
+This function "jumps" at $x=0$:</p>
+
+<p><img width="367" height="252" class="asymptote" src="../asymptote/9b2e3c3b1fa91edcd3b6d87c54c9a3b6.svg" /></p><p>What can we say about $\lim_{x \to 1} f(x)$?
 </p>
 
 </div>

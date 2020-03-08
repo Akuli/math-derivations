@@ -1,0 +1,263 @@
+# Definition of Limit
+
+Limit is a very important concept in calculus.
+There are two common ways to introduce it:
+teaching students to calculate limits without talk much about why they work like they do (high schools), and
+proving all the properties of limits needed very carefully with somewhat difficult proofs (university).
+I will aim for something in the middle;
+my goal is to show you how limits work without doing anything too difficult.
+
+
+## The Idea
+
+Let's get started by plugging some numbers into the function
+$$
+f(x) = \frac{x^3-1}{x-1}.
+$$
+We notice that $f(1)$ is undefined, because that gives division by zero.
+However, if we plug in some values that are just a little bit greater than $1$, we get this:
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$1$</td><td>undefined</td>
+</tr><tr>
+    <td>$1.1$</td><td>$3.31000\dots$</td>
+</tr><tr>
+    <td>$1.01$</td><td>$3.03010\dots$</td>
+</tr><tr>
+    <td>$1.001$</td><td>$3.00300\dots$</td>
+</tr><tr>
+    <td>$1.0001$</td><td>$3.00030\dots$</td>
+</tr><tr>
+    <td>$1.00001$</td><td>$3.00003\dots$</td>
+</tr></table>
+
+The values of $f$ seem to be quite close to $3$.
+
+We notice a similar thing if we plug in values that are just a little bit less than $1$:
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$0.9$</td><td>$2.71000\dots$</td>
+</tr><tr>
+    <td>$0.99$</td><td>$2.97010\dots$</td>
+</tr><tr>
+    <td>$0.999$</td><td>$2.99700\dots$</td>
+</tr><tr>
+    <td>$0.9999$</td><td>$2.99970\dots$</td>
+</tr><tr>
+    <td>$0.99999$</td><td>$2.99997\dots$</td>
+</tr></table>
+
+In this situation, we say that the limit of $f(x)$ as $x \to 1$ (read: $x$ approaches $1$, $x$ goes to $1$)
+is $3$, and we write
+$$
+\lim_{x \to 3} f(x) = 3.
+$$
+We will work with limits a lot, and that will include proving some things about limits.
+Even though plugging in a bunch of numbers is a good way to make a guess about the limit,
+it won't suffice anymore when we want to do something more generally and we can't just plug in numbers.
+For that, we need a better definition of limit.
+
+The above lim notation is somewhat tall, so if it's somewhere in the middle of text,
+it's often written with the $x \to 3$ part off to the side,
+like $\lim_{x \to 3} f(x)$.
+
+
+## Definition with Intervals
+
+Consider the open interval $(2.99, 3.01)$; that is,
+the set of all numbers between $2.99$ and $3.01$.
+The ends of this interval are $3 \pm 0.01$, and the center of the interval is $3$.
+The interval is open, which means that the end points are not included in the interval,
+$2.99 \notin (2.99, 3.01)$ and $3.01 \notin (2.99, 3.01)$.
+
+asymptote:
+    unitsize(300cm);
+    draw((2.98,0)--(3.02,0), arrow=Arrow(5mm));
+
+    draw((2.99,0)--(3.01,0), p=lightblue+5);
+
+    dot((2.99,0), p=dotpen, L="$2.99$", align=S);
+    dot((3,0), p=dotpen, L="$3$", align=S);
+    dot((3.01,0), p=dotpen, L="$3.01$", align=S);
+
+    draw(brace_with_space((2.99, 0), (3, 0), 0.002), L="$0.01$", align=N, p=deepgreen);
+    draw(brace_with_space((3, 0), (3.01, 0), 0.002), L="$0.01$", align=N, p=deepgreen);
+
+By plugging in more numbers, we notice that
+$$
+f(0.997) = 2.991009 \in (2.99, 3.01)
+$$
+and
+$$
+f(1.003) = 3.009009 \in (2.99, 3.01).
+$$
+Let's see what happens for numbers between $0.997$ and $1.003$.
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$0.997$</td><td>$2.991009 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$0.998$</td><td>$2.994004 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$0.999$</td><td>$2.997001 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$1.000$</td><td>undefined</td>
+</tr><tr>
+    <td>$1.001$</td><td>$3.003001 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$1.002$</td><td>$3.006004 \in (2.99, 3.01)$</td>
+</tr><tr>
+    <td>$1.003$</td><td>$3.009009 \in (2.99, 3.01)$</td>
+</tr></table>
+
+Of course, we can't check every number between $0.997$ and $1.003$ with a calculator,
+but what seems to be happening is that
+$$
+f(\text{any number between $0.997$ and $1.003$ except $1$}) \in (2.99,3.01).
+$$
+Let $I_x=(0.997,1.003)$ denote the interval of numbers that we plug into the function, and
+let $I_y=(2.99,3.01)$   denote the interval containing the values of the function.
+We started with $I_y=(2.99,3.01)$, and then found an interval $I_x$ such that
+$$
+f(\text{any number in $I_x$ except $1$}) \in I_y.
+$$
+The definition of $\lim_{x \to 1} f(x) = 3$ is that we always find some $I_x$ interval,
+no matter which $I_y$ interval we choose.
+So, the definition goes as follows:
+for any open interval $I_y$ centered around $3$,
+there is some open interval $I_x$ centered around $1$ such that
+$$
+f(\text{any number in $I_x$ except $1$}) \in I_y.
+$$
+Of course, we can have any other numbers instead of $1$ and $3$ in the definition of limit.
+That results in the following definition.
+
+graybox:
+    The limit is defined as follows:
+    we write $\lim_{x \to a} f(x) = b$, if
+    for any open interval $I_y$ centered around $b$,
+    there is some open interval $I_x$ centered around $a$ such that
+    $$
+    f(\text{any number in $I_x$ except $a$}) \in I_y.
+    $$
+
+So far we have worked with $a=1$ and $b=3$.
+
+
+## Things to Note
+
+Explaining the above definition with words, it says that
+if we want to get the values of a function into any open interval around $b$ (no matter how small),
+then there is an interval around $a$ that allows us to do so.
+
+The calculations we did with a calculator and our example function $f$
+don't prove that $\lim_{x \to 1} f(x) = 3$.
+To actually prove it, we should check all the infinitely many $I_y$ intervals
+instead of just $(2.99, 3.01)$.
+
+The definition of a limit doesn't use $f(a)$ at all.
+In our example, we had $a=1$, and $f(a)$ was undefined;
+even that didn't matter, because we never needed to calculate $f(a)$.
+This makes sense, because limits are all about what happens **around** $a$,
+not at all about what happens at exactly $x=a$.
+
+If we pick a smaller $I_y$ interval that the values of the function must fit into,
+then we likely also need more restrictions for which values of the function we are considering,
+which we can do by choosing a smaller $I_x$ interval.
+This is fine; the choice of the interval $I_x$ may depend on the interval $I_y$ being used.
+
+The openness of the intervals isn't needed for anything.
+The same definition could be presented with closed intervals, which would include the end points,
+but open intervals are much more commonly used for this so I did it that way too.
+
+This definition is usually written in a slightly different way,
+and that's called the $\epsi,\delta$ definition of a limit.
+The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$, so that
+$$
+I_y = (b-\epsi,b+\epsi),
+$$
+and using the delta letter $\delta$ to denote the size of $I_x$ similarly,
+$$
+I_x = (a-\delta,a+\delta).
+$$
+
+
+## Graph
+
+Let's figure out what the definition of the limit looks like in the graph of a function.
+We'll continue with the same example that we had earlier on this page; that is,
+$$
+f(x) = \frac{x^3-1}{x-1}, \quad
+I_y = (2.99, 3.01), \quad
+I_x = (0.997, 1.003).
+$$
+The graph of $f$ looks like this:
+
+asymptote:
+    unitsize(2cm);
+
+    real f(real x) {
+        return x^2+x+1;
+    }
+
+    axises(-1, 3, -1, 7);
+    draw(graph(f, -1, 2), p=blue, L=Label("$y=f(x)$", position=Relative(0.7)));
+
+    draw((1,0)--(1,3)--(0,3), p=gray+smalldashes);
+    label((1,0), L="$1$", align=S);
+    label((0,3), L="$3$", align=W);
+
+    draw(shift(1, 3)*scale(0.05)*scale(2, 2)*shift(-0.5, -0.5)*unitsquare, p=red);
+
+Let's zoom onto the square that I marked with red.
+The interval $I_y=(2.99, 3.01)$ is for the values of the function, so I'll draw it on the $y$ axis,
+and $I_x=(0.997,1.003)$ is for the inputs of the function, so I'll draw that on the $x$ axis.
+The axises should actually be quite far away from the red square that we're zooming into,
+but I'm drawing them anyway because I want something to mark intervals and numbers onto.
+
+asymptote:
+    unitsize(300cm);
+
+    real f(real x) {
+        return x^2+x+1;
+    }
+
+    axises(0.003, 0.03, 0.003, 0.06);
+
+    transform T = shift(-0.985, -2.97);
+    transform Tx = scale(1,0)*T;   // send everything onto the x axis
+    transform Ty = scale(0,1)*T;   // send everything onto the y axis
+
+    draw(T*graph(f, 0.992, 0.9921), p=blue);
+    draw(T*graph(f, 0.993, 0.9931), p=blue);
+    draw(T*graph(f, 0.994, 0.9941), p=blue);
+
+    draw(T*graph(f, 0.995, 1.005), p=blue);
+    dot(T*(1,f(1)), p=white+dotpen);
+
+    draw(T*graph(f, 1.006, 1.0061), p=blue, L="$y=f(x)$");
+    draw(T*graph(f, 1.007, 1.0071), p=blue);
+    draw(T*graph(f, 1.008, 1.0081), p=blue);
+
+    draw(Ty*( (0,2.99)--(0,3.01) ), p=purple+5, L="$I_y$", align=W);
+    draw(Tx*( (0.997,0)--(1.003,0) ), p=deepgreen+5, L="$I_x$", align=N);
+
+    draw( (Tx*(0.997, 0)) -- (T*(0.997,f(0.997))) -- (Ty*(0,f(0.997))), p=gray+smalldashes);
+    draw( (Tx*(1.003, 0)) -- (T*(1.003,f(1.003))) -- (Ty*(0,f(1.003))), p=gray+smalldashes);
+
+    dot(Tx*(0.997,0), p=dotpen, L="0.997", align=cis(-pi/2-0.3));
+    dot(Tx*(1.003,0), p=dotpen, L="1.003", align=cis(-pi/2+0.3));
+    dot(Ty*(0,2.99), p=dotpen, L="2.99", align=W);
+    dot(Ty*(0,3.01), p=dotpen, L="3.01", align=W);
+
+There's a hole in the graph because $f(1)$ is undefined.
+The dashed lines are showing which $f$ values we get
+for inputs in $I_x$.
+Note that the values of $f$ that we get by plugging in numbers from $I_x$
+don't "fill" all of $I_y$, but that doesn't matter;
+what matters is that they all go somewhere inside $I_y$.

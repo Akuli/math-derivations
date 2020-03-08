@@ -121,6 +121,11 @@ def get_sidebar_content(txtfile):
                      'analytic-plane-geometry/why-its-hyperbola'),
             ])),
         ])),
+        dropdown("Calculus", join([
+            dropdown("Limits", join([
+                link("Definition of limit", 'calc/limit-def'),
+            ])),
+        ])),
     ])
 
 
@@ -145,14 +150,7 @@ def get_head_extras(filename):
             J: [ "\\\\vec{j}", 0 ],
             K: [ "\\\\vec{k}", 0 ],
 
-            red: [ "\\\\color{red}{#1}", 1 ],
-            blue: [ "\\\\color{blue}{#1}", 1 ],
-            green: [ "\\\\color{green}{#1}", 1 ],
-            maroon: [ "\\\\color{maroon}{#1}", 1 ],
-            olive: [ "\\\\color{olive}{#1}", 1 ],
-            purple: [ "\\\\color{purple}{#1}", 1 ],
-            black: [ "\\\\color{black}{#1}", 1 ],
-            implies: [ "\\\\Rightarrow", 0 ]
+            epsi: [ "\\\\varepsilon", 0 ],
           }
         }
       });

@@ -135,7 +135,7 @@ f(\text{any number in $I_x$ except $a$}) \in I_y.
 $$</p>
 
 <p>Let $I_y$ be any open interval centered at $a$.
-Now we can choose $I_x$ however want.
+Now we can choose $I_x$ however we want.
 We choose $I_x = I_y$, which works, because we want an open interval centered at $a$,
 and $I_y$ is an open interval centered at $a$.
 (We need something else for more complicated things than $f(x)=x$.)
@@ -145,40 +145,28 @@ f(\text{any number in $I_x$ except $a$}) \in I_x = I_y.
 $$
 Here we used the fact that $f(x) = x$ for all $x$;
 if we put something into $f$, it comes out unchanged,
-so any number in $I_x$ comes out as a number in $I_x$.</p>
+so any number in $I_x$ comes out as a number in $I_x$.
+The proof is done.</p>
 
-<p><img width="343" height="324" class="asymptote" src="../asymptote/9d1e8f4ac86a21ef6413d6d2cecf5cff.svg" /></p><p>Now we need to show that
-$$
-f(\text{any number in $I_x$ except $3$}) \in I_y.
-$$
-Let $x$ be any number in $I_x$ except $3$.
-This means that
-$$
-3 - \frac{r}{2} < x < 3 + \frac{r}{2}, \quad x \ne 3.
-$$
-By multiplying both sides of the inequality by $2$, we get
-$$
-6 - r < \underbrace{2x}_{f(x)} < 6 + r,
-$$
-which shows that $f(x) \in I_y$.
-So, if $x$ is any number in $I_x$ except $3$, then $f(x)$ is in $I_y$.
-This concludes the proof.</p>
-
-<p>If this proof feels too difficult, don't give up now;
-we will find much easier ways to calculate limits later, and that will make math fun again.
+<p><img width="343" height="324" class="asymptote" src="../asymptote/9d1e8f4ac86a21ef6413d6d2cecf5cff.svg" /></p><div class="box graybox"><p>If $a$ is any number, then $\lim_{x \to a} x = a$.
 </p>
 
-<h2 id="limit-might-not-exist">Limit Might Not Exist<a class="headerlink" href="#limit-might-not-exist" title="Link to this title">¶</a></h2><p>Not all functions have a limit!
-For example, let
+</div><p>If this proof feels difficult, don't give up now;
+we will find very easy ways to calculate limits later, and that will make math fun again.
+</p>
+
+<h2 id="jumping-function">Jumping Function<a class="headerlink" href="#jumping-function" title="Link to this title">¶</a></h2><p>Let
 $$
 f(x) = \begin{cases}
-    1, & \text{if $x \ge 0$}; \\
-    -1, & \text{if $x < 0$}.
+    -1, & \text{if $x < 2$}; \\
+    +1, & \text{if $x \ge 2$}.
 \end{cases}
 $$
-This function "jumps" at $x=0$:</p>
+This function "jumps" at $x=0$.</p>
 
-<p><img width="367" height="252" class="asymptote" src="../asymptote/9b2e3c3b1fa91edcd3b6d87c54c9a3b6.svg" /></p><p>What can we say about $\lim_{x \to 1} f(x)$?
+<p><img width="367" height="252" class="asymptote" src="../asymptote/109c91fc628f5184ee5ef6d18e8259a3.svg" /></p><p>What can we say about $\lim_{x \to 1} f(x)$?
+We don't know what the limit is, so let's call it $b$.
+This means that
 </p>
 
 </div>

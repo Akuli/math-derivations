@@ -116,7 +116,7 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-properties.html">Limit properties</a>
+            <a href="limit-def.html">Definition of limit</a>
         </div>
         
         </div>
@@ -124,30 +124,30 @@
 <h1 id="limit-properties">Limit Properties<a class="headerlink" href="#limit-properties" title="Link to this title">¶</a></h1><p>Make sure that you know the <a href="limit-def.html">definition of the limit</a>.
 </p>
 
-<h2 id="simple-example">Simple Example<a class="headerlink" href="#simple-example" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to 3} 2x = 6$.</p>
+<h2 id="simple-example">Simple Example<a class="headerlink" href="#simple-example" title="Link to this title">¶</a></h2><p>Let $a \in \mathbb{R}$.
+We prove that $\lim_{x \to a} x = a$.</p>
 
-<p>Let $f(x) = 2x$.
-Now we want to show that for any open interval $I_y$ centered at $6$,
-there is some open interval $I_x$ centered at $3$ such that
+<p>Let $f(x) = x$.
+We need to show that for any open interval $I_y$ centered at $a$,
+there is some open interval $I_x$ centered at $a$ such that
 $$
-f(\text{any number in $I_x$ except $3$}) \in I_y.
-$$
-Let $I_y$ be any open interval centered at $6$.
-We can write it as
-$$
-I_y = (6-r, 6+r),
-$$
-where $r > 0$ is the "radius" of $I_y$.</p>
+f(\text{any number in $I_x$ except $a$}) \in I_y.
+$$</p>
 
-<p><img width="386" height="78" class="asymptote" src="../asymptote/fe8f7249de84fb8e5b5adb0fcd2ac920.svg" /></p><p>We need to show that there is some open interval $I_x$ centered at $3$ such that something happens.
-This means that we can choose $I_x$ however we want.
-I'll choose
+<p>Let $I_y$ be any open interval centered at $a$.
+Now we can choose $I_x$ however want.
+We choose $I_x = I_y$, which works, because we want an open interval centered at $a$,
+and $I_y$ is an open interval centered at $a$.
+(We need something else for more complicated things than $f(x)=x$.)
+Now
 $$
-I_x = \left( 3 - \frac{r}{2}, 3 + \frac{r}{2} \right),
+f(\text{any number in $I_x$ except $a$}) \in I_x = I_y.
 $$
-which is an open interval centered around $3$.</p>
+Here we used the fact that $f(x) = x$ for all $x$;
+if we put something into $f$, it comes out unchanged,
+so any number in $I_x$ comes out as a number in $I_x$.</p>
 
-<p><img width="325" height="452" class="asymptote" src="../asymptote/ab6253b7c3c5e2f7f6fa1b4387babfa2.svg" /></p><p>Now we need to show that
+<p><img width="343" height="324" class="asymptote" src="../asymptote/9d1e8f4ac86a21ef6413d6d2cecf5cff.svg" /></p><p>Now we need to show that
 $$
 f(\text{any number in $I_x$ except $3$}) \in I_y.
 $$

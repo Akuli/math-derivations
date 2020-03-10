@@ -124,6 +124,7 @@ def get_sidebar_content(txtfile):
         dropdown("Calculus", join([
             dropdown("Limits", join([
                 link("Definition of limit", 'calc/limit-def'),
+                link("Limit basics", 'calc/limit-basics'),
             ])),
         ])),
     ])
@@ -149,6 +150,10 @@ def get_head_extras(filename):
             I: [ "\\\\vec{i}", 0 ],
             J: [ "\\\\vec{j}", 0 ],
             K: [ "\\\\vec{k}", 0 ],
+
+            red: [ "\\\\color{darkred}{#1}", 1 ],
+            blue: [ "\\\\color{blue}{#1}", 1 ],
+            green: [ "\\\\color{green}{#1}", 1 ],
 
             epsi: [ "\\\\varepsilon", 0 ],
           }

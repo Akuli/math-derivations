@@ -1,5 +1,7 @@
 # Definition of Limit
 
+insert-function-warning-here
+
 Limit is a very important concept in calculus.
 There are two common ways to introduce it:
 teaching students to calculate limits without talk much about why they work like they do (high schools), and
@@ -56,14 +58,14 @@ is $3$, and we write
 $$
 \lim_{x \to 1} f(x) = 3.
 $$
+This lim notation is somewhat tall, so if it's somewhere in the middle of text,
+it's often written with the $x \to 1$ part off to the side,
+like $\lim_{x \to 1} f(x)$.
+
 We will work with limits a lot, and that will include proving some things about limits.
 Even though plugging in a bunch of numbers is a good way to make a guess about the limit,
 it won't suffice anymore when we want to do something more generally and we can't just plug in numbers.
 For that, we need a better definition of limit.
-
-The above lim notation is somewhat tall, so if it's somewhere in the middle of text,
-it's often written with the $x \to 1$ part off to the side,
-like $\lim_{x \to 1} f(x)$.
 
 
 ## Definition with Intervals
@@ -115,7 +117,7 @@ Let's see what happens for numbers between $0.997$ and $1.003$.
     <td>$1.003$</td><td>$3.009009 \in (2.99, 3.01)$</td>
 </tr></table>
 
-Of course, we can't check every number between $0.997$ and $1.003$ with a calculator,
+We can't check every number between $0.997$ and $1.003$ with a calculator,
 but what seems to be happening is that
 $$
 f(\text{any number between $0.997$ and $1.003$ except $1$}) \in (2.99,3.01).
@@ -134,19 +136,20 @@ there is some open interval $I_x$ centered around $1$ such that
 $$
 f(\text{any number in $I_x$ except $1$}) \in I_y.
 $$
-Of course, we can have any other numbers instead of $1$ and $3$ in the definition of limit.
-That results in the following definition.
+We have been looking at an example where the limit as $x$ approaches $1$ is $3$,
+but the same works for any other number $a$ being approached, and with any other limit value $L$.
 
 graybox:
+    Let $a,L \in \mathbb{R}$, and let $f$ be a function.
     The limit is defined as follows:
-    we write $\lim_{x \to a} f(x) = b$, if
-    for any open interval $I_y$ centered around $b$,
+    we write $\lim_{x \to a} f(x) = L$, if
+    for any open interval $I_y$ centered around $L$,
     there is some open interval $I_x$ centered around $a$ such that
     $$
     f(\text{any number in $I_x$ except $a$}) \in I_y.
     $$
 
-So far we have worked with $a=1$ and $b=3$.
+So far we have worked with $a=1$ and $L=3$.
 
 
 ## Things to Note
@@ -190,7 +193,7 @@ $$
 ## Graph
 
 Let's figure out what the definition of the limit looks like in the graph of a function.
-We'll continue with the same example that we had earlier on this page; that is,
+We continue with the same example that we had earlier on this page; that is,
 $$
 f(x) = \frac{x^3-1}{x-1}, \quad
 I_y = (2.99, 3.01), \quad
@@ -247,7 +250,7 @@ asymptote:
     dot(Ty*(0,2.99), p=dotpen, L="2.99", align=W);
     dot(Ty*(0,3.01), p=dotpen, L="3.01", align=W);
 
-There's a hole in the graph because $f(1)$ is undefined.
+There's a hole in the graph because $f(1)$ is undefined; that gives division by zero.
 The dashed lines are showing which $f$ values we get
 for inputs in $I_x$.
 Note that the values of $f$ that we get by plugging in numbers from $I_x$

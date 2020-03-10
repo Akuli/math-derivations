@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Limit Basics
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{darkred}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="limit-basics">Limit Basics<a class="headerlink" href="#limit-basics" title="Link to this title">¶</a></h1><p>Make sure that you know the <a href="limit-def.html">definition of the limit</a>.
+</p>
+
+<h2 id="simple-example">Simple Example<a class="headerlink" href="#simple-example" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to \red4} x = \green4$.
+I'm using more colors than usual, because the number $4$ appears in two places with two different meanings;
+we're saying that the limit of $x$ as $x \to \red4$ is $\green4$.</p>
+
+<p>Let $f(x) = x$.
+We need to show that for any open interval $\green{I_y}$ centered around $\green4$,
+there is some open interval $\red{I_x}$ centered around $\red4$ such that
+$$
+f(\text{any number in $\red{I_x}$ except $\red4$}) \in \green{I_y}.
+$$</p>
+
+<p>Let $\green{I_y}$ be any open interval centered around $\green4$.
+Now we can choose $\red{I_x}$ however we want.
+We choose $\red{I_x} = \green{I_y}$, which is fine, because we need an open interval centered around $\red4$,
+and $\green{I_y}$ is an open interval centered around $\green4$.
+(We need something else for more complicated functions than $f(x)=x$.)
+Now
+$$
+f(\text{any number in $\red{I_x}$ except $\red4$}) \in \red{I_x} = \green{I_y}.
+$$
+Here we used the fact that $f(x) = x$ for all $x$;
+if we put something into $f$, it comes out unchanged,
+so any number in $\red{I_x}$ comes out as a number in $\red{I_x}$.
+The proof is done.</p>
+
+<p>Summarizing: if we want to fit the values of $f(x)=x$ into some interval,
+then we can do that by using the same interval for the inputs of the function.</p>
+
+<p>The graph $y=f(x)$ is in this case just $y=x$, and
+<a href="../analytic-plane-geometry/line-eq-slope.html">that's a line with slope $1$</a>.</p>
+
+<p><img width="343" height="324" class="asymptote" src="../asymptote/781b345e2427c4a2645c0ef8ff99071c.svg" /></p><p>If this proof feels too boring, difficult or abstract, don't give up now.
+Limits are a tool that we need for doing fun, easy and non-abstract things,
+and we're currently building the tool.</p>
+
+<p>The proof works similarly for any other number instead of $4$.</p>
+
+<div class="box graybox"><p>For all numbers $a$, we have $\lim_{x \to a} x = a$.
+</p>
+
+</div><h2 id="another-simple-example">Another Simple Example<a class="headerlink" href="#another-simple-example" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to \red3} \blue5 = \green5$.
+This looks a little bit confusing, but it is of the same form as the equation in the definition of limit;
+the $f(x)$ in definition of limit is $\blue5$, and the value of the limit is $\green5$.
+So, we can let $\blue{f(x) = 5}$ and then prove that
+$$
+\lim_{x \to \red3} \blue{f(x)} = \green5.
+$$
+Let $\green{I_y}$ be any open interval centered around $\green5$.
+We choose $\red{I_x} = (2, 4)$, which is an open interval centered around $\red3$.
+Now
+$$
+f(\text{any number in $\red{I_x}$ except $\red3$}) = \blue5 = \green5 \in \green{I_y},
+$$
+where in the last step, we used the fact that $\green{I_y}$ contains $\green5$;
+this must be the case, because $\green{I_y}$ is an interval centered around $\green5$.
+The proof is done.</p>
+
+<p>Summarizing: if we want to fit the values of the function $f(x)=5$ into some interval around $5$,
+then we can do that by choosing a very simple interval for the inputs of the function.</p>
+
+<p>The graph $y=\blue5$ is <a href="../analytic-plane-geometry/line-eq-slope.html">a line with slope $0$</a>,
+so a horizontal line.</p>
+
+<p><img width="264" height="298" class="asymptote" src="../asymptote/819b9ec42cad9d57f2c4fbd5e929c697.svg" /></p><p>This proof works the same if we replace $5$ with some other number.
+We can also get it to work if we replace $\red3$ with some other number,
+but we need to choose $\red{I_x}$ accordingly.
+In general, if replace $\red3$ with $\red a$, then we can pick $\red{I_x} = (\red a-1, \red a+1)$;
+this is an open interval centered around $\red a$, which is all that we need for this.</p>
+
+<div class="box graybox"><p>For all numbers $a$ and $b$, we have $\lim_{x \to a} b = b$.
+</p>
+
+</div><h2 id="jumping-function">Jumping Function<a class="headerlink" href="#jumping-function" title="Link to this title">¶</a></h2><p>Let
+$$
+f(x) = \begin{cases}
+    -1, & \text{if $x < 3$}; \\
+    +1, & \text{if $x \ge 3$}.
+\end{cases}
+$$
+This function "jumps" at $x=3$.</p>
+
+<p><img width="424" height="252" class="asymptote" src="../asymptote/24d314e8c64275ad0df1a5339cbfdf75.svg" /></p><p>What can we say about $\lim_{x \to 3} f(x)$?
+We don't know much yet, so let's say that $\lim_{x \to 3} f(x) = b$,
+for some number $b$, and see what happens.
+Now the definition of limit says that for any interval $I_y$ centered around $b$,
+there is an interval $I_x$ centered around $3$ such that
+$$
+f(\text{any number in $I_x$ except $3$}) \in I_y.
+$$
+For any $I_y$, we end with some $I_x$ interval that contains
+numbers that are greater than $3$ and numbers that are less than $3$.</p>
+
+<p><img width="258" height="57" class="asymptote" src="../asymptote/3b52af96b4f708e17473b1db84ad82fd.svg" /></p><p>By definition of $f$, the corresponding $f$ values are $+1$ and $-1$, and we get
+$$
++1 \in I_y, \quad -1 \in I_y.
+$$
+So, for any open interval $I_y$ centered around $b$, we have $+1 \in I_y$ and $-1 \in I_y$.
+This must also work for small $I_y$ intervals, such as $I_y = (b-0.1, b+0.1)$.
+However, $(b-0.1, b+0.1)$ is a very short interval, of length $0.2$,
+so it can't contain both of $+1$ and $-1$,
+regardless of what number $b$ is.</p>
+
+<p><img width="384" height="429" class="asymptote" src="../asymptote/e6696999c19c16305fca1a5426132461.svg" /></p><p>There must be a mistake somewhere, and most of the above steps are quite convincing;
+the only thing that can be wrong is saying that $\lim_{x \to 2} f(x) = b$.</p>
+
+<p>Summarizing: there is no number $b$ such that $\lim_{x \to 2} f(x) = b$,
+because if there was such $b$, then there would be very small intervals around $b$ containing $+1$ and $-1$.</p>
+
+<p>In this case, we say that the limit $\lim_{x \to 2} f(x)$ does not exist.
+Saying that the limit exists means that there is some number $b$ such that $\lim_{x \to 2} f(x) = b$;
+that's is the opposite of what we have here.</p>
+
+<div class="box graybox"><p>A limit might not exist.
+</p>
+
+</div><h2 id="more-than-one-limit">More than One Limit<a class="headerlink" href="#more-than-one-limit" title="Link to this title">¶</a></h2><p>Can we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ for the same function $f$?</p>
+
+<p>If you think of the notation such that $\lim_{x \to 2} f(x)$ by itself is a thing,
+then this is obviously not possible;
+there's no way how something could be equal to $5$ and $8$ at the same time.
+However, that's not how we have defined the limit.
+The definition doesn't say anything about what $\lim_{x \to 2} f(x)$ by itself is;
+it only tells what setting that equal to something means,
+such as $\lim_{x \to 2} f(x) = 5$.</p>
+
+<p>Let's see what happens if we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$.
+By choosing $I_y=(4,6)$ in the definition of $\lim_{x \to 2} f(x) = 5$,
+we get an open interval $I_x$ centered at $2$ such that
+$$
+f(\text{any number in $I_x$ except $2$}) \in (4,6).
+$$
+By choosing $I_y=(7,9)$ in the definition of $\lim_{x \to 2} f(x) = 8$,
+we get another open interval $J_x$ centered at $2$ such that
+$$
+f(\text{any number in $J_x$ except $2$}) \in (7,9).
+$$</p>
+
+<p><img width="67" height="301" class="asymptote" src="../asymptote/6653fd0be352e85261720d3f139a8068.svg" /></p><p><img width="287" height="120" class="asymptote" src="../asymptote/8ff4aee2777d37ff37ecf56e0706db90.svg" /></p><p>The intervals $I_x$ and $J_x$ overlap, so there are numbers that are in <b>both</b> of $I_x$ and $J_x$.
+If $o$ is one of these "overlap numbers", then we get
+$$
+f(o) \in (4,6) \quad \text{and} \quad f(o) \in (7,9),
+$$
+which is impossible.</p>
+
+<p>Again, we arrived at something impossible, so we made a mistake somewhere along the way.
+The mistake is assuming that we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$.
+So, having $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ at the same time is impossible.</p>
+
+<p>Summarizing: we can't have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ at the same time,
+because that would mean that some values of $f(x)$ are in a small interval around $5$
+but also in a small interval around $8$.</p>
+
+<p>This works the same if we replace $2$ with any other number.
+Replacing $5$ and $8$ with other numbers is a bit more tricky.</p>
+
+<p>Let's say that we want to replace $5$ and $8$ with two <b>different</b> numbers $a$ and $b$; that is, we have
+$\lim_{x \to 2} f(x) = a$,
+$\lim_{x \to 2} f(x) = b$, and
+$a \ne b$.
+Above we used the intervals $(4,6)$ and $(7,9)$, because they are intervals around $5$ and $8$ respectively,
+and there are no numbers that are in both intervals.
+So, we need open intervals centered around $a$ and $b$ such that they have no points in common.
+Letting $D$ denote the distance between $a$ and $b$ (positive because $a \ne b$),
+the intervals $(a-\frac{D}{3}, a+\frac{D}{3})$ and $(b-\frac{D}{3}, b+\frac{D}{3})$ work for this.</p>
+
+<p><img width="118" height="429" class="asymptote" src="../asymptote/a93b00874f9062cbacdc5d74a46f73b8.svg" /></p><p>With all this, we see how this generalizes for any two different numbers $a$ and $b$.</p>
+
+<div class="box graybox"><p>A limit can't be equal to two different numbers.
+</p>
+
+</div><p>Also, the limit can't be equal to <b>more</b> than two different numbers, because
+if a limit was equal to more than two different numbers, then we could pick those two numbers;
+the limit would be equal to them, and that's impossible by the above result.</p>
+
+<div class="box graybox"><p>A limit can be equal to at most one number.
+</p>
+
+</div><p>An important consequence of this result is that
+if there is some number that the limit equals to
+(in other words, if the limit exists, unlike in the jump example above),
+then we can write things like
+$$
+\left( \lim_{x \to a} f(x) \right)^2 + 7.
+$$
+This is a shorthand for letting $L$ be the only number for which $\lim_{x \to a} f(x) = L$,
+and then writing $L^2+7$.
+We can think of $\lim_{x \to a} f(x)$ as a number,
+because we know that it can't be equal to multiple different numbers,
+which prevented us from doing that in the past.
+</p>
+
+</div>
+</body>
+</html>

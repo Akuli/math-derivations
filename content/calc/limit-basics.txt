@@ -197,14 +197,14 @@ asymptote:
         L="length of $I_y$ is $0.2$", align=E, p=darkorange);
 
 There must be a mistake somewhere, and most of the above steps are quite convincing;
-the only thing that can be wrong is saying that $\lim_{x \to 2} f(x) = b$.
+the only thing that can be wrong is saying that $\lim_{x \to 3} f(x) = b$.
 
-Summarizing: there is no number $b$ such that $\lim_{x \to 2} f(x) = b$,
+Summarizing: there is no number $b$ such that $\lim_{x \to 3} f(x) = b$,
 because if there was such $b$, then there would be very small intervals around $b$ containing $+1$ and $-1$.
 
-In this case, we say that the limit $\lim_{x \to 2} f(x)$ does not exist.
-Saying that the limit exists means that there is some number $b$ such that $\lim_{x \to 2} f(x) = b$;
-that's is the opposite of what we have here.
+In this case, we say that the limit $\lim_{x \to 3} f(x)$ does not exist.
+Saying that the limit exists means that there is some number $b$ such that $\lim_{x \to 3} f(x) = b$;
+that's the opposite of what we have here.
 
 graybox:
     A limit might not exist.
@@ -308,7 +308,7 @@ graybox:
     A limit can't be equal to two different numbers.
 
 Also, the limit can't be equal to **more** than two different numbers, because
-if a limit was equal to more than two different numbers, then we could pick those two numbers;
+if a limit was equal to more than two different numbers, then we could pick two of those numbers;
 the limit would be equal to them, and that's impossible by the above result.
 
 graybox:

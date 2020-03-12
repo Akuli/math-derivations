@@ -125,6 +125,7 @@ def get_sidebar_content(txtfile):
             dropdown("Limits", join([
                 link("Definition of limit", 'calc/limit-def'),
                 link("Limit basics", 'calc/limit-basics'),
+                link("Limit properties", 'calc/limit-props'),
             ])),
         ])),
     ])

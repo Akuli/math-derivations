@@ -123,7 +123,7 @@ $$
 f(\text{any number between $0.997$ and $1.003$ except $1$}) \in (2.99,3.01).
 $$
 Let $I_x=(0.997,1.003)$ denote the interval of numbers that we plug into the function, and
-let $I_y=(2.99,3.01)$   denote the interval containing the values of the function.
+let $I_y=(2.99,3.01)$   denote the interval containing the outputs of the function.
 We started with $I_y=(2.99,3.01)$, and then found an interval $I_x$ such that
 $$
 f(\text{any number in $I_x$ except $1$}) \in I_y.
@@ -148,6 +148,7 @@ graybox:
     $$
     f(\text{any number in $I_x$ except $a$}) \in I_y.
     $$
+    Here I refer to $I_x$ as the *input interval*, and I refer to $I_y$ as the *output interval*.
 
 So far we have worked with $a=1$ and $L=3$.
 

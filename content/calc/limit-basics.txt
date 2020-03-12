@@ -1,6 +1,10 @@
 # Limit Basics
 
-Make sure that you know the [definition of the limit](limit-def.html).
+Make sure that you know the [definition of limit](limit-def.html).
+
+If the proofs presented on this page feel too boring, difficult or abstract, don't give up now.
+Limits are a tool that we need for doing fun, easy and non-abstract things,
+and we're currently building the tool.
 
 
 ## Simple Example
@@ -54,10 +58,6 @@ asymptote:
 
     draw((a-r,0)--(a+r,0), p=deepred+5, L="$I_x$", align=N);
     dot((a,0), p=dotpen, L="$4$", align=S);
-
-If this proof feels too boring, difficult or abstract, don't give up now.
-Limits are a tool that we need for doing fun, easy and non-abstract things,
-and we're currently building the tool.
 
 The proof works similarly for any other number instead of $4$.
 
@@ -149,7 +149,7 @@ there is an interval $I_x$ centered around $3$ such that
 $$
 f(\text{any number in $I_x$ except $3$}) \in I_y.
 $$
-For any $I_y$, we end with some $I_x$ interval that contains
+For any $I_y$, we get some $I_x$ interval that contains
 numbers that are greater than $3$ and numbers that are less than $3$.
 
 asymptote:

@@ -120,12 +120,16 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a>
         </div>
         
         </div>
         </div>
-<h1 id="limit-basics">Limit Basics<a class="headerlink" href="#limit-basics" title="Link to this title">¶</a></h1><p>Make sure that you know the <a href="limit-def.html">definition of the limit</a>.
+<h1 id="limit-basics">Limit Basics<a class="headerlink" href="#limit-basics" title="Link to this title">¶</a></h1><p>Make sure that you know the <a href="limit-def.html">definition of limit</a>.</p>
+
+<p>If the proofs presented on this page feel too boring, difficult or abstract, don't give up now.
+Limits are a tool that we need for doing fun, easy and non-abstract things,
+and we're currently building the tool.
 </p>
 
 <h2 id="simple-example">Simple Example<a class="headerlink" href="#simple-example" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to \red4} x = \green4$.
@@ -159,11 +163,7 @@ then we can do that by using the same interval for the inputs of the function.</
 <p>The graph $y=f(x)$ is in this case just $y=x$, and
 <a href="../analytic-plane-geometry/line-eq-slope.html">that's a line with slope $1$</a>.</p>
 
-<p><img width="343" height="324" class="asymptote" src="../asymptote/781b345e2427c4a2645c0ef8ff99071c.svg" /></p><p>If this proof feels too boring, difficult or abstract, don't give up now.
-Limits are a tool that we need for doing fun, easy and non-abstract things,
-and we're currently building the tool.</p>
-
-<p>The proof works similarly for any other number instead of $4$.</p>
+<p><img width="343" height="324" class="asymptote" src="../asymptote/781b345e2427c4a2645c0ef8ff99071c.svg" /></p><p>The proof works similarly for any other number instead of $4$.</p>
 
 <div class="box graybox"><p>For all numbers $a$, we have $\lim_{x \to a} x = a$.
 </p>
@@ -217,7 +217,7 @@ there is an interval $I_x$ centered around $3$ such that
 $$
 f(\text{any number in $I_x$ except $3$}) \in I_y.
 $$
-For any $I_y$, we end with some $I_x$ interval that contains
+For any $I_y$, we get some $I_x$ interval that contains
 numbers that are greater than $3$ and numbers that are less than $3$.</p>
 
 <p><img width="258" height="57" class="asymptote" src="../asymptote/3b52af96b4f708e17473b1db84ad82fd.svg" /></p><p>By definition of $f$, the corresponding $f$ values are $+1$ and $-1$, and we get

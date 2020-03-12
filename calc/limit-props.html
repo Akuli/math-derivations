@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Limit Properties
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{darkred}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="limit-properties">Limit Properties<a class="headerlink" href="#limit-properties" title="Link to this title">¶</a></h1><p>If we know that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist,
+then do we have
+$$
+\lim_{x \to a} (f(x) + g(x)) = \left( \lim_{x \to a} f(x) \right) + \left( \lim_{x \to a} g(x) \right)?
+$$
+A rule like this would be handy for calculating limits.
+With this, we could for example calculate
+$$
+\lim_{x \to 2} (x+5)
+= \left( \lim_{x \to 2} x \right) + \left( \lim_{x \to 2} 5 \right)
+= 2+5=7,
+$$
+where we used most of the results from <a href="limit-basics.html">the limit basics page</a>.
+On this page, we figure out whether this and other similar things work.
+</p>
+
+<h2 id="interval-thing">Interval Thing<a class="headerlink" href="#interval-thing" title="Link to this title">¶</a></h2><p>Before talking more about limits, we need a result about intervals.
+Suppose that $a$ and $b$ are numbers in the open interval $(-r, r)$, where $r$ is a positive number.
+What can we say about $a+b$?</p>
+
+<p><img width="458" height="76" class="asymptote" src="../asymptote/28b3907efb5313491e79c7000984dff5.svg" /></p><p>Because $a$ and $b$ are in $(-r, r)$, we have $-r < a < r$ and $-r < b < r$.
+By combining these inequations together, we get
+$$
+(-r)+(-r) < a+b < r+r,
+$$
+which simplifies to
+$$
+-2r < a+b < 2r.
+$$
+This can be written as
+$$
+a+b \in (-2r, 2r).
+$$
+So, if we have $a,b \in (-r, r)$, then we also know that $a+b \in (-2r, 2r)$.
+We'll need this result next.</p>
+
+<p>Usually a more general theorem called triangle inequality is used instead of this,
+but I'm using this instead because it feels somewhat more intuitive to me.
+</p>
+
+<h2 id="limit-of-sum">Limit of Sum<a class="headerlink" href="#limit-of-sum" title="Link to this title">¶</a></h2><p>Let's go back to the question about limits.
+Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
+We prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.</p>
+
+<p>Let $I_y$ be an open interval centered around $A+B$.
+We can write $I_y$ as $(A+B-\epsi, A+B+\epsi)$ for some positive number $\epsi$.
+By definition of limit,
+there are input intervals centered around $a$ such that
+we can fit the values of $f$ and $g$ into any output intervals around $A$ and $B$ respectively.
+We choose the output intervals
+$\left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right)$ and $\left( B-\frac{\epsi}{2}, B+\frac{\epsi}{2} \right)$.
+The corresponding input intervals are drawn below.</p>
+
+<p><img width="287" height="86" class="asymptote" src="../asymptote/80c336e2bbd28d8d77d047bbe353d71b.svg" /></p><p><a href="limit-basics.html#more-than-one-limit">In the past</a> we have used the fact that intervals like this overlap,
+but we can say more than that;
+one of the intervals is smaller and the other is bigger,
+and the bigger interval contains all numbers of the smaller interval.
+Let $I_x$ be the smaller input interval
+(if the input intervals are the same size, then they are the same interval,
+and it doesn't matter which of them is $I_x$).
+Now any number in $I_x$ is in both of the input intervals, so we have
+$$
+\begin{align}
+&f(\text{any number in $I_x$ except $a$}) \in \left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right),
+\\
+&g(\text{any number in $I_x$ except $a$}) \in \left( B-\frac{\epsi}{2}, B+\frac{\epsi}{2} \right).
+\end{align}
+$$
+Letting $x$ be any number in $I_x$ except $a$, we can write this as
+$$
+f(x) = A+p \quad \text{and} \quad g(x)=B+q
+$$
+for some numbers $p,q \in (-\frac{\epsi}{2},\frac{\epsi}{2})$.
+Now we can use the above interval thing with $r=\frac{\epsi}{2}$ and $2r=\epsi$ to get
+$$
+f(x)+g(x) = A+B+\underbrace{p+q}_{\in (-\epsi,\epsi)},
+$$
+which means that
+$$
+f(x)+g(x) \in (A+B-\epsi, A+B+\epsi) = I_y.
+$$</p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
+$$
+\lim_{x \to a} (f(x) + g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x).
+$$
+</p>
+
+</div><h2 id="limit-of-product">Limit of Product<a class="headerlink" href="#limit-of-product" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
+I'll show you most of the proof for $\lim_{x \to a} f(x)g(x) = AB$.</p>
+
+<p>Let $I_y=(AB-\epsi,AB+\epsi)$ be an open interval centered around $AB$.
+By doing same things as for the sum above, we get an input interval $I_x$ such that
+for any $x$ in $I_x$ except $a$, we get
+$$
+f(x)=A+p \quad \text{and} \quad g(x)=B+q,
+$$
+where we can fit $p$ and $q$ into any interval $(-r,r)$;
+above we had $p,q \in (-\frac{\epsi}{2}, \frac{\epsi}{2})$
+but we could have used any other positive number $r$ instead of $\frac{\epsi}{2}$.
+Just like in the sum proof, it is now enough to show that by choosing $r$ wisely, we get
+$$
+f(x)g(x) = AB+\text{something in $(-\epsi,\epsi)$}.
+$$
+By expanding $f(x)g(x)$, we get
+$$
+\begin{align}
+f(x)g(x)
+&= (A+p)(B+q) \\
+&= A(B+q)+p(B+q) \\
+&= AB+\underbrace{Aq+pB+pq}_{\text{Want: $\in (-\epsi,\epsi)$}}.
+\end{align}
+$$
+To show that we can fit $Aq+pB+pq$ into $(-\epsi,\epsi)$, it is enough to show that
+we can make each of $Aq$, $pB$ and $pq$ small enough by choosing the $r$.
+This can be done, but filling in all the details results in a mess every time I do it,
+so I'll skip most of it here.
+However, I'll show you the idea for doing this;
+you might be able to fill in the skipped details after reading this if you are interested in them.</p>
+
+<p>Let's say that we want to make the $Aq$ part small, say $Aq \in (-s, s)$ for some positive number $s$.
+If $A$ is positive, then we can pick $r = \frac{s}{A}$, because using the fact $q \in (-r,r)$ gives
+$$
+-\frac{s}{A} = -r < q < r = \frac{s}{A}.
+$$
+Multiplying both sides by $A$ gives
+$$
+-s < Aq < s.
+$$
+The mess comes from handling cases where $A$ is zero or negative
+and from combining the three conditions of each of $Aq$, $pB$ and $pq$ being small.</p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
+$$
+\lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right) + \left( \lim_{x \to a} g(x) \right).
+$$
+</p>
+
+</div></div>
+</body>
+</html>

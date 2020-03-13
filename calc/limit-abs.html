@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Absolute Values in Limit Proofs
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{darkred}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-abs.html">Absolute values in limit proofs</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="absolute-values-in-limit-proofs">Absolute Values in Limit Proofs<a class="headerlink" href="#absolute-values-in-limit-proofs" title="Link to this title">¶</a></h1><p>So far we have used intervals centered around a given number when working with limits.
+It's more common to write the definition of limit with absolute values.
+The idea with that is that if $r$ is positive,
+then $x \in (-r, r)$ is same as $\abs{x} < r$;
+the absolute value of $x$ is the distance between $x$ and $0$,
+and both of these are ways to say that the distance is less than $r$.</p>
+
+<p><img width="230" height="32" class="asymptote" src="../asymptote/0055fb9944ef32ea0d74404725532dff.svg" /></p><p>The distance between <b>any</b> two numbers can be calculated by subtracting the numbers,
+but you need to be careful with the order of subtracting.
+For example, the distance between $5$ and $7$ is $7 - 5 = 2$, not $5 - 7 = -2$.
+So, if you put the numbers in the wrong order, the distance comes out with an unwanted minus sign in front;
+to avoid that, we can wrap everything in absolute values and calculate
+$$
+\abs{5-7} = \abs{-2} = 2.
+$$
+In general, the distance between any numbers $a$ and $b$ is $\abs{a-b}$, and now the order doesn't matter.</p>
+
+<p>As a sanity check, we can plug in $b=0$,
+and now it says that the distance between $a$ and zero is $\abs{a}$, which is correct.
+If we plug in $a=0$ instead, it says that the distance between $b$ and zero is $\abs{-b}$.
+This is also correct because we know that $\abs{-b} = \abs{b}$;
+absolute value discards the sign anyway, so the sign inside absolute value doesn't matter.</p>
+
+<p>If $A$ is any number, then we can write $x \in (A-r, A+r)$ as $\abs{x - A} < r$;
+both of these are ways to say that the distance is less than $r$.</p>
+
+<p><img width="344" height="34" class="asymptote" src="../asymptote/05a9270f73876baa89adc6884717fd4b.svg" /></p><div class="box graybox"><p>Let $A$ be any number, and let $r$ be positive.
+Then $x \in (A-r, A+r)$ if and only if $\abs{A-x} < r$.
+</p>
+
+</div><p>Sometimes absolute values are easier to work with than intervals of numbers.
+We'll see examples of this next.
+</p>
+
+<h2 id="limit-of-square-root">Limit of Square Root<a class="headerlink" href="#limit-of-square-root" title="Link to this title">¶</a></h2><p>Let $a$ be a positive number. We prove that $\lim_{x \to a} \sqrt{x} = \sqrt{a}$.</p>
+
+<p>Let $I_y=(\sqrt{a}-\epsi, \sqrt{a}+\epsi)$ be any open interval centered around $\sqrt{a}$.
+Our goal is to choose an input interval centered around $a$ so that
+for any number $x$ in the input interval except $a$, we have $\sqrt{x} \in I_y$.</p>
+
+<p>The idea of the proof is that
+we can make the distance between $\sqrt{a}$ and $\sqrt{x}$ smaller than $\epsi$ by calculating
+$$
+\begin{align}
+\abs{\sqrt{x} - \sqrt{a}}
+&= \abs{\frac{(\sqrt{x} - \sqrt{a})(\sqrt{x} + \sqrt{a})}{\sqrt{x} + \sqrt{a}}} \\
+&= \abs{\frac{(\sqrt{x})^2 - (\sqrt{a})^2}{\sqrt{x} + \sqrt{a}}} \\
+&= \abs{\frac{x-a}{\sqrt{x} + \sqrt{a}}} \\
+&= \frac{\abs{x-a}}{\sqrt{x} + \sqrt{a}}.
+\end{align}
+$$
+The bottom of this fraction can't be smaller than $\sqrt{a}$.
+We also don't have division by zero, because $a$ is positive and so $\sqrt{a}$ is also positive.
+We get
+$$
+\sqrt{x} + \sqrt{a} \ge \sqrt{a} > 0,
+$$
+and from there we get
+$$
+\frac{\abs{x-a}}{\sqrt{x}+\sqrt{a}} \le \frac{\abs{x-a}}{\sqrt{a}}.
+$$
+Notice that the sign of the inequation flipped;
+this is because the fraction is smaller when the bottom is bigger.</p>
+
+<p>All this can be made smaller than $\epsi$ by ensuring that $\abs{x-a}$ is small enough,
+and we can do that with a clever choice of the input interval, such as $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$.
+With that, having $x$ in the input interval means $\abs{x-a} < \sqrt{a}\epsi$,
+and we get
+$$
+\abs{\sqrt{x}-\sqrt{a}}
+= \frac{\abs{x-a}}{\sqrt{x}+\sqrt{a}}
+\le \frac{\abs{x-a}}{\sqrt{a}}
+< \frac{\sqrt{a}\epsi}{\sqrt{a}}
+= \epsi.
+$$
+This shows that
+$$
+\sqrt{x} \in (\sqrt{a}-\epsi, \sqrt{a}+\epsi) = I_y.
+$$</p>
+
+<p>We have one more problem that needs to be fixed:
+to do $\sqrt{x}$, we must ensure that $x$ is not negative.
+If $a - \sqrt{a}\epsi < 0$, then $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$ contains negative numbers,
+and we can't use that as the input interval.</p>
+
+<p><img width="560" height="41" class="asymptote" src="../asymptote/d339a130032932a723f726f533e26ab9.svg" /></p><p>In this case, we use the interval $(0, 2a)$ instead;
+any number in $(0,2a)$ is also in $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$,
+and the rest of the proof works the same.</p>
+
+<div class="box graybox"><p>For any positive number $a$, we have $\lim_{x \to a} \sqrt{x} = \sqrt{a}$.
+</p>
+
+</div><h2 id="limit-of-square-root-at-zero">Limit of Square Root at Zero<a class="headerlink" href="#limit-of-square-root-at-zero" title="Link to this title">¶</a></h2><p>We can't calculate $\lim_{x \to 0} \sqrt{x}$, because
+any input interval around $0$ contains negative numbers.
+However, we can use a <a href="limit-1sided.html">right limit</a>.
+Let's prove that $\lim_{x \to 0^+} \sqrt{x} = 0$.</p>
+
+<p>Let $I_y = (0-\epsi, 0+\epsi) = (-\epsi, \epsi)$ be any open interval centered around $0$.
+We choose $I_x = (0, \epsi^2)$.
+Now for any $x \in I_x$, we get
+$$
+0 < x < \epsi^2,
+$$
+and applying square roots gives
+$$
+\sqrt{0} < \sqrt{x} < \sqrt{\epsi^2}.
+$$
+This leads to
+$$
+-\epsi < 0 < \sqrt{x} < \epsi,
+$$
+which shows that $x \in (-\epsi, \epsi) = I_y$.</p>
+
+<div class="box graybox"><p>We have $\lim_{x \to 0^+} \sqrt{x} = 0$.
+</p>
+
+</div><h2 id="limit-of-frac-1-x">Limit of $\frac 1 x$<a class="headerlink" href="#limit-of-frac-1-x" title="Link to this title">¶</a></h2><p>Let $a$ be a positive number.
+I'll show you most of the proof for $\lim_{x \to a} \frac 1 x = \frac 1 a$.
+I'll skip many things that are similar to the <a href="#limit-of-square-root">square root proof</a> above.</p>
+
+<p>Let $(\frac 1 a - \epsi, \frac 1 a + \epsi)$ be any open interval centered around $\frac 1 a$.
+As always, our goal is to choose an appropriate input interval around $a$.
+Assuming that any $x$ in the input interval except $a$ is positive, we calculate
+$$
+\abs{\frac 1 x - \frac 1 a}
+= \abs{\frac{a}{xa} - \frac{x}{xa}}
+= \abs{\frac{a-x}{xa}}
+= \frac{\abs{a-x}}{a} \frac 1 x.
+$$
+To make sure that $\frac 1 x$ is small enough,
+we can choose the input interval so that it's a subset of $(\frac 1 2 a, \frac 3 2 a)$,
+just like in the square root proof.
+Doing this also ensures that $x$ is positive.</p>
+
+<p><img width="514" height="71" class="asymptote" src="../asymptote/dc00086275beea5500e194c8bedf9982.svg" /></p><p>This guarantees that $x$ is large enough,
+$$
+x > \frac 1 2 a,
+$$
+which leads to $\frac 1 x$ being small enough,
+$$
+\frac 1 x < \frac{1}{\frac 1 2 a} = \frac{2}{a}.
+$$
+Putting everything together, we get
+$$
+\abs{\frac 1 x - \frac 1 a} = \frac{\abs{a-x}}{a}\frac 1 x < \frac{\abs{a-x}}{a} \frac{2}{a}.
+$$
+Rest of the proof can be done by choosing $I_x$ so that this cancels nicely to $\epsi$,
+again just like in the square root proof.
+There's a similar proof for negative $a$ values.</p>
+
+<div class="box graybox"><p>For any $a \ne 0$, we have $\lim_{x \to a} \frac 1 x = \frac 1 a$.
+</p>
+
+</div></div>
+</body>
+</html>

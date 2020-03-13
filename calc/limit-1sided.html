@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>One-sided Limits
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{darkred}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-abs.html">Absolute values in limit proofs</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="one-sided-limits">One-sided Limits<a class="headerlink" href="#one-sided-limits" title="Link to this title">¶</a></h1><p>The input interval in the <a href="limit-def.html">definition of limit</a> for $\lim_{x \to a} f(x)$
+is an open interval centered around $a$.
+These input intervals are always of the form $(a-\delta, a+\delta)$,
+where $\delta$ is a positive number.</p>
+
+<p><img width="344" height="35" class="asymptote" src="../asymptote/ba6de4b27824d1f9cf3418f037314388.svg" /></p><p>For a <b>right limit</b>, we instead take the interval $(a, a+\delta)$.
+We denote right limits just like the usual (both-sided) limits, but with $x \to a^+$ instead of $x \to a$.</p>
+
+<p><img width="344" height="34" class="asymptote" src="../asymptote/0851d60d5304ffe041d35087703af11b.svg" /></p><p>This is called the right limit, because on the number line,
+the input interval being used is the right half of the interval $(a-\delta, a+\delta)$.</p>
+
+<div class="box graybox"><p>The right limit is defined as follows:
+we write $\lim_{x \to a^+} f(x) = L$, if
+for any open interval $I_y$ centered around $L$,
+there is an open interval $I_x=(a, a+\delta)$ (for some $\delta > 0$) such that
+$$
+f(\text{any number in $I_x$}) \in I_y.
+$$
+</p>
+
+</div><p>Note that we don't need to say "any number in $I_x$ except $a$", like we do with both-sided limits;
+the number $a$ is not in any interval $(a, a+\delta)$.
+In the both-sided limit definition, we needed to exclude $a$ more explicitly,
+because it was in the center of an interval rather than being an end point.</p>
+
+<p>We define the left limit similarly.</p>
+
+<div class="box graybox"><p>The left limit is defined as follows:
+we write $\lim_{x \to a^-} f(x) = L$, if
+for any open interval $I_y$ centered around $L$,
+there is an open interval $I_x=(a-\delta, a)$ (for some $\delta > 0$) such that
+$$
+f(\text{any number in $I_x$}) \in I_y.
+$$
+</p>
+
+</div><p>A consequence of these definitions is that if the function $f$ is defined like
+$$
+f(x) = \begin{cases}
+    \text{left part}, & \text{if $x < 4$}; \\
+    \text{center part}, & \text{if $x = 4$}; \\
+    \text{right part}, & \text{if $x > 4$},
+\end{cases}
+$$
+then
+$$
+\begin{align}
+&\lim_{x \to 4^-} f(x) = \lim_{x \to 4^-} (\text{left part}), \\
+&\lim_{x \to 4^+} f(x) = \lim_{x \to 4^+} (\text{right part}).
+\end{align}
+$$
+The definition of the left limit doesn't use the values of $f(x)$ for $x \ge 4$ anywhere,
+so as far as it's concerned, $f(x)$ is just the left part.
+The right limit is similar.
+Also, notice that no limit with $x \to 4$, $x \to 4^-$ or $x \to 4^+$ uses the center part;
+limits are all about what happens around $4$, not at all about what happens at exactly $x=4$.</p>
+
+<p>One-sided limits have all the nice properties that we have proved so far for both-sided limits;
+modifying the proofs to use one-sided limits instead of both-sided limits is easy.
+</p>
+
+<h2 id="connection-to-both-sided-limit">Connection to Both-Sided Limit<a class="headerlink" href="#connection-to-both-sided-limit" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x) = L$.
+Now, for any output interval $I_y$ centered around $L$,
+we get an input interval $I_x=(a-\delta, a+\delta)$ centered around $a$ so that
+$$
+f(\text{any number in $I_x$ except $a$}) \in I_y.
+$$
+Because any number in $(a,a+\delta)$ is also in $I_x$, we get
+$$
+f(\text{any number in $(a,a+\delta)$}) \in I_y,
+$$
+which shows that $\lim_{x \to a^+} f(x) = L$.
+Similarly we get $\lim_{x \to a^-} f(x) = L$.</p>
+
+<p>So, if the both-sided limit exists, then the one-sided limits exist too,
+and the values of all these limits are equal.
+However, if the one-sided limits exist, then the both-sided limit might still not exist!
+For example, let $J$ denote <a href="limit-basics.html#jumping-function">the "jumping function"</a> given by
+$$
+J(x) = \begin{cases}
+    -1, & \text{if $x < 3$}; \\
+    +1, & \text{if $x \ge 3$}.
+\end{cases}
+$$
+The both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist,
+but the one-sided limits exist; they are
+$$
+\lim_{x \to 3^-} J(x) = \lim_{x \to 3^-} -1 = -1
+$$
+and
+$$
+\lim_{x \to 3^+} J(x) = \lim_{x \to 3^-} 1 = 1.
+$$
+In this case, the one-sided limits are not equal.
+Let's see what happens to the both-sided limit if the one-sided limits are equal.</p>
+
+<p>Suppose that $\lim_{x \to a^+} f(x) = L$ and $\lim_{x \to a^-} f(x) = L$.
+Let $I_y$ be any open interval centered around $L$.
+By the definition of the left and right limits,
+we get intervals $(a-\delta_1,a)$ and $(a,a+\delta_2)$ such that
+$$
+\begin{align}
+    &f(\text{any number in $(a-\delta_1,a)$}) \in I_y, \\
+    &f(\text{any number in $(a,a+\delta_2)$}) \in I_y.
+\end{align}
+$$</p>
+
+<p><img width="429" height="36" class="asymptote" src="../asymptote/526d921d6e2d6f1b4736e4d8f415bbf8.svg" /></p><p>Let $s$ be the smaller of $\delta_1$ and $\delta_2$ (doesn't matter which if $\delta_1 = \delta_2$).
+Let $I_x=(a-s,a+s)$; this is an open interval centered around $a$.</p>
+
+<p><img width="429" height="71" class="asymptote" src="../asymptote/c6ebf7476705f1a399eb570b65a9c284.svg" /></p><p>The numbers on the "left half" of $I_x$ are in $(a-\delta_1,a)$
+and the numbers on the "right half" are in $(a,a+\delta_2)$, so we get
+$$
+f(\text{any number in $I_x$ except $a$}) \in I_y.
+$$</p>
+
+<div class="box graybox"><p>The both-sided limit is $L$ if and only if the left and right limits are $L$.
+</p>
+
+</div><p>This result can be used to show more easily that the both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist;
+if that limit existed, we would get
+$$
+-1 = \lim_{x \to 3^-} J(x) = \lim_{x \to 3} J(x) = \lim_{x \to 3^+} J(x) = 1,
+$$
+where the first and last equal signs come from the calculations above,
+and the rest of the equal signs come from the result.
+In general, the both-sided limit doesn't exist
+when the values of the left limit and the right limit differ.
+</p>
+
+</div>
+</body>
+</html>

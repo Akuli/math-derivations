@@ -120,7 +120,7 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-abs.html">Absolute values in limit proofs</a>
         </div>
         
         </div>
@@ -200,27 +200,27 @@ this is an open interval centered around $\red a$, which is all that we need for
 <div class="box graybox"><p>For all numbers $a$ and $b$, we have $\lim_{x \to a} b = b$.
 </p>
 
-</div><h2 id="jumping-function">Jumping Function<a class="headerlink" href="#jumping-function" title="Link to this title">¶</a></h2><p>Let
+</div><h2 id="jumping-function">Jumping Function<a class="headerlink" href="#jumping-function" title="Link to this title">¶</a></h2><p>Let's define the "jumping function" $J$ by
 $$
-f(x) = \begin{cases}
+J(x) = \begin{cases}
     -1, & \text{if $x < 3$}; \\
     +1, & \text{if $x \ge 3$}.
 \end{cases}
 $$
 This function "jumps" at $x=3$.</p>
 
-<p><img width="424" height="252" class="asymptote" src="../asymptote/24d314e8c64275ad0df1a5339cbfdf75.svg" /></p><p>What can we say about $\lim_{x \to 3} f(x)$?
-We don't know much yet, so let's say that $\lim_{x \to 3} f(x) = b$,
+<p><img width="424" height="252" class="asymptote" src="../asymptote/08d5146f296cfbfb2c4178b65a15a5bb.svg" /></p><p>What can we say about $\lim_{x \to 3} J(x)$?
+We don't know much yet, so let's say that $\lim_{x \to 3} J(x) = b$,
 for some number $b$, and see what happens.
 Now the definition of limit says that for any interval $I_y$ centered around $b$,
 there is an interval $I_x$ centered around $3$ such that
 $$
-f(\text{any number in $I_x$ except $3$}) \in I_y.
+J(\text{any number in $I_x$ except $3$}) \in I_y.
 $$
 For any $I_y$, we get some $I_x$ interval that contains
 numbers that are greater than $3$ and numbers that are less than $3$.</p>
 
-<p><img width="258" height="57" class="asymptote" src="../asymptote/3b52af96b4f708e17473b1db84ad82fd.svg" /></p><p>By definition of $f$, the corresponding $f$ values are $+1$ and $-1$, and we get
+<p><img width="258" height="57" class="asymptote" src="../asymptote/3b52af96b4f708e17473b1db84ad82fd.svg" /></p><p>By definition of $J$, the corresponding $J$ values are $+1$ and $-1$, and we get
 $$
 +1 \in I_y, \quad -1 \in I_y.
 $$
@@ -231,13 +231,13 @@ so it can't contain both of $+1$ and $-1$,
 regardless of what number $b$ is.</p>
 
 <p><img width="384" height="429" class="asymptote" src="../asymptote/e6696999c19c16305fca1a5426132461.svg" /></p><p>There must be a mistake somewhere, and most of the above steps are quite convincing;
-the only thing that can be wrong is saying that $\lim_{x \to 3} f(x) = b$.</p>
+the only thing that can be wrong is saying that $\lim_{x \to 3} J(x) = b$.</p>
 
-<p>Summarizing: there is no number $b$ such that $\lim_{x \to 3} f(x) = b$,
+<p>Summarizing: there is no number $b$ such that $\lim_{x \to 3} J(x) = b$,
 because if there was such $b$, then there would be very small intervals around $b$ containing $+1$ and $-1$.</p>
 
-<p>In this case, we say that the limit $\lim_{x \to 3} f(x)$ does not exist.
-Saying that the limit exists means that there is some number $b$ such that $\lim_{x \to 3} f(x) = b$;
+<p>In this case, we say that the limit $\lim_{x \to 3} J(x)$ does not exist.
+Saying that the limit exists means that there is some number $b$ such that $\lim_{x \to 3} J(x) = b$;
 that's the opposite of what we have here.</p>
 
 <div class="box graybox"><p>A limit might not exist.

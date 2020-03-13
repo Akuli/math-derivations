@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Inverse Functions
+<title>Inequality and Limit
 </title>
 
     <script type="text/x-mathjax-config">
@@ -68,7 +68,7 @@
         <input type="checkbox" id="sidebar-checkbox-0" />
         <label for="sidebar-checkbox-0">Equations and functions</label>
         <div class="dropdown">
-            <a href="inverse-funcs.html">Inverse functions</a><a href="how-equations-work.html">How solving equations works</a><a href="incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="how-inequations-work.html">How solving inequalities works</a>
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-2" />
@@ -120,58 +120,74 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-abs.html">Absolute values in limit proofs</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-abs.html">Absolute values in limit proofs</a>
         </div>
         
         </div>
         </div>
-<h1 id="inverse-functions">Inverse Functions<a class="headerlink" href="#inverse-functions" title="Link to this title">¶</a></h1>
-    <div class="box redbox">
-    <p>
-        On this page, the word "function" means a function that
-        takes in a real number as its only argument,
-        and evaluates to another real number.
-        Some real numbers might not be valid inputs of the function;
-        for example, square root is a function that
-        accepts only nonnegative inputs.
-    </p>
-    </div>
-    <p>The inverse function of a function $f$ is a function that takes in a value of $f$ as an argument,
-and it answers the question "which input did $f$ take when it gave this value".
-In other words,
-$$
-(\text{inverse function of $f$})(f(x)) = x
-$$
-for all numbers $x$ for which $f(x)$ is defined.</p>
+<h1 id="inequality-and-limit">Inequality and Limit<a class="headerlink" href="#inequality-and-limit" title="Link to this title">¶</a></h1><p>Suppose that $f(x) \le g(x)$ for all numbers $x$ except $a$,
+and suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
+Let's see what we can say about $A$ and $B$.
+It seems reasonable to expect $A \le B$,
+so let's see what happens if that's false, and we have $A > B$ instead.</p>
 
-<p>For example, let $f(x) = 2x$ and $g(x) = \frac{x}{2}$.
-Now $g$ is the inverse function of $f$, because
-$$
-g(f(x)) = \frac{2x}{2} = x
-$$
-for all numbers $x$.</p>
+<p>Let $D=A-B$ denote the difference of the limits $A$ and $B$.
+We have $A > B$, so $D$ is positive.
+By the definitions of the limits,
+there's an input interval of $f$ corresponding to the output interval $(A-\frac{D}{3}, A+\frac{D}{3})$,
+and there's an input interval of $g$ corresponding to the output interval $(B-\frac{D}{3}, B+\frac{D}{3})$·</p>
 
-<p>The inverse function of $f$ is often denoted with $f^{-1}$.
-Be careful to not confuse this notation with powers.
-For example, $3^{-1} = \frac{1}{3}$ is a number, but
-if $f(x) = 2x$, then $f^{-1}$ is a function, given by $f^{-1}(x)=\frac{x}{2}$.
+<p><img width="125" height="429" class="asymptote" src="../asymptote/15a2203df1d12f739c6334a445922d3c.svg" /></p><p><img width="287" height="35" class="asymptote" src="../asymptote/a89eb753656342944ec9d2ffcde02dbd.svg" /></p><p>Just like <a href="limit-basics.html#more-than-one-limit">before</a>, the input intervals overlap,
+and there are numbers not equal to $a$ that are in both of the input intervals.
+Letting $o$ be one of these "overlap numbers", we get
+$$
+f(o) \in \left( A-\frac{D}{3}, A+\frac{D}{3} \right), \qquad
+g(o) \in \left( B-\frac{D}{3}, B+\frac{D}{3} \right).
+$$
+This leads to
+$$
+f(o) > g(o),
+$$
+which is impossible; we assumed that $f(x) \le g(x)$ whenever $x \ne a$, and we also have $o \ne a$.</p>
+
+<p>We didn't even need the assumption that $f(x) \le g(x)$ for <b>all</b> $x$.
+Instead, it was enough that we found one overlap number, which gave the desired result.
+Instead of assuming that $f(x) \le g(x)$ for all $x$,
+we could assume that there's some open interval $I$ centered around $a$ in which $f(x) \le g(x)$;
+then we can choose $o$ such that it's in both input intervals and in $I$.</p>
+
+<p><img width="401" height="41" class="asymptote" src="../asymptote/1411547f8d3fc2f4e38db3a961c7dff7.svg" /></p><div class="box graybox"><p>If $f(x) \le g(x)$ for all numbers $x$ in some open interval centered around $a$,
+and the limits $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist,
+then $\lim_{x \to a} f(x) \le \lim_{x \to b} g(x)$.
 </p>
 
-<h2 id="issues">Issues<a class="headerlink" href="#issues" title="Link to this title">¶</a></h2><p>One problem with inverse functions is that they might not be defined for all numbers,
-even if the original function is defined for all numbers.
-For example, let $f(x) = 2^x$ and $g(x) = \log_2(x)$.
-Now $f(x)$ is defined for all numbers $x$.
-From logarithms, we know that $g(f(x)) = \log_2(2^x) = x$, so $g$ is the inverse function of $f$.
-However, $g(-1)$ is undefined, because $f(x)=2^x$ is always positive;
-there is no number $x$ for which $f(x) = -1$, which is what $g(-1)$ means.</p>
+</div><p>Note that $f(x) < g(x)$ does <b>not</b> imply $\lim_{x \to a} f(x) < \lim_{x \to a} g(x)$.
+For example, let $f(x) = 0$ and
+$$
+g(x) = \begin{cases}
+    x, & \text{if $x>0$}; \\
+    7, & \text{if $x=0$}; \\
+    -x, & \text{if $x<0$}.
+\end{cases}
+$$</p>
 
-<p>Another problem is that not all functions have an inverse function.
-For example, let $f(x) = x^2$.
-Now we have $f(2) = 4 = f(-2)$, so what should $(\text{inverse function of $f$})(4)$ do?
-Should that evaluate to $2$ or $-2$?
-We don't want to just pick one choice randomly, so instead we say that it's undefined.
-However, there is an inverse function if this problem doesn't occur; that is,
-if $f(a) \ne f(b)$ for all numbers $a,b$ satisfying $a \ne b$.
+<p><img width="367" height="216" class="asymptote" src="../asymptote/7c1a05dc0c8988015bf230bac3785355.svg" /></p><p>Now we have $f(x) < g(x)$ for all $x$. We get
+$$
+\lim_{x \to 0} f(x) = \lim_{x \to 0} 0 = 0.
+$$
+By calculating <a href="limit-1sided.html">left and right limits</a>, we get
+$$
+\begin{align}
+&\lim_{x \to 0^+} g(x) = \lim_{x \to 0^+} x = 0 \\
+&\lim_{x \to 0^-} g(x)
+    = \lim_{x \to 0^-} -x
+    = \underbrace{\left( \lim_{x \to 0^-} -1 \right)}_{-1} \, \underbrace{\left( \lim_{x \to 0^-} x \right)}_0
+    = 0,
+\end{align}
+$$
+which shows that $\lim_{x \to 0} g(x)$ is also $0$.
+So, even though $f(x) < g(x)$ for all $x \in \mathbb{R}$, the limits of $f$ and $g$ are equal.
+This means that the graphs go very close to each other, but they never quite touch.
 </p>
 
 </div>

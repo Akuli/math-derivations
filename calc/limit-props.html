@@ -120,7 +120,7 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-abs.html">Absolute values in limit proofs</a>
         </div>
         
         </div>
@@ -179,10 +179,12 @@ $\left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right)$ and $\left( B-\frac{\epsi}
 The corresponding input intervals are drawn below.</p>
 
 <p><img width="287" height="86" class="asymptote" src="../asymptote/80c336e2bbd28d8d77d047bbe353d71b.svg" /></p><p><a href="limit-basics.html#more-than-one-limit">In the past</a> we have used the fact that intervals like this overlap,
-but we can say more than that;
-one of the intervals is smaller and the other is bigger,
-and the bigger interval contains all numbers of the smaller interval.
-Let $I_x$ be the smaller input interval
+but we can say more than that.
+One of the intervals is smaller and the other is bigger,
+and the smaller interval is a subset of the bigger interval;
+this means that the bigger interval contains all numbers of the smaller interval.</p>
+
+<p>Let $I_x$ be the smaller input interval
 (if the input intervals are the same size, then they are the same interval,
 and it doesn't matter which of them is $I_x$).
 Now any number in $I_x$ is in both of the input intervals, so we have
@@ -198,11 +200,13 @@ $$
 f(x) = A+p \quad \text{and} \quad g(x)=B+q
 $$
 for some numbers $p,q \in (-\frac{\epsi}{2},\frac{\epsi}{2})$.
-Now we can use the above interval thing with $r=\frac{\epsi}{2}$ and $2r=\epsi$ to get
+Now we get
 $$
 f(x)+g(x) = A+B+\underbrace{p+q}_{\in (-\epsi,\epsi)},
 $$
-which means that
+where for the underbraced part,
+we used the above interval thing with $r=\frac{\epsi}{2}$ and $2r=\epsi$.
+We have
 $$
 f(x)+g(x) \in (A+B-\epsi, A+B+\epsi) = I_y.
 $$</p>
@@ -238,31 +242,74 @@ f(x)g(x)
 &= AB+\underbrace{Aq+pB+pq}_{\text{Want: $\in (-\epsi,\epsi)$}}.
 \end{align}
 $$
-To show that we can fit $Aq+pB+pq$ into $(-\epsi,\epsi)$, it is enough to show that
-we can make each of $Aq$, $pB$ and $pq$ small enough by choosing the $r$.
-This can be done, but filling in all the details results in a mess every time I do it,
-so I'll skip most of it here.
-However, I'll show you the idea for doing this;
-you might be able to fill in the skipped details after reading this if you are interested in them.</p>
+Fitting $Aq+pB+pq$ into $(-\epsi,\epsi)$ can be done by choosing the $r$,
+but filling in all the details results in a mess every time I do it, so I'll skip most of it here.
+However, I'll show you the ideas needed for doing that,
+and you might be able to fill in the skipped details after reading this if you are interested in them.</p>
 
-<p>Let's say that we want to make the $Aq$ part small, say $Aq \in (-s, s)$ for some positive number $s$.
-If $A$ is positive, then we can pick $r = \frac{s}{A}$, because using the fact $q \in (-r,r)$ gives
+<p>To fit all of $Aq+pB+pq$ into $(-\epsi,\epsi)$,
+it is enough to ensure that $Aq$, $pB$ and $pq$ are all in $(-\frac{\epsi}{3}, \frac{\epsi}{3})$.
+This can be seen by generalizing the interval thing in the beginning of this page
+for three numbers instead of two.</p>
+
+<p>Let's say that we want to make the $Aq$ part small enough,
+as in $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
+If $A$ is positive, then we can pick $r = \frac{\epsi}{3A}$, because using the fact $q \in (-r,r)$ gives
+$-r < q < r$, which is same as
 $$
--\frac{s}{A} = -r < q < r = \frac{s}{A}.
+-\frac{s}{3A} < q < \frac{s}{3A}.
 $$
-Multiplying both sides by $A$ gives
+Multiplying both sides by $A$ (assuming that it's positive) gives
 $$
--s < Aq < s.
+-\frac{\epsi}{3} < Aq < \frac{\epsi}{3},
 $$
-The mess comes from handling cases where $A$ is zero or negative
-and from combining the three conditions of each of $Aq$, $pB$ and $pq$ being small.</p>
+so $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.</p>
+
+<p>Some of the mess comes from handling zero and negative values of $A$ and $B$,
+and the rest comes from combining the conditions ensuring that
+each of $Aq$, $pB$ and $pq$ are small enough.</p>
 
 <div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
 $$
-\lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right) + \left( \lim_{x \to a} g(x) \right).
+\lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right) \left( \lim_{x \to a} g(x) \right).
 $$
 </p>
 
-</div></div>
+</div><h2 id="limit-of-difference">Limit of Difference<a class="headerlink" href="#limit-of-difference" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist.
+By noticing that $f(x)-g(x) = f(x) + (-1)g(x)$, we get
+$$
+\begin{align}
+\lim_{x \to a} (f(x)-g(x))
+&= \lim_{x \to a} \Bigl( f(x) + (-1)g(x) \Bigr) \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} \Bigl( (-1)g(x) \Bigr) \\
+&= \lim_{x \to a} f(x) + \underbrace{\Bigl( \lim_{x \to a} (-1) \Bigr)}_{-1}\Bigl( \lim_{x \to a} g(x) \Bigr) \\
+&= \lim_{x \to a} f(x) - \lim_{x \to a} g(x).
+\end{align}
+$$
+Here we used most of the results that we have proved so far:
+<ul><li>
+    Limit of sum: we can take the limits of $f(x)$ and $(-1)g(x)$ separately.
+</li><li>
+    Limit of product: we can take the limits of $-1$ and $g(x)$ separately.
+</li><li>
+    Limit of just a number (from <a href="limit-basics.html">the limit basics page</a>): the limit of $-1$ is $-1$.
+</li></ul></p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
+$$
+\lim_{x \to a} (f(x)-g(x)) = \lim_{x \to a} f(x) - \lim_{x \to a} g(x).
+$$
+</p>
+
+</div><h2 id="limit-of-division">Limit of Division<a class="headerlink" href="#limit-of-division" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
+Is it true that
+$$
+\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{A}{B}?
+$$
+This is not true if $B=0$, because then we would divide by zero.
+We'll come back to the case $B \ne 0$ later.
+</p>
+
+</div>
 </body>
 </html>

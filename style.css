@@ -30,10 +30,6 @@ a:hover {
 .graybox { background-color: #ccc; }
 .redbox { background-color: #f88; }
 
-div.MathJax_Display {
-    width: calc(100% - 220px);  /* for side bar */
-}
-
 @media only screen and (max-width: 600px) {
     #sidebar {
         float: none;
@@ -44,9 +40,6 @@ div.MathJax_Display {
     }
     .box {
         width: calc(100% - 30px);
-    }
-    div.MathJax_Display {
-        width: 100%;
     }
 }
 

@@ -126,6 +126,9 @@ def get_sidebar_content(txtfile):
                 link("Definition of limit", 'calc/limit-def'),
                 link("Limit basics", 'calc/limit-basics'),
                 link("Limit properties", 'calc/limit-props'),
+                link("One-sided limits", 'calc/limit-1sided'),
+                link("Inequality and limit", 'calc/limit-ineq'),
+                link("Absolute values in limit proofs", 'calc/limit-abs'),
             ])),
         ])),
     ])

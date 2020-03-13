@@ -122,9 +122,9 @@ graybox:
 
 ## Jumping Function
 
-Let
+Let's define the "jumping function" $J$ by
 $$
-f(x) = \begin{cases}
+J(x) = \begin{cases}
     -1, & \text{if $x < 3$}; \\
     +1, & \text{if $x \ge 3$}.
 \end{cases}
@@ -134,20 +134,20 @@ This function "jumps" at $x=3$.
 asymptote:
     unitsize(2cm);
     axises(-3, 4, -2, 2);
-    draw((-3,-1)--(3,-1), p=blue, L=Label("$y=f(x)$", position=Relative(0.3)), align=N);
+    draw((-3,-1)--(3,-1), p=blue, L=Label("$y=J(x)$", position=Relative(0.3)), align=N);
     draw((3,1)--(4,1), p=blue);
 
     draw((0,1)--(2.9,1), p=gray+smalldashes);
     dot((0,1), p=dotpen, L="$1$", align=W);
     dot((3,0), p=dotpen, L="$3$", align=N);
 
-What can we say about $\lim_{x \to 3} f(x)$?
-We don't know much yet, so let's say that $\lim_{x \to 3} f(x) = b$,
+What can we say about $\lim_{x \to 3} J(x)$?
+We don't know much yet, so let's say that $\lim_{x \to 3} J(x) = b$,
 for some number $b$, and see what happens.
 Now the definition of limit says that for any interval $I_y$ centered around $b$,
 there is an interval $I_x$ centered around $3$ such that
 $$
-f(\text{any number in $I_x$ except $3$}) \in I_y.
+J(\text{any number in $I_x$ except $3$}) \in I_y.
 $$
 For any $I_y$, we get some $I_x$ interval that contains
 numbers that are greater than $3$ and numbers that are less than $3$.
@@ -161,7 +161,7 @@ asymptote:
     dot((3,0), p=dotpen, L="$3$", align=S);
     dot((4,0), p=dotpen);
 
-By definition of $f$, the corresponding $f$ values are $+1$ and $-1$, and we get
+By definition of $J$, the corresponding $J$ values are $+1$ and $-1$, and we get
 $$
 +1 \in I_y, \quad -1 \in I_y.
 $$
@@ -197,13 +197,13 @@ asymptote:
         L="length of $I_y$ is $0.2$", align=E, p=darkorange);
 
 There must be a mistake somewhere, and most of the above steps are quite convincing;
-the only thing that can be wrong is saying that $\lim_{x \to 3} f(x) = b$.
+the only thing that can be wrong is saying that $\lim_{x \to 3} J(x) = b$.
 
-Summarizing: there is no number $b$ such that $\lim_{x \to 3} f(x) = b$,
+Summarizing: there is no number $b$ such that $\lim_{x \to 3} J(x) = b$,
 because if there was such $b$, then there would be very small intervals around $b$ containing $+1$ and $-1$.
 
-In this case, we say that the limit $\lim_{x \to 3} f(x)$ does not exist.
-Saying that the limit exists means that there is some number $b$ such that $\lim_{x \to 3} f(x) = b$;
+In this case, we say that the limit $\lim_{x \to 3} J(x)$ does not exist.
+Saying that the limit exists means that there is some number $b$ such that $\lim_{x \to 3} J(x) = b$;
 that's the opposite of what we have here.
 
 graybox:

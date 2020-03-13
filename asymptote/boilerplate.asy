@@ -6,6 +6,7 @@ texpreamble("\newcommand{\I}{\vec i}");
 texpreamble("\newcommand{\J}{\vec j}");
 texpreamble("\newcommand{\K}{\vec k}");
 texpreamble("\newcommand{\abs}[1]{\left| {#1} \right|}");
+texpreamble("\newcommand{\epsi}{\varepsilon}");
 
 // TODO: stop using a weird mixture of mm and raw numbers?
 defaultpen(0.8mm + fontsize(25pt));

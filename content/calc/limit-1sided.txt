@@ -1,0 +1,177 @@
+# One-sided Limits
+
+The input interval in the [definition of limit](limit-def.html) for $\lim_{x \to a} f(x)$
+is an open interval centered around $a$.
+These input intervals are always of the form $(a-\delta, a+\delta)$,
+where $\delta$ is a positive number.
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,0)--(4,0), arrow=Arrow(5mm));
+    draw((1,0)--(3,0), p=deepred+5);
+
+    dot((1,0), p=dotpen, L="$a-\delta$", align=N);
+    dot((2,0), p=dotpen, L="$a$", align=N);
+    dot((3,0), p=dotpen, L="$a+\delta$", align=N);
+
+For a **right limit**, we instead take the interval $(a, a+\delta)$.
+We denote right limits just like the usual (both-sided) limits, but with $x \to a^+$ instead of $x \to a$.
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,0)--(4,0), arrow=Arrow(5mm));
+    draw((2,0)--(3,0), p=deepred+5);
+
+    dot((2,0), p=dotpen, L="$a$", align=N);
+    dot((3,0), p=dotpen, L="$a+\delta$", align=N);
+
+This is called the right limit, because on the number line,
+the input interval being used is the right half of the interval $(a-\delta, a+\delta)$.
+
+graybox:
+    The right limit is defined as follows:
+    we write $\lim_{x \to a^+} f(x) = L$, if
+    for any open interval $I_y$ centered around $L$,
+    there is an open interval $I_x=(a, a+\delta)$ (for some $\delta > 0$) such that
+    $$
+    f(\text{any number in $I_x$}) \in I_y.
+    $$
+
+Note that we don't need to say "any number in $I_x$ except $a$", like we do with both-sided limits;
+the number $a$ is not in any interval $(a, a+\delta)$.
+In the both-sided limit definition, we needed to exclude $a$ more explicitly,
+because it was in the center of an interval rather than being an end point.
+
+We define the left limit similarly.
+
+graybox:
+    The left limit is defined as follows:
+    we write $\lim_{x \to a^-} f(x) = L$, if
+    for any open interval $I_y$ centered around $L$,
+    there is an open interval $I_x=(a-\delta, a)$ (for some $\delta > 0$) such that
+    $$
+    f(\text{any number in $I_x$}) \in I_y.
+    $$
+
+A consequence of these definitions is that if the function $f$ is defined like
+$$
+f(x) = \begin{cases}
+    \text{left part}, & \text{if $x < 4$}; \\
+    \text{center part}, & \text{if $x = 4$}; \\
+    \text{right part}, & \text{if $x > 4$},
+\end{cases}
+$$
+then
+$$
+\begin{align}
+&\lim_{x \to 4^-} f(x) = \lim_{x \to 4^-} (\text{left part}), \\
+&\lim_{x \to 4^+} f(x) = \lim_{x \to 4^+} (\text{right part}).
+\end{align}
+$$
+The definition of the left limit doesn't use the values of $f(x)$ for $x \ge 4$ anywhere,
+so as far as it's concerned, $f(x)$ is just the left part.
+The right limit is similar.
+Also, notice that no limit with $x \to 4$, $x \to 4^-$ or $x \to 4^+$ uses the center part;
+limits are all about what happens around $4$, not at all about what happens at exactly $x=4$.
+
+One-sided limits have all the nice properties that we have proved so far for both-sided limits;
+modifying the proofs to use one-sided limits instead of both-sided limits is easy.
+
+
+## Connection to Both-Sided Limit
+
+Suppose that $\lim_{x \to a} f(x) = L$.
+Now, for any output interval $I_y$ centered around $L$,
+we get an input interval $I_x=(a-\delta, a+\delta)$ centered around $a$ so that
+$$
+f(\text{any number in $I_x$ except $a$}) \in I_y.
+$$
+Because any number in $(a,a+\delta)$ is also in $I_x$, we get
+$$
+f(\text{any number in $(a,a+\delta)$}) \in I_y,
+$$
+which shows that $\lim_{x \to a^+} f(x) = L$.
+Similarly we get $\lim_{x \to a^-} f(x) = L$.
+
+So, if the both-sided limit exists, then the one-sided limits exist too,
+and the values of all these limits are equal.
+However, if the one-sided limits exist, then the both-sided limit might still not exist!
+For example, let $J$ denote [the "jumping function"](limit-basics.html#jumping-function) given by
+$$
+J(x) = \begin{cases}
+    -1, & \text{if $x < 3$}; \\
+    +1, & \text{if $x \ge 3$}.
+\end{cases}
+$$
+The both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist,
+but the one-sided limits exist; they are
+$$
+\lim_{x \to 3^-} J(x) = \lim_{x \to 3^-} -1 = -1
+$$
+and
+$$
+\lim_{x \to 3^+} J(x) = \lim_{x \to 3^-} 1 = 1.
+$$
+In this case, the one-sided limits are not equal.
+Let's see what happens to the both-sided limit if the one-sided limits are equal.
+
+Suppose that $\lim_{x \to a^+} f(x) = L$ and $\lim_{x \to a^-} f(x) = L$.
+Let $I_y$ be any open interval centered around $L$.
+By the definition of the left and right limits,
+we get intervals $(a-\delta_1,a)$ and $(a,a+\delta_2)$ such that
+$$
+\begin{align}
+    &f(\text{any number in $(a-\delta_1,a)$}) \in I_y, \\
+    &f(\text{any number in $(a,a+\delta_2)$}) \in I_y.
+\end{align}
+$$
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,0)--(5,0), arrow=Arrow(5mm));
+    draw((1,0)--(2,0), p=deepred+5);
+    draw((2,0)--(4,0), p=darkorange+5);
+
+    dot((1,0), p=dotpen, L="$a-\delta_1$", align=N);
+    dot((2,0), p=dotpen, L="$a$", align=N);
+    dot((4,0), p=dotpen, L="$a+\delta_2$", align=N);
+
+Let $s$ be the smaller of $\delta_1$ and $\delta_2$ (doesn't matter which if $\delta_1 = \delta_2$).
+Let $I_x=(a-s,a+s)$; this is an open interval centered around $a$.
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,0)--(5,0), arrow=Arrow(5mm));
+    draw((1,0)--(2,0), p=deepred+5);
+    draw((2,0)--(4,0), p=darkorange+5);
+    draw((1,-0.15)--(3,-0.15), p=blue+5);
+
+    dot((1,0), p=dotpen, L="$a-\delta_1$", align=N);
+    dot((2,0), p=dotpen, L="$a$", align=N);
+    dot((4,0), p=dotpen, L="$a+\delta_2$", align=N);
+
+    dot((1,-0.15), p=dotpen, L="$a-s$", align=S);
+    dot((3,-0.15), p=dotpen, L="$a+s$", align=S);
+
+The numbers on the "left half" of $I_x$ are in $(a-\delta_1,a)$
+and the numbers on the "right half" are in $(a,a+\delta_2)$, so we get
+$$
+f(\text{any number in $I_x$ except $a$}) \in I_y.
+$$
+
+graybox:
+    The both-sided limit is $L$ if and only if the left and right limits are $L$.
+
+This result can be used to show more easily that the both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist;
+if that limit existed, we would get
+$$
+-1 = \lim_{x \to 3^-} J(x) = \lim_{x \to 3} J(x) = \lim_{x \to 3^+} J(x) = 1,
+$$
+where the first and last equal signs come from the calculations above,
+and the rest of the equal signs come from the result.
+In general, the both-sided limit doesn't exist
+when the values of the left limit and the right limit differ.

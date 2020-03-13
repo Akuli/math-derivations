@@ -1,0 +1,205 @@
+# Absolute Values in Limit Proofs
+
+So far we have used intervals centered around a given number when working with limits.
+It's more common to write the definition of limit with absolute values.
+The idea with that is that if $r$ is positive,
+then $x \in (-r, r)$ is same as $\abs{x} < r$;
+the absolute value of $x$ is the distance between $x$ and $0$,
+and both of these are ways to say that the distance is less than $r$.
+
+asymptote:
+    unitsize(2cm);
+
+    draw((-2, 0)--(2, 0), arrow=Arrow(5mm));
+    draw((-1, 0)--(1, 0), p=darkorange+5);
+
+    dot((-1, 0), p=dotpen, L="$-r$", align=N);
+    dot((0, 0), p=dotpen, L="$0$", align=N);
+    dot((1, 0), p=dotpen, L="$r$", align=N);
+
+The distance between **any** two numbers can be calculated by subtracting the numbers,
+but you need to be careful with the order of subtracting.
+For example, the distance between $5$ and $7$ is $7 - 5 = 2$, not $5 - 7 = -2$.
+So, if you put the numbers in the wrong order, the distance comes out with an unwanted minus sign in front;
+to avoid that, we can wrap everything in absolute values and calculate
+$$
+\abs{5-7} = \abs{-2} = 2.
+$$
+In general, the distance between any numbers $a$ and $b$ is $\abs{a-b}$, and now the order doesn't matter.
+
+As a sanity check, we can plug in $b=0$,
+and now it says that the distance between $a$ and zero is $\abs{a}$, which is correct.
+If we plug in $a=0$ instead, it says that the distance between $b$ and zero is $\abs{-b}$.
+This is also correct because we know that $\abs{-b} = \abs{b}$;
+absolute value discards the sign anyway, so the sign inside absolute value doesn't matter.
+
+If $A$ is any number, then we can write $x \in (A-r, A+r)$ as $\abs{x - A} < r$;
+both of these are ways to say that the distance is less than $r$.
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0, 0)--(4, 0), arrow=Arrow(5mm));
+    draw((1, 0)--(3, 0), p=darkorange+5);
+
+    dot((1, 0), p=dotpen, L="$A-r$", align=N);
+    dot((2, 0), p=dotpen, L="$A$", align=N);
+    dot((3, 0), p=dotpen, L="$A+r$", align=N);
+
+graybox:
+    Let $A$ be any number, and let $r$ be positive.
+    Then $x \in (A-r, A+r)$ if and only if $\abs{A-x} < r$.
+
+Sometimes absolute values are easier to work with than intervals of numbers.
+We'll see examples of this next.
+
+
+## Limit of Square Root
+
+Let $a$ be a positive number. We prove that $\lim_{x \to a} \sqrt{x} = \sqrt{a}$.
+
+Let $I_y=(\sqrt{a}-\epsi, \sqrt{a}+\epsi)$ be any open interval centered around $\sqrt{a}$.
+Our goal is to choose an input interval centered around $a$ so that
+for any number $x$ in the input interval except $a$, we have $\sqrt{x} \in I_y$.
+
+The idea of the proof is that
+we can make the distance between $\sqrt{a}$ and $\sqrt{x}$ smaller than $\epsi$ by calculating
+$$
+\begin{align}
+\abs{\sqrt{x} - \sqrt{a}}
+&= \abs{\frac{(\sqrt{x} - \sqrt{a})(\sqrt{x} + \sqrt{a})}{\sqrt{x} + \sqrt{a}}} \\
+&= \abs{\frac{(\sqrt{x})^2 - (\sqrt{a})^2}{\sqrt{x} + \sqrt{a}}} \\
+&= \abs{\frac{x-a}{\sqrt{x} + \sqrt{a}}} \\
+&= \frac{\abs{x-a}}{\sqrt{x} + \sqrt{a}}.
+\end{align}
+$$
+The bottom of this fraction can't be smaller than $\sqrt{a}$.
+We also don't have division by zero, because $a$ is positive and so $\sqrt{a}$ is also positive.
+We get
+$$
+\sqrt{x} + \sqrt{a} \ge \sqrt{a} > 0,
+$$
+and from there we get
+$$
+\frac{\abs{x-a}}{\sqrt{x}+\sqrt{a}} \le \frac{\abs{x-a}}{\sqrt{a}}.
+$$
+Notice that the sign of the inequation flipped;
+this is because the fraction is smaller when the bottom is bigger.
+
+All this can be made smaller than $\epsi$ by ensuring that $\abs{x-a}$ is small enough,
+and we can do that with a clever choice of the input interval, such as $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$.
+With that, having $x$ in the input interval means $\abs{x-a} < \sqrt{a}\epsi$,
+and we get
+$$
+\abs{\sqrt{x}-\sqrt{a}}
+= \frac{\abs{x-a}}{\sqrt{x}+\sqrt{a}}
+\le \frac{\abs{x-a}}{\sqrt{a}}
+< \frac{\sqrt{a}\epsi}{\sqrt{a}}
+= \epsi.
+$$
+This shows that
+$$
+\sqrt{x} \in (\sqrt{a}-\epsi, \sqrt{a}+\epsi) = I_y.
+$$
+
+We have one more problem that needs to be fixed:
+to do $\sqrt{x}$, we must ensure that $x$ is not negative.
+If $a - \sqrt{a}\epsi < 0$, then $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$ contains negative numbers,
+and we can't use that as the input interval.
+
+asymptote:
+    unitsize(3cm);
+
+    draw((-2,0)--(4.5,0), arrow=Arrow(5mm));
+    draw((-1.5,0)--(3.5,0), p=deepred+5);
+
+    dot((0,0), p=dotpen, L="$0$", align=N);
+    dot((1,0), p=dotpen, L="$a$", align=N);
+    dot((2,0), p=dotpen, L="$2a$", align=N);
+    dot((-1.5,0), p=dotpen, L="$a-\sqrt{a}\epsi$", align=N);
+    dot((3.5,0), p=dotpen, L="$a+\sqrt{a}\epsi$", align=N);
+
+In this case, we use the interval $(0, 2a)$ instead;
+any number in $(0,2a)$ is also in $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$,
+and the rest of the proof works the same.
+
+graybox:
+    For any positive number $a$, we have $\lim_{x \to a} \sqrt{x} = \sqrt{a}$.
+
+
+## Limit of Square Root at Zero
+
+We can't calculate $\lim_{x \to 0} \sqrt{x}$, because
+any input interval around $0$ contains negative numbers.
+However, we can use a [right limit](limit-1sided.html).
+Let's prove that $\lim_{x \to 0^+} \sqrt{x} = 0$.
+
+Let $I_y = (0-\epsi, 0+\epsi) = (-\epsi, \epsi)$ be any open interval centered around $0$.
+We choose $I_x = (0, \epsi^2)$.
+Now for any $x \in I_x$, we get
+$$
+0 < x < \epsi^2,
+$$
+and applying square roots gives
+$$
+\sqrt{0} < \sqrt{x} < \sqrt{\epsi^2}.
+$$
+This leads to
+$$
+-\epsi < 0 < \sqrt{x} < \epsi,
+$$
+which shows that $x \in (-\epsi, \epsi) = I_y$.
+
+graybox:
+    We have $\lim_{x \to 0^+} \sqrt{x} = 0$.
+
+
+## Limit of $\frac 1 x$
+
+Let $a$ be a positive number.
+I'll show you most of the proof for $\lim_{x \to a} \frac 1 x = \frac 1 a$.
+I'll skip many things that are similar to the [square root proof](#limit-of-square-root) above.
+
+Let $(\frac 1 a - \epsi, \frac 1 a + \epsi)$ be any open interval centered around $\frac 1 a$.
+As always, our goal is to choose an appropriate input interval around $a$.
+Assuming that any $x$ in the input interval except $a$ is positive, we calculate
+$$
+\abs{\frac 1 x - \frac 1 a}
+= \abs{\frac{a}{xa} - \frac{x}{xa}}
+= \abs{\frac{a-x}{xa}}
+= \frac{\abs{a-x}}{a} \frac 1 x.
+$$
+To make sure that $\frac 1 x$ is small enough,
+we can choose the input interval so that it's a subset of $(\frac 1 2 a, \frac 3 2 a)$,
+just like in the square root proof.
+Doing this also ensures that $x$ is positive.
+
+asymptote:
+    unitsize(3cm);
+
+    draw((-1,0)--(5,0), arrow=Arrow(5mm));
+    draw((1.2,0)--(2.8,0), p=deepred+5, L=Label("$I_x$", position=Relative(0.8)));
+
+    dot((0,0), p=dotpen, L="$0$", align=N);
+    dot((1,0), p=dotpen, L="$\frac 1 2 a$", align=N);
+    dot((2,0), p=dotpen, L="$a$", align=N);
+    dot((3,0), p=dotpen, L="$\frac 3 2 a$", align=N);
+
+This guarantees that $x$ is large enough,
+$$
+x > \frac 1 2 a,
+$$
+which leads to $\frac 1 x$ being small enough,
+$$
+\frac 1 x < \frac{1}{\frac 1 2 a} = \frac{2}{a}.
+$$
+Putting everything together, we get
+$$
+\abs{\frac 1 x - \frac 1 a} = \frac{\abs{a-x}}{a}\frac 1 x < \frac{\abs{a-x}}{a} \frac{2}{a}.
+$$
+Rest of the proof can be done by choosing $I_x$ so that this cancels nicely to $\epsi$,
+again just like in the square root proof.
+There's a similar proof for negative $a$ values.
+
+graybox:
+    For any $a \ne 0$, we have $\lim_{x \to a} \frac 1 x = \frac 1 a$.

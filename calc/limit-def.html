@@ -113,14 +113,26 @@
         
         </div>
         
-        <input type="checkbox" id="sidebar-checkbox-9" />
-        <label for="sidebar-checkbox-9">Calculus</label>
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Calculus</label>
         <div class="dropdown">
             
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-abs.html">Absolute values in limit proofs</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Continuity</label>
+        <div class="dropdown">
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Derivative</label>
+        <div class="dropdown">
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-simple.html">Simple derivative examples</a><a href="derivative-notation.html">Notation for derivatives</a>
         </div>
         
         </div>
@@ -271,8 +283,8 @@ Here I refer to $I_x$ as the <i>input interval</i>, and I refer to $I_y$ as the 
 </p>
 
 <h2 id="things-to-note">Things to Note<a class="headerlink" href="#things-to-note" title="Link to this title">¶</a></h2><p>Explaining the above definition with words, it says that
-if we want to get the values of a function into any open interval around $b$ (no matter how small),
-then there is an interval around $a$ that allows us to do so.</p>
+if we want to get the values of a function into any output interval (no matter how small),
+then there is an input interval that allows us to do so.</p>
 
 <p>The calculations we did with a calculator and our example function $f$
 don't prove that $\lim_{x \to 1} f(x) = 3$.
@@ -298,7 +310,7 @@ but open intervals are much more commonly used for this so I did it that way too
 and that's called the $\epsi,\delta$ definition of a limit.
 The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$, so that
 $$
-I_y = (b-\epsi,b+\epsi),
+I_y = (L-\epsi,L+\epsi),
 $$
 and using the delta letter $\delta$ to denote the size of $I_x$ similarly,
 $$

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>One-sided Limits
+<title>Simple Derivative Examples
 </title>
 
     <script type="text/x-mathjax-config">
@@ -137,134 +137,116 @@
         
         </div>
         </div>
-<h1 id="one-sided-limits">One-sided Limits<a class="headerlink" href="#one-sided-limits" title="Link to this title">¶</a></h1><p>The input interval in the <a href="limit-def.html">definition of limit</a> for $\lim_{x \to a} f(x)$
-is an open interval centered around $a$.
-These input intervals are always of the form $(a-\delta, a+\delta)$,
-where $\delta$ is a positive number.</p>
-
-<p><img width="344" height="35" class="asymptote" src="../asymptote/ba6de4b27824d1f9cf3418f037314388.svg" /></p><p>For a <b>right limit</b>, we instead take the interval $(a, a+\delta)$.
-We denote right limits just like the usual (both-sided) limits, but with $x \to a^+$ instead of $x \to a$.</p>
-
-<p><img width="344" height="34" class="asymptote" src="../asymptote/0851d60d5304ffe041d35087703af11b.svg" /></p><p>This is called the right limit, because on the number line,
-the input interval being used is the right half of the interval $(a-\delta, a+\delta)$.</p>
-
-<div class="box graybox"><p>The right limit is defined as follows:
-we write $\lim_{x \to a^+} f(x) = L$, if
-for any open interval $I_y$ centered around $L$,
-there is an open interval $I_x=(a, a+\delta)$ (for some $\delta > 0$) such that
-$$
-f(\text{any number in $I_x$}) \in I_y.
-$$
-</p>
-
-</div><p>Note that we don't need to say "any number in $I_x$ except $a$", like we do with both-sided limits;
-the number $a$ is not in any interval $(a, a+\delta)$.
-In the both-sided limit definition, we needed to exclude $a$ more explicitly,
-because it was in the center of an interval rather than being an end point.</p>
-
-<p>We define the left limit similarly.</p>
-
-<div class="box graybox"><p>The left limit is defined as follows:
-we write $\lim_{x \to a^-} f(x) = L$, if
-for any open interval $I_y$ centered around $L$,
-there is an open interval $I_x=(a-\delta, a)$ (for some $\delta > 0$) such that
-$$
-f(\text{any number in $I_x$}) \in I_y.
-$$
-</p>
-
-</div><p>A consequence of these definitions is that if the function $f$ is defined like
-$$
-f(x) = \begin{cases}
-    \text{left part}, & \text{if $x < 4$}; \\
-    \text{center part}, & \text{if $x = 4$}; \\
-    \text{right part}, & \text{if $x > 4$},
-\end{cases}
-$$
-then
+<h1 id="simple-derivative-examples">Simple Derivative Examples<a class="headerlink" href="#simple-derivative-examples" title="Link to this title">¶</a></h1><h2 id="derivative-of-x-2">Derivative of $x^2$<a class="headerlink" href="#derivative-of-x-2" title="Link to this title">¶</a></h2><p>Let $f(x) = x^2$, and let $a$ be any number.
+By <a href="derivative-def.html#the-definition">definition of derivative</a>,
+the derivative of $f$ at $a$ is
 $$
 \begin{align}
-&\lim_{x \to 4^-} f(x) = \lim_{x \to 4^-} (\text{left part}), \\
-&\lim_{x \to 4^+} f(x) = \lim_{x \to 4^+} (\text{right part}).
-\end{align}
-$$
-The definition of the left limit doesn't use the values of $f(x)$ for $x \ge 4$ anywhere,
-so as far as it's concerned, $f(x)$ is just the left part.
-The right limit is similar.
-Also, notice that no limit with $x \to 4$, $x \to 4^-$ or $x \to 4^+$ uses the center part;
-limits are all about what happens around $4$, not at all about what happens at exactly $x=4$.</p>
-
-<p>One-sided limits have all the nice properties that we have proved so far for both-sided limits;
-modifying the proofs to use one-sided limits instead of both-sided limits is easy.
-</p>
-
-<h2 id="connection-to-both-sided-limit">Connection to Both-Sided Limit<a class="headerlink" href="#connection-to-both-sided-limit" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x) = L$.
-Now, for any output interval $I_y$ centered around $L$,
-we get an input interval $I_x=(a-\delta, a+\delta)$ centered around $a$ so that
-$$
-f(\text{any number in $I_x$ except $a$}) \in I_y.
-$$
-Because any number in $(a,a+\delta)$ is also in $I_x$, we get
-$$
-f(\text{any number in $(a,a+\delta)$}) \in I_y,
-$$
-which shows that $\lim_{x \to a^+} f(x) = L$.
-Similarly we get $\lim_{x \to a^-} f(x) = L$.</p>
-
-<p>So, if the both-sided limit exists, then the one-sided limits exist too,
-and the values of all these limits are equal.
-However, if the one-sided limits exist, then the both-sided limit might still not exist!
-For example, let $J$ denote <a href="limit-basics.html#jumping-function">the "jumping function"</a> given by
-$$
-J(x) = \begin{cases}
-    -1, & \text{if $x < 3$}; \\
-    +1, & \text{if $x \ge 3$}.
-\end{cases}
-$$
-The both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist,
-but the one-sided limits exist; they are
-$$
-\lim_{x \to 3^-} J(x) = \lim_{x \to 3^-} -1 = -1
-$$
-and
-$$
-\lim_{x \to 3^+} J(x) = \lim_{x \to 3^-} 1 = 1.
-$$
-In this case, the one-sided limits are not equal.
-Let's see what happens to the both-sided limit if the one-sided limits are equal.</p>
-
-<p>Suppose that $\lim_{x \to a^+} f(x) = L$ and $\lim_{x \to a^-} f(x) = L$.
-Let $I_y$ be any open interval centered around $L$.
-By the definition of the left and right limits,
-we get intervals $(a-\delta_1,a)$ and $(a,a+\delta_2)$ such that
-$$
-\begin{align}
-    &f(\text{any number in $(a-\delta_1,a)$}) \in I_y, \\
-    &f(\text{any number in $(a,a+\delta_2)$}) \in I_y.
+\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}
+&= \lim_{h \to 0} \frac{(a+h)^2-a^2}{h} \\
+&= \lim_{h \to 0} \frac{a^2+2ah+h^2-a^2}{h} \\
+&= \lim_{h \to 0} \frac{2ah+h^2}{h} \\
+&= \lim_{h \to 0} 2a + \lim_{h \to 0} h = 2a.
 \end{align}
 $$</p>
 
-<p><img width="429" height="36" class="asymptote" src="../asymptote/526d921d6e2d6f1b4736e4d8f415bbf8.svg" /></p><p>Let $s$ be the smaller of $\delta_1$ and $\delta_2$ (doesn't matter which if $\delta_1 = \delta_2$).
-Let $I_x=(a-s,a+s)$; this is an open interval centered around $a$.</p>
-
-<p><img width="429" height="71" class="asymptote" src="../asymptote/c6ebf7476705f1a399eb570b65a9c284.svg" /></p><p>The numbers on the "left half" of $I_x$ are in $(a-\delta_1,a)$
-and the numbers on the "right half" are in $(a,a+\delta_2)$, so we get
-$$
-f(\text{any number in $I_x$ except $a$}) \in I_y.
-$$</p>
-
-<div class="box graybox"><p>The both-sided limit is $L$ if and only if the left and right limits are $L$.
+<div class="box graybox"><p>The derivative of the function $f(x) = x^2$ at any number $a$ is $2a$.
 </p>
 
-</div><p>This result can be used to show more easily that the both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist;
-if that limit existed, we would get
+</div><p>This means that if you place a tangent line on the graph $y=f(x)$ at a point $(3, 9)$,
+the slope of the tangent line will be $2 \cdot 3 = 6$.</p>
+
+<p><img width="262" height="492" class="asymptote" src="../asymptote/0ea4d1c813aecdb4f652aae3e3fc780f.svg" /></p><p>As a quick check,
+this result says that the slope of a tangent line placed at the tip of the parabola is $2 \cdot 0 = 0$,
+which makes sense because that tangent line is horizontal.
+Also, $2a$ is negative when $a$ is negative, so
+any tangent line touching the parabola on the left side of $y$ axis has negative slope;
+this makes sense too.</p>
+
+<p><img width="253" height="290" class="asymptote" src="../asymptote/9cdbe7d4813534b90b45fee3fc7c13aa.svg" /></p><h2 id="derivative-of-x-3">Derivative of $x^3$<a class="headerlink" href="#derivative-of-x-3" title="Link to this title">¶</a></h2><p>To calculate the derivative of $x^3$, recall that for all numbers $a$ and $b$, we have
 $$
--1 = \lim_{x \to 3^-} J(x) = \lim_{x \to 3} J(x) = \lim_{x \to 3^+} J(x) = 1,
+(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3.
 $$
-where the first and last equal signs come from the calculations above,
-and the rest of the equal signs come from the result.
-In general, the both-sided limit doesn't exist
-when the values of the left limit and the right limit differ.
+You can verify this easily by calculating
+$$
+(a+b)^3 = (a+b)^2(a+b) = (a+b)^2 a + (a+b)^2 b,
+$$
+and then using the formula for $(a+b)^2$.</p>
+
+<p>Let $f(x) = x^3$, and let $a$ be any number.
+By <a href="derivative-def.html#the-definition">definition of derivative</a>,
+the derivative of $f$ at $a$ is
+$$
+\begin{align}
+\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}
+&= \lim_{h \to 0} \frac{(a+h)^3-a^3}{h} \\
+&= \lim_{h \to 0} \frac{a^3+3a^2h+3ah^2+h^3-a^2}{h} \\
+&= \lim_{h \to 0} \frac{3a^2h+3ah^2+h^3}{h} \\
+&= \lim_{h \to 0} (3a^2+3ah+h^2) \\
+&= \lim_{h \to 0} 3a^2 + \lim_{h \to 0} 3ah + \lim_{h \to 0} h^2 \\
+&= 3a^2.
+\end{align}
+$$</p>
+
+<div class="box graybox"><p>The derivative of the function $f(x) = x^3$ at any number $a$ is $3a^2$.
+</p>
+
+</div><p>The graph $y=x^3$ looks like this:</p>
+
+<p><img width="199" height="366" class="asymptote" src="../asymptote/cacbd6a9c052909e45d0932ab1c285e0.svg" /></p><p>The derivative $3a^2$ is never negative because $a^2$ is not negative,
+so no tangent line of this graph has negative slope; that makes sense if you look at the above graph.
+Also, the only tangent line with slope $0$ is the one touching the graph at $(0,0)$,
+and that corresponds with how $3a^2 = 0$ if and only if $a=0$.</p>
+
+<p>TODO: geometric ways to remember the derivatives of $x^2$ and $x^3$
+</p>
+
+<h2 id="derivative-of-x">Derivative of $x$<a class="headerlink" href="#derivative-of-x" title="Link to this title">¶</a></h2><p>Let $f(x) = x$, and let $a$ be any number.
+By <a href="derivative-def.html#the-definition">definition of derivative</a>,
+the derivative of $f$ at $a$ is
+$$
+\begin{align}
+\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}
+&= \lim_{h \to 0} \frac{(a+h)-a}{h} \\
+&= \lim_{h \to 0} \frac{h}{h}
+= \lim_{h \to 0} 1
+= 1.
+\end{align}
+$$</p>
+
+<div class="box graybox"><p>Let $f(x) = x$. Then the derivative of $f$ at any number is $1$.
+</p>
+
+</div><p>This means that any tangent line of the line $y=x$ has slope $1$.
+That makes sense, because any tangent line of $y=x$ is just $y=x$ itself,
+and the slope of $y=x$ is $1$.</p>
+
+<p>Interpreting this result with speed, it says that
+if your walked distance at $t$ seconds is $t$ metres, then you move 1 metre per second.
+That makes sense too.
+</p>
+
+<h2 id="derivative-of-constant">Derivative of Constant<a class="headerlink" href="#derivative-of-constant" title="Link to this title">¶</a></h2><p>Let $a$ and $b$ be any numbers, and let $f(x) = b$.
+By <a href="derivative-def.html#the-definition">definition of derivative</a>, the derivative of $f$ at $a$ is
+$$
+\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}
+= \lim_{h \to 0} \frac{b-b}{h}
+= \lim_{h \to 0} 0 = 0.
+$$</p>
+
+<div class="box graybox"><p>Let $b$ be any number and $f(x) = b$. Then the derivative of $f$ at any number is $0$.
+</p>
+
+</div><p>This means that any tangent line of $y=0$ has slope $0$, and again, that makes sense;
+any tangent line is simply $y=0$ itself, and that has slope $0$.</p>
+
+<p>Interpreting this result with speed, it says that
+if your walked distance at <b>any</b> time is $b$, regardless of what time it is,
+then your walking speed is zero, simply because you are not moving at all.</p>
+
+<p>In the context of derivatives and limits,
+a number that doesn't depend on other things is called <b>constant</b>.
+Here $a$ and $b$ are constants.
 </p>
 
 </div>

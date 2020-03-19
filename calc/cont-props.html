@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Angle Between Vectors
+<title>Continuity Properties
 </title>
 
     <script type="text/x-mathjax-config">
@@ -78,7 +78,7 @@
         <input type="checkbox" id="sidebar-checkbox-1" />
         <label for="sidebar-checkbox-1">Dot product</label>
         <div class="dropdown">
-            <a href="dot-projection.html">Projection</a><a href="angle-between-vectors.html">Angle between vectors</a><a href="iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
         </div>
         
         </div>
@@ -120,108 +120,139 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-9" />
         <label for="sidebar-checkbox-9">Continuity</label>
         <div class="dropdown">
-            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-10" />
         <label for="sidebar-checkbox-10">Derivative</label>
         <div class="dropdown">
-            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-simple.html">Simple derivative examples</a><a href="../calc/derivative-notation.html">Notation for derivatives</a>
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-simple.html">Simple derivative examples</a><a href="derivative-notation.html">Notation for derivatives</a>
         </div>
         
         </div>
         </div>
-<h1 id="angle-between-vectors">Angle Between Vectors<a class="headerlink" href="#angle-between-vectors" title="Link to this title">¶</a></h1><p>Let $\vec v$ and $\vec w$ be nonzero vectors.
-By the angle between them, I mean an angle $\theta$ between 0 and 180 degrees like this:</p>
-
-<p><img width="282" height="80" class="asymptote" src="../asymptote/6d471790d89b0ae6a17ad29d95e5f14c.svg" /></p><p>Let's draw a circle of radius $\abs{\vec v}$ around the "beginning" of $\vec v$ and $\vec w$.
-Let's also draw axises centered on that point so that $\vec w$ goes along one of the axises.
-These might not be the same as the $x$ and $y$ axises that we use most of the time,
-because these axises can be rotated depending on how $\vec w$ is rotated,
-so I'll call them $t$ and $u$ axises instead of $x$ and $y$.</p>
-
-<p><img width="395" height="341" class="asymptote" src="../asymptote/432cfaf695dce2fc4a2ad552f2cdbc48.svg" /></p><p>From non-unit-circle trig (TODO),
-we know that the $t$ and $u$ coordinates of the tip of $\vec v$ are
-$$
-(t,u) = \Bigl( \abs{\vec v} \cos(\theta), \abs{\vec v} \sin (\theta) \Bigr).
-$$
-The $t$ coordinate $\abs{\vec v} \cos(\theta)$ is
-the projection of $\vec v$ onto $\vec w$ (this also works if it's negative).
-Recall from <a href="dot-projection.html">the previous page</a> that
-the dot product $\vec v \cdot \vec w$ is this projection
-multiplied by $\abs{\vec w}$, the length of the vector being projected onto.
-With this, we get
-$$
-\vec v \cdot \vec w = ( \text{projection} ) \abs{\vec w}
-= \abs{\vec v} \cos(\theta) \abs{\vec w}.
-$$
-This equation also holds if one or both of the vectors is $\vec 0$;
-in that case, both sides of the equation are zero,
-regardless of how we define the angle between $\vec 0$ and other vectors.</p>
-
-<div class="box graybox"><p>Let $\theta$ be the angle between the vectors $\vec v$ and $\vec w$.
-Then $\vec v \cdot \vec w = \abs{\vec v} \abs{\vec w} \cos(\theta)$.
+<h1 id="continuity-properties">Continuity Properties<a class="headerlink" href="#continuity-properties" title="Link to this title">¶</a></h1><p>Make sure that you are familiar with the <a href="cont-def.html">two ways to define continuity</a>.
 </p>
 
-</div><p>This is a different way to think about the dot product.
-Using this formula, you can think about dot product without
-doing anything with projections.</p>
+<h2 id="moving-limit-inside-a-continuous-function">Moving Limit Inside a Continuous Function<a class="headerlink" href="#moving-limit-inside-a-continuous-function" title="Link to this title">¶</a></h2><p>Let $g$ be a function, and suppose that $\lim_{x \to a} g(x) = L$.
+Let $f$ be any function that is continuous at $L$.
+We prove that
+$$
+\lim_{x \to a} f(g(x)) = f\left( \lim_{x \to a} g(x) \right).
+$$</p>
 
-<p>With this way to think about the dot product,
-we get easily some of the results that we derived on the previous page:
-<ul><li>
-The angle between any vector and the vector itself is zero, so
+<p>Let $I_y$ be any output interval centered around $f(L)$.
+Because $f$ is continuous at $L$, we have $\lim_{x \to L} f(x) = f(L)$,
+so by definition of limit, there's an input interval $J$ centered around $L$ such that
 $$
-\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} \underbrace{\cos(0)}_1 = \abs{\vec v}^2.
+f(\text{any number in $J$ except $L$}) \in I_y.
 $$
-</li><li>
-Let's check when the dot product is zero:
+The interval $I_y$ is centered around $f(L)$, so it contains $f(L)$, and we actually have
+$$
+f(\text{any number in $J$}) \in I_y.
+$$
+The interval $J$ is an open interval centered around $L$, so
+we can use it as the <b>output</b> interval of $\lim_{x \to a} g(x) = L$.
+This way we get an input interval $I_x$ centered around $a$ such that
+$$
+g(\text{any number in $I_x$ except $a$}) \in J.
+$$</p>
+
+<p><img width="344" height="226" class="asymptote" src="../asymptote/4dbce384d0dde813e3759757ce5195b8.svg" /></p><p>By putting everything together, we get
+$$
+f\Bigl(\overbrace{g(\text{any number in $I_x$ except $a$})}^{\in J}\Bigr) \in I_y,
+$$
+so $\lim_{x \to a} f(g(x)) = f(L)$.</p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} g(x)$ exists and $f$ is continuous at that number, then
+$$
+\lim_{x \to a} f(g(x)) = f\left( \lim_{x \to a} g(x) \right).
+$$
+</p>
+
+</div><h2 id="limit-of-division">Limit of Division<a class="headerlink" href="#limit-of-division" title="Link to this title">¶</a></h2><p>From a graph, we see that the function $h(x) = \frac 1 x$ is continuous on $(-\infty, 0)$ and $(0, \infty)$;
+<a href="../analytic-plane-geometry/why-its-hyperbola.html">the graph is a hyperbola</a>,
+and each "half" of the hyperbola <a href="cont-def.html">consists of just one part</a>.
+If this was a course in a university, then we wouldn't rely on a graph, but this is good enough for us.</p>
+
+<p><img width="367" height="366" class="asymptote" src="../asymptote/aa424862fc25d06c8a96227bae89585a.svg" /></p><p>If $\lim_{x \to a} g(x) = B \ne 0$, then $h$ is continuous at $B$, and with the above result, we get
+$$
+\lim_{x \to a} \frac{1}{g(x)}
+= \lim_{x \to a} h(g(x))
+= h\left( \lim_{x \to a} g(x) \right)
+= h(B) = \frac 1 B.
+$$
+If we also have $\lim_{x \to a} f(x) = A$, then
+with <a href="limit-basics.html#limit-of-product">limit of product</a>, we get
 $$
 \begin{align}
-\vec v \cdot \vec w &= 0 \\
-\abs{\vec v} \abs{\vec w} \cos(\theta) &= 0 \\
-\abs{\vec v}=0 \text{ or }  \abs{\vec w}=0 & \text{ or } \cos(\theta)=0
+\lim_{x \to a} \frac{f(x)}{g(x)}
+&= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
+&= \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} \frac{1}{g(x)} \right) \\
+&= A \cdot \frac 1 B = \frac A B.
+\end{align}
+$$</p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, and $\lim_{x \to a} g(x) \ne 0$, then
+$$
+\lim_{x \to a} \frac{f(x)}{g(x)} =
+\frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}.
+$$
+</p>
+
+</div><p>Now we finally know how to calculate limits with division in them.
+</p>
+
+<h2 id="continuity-of-sum-difference-and-product-and-division">Continuity of Sum, Difference and Product and Division<a class="headerlink" href="#continuity-of-sum-difference-and-product-and-division" title="Link to this title">¶</a></h2><p>Let $f$ and $g$ be functions that are continuous at some number $a$. Let $h(x) = f(x)+g(x)$.
+Then, with <a href="limit-props.html#limit-of-sum">limit of sum</a>, we get
+$$
+\begin{align}
+\lim_{x \to a} h(x)
+&= \lim_{x \to a} (f(x)+g(x))\\
+&= \left( \lim_{x \to a} f(x) \right) + \left( \lim_{x \to a} g(x) \right) \\
+&= f(a) + g(a) \\
+&= h(a),
 \end{align}
 $$
-We see that there are two ways how the dot product can be zero:
+which shows that $h$ is also continuous at $a$.
+We have very similar limit properties for subtracting, multiplying and dividing, so
+we can do the same thing with any of those instead of $+$.</p>
+
+<div class="box graybox"><p>If $f$ and $g$ are continuous at $a$, then the following functions are also continuous at $a$:
 <ul><li>
-One of the vectors being dot producted is the zero vector.
+    $f(x)+g(x)$
 </li><li>
-The cosine of the angle between the vectors is zero.
-90 degrees is the only angle between 0 and 180 degrees whose cosine is zero,
-so this means that the angle between the vectors is 90 degrees; that is, the vectors are perpendicular.
-</li></ul>
-</li></ul>
+    $f(x)-g(x)$
+</li><li>
+    $f(x)g(x)$
+</li></ul></p>
+
+<p>If additionally $g(a) \ne 0$, then the function $\frac{f(x)}{g(x)}$ is continuous at $a$.
 </p>
 
-<h2 id="order-doesn-t-matter">Order Doesn't Matter<a class="headerlink" href="#order-doesn-t-matter" title="Link to this title">¶</a></h2><p>Let $\theta$ be the angle between two vectors $\vec v$ and $\vec w$.
-It's also the angle between $\vec w$ and $\vec v$;
-the angle doesn't depend on which vector is which.
-Using this along with the formula we derived above, we get
+</div><p>For continuous functions nested inside each other,
+suppose that $g$ is continuous at $a$ and $f$ is continuous at $g(a)$.
+Let $h(x) = f(g(x))$.
+Then, by moving the limit inside $f$ (see above), we get
 $$
-\vec v \cdot \vec w
-= \abs{\vec v} \abs{\vec w} \cos(\theta)
-= \abs{\vec w} \abs{\vec v} \cos(\theta)
-= \vec w \cdot \vec v.
+\begin{align}
+\lim_{x \to a} h(x)
+&= \lim_{x \to a} f(g(x)) \\
+&= f\left( \lim_{x \to a} g(x) \right) \\
+&= f(g(a)) = h(a).
+\end{align}
 $$
-It's fine to swap the vector lengths in the middle,
-because they are numbers, and we know that the order doesn't matter when multiplying numbers.</p>
+This shows that $h$ is continuous at $a$.</p>
 
-<div class="box graybox"><p>For all vectors $\vec v$ and $\vec w$, we have $\vec v \cdot \vec w = \vec w \cdot \vec v$.
+<div class="box graybox"><p>If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$ then $f(g(x))$ is continuous at $a$.
 </p>
 
-</div><p>Going back to projections, it's not at all clear that
-projecting one vector onto the other and multiplying by the length of the vector being projected onto
-(that is, calculating dot product) doesn't depend on which vector is which,
-even though it was quite easy to see from the $\cos(\theta)$ formula.
-</p>
-
-</div>
+</div></div>
 </body>
 </html>

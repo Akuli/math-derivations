@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Distance between Line and Point
+<title>Notation for Derivatives
 </title>
 
     <script type="text/x-mathjax-config">
@@ -90,25 +90,25 @@
         <input type="checkbox" id="sidebar-checkbox-3" />
         <label for="sidebar-checkbox-3">Transforming curves</label>
         <div class="dropdown">
-            <a href="reflect.html">Reflecting</a><a href="shift.html">Shifting</a><a href="stretch.html">Stretching</a>
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-4" />
         <label for="sidebar-checkbox-4">Line</label>
         <div class="dropdown">
-            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="slope-tan.html">Slope and tan</a><a href="line-eq-determinant.html">Equation with determinant</a>
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-5" />
         <label for="sidebar-checkbox-5">Parabola</label>
         <div class="dropdown">
-            <a href="parabola.html">Equation of parabola</a>
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-6" />
         <label for="sidebar-checkbox-6">Hyperbola</label>
         <div class="dropdown">
-            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
         </div>
         
         </div>
@@ -120,81 +120,76 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-9" />
         <label for="sidebar-checkbox-9">Continuity</label>
         <div class="dropdown">
-            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-10" />
         <label for="sidebar-checkbox-10">Derivative</label>
         <div class="dropdown">
-            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-simple.html">Simple derivative examples</a><a href="../calc/derivative-notation.html">Notation for derivatives</a>
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-simple.html">Simple derivative examples</a><a href="derivative-notation.html">Notation for derivatives</a>
         </div>
         
         </div>
         </div>
-<h1 id="distance-between-line-and-point">Distance between Line and Point<a class="headerlink" href="#distance-between-line-and-point" title="Link to this title">¶</a></h1><p>On this page, we'll derive the formula for distance between a line and a point,
-given the equation of the line and the coordinates of the point.
-First of all, I <b>don't</b> mean something like this:</p>
-
-<p><img width="228" height="225" class="asymptote" src="../asymptote/b12162a0d34d6a35f07e807618acd47f.svg" /></p><p>The distance must be perpendicularly to the line, like this:</p>
-
-<p><img width="216" height="225" class="asymptote" src="../asymptote/ca6b5f5b15a7719ce8e0fdfb0e420b7e.svg" /></p><p>Let's find the distance between any point $Q$ and any line.
-From <a href="line-eq-normal.html">this line equation derivation</a>,
-we know that the equation of any line can be written as $ax+by+c=0$.
-Here $\vec n = a\I+b\J$ is a normal vector of the line, and
-for any point $P$ on the line, the projection of $\Vec{OP}$ onto $\vec n$ is the same.
-We called it $p$, and we got $c = -p|\vec n|$.
-Let $q$ denote the projection of $\Vec{OQ}$ onto $\vec n$.</p>
-
-<p><img width="401" height="354" class="asymptote" src="../asymptote/944494edb53a6474f0014dadf41cdfc9.svg" /></p><p>In the picture, the distance is $p-q$, but
-if $Q$ was on the other side of the line, it would be $q-p$ instead, because the distance isn't negative.
-In either case, the distance can be written as $|q-p|$.
-This means that we need to calculate $q$ and $p$, and then we'll calculate $|q-p|$ and be done.</p>
-
-<p>Let's start by finding $p$ using $c=-p|\vec n|$,
-which is one of the results we got in the line equation derivation.
+<h1 id="notation-for-derivatives">Notation for Derivatives<a class="headerlink" href="#notation-for-derivatives" title="Link to this title">¶</a></h1><p>So far we haven't used any notation for the derivative;
+we have just said that the derivative of $f$ at $a$ is
 $$
-\begin{align}
-c &= -p|\vec n| \\
--c &= p|\vec n| \\
--\frac{c}{|\vec n|} &= p
-\end{align}
+\lim_{h \to 0} \frac{f(x+h)-f(x)}{h}.
 $$
-To find $q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$
-with a <a href="../vectors/iwi-jwj.html#example-calculating-projection">dot product</a>:
-$$
-q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
-= \frac{aQ_x+bQ_y}{|\vec n|}
-$$
-Now we can calculate the distance:
-$$
-\begin{align}
-|q-p|
-&= \left|\frac{aQ_x+bQ_y}{|\vec n|} - \left( -\frac{c}{|\vec n|} \right)\right| \\
-&= \left|\frac{aQ_x+bQ_y}{|\vec n|} + \frac{c}{|\vec n|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{|\vec n|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{|a\I+b\J|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{\sqrt{a^2+b^2}} \right| \\
-&= \frac{|aQ_x+bQ_y+c|}{\sqrt{a^2+b^2}}
-\end{align}
-$$
-In the last step, we noticed that it's enough to take the absolute value of the top,
-because the bottom is a square root, which can't be negative.</p>
-
-<div class="box graybox"><p>The distance between a point $Q$ and a line $ax+by+c=0$ is
-$$
-\frac{|aQ_x+bQ_y+c|}{\sqrt{a^2+b^2}}.
-$$
+We will use derivatives a lot, so we need some notation.
 </p>
 
-</div><p>Notice how the inside of the absolute value is the coordinates of $Q$ plugged into $ax+by+c$,
-and the rest is dividing by the length of the normal vector $a\I+b\J$.
-This is an easy way to remember the formula.
+<h2 id="lagrange-s-notation">Lagrange's Notation<a class="headerlink" href="#lagrange-s-notation" title="Link to this title">¶</a></h2><p>We write the derivative of a function $f$ at $a$ as
+$$
+f'(a) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}.
+$$
+This is called Lagrange's notation.</p>
+
+<p>With this notation, you can think of $f'$ itself as a thing;
+it's a function that takes in a number, and outputs the derivative of $f$ at that number.
+Often the function $f'$ is called the derivative of $f$.</p>
+
+<p>So, to write <a href="derivative-simple.html#derivative-of-x-2">this result of the previous derivation</a>,
+we can let $f(x) = x^2$ and then say $f'(x) = 2x$.
+This isn't bad, but we will do this a lot,
+so I'll show you a way to write this without having to define a function.
+</p>
+
+<h2 id="leibniz-s-notation">Leibniz's Notation<a class="headerlink" href="#leibniz-s-notation" title="Link to this title">¶</a></h2><p>We can write the derivative of $x^2$ like
+$$
+\frac{d}{dx} x^2 = 2x.
+$$
+This is called Leibniz's notation.
+So, $\frac{d}{dx}$ sees whatever you put in front of it as $\text{function}(x)$,
+and then gives you $\text{function}'(x)$.</p>
+
+<p>The above notation is actually a shorthand for
+$$
+\frac{d(x^2)}{dx} = 2x.
+$$
+A long time ago, $d(x^2)$ was an infinitely small difference of $x^2$ values, given by
+$$
+d(x^2) = (x + \text{infinitely small number})^2 - x^2,
+$$
+and similarly, $dx$ was an infinitely small difference of $x$ values.
+Then $\frac{d(x^2)}{dx}$ was just two infinitely small numbers divided by each other.
+Nowadays we have limits instead of infinitely small numbers, and the derivative is more than division;
+it's a limit of whatever the division gives.
+The notation is still being used though.</p>
+
+<p>Leibniz's notation can be useful for "checking" some derivative results.
+For example, with Leibniz's notation, the derivative of $x$ is
+$$
+\frac{d}{dx} x = \frac{dx}{dx},
+$$
+which looks like it really should be $1$, and indeed it is $1$
+like we saw <a href="derivative-simple.html#derivative-of-constant">here</a>.
 </p>
 
 </div>

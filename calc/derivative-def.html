@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Definition of Derivative
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{darkred}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Continuity</label>
+        <div class="dropdown">
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Derivative</label>
+        <div class="dropdown">
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-simple.html">Simple derivative examples</a><a href="derivative-notation.html">Notation for derivatives</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="definition-of-derivative">Definition of Derivative<a class="headerlink" href="#definition-of-derivative" title="Link to this title">¶</a></h1><p>To motivate the definition of derivative, we show several different examples.
+</p>
+
+<h2 id="walking-speed">Walking Speed<a class="headerlink" href="#walking-speed" title="Link to this title">¶</a></h2><p>Let's say that you're walking along a line.
+You might know that
+$$
+\text{speed} = \frac{\text{distance}}{\text{time}}.
+$$
+For example, if we move $3$ metres during $2$ seconds,
+then the speed would be $\frac 3 2 = 1.5$ metres per second.
+This is actually not quite right; the <b>average</b> speed is distance divided by time, $1.5$ metres per second,
+but your actual speed might vary during those 2 seconds.</p>
+
+<p>To approximate the actual speed, we can do the same thing with a small time interval.
+For example, if we move $0.2$ metres during $0.1$ seconds,
+then the average speed during the $0.1$ seconds is
+$$
+\frac{0.2\text{ metres}}{0.1\text{ seconds}} = 2\text{ metres per second},
+$$
+which measures your speed quite accurately.
+To get the exact speed, we can do
+$$
+\text{speed} = \lim_{\text{time} \to 0} \frac{\text{distance}}{\text{time}}.
+$$
+By definition of limit,
+we can approximate the limit to any precision we want by measuring with a small enough time interval,
+so it must be your speed.</p>
+
+<p>Let $t$ denote time as seconds, and let $w(t)$ denote the distance that you have walked at time $t$.
+Let $h$ be the length of the time interval (above we had examples with $h=2$ and $h=0.1$).
+Consider the two moments at time $t$, and a little bit after it, at time $t+h$.
+The corresponding walked distances are $w(t)$ and $w(t+h)$, so
+the distance walked during the time interval is
+$$
+\text{distance} = w(t+h) - w(t).
+$$
+Plugging everything in, we get
+$$
+\text{speed}
+= \lim_{\text{time} \to 0} \frac{\text{distance}}{\text{time}}
+= \lim_{h \to 0} \frac{w(t+h)-w(t)}{h}.
+$$
+Here $h \to 0$ means that $h$ can be negative;
+that means measuring the distance between a moment just a little bit before $t$ and the moment $t$.
+</p>
+
+<h2 id="download-speed">Download Speed<a class="headerlink" href="#download-speed" title="Link to this title">¶</a></h2><p>Let's say that we are downloading a big file.
+You might know that
+$$
+\text{downloading speed} = \frac{\text{amount of downloaded data}}{\text{time spent downloading}}.
+$$
+For example, if $3\text{MB}$ gets downloaded in $2$ seconds,
+then the download speed would be $\frac 3 2 = 1.5$ megabytes per second.
+This is not quite right; the <b>average</b> speed is amount of data divided by time, $1.5$ megabytes per second,
+but the actual downloading speed might vary during those 2 seconds.</p>
+
+<p>To approximate the actual downloading speed, we can do the same thing with a small time interval.
+For example, if we download $0.2\text{MB}$ during $0.1$ seconds,
+then the average downloading speed during the $0.1$ seconds is
+$$
+\frac{0.2\text{MB}}{0.1\text{ seconds}} = 2\text{MB per second},
+$$
+which measures the downloading speed quite accurately.
+To get the exact speed, we can do
+$$
+\text{downloading speed} = \lim_{\text{time} \to 0} \frac{\text{amount of downloaded data}}{\text{time}}.
+$$
+By definition of limit,
+we can approximate the limit to any precision we want by measuring with a small enough time interval,
+so it must be the downloading speed.</p>
+
+<p>Let $t$ denote time as seconds, and let $D(t)$ denote the amount of data downloaded at time $t$.
+Let $h$ be the length of the time interval (above we had examples with $h=2$ and $h=0.1$).
+Consider the two moments at time $t$, and a little bit after it, at time $t+h$.
+The corresponding amounts of downloaded data are $D(t)$ and $D(t+h)$, so
+the data downloaded during the time interval is
+$$
+\text{amount of downloaded data} = D(t+h) - D(t).
+$$
+Plugging everything in, we get
+$$
+\begin{align}
+\text{downloading speed}
+&= \lim_{\text{time} \to 0} \frac{\text{amount of downloaded data}}{\text{time}} \\
+&= \lim_{h \to 0} \frac{D(t+h) - D(t)}{h}.
+\end{align}
+$$
+Here $h \to 0$ means that $h$ can be negative;
+that means calculating the amount of data downloaded
+between a moment just a little bit before $t$ and the moment $t$.
+</p>
+
+<h2 id="slope-of-tangent-line">Slope of Tangent Line<a class="headerlink" href="#slope-of-tangent-line" title="Link to this title">¶</a></h2><p>Let's say that we want to find the tangent line of the parabola $y = x^2$ at the point $(1,1)$.</p>
+
+<p><img width="306" height="452" class="asymptote" src="../asymptote/5cadfd7848e3f6928157747ee2bcc303.svg" /></p><p>To find the equation of a tangent line,
+we only need to find its slope;
+once we have the slope, we can plug that and the point $(1,1)$ into
+<a href="../analytic-plane-geometry/line-eq-slope-and-point.html">this result</a>.</p>
+
+<p><a href="../analytic-plane-geometry/line-eq-slope.html#meaning-of-s-and-h">We know</a> that
+if we have a tangent line, then any nonzero vector $\vec d$ along the tangent line
+gives the slope as $\frac{d_y}{d_x}$.
+We can't find a vector like that easily,
+but we can instead consider a vector between $(1,1)$ and some other point $P$ on the graph.</p>
+
+<p><img width="282" height="452" class="asymptote" src="../asymptote/abf90a1e889f3866002b8dbdfb8d346e.svg" /></p><p>If we do $\frac{v_y}{v_x}$, we don't quite get the slope of the tangent line
+because $\vec v$ doesn't go in the direction of the tangent line.
+However, if the point $P$ is near $(1,1)$,
+then $\vec v$ goes almost in the direction of the graph and $\frac{v_y}{v_x}$ is almost equal to the slope:</p>
+
+<p><img width="281" height="452" class="asymptote" src="../asymptote/7eb199358b2d6661bb6ade16bf21f128.svg" /></p><p>To get the exact speed, we can take a limit of $\frac{v_y}{v_x}$
+with the point $P$ approaching the point $(1,1)$.
+We can approximate the slope of the tangent line to any precision we want
+by bringing $P$ close enough to $(1,1)$,
+so by definition of limit, the slope of the tangent line is the limit.</p>
+
+<p>Let $h = v_x$.
+Then the $x$ coordinate of $P$ is $1+h$, and because $P$ is a point on the graph $y=x^2$,
+the $y$ coordinate is $(1+h)^2$.
+This means that
+$$
+v_y = (1+h)^2 - 1,
+$$
+so
+$$
+\frac{v_y}{v_x} = \frac{(1+h)^2 - 1}{h}.
+$$
+To bring the points closer to each other, we can take a limit with $h \to 0$,
+because $h$ is the difference of the $x$ coordinates of the points:
+$$
+\text{slope of tangent line} = \lim_{h \to 0} \frac{(1+h)^2 - 1^2}{h}
+$$
+Calculating this limit is straight-forward
+(expand the top, cancel a lot of things and then use <a href="limit-props.html">limit properties</a>).
+</p>
+
+<h2 id="the-definition">The Definition<a class="headerlink" href="#the-definition" title="Link to this title">¶</a></h2><p>All of the above examples resulted in a limit of the form
+$$
+\lim_{h \to 0} \frac{f(a+h) - f(a)}{h},
+$$
+where $a$ was some number and $f$ was some function.
+Now we give a name for limits like this; this is the <b>derivative</b> of $f$ at $a$.
+So, when you are learning to calculate derivatives,
+you simultaneously learn to calculate
+speeds of moving objects, downloading speeds, tangent line slopes and
+many other things that can be described with a derivative.
+</p>
+
+</div>
+</body>
+</html>

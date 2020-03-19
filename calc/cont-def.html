@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Definitions of Continuity
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{darkred}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Continuity</label>
+        <div class="dropdown">
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Derivative</label>
+        <div class="dropdown">
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-simple.html">Simple derivative examples</a><a href="derivative-notation.html">Notation for derivatives</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="definitions-of-continuity">Definitions of Continuity<a class="headerlink" href="#definitions-of-continuity" title="Link to this title">¶</a></h1><p>We start with an intuitive definition of continuity using graphs, and
+then we figure out how to express it without using graphs at all.</p>
+
+<p>The purpose of this page is to explain the connection between graphs and how continuity is usually defined.
+If you dislike relying only on graphs to prove things, don't think of the content of this page as proofs;
+instead, think of it as intuitive explanations that aren't supposed to be perfectly rigorous.
+</p>
+
+<h2 id="definition-with-graphs">"Definition" with Graphs<a class="headerlink" href="#definition-with-graphs" title="Link to this title">¶</a></h2><p>We say that a function $f$ is continuous on an interval, if
+the part of the graph $y=f(x)$ directly above or below the interval (imagine the interval on the $x$ axis)
+consists of only one part.
+For example, the function represented by the below graph is continuous on $[1,3]$,
+but discontinuous on $[4,6]$.</p>
+
+<p><img width="537" height="309" class="asymptote" src="../asymptote/d8868186060fd647bab4c0b72e416f1f.svg" /></p><p>If a function is defined on some interval, we can say that the function is continuous,
+without specifying any interval.
+Here the interval defaults to the interval that the function is defined on.
+For example:</p>
+
+<p><ul><li>
+    Let's say that the function in the above drawing is defined on the interval $[-1, 7]$.
+    It's a discontinuous function, which means that it's discontinuous on the interval $[-1,7]$.
+</li><li>
+    The function $f(x) = \sqrt{x}$ is defined for $x \in [0,\infty)$.
+    It is continuous, which means that it's continuous on $[0,\infty)$;
+    the graph is the upper half of a <a href="../analytic-plane-geometry/parabola.html">sideways parabola</a>
+    ($y=\sqrt{x}$ gives $x=y^2$, but $y$ can't be negative),
+    and it consists of only one part.</p>
+
+<p><img width="367" height="252" class="asymptote" src="../asymptote/517ce5e048fe9ace37f5bc608968fd51.svg" /></p><p></li><li>
+    The function $g(x) = x^2$ is defined for all $x \in \mathbb{R}$.
+    It is continuous, which means that it's continuous on the open interval $(-\infty, \infty) = \mathbb{R}$.
+    The graph is a parabola, and again, parabolas consist of only one part.</p>
+
+<p><img width="310" height="309" class="asymptote" src="../asymptote/204c04b3f5f168a99a67916afb1b5e10.svg" /></p><p></li><li>
+    If $s$ and $h$ are any numbers, then the function $H(x) = sx+h$ is defined for all $x \in \mathbb{R}$.
+    It's continuous, because the graph is <a href="../analytic-plane-geometry/line-eq-slope.html">a line</a>
+    consisting of only one part.</p>
+
+<p><img width="264" height="260" class="asymptote" src="../asymptote/d96a8575baa6a1d87e7b84c332a23ee0.svg" /></p><p></li></ul>
+</p>
+
+<h2 id="looking-for-an-alternative-definition">Looking for an Alternative Definition<a class="headerlink" href="#looking-for-an-alternative-definition" title="Link to this title">¶</a></h2><p>The above definition of continuity is useful for
+quickly figuring out whether any given function is continuous;
+just draw a graph with your favorite function graphing software and look.
+However, it's hard to answer the following questions with it:
+<ul><li>
+    If $f(x)$ and $g(x)$ are continuous, then can we know for sure that $f(x)+g(x)$ is continuous?
+    What if we subtract, multiply or divide instead of adding?
+</li><li>
+    Can we use continuity somehow when calculating limits?
+</li><li>
+    What should you do if looking at graphs isn't convincing enough for you?
+</li></ul></p>
+
+<p>We want to find an alternative definition for continuity to work around these problems.
+Let's start with examples of discontinuous functions, such as the "jumping function"
+$$
+J(x) = \begin{cases}
+    -1, & \text{if $x < 3$}; \\
+    +1, & \text{if $x \ge 3$}.
+\end{cases}
+$$</p>
+
+<p><img width="424" height="252" class="asymptote" src="../asymptote/08d5146f296cfbfb2c4178b65a15a5bb.svg" /></p><p>In the past, we have seen that $\lim_{x \to 3} J(x)$ doesn't exist;
+it's possible to show it with <a href="limit-1sided.html#connection-to-both-sided-limit">one-sided limits</a>
+or <a href="limit-basics.html#jumping-function">directly from the definition of limit</a>.
+This gives a hint that for a function to be continuous on an interval,
+maybe any limit of the function with $x$ approaching some number on the interval should exist.</p>
+
+<p>This is not enough to guarantee that the function is continuous.
+For example, consider the discontinuous function
+$$
+f(x) = \begin{cases}
+    1, & \text{if $x \ne 3$}; \\
+    2, & \text{if $x = 3$}.
+\end{cases}
+$$</p>
+
+<p><img width="440" height="196" class="asymptote" src="../asymptote/64b3796abaf761ba1eefdb37492a6f8e.svg" /></p><p>This function satisfies
+$$
+\lim_{x \to 3} f(x) = \lim_{x \to 3} 1 = 1,
+$$
+where we used the fact that <a href="limit-def.html">the definition</a> of $\lim_{x \to 3} f(x)$
+doesn't use $f(3)$ for anything.</p>
+
+<p>At any number $a \ne 3$, we have $\lim_{x \to a} f(x) = 1$, because
+we can choose an input interval centered around $a$ but not containing the number $3$;
+in that interval with $a$ excluded, the only value of the function is $1$,
+which is in any output interval centered around $1$.
+Letting $D$ denote the distance between $a$ and $3$ (that's positive because $a\ne 3$),
+one suitable input interval is $(a-\frac D 2, a+\frac D 2)$.</p>
+
+<p><img width="344" height="86" class="asymptote" src="../asymptote/d9229cc468c97895e5fa52070af31143.svg" /></p><p>So, even though the limit of the function exists at every number,
+the function is discontinuous.
+In this example, we have
+$$
+\lim_{x \to 3} f(x) \ne f(3).
+$$
+If we also require that this doesn't happen,
+then there's no way how the graph of the function could consist of more than one part;
+requiring the limit to exist means that two parts of the graph can't have a vertical gap between them, and
+also requiring the limit to equal the value of the function ensures that
+no value of the function can be away from the rest of the graph.</p>
+
+<div class="box graybox"><p>If a function $f$ is defined for all numbers and $\lim_{x \to a} f(x) = f(a)$ for all numbers $a$,
+then the graph $y=f(x)$ consists of only one part.
+</p>
+
+</div><h2 id="other-direction">Other Direction<a class="headerlink" href="#other-direction" title="Link to this title">¶</a></h2><p>Let $f$ be a function defined for all numbers.
+Now we know that if $\lim_{x \to a} f(x) = f(a)$ for all numbers $a$, then
+the graph of $f$ must consist of only one part.
+Let's see whether this also goes the other way:
+if the graph consists of only one part, then do we have $\lim_{x \to a} f(x) = f(a)$?</p>
+
+<p>Suppose that the graph of $f$ consists of only one part.
+Let $a$ be any number, and let $I_y=(f(a)-\epsi, f(a)+\epsi)$ be any open interval centered around $f(a)$.
+Consider the lines $y=f(a) \pm \epsi$ surrounding $I_y$.</p>
+
+<p>If the graph intersects the lines $y = f(a) \pm \epsi$ on the left side of $a$, like in the below picture,
+then we choose an input interval $I_x$ on the left side of $a$ so that
+there are no intersection points directly above or below the interval.
+The graph consists of just one part, so on the input interval, it must be between the two lines and we get
+$$
+f(\text{any number in $I_x$}) \in I_y.
+$$</p>
+
+<p><img width="655" height="399" class="asymptote" src="../asymptote/bb0c38cabdb02b515a311eef8b8411b8.svg" /></p><p>If the graph doesn't intersect the lines $y = f(a) \pm \epsi$ on the left side of $a$,
+then the graph must be between $y = f(a) \pm \epsi$ on the left side of $a$;
+otherwise there would be an intersection point somewhere,
+or the graph would not consist of only one part.
+In this case, we choose $I_x = (a-1, a)$, and again, we get
+$$
+f(\text{any number in $I_x$}) \in I_y.
+$$</p>
+
+<p><img width="655" height="366" class="asymptote" src="../asymptote/a1f68fd21b405ea21898709a9e668592.svg" /></p><p>This shows that $\lim_{x \to a^-} f(x) = f(a)$, and
+with a very similar proof, we get $\lim_{x \to a^+} f(x) = f(a)$.
+By using <a href="limit-1sided.html#connection-to-both-sided-limit">this result</a>, we get
+$\lim_{x \to a} f(x) = f(a)$.</p>
+
+<div class="box graybox"><p>If a function $f$ is defined for all numbers and the graph $y=f(x)$ consists of only one part,
+then $\lim_{x \to a} f(x) = f(a)$ for all numbers $a$.
+</p>
+
+</div><p>This result gives a very quick way to calculate a limit:
+draw the graph of the function, and if the function turns out to be continuous,
+plug the number into the function and you're done.</p>
+
+<p>With this and the previous result in mind, we get that
+the graph of $f$ consists of only one part if and only if $\lim_{x \to a} f(x) = f(a)$ for all $a$.</p>
+
+<p>To talk about whether this happens about a given $a$, we introduce another concept:
+a function $f$ is continuous <b>at</b> $a$ if $\lim_{x \to a} f(x) = f(a)$.
+Now $f$ is continuous if and only if it's continuous at all numbers.
+</p>
+
+<h2 id="generalizing">Generalizing<a class="headerlink" href="#generalizing" title="Link to this title">¶</a></h2><p>Above we talked about continuity on the interval $\mathbb{R} = (-\infty, \infty)$.
+Let's see whether this works on other intervals too.
+For example, let's define a function $f$ on the interval $[1, \infty)$ by
+$$
+f(x) = \begin{cases}
+    2, & \text{if $x=1$} \\
+    x, & \text{if $x > 1$}.
+\end{cases}
+$$</p>
+
+<p><img width="367" height="366" class="asymptote" src="../asymptote/04129f20df7d8c3eae93bb1f714cb674.svg" /></p><p>This function is not continuous, and with a right limit, we get
+$$
+\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} x = 1 \ne f(1).
+$$
+However, we can't take a both-sided limit with $x \to 1$,
+because the function is not defined for inputs less than $1$.</p>
+
+<p>The end points of an interval are the $a$ and $b$ of $(a,b)$, $(a,b]$, $[a,b)$ or $[a,b]$;
+they may be infinite, but infinities are not included in the interval, so
+we can have $[a,b)$ with $b=\infty$ but not $(a,b]$ with $b=\infty$.
+The following result can be justified very similarly to what we did above.</p>
+
+<div class="box graybox"><p>Let $I$ be any interval with end points $a$ and $b$.
+The graph of a function $f$ on $I$ consists of only one part if and only if
+all of the following conditions are true:
+<ul><li>
+    For all numbers $c \in I$ except the end points of $I$,
+    we have $\lim_{x \to c} f(x) = f(a)$.
+</li><li>
+    If $a \in I$, then $\lim_{x \to a^+} f(x) = f(a)$.
+</li><li>
+    If $b \in I$, then $\lim_{x \to b^-} f(x) = f(a)$.
+</li></ul>
+</p>
+
+</div><p>Choosing $I = \mathbb{R} = (-\infty, \infty)$ gives the result that we had above,
+with all numbers included in $I$ and both end points excluded (here we don't think of infinities as numbers).
+From now on, we use these conditions as the definition of continuity,
+but of course, we can still look at graphs to quickly check whether a function is continuous or not.
+</p>
+
+</div>
+</body>
+</html>

@@ -156,8 +156,8 @@ So far we have worked with $a=1$ and $L=3$.
 ## Things to Note
 
 Explaining the above definition with words, it says that
-if we want to get the values of a function into any open interval around $b$ (no matter how small),
-then there is an interval around $a$ that allows us to do so.
+if we want to get the values of a function into any output interval (no matter how small),
+then there is an input interval that allows us to do so.
 
 The calculations we did with a calculator and our example function $f$
 don't prove that $\lim_{x \to 1} f(x) = 3$.
@@ -183,7 +183,7 @@ This definition is usually written in a slightly different way,
 and that's called the $\epsi,\delta$ definition of a limit.
 The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$, so that
 $$
-I_y = (b-\epsi,b+\epsi),
+I_y = (L-\epsi,L+\epsi),
 $$
 and using the delta letter $\delta$ to denote the size of $I_x$ similarly,
 $$

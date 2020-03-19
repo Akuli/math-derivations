@@ -128,7 +128,17 @@ def get_sidebar_content(txtfile):
                 link("Limit properties", 'calc/limit-props'),
                 link("One-sided limits", 'calc/limit-1sided'),
                 link("Inequality and limit", 'calc/limit-ineq'),
-                link("Absolute values in limit proofs", 'calc/limit-abs'),
+                # I don't like the absolute value thing, commented out for now
+                #link("Absolute values in limit proofs", 'calc/limit-abs'),
+            ])),
+            dropdown("Continuity", join([
+                link("Definitions of continuity", 'calc/cont-def'),
+                link("Continuity properties", 'calc/cont-props'),
+            ])),
+            dropdown("Derivative", join([
+                link("Definition of derivative", 'calc/derivative-def'),
+                link("Simple derivative examples", 'calc/derivative-simple'),
+                link("Notation for derivatives", 'calc/derivative-notation'),
             ])),
         ])),
     ])

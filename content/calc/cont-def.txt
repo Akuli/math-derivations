@@ -1,0 +1,370 @@
+# Definitions of Continuity
+
+We start with an intuitive definition of continuity using graphs, and
+then we figure out how to express it without using graphs at all.
+
+The purpose of this page is to explain the connection between graphs and how continuity is usually defined.
+If you dislike relying only on graphs to prove things, don't think of the content of this page as proofs;
+instead, think of it as intuitive explanations that aren't supposed to be perfectly rigorous.
+
+
+## "Definition" with Graphs
+
+We say that a function $f$ is continuous on an interval, if
+the part of the graph $y=f(x)$ directly above or below the interval (imagine the interval on the $x$ axis)
+consists of only one part.
+For example, the function represented by the below graph is continuous on $[1,3]$,
+but discontinuous on $[4,6]$.
+
+asymptote:
+    unitsize(2cm);
+    axises(-1.5, 7.5, -1, 4);
+
+    real f(real x) {
+        if (x < 5) {
+            return sin(sqrt(11(x+1.1))) + 1.5;
+        }
+        return exp(0.7(x-5.5)) + 0.5;
+    }
+
+    draw(graph(f, -1, 4.999), p=blue);
+    draw(graph(f, 5, 7), p=blue);
+
+    draw((1,0)--(3,0), p=deepgreen+5);
+    draw((4,0)--(6,0), p=deepred+5);
+
+    dot((-1,0), p=dotpen, L="$-1$", align=S);
+    dot((1,0), p=dotpen, L="$1$", align=S);
+    dot((3,0), p=dotpen, L="$3$", align=S);
+    dot((4,0), p=dotpen, L="$4$", align=S);
+    dot((6,0), p=dotpen, L="$6$", align=S);
+    dot((7,0), p=dotpen, L="$7$", align=S);
+
+If a function is defined on some interval, we can say that the function is continuous,
+without specifying any interval.
+Here the interval defaults to the interval that the function is defined on.
+For example:
+
+comment:
+    no idea why [sideways parabola](whatever) doesn't work below:
+
+<ul><li>
+    Let's say that the function in the above drawing is defined on the interval $[-1, 7]$.
+    It's a discontinuous function, which means that it's discontinuous on the interval $[-1,7]$.
+</li><li>
+    The function $f(x) = \sqrt{x}$ is defined for $x \in [0,\infty)$.
+    It is continuous, which means that it's continuous on $[0,\infty)$;
+    the graph is the upper half of a <a href="../analytic-plane-geometry/parabola.html">sideways parabola</a>
+    ($y=\sqrt{x}$ gives $x=y^2$, but $y$ can't be negative),
+    and it consists of only one part.
+
+asymptote:
+    unitsize(2cm);
+    axises(-1, 5, -1, 3);
+    draw(graph(sqrt, 0, 5), p=blue, L=Label("$y=\sqrt{x}$", position=Relative(0.9)));
+
+</li><li>
+    The function $g(x) = x^2$ is defined for all $x \in \mathbb{R}$.
+    It is continuous, which means that it's continuous on the open interval $(-\infty, \infty) = \mathbb{R}$.
+    The graph is a parabola, and again, parabolas consist of only one part.
+
+asymptote:
+    unitsize(2cm);
+    axises(-2.5, 2.5, -1, 4);
+    real f(real x) { return x*x; }
+    draw(graph(f, -2, 2), p=blue, L=Label("$y=x^2$", position=Relative(0.7)));
+
+</li><li>
+    If $s$ and $h$ are any numbers, then the function $H(x) = sx+h$ is defined for all $x \in \mathbb{R}$.
+    It's continuous, because the graph is [a line](../analytic-plane-geometry/line-eq-slope.html)
+    consisting of only one part.
+
+asymptote:
+    unitsize(1.5cm);
+    axises(-2.5, 2.5, -1, 4);
+    real f(real x) { return 1.5*x + 1.5; }
+    draw(graph(f, -2, 2), p=blue, L=Label("$y=sx+h$", position=Relative(0.7)));
+
+</li></ul>
+
+
+## Looking for an Alternative Definition
+
+The above definition of continuity is useful for
+quickly figuring out whether any given function is continuous;
+just draw a graph with your favorite function graphing software and look.
+However, it's hard to answer the following questions with it:
+<ul><li>
+    If $f(x)$ and $g(x)$ are continuous, then can we know for sure that $f(x)+g(x)$ is continuous?
+    What if we subtract, multiply or divide instead of adding?
+</li><li>
+    Can we use continuity somehow when calculating limits?
+</li><li>
+    What should you do if looking at graphs isn't convincing enough for you?
+</li></ul>
+
+We want to find an alternative definition for continuity to work around these problems.
+Let's start with examples of discontinuous functions, such as the "jumping function"
+$$
+J(x) = \begin{cases}
+    -1, & \text{if $x < 3$}; \\
+    +1, & \text{if $x \ge 3$}.
+\end{cases}
+$$
+
+asymptote:
+    unitsize(2cm);
+    axises(-3, 4, -2, 2);
+    draw((-3,-1)--(3,-1), p=blue, L=Label("$y=J(x)$", position=Relative(0.3)), align=N);
+    draw((3,1)--(4,1), p=blue);
+
+    draw((0,1)--(2.9,1), p=gray+smalldashes);
+    dot((0,1), p=dotpen, L="$1$", align=W);
+    dot((3,0), p=dotpen, L="$3$", align=N);
+
+In the past, we have seen that $\lim_{x \to 3} J(x)$ doesn't exist;
+it's possible to show it with [one-sided limits](limit-1sided.html#connection-to-both-sided-limit)
+or [directly from the definition of limit](limit-basics.html#jumping-function).
+This gives a hint that for a function to be continuous on an interval,
+maybe any limit of the function with $x$ approaching some number on the interval should exist.
+
+This is not enough to guarantee that the function is continuous.
+For example, consider the discontinuous function
+$$
+f(x) = \begin{cases}
+    1, & \text{if $x \ne 3$}; \\
+    2, & \text{if $x = 3$}.
+\end{cases}
+$$
+
+asymptote:
+    unitsize(2cm);
+    axises(-3, 4, -0.5, 2.5);
+    real small = 0.05;
+
+    draw((-3,1)--(3-small,1), p=blue, L=Label("$y=f(x)$", position=Relative(0.3)), align=N);
+    draw((3+small,1)--(4,1), p=blue);
+
+    dot((0,1), p=dotpen, L="$1$", align=SW);
+    dot((3,0), p=dotpen, L="$3$", align=N);
+    dot((3,2), p=dotpen+blue, L="$f(3)=2$");
+
+This function satisfies
+$$
+\lim_{x \to 3} f(x) = \lim_{x \to 3} 1 = 1,
+$$
+where we used the fact that [the definition](limit-def.html) of $\lim_{x \to 3} f(x)$
+doesn't use $f(3)$ for anything.
+
+At any number $a \ne 3$, we have $\lim_{x \to a} f(x) = 1$, because
+we can choose an input interval centered around $a$ but not containing the number $3$;
+in that interval with $a$ excluded, the only value of the function is $1$,
+which is in any output interval centered around $1$.
+Letting $D$ denote the distance between $a$ and $3$ (that's positive because $a\ne 3$),
+one suitable input interval is $(a-\frac D 2, a+\frac D 2)$.
+
+asymptote:
+    unitsize(2cm);
+    draw((-1,0)--(5,0), arrow=Arrow(5mm));
+    real small = 0.05;
+
+    draw((0, 0)--(2, 0), p=deepred+5);
+    dot((3,0), p=dotpen, L="$3$", align=N);
+    dot((1,0), p=dotpen, L="$a$", align=N);
+
+    draw(brace_with_space((3-small,0), (2+small,0), 0.2), p=deepgreen, L="$\frac D 2$", align=S);
+    draw(brace_with_space((2,0), (1+small,0), 0.2), p=deepgreen, L="$\frac D 2$", align=S);
+    draw(brace_with_space((1-small,0), (0,0), 0.2), p=deepgreen, L="$\frac D 2$", align=S);
+
+So, even though the limit of the function exists at every number,
+the function is discontinuous.
+In this example, we have
+$$
+\lim_{x \to 3} f(x) \ne f(3).
+$$
+If we also require that this doesn't happen,
+then there's no way how the graph of the function could consist of more than one part;
+requiring the limit to exist means that two parts of the graph can't have a vertical gap between them, and
+also requiring the limit to equal the value of the function ensures that
+no value of the function can be away from the rest of the graph.
+
+graybox:
+    If a function $f$ is defined for all numbers and $\lim_{x \to a} f(x) = f(a)$ for all numbers $a$,
+    then the graph $y=f(x)$ consists of only one part.
+
+## Other Direction
+
+Let $f$ be a function defined for all numbers.
+Now we know that if $\lim_{x \to a} f(x) = f(a)$ for all numbers $a$, then
+the graph of $f$ must consist of only one part.
+Let's see whether this also goes the other way:
+if the graph consists of only one part, then do we have $\lim_{x \to a} f(x) = f(a)$?
+
+Suppose that the graph of $f$ consists of only one part.
+Let $a$ be any number, and let $I_y=(f(a)-\epsi, f(a)+\epsi)$ be any open interval centered around $f(a)$.
+Consider the lines $y=f(a) \pm \epsi$ surrounding $I_y$.
+
+If the graph intersects the lines $y = f(a) \pm \epsi$ on the left side of $a$, like in the below picture,
+then we choose an input interval $I_x$ on the left side of $a$ so that
+there are no intersection points directly above or below the interval.
+The graph consists of just one part, so on the input interval, it must be between the two lines and we get
+$$
+f(\text{any number in $I_x$}) \in I_y.
+$$
+
+asymptote:
+    unitsize(3cm);
+
+    axises(-1, 5, -1, 3);
+
+    real f(real x) { return cos((x-2)^2 + 1) + 0.5x + 0.5; }
+    real a = 3;
+    real epsi = 0.45;
+
+    path fgraph = graph(f, -1, 5);
+    pair[] intersections = sort(
+        concat(
+            intersectionpoints(fgraph, (-1, f(a)-epsi)--(5, f(a)-epsi)),
+            intersectionpoints(fgraph, (-1, f(a)+epsi)--(5, f(a)+epsi))
+        ),
+        // sort by x coordinate, leftmost points first
+        new bool(pair a, pair b) {
+            return (a.x < b.x);
+        }
+    );
+
+    pair intersect = intersections[4];
+    real input_interval_left = (a + 2*intersect.x)/3;
+
+    draw(fgraph, p=blue, L=Label("$y=f(x)$", position=Relative(0.8), align=W));
+    draw((-1,f(a)+epsi)--(5, f(a)+epsi), p=deepgreen+smalldashes, L=Label("$y=f(a)+\epsi$", position=Relative(1)), align=E);
+    draw((-1,f(a)-epsi)--(5, f(a)-epsi), p=deepgreen+smalldashes, L=Label("$y=f(a)-\epsi$", position=Relative(1)), align=E);
+    draw((0, f(a)-epsi)--(0, f(a)+epsi), p=deepgreen+5, L="$I_y$", align=cis(0.7));
+    draw((input_interval_left, 0)--(a, 0), p=deepred+5, L="$I_x$", align=N);
+
+    draw((a,0)--(a,f(a))--(0,f(a)), p=gray+smalldashes);
+    draw((intersect.x,0)--intersect, p=darkorange+smalldashes);
+
+    dot((0, f(a)), p=dotpen, L="$f(a)$", align=W);
+    dot((a, 0), p=dotpen, L="$a$", align=S);
+    for (int i = 0; i < intersections.length; ++i) {
+        dot(intersections[i], p=darkorange+dotpen);
+    }
+
+If the graph doesn't intersect the lines $y = f(a) \pm \epsi$ on the left side of $a$,
+then the graph must be between $y = f(a) \pm \epsi$ on the left side of $a$;
+otherwise there would be an intersection point somewhere,
+or the graph would not consist of only one part.
+In this case, we choose $I_x = (a-1, a)$, and again, we get
+$$
+f(\text{any number in $I_x$}) \in I_y.
+$$
+
+asymptote:
+    unitsize(3cm);
+
+    axises(-1, 5, -1, 3);
+
+    real f(real x) { return 2sin(x^2)*exp(x-5) + 1.5; }
+    real a = 2.8;
+    real epsi = 0.45;
+
+    path fgraph = graph(f, -1, 5, n=200);
+    pair[] intersections = sort(
+        concat(
+            intersectionpoints(fgraph, (-1, f(a)-epsi)--(5, f(a)-epsi)),
+            intersectionpoints(fgraph, (-1, f(a)+epsi)--(5, f(a)+epsi))
+        ),
+        // sort by x coordinate, leftmost points first
+        new bool(pair a, pair b) {
+            return (a.x < b.x);
+        }
+    );
+
+    real input_interval_left = a-1;
+
+    draw(fgraph, p=blue, L=Label("$y=f(x)$", position=Relative(0.67), align=W));
+    draw((-1,f(a)+epsi)--(5, f(a)+epsi), p=deepgreen+smalldashes, L=Label("$y=f(a)+\epsi$", position=Relative(1)), align=E);
+    draw((-1,f(a)-epsi)--(5, f(a)-epsi), p=deepgreen+smalldashes, L=Label("$y=f(a)-\epsi$", position=Relative(1)), align=E);
+    draw((0, f(a)-epsi)--(0, f(a)+epsi), p=deepgreen+5, L="$I_y$", align=cis(0.7));
+    draw((input_interval_left, 0)--(a, 0), p=deepred+5, L="$I_x$", align=N);
+
+    draw((a,0)--(a,f(a))--(0,f(a)), p=gray+smalldashes);
+
+    dot((0, f(a)), p=dotpen, L="$f(a)$", align=W);
+    dot((a, 0), p=dotpen, L="$a$", align=S);
+    dot((a-1, 0), p=dotpen, L="$a-1$", align=S);
+    for (int i = 0; i < intersections.length; ++i) {
+        dot(intersections[i], p=darkorange+dotpen);
+    }
+
+This shows that $\lim_{x \to a^-} f(x) = f(a)$, and
+with a very similar proof, we get $\lim_{x \to a^+} f(x) = f(a)$.
+By using [this result](limit-1sided.html#connection-to-both-sided-limit), we get
+$\lim_{x \to a} f(x) = f(a)$.
+
+graybox:
+    If a function $f$ is defined for all numbers and the graph $y=f(x)$ consists of only one part,
+    then $\lim_{x \to a} f(x) = f(a)$ for all numbers $a$.
+
+This result gives a very quick way to calculate a limit:
+draw the graph of the function, and if the function turns out to be continuous,
+plug the number into the function and you're done.
+
+With this and the previous result in mind, we get that
+the graph of $f$ consists of only one part if and only if $\lim_{x \to a} f(x) = f(a)$ for all $a$.
+
+To talk about whether this happens about a given $a$, we introduce another concept:
+a function $f$ is continuous **at** $a$ if $\lim_{x \to a} f(x) = f(a)$.
+Now $f$ is continuous if and only if it's continuous at all numbers.
+
+
+## Generalizing
+
+Above we talked about continuity on the interval $\mathbb{R} = (-\infty, \infty)$.
+Let's see whether this works on other intervals too.
+For example, let's define a function $f$ on the interval $[1, \infty)$ by
+$$
+f(x) = \begin{cases}
+    2, & \text{if $x=1$} \\
+    x, & \text{if $x > 1$}.
+\end{cases}
+$$
+
+asymptote:
+    unitsize(2cm);
+    axises(-1, 5, -1, 5);
+
+    draw((1.1,1.1)--(5,5), p=blue, L=Label(rotate(45)*"$y=f(x)$"));
+    // there appears to be a bug somewhere, doesn't work without rotate(small number)
+    dot((1,2), p=blue+dotpen, L=rotate(0.0001)*"$f(1)=2$", align=N);
+
+This function is not continuous, and with a right limit, we get
+$$
+\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} x = 1 \ne f(1).
+$$
+However, we can't take a both-sided limit with $x \to 1$,
+because the function is not defined for inputs less than $1$.
+
+The end points of an interval are the $a$ and $b$ of $(a,b)$, $(a,b]$, $[a,b)$ or $[a,b]$;
+they may be infinite, but infinities are not included in the interval, so
+we can have $[a,b)$ with $b=\infty$ but not $(a,b]$ with $b=\infty$.
+The following result can be justified very similarly to what we did above.
+
+graybox:
+    Let $I$ be any interval with end points $a$ and $b$.
+    The graph of a function $f$ on $I$ consists of only one part if and only if
+    all of the following conditions are true:
+    <ul><li>
+        For all numbers $c \in I$ except the end points of $I$,
+        we have $\lim_{x \to c} f(x) = f(a)$.
+    </li><li>
+        If $a \in I$, then $\lim_{x \to a^+} f(x) = f(a)$.
+    </li><li>
+        If $b \in I$, then $\lim_{x \to b^-} f(x) = f(a)$.
+    </li></ul>
+
+Choosing $I = \mathbb{R} = (-\infty, \infty)$ gives the result that we had above,
+with all numbers included in $I$ and both end points excluded (here we don't think of infinities as numbers).
+From now on, we use these conditions as the definition of continuity,
+but of course, we can still look at graphs to quickly check whether a function is continuous or not.

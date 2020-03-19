@@ -1,0 +1,59 @@
+# Notation for Derivatives
+
+So far we haven't used any notation for the derivative;
+we have just said that the derivative of $f$ at $a$ is
+$$
+\lim_{h \to 0} \frac{f(x+h)-f(x)}{h}.
+$$
+We will use derivatives a lot, so we need some notation.
+
+
+## Lagrange's Notation
+
+We write the derivative of a function $f$ at $a$ as
+$$
+f'(a) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}.
+$$
+This is called Lagrange's notation.
+
+With this notation, you can think of $f'$ itself as a thing;
+it's a function that takes in a number, and outputs the derivative of $f$ at that number.
+Often the function $f'$ is called the derivative of $f$.
+
+So, to write [this result of the previous derivation](derivative-simple.html#derivative-of-x-2),
+we can let $f(x) = x^2$ and then say $f'(x) = 2x$.
+This isn't bad, but we will do this a lot,
+so I'll show you a way to write this without having to define a function.
+
+
+## Leibniz's Notation
+
+We can write the derivative of $x^2$ like
+$$
+\frac{d}{dx} x^2 = 2x.
+$$
+This is called Leibniz's notation.
+So, $\frac{d}{dx}$ sees whatever you put in front of it as $\text{function}(x)$,
+and then gives you $\text{function}'(x)$.
+
+The above notation is actually a shorthand for
+$$
+\frac{d(x^2)}{dx} = 2x.
+$$
+A long time ago, $d(x^2)$ was an infinitely small difference of $x^2$ values, given by
+$$
+d(x^2) = (x + \text{infinitely small number})^2 - x^2,
+$$
+and similarly, $dx$ was an infinitely small difference of $x$ values.
+Then $\frac{d(x^2)}{dx}$ was just two infinitely small numbers divided by each other.
+Nowadays we have limits instead of infinitely small numbers, and the derivative is more than division;
+it's a limit of whatever the division gives.
+The notation is still being used though.
+
+Leibniz's notation can be useful for "checking" some derivative results.
+For example, with Leibniz's notation, the derivative of $x$ is
+$$
+\frac{d}{dx} x = \frac{dx}{dx},
+$$
+which looks like it really should be $1$, and indeed it is $1$
+like we saw [here](derivative-simple.html#derivative-of-constant).

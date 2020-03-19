@@ -222,4 +222,4 @@ $$
 \lim_{x \to a} \frac{f(x)}{g(x)} = \frac{A}{B}?
 $$
 This is not true if $B=0$, because then we would divide by zero.
-We'll come back to the case $B \ne 0$ later.
+We'll come back to the case $B \ne 0$ [later](cont-props.html#limit-of-division).

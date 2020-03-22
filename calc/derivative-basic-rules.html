@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>How does Solving Equations Work?
+<title>Basic Derivative Rules
 </title>
 
     <script type="text/x-mathjax-config">
@@ -68,7 +68,7 @@
         <input type="checkbox" id="sidebar-checkbox-0" />
         <label for="sidebar-checkbox-0">Equations and functions</label>
         <div class="dropdown">
-            <a href="inverse-funcs.html">Inverse functions</a><a href="how-equations-work.html">How solving equations works</a><a href="incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="how-inequations-work.html">How solving inequalities works</a>
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-2" />
@@ -120,115 +120,96 @@
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Limits</label>
         <div class="dropdown">
-            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-9" />
         <label for="sidebar-checkbox-9">Continuity</label>
         <div class="dropdown">
-            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-10" />
         <label for="sidebar-checkbox-10">Derivative</label>
         <div class="dropdown">
-            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a>
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a>
         </div>
         
         </div>
         </div>
-<h1 id="how-does-solving-equations-work">How does Solving Equations Work?<a class="headerlink" href="#how-does-solving-equations-work" title="Link to this title">¶</a></h1><p>Let's talk about equivalence, also known as "if and only if", or $\Leftrightarrow$.
-It is a combination of $\Leftarrow$ and $\Rightarrow$, as you might expect:</p>
+<h1 id="basic-derivative-rules">Basic Derivative Rules<a class="headerlink" href="#basic-derivative-rules" title="Link to this title">¶</a></h1><p>Now we know how to calculate $\frac{d}{dx} x^3$ or $\frac{d}{dx} x^4$,
+but how to calculate $\frac{d}{dx} (x^3 + x^4)$?
+How about $\frac{d}{dx}(3x^2-4x+5)$?
+</p>
 
-<p><ul><li>
-    $A \Leftarrow B$ means that if $B$ is true, then $A$ is true.
-</li><li>
-    $A \Rightarrow B$ means that if $A$ is true, then $B$ is true.
-</li><li>
-    $A \Leftrightarrow B$ means that we have both $A \Rightarrow B$ and $A \Leftarrow B$;
-    if one of $A$ and $B$ is true, then the other one is also true.
-</li></ul></p>
-
-<p>If one of $A$ and $B$ is <b>false</b> and we have $A \Leftrightarrow B$, then the other is also false;
-for example, if $A$ is false, then $B$ can't be true because that would imply that $A$ is also true.</p>
-
-<p>At a higher level, $A$ and $B$ have the same "truth value", either both true or both false.
-This means that we can solve an equation like this:
+<h2 id="derivative-of-sum">Derivative of Sum<a class="headerlink" href="#derivative-of-sum" title="Link to this title">¶</a></h2><p>Suppose that the derivatives $\frac{d}{dx} f(x)$ and $\frac{d}{dx} g(x)$ exist. Then
 $$
 \begin{align}
-\text{equation we want to solve}
-&\iff \text{something} \\
-&\iff \text{something} \\
-&\qquad \vdots \\
-&\iff \text{something} \\
-&\iff x = 5 \text{ or } x = 7
+\frac{d}{dx} (f(x)+g(x))
+&= \lim_{h \to 0} \frac{(f(x+h)+g(x+h))-(f(x)+g(x))}{h} \\
+&= \lim_{h \to 0} \frac{f(x+h)+g(x+h)-f(x)-g(x)}{h} \\
+&= \lim_{h \to 0} \frac{f(x+h)-f(x)+g(x+h)-g(x)}{h} \\
+&= \lim_{h \to 0} \left( \frac{f(x+h)-f(x)}{h} + \frac{g(x+h)-g(x)}{h} \right) \\
+&= \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} + \lim_{h \to 0} \frac{g(x+h)-g(x)}{h} \\
+&= \frac{d}{dx} f(x) + \frac{d}{dx} g(x).
 \end{align}
-$$
-This guarantees that $x=5$ and $x=7$ are the solutions of the equation, and there are no other solutions;
-the original equation is true if $x$ is $5$ or $7$, and otherwise it's false.
-For this reason, we always solve equations so that we have equivalence at each step.
-It is very common to teach students to do this without writing down the equivalence signs.</p>
+$$</p>
 
-<div class="box graybox"><p>When solving an equation, we rewrite the equation in equivalent ways until we arrive at the solutions.
+<div class="box graybox"><p>If the derivatives $\frac{d}{dx} f(x)$ and $\frac{d}{dx} g(x)$ exist, then
+$$
+\frac{d}{dx} (f(x)+g(x)) = \frac{d}{dx} f(x) + \frac{d}{dx} g(x).
+$$
 </p>
 
-</div><p>Common things that can be done to an equality so that we get equivalence:</p>
+</div><h2 id="derivative-with-constant-in-front">Derivative with Constant in Front<a class="headerlink" href="#derivative-with-constant-in-front" title="Link to this title">¶</a></h2><p>Let $c$ be a constant (that is, any number that does not depend on $x$).
+Suppose that $\frac{d}{dx} f(x)$ exists.
+Then
+$$
+\begin{align}
+\frac{d}{dx} (cf(x))
+&= \lim_{h \to 0} \frac{cf(x+h)-cf(x)}{h} \\
+&= \lim_{h \to 0} \frac{c(f(x+h)-f(x))}{h} \\
+&= \lim_{h \to 0} c\frac{f(x+h)-f(x)}{h} \\
+&= \left( \lim_{h \to 0} c \right) \left( \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} \right) \\
+&= c\frac{d}{dx} f(x).
+\end{align}
+$$</p>
 
-<p><ul><li>
-    Adding a number on both sides: $x=y \iff x+z=y+z$.
-</li><li>
-    Subtracting a number on both sides.
-</li><li>
-    Multiplying both sides by a nonzero number: if $z \ne 0$, then $x=y \iff xz=yz$.
-    We need a nonzero $z$ for this, because we also want to say that if $xz=yz$, then $x=y$;
-    this doesn't work if $z=0$.
-    For example, $3 \cdot 0 = 4 \cdot 0$, but $3 \ne 4$.
-</li><li>
-    Dividing both sides by a nonzero number: if $z \ne 0$, then $x=y \iff \frac{x}{z} = \frac{y}{z}$.
-</li></ul></p>
-
-<p>I'll start by justifying the first item of the list, why adding a number on both sides gives equivalence.
-If $x = y$, then we of course have $x+z = y+z$, because $x=y$ means that $x$ and $y$ are the same;
-we can substitute $x$ for $y$ wherever we want.
-This proves the $\Rightarrow$ part of $\Leftrightarrow$, and for the $\Leftarrow$ part,
-suppose that $x + z = y + z$.
-Now we get
+<div class="box graybox"><p>If the derivative $\frac{d}{dx} f(x)$ exists and $c$ is a constant, then
 $$
-x = (x+z)-z = (y+z)-z = y,
+\frac{d}{dx} (cf(x)) = c \cdot \frac{d}{dx} f(x).
 $$
-where we substituted in the assumption $x+z = y+z$ in the middle step.</p>
-
-<p>Other items of the list can be justified in a very similar way.
-For the $\Leftarrow$ part, we need something that cancels the effect of doing something on both sides.
-Above we canceled the addition of $z$ by subtracting $z$.
-We can similarly cancel
-a subtraction of $z$ with adding $z$,
-a multiplication by $z$ with dividing by $z$, or
-a division by $z$ with multiplying by $z$.</p>
-
-<p>More generally, if $f$ is a function that has an <a href="inverse-funcs.html">inverse function</a>,
-then we can apply $f$ on both sides of the equation, as in
-$$
-x = y \iff f(x) = f(y).
-$$
-Again, the $\Rightarrow$ part of $\Leftrightarrow$ is just substitution,
-and for the other direction, we can use the inverse function $f^{-1}$ as follows:
-if $f(x) = f(y)$, then
-$$
-x = f^{-1}(f(x)) = f^{-1}(f(y)) = y,
-$$
-where the first and last equality sign use the definition of inverse function,
-and the middle equality comes from substituting the assumption $f(x)=f(y)$.</p>
-
-<div class="box graybox"><p>If the function $f$ has an inverse function, then
-$f$ can be applied on both sides while solving an equation.
 </p>
 
-</div><p>The above rules are actually special cases of this with different functions;
-for example, the rule for adding $z$ on both sides uses the function $f(x)=x+z$,
-which has the inverse function $f^{-1}(x)=x-z$.
+</div><p>This rule does <b>not</b> work if $c$ is something that contains $x$.
+For example,
+$$
+\frac{d}{dx} (x \cdot x) = \frac{d}{dx} x^2 = 2x,
+$$
+but
+$$
+x \cdot \frac{d}{dx} x = x \cdot 1 = x.
+$$
 </p>
 
-</div>
+<h2 id="derivative-of-difference">Derivative of Difference<a class="headerlink" href="#derivative-of-difference" title="Link to this title">¶</a></h2><p>Suppose that the derivatives $\frac{d}{dx} f(x)$ and $\frac{d}{dx} g(x)$ exist.
+Then by using the above results, we get
+$$
+\begin{align}
+\frac{d}{dx} (f(x)-g(x))
+&= \frac{d}{dx} \Bigl( f(x) + (-1)g(x)\Bigr) \\
+&= \frac{d}{dx} f(x) + \frac{d}{dx} \Bigl( (-1)g(x)\Bigr) \\
+&= \frac{d}{dx} f(x) + (-1) \frac{d}{dx} g(x) \\
+&= \frac{d}{dx} f(x) - \frac{d}{dx} g(x).
+\end{align}
+$$</p>
+
+<div class="box graybox"><p>If the derivatives $\frac{d}{dx} f(x)$ and $\frac{d}{dx} g(x)$ exist, then
+$$
+\frac{d}{dx} (f(x)-g(x)) = \frac{d}{dx} f(x) - \frac{d}{dx} g(x).
+$$
+</p>
+
+</div></div>
 </body>
 </html>

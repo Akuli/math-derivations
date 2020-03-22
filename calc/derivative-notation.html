@@ -132,48 +132,42 @@
         <input type="checkbox" id="sidebar-checkbox-10" />
         <label for="sidebar-checkbox-10">Derivative</label>
         <div class="dropdown">
-            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-simple.html">Simple derivative examples</a><a href="derivative-notation.html">Notation for derivatives</a>
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a>
         </div>
         
         </div>
         </div>
-<h1 id="notation-for-derivatives">Notation for Derivatives<a class="headerlink" href="#notation-for-derivatives" title="Link to this title">¶</a></h1><p>So far we haven't used any notation for the derivative;
-we have just said that the derivative of $f$ at $a$ is
-$$
-\lim_{h \to 0} \frac{f(x+h)-f(x)}{h}.
-$$
-We will use derivatives a lot, so we need some notation.
+<h1 id="notation-for-derivatives">Notation for Derivatives<a class="headerlink" href="#notation-for-derivatives" title="Link to this title">¶</a></h1><p>We will use derivatives a lot, so we introduce notation for derivatives.
 </p>
 
 <h2 id="lagrange-s-notation">Lagrange's Notation<a class="headerlink" href="#lagrange-s-notation" title="Link to this title">¶</a></h2><p>We write the derivative of a function $f$ at $a$ as
 $$
-f'(a) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}.
+f'(a) = \lim_{h \to 0} \frac{f(a+h)-f(a)}{h}.
 $$
-This is called Lagrange's notation.</p>
+This is called Lagrange's notation.
+So, to write the result of <a href="derivative-def.html#the-definition">the last example on the previous page</a>,
+we can let $f(x) = x^2$ and then say $f'(x) = 2x$.</p>
 
 <p>With this notation, you can think of $f'$ itself as a thing;
 it's a function that takes in a number, and outputs the derivative of $f$ at that number.
-Often the function $f'$ is called the derivative of $f$.</p>
-
-<p>So, to write <a href="derivative-simple.html#derivative-of-x-2">this result of the previous derivation</a>,
-we can let $f(x) = x^2$ and then say $f'(x) = 2x$.
-This isn't bad, but we will do this a lot,
-so I'll show you a way to write this without having to define a function.
+Often the function $f'$ is called the derivative of $f$.
 </p>
 
-<h2 id="leibniz-s-notation">Leibniz's Notation<a class="headerlink" href="#leibniz-s-notation" title="Link to this title">¶</a></h2><p>We can write the derivative of $x^2$ like
+<h2 id="leibniz-s-notation">Leibniz's Notation<a class="headerlink" href="#leibniz-s-notation" title="Link to this title">¶</a></h2><p>We can also write
 $$
 \frac{d}{dx} x^2 = 2x.
 $$
-This is called Leibniz's notation.
+This is called Leibniz's notation, and
+it can be handy because we didn't need to define a function just to talk about the derivative of $x^2$.
 So, $\frac{d}{dx}$ sees whatever you put in front of it as $\text{function}(x)$,
-and then gives you $\text{function}'(x)$.</p>
+and then gives you $\text{function}'(x)$;
+that is,
+$$
+\frac{d}{dx} f(x) = f'(x).
+$$</p>
 
-<p>The above notation is actually a shorthand for
-$$
-\frac{d(x^2)}{dx} = 2x.
-$$
-A long time ago, $d(x^2)$ was an infinitely small difference of $x^2$ values, given by
+<p>The $\frac{d}{dx} x^2$ is actually a shorthand for $\frac{d(x^2)}{dx}$, with $x^2$ on the top like that.
+Originally $d(x^2)$ was an infinitely small difference of $x^2$ values, given by
 $$
 d(x^2) = (x + \text{infinitely small number})^2 - x^2,
 $$
@@ -181,15 +175,7 @@ and similarly, $dx$ was an infinitely small difference of $x$ values.
 Then $\frac{d(x^2)}{dx}$ was just two infinitely small numbers divided by each other.
 Nowadays we have limits instead of infinitely small numbers, and the derivative is more than division;
 it's a limit of whatever the division gives.
-The notation is still being used though.</p>
-
-<p>Leibniz's notation can be useful for "checking" some derivative results.
-For example, with Leibniz's notation, the derivative of $x$ is
-$$
-\frac{d}{dx} x = \frac{dx}{dx},
-$$
-which looks like it really should be $1$, and indeed it is $1$
-like we saw <a href="derivative-simple.html#derivative-of-constant">here</a>.
+The notation is still being used though.
 </p>
 
 </div>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Chain Rule
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{darkred}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Continuity</label>
+        <div class="dropdown">
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Derivative</label>
+        <div class="dropdown">
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="chain-rule">Chain Rule<a class="headerlink" href="#chain-rule" title="Link to this title">¶</a></h1><p>We calculate $\frac{d}{dx} f(g(x))$ assuming that the derivatives $f'(g(x))$ and $g'(x)$ exist.
+The result is known as the chain rule.
+This derivative rule derivation is the longest one, so I broke it into several parts.
+Feel free to skip some of this if it's too boring;
+other derivative rule derivations aren't as boring as this one,
+and learning to use the result of this derivation is more important than the derivation itself.
+</p>
+
+<h2 id="the-idea">The Idea<a class="headerlink" href="#the-idea" title="Link to this title">¶</a></h2><p>Let $\approx$ denote an approximation.
+Later we will figure out whether the approximations are accurate enough for our purposes,
+but for presenting the idea of this derivation, the $\approx$ sign is good enough.</p>
+
+<p>The definition of derivative says that
+$$
+g'(x) = \lim_{h \to 0} \frac{g(x+h)-g(x)}{h},
+$$
+so if $h \approx 0$, then
+$$
+g'(x) \approx \frac{g(x+h)-g(x)}{h}.
+$$
+Multiplying both sides by $h$ gives
+$$
+g(x+h)-g(x) \approx g'(x)h.
+$$
+For the chain rule, this is a useful way to think about the derivative.
+If you change the input of $g$ by $h$, then the output changes by approximately $g'(x)h$.</p>
+
+<p><img width="514" height="233" class="asymptote" src="../asymptote/4cd2c055c6ff5ba5c93056ce2cef182e.svg" /></p><p>For the chain rule, we do a similar thing again, but with
+$f$ instead of $g$,
+$g(x)$ instead of $x$, and
+$g'(x)h$ instead of $h$.</p>
+
+<p><img width="514" height="404" class="asymptote" src="../asymptote/00445ae8c7fc706cb0b90092d7cd022c.svg" /></p><p>We get
+$$
+f(g(x+h))-f(g(x)) \approx f'(g(x))g'(x)h,
+$$
+and that leads to
+$$
+\frac{f(g(x+h))-f(g(x))}{h} \approx f'(g(x))g'(x),
+$$
+so maybe the derivative of $f(g(x))$ should be $f'(g(x))g'(x)$.
+To be sure about it, we need to ensure that the approximations we do when writing the $\approx$ signs
+are accurate enough to produce the correct result.</p>
+
+<p>In <a href="https://www.youtube.com/watch?v=YG15m2VwSjA&t=8m42s">this awesome video</a>,
+3blue1brown explains this idea very nicely, starting at about 8:42.
+I recommend watching that, and actually I got this idea from there.
+While watching, keep in mind that
+<ul><li>
+    3blue1brown's $dx$ is same as our $h$,
+</li><li>
+    3blue1brown's $d(x^2)$ is same as our $(x+h)^2-x^2$,
+</li><li>
+    3blue1brown uses equal signs when explaining this,
+    but it would be better to use the $\approx$ sign,
+</li><li>
+    in the video, 3blue1brown uses the fact that the derivative of $\sin(x)$ is $\cos(x)$,
+    which we will derive later, and
+</li><li>
+    all of this is just an idea, we still need to ensure that the approximations are accurate enough.
+</li></ul>
+</p>
+
+<h2 id="estimating-the-errors">Estimating the Errors<a class="headerlink" href="#estimating-the-errors" title="Link to this title">¶</a></h2><p>Consider the approximation
+$$
+g(x+h)-g(x) \approx g'(x)h.
+$$
+Let $E_g(h)$ denote the error in this approximation.
+It's what we get by subtracting the left and right side of this approximate equation, so
+$$
+E_g(h) = \Bigl( g(x+h)-g(x) \Bigr) - g'(x)h.
+$$
+We notice that
+$$
+\begin{align}
+\lim_{h \to 0} \frac{E_g(h)}{h}
+&= \lim_{h \to 0} \frac{g(x+h)-g(x)-g'(x)h}{h} \\
+&= \lim_{h \to 0} \left( \frac{g(x+h)-g(x)}{h} - \frac{g'(x)h}{h} \right) \\
+&= \lim_{h \to 0} \frac{g(x+h)-g(x)}{h} - \lim_{h \to 0} g'(x) \\
+&= g'(x) - g'(x) = 0.
+\end{align}
+$$
+We also get
+$$
+g(x+h) = g(x) + g'(x)h + E_g(h),
+$$
+so to calculate $g(x+h)$, we calculate $g(x)$, then add the approximate difference $g'(x)h$,
+and then also take in account the error that we did in the approximation.
+This makes sense.</p>
+
+<p>With $f$, we can do a similar approximation, but with $g(x)$ instead of $x$.
+That gives
+$$
+f(g(x)+n)-f(g(x)) \approx f'(g(x))n,
+$$
+where we also use $n$ instead of $h$, because we already used $h$ when working with $g$.
+By doing the same things for this approximation, we get a function $E_f$ satisfying
+$$
+\begin{align}
+\lim_{n \to 0} \frac{E_f(n)}{n} &= 0, \\
+f(g(x)+n) &= f(g(x)) + f'(g(x))n + E_f(n).
+\end{align}
+$$
+</p>
+
+<h2 id="putting-it-all-together">Putting it All Together<a class="headerlink" href="#putting-it-all-together" title="Link to this title">¶</a></h2><p>With the approximation of $g(x+h)$, we get
+$$
+f(g(x+h)) = f(g(x) + g'(x)h + E_g(h)).
+$$
+To avoid writing the same thing repeatedly several times, let
+$$
+q(h) = g'(x)h + E_g(h).
+$$
+With this, we have
+$$
+f(g(x+h)) = f(g(x) + q(h)),
+$$
+and by choosing $n=q(h)$ in the approximation of $f(g(x)+n)$, we get
+$$
+f(g(x+h)) = f(g(x)) + f'(g(x))q(h) + E_f(q(h)).
+$$
+By subtracting $f(g(x))$ on both sides, we get
+$$
+f(g(x+h))-f(g(x)) = f'(g(x))q(h) + E_f(q(h)).
+$$
+Now we can calculate
+$$
+\begin{align}
+\frac{d}{dx} f(g(x))
+&= \lim_{h \to 0} \frac{f(g(x+h))-f(g(x))}{h} \\
+&= \lim_{h \to 0} \frac{f'(g(x))q(h) + E_f(q(h))}{h} \\
+&= \lim_{h \to 0} \left( f'(g(x)) \frac{q(h)}{h} + \frac{E_f(q(h))}{h} \right) \\
+&= f'(g(x)) \left( \lim_{h \to 0} \frac{q(h)}{h} \right) + \lim_{h \to 0} \frac{E_f(q(h))}{h}.
+\end{align}
+$$
+Now we just need to calculate the two limits.
+For the first one, we get
+$$
+\begin{align}
+\lim_{h \to 0} \frac{q(h)}{h}
+&= \lim_{h \to 0} \frac{g'(x)h + E_g(h)}{h} \\
+&= \lim_{h \to 0} \left( g'(x) + \frac{E_g(h)}{h} \right) \\
+&= \underbrace{\lim_{h \to 0} g'(x)}_{g'(x)} + \underbrace{\lim_{h \to 0} \frac{E_g(h)}{h}}_0 \\
+&= g'(x),
+\end{align}
+$$
+so
+$$
+\frac{d}{dx} f(g(x)) = f'(g(x))g'(x) + \lim_{h \to 0} \frac{E_f(q(h))}{h}.
+$$
+The other limit is a bit tricky, and we'll do that next.
+</p>
+
+<h2 id="tricky-limit">Tricky Limit<a class="headerlink" href="#tricky-limit" title="Link to this title">¶</a></h2><p>The idea with this trick is to turn the known limit (see above)
+$$
+\lim_{n \to 0} \frac{E_f(n)}{n} = 0
+$$
+into continuity.
+We do this by defining a new function
+$$
+C(n) = \begin{cases}
+    \frac{E_f(n)}{n},   & \text{if $n \ne 0$}; \\
+    0,                  & \text{if $n = 0$}, \\
+\end{cases}
+$$
+which is just like $\frac{E_f(n)}{n}$, but "extended" so that $C(0)$ is defined.
+We have
+$$
+\lim_{n \to 0} C(n) = \lim_{n \to 0} \frac{E_f(n)}{n} = 0 = C(0),
+$$
+so the function $C$ is continuous at $0$; this was the whole purpose of defining the $C$ function.</p>
+
+<p>We also have
+$$
+C(n)n = E_f(n),
+$$
+because $E_f(0) = 0$ (why?), and if $n \ne 0$, then $C(n) = \frac{E_f(n)}{n}$.
+By using this with $n=q(h)$, we can calculate the tricky limit, and it gives
+\begin{align}
+\lim_{h \to 0} \frac{E_f(q(h))}{h}
+&= \lim_{h \to 0} \frac{C(q(h))q(h)}{h} \\
+&= \left( \lim_{h \to 0} C(q(h)) \right) \underbrace{\left( \lim_{h \to 0} \frac{q(h)}{h} \right)}_{g'(x)} \\
+&= C\left( \lim_{h \to 0} q(h) \right) g'(x) \\
+&= C\left( \lim_{h \to 0} \left( \frac{q(h)}{h} h \right) \right) g'(x) \\
+&= C\left( \left( \lim_{h \to 0} \frac{q(h)}{h} \right) \left( \lim_{h \to 0} h \right) \right) g'(x) \\
+&= \underbrace{C\Bigl( g'(h) \cdot 0 \Bigr)}_{C(0)=0} g'(x) = 0.
+\end{align}
+Here we used the fact that $C$ is continuous at $0$
+by <a href="cont-props.html#moving-limit-inside-a-continuous-function">bringing the limit inside it</a>.
+This is why we needed continuity.
+</p>
+
+<h2 id="the-result">The Result<a class="headerlink" href="#the-result" title="Link to this title">¶</a></h2><div class="box graybox"><p>If $g'(x)$ and $f'(g(x))$ exist, then
+$$
+\frac{d}{dx} f(g(x)) = f'(g(x))g'(x).
+$$
+This is known as the <b>chain rule</b>.
+</p>
+
+</div><p>Examples:
+<ul><li>
+    By choosing $f(x)=x^2$ and $g(x)=3x+1$, we get $f'(x)=2x$ and $g'(x)=3$.
+    The chain rule says that
+    $$
+    \frac{d}{dx} (3x+1)^2 = 2(3x+1) \cdot 3 = 18x+6.
+    $$
+    We can also verify this without the chain rule by calculating
+    $$
+    (3x+1)^2 = (3x)^2 + 2(3x)1 + 1^2 = 9x^2 + 6x + 1,
+    $$
+    and with <a href="derivative-basic-rules.html">these rules</a>, we get
+    $$
+    \begin{align}
+    \frac{d}{dx} \left( 9x^2+6x+1 \right)
+    &= 9 \cdot \frac{d}{dx} x^2 + 6 \cdot \frac{d}{dx} x + \frac{d}{dx} 1 \\
+    &= 9 \cdot 2x + 6 \cdot 1 + 0 \\
+    &= 18x + 6.
+    \end{align}
+    $$
+</li><li>
+    By choosing $f(x)=x^2$ and $g(x)=x^3$,
+    we get $f'(x)=2x$ and $g'(x)=3x^2$ with <a href="derivative-power-rule-1.html">the power rule</a>.
+    The chain rule gives
+    $$
+    \frac{d}{dx} \left(x^3\right)^2 = 2(x^3)(3x^2) = 6x^5,
+    $$
+    but on the other hand, $(x^3)^2 = x^6$, and the power rule gives the same result.
+</li></ul>
+</p>
+
+</div>
+</body>
+</html>

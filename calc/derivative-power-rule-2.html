@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Simple Derivative Examples
+<title>Power Rule, Part 2
 </title>
 
     <script type="text/x-mathjax-config">
@@ -132,121 +132,117 @@
         <input type="checkbox" id="sidebar-checkbox-10" />
         <label for="sidebar-checkbox-10">Derivative</label>
         <div class="dropdown">
-            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-simple.html">Simple derivative examples</a><a href="derivative-notation.html">Notation for derivatives</a>
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a>
         </div>
         
         </div>
         </div>
-<h1 id="simple-derivative-examples">Simple Derivative Examples<a class="headerlink" href="#simple-derivative-examples" title="Link to this title">¶</a></h1><h2 id="derivative-of-x-2">Derivative of $x^2$<a class="headerlink" href="#derivative-of-x-2" title="Link to this title">¶</a></h2><p>Let $f(x) = x^2$, and let $a$ be any number.
-By <a href="derivative-def.html#the-definition">definition of derivative</a>,
-the derivative of $f$ at $a$ is
+<h1 id="power-rule-part-2">Power Rule, Part 2<a class="headerlink" href="#power-rule-part-2" title="Link to this title">¶</a></h1><p>In <a href="derivative-power-rule-1.html">part 1</a>,
+we saw that the power rule $\frac{d}{dx} x^n = nx^{n-1}$ works in the following cases:
+<ul><li>
+    $n=-1$, $n=0$, $n=1$, $n=2$, $n=3$, $\dots$
+</li><li>
+    $n=\frac 1 2$, $n=\frac 1 3$, $n=\frac 1 4$, $\dots$
+</li></ul></p>
+
+<p>Next we'll figure out whether it works in other cases.
+</p>
+
+<h2 id="negative-integer">Negative Integer<a class="headerlink" href="#negative-integer" title="Link to this title">¶</a></h2><p>Let $n$ be any negative integer.
+Because $n$ is negative, we have $n = (-1)\abs{n}$, and so
+$$
+x^n
+= x^{(-1)\abs{n}}
+= \left( x^{\abs{n}} \right)^{-1}.
+$$
+We know that the power rule works in the case $n = -1$, so $\frac{d}{dx} x^{-1} = (-1)x^{-2}$.
+By using that with the <a href="derivative-chain-rule.html">chain rule</a>, we get
+$$
+\frac{d}{dx} x^n
+= \left( x^{\abs{n}} \right)^{-1}
+= (-1)\left( x^{\abs{n}} \right)^{-2} \cdot \frac{d}{dx} x^{\abs{n}}.
+$$
+By using the power rule with the positive integer $\abs{n}$ (we know that it works for positive integers),
+we get
+$$
+\frac{d}{dx} x^{\abs{n}} = \abs{n}x^{\abs{n} - 1}.
+$$
+By bringing it all together, we get
 $$
 \begin{align}
-\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}
-&= \lim_{h \to 0} \frac{(a+h)^2-a^2}{h} \\
-&= \lim_{h \to 0} \frac{a^2+2ah+h^2-a^2}{h} \\
-&= \lim_{h \to 0} \frac{2ah+h^2}{h} \\
-&= \lim_{h \to 0} 2a + \lim_{h \to 0} h = 2a.
+\frac{d}{dx} x^n
+&= (-1)\left( x^{\abs{n}} \right)^{-2} \abs{n}x^{\abs{n} - 1} \\
+&= -\abs{n}x^{(-2)\abs{n}}x^{\abs{n} - 1}.
+\end{align}
+$$
+Because $n$ is negative, we have $n = -\abs{n}$ and $\abs{n} = -n$, so
+$$
+\begin{align}
+\frac{d}{dx} x^n
+= nx^{2n}x^{-n - 1}
+= nx^{2n-n-1}
+= nx^{n-1}.
 \end{align}
 $$</p>
 
-<div class="box graybox"><p>The derivative of the function $f(x) = x^2$ at any number $a$ is $2a$.
+<div class="box graybox"><p>The power rule works when $n$ is a negative integer.
 </p>
 
-</div><p>This means that if you place a tangent line on the graph $y=f(x)$ at a point $(3, 9)$,
-the slope of the tangent line will be $2 \cdot 3 = 6$.</p>
-
-<p><img width="262" height="492" class="asymptote" src="../asymptote/0ea4d1c813aecdb4f652aae3e3fc780f.svg" /></p><p>As a quick check,
-this result says that the slope of a tangent line placed at the tip of the parabola is $2 \cdot 0 = 0$,
-which makes sense because that tangent line is horizontal.
-Also, $2a$ is negative when $a$ is negative, so
-any tangent line touching the parabola on the left side of $y$ axis has negative slope;
-this makes sense too.</p>
-
-<p><img width="253" height="290" class="asymptote" src="../asymptote/9cdbe7d4813534b90b45fee3fc7c13aa.svg" /></p><h2 id="derivative-of-x-3">Derivative of $x^3$<a class="headerlink" href="#derivative-of-x-3" title="Link to this title">¶</a></h2><p>To calculate the derivative of $x^3$, recall that for all numbers $a$ and $b$, we have
+</div><h2 id="rational-number">Rational Number<a class="headerlink" href="#rational-number" title="Link to this title">¶</a></h2><p>Let $a$ be any integer, and let $b$ be any positive integer.
+Now
 $$
-(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3.
+x^{a/b} = \left( x^a \right)^{1/b}.
 $$
-You can verify this easily by calculating
+We know that the power rule works when its $n$ is $1/b$ or any integer, so
 $$
-(a+b)^3 = (a+b)^2(a+b) = (a+b)^2 a + (a+b)^2 b,
+\frac{d}{dx} x^{1/b} = \frac 1 b x^{1/b\ -1}, \qquad \frac{d}{dx} x^a = ax^{a-1}.
 $$
-and then using the formula for $(a+b)^2$.</p>
-
-<p>Let $f(x) = x^3$, and let $a$ be any number.
-By <a href="derivative-def.html#the-definition">definition of derivative</a>,
-the derivative of $f$ at $a$ is
+The <a href="derivative-chain-rule.html">chain rule</a> gives
 $$
 \begin{align}
-\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}
-&= \lim_{h \to 0} \frac{(a+h)^3-a^3}{h} \\
-&= \lim_{h \to 0} \frac{a^3+3a^2h+3ah^2+h^3-a^2}{h} \\
-&= \lim_{h \to 0} \frac{3a^2h+3ah^2+h^3}{h} \\
-&= \lim_{h \to 0} (3a^2+3ah+h^2) \\
-&= \lim_{h \to 0} 3a^2 + \lim_{h \to 0} 3ah + \lim_{h \to 0} h^2 \\
-&= 3a^2.
+\frac{d}{dx} x^{a/b}
+&= \frac{d}{dx} \left( x^a \right)^{1/b} \\
+&= \frac{1}{b} \left( x^a \right)^{1/b\ -1} ax^{a-1} \\
+&= \frac{a}{b} x^{a  ( 1/b\ -1 )} x^{a-1} \\
+&= \frac{a}{b} x^{a  ( 1/b\ -1 ) + (a-1)}.
 \end{align}
-$$</p>
-
-<div class="box graybox"><p>The derivative of the function $f(x) = x^3$ at any number $a$ is $3a^2$.
-</p>
-
-</div><p>The graph $y=x^3$ looks like this:</p>
-
-<p><img width="199" height="366" class="asymptote" src="../asymptote/cacbd6a9c052909e45d0932ab1c285e0.svg" /></p><p>The derivative $3a^2$ is never negative because $a^2$ is not negative,
-so no tangent line of this graph has negative slope; that makes sense if you look at the above graph.
-Also, the only tangent line with slope $0$ is the one touching the graph at $(0,0)$,
-and that corresponds with how $3a^2 = 0$ if and only if $a=0$.</p>
-
-<p>TODO: geometric ways to remember the derivatives of $x^2$ and $x^3$
-</p>
-
-<h2 id="derivative-of-x">Derivative of $x$<a class="headerlink" href="#derivative-of-x" title="Link to this title">¶</a></h2><p>Let $f(x) = x$, and let $a$ be any number.
-By <a href="derivative-def.html#the-definition">definition of derivative</a>,
-the derivative of $f$ at $a$ is
 $$
-\begin{align}
-\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}
-&= \lim_{h \to 0} \frac{(a+h)-a}{h} \\
-&= \lim_{h \to 0} \frac{h}{h}
-= \lim_{h \to 0} 1
-= 1.
-\end{align}
-$$</p>
-
-<div class="box graybox"><p>Let $f(x) = x$. Then the derivative of $f$ at any number is $1$.
-</p>
-
-</div><p>This means that any tangent line of the line $y=x$ has slope $1$.
-That makes sense, because any tangent line of $y=x$ is just $y=x$ itself,
-and the slope of $y=x$ is $1$.</p>
-
-<p>Interpreting this result with speed, it says that
-if your walked distance at $t$ seconds is $t$ metres, then you move 1 metre per second.
-That makes sense too.
-</p>
-
-<h2 id="derivative-of-constant">Derivative of Constant<a class="headerlink" href="#derivative-of-constant" title="Link to this title">¶</a></h2><p>Let $a$ and $b$ be any numbers, and let $f(x) = b$.
-By <a href="derivative-def.html#the-definition">definition of derivative</a>, the derivative of $f$ at $a$ is
+Simplifying the power of $x$ gives
 $$
-\lim_{h \to 0} \frac{f(a+h)-f(a)}{h}
-= \lim_{h \to 0} \frac{b-b}{h}
-= \lim_{h \to 0} 0 = 0.
+a  \left( \frac 1 b - 1 \right) + (a-1)
+= a\frac 1 b - a + a - 1
+= \frac a b - 1,
+$$
+so we get
+$$
+\frac{d}{dx} x^{a/b} = \frac a b x^{a/b\ -1}.
 $$</p>
 
-<div class="box graybox"><p>Let $b$ be any number and $f(x) = b$. Then the derivative of $f$ at any number is $0$.
+<div class="box graybox"><p>The power rule works when $n=a/b$, where $a$ is any integer and $b$ is a positive integer.
 </p>
 
-</div><p>This means that any tangent line of $y=0$ has slope $0$, and again, that makes sense;
-any tangent line is simply $y=0$ itself, and that has slope $0$.</p>
+</div><p>Any fraction of integers $\frac{A}{B}$ can be written as an integer divided by a positive integer.
+First of all, $B$ can't be zero, because we can't divide by zero.
+If $B$ is negative, then we have
+$$
+\frac{A}{B} = \frac{-A}{-B},
+$$
+where $-A$ is an integer and $-B = \abs{B}$ is a positive integer.</p>
 
-<p>Interpreting this result with speed, it says that
-if your walked distance at <b>any</b> time is $b$, regardless of what time it is,
-then your walking speed is zero, simply because you are not moving at all.</p>
+<div class="box graybox"><p>The power rule works when $n$ is a fraction of integers.
+</p>
 
-<p>In the context of derivatives and limits,
-a number that doesn't depend on other things is called <b>constant</b>.
-Here $a$ and $b$ are constants.
+</div><p>This result includes <b>all</b> of our previous power rule results, including the results for integers;
+any integer $k$ can be written as a fraction of integers, because $k = \frac k 1$.</p>
+
+<p>A number is called rational, if it can be written as a fraction of integers,
+so the above result could be also written as follows:
+the power rule works when $n$ is rational.</p>
+
+<p>Not all numbers are rational.
+For example, $\sqrt{2}$ is not rational (find a proof from your favorite math YouTube channel).
+Those numbers are called irrational,
+and later we'll figure out what happens to the power rule when $n$ is irrational.
 </p>
 
 </div>

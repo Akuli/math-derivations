@@ -1,12 +1,26 @@
 // just for convenience in other files
 import graph;
 
+void define_tex_color(string name, pen asy_color) {
+    texpreamble("\definecolor{" + name + "}{rgb}{" +
+        string(colors(asy_color)[0])
+        + "," +
+        string(colors(asy_color)[1])
+        + "," +
+        string(colors(asy_color)[2])
+    + "}");
+    texpreamble("\newcommand{" + '\\' + name + "}[1]{{ \color{" + name + "}{#1} }}");
+}
+
+texpreamble("\usepackage[dvipsnames]{xcolor}");
 texpreamble("\newcommand{\Vec}[1]{\overrightarrow{#1}}");
 texpreamble("\newcommand{\I}{\vec i}");
 texpreamble("\newcommand{\J}{\vec j}");
 texpreamble("\newcommand{\K}{\vec k}");
 texpreamble("\newcommand{\abs}[1]{\left| {#1} \right|}");
 texpreamble("\newcommand{\epsi}{\varepsilon}");
+define_tex_color("blue", blue);
+define_tex_color("green", deepgreen);
 
 // TODO: stop using a weird mixture of mm and raw numbers?
 defaultpen(0.8mm + fontsize(25pt));

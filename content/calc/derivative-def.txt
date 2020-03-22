@@ -196,3 +196,25 @@ So, when you are learning to calculate derivatives,
 you simultaneously learn to calculate
 speeds of moving objects, downloading speeds, tangent line slopes and
 many other things that can be described with a derivative.
+
+For example, let $f(x) = x^2$. The derivative of $f$ at any number $a$ is
+$$
+\begin{align}
+\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}
+&= \lim_{h \to 0} \frac{(a+h)^2 - a^2}{h} \\
+&= \lim_{h \to 0} \frac{a^2 + 2ah + h^2 - a^2}{h} \\
+&= \lim_{h \to 0} \frac{2ah + h^2}{h} \\
+&= \lim_{h \to 0} (2a + h) \\
+&= \lim_{h \to 0} 2a + \lim_{h \to 0} h = 2a.
+\end{align}
+$$
+Here are several ways to interpret the result:
+<ul><li>
+    A tangent line of the graph $y=x^2$ going through the point $(a, a^2)$ has slope $2a$.
+</li><li>
+    If your location at $t$ seconds is $t^2$ metres,
+    then your speed at any time $t$ is $2t$ metres per second.
+</li><li>
+    If the amount of data downloaded at $t$ seconds is $t^2$ megabytes,
+    then the downloading speed at any time $t$ is $2t$ megabytes per second.
+</li></ul>

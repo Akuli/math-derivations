@@ -157,4 +157,4 @@ $$
 This shows that $h$ is continuous at $a$.
 
 graybox:
-    If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$ then $f(g(x))$ is continuous at $a$.
+    If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then $f(g(x))$ is continuous at $a$.

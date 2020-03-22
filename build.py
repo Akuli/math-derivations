@@ -137,8 +137,13 @@ def get_sidebar_content(txtfile):
             ])),
             dropdown("Derivative", join([
                 link("Definition of derivative", 'calc/derivative-def'),
-                link("Simple derivative examples", 'calc/derivative-simple'),
                 link("Notation for derivatives", 'calc/derivative-notation'),
+                link("Power rule, part 1", 'calc/derivative-power-rule-1'),
+                link("Basic derivative rules", 'calc/derivative-basic-rules'),
+                link("Chain rule", 'calc/derivative-chain-rule'),
+                link("Power rule, part 2", 'calc/derivative-power-rule-2'),
+                link("Product rule and quotient rule",
+                     'calc/derivative-product-quotient-rules'),
             ])),
         ])),
     ])

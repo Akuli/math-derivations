@@ -1,0 +1,113 @@
+# Power Rule, Part 2
+
+In [part 1](derivative-power-rule-1.html),
+we saw that the power rule $\frac{d}{dx} x^n = nx^{n-1}$ works in the following cases:
+<ul><li>
+    $n=-1$, $n=0$, $n=1$, $n=2$, $n=3$, $\dots$
+</li><li>
+    $n=\frac 1 2$, $n=\frac 1 3$, $n=\frac 1 4$, $\dots$
+</li></ul>
+
+Next we'll figure out whether it works in other cases.
+
+
+## Negative Integer
+
+Let $n$ be any negative integer.
+Because $n$ is negative, we have $n = (-1)\abs{n}$, and so
+$$
+x^n
+= x^{(-1)\abs{n}}
+= \left( x^{\abs{n}} \right)^{-1}.
+$$
+We know that the power rule works in the case $n = -1$, so $\frac{d}{dx} x^{-1} = (-1)x^{-2}$.
+By using that with the [chain rule](derivative-chain-rule.html), we get
+$$
+\frac{d}{dx} x^n
+= \left( x^{\abs{n}} \right)^{-1}
+= (-1)\left( x^{\abs{n}} \right)^{-2} \cdot \frac{d}{dx} x^{\abs{n}}.
+$$
+By using the power rule with the positive integer $\abs{n}$ (we know that it works for positive integers),
+we get
+$$
+\frac{d}{dx} x^{\abs{n}} = \abs{n}x^{\abs{n} - 1}.
+$$
+By bringing it all together, we get
+$$
+\begin{align}
+\frac{d}{dx} x^n
+&= (-1)\left( x^{\abs{n}} \right)^{-2} \abs{n}x^{\abs{n} - 1} \\
+&= -\abs{n}x^{(-2)\abs{n}}x^{\abs{n} - 1}.
+\end{align}
+$$
+Because $n$ is negative, we have $n = -\abs{n}$ and $\abs{n} = -n$, so
+$$
+\begin{align}
+\frac{d}{dx} x^n
+= nx^{2n}x^{-n - 1}
+= nx^{2n-n-1}
+= nx^{n-1}.
+\end{align}
+$$
+
+graybox:
+    The power rule works when $n$ is a negative integer.
+
+
+## Rational Number
+
+Let $a$ be any integer, and let $b$ be any positive integer.
+Now
+$$
+x^{a/b} = \left( x^a \right)^{1/b}.
+$$
+We know that the power rule works when its $n$ is $1/b$ or any integer, so
+$$
+\frac{d}{dx} x^{1/b} = \frac 1 b x^{1/b\ -1}, \qquad \frac{d}{dx} x^a = ax^{a-1}.
+$$
+The [chain rule](derivative-chain-rule.html) gives
+$$
+\begin{align}
+\frac{d}{dx} x^{a/b}
+&= \frac{d}{dx} \left( x^a \right)^{1/b} \\
+&= \frac{1}{b} \left( x^a \right)^{1/b\ -1} ax^{a-1} \\
+&= \frac{a}{b} x^{a  ( 1/b\ -1 )} x^{a-1} \\
+&= \frac{a}{b} x^{a  ( 1/b\ -1 ) + (a-1)}.
+\end{align}
+$$
+Simplifying the power of $x$ gives
+$$
+a  \left( \frac 1 b - 1 \right) + (a-1)
+= a\frac 1 b - a + a - 1
+= \frac a b - 1,
+$$
+so we get
+$$
+\frac{d}{dx} x^{a/b} = \frac a b x^{a/b\ -1}.
+$$
+
+graybox:
+    The power rule works when $n=a/b$, where $a$ is any integer and $b$ is a positive integer.
+
+Any fraction of integers $\frac{A}{B}$ can be written as an integer divided by a positive integer.
+First of all, $B$ can't be zero, because we can't divide by zero.
+If $B$ is negative, then we have
+$$
+\frac{A}{B} = \frac{-A}{-B},
+$$
+where $-A$ is an integer and $-B = \abs{B}$ is a positive integer.
+
+graybox:
+    The power rule works when $n$ is a fraction of integers.
+
+This result includes **all** of our previous power rule results, including the results for integers;
+any integer $k$ can be written as a fraction of integers, because $k = \frac k 1$.
+
+A number is called rational, if it can be written as a fraction of integers,
+so the above result could be also written as follows:
+the power rule works when $n$ is rational.
+
+Not all numbers are rational.
+For example, $\sqrt{2}$ is not rational (find a proof from your favorite math YouTube channel).
+Those numbers are called irrational,
+and later we'll figure out what happens to the power rule when $n$ is irrational.

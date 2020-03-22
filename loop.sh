@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source env/bin/activate
+
 build()
 {
     python3 build.py && linkchecker html/*.html html/*/*.html &

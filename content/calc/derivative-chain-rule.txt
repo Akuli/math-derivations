@@ -277,6 +277,12 @@ Examples:
     \end{align}
     $$
 </li><li>
+    Similarly, we get
+    $$
+    \frac{d}{dx} (3x+1)^{10} = 10(3x+1)^9 \cdot 3 = 30(3x+1)^9.
+    $$
+    This would be very difficult to calculate without the chain rule, unlike the previous example.
+</li><li>
     By choosing $f(x)=x^2$ and $g(x)=x^3$,
     we get $f'(x)=2x$ and $g'(x)=3x^2$ with [the power rule](derivative-power-rule-1.html).
     The chain rule gives

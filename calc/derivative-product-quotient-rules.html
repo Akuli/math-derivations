@@ -169,9 +169,14 @@ $$
 Subtracting $\blue{f(x)}\green{g(x)}$ on both sides gives
 $$
 \blue{f(x+h)}\green{g(x+h)} - \blue{f(x)}\green{g(x)}
-= \blue{p(h)}\green{g(x)} + \blue{f(x)}\green{q(h)} + \blue{p(h)}\green{q(h)},
+= \blue{p(h)}\green{g(x)} + \blue{f(x)}\green{q(h)} + \blue{p(h)}\green{q(h)}.
 $$
-which leads to
+This can also be seen by calculating areas in the following picture
+(although that doesn't work very well with negative numbers).
+The total area is $\blue{f(x+h)}\green{g(x+h)}$, and
+subtracting the area of the $\blue{f(x)}\green{g(x)}$ rectangle results in the areas of other rectangles.</p>
+
+<p><img width="573" height="428" class="asymptote" src="../asymptote/0943f75efc11f76fffad1c806d124e2b.svg" /></p><p>Now we get
 $$
 \begin{align}
 \frac{d}{dx} (f(x)g(x))
@@ -251,9 +256,32 @@ $$
 This is known as the <b>quotient rule</b>.
 </p>
 
-</div><p>I dislike the quotient rule because it's messy and it doesn't simplify nicely.
+</div><p>The quotient rule is messy and it doesn't simplify nicely.
 Instead of using the quotient rule, you can always rewrite $\frac{f(x)}{g(x)}$ as $f(x)g(x)^{-1}$
 and then apply other derivative rules, because that's how the quotient rule is derived.
+On the other hand, the quotient rule gets the job done in one step, although that step is ugly.</p>
+
+<p>For example, you can use the quotient rule along with
+<a href="derivative-power-rule-1.html">power rule</a> and <a href="derivative-basic-rules.html">derivative of sum</a> to get
+$$
+\frac{d}{dx} \left( \frac{x^2}{x+x^{-1}} \right)
+= \frac{2x\left( x+x^{-1} \right)-x^2\left( 1 + (-1)x^{-2} \right)}{\left( x + x^{-1} \right)^2}.
+$$
+Without the quotient rule, the calculation looks like this
+(see the derivation of the quotient rule for explanations):
+$$
+\begin{align}
+\frac{d}{dx} \left( \frac{x^2}{x+x^{-1}} \right)
+&= \frac{d}{dx} \left( x^2(x+x^{-1})^{-1} \right) \\
+&= 2x(x+x^{-1})^{-1} + x^2 \cdot \frac{d}{dx}\left( (x+x^{-1})^{-1} \right) \\
+&= 2x(x+x^{-1})^{-1} + x^2(-1)(x+x^{-1})^{-2} \cdot \frac{d}{dx}(x + x^{-1}) \\
+&= 2x(x+x^{-1})^{-1} + x^2(-1)(x+x^{-1})^{-2} \left( 1 + (-1)x^{-2} \right)
+\end{align}
+$$
+Both of these results simplify to
+$$
+\frac{x^2+3}{(x+x^{-1})^2}.
+$$
 </p>
 
 </div>

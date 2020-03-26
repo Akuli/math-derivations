@@ -128,6 +128,7 @@ def get_sidebar_content(txtfile):
                 link("Limit properties", 'calc/limit-props'),
                 link("One-sided limits", 'calc/limit-1sided'),
                 link("Inequality and limit", 'calc/limit-ineq'),
+                link("Limit of vector", 'calc/limit-vector'),
                 # I don't like the absolute value thing, commented out for now
                 #link("Absolute values in limit proofs", 'calc/limit-abs'),
             ])),
@@ -144,6 +145,7 @@ def get_sidebar_content(txtfile):
                 link("Power rule, part 2", 'calc/derivative-power-rule-2'),
                 link("Product rule and quotient rule",
                      'calc/derivative-product-quotient-rules'),
+                link("Derivative of vector", 'calc/derivative-vector'),
             ])),
         ])),
     ])

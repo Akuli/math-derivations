@@ -299,7 +299,7 @@ asymptote:
     }
 
 This shows that $\lim_{x \to a^-} f(x) = f(a)$, and
-with a very similar proof, we get $\lim_{x \to a^+} f(x) = f(a)$.
+with a very similar derivation, we get $\lim_{x \to a^+} f(x) = f(a)$.
 By using [this result](limit-1sided.html#connection-to-both-sided-limit), we get
 $\lim_{x \to a} f(x) = f(a)$.
 
@@ -314,7 +314,7 @@ plug the number into the function and you're done.
 With this and the previous result in mind, we get that
 the graph of $f$ consists of only one part if and only if $\lim_{x \to a} f(x) = f(a)$ for all $a$.
 
-To talk about whether this happens about a given $a$, we introduce another concept:
+To talk about whether this happens with a given $a$, we introduce another concept:
 a function $f$ is continuous **at** $a$ if $\lim_{x \to a} f(x) = f(a)$.
 Now $f$ is continuous if and only if it's continuous at all numbers.
 

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<title>Limit of a Vector-valued Function
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            red: [ "\\color{darkred}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Limits</label>
+        <div class="dropdown">
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Continuity</label>
+        <div class="dropdown">
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Derivative</label>
+        <div class="dropdown">
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="derivative-vector.html">Derivative of vector</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="limit-of-a-vector-valued-function">Limit of a Vector-valued Function<a class="headerlink" href="#limit-of-a-vector-valued-function" title="Link to this title">¶</a></h1><p>Let $\vec v$ be a function that takes in a number and outputs a 2D vector.
+In other words, we have
+$$
+\vec v(t) = f(t)\I + g(t)\J,
+$$
+where $f$ and $g$ are functions that take in a number and output a number,
+like most other functions that we have seen before.</p>
+
+<p>Functions like this $\vec v$ are called vector-valued, because their values (aka outputs) are vectors.
+It's tempting to call $f$ and $g$ number-valued, but it's more common to call them real-valued;
+here "real" refers to real numbers, which we tend to abbreviate as just numbers.
+</p>
+
+<p>To visualize a vector-valued function, imagine that the input $t$ is on a number line.</p>
+
+<p><img width="230" height="31" class="asymptote" src="../asymptote/3718d6fb194bd0ecf2343fc244e61ad4.svg" /></p><p>Now imagine a 2D plane where the resulting vector is, so that the "start" of the vector is at the origin.</p>
+
+<p><img width="196" height="252" class="asymptote" src="../asymptote/6f5f69797a061fc4079383417ea2fd22.svg" /></p><p>The resulting vector depends on where $t$ is on the number line.
+You can think of the $t$ number line as a slider, and
+the output vector $\vec v(t)$ as a vector that moves as you slide $t$ on the number line.</p>
+
+<p>In this context, <b>we think of vectors and points as the same thing</b>;
+2D vectors and 2D points are just pairs of numbers anyway,
+so we won't bother with making a distinction between
+a vector $a\I+b\J$ and a point $(a,b)$.
+This leads to a slightly different visualization, where instead of a vector,
+you have a point that moves as you slide $t$ on the number line:</p>
+
+<p><img width="305" height="252" class="asymptote" src="../asymptote/3667fac731d45a18c4cd13e5f146086e.svg" /></p><p>Vector-valued functions are useful in physics.
+Typically $t$ is time, and $\vec v(t)$ is a vector representing something that changes over time,
+such as the location or velocity of an object.
+The location makes sense as a point, and the velocity makes sense as a vector;
+it's a vector whose length is the speed, and the direction of the vector
+tells the direction in which the object is moving.</p>
+
+<p>Almost all of the theory that I present for 2D vectors also works in 3D,
+although in many physics problems,
+everything happens in one plane and 2D vectors are enough to describe the situation.
+</p>
+
+<h2 id="defining-the-limit">Defining the Limit<a class="headerlink" href="#defining-the-limit" title="Link to this title">¶</a></h2><p>To define $\lim_{t \to a} \vec v(t)$, we look at
+what has to be changed in <a href="limit-def.html">the definition of limit for real-valued functions</a>.
+The inputs of the function are still numbers, so the input interval can stay the same,
+although we'll typically call it $I_t$ rather than $I_x$.</p>
+
+<p><img width="287" height="52" class="asymptote" src="../asymptote/1381d371cbd41a1e1c58863bd0e11968.svg" /></p><p>Now the outputs of the function are vectors,
+so we can't use an interval consisting of numbers for those.
+The idea with using an interval of numbers for output was that
+a small open interval centered around a number $L$ contains numbers that are near $L$.
+For a vector $\vec L$, visualized as a point, a similar idea of nearness is given by a circle.</p>
+
+<p><img width="196" height="252" class="asymptote" src="../asymptote/b831d8af6a268701f27d3518afd201d4.svg" /></p><p>In this context, the boundary is not included in the circle;
+only the interior of the circle is included.
+This corresponds to how we used open intervals in the past.
+Circles consisting of only the interior are often called 2D balls, but
+I don't do that on this site, because a ball means a 3D thing for many people.</p>
+
+<p>We have arrived at the following definition:</p>
+
+<div class="box graybox"><p>Let $a$ be a number, let $\vec L$ be a 2D vector,
+and let $\vec v$ be a 2D-vector-valued function.
+We write $\lim_{t \to a} \vec v(t) = \vec L$, if for any circle $C$ centered around $\vec L$,
+there is an open interval $I_t$ centered around $a$ such that
+$$
+\vec v(\text{any number in $I_t$ except $a$}) \in C.
+$$
+Here I refer to $I_t$ as the <i>input interval</i>, and I refer to $C$ as the <i>output circle</i>.
+</p>
+
+</div><h2 id="taking-limits-of-i-and-j-parts-separately">Taking Limits of $\I$ and $\J$ parts Separately<a class="headerlink" href="#taking-limits-of-i-and-j-parts-separately" title="Link to this title">¶</a></h2><p>Let $\vec v(t) = (f(t), g(t))$ be a 2D-vector-valued function.
+Suppose that the limits $\lim_{t \to a} f(t) = L_x$ and $\lim_{t \to a} g(t) = L_y$ exist.
+Let
+$$
+\vec L = (L_x, L_y) = \left( \lim_{t \to a} f(t), ~ \lim_{t \to a} g(t) \right).
+$$
+We show that $\lim_{x \to a} \vec f(t) = \vec L$.
+Let $C$ be any output circle centered around $L$.
+We pick a rectangle inside the circle,
+rotated so that its sides are parallel with $x$ and $y$ axises,
+and centered around $L$.
+(There are infinitely many such rectangles; we just pick one.)</p>
+
+<p><img width="253" height="309" class="asymptote" src="../asymptote/769c6270b3850c90ac685791f49e047d.svg" /></p><p>The rectangle consists of points
+whose $x$ coordinate is in some open interval $I_x$ centered around $L_x$, and
+whose $y$ coordinate is in some open interval $I_y$ centered around $L_y$.
+By using
+$I_x$ as the output interval of $\lim_{x \to a} f(x) = L_x$ and
+$I_y$ as the output interval of $\lim_{x \to a} f(x) = L_y$,
+we get two open input intervals centered around $a$ such that
+$$
+\begin{align}
+&f(\text{any number in the first input interval except $a$}) \in I_x, \\
+&g(\text{any number in the second input interval except $a$}) \in I_y.
+\end{align}
+$$</p>
+
+<p><img width="287" height="41" class="asymptote" src="../asymptote/8173d3dda3081042b50aed94b6f11a4d.svg" /></p><p>One of these input intervals is a subset of the other. Let $I_t$ denote that "smaller" interval.
+Now any number in $I_t$ is in <b>both</b> input intervals, and we have
+$$
+\begin{align}
+&f(\text{any number in $I_t$ except $a$}) \in I_x, \\
+&g(\text{any number in $I_t$ except $a$}) \in I_y.
+\end{align}
+$$
+This means that
+$$
+\vec v(\text{any number in $I_t$ except $a$}) \in \text{the rectangle},
+$$
+and because the rectangle is inside the circle $C$, we have
+$$
+\vec v(\text{any number in $I_t$ except $a$}) \in C.
+$$</p>
+
+<p>So, if $\lim_{t \to a} f(t) = L_x$ and $\lim_{t \to a} g(t) = L_y$,
+then $\lim_{t \to a} (f(t), g(t)) = (L_x, L_y)$.
+This also goes the other way, and the proof is similar;
+the biggest difference is that instead of choosing a rectangle inside a circle,
+we choose a circle inside a rectangle.</p>
+
+<div class="box graybox"><p>Let $f$ and $g$ be real-valued functions.
+Then the limit $\lim_{t \to a} (f(t), g(t))$ exists if and only if
+both of the limits $\lim_{t \to a} f(t)$ and $\lim_{t \to a} g(t)$ exist,
+and in that case, we have
+$$
+\lim_{t \to a} (f(t), g(t)) = \left( \lim_{t \to a} f(t), ~ \lim_{t \to a} g(t) \right).
+$$
+</p>
+
+</div><p>Essentially this result says that we can calculate any limit of a vector-valued function
+by separately calculating limits of the $\I$ and $\J$ parts (that is, $x$ and $y$ coordinates).
+This is called calculating the limits component-wise.
+The result is nice, because we know how to calculate limits of real-valued functions.
+If only one of those limits exists or neither of them exists,
+then the limit of the vector-valued function doesn't exist either.
+</p>
+
+</div>
+</body>
+</html>

@@ -357,11 +357,11 @@ graybox:
     all of the following conditions are true:
     <ul><li>
         For all numbers $c \in I$ except the end points of $I$,
-        we have $\lim_{x \to c} f(x) = f(a)$.
+        we have $\lim_{x \to c} f(x) = f(c)$.
     </li><li>
         If $a \in I$, then $\lim_{x \to a^+} f(x) = f(a)$.
     </li><li>
-        If $b \in I$, then $\lim_{x \to b^-} f(x) = f(a)$.
+        If $b \in I$, then $\lim_{x \to b^-} f(x) = f(b)$.
     </li></ul>
 
 Choosing $I = \mathbb{R} = (-\infty, \infty)$ gives the result that we had above,

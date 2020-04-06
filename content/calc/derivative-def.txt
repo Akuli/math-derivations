@@ -158,7 +158,7 @@ asymptote:
     dot((1,1), p=dotpen, L="$(1,1)$");
     dot(P, p=dotpen, L="$P$");
 
-To get the exact speed, we can take a limit of $\frac{v_y}{v_x}$
+To get the exact slope, we can take a limit of $\frac{v_y}{v_x}$
 with the point $P$ approaching the point $(1,1)$.
 We can approximate the slope of the tangent line to any precision we want
 by bringing $P$ close enough to $(1,1)$,

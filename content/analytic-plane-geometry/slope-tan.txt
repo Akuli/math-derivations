@@ -71,7 +71,7 @@ asymptote:
     draw(shift(fzerohere,0)*rrotate(atan(f(1)-f(0)))*((0,0.1)--(1,0.1)), p=deepred, arrow=Arrow(5mm),
         L="$\vec d$", align=NW);
 
-From trig, we know that
+From trig (TODO), we know that
 $$
 \vec d = \cos(\alpha)\I + \sin(\alpha)\J.
 $$
@@ -85,12 +85,12 @@ $$
 ## Using Slope for Trig
 
 This is not only a way to think about slope, but also a way to think about tan:
-$\tan(\alpha)$ is a slope of a line with angle $\alpha$.
+$\tan(\alpha)$ is the slope of a line with angle $\alpha$.
 
 For example, consider a line with slope $\tan(\alpha)$, going through $(0,0)$ for simplicity.
 Its equation is $y = \tan(\alpha)x + h$, where plugging in $x=y=0$ reveals that $h=0$.
-Reflecting the line to the other side of the $x$ axis gives a line
-whose equation is $y=-\tan(\alpha)x$ (TODO).
+[Reflecting](reflect.html) the line to the other side of the $x$ axis gives a line
+whose equation is $-y=\tan(\alpha)x$; that is, $y = -\tan(\alpha)x$.
 
 asymptote:
     unitsize(4cm);

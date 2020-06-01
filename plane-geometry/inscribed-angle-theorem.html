@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Power Rule, Part 2
+<title>Inscribed Angle Theorem
 </title>
 
     <script type="text/x-mathjax-config">
@@ -90,7 +90,7 @@
         <input type="checkbox" id="sidebar-checkbox-3" />
         <label for="sidebar-checkbox-3">Circle</label>
         <div class="dropdown">
-            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+            <a href="inscribed-angle-theorem.html">Inscribed angle theorem</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-4" />
@@ -138,129 +138,83 @@
         <input type="checkbox" id="sidebar-checkbox-11" />
         <label for="sidebar-checkbox-11">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-12" />
         <label for="sidebar-checkbox-12">Continuity</label>
         <div class="dropdown">
-            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Derivative</label>
         <div class="dropdown">
-            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="derivative-vector.html">Derivative of vector</a>
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
         </div>
         
         </div>
         </div>
-<h1 id="power-rule-part-2">Power Rule, Part 2<a class="headerlink" href="#power-rule-part-2" title="Link to this title">¶</a></h1><p>In <a href="derivative-power-rule-1.html">part 1</a>,
-we saw that the power rule $\frac{d}{dx} x^n = nx^{n-1}$ works in the following cases:
-<ul><li>
-    $n=-1$, $n=0$, $n=1$, $n=2$, $n=3$, $\dots$
-</li><li>
-    $n=\frac 1 2$, $n=\frac 1 3$, $n=\frac 1 4$, $\dots$
-</li></ul></p>
+<h1 id="inscribed-angle-theorem">Inscribed Angle Theorem<a class="headerlink" href="#inscribed-angle-theorem" title="Link to this title">¶</a></h1><p>Some people think that this theorem is very useful while others think that it it's
+very useless. I'll present it to you anyway because I need it for deriving
+the <a href="law-of-sines.txt">law of sines</a>.</p>
 
-<p>Next we'll figure out whether it works in other cases.
-</p>
+<p>Pick any three different points along the circumference of a circle.
+Then draw lines from one point (blue) and the center of the circle
+to the other two points (green).
+The lines form angles in the center of the circle and near the blue point.</p>
 
-<h2 id="negative-integer">Negative Integer<a class="headerlink" href="#negative-integer" title="Link to this title">¶</a></h2><p>Let $n$ be any negative integer.
-Because $n$ is negative, we have $n = (-1)\abs{n}$, and so
-$$
-x^n
-= x^{(-1)\abs{n}}
-= \left( x^{\abs{n}} \right)^{-1}.
-$$
-We know that the power rule works in the case $n = -1$, so $\frac{d}{dx} x^{-1} = (-1)x^{-2}$.
-By using that with the <a href="derivative-chain-rule.html">chain rule</a>, we get
-$$
-\frac{d}{dx} x^n
-= \left( x^{\abs{n}} \right)^{-1}
-= (-1)\left( x^{\abs{n}} \right)^{-2} \cdot \frac{d}{dx} x^{\abs{n}}.
-$$
-By using the power rule with the positive integer $\abs{n}$ (we know that it works for positive integers),
-we get
-$$
-\frac{d}{dx} x^{\abs{n}} = \abs{n}x^{\abs{n} - 1}.
-$$
-By bringing it all together, we get
+<p><img width="286" height="286" class="asymptote" src="../asymptote/b5628fe6ad75bca0c652b50387bdf951.svg" /></p><p>Our goal is to figure out how the green and blue angles compare to each other.
+Let's draw another line from the blue point to center.</p>
+
+<p><img width="286" height="286" class="asymptote" src="../asymptote/d4b7a3894944e35267d5341a1ff02997.svg" /></p><p>The blue angle got split into two pieces, $\alpha$ and $\beta$.
+We also have two triangles whose two sides are the circle radius.
+Because these triangles have two sides with the same length,
+they have two angles that are equal
+(TODO: explain why this works?).</p>
+
+<p><img width="286" height="286" class="asymptote" src="../asymptote/af3359c12d4060b0c637cac6ef6bf68e.svg" /></p><p>Because the sum of a triangle's angles is $180^\circ$ (TODO),
+we get the remaining angle of each triangle by subtracting other angles from $180^\circ$.</p>
+
+<p><img width="532" height="286" class="asymptote" src="../asymptote/941eaaa0f599de1c95b9b14645c97c60.svg" /></p><p>The sum of all angles drawn to the center of the circle is $360^\circ$, so
 $$
 \begin{align}
-\frac{d}{dx} x^n
-&= (-1)\left( x^{\abs{n}} \right)^{-2} \abs{n}x^{\abs{n} - 1} \\
-&= -\abs{n}x^{(-2)\abs{n}}x^{\abs{n} - 1}.
+\green{\text{green angle}}
+&= 360^\circ - (180^\circ - 2\alpha) - (180^\circ - 2\beta) \\
+&= 360^\circ - 180^\circ - 180^\circ + 2\alpha + 2\beta \\
+&= 2\underbrace{(\alpha + \beta)}_{\blue{\text{blue angle}}}.
 \end{align}
 $$
-Because $n$ is negative, we have $n = -\abs{n}$ and $\abs{n} = -n$, so
-$$
-\begin{align}
-\frac{d}{dx} x^n
-= nx^{2n}x^{-n - 1}
-= nx^{2n-n-1}
-= nx^{n-1}.
-\end{align}
-$$</p>
+Here $\alpha+\beta$ is the smaller of the angles we started with.</p>
 
-<div class="box graybox"><p>The power rule works when $n$ is a negative integer.
+<p><div class="box graybox"></p>
+
+<p>Consider any three points of a circle's circumference.
+Connect two of them to center and the third point with lines.
+Then the angle in the center of the circle is twice as big as
+the angle at the third circumference point.</p>
+
+<p><img width="286" height="286" class="asymptote" src="../asymptote/b3c73b4450106e3b37f9ca61ea3dd547.svg" /></p><p></div></p>
+
+<p>This result is known as the inscribed angle theorem.</p>
+
+<p>The above derivation won't work
+when the lines connecting each green point to the blue point
+are on the same side of the center.
+For example:</p>
+
+<p><img width="287" height="286" class="asymptote" src="../asymptote/f6dcbe854f7859a71664c4c2afb47ab6.svg" /></p><p>The same result still applies, although the derivation for this case looks a bit different.
 </p>
 
-</div><h2 id="rational-number">Rational Number<a class="headerlink" href="#rational-number" title="Link to this title">¶</a></h2><p>Let $a$ be any integer, and let $b$ be any positive integer.
-Now
-$$
-x^{a/b} = \left( x^a \right)^{1/b}.
-$$
-We know that the power rule works when its $n$ is $1/b$ or any integer, so
-$$
-\frac{d}{dx} x^{1/b} = \frac 1 b x^{1/b\ -1}, \qquad \frac{d}{dx} x^a = ax^{a-1}.
-$$
-The <a href="derivative-chain-rule.html">chain rule</a> gives
-$$
-\begin{align}
-\frac{d}{dx} x^{a/b}
-&= \frac{d}{dx} \left( x^a \right)^{1/b} \\
-&= \frac{1}{b} \left( x^a \right)^{1/b\ -1} ax^{a-1} \\
-&= \frac{a}{b} x^{a  ( 1/b\ -1 )} x^{a-1} \\
-&= \frac{a}{b} x^{a  ( 1/b\ -1 ) + (a-1)}.
-\end{align}
-$$
-Simplifying the power of $x$ gives
-$$
-a  \left( \frac 1 b - 1 \right) + (a-1)
-= a\frac 1 b - a + a - 1
-= \frac a b - 1,
-$$
-so we get
-$$
-\frac{d}{dx} x^{a/b} = \frac a b x^{a/b\ -1}.
-$$</p>
+<h2 id="example-thales-s-theorem">Example: Thales's Theorem<a class="headerlink" href="#example-thales-s-theorem" title="Link to this title">¶</a></h2><p>Consider a diameter of a circle.
+Pick any point from the circumference other than the end points of the diameter,
+and draw lines from the end points of the diameter to that point.</p>
 
-<div class="box graybox"><p>The power rule works when $n=a/b$, where $a$ is any integer and $b$ is a positive integer.
-</p>
+<p><img width="286" height="286" class="asymptote" src="../asymptote/61f5ee914fc2b334f9a4188c1e708648.svg" /></p><p>The angle looks like it's 90 degrees.
+This is known as Thales's theorem.
+To explain why it works, we can use the inscribed angle theorem:</p>
 
-</div><p>Any fraction of integers $\frac{A}{B}$ can be written as an integer divided by a positive integer.
-First of all, $B$ can't be zero, because we can't divide by zero.
-If $B$ is negative, then we have
-$$
-\frac{A}{B} = \frac{-A}{-B},
-$$
-where $-A$ is an integer and $-B = \abs{B}$ is a positive integer.</p>
-
-<div class="box graybox"><p>The power rule works when $n$ is a fraction of integers.
-</p>
-
-</div><p>This result includes <b>all</b> of our previous power rule results, including the results for integers;
-any integer $k$ can be written as a fraction of integers, because $k = \frac k 1$.</p>
-
-<p>A number is called rational, if it can be written as a fraction of integers,
-so the above result could be also written as follows:
-the power rule works when $n$ is rational.</p>
-
-<p>Not all numbers are rational.
-For example, $\sqrt{2}$ is not rational (find a proof from your favorite math YouTube channel).
-Those numbers are called irrational,
-and later we'll figure out what happens to the power rule when $n$ is irrational.
+<p><img width="286" height="286" class="asymptote" src="../asymptote/5badcca881497f03668d97d3a1bc9b8e.svg" /></p><p>The blue angle is half of the green angle, and the green angle is 180 degrees.
 </p>
 
 </div>

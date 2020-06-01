@@ -47,13 +47,14 @@ void axises(real xmin, real xmax, real ymin, real ymax,
             pen xpen=defaultpen(), pen ypen=defaultpen(),
             transform T=shift(0,0)) {
     // TODO: come up with a nice way to add numbers along the axises
+    // TODO: make labels work with latest asymptote version
     if (xmin != 0 || xmax != 0) {
         draw(T*( (xmin,0)--(xmax,0) ), p=xpen, arrow=Arrow(size=0.7cm));
-        label(T*(xmax,0), p=xpen, L=xlabel, align=E);
+        //label(T*(xmax,0), p=xpen, L=xlabel, align=E);
     }
     if (ymin != 0 || ymax != 0) {
         draw(T*( (0,ymin)--(0,ymax) ), p=ypen, arrow=Arrow(size=0.7cm));
-        label(T*(0,ymax), p=ypen, L=ylabel, align=(ymin < ymax ? NE : SE));
+        //label(T*(0,ymax), p=ypen, L=ylabel, align=(ymin < ymax ? NE : SE));
     }
 }
 

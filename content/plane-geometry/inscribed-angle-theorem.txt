@@ -1,0 +1,214 @@
+# Inscribed Angle Theorem
+
+Some people think that this theorem is very useful while others think that it it's
+very useless. I'll present it to you anyway because I need it for deriving
+the [law of sines](law-of-sines.txt).
+
+Pick any three different points along the circumference of a circle.
+Then draw lines from one point (blue) and the center of the circle
+to the other two points (green).
+The lines form angles in the center of the circle and near the blue point.
+
+asymptote:
+    unitsize(5cm);
+    draw(unitcircle);
+
+    pair A = cis(2.5);
+    pair B = cis(0.2);
+    pair thirdPoint = cis(4);
+
+    draw(A--thirdPoint--B);
+    draw(A--(0,0)--B);
+
+    dot(A, p=dotpen+deepgreen);
+    dot(B, p=dotpen+deepgreen);
+    dot(thirdPoint, p=dotpen+blue);
+
+    draw(rarc(thirdPoint, 0.2, angle(B - thirdPoint), angle(A - thirdPoint)), p=blue);
+    draw(rarc((0,0), 0.25, angle(B), angle(A)), p=deepgreen);
+
+Our goal is to figure out how the green and blue angles compare to each other.
+Let's draw another line from the blue point to center.
+
+asymptote:
+    unitsize(5cm);
+    draw(unitcircle);
+
+    pair A = cis(2.5);
+    pair B = cis(0.2);
+    pair thirdPoint = cis(4);
+
+    draw(A--thirdPoint--B);
+    draw(A--(0,0)--B);
+
+    draw(thirdPoint--(0,0), p=gray+smalldashes);
+    dot(A, p=dotpen+deepgreen);
+    dot(B, p=dotpen+deepgreen);
+    dot(thirdPoint, p=dotpen+blue);
+
+    draw(rarc(thirdPoint, 0.2, angle(B - thirdPoint), angle(A - thirdPoint)), p=blue);
+    draw(rarc((0,0), 0.25, angle(B), angle(A)), p=deepgreen);
+    draw(rarc(thirdPoint, 0.3, angle(-thirdPoint), angle(A - thirdPoint)), L="$\alpha$", p=darkorange);
+    draw(rarc(thirdPoint, 0.4, angle(B - thirdPoint), angle(-thirdPoint)), L="$\beta$", p=magenta);
+
+The blue angle got split into two pieces, $\alpha$ and $\beta$.
+We also have two triangles whose two sides are the circle radius.
+Because these triangles have two sides with the same length,
+they have two angles that are equal
+(TODO: explain why this works?).
+
+asymptote:
+    unitsize(5cm);
+    draw(unitcircle);
+
+    pair A = cis(2.5);
+    pair B = cis(0.2);
+    pair thirdPoint = cis(4);
+
+    draw(A--thirdPoint--B);
+    draw(A--(0,0)--B);
+
+    draw(thirdPoint--(0,0), p=gray+smalldashes);
+    dot(A, p=dotpen+deepgreen);
+    dot(B, p=dotpen+deepgreen);
+    dot(thirdPoint, p=dotpen+blue);
+
+    draw(rarc(thirdPoint, 0.2, angle(B - thirdPoint), angle(A - thirdPoint)), p=blue);
+    draw(rarc((0,0), 0.25, angle(B), angle(A)), p=deepgreen);
+    draw(rarc(thirdPoint, 0.3, angle(-thirdPoint), angle(A - thirdPoint)), L="$\alpha$", p=darkorange);
+    draw(rarc(thirdPoint, 0.4, angle(B - thirdPoint), angle(-thirdPoint)), L="$\beta$", p=magenta);
+
+    draw(rarc(A, 0.3, angle(thirdPoint-A), angle(-A)), L="$\alpha$", p=darkorange);
+    draw(rarc(B, 0.4, angle(thirdPoint-B), angle(-B)), L="$\beta$", p=magenta, align=cis(3.5));
+
+Because the sum of a triangle's angles is $180^\circ$ (TODO),
+we get the remaining angle of each triangle by subtracting other angles from $180^\circ$.
+
+asymptote:
+    unitsize(5cm);
+    draw(unitcircle);
+
+    pair A = cis(2.5);
+    pair B = cis(0.2);
+    pair thirdPoint = cis(4);
+
+    draw(A--thirdPoint--B);
+    draw(A--(0,0)--B);
+
+    draw(thirdPoint--(0,0), p=gray+smalldashes);
+    dot(A, p=dotpen+deepgreen);
+    dot(B, p=dotpen+deepgreen);
+    dot(thirdPoint, p=dotpen+blue);
+
+    draw(rarc(thirdPoint, 0.2, angle(B - thirdPoint), angle(A - thirdPoint)), p=blue);
+    draw(rarc((0,0), 0.25, angle(B), angle(A)), p=deepgreen);
+    draw(rarc(thirdPoint, 0.3, angle(-thirdPoint), angle(A - thirdPoint)), L="$\alpha$", p=darkorange);
+    draw(rarc(thirdPoint, 0.4, angle(B - thirdPoint), angle(-thirdPoint)), L="$\beta$", p=magenta);
+
+    draw(rarc(A, 0.3, angle(thirdPoint-A), angle(-A)), L="$\alpha$", p=darkorange);
+    draw(rarc(B, 0.4, angle(thirdPoint-B), angle(-B)), L="$\beta$", p=magenta, align=cis(3.5));
+
+    draw(rarc((0,0), 0.15, angle(A), 2pi+angle(thirdPoint)), p=olive);
+    draw((-1.2,-0.2)..(-1.1,-0.2)..(-0.3,0)..(-0.2,0), p=olive, arrow=Arrow(3mm),
+        L=Label("$180^\circ-2\alpha$", align=W, position=Relative(0)));
+    draw(rarc((0,0), 0.2, angle(thirdPoint), angle(B)), p=red);
+    draw((1.4,-0.5)..(1.1,-0.6)..(0.15,-0.2), p=red, arrow=Arrow(3mm),
+        L=Label("$180^\circ-2\beta$", align=N, position=Relative(0)));
+
+The sum of all angles drawn to the center of the circle is $360^\circ$, so
+$$
+\begin{align}
+\green{\text{green angle}}
+&= 360^\circ - (180^\circ - 2\alpha) - (180^\circ - 2\beta) \\
+&= 360^\circ - 180^\circ - 180^\circ + 2\alpha + 2\beta \\
+&= 2\underbrace{(\alpha + \beta)}_{\blue{\text{blue angle}}}.
+\end{align}
+$$
+Here $\alpha+\beta$ is the smaller of the angles we started with.
+
+comment:
+    currently there seems to be no good way to put asymptote inside graybox
+
+<div class="box graybox">
+
+Consider any three points of a circle's circumference.
+Connect two of them to center and the third point with lines.
+Then the angle in the center of the circle is twice as big as
+the angle at the third circumference point.
+
+asymptote:
+    unitsize(5cm);
+    draw(unitcircle);
+    pair A = cis(2.5);
+    pair B = cis(0.2);
+    pair thirdPoint = cis(4);
+    draw(A--thirdPoint--B);
+    draw(A--(0,0)--B);
+    dot(A, p=dotpen+deepgreen);
+    dot(B, p=dotpen+deepgreen);
+    dot(thirdPoint, p=dotpen+blue);
+    draw(rarc(thirdPoint, 0.2, angle(B - thirdPoint), angle(A - thirdPoint)), p=blue, L="$\theta$");
+    draw(rarc((0,0), 0.25, angle(B), angle(A)), p=deepgreen, L="$2\theta$");
+
+</div>
+
+This result is known as the inscribed angle theorem.
+
+The above derivation won't work
+when the lines connecting each green point to the blue point
+are on the same side of the center.
+For example:
+
+asymptote:
+    unitsize(5cm);
+    draw(unitcircle);
+    pair A = cis(3.3);
+    pair B = cis(1.9);
+    pair thirdPoint = cis(4);
+    draw(A--thirdPoint--B);
+    draw(A--(0,0)--B);
+    dot(A, p=dotpen+deepgreen);
+    dot(B, p=dotpen+deepgreen);
+    dot(thirdPoint, p=dotpen+blue);
+    draw(rarc(thirdPoint, 0.2, angle(B - thirdPoint), angle(A - thirdPoint)), p=blue, L="$\theta$");
+    draw(rarc((0,0), 0.25, angle(B), 2pi+angle(A)), p=deepgreen, L="$2\theta$");
+
+The same result still applies, although the derivation for this case looks a bit different.
+
+
+## Example: Thales's Theorem
+
+Consider a diameter of a circle.
+Pick any point from the circumference other than the end points of the diameter,
+and draw lines from the end points of the diameter to that point.
+
+asymptote:
+    unitsize(5cm);
+    draw(unitcircle);
+
+    pair P = cis(1);
+    dot((0,0), p=dotpen);
+
+    draw((-1,0)--(1,0));
+    draw((-1,0)--P--(1,0), p=gray);
+    dot(P, p=dotpen+blue);
+
+The angle looks like it's 90 degrees.
+This is known as Thales's theorem.
+To explain why it works, we can use the inscribed angle theorem:
+
+asymptote:
+    unitsize(5cm);
+    draw(unitcircle);
+
+    pair P = cis(1);
+    dot((0,0), p=dotpen);
+
+    draw((-1,0)--(1,0));
+    draw((-1,0)--P--(1,0), p=gray);
+    dot(P, p=dotpen+blue);
+
+    draw(rarc(P, 0.15, angle((1,0) - P), angle((-1,0) - P)), p=blue);
+    draw(rarc((0,0), 0.2, pi, 2pi), p=deepgreen);
+
+The blue angle is half of the green angle, and the green angle is 180 degrees.

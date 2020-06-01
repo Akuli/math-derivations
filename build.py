@@ -73,6 +73,7 @@ def get_sidebar_content(txtfile):
 #    return '<div id="sidebar">%s</div>' % join([
     return join([
         link("Front page", 'index'),
+
         dropdown("Equations and functions", join([
             link("Inverse functions",
                  'eqs-and-funcs/inverse-funcs'),
@@ -83,6 +84,7 @@ def get_sidebar_content(txtfile):
             link("How solving inequalities works",
                  'eqs-and-funcs/how-inequations-work'),
         ])),
+
         dropdown("Vectors", join([
             dropdown("Dot product", join([
                 link("Projection", 'vectors/dot-projection'),
@@ -91,6 +93,21 @@ def get_sidebar_content(txtfile):
                      'vectors/iwi-jwj'),
             ])),
         ])),
+
+        dropdown("Plane geometry", join([
+            # TODO: explain which things are not proved here
+            dropdown("Circle", join([
+                link("Inscribed angle theorem",
+                     'plane-geometry/inscribed-angle-theorem'),
+            ])),
+            dropdown("Triangle", join([
+                # TODO: sin, cos, tan in triangles
+                # TODO: sum of angles
+                # TODO: triangle area
+                # TODO: law of sines
+            ])),
+        ])),
+
         dropdown("Analytic plane geometry", join([
             dropdown("Transforming curves", join([
                 link("Reflecting", 'analytic-plane-geometry/reflect'),
@@ -121,6 +138,7 @@ def get_sidebar_content(txtfile):
                      'analytic-plane-geometry/why-its-hyperbola'),
             ])),
         ])),
+
         dropdown("Calculus", join([
             dropdown("Limits", join([
                 link("Definition of limit", 'calc/limit-def'),
@@ -148,6 +166,7 @@ def get_sidebar_content(txtfile):
                 link("Derivative of vector", 'calc/derivative-vector'),
             ])),
         ])),
+
     ])
 
 

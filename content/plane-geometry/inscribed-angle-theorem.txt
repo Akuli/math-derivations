@@ -124,7 +124,6 @@ $$
 &= 2\underbrace{(\alpha + \beta)}_{\blue{\text{blue angle}}}.
 \end{align}
 $$
-Here $\alpha+\beta$ is the smaller of the angles we started with.
 
 comment:
     currently there seems to be no good way to put asymptote inside graybox
@@ -193,7 +192,7 @@ asymptote:
     draw((-1,0)--P--(1,0), p=gray);
     dot(P, p=dotpen+blue);
 
-The angle looks like it's 90 degrees.
+The angle at top looks like it's 90 degrees.
 This is known as Thales's theorem.
 To explain why it works, we can use the inscribed angle theorem:
 

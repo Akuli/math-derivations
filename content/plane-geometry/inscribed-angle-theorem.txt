@@ -2,7 +2,7 @@
 
 Some people think that this theorem is very useful while others think that it it's
 very useless. I'll present it to you anyway because I need it for deriving
-the [law of sines](law-of-sines.txt).
+the [law of sines](law-of-sines.html).
 
 Pick any three different points along the circumference of a circle.
 Then draw lines from one point (blue) and the center of the circle

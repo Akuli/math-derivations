@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Derivative of a Vector-valued Function
+<title>Law of Cosines
 </title>
 
     <script type="text/x-mathjax-config">
@@ -90,13 +90,13 @@
         <input type="checkbox" id="sidebar-checkbox-3" />
         <label for="sidebar-checkbox-3">Circle</label>
         <div class="dropdown">
-            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+            <a href="inscribed-angle-theorem.html">Inscribed angle theorem</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-4" />
         <label for="sidebar-checkbox-4">Triangle</label>
         <div class="dropdown">
-            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a>
+            <a href="law-of-sines.html">Law of sines</a><a href="law-of-cosines.html">Law of cosines</a>
         </div>
         
         </div>
@@ -138,88 +138,109 @@
         <input type="checkbox" id="sidebar-checkbox-11" />
         <label for="sidebar-checkbox-11">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-12" />
         <label for="sidebar-checkbox-12">Continuity</label>
         <div class="dropdown">
-            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Derivative</label>
         <div class="dropdown">
-            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="derivative-vector.html">Derivative of vector</a>
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
         </div>
         
         </div>
         </div>
-<h1 id="derivative-of-a-vector-valued-function">Derivative of a Vector-valued Function<a class="headerlink" href="#derivative-of-a-vector-valued-function" title="Link to this title">¶</a></h1><p>Let $\vec v$ be a vector-valued function.
-If we just try to apply the definition of derivative to it, we get
-$$
-\vec v'(t) = \lim_{h \to 0} \frac{\vec v(t+h) - \vec v(t)}{h}.
-$$
-This works, although the meanings of the operations involved change a bit.
-On the top, we are now subtracting vectors instead of numbers, and the result is a vector.
-When we divide by $h$, we divide a vector by a number, which results in a vector,
-so we end up taking a <a href="limit-vector.html">limit of a vector</a>.
-Just like before, we call this the derivative of $f$, and we write
-$$
-\frac{d}{dt} \vec v(t) = \vec v'(t),
-$$
-although now we use $t$ instead of $x$ everywhere, so we have $\frac{d}{dt}$ instead of $\frac{d}{dx}$.</p>
+<h1 id="law-of-cosines">Law of Cosines<a class="headerlink" href="#law-of-cosines" title="Link to this title">¶</a></h1><p>Let $\vec a$, $\vec b$ and $\vec c$ be the vectors connecting the corners of any triangle
+so that $\vec a$ and $\vec b$ are pointing away from the same triangle corner.
+Let $\gamma$ be the angle at that triangle corner.</p>
 
-<p>The physical meaning of this derivative is similar to the derivative of a real-valued function;
-if $\vec v(t)$ is the location of an object at time $t$, thought of as a point in space,
-then $\vec v'(t)$ is the velocity vector,
-indicating in which direction and how fast the object is moving.
-To see why, do <a href="derivative-def.html">the things that we did with real-valued functions</a>,
-replacing the walked distance with a vector representing the location.
-It's very common to use the letter $\vec v$ for the velocity vector,
-and some other letter such as $\vec r$ for the location.
+<p><img width="174" height="209" class="asymptote" src="../asymptote/b6c6d08f90ca721bb1620da42bafead2.svg" /></p><p>In the above picture, $-\vec b$ goes from the bottom corner to the top right corner, so
+$$
+\vec c = (-\vec b) + \vec a = \vec a - \vec b.
+$$
+We know that if $a$ and $b$ are numbers, then
+$$
+(a-b)^2 = a^2 - 2ab + b^2,
+$$
+and for deriving that (TODO), we only needed $(a-b)c=ac-bc$ and $ab=ba$.
+These also work with dot product of vectors instead of multiplication of numbers
+(see <a href="../vectors/dot-projection.html#dot-product-and-sum">this</a>
+and <a href="../vectors/angle-between-vectors.html#order-doesn-t-matter">this</a>),
+so the $(a-b)^2$ formula works
+if $a$ and $b$ are vectors and we replace all multiplications with dot products:
+$$
+(\vec a - \vec b)\cdot(\vec a - \vec b) = (\vec a\cdot\vec a) + 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b)
+$$
+By putting everything together, we get
+$$
+(\vec c \cdot \vec c)^2 = (\vec a\cdot\vec a) + 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b).
+$$
+Because $\vec a \cdot \vec a = |\vec a|^2$
+(see <a href="../vectors/dot-projection.html#defining-dot-product">here</a>)
+and similarly for all other vectors, we have
+$$
+|\vec c|^2 = |\vec a|^2 - 2(\vec a \cdot \vec b) + |\vec b|^2.
+$$
+We can
+<a href="https://akuli.github.io/math-derivations/vectors/angle-between-vectors.html">write the dot product with angle between vectors</a>
+to get
+$$
+\vec a \cdot \vec b = |\vec a| |\vec b| \cos(\gamma).
+$$
+By plugging this in we get
+$$
+|\vec c|^2 = |\vec a|^2 + |\vec b|^2 - 2|\vec a||\vec b|\cos(\gamma).
+$$
+Finally, we can define $a = |\vec a|$ and similarly for $b$ and $c$.
+These are the side lengths of the triangle.</p>
+
+<p><img width="174" height="209" class="asymptote" src="../asymptote/f6e12125d238b54debce694cf40683be.svg" /></p><div class="box graybox"><p>Let $a$, $b$ and $c$ be the sides of any triangle,
+and let $\gamma$ be the angle opposite to $c$.
+Then
+$$
+c^2 = a^2 + b^2 - 2ab\cos(\gamma).
+$$
+This is known as the <b>law of cosines</b>.
 </p>
 
-<h2 id="taking-derivatives-of-i-and-j-parts-separately">Taking Derivatives of $\I$ and $\J$ parts Separately<a class="headerlink" href="#taking-derivatives-of-i-and-j-parts-separately" title="Link to this title">¶</a></h2><p>Let $\vec v(t) = (f(t), g(t))$.
-With the definition of derivative, we get
-$$
-\begin{align}
-\vec v'(t)
-&= \lim_{h \to 0} \frac{\vec v(t+h) - \vec v(t)}{h} \\
-&= \lim_{h \to 0} \frac{(f(t+h), g(t+h)) - (f(t), g(t))}{h}.
-\end{align}
-$$
-Let's switch to using the $\I$ and $\J$ notation of vectors. Now we get
-$$
-\begin{align}
-\vec v'(t)
-&= \lim_{h \to 0} \frac{( f(t+h)\I + g(t+h)\J ) - ( f(t)\I + g(t)\J )}{h} \\
-&= \lim_{h \to 0} \frac{f(t+h)\I + g(t+h)\J - f(t)\I - g(t)\J}{h} \\
-&= \lim_{h \to 0} \frac{(f(t+h) - f(t))\I + (g(t+h) - g(t))\J}{h} \\
-&= \lim_{h \to 0} \left( \frac{f(t+h) - f(t)}{h}\I + \frac{g(t+h) - g(t)}{h}\J \right).
-\end{align}
-$$
-By <a href="limit-vector.html#taking-limits-of-i-and-j-parts-separately">taking limits of $\I$ and $\J$ parts
-separately</a>, we get
-$$
-\vec v'(t)
-= \underbrace{\left( \lim_{h \to 0} \frac{f(t+h) - f(t)}{h} \right)}_{f'(t)}\I
-+ \underbrace{\left( \lim_{h \to 0} \frac{g(t+h) - g(t)}{h} \right)}_{g'(t)}\J.
-$$
-So, we can not only calculate any limit of a vector-valued function as two limits of real-valued functions,
-but also calculate any derivative of a vector-valued function as two derivatives of real-valued functions.
-Here the derivative $\vec v'(t)$ exists if and only if $f'(t)$ and $g'(t)$ exist;
-this follows from the "if and only if" in the result for taking limits of $\I$ and $\J$ parts separately.</p>
-
-<div class="box graybox"><p>Let $f$ and $g$ be real-valued functions.
-Then the derivative $\frac{d}{dt} (f(t),g(t))$ exists
-if and only if $\frac{d}{dt} f(t)$ and $\frac{d}{dt} g(t)$ exist,
-and in that case, we have
-$$
-\frac{d}{dt} (f(t),g(t)) = \left( \frac{d}{dt} f(t), ~ \frac{d}{dt} g(t) \right).
-$$
+</div><p>We get other well-known things as special cases.
 </p>
 
-</div></div>
+<h2 id="pythagorean-theorem">Pythagorean Theorem<a class="headerlink" href="#pythagorean-theorem" title="Link to this title">¶</a></h2><p>If $\gamma = 90^\circ$, then $\cos(\gamma) = 0$ and
+$$
+c^2 = a^2 + b^2.
+$$
+This is the Pythagorean theorem.</p>
+
+<p><img width="192" height="249" class="asymptote" src="../asymptote/95a7336f6f999e4c1673171c54978fa8.svg" /></p><p>Alternatively, you can go back to the law of cosines derivation and use the fact that
+if $\vec a$ and $\vec b$ are perpendicular, then $\vec a \cdot \vec b = 0$.
+</p>
+
+<h2 id="a-b-2-for-numbers">$(a-b)^2$ for numbers<a class="headerlink" href="#a-b-2-for-numbers" title="Link to this title">¶</a></h2><p>If $\gamma = 0$, then the triangle is flat,
+and it's a bit questionable whether we can still call it a triangle.</p>
+
+<p><img width="352" height="93" class="asymptote" src="../asymptote/4f33ddcf9f5ed9f3974d34a7876c0fc4.svg" /></p><p>The above derivation still works, and because $\cos(0)=1$, we get
+$$
+c^2 = a^2 + b^2 - 2ab.
+$$
+In the picture, $a$ is longer than $b$ so we have $c = a-b$.
+If $b$ was longer than $a$, then we would instead have $c = b-a$.
+Either way, we have $c = \abs{a-b}$ and
+$$
+c^2 = \abs{a-b}^2 = (a-b)^2.
+$$
+By putting all this together, we get
+$$
+(a-b)^2 = a^2 - 2ab + b^2,
+$$
+which is the formula that we used (and generalized) earlier on this page.
+</p>
+
+</div>
 </body>
 </html>

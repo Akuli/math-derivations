@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Angle Between Vectors
+<title>Law of Sines
 </title>
 
     <script type="text/x-mathjax-config">
@@ -78,7 +78,7 @@
         <input type="checkbox" id="sidebar-checkbox-1" />
         <label for="sidebar-checkbox-1">Dot product</label>
         <div class="dropdown">
-            <a href="dot-projection.html">Projection</a><a href="angle-between-vectors.html">Angle between vectors</a><a href="iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
         </div>
         
         </div>
@@ -90,13 +90,13 @@
         <input type="checkbox" id="sidebar-checkbox-3" />
         <label for="sidebar-checkbox-3">Circle</label>
         <div class="dropdown">
-            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+            <a href="inscribed-angle-theorem.html">Inscribed angle theorem</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-4" />
         <label for="sidebar-checkbox-4">Triangle</label>
         <div class="dropdown">
-            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a>
+            <a href="law-of-sines.html">Law of sines</a><a href="law-of-cosines.html">Law of cosines</a>
         </div>
         
         </div>
@@ -155,91 +155,124 @@
         
         </div>
         </div>
-<h1 id="angle-between-vectors">Angle Between Vectors<a class="headerlink" href="#angle-between-vectors" title="Link to this title">¶</a></h1><p>Let $\vec v$ and $\vec w$ be nonzero vectors.
-By the angle between them, I mean an angle $\theta$ between 0 and 180 degrees like this:</p>
+<h1 id="law-of-sines">Law of Sines<a class="headerlink" href="#law-of-sines" title="Link to this title">¶</a></h1><p>We know how $\sin$, $\cos$ and $\tan$ work
+in a triangle that has a 90 degree corner (TODO),
+but the results of this derivation work for <b>any</b> triangle.</p>
 
-<p><img width="282" height="80" class="asymptote" src="../asymptote/6d471790d89b0ae6a17ad29d95e5f14c.svg" /></p><p>Let's draw a circle of radius $\abs{\vec v}$ around the "beginning" of $\vec v$ and $\vec w$.
-Let's also draw axises centered on that point so that $\vec w$ goes along one of the axises.
-These might not be the same as the $x$ and $y$ axises that we use most of the time,
-because these axises can be rotated depending on how $\vec w$ is rotated,
-so I'll call them $t$ and $u$ axises instead of $x$ and $y$.</p>
+<p>Let $\alpha$ be any angle of any triangle,
+and let $b$ and $c$ denote the sides not opposite to $\alpha$.</p>
 
-<p><img width="395" height="341" class="asymptote" src="../asymptote/432cfaf695dce2fc4a2ad552f2cdbc48.svg" /></p><p>From non-unit-circle trig (TODO),
-we know that the $t$ and $u$ coordinates of the tip of $\vec v$ are
-$$
-(t,u) = \Bigl( \abs{\vec v} \cos(\theta), \abs{\vec v} \sin (\theta) \Bigr).
-$$
-The $t$ coordinate $\abs{\vec v} \cos(\theta)$ is
-the projection of $\vec v$ onto $\vec w$ (this also works if it's negative).
-Recall from <a href="dot-projection.html">the previous page</a> that
-the dot product $\vec v \cdot \vec w$ is this projection
-multiplied by $\abs{\vec w}$, the length of the vector being projected onto.
-With this, we get
-$$
-\vec v \cdot \vec w = ( \text{projection} ) \abs{\vec w}
-= \abs{\vec v} \cos(\theta) \abs{\vec w}.
-$$
-This equation also holds if one or both of the vectors is $\vec 0$;
-in that case, both sides of the equation are zero,
-regardless of how we define the angle between $\vec 0$ and other vectors.</p>
+<p><img width="131" height="157" class="asymptote" src="../asymptote/f82689b3778be6d1a3959ca4c80b9de2.svg" /></p><p>Let's make a green copy of the triangle, rotate the copy by 180 degrees,
+and then move it so that the sides opposite to $\alpha$ match.</p>
 
-<div class="box graybox"><p>Let $\theta$ be the angle between the vectors $\vec v$ and $\vec w$.
-Then $\vec v \cdot \vec w = \abs{\vec v} \abs{\vec w} \cos(\theta)$.
+<p><img width="131" height="260" class="asymptote" src="../asymptote/6d77ab30e79f2234db4bf97273d8d2ba.svg" /></p><p>The opposite sides of the created 4-gon have the same lengths,
+so it is a parallelogram.
+By the parallelogram area formula (TODO), its area is $bc\sin(\alpha)$,
+because $\alpha$ is an angle of the parallelogram
+and $b$ and $c$ are the different sides.
+The parallelogram is made of two copies of the same triangle,
+so the area of the triangle is
+$$
+\text{triangle area} = \frac{bc\sin(\alpha)}{2}.
+$$
+Let $a$ be the side opposite to $\alpha$,
+and let $\beta$ and $\gamma$ be the angles opposite to $b$ and $c$.</p>
+
+<p><img width="131" height="157" class="asymptote" src="../asymptote/1f52c29f9ab22d4c5fe02871e68b8f34.svg" /></p><p>By doing the above calculation with $\beta$ instead of $\alpha$, we get
+$$
+\text{triangle area} = \frac{ac\sin(\beta)}{2},
+$$
+and with $\gamma$ we get
+$$
+\text{triangle area} = \frac{ab\sin(\gamma)}{2}.
+$$
+By setting all the different ways to write the triangle area equal, we get
+$$
+\frac{bc\sin(\alpha)}{2} = \frac{ac\sin(\beta)}{2} = \frac{ab\sin(\gamma)}{2}.
+$$
+Multiplying everything by $2$ and dividing by $abc$ gives
+$$
+\frac{\sin(\alpha)}{a} = \frac{\sin(\beta)}{b} = \frac{\sin(\gamma)}{b}.
+$$
+Finally, we rewrite this slightly to get what is typically presented in text books.
+By raising all sides to power $-1$, we get
+$$
+\left( \frac{\sin(\alpha)}{a} \right)^{-1}
+= \left( \frac{\sin(\beta)}{b} \right)^{-1}
+= \left( \frac{\sin(\gamma)}{b} \right)^{-1},
+$$
+and because power $-1$ flips a fraction around, we have
+$$
+\frac{a}{\sin(\alpha)} = \frac{b}{\sin(\beta)} = \frac{c}{\sin(\gamma)}.
+$$</p>
+
+<div class="box graybox"><p>Let $a$, $b$ and $c$ be the side lengths of any triangle,
+and let $\alpha$, $\beta$ and $\gamma$ be the angles opposite to those sides.
+Then
+$$
+\frac{a}{\sin(\alpha)} = \frac{b}{\sin(\beta)} = \frac{c}{\sin(\gamma)}.
+$$
+This is known as <b>law of sines</b>.
 </p>
 
-</div><p>This is a different way to think about the dot product.
-Using this formula, you can think about dot product without
-doing anything with projections.</p>
-
-<p>With this way to think about the dot product,
-we get easily some of the results that we derived on the previous page:
-<ul><li>
-The angle between any vector and the vector itself is zero, so
-$$
-\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} \underbrace{\cos(0)}_1 = \abs{\vec v}^2.
-$$
-</li><li>
-Let's check when the dot product is zero:
-$$
-\begin{align}
-\vec v \cdot \vec w &= 0 \\
-\abs{\vec v} \abs{\vec w} \cos(\theta) &= 0 \\
-\abs{\vec v}=0 \text{ or }  \abs{\vec w}=0 & \text{ or } \cos(\theta)=0
-\end{align}
-$$
-We see that there are two ways how the dot product can be zero:
-<ul><li>
-One of the vectors being dot producted is the zero vector.
-</li><li>
-The cosine of the angle between the vectors is zero.
-90 degrees is the only angle between 0 and 180 degrees whose cosine is zero,
-so this means that the angle between the vectors is 90 degrees; that is, the vectors are perpendicular.
-</li></ul>
-</li></ul>
+</div><p>So, the number that we get by dividing a side length with $\sin(\text{opposite angle})$
+doesn't depend on which side and angle we choose.
+It depends only on the triangle being used.
+Next we'll derive the law of sines again in a different way
+that also gives a satisfying explanation for what that number is.
 </p>
 
-<h2 id="order-doesn-t-matter">Order Doesn't Matter<a class="headerlink" href="#order-doesn-t-matter" title="Link to this title">¶</a></h2><p>Let $\theta$ be the angle between two vectors $\vec v$ and $\vec w$.
-It's also the angle between $\vec w$ and $\vec v$;
-the angle doesn't depend on which vector is which.
-Using this along with the formula we derived above, we get
-$$
-\vec v \cdot \vec w
-= \abs{\vec v} \abs{\vec w} \cos(\theta)
-= \abs{\vec w} \abs{\vec v} \cos(\theta)
-= \vec w \cdot \vec v.
-$$
-It's fine to swap the vector lengths in the middle,
-because they are numbers, and we know that the order doesn't matter when multiplying numbers.</p>
+<h2 id="different-derivation">Different derivation<a class="headerlink" href="#different-derivation" title="Link to this title">¶</a></h2><p>Again, consider any angle of any triangle.</p>
 
-<div class="box graybox"><p>For all vectors $\vec v$ and $\vec w$, we have $\vec v \cdot \vec w = \vec w \cdot \vec v$.
+<p><img width="216" height="260" class="asymptote" src="../asymptote/fc69b7822ffe2b97ca5c2daf13641ddc.svg" /></p><p>Let's place a circle around the triangle so that
+the circle touches each corner of the triangle.
+The pink dot in the middle is the center of this circle.</p>
+
+<p><img width="286" height="286" class="asymptote" src="../asymptote/9371f6db2fdc0cc97616e7d81628150b.svg" /></p><p>Let's draw lines from the center of the circle to other corners of the triangle:</p>
+
+<p><img width="286" height="286" class="asymptote" src="../asymptote/fb23a797a581f78f18f566957bce49a7.svg" /></p><p>We find a new triangle that I have colored with darker blue.
+Let's draw a line from the circle center perpendicularly to the opposite side.
+This splits an angle of the dark-blue triangle into two smaller angles
+that I'm drawing with white.</p>
+
+<p><img width="286" height="286" class="asymptote" src="../asymptote/9e1ad45eb53a7bdaf58afd90cb9e83b4.svg" /></p><p>The dark-blue triangle has two sides whose length is the radius of the circle.
+That's why it's symmetric along the line we drew.
+By that symmetry, the white angles are equal.
+By the <a href="inscribed-angle-theorem.html">inscribed angle theorem</a>,
+the two white angles together are $2\alpha$, so the white angles are also $\alpha$:</p>
+
+<p><img width="286" height="286" class="asymptote" src="../asymptote/d9f4ab06240e6ca8c0f47f7887283def.svg" /></p><p>Let $a$ denote the opposite side of the angle $\alpha$ in the big triangle.
+By the symmetry of the triangle, the 90 degree line we drew splits the $a$ side
+into two equally long pieces.</p>
+
+<p><img width="286" height="286" class="asymptote" src="../asymptote/b36b15aef2f98a8a4e400735dd79d8ef.svg" /></p><p>By calculating $\sin(\alpha)$ with either one of the 90 degree triangles, we get
+$$
+\sin(\alpha) = \frac{\text{opposite}}{\text{hypotenuse}} = \frac{a/2}{R},
+$$
+where $R$ denotes the radius of the circle.
+If we multiply both sides by $2R$ and divide by $\sin(\alpha)$, we get
+$$
+2R = \frac{a}{\sin(\alpha)}.
+$$</p>
+
+<p>Let $\beta$ and $\gamma$ be other angles of the triangle,
+and let $b$ and $c$ be their opposite sides.</p>
+
+<p><img width="216" height="260" class="asymptote" src="../asymptote/23f61c9a1a8f763775ee7f90b611f42b.svg" /></p><p>By applying the above result for $\beta$ and $\gamma$, we get
+$$
+\frac{b}{\sin(\beta)} = 2R, \quad \frac{c}{\sin(\gamma)} = 2R.
+$$
+We got the law of sines again, but with an extra $2R$ at the end.</p>
+
+<div class="box graybox"><p>Let $a$, $b$ and $c$ be the side lengths of any triangle,
+and let $\alpha$, $\beta$ and $\gamma$ be the angles opposite to those sides.
+Then
+$$
+\frac{a}{\sin(\alpha)} = \frac{b}{\sin(\beta)} = \frac{c}{\sin(\gamma)} = 2R,
+$$
+where $2R$ is the diameter of a circle touching all corners of the triangle.
 </p>
 
-</div><p>Going back to projections, it's not at all clear that
-projecting one vector onto the other and multiplying by the length of the vector being projected onto
-(that is, calculating dot product) doesn't depend on which vector is which,
-even though it was quite easy to see from the $\cos(\theta)$ formula.
-</p>
-
-</div>
+</div></div>
 </body>
 </html>

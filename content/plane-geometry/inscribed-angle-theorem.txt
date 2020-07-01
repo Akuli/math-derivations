@@ -130,7 +130,7 @@ comment:
 
 <div class="box graybox">
 
-Consider any three points of a circle's circumference.
+Consider any three different points of a circle's circumference.
 Connect two of them to center and the third point with lines.
 Then the angle in the center of the circle is twice as big as
 the angle at the third circumference point.

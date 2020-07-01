@@ -105,7 +105,7 @@ def get_sidebar_content(txtfile):
                 # TODO: sum of angles
                 # TODO: triangle area
                 link("Law of sines", 'plane-geometry/law-of-sines'),
-                # TODO: law of cosines
+                link("Law of cosines", 'plane-geometry/law-of-cosines'),
             ])),
         ])),
 

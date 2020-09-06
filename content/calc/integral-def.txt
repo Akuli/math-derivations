@@ -269,9 +269,12 @@ $$
 We can also do this using a partition of just two numbers, $x_0=2$ and $x_1=4$.
 This gives
 $$
-\text{upper sum} = \sum_{k=1}^1 (x_k - x_{k-1})\max_{[x_{k-1},x_k]}f
-= (x_1-x_0) \cdot 3
+\begin{align}
+\text{upper sum}
+&= \sum_{k=1}^1 (x_k - x_{k-1})\max_{[x_{k-1},x_k]}f \\
+&= (x_1-x_0) \cdot 3
 = (4-2) \cdot 3,
+\end{align}
 $$
 which is the area calculation in the beginning of this example.
 
@@ -412,7 +415,11 @@ This means that
 $$
 2-\frac{2}{n} \le \int_0^2 x\ dx \le 2+\frac{2}{n},
 $$
-and the only way how that can work for all values of $n$ is
+and because
+$$
+\lim_{n \to \infty} \left( 2 \pm \frac{2}{n} \right) = 2,
+$$
+the only way how that can work for all values of $n$ is
 $$
 \int_0^2 x\ dx = 2.
 $$
@@ -488,7 +495,7 @@ asymptote:
         draw((x,f(x))--(xnext,f(x)));
     }
 
-Because $f$ is strictly increasing for positive inputs, we again have
+Because $f$ is strictly increasing on the interval $\leftsquarebracket 0,2]$, we again have
 $$
 \max_{[x_{k-1},x_k]} f = f(x_k) = x_k^2
 \quad \text{and} \quad

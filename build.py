@@ -198,6 +198,7 @@ def get_head_extras(filename):
             green: [ "\\\\color{green}{#1}", 1 ],
 
             epsi: [ "\\\\varepsilon", 0 ],
+            leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
           }
         }
       });

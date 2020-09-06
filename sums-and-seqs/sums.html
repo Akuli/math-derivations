@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../style.css">
-<title>Continuity Properties
+<title>Sums
 </title>
 
     <script type="text/x-mathjax-config">
@@ -87,7 +87,7 @@
         <input type="checkbox" id="sidebar-checkbox-3" />
         <label for="sidebar-checkbox-3">Sums and sequences</label>
         <div class="dropdown">
-            <a href="../sums-and-seqs/sums.html">Sums</a>
+            <a href="sums.html">Sums</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-6" />
@@ -145,143 +145,199 @@
         <input type="checkbox" id="sidebar-checkbox-12" />
         <label for="sidebar-checkbox-12">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Continuity</label>
         <div class="dropdown">
-            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
         <label for="sidebar-checkbox-14">Derivative</label>
         <div class="dropdown">
-            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="derivative-vector.html">Derivative of vector</a>
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-15" />
         <label for="sidebar-checkbox-15">Integral</label>
         <div class="dropdown">
-            <a href="integral-def.html">Definition of integral</a>
+            <a href="../calc/integral-def.html">Definition of integral</a>
         </div>
         
         </div>
         </div>
-<h1 id="continuity-properties">Continuity Properties<a class="headerlink" href="#continuity-properties" title="Link to this title">¶</a></h1><p>Make sure that you are familiar with the <a href="cont-def.html">two ways to define continuity</a>.
+<h1 id="sums">Sums<a class="headerlink" href="#sums" title="Link to this title">¶</a></h1><p>The results on this page work for any integer $n \ge 1$.
 </p>
 
-<h2 id="moving-limit-inside-a-continuous-function">Moving Limit Inside a Continuous Function<a class="headerlink" href="#moving-limit-inside-a-continuous-function" title="Link to this title">¶</a></h2><p>Let $g$ be a function, and suppose that $\lim_{x \to a} g(x) = L$.
-Let $f$ be any function that is continuous at $L$.
-We prove that
+<h2 id="sum-of-positive-integers-up-to-n">Sum of positive integers up to $n$<a class="headerlink" href="#sum-of-positive-integers-up-to-n" title="Link to this title">¶</a></h2><p>Let's calculate
 $$
-\lim_{x \to a} f(g(x)) = f\left( \lim_{x \to a} g(x) \right).
-$$</p>
+1 + 2 + 3 + \dots + n.
+$$
+Suppose that this drawing has $n$ rows of squares.
+It actually has 7 rows, but this also works for any other value of $n$.</p>
 
-<p>Let $I_y$ be any output interval centered around $f(L)$.
-Because $f$ is continuous at $L$, we have $\lim_{x \to L} f(x) = f(L)$,
-so by definition of limit, there's an input interval $J$ centered around $L$ such that
-$$
-f(\text{any number in $J$ except $L$}) \in I_y.
-$$
-The interval $I_y$ is centered around $f(L)$, so it contains $f(L)$, and we actually have
-$$
-f(\text{any number in $J$}) \in I_y.
-$$
-The interval $J$ is an open interval centered around $L$, so
-we can use it as the <b>output</b> interval of $\lim_{x \to a} g(x) = L$.
-This way we get an input interval $I_x$ centered around $a$ such that
-$$
-g(\text{any number in $I_x$ except $a$}) \in J.
-$$</p>
+<p><img width="201" height="201" class="asymptote" src="../asymptote/9de24dc59e0738eaf082b2e4fdce2a81.svg" /></p><p>The top row contains 1 square, the one below that contains 2 squares, and so on.
+Finally, the bottom row contains 7 squares.
+For this reason, the total number of squares in the drawing is $1 + 2 + \dots + n$.
+Alternatively, the leftmost column contains 1 square, the one to the right from it contains 2 squares,
+and the rightmost column contains $n$ squares.</p>
 
-<p><img width="344" height="226" class="asymptote" src="../asymptote/4dbce384d0dde813e3759757ce5195b8.svg" /></p><p>By putting everything together, we get
-$$
-f\Bigl(\overbrace{g(\text{any number in $I_x$ except $a$})}^{\in J}\Bigr) \in I_y,
-$$
-so $\lim_{x \to a} f(g(x)) = f(L)$.</p>
+<p>Let's make a rotated copy of the drawing...</p>
 
-<div class="box graybox"><p>If $\lim_{x \to a} g(x)$ exists and $f$ is continuous at that number, then
-$$
-\lim_{x \to a} f(g(x)) = f\left( \lim_{x \to a} g(x) \right).
+<p><img width="484" height="201" class="asymptote" src="../asymptote/3bc5bbac0d0ebfe7bff61f1ab865f03a.svg" /></p><p>...and move the copies together:</p>
+
+<p><img width="229" height="201" class="asymptote" src="../asymptote/7f81cbbf91ceb2fe9cad8d35676c927b.svg" /></p><p>We now have a rectangle with
+$n+1$ squares horizontally (e.g. $n$ yellow squares and $1$ green square in top row)
+and $n$ squares vertically.
+That is a total of $n(n+1)$ squares.
+Exactly half of the squares are green, so the number of green squares is half of the total number of squares.
+On the other hand, we started with $1+2+\dots+n$ green squares.</p>
+
+<div class="box graybox"><p>$$
+1+2+\dots+n = \frac{n(n+1)}{2}
 $$
 </p>
 
-</div><h2 id="limit-of-division">Limit of Division<a class="headerlink" href="#limit-of-division" title="Link to this title">¶</a></h2><p>From a graph, we see that the function $h(x) = \frac 1 x$ is continuous on $(-\infty, 0)$ and $(0, \infty)$;
-<a href="../analytic-plane-geometry/why-its-hyperbola.html">the graph is a hyperbola</a>,
-and each "half" of the hyperbola <a href="cont-def.html">consists of just one part</a>.
-If this was a course in a university, then we wouldn't rely on a graph, but this is good enough for us.</p>
-
-<p><img width="367" height="366" class="asymptote" src="../asymptote/aa424862fc25d06c8a96227bae89585a.svg" /></p><p>If $\lim_{x \to a} g(x) = B \ne 0$, then $h$ is continuous at $B$, and with the above result, we get
+</div><h2 id="finite-backward-difference">Finite Backward Difference<a class="headerlink" href="#finite-backward-difference" title="Link to this title">¶</a></h2><p>For any function $f$ defined for integer inputs, let
 $$
-\lim_{x \to a} \frac{1}{g(x)}
-= \lim_{x \to a} h(g(x))
-= h\left( \lim_{x \to a} g(x) \right)
-= h(B) = \frac 1 B.
+\nabla f(n) = f(n)-f(n-1).
 $$
-If we also have $\lim_{x \to a} f(x) = A$, then
-with <a href="limit-basics.html#limit-of-product">limit of product</a>, we get
+This is known as the finite backward difference of $f$. For example,
+$$
+\nabla n^2 = n^2 - (n+1)^2 = n^2 - (n^2-2n+1) = 2n-1.
+$$
+This operation behaves somewhat like a <a href="../calc/derivative-def.html">derivative</a>.
+With a derivative, we have $\frac{d}{dx}x^2 = 2x$, but we got $2n-1$ instead of just $2n$.
+To see connection, recall that the derivative is
+$$
+f'(x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h},
+$$
+while the finite backward difference is the same thing with $h=-1$ and without a limit,
 $$
 \begin{align}
-\lim_{x \to a} \frac{f(x)}{g(x)}
-&= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
-&= \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} \frac{1}{g(x)} \right) \\
-&= A \cdot \frac 1 B = \frac A B.
+\frac{f(x+(-1))-f(x)}{-1}
+&= \frac{f(x-1)-f(x)}{-1} \\
+&= -(f(x-1)-f(x)) \\
+&= f(x)-f(x-1).
+\end{align}
+$$
+The derivative and finite backward difference are ways to figure out how fast the values of a function grow,
+but they do it differently.
+If $n$ and $x$ represent time as seconds and $f$ represents your location,
+then the finite difference tells how much you moved during the previous second
+while the derivative tells your current moving speed.</p>
+
+<p>These rules for finite difference are very similar to some derivative rules,
+and they can be proved just like the derivative rules:
+$$
+\begin{align}
+\nabla (f(n)+g(n)) &= \nabla f(n) + \nabla g(n) \\
+\nabla (f(n)-g(n)) &= \nabla f(n) - \nabla g(n) \\
+\nabla (cf(n)) &= c \cdot \nabla f(n) \\
+\nabla c &= 0 \\
+\nabla n &= 1 \\
+\nabla(cn) &= c
+\end{align}
+$$
+Not all derivative rules apply to the finite difference.
+For example, $\Delta n^2 \ne 2n$ like we saw above.
+</p>
+
+<h2 id="sum-of-positive-integers-up-to-n-again">Sum of positive integers up to $n$ (again)<a class="headerlink" href="#sum-of-positive-integers-up-to-n-again" title="Link to this title">¶</a></h2><p>The square drawing derivation above works for $1+2+\dots+n$,
+but it doesn't generalize nicely for e.g. $1^2+2^2+\dots+n^2$.
+For that reason, we'll derive the formula for $1+2+\dots+n$ again in a different way,
+using the finite difference.</p>
+
+<p>Above we got
+$$
+\nabla n^2 = 2n-1,
+$$
+and that's why
+$$
+\nabla\left( \frac{1}{2} n^2 \right) = \frac{1}{2}(2n-1) = n - \frac{1}{2}.
+$$
+To get rid of $-\frac{1}{2}$, we need to add $+\frac{1}{2}$ to the result of the finite difference.
+We can do that by adding $+\frac{1}{2}n$ before taking the finite difference; that is,
+$$
+\nabla\left( \frac{1}{2} n^2 + \frac{1}{2}n \right)
+= \nabla\left( \frac{1}{2} n^2 \right) + \nabla\left( \frac{1}{2} n \right)
+= n-\frac{1}{2}+\frac{1}{2}
+=n.
+$$
+In other words, by letting
+$$
+f(n) = \frac{1}{2} n^2 + \frac{1}{2}n = \frac{n(n+1)}{2},
+$$
+we get $1 = f(1)-f(0)$, $2 = f(2)-f(1)$ and so on.
+Now we can calculate
+$$
+\begin{align}
+1+2+\dots+n
+&= \quad f(1)-f(0) \\
+&\quad +f(2)-f(1) \\
+&\quad +f(3)-f(2) \\
+&\quad +f(4)-f(3) \\
+&\quad +f(5)-f(4) \\
+&\quad +\dots \\
+&\quad +f(n-1)-f(n-2) \\
+&\quad +f(n)-f(n-1),
+\end{align}
+$$
+and after canceling diagonally, we are left with
+$$
+1+2+\dots+n = f(n)-\underbrace{f(0)}_0 = \frac{n(n+1)}{2}.
+$$
+</p>
+
+<h2 id="sum-of-squares">Sum of squares<a class="headerlink" href="#sum-of-squares" title="Link to this title">¶</a></h2><p>Let's calculate
+$$
+1^2 + 2^2 + \dots + n^2.
+$$
+We'll do this similarly to the previous derivation.
+We start with
+$$
+\nabla n^3 = n^3-(n-1)^3 = n^3-(n^3-3n^2 1+3n 1^2-1^3) = 3n^2-3n+1,
+$$
+where we used the formula for $(a-b)^3$ (TODO).
+This leads to
+$$
+\nabla\left( \frac{1}{3} n^3 \right) = \frac{1}{3}(3n^2-3n+1) = n^2-n+\frac{1}{3}.
+$$
+Because $\nabla \frac{n(n+1)}{2} = n$ (see previous derivation) and $\nabla (\frac{1}{3}n) = \frac{1}{3}$,
+we get
+$$
+\begin{align}
+\nabla\left( \frac{1}{3} n^3 + \frac{n(n+1)}{2} - \frac{1}{3}n \right)
+&= n^2-n+\frac{1}{3} + n - \frac{1}{3}
+= n^2.
+\end{align}
+$$
+Just like in the previous derivation, we get
+$$
+\frac{1}{3} n^3 + \frac{n(n+1)}{2} - \frac{1}{3}n = 1^2+2^2+\dots+n^2.
+$$
+Usually this formula is instead written as
+$$
+\frac{n(n+1)(2n+1)}{6},
+$$
+which is a different way to write what we got, because
+$$
+\begin{align}
+\frac{n(n+1)(2n+1)}{6}
+&= \frac{(n^2+n)(2n+1)}{6} \\
+&= \frac{n^2(2n+1)+n(2n+1)}{6} \\
+&= \frac{2n^3+n^2+2n^2+n}{6} \\
+&= \frac{2n^3+3(n^2+n)-2n}{6} \\
+&= \frac{2}{6}n^3 + \frac{3}{6}(n^2+n) - \frac{2}{6}n \\
+&= \frac{1}{3}n^3 + \frac{n^2+n}{2} - \frac{1}{3}n.
 \end{align}
 $$</p>
 
-<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, and $\lim_{x \to a} g(x) \ne 0$, then
+<div class="box graybox"><p>$$
+1^2+2^2+\dots+n^2 = \frac{n(n+1)(2n+1)}{6}
 $$
-\lim_{x \to a} \frac{f(x)}{g(x)} =
-\frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}.
-$$
-</p>
-
-</div><p>Now we finally know how to calculate limits with division in them.
-</p>
-
-<h2 id="continuity-of-sum-difference-and-product-and-division">Continuity of Sum, Difference and Product and Division<a class="headerlink" href="#continuity-of-sum-difference-and-product-and-division" title="Link to this title">¶</a></h2><p>Let $f$ and $g$ be functions that are continuous at some number $a$. Let $h(x) = f(x)+g(x)$.
-Then, with <a href="limit-props.html#limit-of-sum">limit of sum</a>, we get
-$$
-\begin{align}
-\lim_{x \to a} h(x)
-&= \lim_{x \to a} (f(x)+g(x))\\
-&= \left( \lim_{x \to a} f(x) \right) + \left( \lim_{x \to a} g(x) \right) \\
-&= f(a) + g(a) \\
-&= h(a),
-\end{align}
-$$
-which shows that $h$ is also continuous at $a$.
-We have very similar limit properties for subtracting, multiplying and dividing, so
-we can do the same thing with any of those instead of $+$.</p>
-
-<div class="box graybox"><p>If $f$ and $g$ are continuous at $a$, then the following functions are also continuous at $a$:
-<ul><li>
-    $f(x)+g(x)$
-</li><li>
-    $f(x)-g(x)$
-</li><li>
-    $f(x)g(x)$
-</li></ul></p>
-
-<p>If additionally $g(a) \ne 0$, then the function $\frac{f(x)}{g(x)}$ is continuous at $a$.
-</p>
-
-</div><p>For continuous functions nested inside each other,
-suppose that $g$ is continuous at $a$ and $f$ is continuous at $g(a)$.
-Let $h(x) = f(g(x))$.
-Then, by moving the limit inside $f$ (see above), we get
-$$
-\begin{align}
-\lim_{x \to a} h(x)
-&= \lim_{x \to a} f(g(x)) \\
-&= f\left( \lim_{x \to a} g(x) \right) \\
-&= f(g(a)) = h(a).
-\end{align}
-$$
-This shows that $h$ is continuous at $a$.</p>
-
-<div class="box graybox"><p>If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then $f(g(x))$ is continuous at $a$.
 </p>
 
 </div></div>

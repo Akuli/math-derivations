@@ -392,7 +392,7 @@ $$
 \quad \text{and} \quad
 \min_{[x_{k-1},x_k]} f = f(x_{k-1}) = x_{k-1}.
 $$
-With the sum of positive integers below $n$ formula (TODO), we now get
+With [a sum formula](../sums-and-seqs/sums.html#sum-of-positive-integers-up-to-n-again), we now get
 $$
 \begin{align}
 \text{upper sum}
@@ -494,7 +494,7 @@ $$
 \quad \text{and} \quad
 \min_{[x_{k-1},x_k]} f = f(x_{k-1}) = x_{k-1}^2.
 $$
-With the sum of squares formula (TODO), we get
+With [the sum of squares formula](../sums-and-seqs/sums.html#sum-of-squares), we get
 $$
 \begin{align}
 \text{upper sum}

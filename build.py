@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
-import collections
-import functools
 import glob
 import hashlib
 import itertools
 import os
-import re
 import shutil
 import subprocess
 import tempfile
 import textwrap
 import xml.etree.ElementTree
 
-from htmlthingy import Builder, tags, linkcheck
-from bs4 import BeautifulSoup
+from htmlthingy import Builder, tags
 
 
 # TODO: move these to htmlthingy
@@ -69,8 +65,6 @@ def get_sidebar_content(txtfile):
         ''' % (checkbox_id, checkbox_id, title, content)
 
     join = ''.join
-
-#    return '<div id="sidebar">%s</div>' % join([
     return join([
         link("Front page", 'index'),
 
@@ -89,9 +83,13 @@ def get_sidebar_content(txtfile):
             dropdown("Dot product", join([
                 link("Projection", 'vectors/dot-projection'),
                 link("Angle between vectors", 'vectors/angle-between-vectors'),
-                link("$\I$'s with $\I$'s, $\J$'s with $\J$'s",
+                link(r"$\I$'s with $\I$'s, $\J$'s with $\J$'s",
                      'vectors/iwi-jwj'),
             ])),
+        ])),
+
+        dropdown("Sums and sequences", join([
+            link("Sums", 'sums-and-seqs/sums'),
         ])),
 
         dropdown("Plane geometry", join([

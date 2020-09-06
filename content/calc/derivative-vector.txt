@@ -9,7 +9,7 @@ This works, although the meanings of the operations involved change a bit.
 On the top, we are now subtracting vectors instead of numbers, and the result is a vector.
 When we divide by $h$, we divide a vector by a number, which results in a vector,
 so we end up taking a [limit of a vector](limit-vector.html).
-Just like before, we call this the derivative of $f$, and we write
+Just like before, we call this the derivative of $v$, and we write
 $$
 \frac{d}{dt} \vec v(t) = \vec v'(t),
 $$

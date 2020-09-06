@@ -1,97 +1,57 @@
 #!/usr/bin/env python3
-"""Commit the html directory to the gh-pages branch and push.
+"""build the docs and commit them to the gh-pages branch"""
 
-This script is crazy. Use it if you dare!
-"""
-
-import contextlib
-import functools
 import os
-import re
+import pathlib
 import shlex
 import shutil
 import subprocess
 import sys
 import tempfile
 
-info = functools.partial(print, '**** %s:' % sys.argv[0])
 
+def run(*command, cwd=None):
+    command_string = ' '.join(map(shlex.quote, command))
+    if cwd:
+        print(f"running {command_string!r} in {cwd}")
+    else:
+        print(f"running {command_string!r}")
 
-def run(*command, capture=False):
-    info("running", ' '.join(map(shlex.quote, command)))
-    if capture:
-        output = subprocess.check_output(list(command))
-        return output.decode('utf-8', errors='replace')
-
-    subprocess.check_call(list(command))
-    return None     # pep-8
-
-
-@contextlib.contextmanager
-def switch_branch(new_branch):
-    output = run('git', 'branch', capture=True)
-    [old_branch] = re.findall('^\* (.*)$', output, flags=re.MULTILINE)
-    run('git', 'checkout', new_branch)
-
-    try:
-        yield
-    except Exception as e:
-        # undo everything to make sure that going back to old_branch works
-        run('git', 'reset', 'HEAD', '.')
-        run('git', 'checkout', '--', '.')
-        raise e
-    finally:
-        run('git', 'checkout', old_branch)
-
-
-@contextlib.contextmanager
-def git_stash():
-    # git stash doesn't work if there's nothing to stash
-    open('stash-dummy', 'x').close()
-
-    run('git', 'stash', '--all')
-    try:
-        yield
-    finally:
-        run('git', 'stash', 'pop')
-        os.remove('stash-dummy')
+    subprocess.check_call(list(command), cwd=cwd)
 
 
 def main():
+    if not os.environ.get('VIRTUAL_ENV'):
+        sys.exit(f"{sys.argv[0]}: not running in virtualenv (see README.md)")
+
     run(sys.executable, 'build.py')
 
+    print("creating a temporary directory for building docs")
     with tempfile.TemporaryDirectory() as tmpdir:
-        info("copying html/ to a temporary directory")
-        tmpdir = os.path.join(tmpdir, 'html')
-        shutil.copytree('html', tmpdir)
+        run('git', 'clone', '--depth=1', '--branch=gh-pages', 'https://github.com/Akuli/math-derivations', cwd=tmpdir)
+        temp_git_dir = pathlib.Path(tmpdir) / 'math-derivations'
+        run('git', 'checkout', 'gh-pages', cwd=temp_git_dir)
 
-        with git_stash():
-            with switch_branch('gh-pages'):
-                run('git', 'pull', 'origin', 'gh-pages')   # avoid merging hell
+        for subpath in temp_git_dir.iterdir():
+            if subpath.name not in {'.git', '.gitignore'}:
+                print(f"deleting {subpath}")
+                try:
+                    shutil.rmtree(subpath)
+                except NotADirectoryError:
+                    subpath.unlink()
 
-                for item in os.listdir():
-                    if item[0] != '.':
-                        info('removing', item)
-                        if os.path.isdir(item):
-                            shutil.rmtree(item)
-                        else:
-                            os.remove(item)
+        # TODO: do this in a simpler way?
+        temp_html_path = pathlib.Path(tmpdir) / 'html'
+        print(f"copying: html --> {temp_html_path}")
+        shutil.copytree('html', temp_html_path)
+        for subpath in temp_html_path.iterdir():
+            new_path = temp_git_dir / subpath.name
+            print(f"moving: {subpath} --> {new_path}")
+            subpath.rename(new_path)
 
-                for item in os.listdir(tmpdir):
-                    if item[0] != '.' or item == '.nojekyll':
-                        info('copying', item)
-                        src = os.path.join(tmpdir, item)
-                        if os.path.isdir(src):
-                            shutil.copytree(src, item)
-                        else:
-                            shutil.copy(src, item)
-
-                run('git', 'add', '--all', '.')
-                run('git', 'commit', '-m', 'updating docs with ' + __file__)
-
-        info("deleting the temporary directory")
-
-    run('git', 'push', 'origin', 'gh-pages')
+        run('git', 'add', '--all', '.', cwd=temp_git_dir)
+        run('git', 'commit', '-m', f'publishing with {__file__}', cwd=temp_git_dir)
+        run('git', 'push', 'origin', 'gh-pages', cwd=temp_git_dir)
 
 
 if __name__ == '__main__':

@@ -166,6 +166,9 @@ def get_sidebar_content(txtfile):
                      'calc/derivative-product-quotient-rules'),
                 link("Derivative of vector", 'calc/derivative-vector'),
             ])),
+            dropdown("Integral", join([
+                link("Definition of integral", 'calc/integral-def'),
+            ])),
         ])),
 
     ])

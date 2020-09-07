@@ -132,7 +132,7 @@ If we had used minimums instead, we would instead get a **lower sum** like this:
 $$
 \text{integral} \ge \underbrace{\sum_{k=1}^n (x_k-x_{k-1})\min_{[x_{k-1},x_k]} f}_{\text{lower sum}},
 $$
-The picture for the lower sum looks like this instead:
+The picture for the lower sum looks like this:
 
 asymptote:
     unitsize(2cm);
@@ -169,7 +169,7 @@ and you might be able to see where this is going now;
 to find the value of the integral, we can squeeze it between upper sums and lower sums.
 
 The minimums and maximums don't exist for all functions $f$,
-but they do exist that $f$ is continuous (TODO).
+but they do exist if $f$ is continuous (TODO).
 For that reason, **we assume that $f$ is continuous** from now on.
 
 Now we are ready to define what an integral means.
@@ -205,7 +205,7 @@ If you want to know more about Riemann integrals, then you should go study math 
 
 This approach has several advantages over just defining the integral as area under a graph:
 <ul><li>
-    We never defined what exactly area is, and this is much easier than defining area properly.
+    We never defined what exactly area is, and this is easier than defining area properly.
 </li><li>
     The lower sums and upper sums work
     even if the function $f$ has negative values and its graph (or a part of it) is below the $x$ axis.
@@ -302,10 +302,9 @@ asymptote:
     dot((2,0), p=dotpen, L="$2$", align=S);
 
 We partition the interval $[0,2]$ into 5 equally sized parts.
-The first partition number will be $0$.
 Because each parts has length $\frac{2}{5}$ (that is, interval length $2$ divided into $5$ equal pieces),
-the next one is $\frac{2}{5}$.
-The one after that will be $\frac{2}{5}+\frac{2}{5}=\frac{4}{5}$.
+the first two numbers of the partition will be $0$ and $\frac{2}{5}$.
+The number after those will be $\frac{2}{5}+\frac{2}{5}=\frac{4}{5}$.
 By continuing like this, we see that the partition we want is
 $$
 x_0=\frac{0}{5}, ~ x_1=\frac{2}{5}, ~ x_2=\frac{4}{5}, ~ x_3=\frac{6}{5}, ~ x_4=\frac{8}{5}, ~ x_5=\frac{10}{5}.
@@ -395,7 +394,7 @@ $$
 \quad \text{and} \quad
 \min_{[x_{k-1},x_k]} f = f(x_{k-1}) = x_{k-1}.
 $$
-With [a sum formula](../sums-and-seqs/sums.html#sum-of-positive-integers-up-to-n-again), we now get
+With [a sum formula](../sums-and-seqs/sums.html#sum-of-positive-integers-up-to-n), we now get
 $$
 \begin{align}
 \text{upper sum}
@@ -431,8 +430,8 @@ We calculate
 $$
 \int_0^2 x^2\ dx.
 $$
-Unlike in the previous examples, we can't just calculate the area in the graph without an integral
-because we don't know how to calculate areas involving parabolas.
+Unlike in the previous examples, we can't just calculate the area in the graph without an integral,
+because we don't have a formula for the area under a parabola.
 We finally have a reason for working with integrals.
 
 asymptote:
@@ -510,7 +509,7 @@ $$
 = \sum_{k=1}^n \frac{8}{n^3}k^2 \\
 &= \frac{8}{n^3}(1^2+2^2+\dots+n^2) \\
 &= \frac{8}{n^3}\frac{n(n+1)(2n+1)}{6}
-= \frac{8}{3}\left( 1+\frac{1}{n} \right)\left( 1+\frac{1}{2n} \right).
+= \frac{8}{3}\left( 1+\frac{1}{n} \right)\left( 1+\frac{1}{2n} \right)
 \end{align}
 $$
 and

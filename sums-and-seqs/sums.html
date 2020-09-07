@@ -201,7 +201,9 @@ the sum of yellow squares is half of what we got.</p>
 $$
 </p>
 
-</div><h2 id="sum-of-squares">Sum of Squares<a class="headerlink" href="#sum-of-squares" title="Link to this title">¶</a></h2><p>Let's calculate
+</div><h2 id="sum-of-squares">Sum of Squares<a class="headerlink" href="#sum-of-squares" title="Link to this title">¶</a></h2><p><small>This derivation is based on <a href="https://www.youtube.com/watch?v=3IX-ukfgZdk">this video</a>.</small></p>
+
+<p>Let's calculate
 $$
 1^2+2^2+\dots+n^2.
 $$
@@ -224,6 +226,23 @@ For example, the third row of the red triangle is now $\red{1~2~3~4~5~5~5}$,
 and $\color{#f60}{4~3~2~1}$ is added to the beginning of it.
 That gives $\magenta{5~5~5~5}~\red{5~5~5}$.</p>
 
-<p><img width="399" height="399" class="asymptote" src="../asymptote/c61b73b96002c8407302e48ee73bccb3.svg" /></p></div>
+<p><img width="399" height="399" class="asymptote" src="../asymptote/c61b73b96002c8407302e48ee73bccb3.svg" /></p><p>Each of the $n$ by $n$ squares now have $n$ columns or rows of $1,2,\dots,n$.
+There's one more $1,2,\dots,n$ from the blue squares.
+In total, the numbers $1,2,\dots,n$ appear $2n+1$ times, so by the previous result, the sum of all numbers is
+$$
+(2n+1)(1+2+\dots+n) = (2n+1)\frac{n(n+1)}{2} = \frac{n(n+1)(2n+1)}{2}.
+$$
+We started with a drawing representing $1^2+2^2+\dots+n^2$ and then added two more copies of it,
+so we have
+$$
+3(1^2+2^2+\dots+n^2) = \frac{n(n+1)(2n+1)}{2}.
+$$</p>
+
+<div class="box graybox"><p>$$
+1^2+2^2+\dots+n^2 = \frac{n(n+1)(2n+1)}{6}
+$$
+</p>
+
+</div></div>
 </body>
 </html>

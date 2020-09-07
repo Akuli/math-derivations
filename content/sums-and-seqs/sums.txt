@@ -58,6 +58,8 @@ graybox:
 
 ## Sum of Squares
 
+<small>This derivation is based on [this video](https://www.youtube.com/watch?v=3IX-ukfgZdk).</small>
+
 Let's calculate
 $$
 1^2+2^2+\dots+n^2.
@@ -188,3 +190,20 @@ asymptote:
             filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? lightmagenta : lightgreen, format("%d", y+n+1));
         }
     }
+
+Each of the $n$ by $n$ squares now have $n$ columns or rows of $1,2,\dots,n$.
+There's one more $1,2,\dots,n$ from the blue squares.
+In total, the numbers $1,2,\dots,n$ appear $2n+1$ times, so by the previous result, the sum of all numbers is
+$$
+(2n+1)(1+2+\dots+n) = (2n+1)\frac{n(n+1)}{2} = \frac{n(n+1)(2n+1)}{2}.
+$$
+We started with a drawing representing $1^2+2^2+\dots+n^2$ and then added two more copies of it,
+so we have
+$$
+3(1^2+2^2+\dots+n^2) = \frac{n(n+1)(2n+1)}{2}.
+$$
+
+graybox:
+    $$
+    1^2+2^2+\dots+n^2 = \frac{n(n+1)(2n+1)}{6}
+    $$

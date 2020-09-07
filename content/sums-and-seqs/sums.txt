@@ -97,14 +97,14 @@ $$
 &= f(x)-f(x-1).
 \end{align}
 $$
-The derivative and finite backward difference are ways to figure out how fast the values of a function grow,
-but they do it differently.
-If $n$ and $x$ represent time as seconds and $f$ represents your location,
-then the finite difference tells how much you moved during the previous second
-while the derivative tells your current moving speed.
+To better understand the difference and similarities between derivative and finite backward difference,
+imagine that $n$ and $x$ represent time as seconds, and $f$ is a location of an object.
+Then the finite difference tells how much the object has moved during the previous second,
+and the derivative is the speed of the object, which may vary during each second.
+These are different things, but they both describe whether the object is moving slowly or quickly.
 
 These rules for finite difference are very similar to some derivative rules,
-and they can be proved just like the derivative rules:
+and they can be proved just like the corresponding derivative rules:
 $$
 \begin{align}
 \nabla (f(n)+g(n)) &= \nabla f(n) + \nabla g(n) \\

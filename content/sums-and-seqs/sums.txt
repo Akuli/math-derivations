@@ -16,18 +16,18 @@ asymptote:
     unitsize(1cm);
     int n = 7;
     for (int x = 0; x < n; ++x) {
-        filldrawlabel(shift(x, 0)*unitsquare, lightgreen, format("%d", x+1));
+        filldrawlabel(shift(x, 0)*unitsquare, lightyellow, format("%d", x+1));
     }
 
-Let's make a yellow copy of the numbers and reverse the copy.
+Let's make a green copy of the numbers and reverse the copy.
 This does not change the sum of the numbers.
 
 asymptote:
     unitsize(1cm);
     int n = 7;
     for (int x = 0; x < n; ++x) {
-        filldrawlabel(shift(x, 0)*unitsquare, lightgreen, format("%d", x+1));
-        filldrawlabel(shift(x, -1)*unitsquare, lightyellow, format("%d", n-x));
+        filldrawlabel(shift(x, 0)*unitsquare, lightyellow, format("%d", x+1));
+        filldrawlabel(shift(x, -1)*unitsquare, lightgreen, format("%d", n-x));
     }
 
 Because we only care about the sum of all numbers,
@@ -46,9 +46,9 @@ The number in each square is now $n+1$ and we have $n$ squares, so the sum is
 $$
 \underbrace{(n+1)+(n+1)+\dots+(n+1)}_{\text{adding $n$ times}} = n(n+1).
 $$
-This includes the yellow squares and the green squares,
-and because the yellow squares and green squares have the same numbers (although in a different order),
-the sum of green squares is half of what we got.
+This includes the green squares and the yellow squares,
+and because the green squares and yellow squares have the same numbers (although in a different order),
+the sum of yellow squares is half of what we got.
 
 graybox:
     $$
@@ -56,125 +56,9 @@ graybox:
     $$
 
 
-## $n-1$ ones, $n-2$ twos etc.
-
-Again, I will use $n=7$ for the drawings, even though this works similarly for any $n$.
-
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-
-    for (int x = 0; x < n-1; ++x) {
-        for (int y = 0; y+x < n-1; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", x+1));
-            filldrawlabel(shift(n,0)*shift(x, y)*unitsquare, lightred, format("%d", n-1-(x+y)));
-            filldrawlabel(shift(2n,0)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
-        }
-    }
-
-Each of the above drawings has $n-1$ ones, $n-2$ twos, $n-3$ threes and so on, and finally one $n-1$.
-For this reason, the sum of all numbers is the same in each drawing. Our goal is to calculate it.
-
-Let's now move the blue and red drawings on top of each other and add the numbers:
-
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-
-    for (int x = 0; x < n-1; ++x) {
-        for (int y = 0; y+x < n-1; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", x+1));
-        }
-    }
-    for (int x = 0; x < n-1; ++x) {
-        for (int y = 0; y+x < n-1; ++y) {
-            filldrawlabel(shift(0.25,0.4)*shift(x, y)*unitsquare, lightred, format("%d", n-1-(x+y)));
-            filldrawlabel(shift(n+2,0)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
-        }
-    }
-
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-
-    for (int x = 0; x < n-1; ++x) {
-        for (int y = 0; y+x < n-1; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, lightmagenta, format("%d", n-y));
-            filldrawlabel(shift(n+2,0)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
-        }
-    }
-
-For example, the $\magenta{5~5~5~5}$ row came from adding $\blue{1~2~3~4}$ and $\red{4~3~2~1}$.
-This is why each row consists of just one repeated number.
-
-Let's add the remaining two drawings together too:
-
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-
-    for (int x = 0; x < n-1; ++x) {
-        for (int y = 0; y+x < n-1; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, lightmagenta, format("%d", n-y));
-        }
-    }
-    for (int x = 0; x < n-1; ++x) {
-        for (int y = 0; y+x < n-1; ++y) {
-            filldrawlabel(shift(0.25,0.4)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
-        }
-    }
-
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-
-    for (int x = 0; x < n-1; ++x) {
-        for (int y = 0; y+x < n-1; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, lightyellow, format("%d", n+1));
-        }
-    }
-
-Now the number in each square is $8=7+1=n+1$.
-Because the drawing has $n-1$ rows, the number of squares is
-$$
-1+2+3+\dots+(n-1) = \frac{(n-1)((n-1)+1)}{2} = \frac{(n-1)n}{2}
-$$
-where we used the previous derivation.
-The sum of all numbers is
-$$
-\frac{(n-1)n}{2} \cdot (n+1) = \frac{(n-1)n(n+1)}{2}.
-$$
-Recall that we started with 3 drawings with the same same numbers in each.
-For that reason, the sum of numbers in each drawing must be
-$$
-\frac{1}{3} \frac{(n-1)n(n+1)}{2} = \frac{(n-1)n(n+1)}{6}.
-$$
-
-graybox:
-    In a drawing with $n-1$ ones, $n-2$ twos and so on until one $n-1$, the sum of all numbers is
-    $$
-    \frac{(n-1)n(n+1)}{6}.
-    $$
-    Here are the drawings for $n=7$:
-
-    asymptote:
-        // aku-debug
-        unitsize(1cm);
-        int n = 7;
-
-        for (int x = 0; x < n-1; ++x) {
-            for (int y = 0; y+x < n-1; ++y) {
-                filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", x+1));
-                filldrawlabel(shift(n,0)*shift(x, y)*unitsquare, lightred, format("%d", n-1-(x+y)));
-                filldrawlabel(shift(2n,0)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
-            }
-        }
-
-
-
 ## Sum of Squares
 
-We calculate
+Let's calculate
 $$
 1^2+2^2+\dots+n^2.
 $$
@@ -185,21 +69,21 @@ asymptote:
     int n = 7;
     real xshift = 0;
     real yshift = 0;
-    for (int k = n; k >= 1; --k) {
+    for (int k = 1; k <= n; ++k) {
         for (int x = 0; x < k; ++x) {
             for (int y = 0; y < k; ++y) {
-                filldrawlabel(shift(xshift, yshift)*shift(x, y)*unitsquare, lightgreen, "1");
+                filldrawlabel(shift(xshift, yshift)*shift(x, y)*unitsquare, lightyellow, "1");
             }
         }
         if (k == 5) {
             xshift = 0;
-            yshift = -k;
+            yshift = -(n+1);
         } else {
             xshift += k + 0.5;
         }
     }
 
-Let's stack all of these on top of each other.
+Let's stack all of these on top of each other and add the numbers.
 
 asymptote:
     unitsize(1cm);
@@ -207,7 +91,7 @@ asymptote:
     for (int k = n; k >= 1; --k) {
         for (int x = 0; x < k; ++x) {
             for (int y = -k; y < 0; ++y) {
-                filldrawlabel(shift(0.1k, 0.15k)*shift(x, y)*unitsquare, lightgreen, "1");
+                filldrawlabel(shift(0.1k, 0.15k)*shift(x, y)*unitsquare, lightyellow, "1");
             }
         }
     }
@@ -216,41 +100,91 @@ asymptote:
     unitsize(1cm);
     int n = 7;
     for (int x = 0; x < n; ++x) {
-        for (int y = 0; y < n; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, lightgreen, format("%d", min(n-x,y+1)));
+        for (int y = -n; y < 0; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, lightyellow, format("%d", min(n-x,y+n+1)));
         }
     }
 
-Now let's view this drawing as 3 different parts, separated by a diagonal part:
+Let's create two flipped copies of this.
 
 asymptote:
     unitsize(1cm);
     int n = 7;
     for (int x = 0; x < n; ++x) {
-        for (int y = 0; y < n; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, x+y==n-1 ? lightblue : lightgreen, format("%d", min(n-x,y+1)));
+        for (int y = -n; y < 0; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, lightyellow, format("%d", min(n-x,y+n+1)));
+            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, lightred, format("%d", min(n-x,y+n+1)));
+            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, lightgreen, format("%d", min(n-x,y+n+1)));
         }
     }
 
-Based on the above derivations, the sum of each green part is
-$$
-\frac{(n-1)n(n+1)}{6},
-$$
-and the sum of the blue part is
-$$
-1+2+\dots+n = \frac{n(n+1)}{2}.
-$$
-With two green parts and one blue part, we get
-$$
-\begin{align*}
-2\frac{(n-1)n(n+1)}{6} + \frac{n(n+1)}{2}
-&= \frac{(2n-2)n(n+1) + 3n(n+1)}{6} \\
-&= \frac{(2n-2+3)n(n+1)}{6} \\
-&= \frac{n(n+1)(2n+1)}{6}.
-\end{align*}
-$$
+Let's also change some colors.
 
-graybox:
-    $$
-    1^2+2^2+3^2+\dots+n^2 = \frac{n(n+1)(2n+1)}{6}
-    $$
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = 0; x < n; ++x) {
+        for (int y = -n; y < 0; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, y+1==-x ? lightblue : lightyellow, format("%d", min(n-x,y+n+1)));
+            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, y+1>-x ? red : lightred, format("%d", min(n-x,y+n+1)));
+            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? green : lightgreen, format("%d", min(n-x,y+n+1)));
+        }
+    }
+
+Now let's separate the yellow parts from the drawing.
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = 0; x < n; ++x) {
+        for (int y = -n; y < 0; ++y) {
+            if (y+1 < -x) {
+                filldrawlabel(shift(-n,-n)*shift(x, y)*unitsquare, lightyellow, format("%d", min(n-x,y+n+1)));
+            } else if (y+1 > -x) {
+                filldrawlabel(shift(n,n)*shift(x, y)*unitsquare, lightyellow, format("%d", min(n-x,y+n+1)));
+            } else {
+                filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", min(n-x,y+n+1)));
+            }
+            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, y+1>-x ? red : lightred, format("%d", min(n-x,y+n+1)));
+            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? green : lightgreen, format("%d", min(n-x,y+n+1)));
+        }
+    }
+
+For the yellow part at top right, we now slide each row left so that they line up.
+For the yellow part at bottom left, we shift the columns up instead.
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = 0; x < n; ++x) {
+        for (int y = -n; y < 0; ++y) {
+            if (y+1 == -x) {
+                filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", min(n-x,y+n+1)));
+            }
+            if (x > 0 && x-y <= n) {
+                filldrawlabel(shift(n,n)*shift(x,y)*unitsquare, lightyellow, format("%d", n-x+y+1));
+                filldrawlabel(shift(-n-1,-n-1)*shift(x,y)*unitsquare, lightyellow, format("%d", n-x+y+1));
+            }
+            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, y+1>-x ? red : lightred, format("%d", min(n-x,y+n+1)));
+            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? green : lightgreen, format("%d", min(n-x,y+n+1)));
+        }
+    }
+
+Now the yellow parts fit to the highlighted places.
+Let's move them there and add the numbers.
+For example, the third row of the red triangle is now $\red{1~2~3~4~5~5~5}$,
+and $\color{#f60}{4~3~2~1}$ is added to the beginning of it.
+That gives $\magenta{5~5~5~5}~\red{5~5~5}$.
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = 0; x < n; ++x) {
+        for (int y = -n; y < 0; ++y) {
+            if (y+1 == -x) {
+                filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", min(n-x,y+n+1)));
+            }
+            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, y+1>-x ? lightmagenta : lightred, format("%d", y+n+1));
+            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? lightmagenta : lightgreen, format("%d", y+n+1));
+        }
+    }

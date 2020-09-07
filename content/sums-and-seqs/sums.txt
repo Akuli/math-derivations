@@ -22,7 +22,7 @@ asymptote:
     }
 
 The top row contains 1 square, the one below that contains 2 squares, and so on.
-Finally, the bottom row contains 7 squares.
+Finally, the bottom row contains $n$ squares.
 For this reason, the total number of squares in the drawing is $1 + 2 + \dots + n$.
 Alternatively, the leftmost column contains 1 square, the one to the right from it contains 2 squares,
 and the rightmost column contains $n$ squares.
@@ -71,149 +71,241 @@ graybox:
     1+2+\dots+n = \frac{n(n+1)}{2}
     $$
 
+To fit drawings into smaller space, instead of this...
 
-## Finite Backward Difference
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = 0; x < n; ++x) {
+        for (int y = 0; y <= x; ++y) {
+            filldraw(shift(x, y)*unitsquare, lightgreen);
+        }
+    }
 
-For any function $f$ defined for integer inputs, let
-$$
-\nabla f(n) = f(n)-f(n-1).
-$$
-This is known as the finite backward difference of $f$. For example,
-$$
-\nabla n^2 = n^2 - (n+1)^2 = n^2 - (n^2-2n+1) = 2n-1.
-$$
-This operation behaves somewhat like a [derivative](../calc/derivative-def.html).
-With a derivative, we have $\frac{d}{dx}x^2 = 2x$, but we got $2n-1$ instead of just $2n$.
-To see connection, recall that the derivative is
-$$
-f'(x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h},
-$$
-while the finite backward difference is the same thing with $h=-1$ and without a limit,
-$$
-\begin{align}
-\frac{f(x+(-1))-f(x)}{-1}
-&= \frac{f(x-1)-f(x)}{-1} \\
-&= -(f(x-1)-f(x)) \\
-&= f(x)-f(x-1).
-\end{align}
-$$
-To better understand the difference and similarities between derivative and finite backward difference,
-imagine that $n$ and $x$ represent time as seconds, and $f$ is a location of an object.
-Then the finite difference tells how much the object has moved during the previous second,
-and the derivative is the speed of the object, which may vary during each second.
-These are different things, but they both describe whether the object is moving slowly or quickly.
+...I could have drawn the squares so that they overlap, like this:
 
-These rules for finite difference are very similar to some derivative rules,
-and they can be proved just like the corresponding derivative rules:
-$$
-\begin{align}
-\nabla (f(n)+g(n)) &= \nabla f(n) + \nabla g(n) \\
-\nabla (f(n)-g(n)) &= \nabla f(n) - \nabla g(n) \\
-\nabla (cf(n)) &= c \cdot \nabla f(n) \\
-\nabla c &= 0 \\
-\nabla n &= 1 \\
-\nabla(cn) &= c
-\end{align}
-$$
-Not all derivative rules apply to the finite difference.
-For example, $\Delta n^2 \ne 2n$ like we saw above.
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = n-1; x >= 0; --x) {
+        for (int y = 0; y <= x; ++y) {
+            filldraw(shift(x + y/10, y/5)*unitsquare, lightgreen);
+        }
+    }
+
+Or like this, so that a square with 5 in it essentially means stacking 5 squares on top of each other:
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = 0; x < n; ++x) {
+        path square = shift(x, 0)*unitsquare;
+        filldraw(square, lightgreen);
+        label(format("%d", x+1), (min(square) + max(square))/2);
+    }
+
+Recall that we care about $1+2+\dots+n$, which is now the sum of all numbers in the drawing.
+These drawings will be used in other derivations below.
 
 
-## Sum of positive integers up to $n$ (again)
+## $n-1$ ones, $n-2$ twos etc.
 
-The square drawing derivation above works for $1+2+\dots+n$,
-but it doesn't generalize nicely for e.g. $1^2+2^2+\dots+n^2$.
-For that reason, we'll derive the formula for $1+2+\dots+n$ again in a different way,
-using the finite difference.
+This section by itself isn't very interesting, but we'll need it soon.
+Again, I will use $n=7$ for the drawings, even though this works similarly for any $n$.
 
-Above we got
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+
+    for (int x = 0; x < n-1; ++x) {
+        for (int y = 0; y+x < n-1; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", x+1));
+            filldrawlabel(shift(n,0)*shift(x, y)*unitsquare, lightred, format("%d", n-1-(x+y)));
+            filldrawlabel(shift(2n,0)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
+        }
+    }
+
+Each of the above drawings has $n-1$ ones, $n-2$ twos, $n-3$ threes and so on, and finally one $n-1$.
+For this reason, the sum of all numbers is the same in each drawing. Our goal is to calculate it.
+
+Let's now move the blue and red drawings on top of each other...
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+
+    for (int x = 0; x < n-1; ++x) {
+        for (int y = 0; y+x < n-1; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", x+1));
+        }
+    }
+    for (int x = 0; x < n-1; ++x) {
+        for (int y = 0; y+x < n-1; ++y) {
+            filldrawlabel(shift(0.25,0.4)*shift(x, y)*unitsquare, lightred, format("%d", n-1-(x+y)));
+            filldrawlabel(shift(n+2,0)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
+        }
+    }
+
+...and whenever a blue square with number $\blue{a}$ and a red square with number $\red{b}$ overlap,
+we replace that with a pink square whose number $\blue{a}+\red{b}$:
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+
+    for (int x = 0; x < n-1; ++x) {
+        for (int y = 0; y+x < n-1; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, lightmagenta, format("%d", n-y));
+            filldrawlabel(shift(n+2,0)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
+        }
+    }
+
+For example, the $\magenta{5~5~5~5}$ row came from adding $\blue{1~2~3~4}$ and $\red{4~3~2~1}$.
+This is why each row consists of just one repeated number.
+
+Let's add the remaining two drawings together too:
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+
+    for (int x = 0; x < n-1; ++x) {
+        for (int y = 0; y+x < n-1; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, lightmagenta, format("%d", n-y));
+        }
+    }
+    for (int x = 0; x < n-1; ++x) {
+        for (int y = 0; y+x < n-1; ++y) {
+            filldrawlabel(shift(0.25,0.4)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
+        }
+    }
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+
+    for (int x = 0; x < n-1; ++x) {
+        for (int y = 0; y+x < n-1; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, lightyellow, format("%d", n+1));
+        }
+    }
+
+Now the number in each square is $8=7+1=n+1$.
+By using the result of the previous derivation with $n-1$ instead of $n$,
+we get that the number of squares in the drawing is
 $$
-\nabla n^2 = 2n-1,
+1+2+3+\dots+(n-1) = \frac{(n-1)((n-1)+1)}{2} = \frac{(n-1)n}{2},
 $$
-and that's why
+and because each square is numbered with $n+1$, the sum of all numbers is
 $$
-\nabla\left( \frac{1}{2} n^2 \right) = \frac{1}{2}(2n-1) = n - \frac{1}{2}.
+(n+1)\frac{(n-1)n}{2} = \frac{(n-1)n(n+1)}{2}.
 $$
-To get rid of $-\frac{1}{2}$, we need to add $+\frac{1}{2}$ to the result of the finite difference.
-We can do that by adding $+\frac{1}{2}n$ before taking the finite difference; that is,
+Recall that we started with 3 drawings having, each containing same numbers.
+For that reason, the sum of numbers in each drawing must be
 $$
-\nabla\left( \frac{1}{2} n^2 + \frac{1}{2}n \right)
-= \nabla\left( \frac{1}{2} n^2 \right) + \nabla\left( \frac{1}{2} n \right)
-= n-\frac{1}{2}+\frac{1}{2}
-=n.
-$$
-In other words, by letting
-$$
-f(n) = \frac{1}{2} n^2 + \frac{1}{2}n = \frac{n(n+1)}{2},
-$$
-we get $1 = f(1)-f(0)$, $2 = f(2)-f(1)$ and so on.
-Now we can calculate
-$$
-\begin{align}
-1+2+\dots+n
-&= \quad f(1)-f(0) \\
-&\quad +f(2)-f(1) \\
-&\quad +f(3)-f(2) \\
-&\quad +f(4)-f(3) \\
-&\quad +f(5)-f(4) \\
-&\quad +\dots \\
-&\quad +f(n-1)-f(n-2) \\
-&\quad +f(n)-f(n-1),
-\end{align}
-$$
-and after canceling diagonally, we are left with
-$$
-1+2+\dots+n = f(n)-\underbrace{f(0)}_0 = \frac{n(n+1)}{2}.
+\frac{1}{3} \frac{(n-1)n(n+1)}{2} = \frac{(n-1)n(n+1)}{6}.
 $$
 
+graybox:
+    The sum of all numbers in the below drawings is
+    $$
+    \frac{(n-1)n(n+1)}{6}.
+    $$
 
-## Sum of squares
+    asymptote:
+        // aku-debug
+        unitsize(1cm);
+        int n = 7;
 
-Let's calculate
+        for (int x = 0; x < n-1; ++x) {
+            for (int y = 0; y+x < n-1; ++y) {
+                filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", x+1));
+                filldrawlabel(shift(n,0)*shift(x, y)*unitsquare, lightred, format("%d", n-1-(x+y)));
+                filldrawlabel(shift(2n,0)*shift(x, y)*unitsquare, lightgreen, format("%d", y+1));
+            }
+        }
+
+
+
+## Sum of Squares
+
+We calculate
 $$
-1^2 + 2^2 + \dots + n^2.
+1^2+2^2+\dots+n^2.
 $$
-We'll do this similarly to the previous derivation.
-We start with
+Again, we visualize this for $n=7$, like this:
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    real xshift = 0;
+    real yshift = 0;
+    for (int k = n; k >= 1; --k) {
+        for (int x = 0; x < k; ++x) {
+            for (int y = 0; y < k; ++y) {
+                filldrawlabel(shift(xshift, yshift)*shift(x, y)*unitsquare, lightgreen, "1");
+            }
+        }
+        if (k == 5) {
+            xshift = 0;
+            yshift = -k;
+        } else {
+            xshift += k + 0.5;
+        }
+    }
+
+Let's stack all of these on top of each other.
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int k = n; k >= 1; --k) {
+        for (int x = 0; x < k; ++x) {
+            for (int y = -k; y < 0; ++y) {
+                filldrawlabel(shift(0.1k, 0.15k)*shift(x, y)*unitsquare, lightgreen, "1");
+            }
+        }
+    }
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = 0; x < n; ++x) {
+        for (int y = 0; y < n; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, lightgreen, format("%d", min(n-x,y+1)));
+        }
+    }
+
+Now let's view this square as consisting of 3 different parts, separated by the diagonal part:
+
+asymptote:
+    unitsize(1cm);
+    int n = 7;
+    for (int x = 0; x < n; ++x) {
+        for (int y = 0; y < n; ++y) {
+            filldrawlabel(shift(x, y)*unitsquare, x+y==n-1 ? lightblue : lightgreen, format("%d", min(n-x,y+1)));
+        }
+    }
+
+Based on the above derivations, the sum of each green part is
 $$
-\nabla n^3 = n^3-(n-1)^3 = n^3-(n^3-3n^2 1+3n 1^2-1^3) = 3n^2-3n+1,
+\frac{(n-1)n(n+1)}{6},
 $$
-where we used the formula for $(a-b)^3$ (TODO).
-This leads to
+and the sum of the blue part is
 $$
-\nabla\left( \frac{1}{3} n^3 \right) = \frac{1}{3}(3n^2-3n+1) = n^2-n+\frac{1}{3}.
+1+2+\dots+n = \frac{n(n+1)}{2}.
 $$
-Because $\nabla \frac{n(n+1)}{2} = n$ (see previous derivation) and $\nabla (\frac{1}{3}n) = \frac{1}{3}$,
-we get
+With two green parts and one blue part, we then get
 $$
-\begin{align}
-\nabla\left( \frac{1}{3} n^3 + \frac{n(n+1)}{2} - \frac{1}{3}n \right)
-&= n^2-n+\frac{1}{3} + n - \frac{1}{3}
-= n^2.
-\end{align}
-$$
-Just like in the previous derivation, we get
-$$
-\frac{1}{3} n^3 + \frac{n(n+1)}{2} - \frac{1}{3}n = 1^2+2^2+\dots+n^2.
-$$
-Usually this formula is instead written as
-$$
-\frac{n(n+1)(2n+1)}{6},
-$$
-which is a different way to write what we got, because
-$$
-\begin{align}
-\frac{n(n+1)(2n+1)}{6}
-&= \frac{(n^2+n)(2n+1)}{6} \\
-&= \frac{n^2(2n+1)+n(2n+1)}{6} \\
-&= \frac{2n^3+n^2+2n^2+n}{6} \\
-&= \frac{2n^3+3(n^2+n)-2n}{6} \\
-&= \frac{2}{6}n^3 + \frac{3}{6}(n^2+n) - \frac{2}{6}n \\
-&= \frac{1}{3}n^3 + \frac{n^2+n}{2} - \frac{1}{3}n.
-\end{align}
+\begin{align*}
+2\frac{(n-1)n(n+1)}{6} + \frac{n(n+1)}{2}
+&= \frac{(2n-2)n(n+1) + 3n(n+1)}{6} \\
+&= \frac{(2n-2+3)n(n+1)}{6} \\
+&= \frac{n(n+1)(2n+1)}{6}.
+\end{align*}
 $$
 
 graybox:
     $$
-    1^2+2^2+\dots+n^2 = \frac{n(n+1)(2n+1)}{6}
+    1^2+2^2+3^2+\dots+n^2 = \frac{n(n+1)(2n+1)}{6}
     $$

@@ -193,9 +193,11 @@ def get_head_extras(filename):
             J: [ "\\\\vec{j}", 0 ],
             K: [ "\\\\vec{k}", 0 ],
 
-            red: [ "\\\\color{darkred}{#1}", 1 ],
+            // darkred is too dark, red is too bright
+            red: [ "\\\\color{##c00}{#1}", 1 ],
             blue: [ "\\\\color{blue}{#1}", 1 ],
             green: [ "\\\\color{green}{#1}", 1 ],
+            magenta: [ "\\\\color{magenta}{#1}", 1 ],
 
             epsi: [ "\\\\varepsilon", 0 ],
             leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround

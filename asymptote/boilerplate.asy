@@ -100,3 +100,8 @@ pair cis(real angle) {
 
 // from python
 real e = 2.718281828459045;
+
+void filldrawlabel(path p, pen fillpen, Label L) {
+    filldraw(p, fillpen);
+    label(L, (min(p) + max(p))/2);
+}

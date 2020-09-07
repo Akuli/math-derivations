@@ -25,9 +25,11 @@
             J: [ "\\vec{j}", 0 ],
             K: [ "\\vec{k}", 0 ],
 
-            red: [ "\\color{darkred}{#1}", 1 ],
+            // darkred is too dark, red is too bright
+            red: [ "\\color{##c00}{#1}", 1 ],
             blue: [ "\\color{blue}{#1}", 1 ],
             green: [ "\\color{green}{#1}", 1 ],
+            magenta: [ "\\color{magenta}{#1}", 1 ],
 
             epsi: [ "\\varepsilon", 0 ],
             leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
@@ -227,7 +229,7 @@ The sum of rectangle areas on the right is called the <b>upper sum</b> of $f$ wi
 $$
 \text{integral} \ge \underbrace{\sum_{k=1}^n (x_k-x_{k-1})\min_{[x_{k-1},x_k]} f}_{\text{lower sum}},
 $$
-The picture for the lower sum looks like this instead:</p>
+The picture for the lower sum looks like this:</p>
 
 <p><img width="402" height="201" class="asymptote" src="../asymptote/45018bcb9970c72b46c82e89b6fedd47.svg" /></p><p>By putting the results together, we get
 $$
@@ -237,7 +239,7 @@ and you might be able to see where this is going now;
 to find the value of the integral, we can squeeze it between upper sums and lower sums.</p>
 
 <p>The minimums and maximums don't exist for all functions $f$,
-but they do exist that $f$ is continuous (TODO).
+but they do exist if $f$ is continuous (TODO).
 For that reason, <b>we assume that $f$ is continuous</b> from now on.</p>
 
 <p>Now we are ready to define what an integral means.</p>
@@ -271,7 +273,7 @@ If you want to know more about Riemann integrals, then you should go study math 
 
 <h2 id="why">Why???<a class="headerlink" href="#why" title="Link to this title">¶</a></h2><p>This approach has several advantages over just defining the integral as area under a graph:
 <ul><li>
-    We never defined what exactly area is, and this is much easier than defining area properly.
+    We never defined what exactly area is, and this is easier than defining area properly.
 </li><li>
     The lower sums and upper sums work
     even if the function $f$ has negative values and its graph (or a part of it) is below the $x$ axis.
@@ -336,10 +338,9 @@ Let $f(x) = x$.
 Again, it's not very hard to get the right answer by just calculating an area.</p>
 
 <p><img width="257" height="257" class="asymptote" src="../asymptote/588e17d5ef6a894aa52bdfd2fc274a27.svg" /></p><p>We partition the interval $[0,2]$ into 5 equally sized parts.
-The first partition number will be $0$.
 Because each parts has length $\frac{2}{5}$ (that is, interval length $2$ divided into $5$ equal pieces),
-the next one is $\frac{2}{5}$.
-The one after that will be $\frac{2}{5}+\frac{2}{5}=\frac{4}{5}$.
+the first two numbers of the partition will be $0$ and $\frac{2}{5}$.
+The number after those will be $\frac{2}{5}+\frac{2}{5}=\frac{4}{5}$.
 By continuing like this, we see that the partition we want is
 $$
 x_0=\frac{0}{5}, ~ x_1=\frac{2}{5}, ~ x_2=\frac{4}{5}, ~ x_3=\frac{6}{5}, ~ x_4=\frac{8}{5}, ~ x_5=\frac{10}{5}.
@@ -365,7 +366,7 @@ $$
 \quad \text{and} \quad
 \min_{[x_{k-1},x_k]} f = f(x_{k-1}) = x_{k-1}.
 $$
-With <a href="../sums-and-seqs/sums.html#sum-of-positive-integers-up-to-n-again">a sum formula</a>, we now get
+With <a href="../sums-and-seqs/sums.html#sum-of-positive-integers-up-to-n">a sum formula</a>, we now get
 $$
 \begin{align}
 \text{upper sum}
@@ -399,8 +400,8 @@ $$
 $$
 \int_0^2 x^2\ dx.
 $$
-Unlike in the previous examples, we can't just calculate the area in the graph without an integral
-because we don't know how to calculate areas involving parabolas.
+Unlike in the previous examples, we can't just calculate the area in the graph without an integral,
+because we don't have a formula for the area under a parabola.
 We finally have a reason for working with integrals.</p>
 
 <p><img width="257" height="420" class="asymptote" src="../asymptote/29c52282c26ada2c3c8dd803c076db63.svg" /></p><p>Let $f(x) = x^2$.
@@ -424,7 +425,7 @@ $$
 = \sum_{k=1}^n \frac{8}{n^3}k^2 \\
 &= \frac{8}{n^3}(1^2+2^2+\dots+n^2) \\
 &= \frac{8}{n^3}\frac{n(n+1)(2n+1)}{6}
-= \frac{8}{3}\left( 1+\frac{1}{n} \right)\left( 1+\frac{1}{2n} \right).
+= \frac{8}{3}\left( 1+\frac{1}{n} \right)\left( 1+\frac{1}{2n} \right)
 \end{align}
 $$
 and

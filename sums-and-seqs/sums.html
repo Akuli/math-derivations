@@ -25,9 +25,11 @@
             J: [ "\\vec{j}", 0 ],
             K: [ "\\vec{k}", 0 ],
 
-            red: [ "\\color{darkred}{#1}", 1 ],
+            // darkred is too dark, red is too bright
+            red: [ "\\color{##c00}{#1}", 1 ],
             blue: [ "\\color{blue}{#1}", 1 ],
             green: [ "\\color{green}{#1}", 1 ],
+            magenta: [ "\\color{magenta}{#1}", 1 ],
 
             epsi: [ "\\varepsilon", 0 ],
             leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
@@ -175,171 +177,53 @@
 $$
 1 + 2 + 3 + \dots + n.
 $$
-Suppose that this drawing has $n$ rows of squares.
-It actually has 7 rows, but this also works for any other value of $n$.</p>
+To visualize the numbers being added, we draw this
+(the drawing has $n=7$, but it works similarly for other values of $n$):</p>
 
-<p><img width="201" height="201" class="asymptote" src="../asymptote/9de24dc59e0738eaf082b2e4fdce2a81.svg" /></p><p>The top row contains 1 square, the one below that contains 2 squares, and so on.
-Finally, the bottom row contains 7 squares.
-For this reason, the total number of squares in the drawing is $1 + 2 + \dots + n$.
-Alternatively, the leftmost column contains 1 square, the one to the right from it contains 2 squares,
-and the rightmost column contains $n$ squares.</p>
+<p><img width="201" height="31" class="asymptote" src="../asymptote/b65f32e0e959770ce99cfa060ddaa092.svg" /></p><p>Let's make a green copy of the numbers and reverse the copy.
+This does not change the sum of the numbers.</p>
 
-<p>Let's make a rotated copy of the drawing...</p>
+<p><img width="201" height="59" class="asymptote" src="../asymptote/2f0178cde336a162c061b0b3a1e8f427.svg" /></p><p>Because we only care about the sum of all numbers,
+we can replace two squares containing $1$ and $7$ with one square containing $8$,
+or more generally, $a$ and $b$ squares with one $a+b$ square.
+Let's do it for each column. I'll use pink squares for the replacing results.</p>
 
-<p><img width="484" height="201" class="asymptote" src="../asymptote/3bc5bbac0d0ebfe7bff61f1ab865f03a.svg" /></p><p>...and move the copies together:</p>
-
-<p><img width="229" height="201" class="asymptote" src="../asymptote/7f81cbbf91ceb2fe9cad8d35676c927b.svg" /></p><p>We now have a rectangle with
-$n+1$ squares horizontally (e.g. $n$ yellow squares and $1$ green square in top row)
-and $n$ squares vertically.
-That is a total of $n(n+1)$ squares.
-Exactly half of the squares are green, so the number of green squares is half of the total number of squares.
-On the other hand, we started with $1+2+\dots+n$ green squares.</p>
+<p><img width="201" height="31" class="asymptote" src="../asymptote/163d68fc544052604e3800cece0ce86c.svg" /></p><p>The number in each square is now $n+1$ and we have $n$ squares, so the sum is
+$$
+\underbrace{(n+1)+(n+1)+\dots+(n+1)}_{\text{adding $n$ times}} = n(n+1).
+$$
+This includes the green squares and the yellow squares,
+and because the green squares and yellow squares have the same numbers (although in a different order),
+the sum of yellow squares is half of what we got.</p>
 
 <div class="box graybox"><p>$$
 1+2+\dots+n = \frac{n(n+1)}{2}
 $$
 </p>
 
-</div><h2 id="finite-backward-difference">Finite Backward Difference<a class="headerlink" href="#finite-backward-difference" title="Link to this title">¶</a></h2><p>For any function $f$ defined for integer inputs, let
+</div><h2 id="sum-of-squares">Sum of Squares<a class="headerlink" href="#sum-of-squares" title="Link to this title">¶</a></h2><p>Let's calculate
 $$
-\nabla f(n) = f(n)-f(n-1).
+1^2+2^2+\dots+n^2.
 $$
-This is known as the finite backward difference of $f$. For example,
-$$
-\nabla n^2 = n^2 - (n+1)^2 = n^2 - (n^2-2n+1) = 2n-1.
-$$
-This operation behaves somewhat like a <a href="../calc/derivative-def.html">derivative</a>.
-With a derivative, we have $\frac{d}{dx}x^2 = 2x$, but we got $2n-1$ instead of just $2n$.
-To see connection, recall that the derivative is
-$$
-f'(x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h},
-$$
-while the finite backward difference is the same thing with $h=-1$ and without a limit,
-$$
-\begin{align}
-\frac{f(x+(-1))-f(x)}{-1}
-&= \frac{f(x-1)-f(x)}{-1} \\
-&= -(f(x-1)-f(x)) \\
-&= f(x)-f(x-1).
-\end{align}
-$$
-The derivative and finite backward difference are ways to figure out how fast the values of a function grow,
-but they do it differently.
-If $n$ and $x$ represent time as seconds and $f$ represents your location,
-then the finite difference tells how much you moved during the previous second
-while the derivative tells your current moving speed.</p>
+Again, we visualize this for $n=7$, like this:</p>
 
-<p>These rules for finite difference are very similar to some derivative rules,
-and they can be proved just like the derivative rules:
-$$
-\begin{align}
-\nabla (f(n)+g(n)) &= \nabla f(n) + \nabla g(n) \\
-\nabla (f(n)-g(n)) &= \nabla f(n) - \nabla g(n) \\
-\nabla (cf(n)) &= c \cdot \nabla f(n) \\
-\nabla c &= 0 \\
-\nabla n &= 1 \\
-\nabla(cn) &= c
-\end{align}
-$$
-Not all derivative rules apply to the finite difference.
-For example, $\Delta n^2 \ne 2n$ like we saw above.
-</p>
+<p><img width="484" height="371" class="asymptote" src="../asymptote/54c16bf61b25c700cbc410b289c9f341.svg" /></p><p>Let's stack all of these on top of each other and add the numbers.</p>
 
-<h2 id="sum-of-positive-integers-up-to-n-again">Sum of positive integers up to $n$ (again)<a class="headerlink" href="#sum-of-positive-integers-up-to-n-again" title="Link to this title">¶</a></h2><p>The square drawing derivation above works for $1+2+\dots+n$,
-but it doesn't generalize nicely for e.g. $1^2+2^2+\dots+n^2$.
-For that reason, we'll derive the formula for $1+2+\dots+n$ again in a different way,
-using the finite difference.</p>
+<p><img width="218" height="201" class="asymptote" src="../asymptote/bb7a397c1925ac8e85637a72862c8dca.svg" /></p><p><img width="201" height="201" class="asymptote" src="../asymptote/b24cdedb145866627271406dbaba6e69.svg" /></p><p>Let's create two flipped copies of this.</p>
 
-<p>Above we got
-$$
-\nabla n^2 = 2n-1,
-$$
-and that's why
-$$
-\nabla\left( \frac{1}{2} n^2 \right) = \frac{1}{2}(2n-1) = n - \frac{1}{2}.
-$$
-To get rid of $-\frac{1}{2}$, we need to add $+\frac{1}{2}$ to the result of the finite difference.
-We can do that by adding $+\frac{1}{2}n$ before taking the finite difference; that is,
-$$
-\nabla\left( \frac{1}{2} n^2 + \frac{1}{2}n \right)
-= \nabla\left( \frac{1}{2} n^2 \right) + \nabla\left( \frac{1}{2} n \right)
-= n-\frac{1}{2}+\frac{1}{2}
-=n.
-$$
-In other words, by letting
-$$
-f(n) = \frac{1}{2} n^2 + \frac{1}{2}n = \frac{n(n+1)}{2},
-$$
-we get $1 = f(1)-f(0)$, $2 = f(2)-f(1)$ and so on.
-Now we can calculate
-$$
-\begin{align}
-1+2+\dots+n
-&= \quad f(1)-f(0) \\
-&\quad +f(2)-f(1) \\
-&\quad +f(3)-f(2) \\
-&\quad +f(4)-f(3) \\
-&\quad +f(5)-f(4) \\
-&\quad +\dots \\
-&\quad +f(n-1)-f(n-2) \\
-&\quad +f(n)-f(n-1),
-\end{align}
-$$
-and after canceling diagonally, we are left with
-$$
-1+2+\dots+n = f(n)-\underbrace{f(0)}_0 = \frac{n(n+1)}{2}.
-$$
-</p>
+<p><img width="399" height="399" class="asymptote" src="../asymptote/c2c97491c610067c6ae298a96e53cddf.svg" /></p><p>Let's also change some colors.</p>
 
-<h2 id="sum-of-squares">Sum of squares<a class="headerlink" href="#sum-of-squares" title="Link to this title">¶</a></h2><p>Let's calculate
-$$
-1^2 + 2^2 + \dots + n^2.
-$$
-We'll do this similarly to the previous derivation.
-We start with
-$$
-\nabla n^3 = n^3-(n-1)^3 = n^3-(n^3-3n^2 1+3n 1^2-1^3) = 3n^2-3n+1,
-$$
-where we used the formula for $(a-b)^3$ (TODO).
-This leads to
-$$
-\nabla\left( \frac{1}{3} n^3 \right) = \frac{1}{3}(3n^2-3n+1) = n^2-n+\frac{1}{3}.
-$$
-Because $\nabla \frac{n(n+1)}{2} = n$ (see previous derivation) and $\nabla (\frac{1}{3}n) = \frac{1}{3}$,
-we get
-$$
-\begin{align}
-\nabla\left( \frac{1}{3} n^3 + \frac{n(n+1)}{2} - \frac{1}{3}n \right)
-&= n^2-n+\frac{1}{3} + n - \frac{1}{3}
-= n^2.
-\end{align}
-$$
-Just like in the previous derivation, we get
-$$
-\frac{1}{3} n^3 + \frac{n(n+1)}{2} - \frac{1}{3}n = 1^2+2^2+\dots+n^2.
-$$
-Usually this formula is instead written as
-$$
-\frac{n(n+1)(2n+1)}{6},
-$$
-which is a different way to write what we got, because
-$$
-\begin{align}
-\frac{n(n+1)(2n+1)}{6}
-&= \frac{(n^2+n)(2n+1)}{6} \\
-&= \frac{n^2(2n+1)+n(2n+1)}{6} \\
-&= \frac{2n^3+n^2+2n^2+n}{6} \\
-&= \frac{2n^3+3(n^2+n)-2n}{6} \\
-&= \frac{2}{6}n^3 + \frac{3}{6}(n^2+n) - \frac{2}{6}n \\
-&= \frac{1}{3}n^3 + \frac{n^2+n}{2} - \frac{1}{3}n.
-\end{align}
-$$</p>
+<p><img width="399" height="399" class="asymptote" src="../asymptote/25db6184aad9861067e6235919c90b34.svg" /></p><p>Now let's separate the yellow parts from the drawing.</p>
 
-<div class="box graybox"><p>$$
-1^2+2^2+\dots+n^2 = \frac{n(n+1)(2n+1)}{6}
-$$
-</p>
+<p><img width="598" height="598" class="asymptote" src="../asymptote/5cdb48a8a0b195819bf9e13b3d141a74.svg" /></p><p>For the yellow part at top right, we now slide each row left so that they line up.
+For the yellow part at bottom left, we shift the columns up instead.</p>
 
-</div></div>
+<p><img width="598" height="598" class="asymptote" src="../asymptote/c042ad96ed7fbad086bd562c518b233e.svg" /></p><p>Now the yellow parts fit to the highlighted places.
+Let's move them there and add the numbers.
+For example, the third row of the red triangle is now $\red{1~2~3~4~5~5~5}$,
+and $\color{#f60}{4~3~2~1}$ is added to the beginning of it.
+That gives $\magenta{5~5~5~5}~\red{5~5~5}$.</p>
+
+<p><img width="399" height="399" class="asymptote" src="../asymptote/c61b73b96002c8407302e48ee73bccb3.svg" /></p></div>
 </body>
 </html>

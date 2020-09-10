@@ -25,7 +25,7 @@ animation: anim-sum-of-integers
                 y: 0,
                 textContent: x+1,
                 classes: 'square',
-                zIndex: 2,
+                css: {zIndex: 2},
             }))
         ).concat(
             copiedSquares.map((element, x) => ({
@@ -34,7 +34,7 @@ animation: anim-sum-of-integers
                 y: 0,
                 textContent: x+1,
                 classes: 'square color1',
-                zIndex: 1,
+                css: {zIndex: 1},
             }))
         ),
         copiedSquares.map(element => ({type: 'config', element, dy: 2})),
@@ -116,7 +116,7 @@ animation: anim-sum-of-squares
             y: initialY,
             textContent: 1,
             classes: 'square',
-            zIndex: 2,
+            css: {zIndex: 2},
         }))).flat(),
 
         differentSizeSquares.map(squareList => squareList.map(({x, y, element}) => ({
@@ -136,7 +136,7 @@ animation: anim-sum-of-squares
                 element, x, y,
                 textContent: n - Math.max(x, y),
                 classes: 'square',
-                zIndex: 1,
+                css: {zIndex: 1},
             }))
         ).concat(
             topCopy.map(({element}) => ({type: 'config', element, classes: 'color1'}))
@@ -161,7 +161,7 @@ animation: anim-sum-of-squares
             type: 'config',
             dx: (x > y) ? -y : 0,
             dy: (x < y) ? -x : 0,
-            zIndex: 3,
+            css: {zIndex: 3},
             element,
         })),
 
@@ -258,7 +258,7 @@ animation: anim-sum-of-cubes
             x, y, element,
             classes: 'square',
             textContent: mulString(y+1, x+1),
-            zIndex: (x === partNumber) ? 1 : 2,  // left row in front of right row when merging
+            css: {zIndex: (x === partNumber) ? 1 : 2},  // left row in front of right row when merging
         })),
 
         mulTable.map(({partNumber, element}) => ({

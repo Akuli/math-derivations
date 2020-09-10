@@ -202,7 +202,7 @@ This animation shows how this goes for $n=7$:</p>
                 y: 0,
                 textContent: x+1,
                 classes: 'square',
-                zIndex: 2,
+                css: {zIndex: 2},
             }))
         ).concat(
             copiedSquares.map((element, x) => ({
@@ -211,7 +211,7 @@ This animation shows how this goes for $n=7$:</p>
                 y: 0,
                 textContent: x+1,
                 classes: 'square color1',
-                zIndex: 1,
+                css: {zIndex: 1},
             }))
         ),
         copiedSquares.map(element => ({type: 'config', element, dy: 2})),
@@ -229,8 +229,8 @@ This animation shows how this goes for $n=7$:</p>
     </script>
     <p>In the beginning, $1+2+\dots+n$ is represented with numbers inside squares,
 so we are interested in <b>the sum of all numbers in the squares</b>.
-This sum doubles when we make a copy of each square, but otherwise it never changes;
-this is why the numbers of the squares are added when the squares get merged together.
+This sum doubles when we make a copy of each square, but
+it doesn't change in other ways because the numbers get added when squares merge together.
 We ended up with $n+1=8$ showing $n$ times, once in each of the $n$ squares, so
 $$
 \begin{align}
@@ -298,7 +298,7 @@ This animation shows how this goes for $n=7$:</p>
             y: initialY,
             textContent: 1,
             classes: 'square',
-            zIndex: 2,
+            css: {zIndex: 2},
         }))).flat(),
 
         differentSizeSquares.map(squareList => squareList.map(({x, y, element}) => ({
@@ -318,7 +318,7 @@ This animation shows how this goes for $n=7$:</p>
                 element, x, y,
                 textContent: n - Math.max(x, y),
                 classes: 'square',
-                zIndex: 1,
+                css: {zIndex: 1},
             }))
         ).concat(
             topCopy.map(({element}) => ({type: 'config', element, classes: 'color1'}))
@@ -343,7 +343,7 @@ This animation shows how this goes for $n=7$:</p>
             type: 'config',
             dx: (x > y) ? -y : 0,
             dy: (x < y) ? -x : 0,
-            zIndex: 3,
+            css: {zIndex: 3},
             element,
         })),
 
@@ -385,6 +385,117 @@ $$</p>
 
 <div class="box graybox"><p>$$
 1^2+2^2+\dots+n^2 = \frac{n(n+1)(2n+1)}{6}
+$$
+</p>
+
+</div><h2 id="sum-of-cubes">Sum of Cubes<a class="headerlink" href="#sum-of-cubes" title="Link to this title">¶</a></h2><p>Let's calculate
+$$
+(1 + 2 + 3 + \dots + n)^2.
+$$
+By on the first result on this page, we can write this as
+$$
+(1 + 2 + \dots + n)^2
+= \left( \frac{n(n+1)}{2} \right)^2
+= \frac{n^2(n+1)^2}{4}.
+$$
+On the other hand, we can expand it to get
+$$
+\begin{align}
+(1 + 2 + 3 + \dots + n)^2
+&= (1 + 2 + 3 + \dots + n)(1 + 2 + 3 + \dots + n) \\
+&\\
+&= \quad 1(1 + 2 + 3 + \dots + n) \\
+&\quad+ 2(1 + 2 + 3 + \dots + n) \\
+&\quad+ 3(1 + 2 + 3 + \dots + n) \\
+&\quad\quad\vdots \\
+&\quad+ n(1 + 2 + 3 + \dots + n) \\
+&\\
+&= \quad 1 \cdot 1 + 1 \cdot 2 + 1 \cdot 3 + \dots + 1 \cdot n \\
+&\quad+ 2 \cdot 1 + 2 \cdot 2 + 2 \cdot 3 + \dots + 2 \cdot n \\
+&\quad+ 3 \cdot 1 + 3 \cdot 2 + 3 \cdot 3 + \dots + 3 \cdot n \\
+&\quad\quad\vdots \\
+&\quad+ n \cdot 1 + n \cdot 2 + n \cdot 3 + \dots + n \cdot n.
+\end{align}
+$$
+This is the sum of all numbers in a multiplication table of size $n$ by $n$.
+It's represented in the beginning of the following animation for $n=7$.</p>
+
+
+    <div id="anim-sum-of-cubes"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            function run() {
+                window.animator.run("anim-sum-of-cubes", ...arguments);
+            }
+                function mulString(a, b) { return `${a}⋅${b}`; }
+
+    const n = 7;
+    const mulTable = Array(n*n)
+        .fill()
+        .map((junk, i) => ({
+            x: (i % n),
+            y: Math.floor(i / n),
+            element: document.createElement('div'),
+        }))
+        .map(info => ({...info, partNumber: Math.max(info.x, info.y)}));
+
+    run([
+        mulTable.map(({x, y, element, partNumber}) => ({
+            type: 'create',
+            x, y, element,
+            classes: 'square',
+            textContent: mulString(y+1, x+1),
+            css: {zIndex: (x === partNumber) ? 1 : 2},  // left row in front of right row when merging
+        })),
+
+        mulTable.map(({partNumber, element}) => ({
+            type: 'config',
+            element,
+            dx: 1.5*partNumber,
+            dy: 0*partNumber,
+        })),
+
+        mulTable.map(({partNumber, element, x}) => ({
+            type: 'config',
+            element,
+            dx: (x < partNumber)*(partNumber-x-1),
+            dy: (x < partNumber)*(-x-1),
+        })),
+
+        ...Array(n)
+            .fill()
+            .map((junk, i) => i)
+            .filter(partNumber => partNumber !== 0)
+            .map(partNumber =>
+                mulTable
+                .filter(item => item.partNumber === partNumber)
+                .filter(({x}) => x < partNumber)   // exclude right row
+                .reverse()
+                .map(({element}) => ({
+                    type: 'config',
+                    element,
+                    dx: 1,
+                    textContent: mulString(partNumber+1, partNumber+1),
+                    classes: 'merged',
+                }))
+            ),
+    ]);
+
+        });
+    </script>
+    <p>The sum of all numbers doesn't change during the animation.
+At the end, there is a column that contains $5$ squares with $5 \cdot 5$ in each, so a total of
+$$
+5(5 \cdot 5) = 5^3,
+$$
+and similarly, the sums of numbers in each column are $1^3, 2^3, \dots, n^3$.
+For this reason, the sum of all numbers is
+$$
+1^3 + 2^3 + 3^3 + \dots + n^3.
+$$</p>
+
+<div class="box graybox"><p>$$
+1^3 + 2^3 + 3^3 + \dots + n^3 = \frac{n^2(n+1)^2}{4}
 $$
 </p>
 

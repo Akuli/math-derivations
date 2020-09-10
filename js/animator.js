@@ -104,8 +104,8 @@
                 this._handleClass(className, action.element);
               }
             }
-            if (action.zIndex !== undefined) {
-              this.set(action.element.style, 'zIndex', action.zIndex);
+            for (const [name, value] of Object.entries(action.css || {})) {
+              this.set(action.element.style, name, value);
             }
             if (action.x !== undefined) {
               this.set(action.element.style, 'left', `calc(${this._translateX + action.x}*var(--math-unit))`);

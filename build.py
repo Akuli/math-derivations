@@ -40,6 +40,7 @@ builder.infile2outfile = lambda infile: os.path.join(
     builder.outputdir,
     os.path.splitext(infile.replace('content' + os.sep, '', 1))[0] + '.html')
 
+builder.additional_files.append('css')
 builder.additional_files.append('js')
 
 
@@ -236,11 +237,23 @@ stylesheet">
     </script>
     '''
 
+    htmlfile = builder.infile2outfile(filename)
+    relative_path_prefix = os.path.relpath(
+        builder.outputdir, os.path.dirname(htmlfile)
+    ).replace(os.sep, '/')
+
+    for css_slash_something in glob.glob('css/*.css'):
+        result += f'<link rel="stylesheet" href="{relative_path_prefix}/{css_slash_something}">\n'
+
     if filename == 'content/vectors/dot-projection.txt':
-        result += '''
-        <script src="../js/vendor/three.js"></script>
-        <script src="../js/common.js"></script>
-        <script src="../js/projection-demo.js"></script>
+        result += f'''
+        <script src="{relative_path_prefix}/js/vendor/three.js"></script>
+        <script src="{relative_path_prefix}/js/common.js"></script>
+        <script src="{relative_path_prefix}/js/projection-demo.js"></script>
+        '''
+    if filename == 'content/sums-and-seqs/sums.txt':
+        result += f'''
+        <script src="{relative_path_prefix}/js/animator.js"></script>
         '''
 
     return result
@@ -317,8 +330,7 @@ def asymptote(match, filename):
         attribs = xml.etree.ElementTree.parse(outfile).getroot().attrib
         assert attribs['width'].endswith('pt')
         assert attribs['height'].endswith('pt')
-        size = (float(attribs['width'][:-2]),
-                float(attribs['height'][:-2]))
+        size = (float(attribs['width'][:-2]), float(attribs['height'][:-2]))
         extrainfo = 'width="%.0f" height="%.0f"' % size
     else:
         extrainfo = ''
@@ -328,6 +340,24 @@ def asymptote(match, filename):
 
     html = tags.image(relative.replace(os.sep, '/'), match.group(2))
     return html.replace('<img', '<img %s class="asymptote"' % extrainfo, 1)
+
+
+@builder.converter.add_multiliner(r'^animation:(.*)\n')
+def animation(match, filename):
+    the_id = match.group(1).strip()
+    javascript = match.string[match.end():]
+    # TODO: don't put script tags in middle of page, belongs to head
+    return f'''
+    <div id="{the_id}"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {{
+            function run() {{
+                window.animator.run("{the_id}", ...arguments);
+            }}
+            {javascript}
+        }});
+    </script>
+    '''
 
 
 builder.run()

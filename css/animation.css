@@ -1,0 +1,46 @@
+#anim-sum-of-squares > .animation-content,
+#anim-sum-of-integers > .animation-content {
+    --math-unit: 30px;
+}
+#anim-sum-of-squares > .animation-content { height: calc(21*var(--math-unit)); }
+#anim-sum-of-integers > .animation-content { height: calc(3*var(--math-unit)); }
+
+.animation {
+    margin: 20px;
+}
+.animation > button {
+    margin: 5px;
+    margin-top: 20px;
+}
+.animation-content > div {
+    position: absolute;   /* respect .animation-content's margin */
+}
+
+.animation-content > div > * {
+    /* typically much of this is overrided in element-specific styles */
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transition: all 0.5s ease-in-out;
+}
+.animation-content > div > .square {
+    width: var(--math-unit);
+    height: var(--math-unit);
+    border: 1px solid black;
+    text-align: center;   /* center horizontally */
+    vertical-align: middle;
+    line-height: var(--math-unit);
+
+    background-color: #ffff80;
+    border-radius: 10px;
+    border: 1px solid;
+}
+.animation-content > div > .square.color1 {
+    background-color: #80ff80;
+}
+.animation-content > div > .square.color2 {
+    background-color: #ff8080;
+}
+.animation-content > div > .square.merged {
+    background-color: #ff80ff;
+}

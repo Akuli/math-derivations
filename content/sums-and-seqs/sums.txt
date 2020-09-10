@@ -1,6 +1,7 @@
 # Sums
 
 The results on this page work for any integer $n \ge 1$.
+I animated the derivations with $n=7$, but similar derivations work for any other $n$ too.
 
 
 ## Sum of positive integers up to $n$
@@ -9,46 +10,57 @@ Let's calculate
 $$
 1 + 2 + 3 + \dots + n.
 $$
-To visualize the numbers being added, we draw this
-(the drawing has $n=7$, but it works similarly for other values of $n$):
+This animation shows how this goes for $n=7$:
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        filldrawlabel(shift(x, 0)*unitsquare, lightyellow, format("%d", x+1));
-    }
+animation: anim-sum-of-integers
+    const n = 7;
+    const originalSquares = Array(n).fill().map(() => document.createElement('div'));
+    const copiedSquares = Array(n).fill().map(() => document.createElement('div'));
 
-Let's make a green copy of the numbers and reverse the copy.
-This does not change the sum of the numbers.
+    run([
+        (
+            originalSquares.map((element, x) => ({
+                type: 'create',
+                element, x,
+                y: 0,
+                textContent: x+1,
+                classes: 'square',
+                zIndex: 2,
+            }))
+        ).concat(
+            copiedSquares.map((element, x) => ({
+                type: 'create',
+                element, x,
+                y: 0,
+                textContent: x+1,
+                classes: 'square color1',
+                zIndex: 1,
+            }))
+        ),
+        copiedSquares.map(element => ({type: 'config', element, dy: 2})),
+        copiedSquares.map((element, x) => ({type: 'config', element, x: n-x-1})),
+        ...originalSquares.map((origSquare, x) => {
+            const copySquare = copiedSquares[n-x-1];
+            return [
+                {type: 'config', element: origSquare, textContent: n+1, y: 1, classes: 'merged'},
+                {type: 'config', element: copySquare, y: 1},
+            ];
+        }),
+    ]);
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        filldrawlabel(shift(x, 0)*unitsquare, lightyellow, format("%d", x+1));
-        filldrawlabel(shift(x, -1)*unitsquare, lightgreen, format("%d", n-x));
-    }
-
-Because we only care about the sum of all numbers,
-we can replace two squares containing $1$ and $7$ with one square containing $8$,
-or more generally, $a$ and $b$ squares with one $a+b$ square.
-Let's do it for each column. I'll use pink squares for the replacing results.
-
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        filldrawlabel(shift(x, 0)*unitsquare, lightmagenta, format("%d", n+1));
-    }
-
-The number in each square is now $n+1$ and we have $n$ squares, so the sum is
+In the beginning, $1+2+\dots+n$ is represented with numbers inside squares,
+so we are interested in **the sum of all numbers in the squares**.
+This sum doubles when we make a copy of each square, but otherwise it never changes;
+this is why the numbers of the squares are added when the squares get merged together.
+We ended up with $n+1=8$ showing $n$ times, once in each of the $n$ squares, so
 $$
-\underbrace{(n+1)+(n+1)+\dots+(n+1)}_{\text{adding $n$ times}} = n(n+1).
+\begin{align}
+1+2+3+\dots+n
+&= \text{sum of numbers in the beginning} \\
+&= \frac{1}{2}(\text{sum of numbers at end of animation}) \\
+&= \frac{1}{2}n(n+1).
+\end{align}
 $$
-This includes the green squares and the yellow squares,
-and because the green squares and yellow squares have the same numbers (although in a different order),
-the sum of yellow squares is half of what we got.
 
 graybox:
     $$
@@ -62,145 +74,129 @@ graybox:
 
 Let's calculate
 $$
-1^2+2^2+\dots+n^2.
+1^2 + 2^2 + 3^2 + \dots + n^2.
 $$
-Again, we visualize this for $n=7$, like this:
+This animation shows how this goes for $n=7$:
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    real xshift = 0;
-    real yshift = 0;
-    for (int k = 1; k <= n; ++k) {
-        for (int x = 0; x < k; ++x) {
-            for (int y = 0; y < k; ++y) {
-                filldrawlabel(shift(xshift, yshift)*shift(x, y)*unitsquare, lightyellow, "1");
-            }
-        }
-        if (k == 5) {
-            xshift = 0;
-            yshift = -(n+1);
-        } else {
-            xshift += k + 0.5;
-        }
-    }
+animation: anim-sum-of-squares
+    function sumOfIntegersUpTo(n) { return n*(n+1)/2; }
+    function range(n) { return Array(n).fill().map((junk, number) => number); }
+    const n = 7;
 
-Let's stack all of these on top of each other and add the numbers.
+    const differentSizeSquares = range(n)
+        .map(i => i+1)
+        .map(size =>
+            range(n*n)
+            .map(i => ({x: i%n, y: Math.floor(i/n)}))
+            .filter(({x, y}) => x < size && y < size)
+            .map(({x, y}) => ({
+                x,
+                y,
+                element: document.createElement('div'),
+                initialX: (
+                    (size >= 5) ?
+                        sumOfIntegersUpTo(size-1)-sumOfIntegersUpTo(4) + (size-5)
+                    :
+                        sumOfIntegersUpTo(size-1) + (size-1)
+                ) + x - n,
+                initialY: ((size >= 5) ? 5 : 0) + y - n,
+            }))
+        );
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int k = n; k >= 1; --k) {
-        for (int x = 0; x < k; ++x) {
-            for (int y = -k; y < 0; ++y) {
-                filldrawlabel(shift(0.1k, 0.15k)*shift(x, y)*unitsquare, lightyellow, "1");
-            }
-        }
-    }
+    const basicSquares = differentSizeSquares[n-1];
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        for (int y = -n; y < 0; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, lightyellow, format("%d", min(n-x,y+n+1)));
-        }
-    }
+    const topCopy  = range(n*n).map(i => ({x: i%n, y: Math.floor(i/n), element: document.createElement('div')}));
+    const leftCopy = range(n*n).map(i => ({x: i%n, y: Math.floor(i/n), element: document.createElement('div')}));
 
-Let's create two flipped copies of this.
+    run([
+        differentSizeSquares.map((squareList, size) => squareList.map(({x, y, initialX, initialY, element}) => ({
+            type: 'create',
+            element,
+            x: initialX,
+            y: initialY,
+            textContent: 1,
+            classes: 'square',
+            zIndex: 2,
+        }))).flat(),
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        for (int y = -n; y < 0; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, lightyellow, format("%d", min(n-x,y+n+1)));
-            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, lightred, format("%d", min(n-x,y+n+1)));
-            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, lightgreen, format("%d", min(n-x,y+n+1)));
-        }
-    }
+        differentSizeSquares.map(squareList => squareList.map(({x, y, element}) => ({
+            type: 'config',
+            element, x, y,
+            textContent: (squareList.length === n*n) ? (n - Math.max(x, y)) : undefined,
+        }))).flat(),
 
-Let's also change some colors.
+        (
+            differentSizeSquares
+            .filter(squareList => squareList.length !== n*n)
+            .flat()
+            .map(({element}) => ({type: 'delete', element}))
+        ).concat(
+            topCopy.concat(leftCopy).map(({x, y, element}) => ({
+                type: 'create',
+                element, x, y,
+                textContent: n - Math.max(x, y),
+                classes: 'square',
+                zIndex: 1,
+            }))
+        ).concat(
+            topCopy.map(({element}) => ({type: 'config', element, classes: 'color1'}))
+        ).concat(
+            leftCopy.map(({element}) => ({type: 'config', element, classes: 'color2'}))
+        ),
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        for (int y = -n; y < 0; ++y) {
-            filldrawlabel(shift(x, y)*unitsquare, y+1==-x ? lightblue : lightyellow, format("%d", min(n-x,y+n+1)));
-            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, y+1>-x ? red : lightred, format("%d", min(n-x,y+n+1)));
-            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? green : lightgreen, format("%d", min(n-x,y+n+1)));
-        }
-    }
+        (
+            topCopy.map(({x, y, element}) => ({type: 'config', element, x, y: -y-1}))
+        ).concat(
+            leftCopy.map(({x, y, element}) => ({type: 'config', element, x: -x-1, y}))
+        ),
 
-Now let's separate the yellow parts from the drawing.
+        basicSquares.map(({x, y, element}) => ({
+            type: 'config',
+            dx: (x < y) ? -n : (x > y) ? n : 0,
+            dy: (x < y) ? n : (x > y) ? -n : 0,
+            element,
+        })),
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        for (int y = -n; y < 0; ++y) {
-            if (y+1 < -x) {
-                filldrawlabel(shift(-n,-n)*shift(x, y)*unitsquare, lightyellow, format("%d", min(n-x,y+n+1)));
-            } else if (y+1 > -x) {
-                filldrawlabel(shift(n,n)*shift(x, y)*unitsquare, lightyellow, format("%d", min(n-x,y+n+1)));
-            } else {
-                filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", min(n-x,y+n+1)));
-            }
-            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, y+1>-x ? red : lightred, format("%d", min(n-x,y+n+1)));
-            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? green : lightgreen, format("%d", min(n-x,y+n+1)));
-        }
-    }
+        basicSquares.map(({x, y, element}) => ({
+            type: 'config',
+            dx: (x > y) ? -y : 0,
+            dy: (x < y) ? -x : 0,
+            zIndex: 3,
+            element,
+        })),
 
-For the yellow part at top right, we now slide each row left so that they line up.
-For the yellow part at bottom left, we shift the columns up instead.
+        ...range(n-1).map(movingRowOrColumn =>
+            basicSquares
+            .filter(({x, y}) => x !== y && Math.min(x, y) === movingRowOrColumn)
+            .map(({x, y, element}) => ({
+                type: 'config',
+                element,
+                classes: 'merged',
+                textContent: n - Math.abs(x-y) + 1,
+                ...(x<y ? {dy: -n-1} : {dx: -n-1}),
+            }))
+        ),
+    ]);
 
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        for (int y = -n; y < 0; ++y) {
-            if (y+1 == -x) {
-                filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", min(n-x,y+n+1)));
-            }
-            if (x > 0 && x-y <= n) {
-                filldrawlabel(shift(n,n)*shift(x,y)*unitsquare, lightyellow, format("%d", n-x+y+1));
-                filldrawlabel(shift(-n-1,-n-1)*shift(x,y)*unitsquare, lightyellow, format("%d", n-x+y+1));
-            }
-            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, y+1>-x ? red : lightred, format("%d", min(n-x,y+n+1)));
-            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? green : lightgreen, format("%d", min(n-x,y+n+1)));
-        }
-    }
+In the beginning, $4^2$ is represented with $16 = 4 \cdot 4$ squares, each containing $1$.
+The the sum of all numbers in those squares is $4^2$.
+We represent other things being added similarly.
 
-Now the yellow parts fit to the highlighted places.
-Let's move them there and add the numbers.
-For example, the third row of the red part is now $\red{1~2~3~4~5~5~5}$,
-and $\color{#f60}{4~3~2~1}$ is added to the beginning of it.
-That gives $\magenta{5~5~5~5}~\red{5~5~5}$.
-
-asymptote:
-    unitsize(1cm);
-    int n = 7;
-    for (int x = 0; x < n; ++x) {
-        for (int y = -n; y < 0; ++y) {
-            if (y+1 == -x) {
-                filldrawlabel(shift(x, y)*unitsquare, lightblue, format("%d", min(n-x,y+n+1)));
-            }
-            filldrawlabel(scale(-1,1)*shift(x, y)*unitsquare, y+1>-x ? lightmagenta : lightred, format("%d", y+n+1));
-            filldrawlabel(scale(1,-1)*shift(x, y)*unitsquare, y+1<-x ? lightmagenta : lightgreen, format("%d", y+n+1));
-        }
-    }
-
-Both of the $n$ by $n$ squares now have $n$ columns or rows of $1,2,\dots,n$.
-There's one more $1,2,\dots,n$ from the blue squares.
-In total, the numbers $1,2,\dots,n$ appear $2n+1$ times, so by the previous result, the sum of all numbers is
+During the animation, the sum of all numberes
+changes only when the red and green copies of the drawing are created, and that triples the sum.
+At the end of the animation,
+there are $n$ rows, $n$ columns and $1$ diagonal of squares showing $1+2+\dots+n$.
+This means that we have $1+2+\dots+n$, repeated $2n+1$ times.
+With these things and the result from the previous derivation, we get
 $$
-(2n+1)(1+2+\dots+n) = (2n+1)\frac{n(n+1)}{2} = \frac{n(n+1)(2n+1)}{2}.
-$$
-We started with a drawing representing $1^2+2^2+\dots+n^2$ and then added two more copies of it,
-so we have
-$$
-3(1^2+2^2+\dots+n^2) = \frac{n(n+1)(2n+1)}{2}.
+\begin{align}
+1^2 + 2^2 + \dots + n^2
+&= \text{sum of numbers in the beginning} \\
+&= \frac{1}{3}(\text{sum of numbers at end of animation}) \\
+&= \frac{1}{3}(2n+1)(1+2+\dots+n) \\
+&= \frac{1}{3}(2n+1)\frac{n(n+1)}{2} \\
+&= \frac{n(n+1)(2n+1)}{6}.
+\end{align}
 $$
 
 graybox:

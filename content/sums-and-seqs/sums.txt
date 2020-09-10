@@ -50,8 +50,8 @@ animation: anim-sum-of-integers
 
 In the beginning, $1+2+\dots+n$ is represented with numbers inside squares,
 so we are interested in **the sum of all numbers in the squares**.
-This sum doubles when we make a copy of each square, but otherwise it never changes;
-this is why the numbers of the squares are added when the squares get merged together.
+This sum doubles when we make a copy of each square, but
+it doesn't change in other ways because the numbers get added when squares merge together.
 We ended up with $n+1=8$ showing $n$ times, once in each of the $n$ squares, so
 $$
 \begin{align}

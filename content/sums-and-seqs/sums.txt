@@ -207,57 +207,70 @@ graybox:
 
 ## Sum of Cubes
 
-Let's calculate
-$$
-(1 + 2 + 3 + \dots + n)^2.
-$$
-By on the first result on this page, we can write this as
-$$
-(1 + 2 + \dots + n)^2
-= \left( \frac{n(n+1)}{2} \right)^2
-= \frac{n^2(n+1)^2}{4}.
-$$
-On the other hand, we can expand it to get
-$$
-\begin{align}
-(1 + 2 + 3 + \dots + n)^2
-&= (1 + 2 + 3 + \dots + n)(1 + 2 + 3 + \dots + n) \\
-&\\
-&= \quad 1(1 + 2 + 3 + \dots + n) \\
-&\quad+ 2(1 + 2 + 3 + \dots + n) \\
-&\quad+ 3(1 + 2 + 3 + \dots + n) \\
-&\quad\quad\vdots \\
-&\quad+ n(1 + 2 + 3 + \dots + n) \\
-&\\
-&= \quad 1 \cdot 1 + 1 \cdot 2 + 1 \cdot 3 + \dots + 1 \cdot n \\
-&\quad+ 2 \cdot 1 + 2 \cdot 2 + 2 \cdot 3 + \dots + 2 \cdot n \\
-&\quad+ 3 \cdot 1 + 3 \cdot 2 + 3 \cdot 3 + \dots + 3 \cdot n \\
-&\quad\quad\vdots \\
-&\quad+ n \cdot 1 + n \cdot 2 + n \cdot 3 + \dots + n \cdot n.
-\end{align}
-$$
-This is the sum of all numbers in a multiplication table of size $n$ by $n$.
-It's represented in the beginning of the following animation for $n=7$.
+As usual, the animation below has $n=7$.
 
 animation: anim-sum-of-cubes
     function mulString(a, b) { return `${a}⋅${b}`; }
-
     const n = 7;
-    const mulTable = Array(n*n)
-        .fill()
-        .map((junk, i) => ({
-            x: (i % n),
-            y: Math.floor(i / n),
-            element: document.createElement('div'),
-        }))
-        .map(info => ({...info, partNumber: Math.max(info.x, info.y)}));
+
+    const repeatedRows = Array(n).fill().map((junk, i) => i+1).map(rowCount =>
+        Array(rowCount).fill().map(() => Array(n).fill().map(() => document.createElement('div')))
+    );
+    const mulTable = repeatedRows
+        .map(rowList => rowList[rowList.length - 1])
+        .map((lastRow, y) => lastRow.map((element, x) => ({
+            x, y, element,
+            partNumber: Math.max(x, y),
+        })))
+        .flat();
 
     run([
-        mulTable.map(({x, y, element, partNumber}) => ({
-            type: 'create',
-            x, y, element,
-            classes: 'square',
-            textContent: mulString(y+1, x+1),
+        repeatedRows.map(rowList => ({
+            rowList,
+            xFirst: (n+1)*(rowList.length-1>=4),
+            yFirst: rowList.length>=5 ? (rowList.length-1)*rowList.length/2 - 5*6/2 + rowList.length : (rowList.length-1)*rowList.length/2+rowList.length-1,
+        })).map(({rowList, xFirst, yFirst}) =>
+            rowList.map((row, rowNumber) =>
+                row.map((element, x) => ({
+                    type: 'create',
+                    x: xFirst + x,
+                    y: yFirst + rowNumber,
+                    element,
+                    classes: 'square',
+                    textContent: x+1,
+                }))
+            )
+        ).flat().flat(),
+
+        (
+            repeatedRows.map(rowList => rowList.map((row, rowNumber) => row.map(element => ({
+                type: 'config',
+                element,
+                dy: -rowNumber,
+            })))).flat().flat()
+        ).concat(
+            repeatedRows
+            .map(rowList => ({lastRow: rowList[rowList.length - 1], rowCount: rowList.length}))
+            .map(({lastRow, rowCount}) => lastRow.map((element, x) => ({
+                type: 'config',
+                element,
+                textContent: mulString(rowCount, x+1),
+            })))
+            .flat()
+        ),
+
+        repeatedRows
+        .flat()
+        .flat()
+        .filter(el => !mulTable.map(({element}) => element).includes(el))
+        .map(element => ({
+            type: 'delete',
+            element,
+        })),
+
+        mulTable.map(({element, x, y, partNumber}) => ({
+            type: 'config',
+            element, x, y,
             css: {zIndex: (x === partNumber) ? 1 : 2},  // left row in front of right row when merging
         })),
 
@@ -293,6 +306,21 @@ animation: anim-sum-of-cubes
                 }))
             ),
     ]);
+
+In the beginning, there are many copies of $1+2+\dots+n$.
+There's one copy in top left corner, then two copies below that, and so on until $n$ copies at bottom right.
+For that reason, the number of copies is $1+2+\dots+n$;
+we have $1+2+\dots+n$ copies of $1+2+\dots+n$.
+This means that the sum of all numbers is
+$$
+\begin{align}
+(1+2+\dots+n)(1+2+\dots+n)
+&= (1+2+\dots+n)^2 \\
+&= \left( \frac{n(n+1)}{2} \right)^2 \\
+&= \frac{n^2(n+1)^2}{4},
+\end{align}
+$$
+where the first result on this page was used to calculate $1+2+\dots+n$.
 
 The sum of all numbers doesn't change during the animation.
 At the end, there is a column that contains $5$ squares with $5 \cdot 5$ in each, so a total of

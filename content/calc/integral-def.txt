@@ -23,7 +23,7 @@ so let's do that.
 
 ## Partitions
 
-Let's split the interval $[a,b]$ into $n$ smaller parts.
+Let's split the interval $[a,b]$ into $n$ smaller parts (not infinitely many parts).
 In the below picture, we have $n = 6$.
 
 asymptote:
@@ -109,7 +109,7 @@ For example:
     The interval marked in the above picture is the 4th interval.
 </li></ul>
 
-Drawing the upper sums like this creates rectangles, and we see that
+Now we see rectangles and notice that
 $$
 \text{integral} \le \text{first rectangle area} + \text{second rectangle area} + \dots + \text{$n$th rectangle area}.
 $$
@@ -206,17 +206,20 @@ If you want to know more about Riemann integrals, then you should go study math 
 This approach has several advantages over just defining the integral as area under a graph:
 <ul><li>
     We never defined what exactly area is, and this is easier than defining area properly.
+    For this, we needed rectangle area and not much else.
 </li><li>
     The lower sums and upper sums work
     even if the function $f$ has negative values and its graph (or a part of it) is below the $x$ axis.
     We don't need to special-case negative numbers
     when deriving something with upper sums and lower sums.
 </li><li>
-    Some things are easier to derive this way than with areas. See the $\int_0^1 x^2\ dx$ example below.
+    If you are fine with relying on areas, then you should view what we just did as
+    a way to calculate areas that you can't calculate otherwise.
+    See the $\int_0^2 x^2\ dx$ example below.
+    At this point, calculating integrals is ridulously difficult,
+    but we'll find an easy and powerful way to do it later.
 </li></ul>
 
-At this point, calculating integrals is ridulously difficult (see the examples below).
-Later we'll find a much easier way to do it.
 
 
 ## Example: integral of 3

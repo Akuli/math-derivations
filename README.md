@@ -21,4 +21,5 @@ Run these commands from the virtualenv as needed:
 
 - Building into `html` directory: `python3 build.py`
 - Building automatically when a file is saved in the editor: `make buildloop`
+- Checking links: `make linkcheck`
 - Publishing to github pages: `python3 publish.py`

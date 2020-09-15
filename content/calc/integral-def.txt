@@ -302,7 +302,7 @@ asymptote:
     dot((2,0), p=dotpen, L="$2$", align=S);
 
 We partition the interval $[0,2]$ into 5 equally sized parts.
-Because each parts has length $\frac{2}{5}$ (that is, interval length $2$ divided into $5$ equal pieces),
+Because each part has length $\frac{2}{5}$ (that is, interval length $2$ divided into $5$ equal pieces),
 the first two numbers of the partition will be $0$ and $\frac{2}{5}$.
 The number after those will be $\frac{2}{5}+\frac{2}{5}=\frac{4}{5}$.
 By continuing like this, we see that the partition we want is

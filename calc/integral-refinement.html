@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Inequality and Limit
+<title>Refinement of Partition
 </title>
 
     <script type="text/x-mathjax-config">
@@ -171,69 +171,92 @@
         
         </div>
         </div>
-<h1 id="inequality-and-limit">Inequality and Limit<a class="headerlink" href="#inequality-and-limit" title="Link to this title">¶</a></h1><p>Suppose that $f(x) \le g(x)$ for all numbers $x$ except $a$,
-and suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-Let's see what we can say about $A$ and $B$.
-It seems reasonable to expect $A \le B$,
-so let's see what happens if that's false, and we have $A > B$ instead.</p>
+<h1 id="refinement-of-partition">Refinement of Partition<a class="headerlink" href="#refinement-of-partition" title="Link to this title">¶</a></h1><p>Let $P$ and $R$ be partitions of $[a,b]$.
+We say that $R$ is a <b>refinement</b> of $P$ if $R$ contains all partition numbers of $P$.</p>
 
-<p>Let $D=A-B$ denote the difference of the limits $A$ and $B$.
-We have $A > B$, so $D$ is positive.
-By the definitions of the limits,
-there's an input interval of $f$ corresponding to the output interval $(A-\frac{D}{3}, A+\frac{D}{3})$,
-and there's an input interval of $g$ corresponding to the output interval $(B-\frac{D}{3}, B+\frac{D}{3})$·</p>
-
-<p><img width="125" height="429" class="asymptote" src="../asymptote/15a2203df1d12f739c6334a445922d3c.svg" /></p><p><img width="287" height="35" class="asymptote" src="../asymptote/a89eb753656342944ec9d2ffcde02dbd.svg" /></p><p>Just like <a href="limit-basics.html#more-than-one-limit">before</a>, the input intervals overlap,
-and there are numbers not equal to $a$ that are in both of the input intervals.
-Letting $o$ be one of these "overlap numbers", we get
-$$
-f(o) \in \left( A-\frac{D}{3}, A+\frac{D}{3} \right), \qquad
-g(o) \in \left( B-\frac{D}{3}, B+\frac{D}{3} \right).
-$$
-This leads to
-$$
-f(o) > g(o),
-$$
-which is impossible; we assumed that $f(x) \le g(x)$ whenever $x \ne a$, and we also have $o \ne a$.</p>
-
-<p>We didn't even need the assumption that $f(x) \le g(x)$ for <b>all</b> $x$.
-Instead, it was enough that we found one overlap number, which gave the desired result.
-Instead of assuming that $f(x) \le g(x)$ for all $x$,
-we could assume that there's some open interval $I$ centered around $a$ in which $f(x) \le g(x)$;
-then we can choose $o$ such that it's in both input intervals and in $I$.</p>
-
-<p><img width="401" height="41" class="asymptote" src="../asymptote/1411547f8d3fc2f4e38db3a961c7dff7.svg" /></p><div class="box graybox"><p>If $f(x) \le g(x)$ for all numbers $x$ in some open interval centered around $a$,
-and the limits $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist,
-then $\lim_{x \to a} f(x) \le \lim_{x \to b} g(x)$.
+<p><img width="328" height="124" class="asymptote" src="../asymptote/569bf65ab2e2b08be3554f7902488999.svg" /></p><p>Note that any partition is a refinement of itself
+because it contains all partition numbers of itself.
 </p>
 
-</div><p>Note that $f(x) < g(x)$ does <b>not</b> imply $\lim_{x \to a} f(x) < \lim_{x \to a} g(x)$.
-For example, let $f(x) = 0$ and
-$$
-g(x) = \begin{cases}
-    x, & \text{if $x>0$}; \\
-    7, & \text{if $x=0$}; \\
-    -x, & \text{if $x<0$}.
-\end{cases}
-$$</p>
+<h2 id="upper-and-lower-sums-with-refinements">Upper and lower sums with refinements<a class="headerlink" href="#upper-and-lower-sums-with-refinements" title="Link to this title">¶</a></h2><p>Suppose that $R$ contains one more partition number than $P$,
+and let $f$ be a function that is continuous on $[a,b]$.
+Let $r$ be the partition number that $R$ has but $P$ doesn't have.
+The upper sums look like this:</p>
 
-<p><img width="367" height="216" class="asymptote" src="../asymptote/7c1a05dc0c8988015bf230bac3785355.svg" /></p><p>Now we have $f(x) < g(x)$ for all $x$. We get
+<p><img width="402" height="201" class="asymptote" src="../asymptote/f1d1cf980fe1580353734e26d841bb54.svg" /></p><p><img width="402" height="201" class="asymptote" src="../asymptote/2ba54afac7a44281cdbd5ae815e5fe4b.svg" /></p><p>The upper sum with $R$ seems to be less than the upper sum with $P$.
+We can also verify this without relying on a picture.
+Let $x_1,x_2,\dots,x_n$ be the partition numbers of $P$,
+and let $[x_{k-1},x_k]$ be the interval that contains $r$.
+Now
 $$
-\lim_{x \to 0} f(x) = \lim_{x \to 0} 0 = 0.
+\text{upper sum with $P$} = (x_k-x_{k-1})\max_{[x_{k-1},x_k]}f + \text{other stuff}
 $$
-By calculating <a href="limit-1sided.html">left and right limits</a>, we get
+and
+$$
+\text{upper sum with $R$} = (r-x_{k-1})\max_{[x_{k-1},r]}f+(x_k-r)\max_{[r,x_k]}f + \text{other stuff},
+$$
+where other stuff is the areas of rectangles that are the same in $P$ and $R$.
+Adding more numbers to the interval of a maximum (e.g. $[x_{k-1},r]$ to $[x_{k-1},x_k]$)
+can't make the maximum smaller, so
 $$
 \begin{align}
-&\lim_{x \to 0^+} g(x) = \lim_{x \to 0^+} x = 0 \\
-&\lim_{x \to 0^-} g(x)
-    = \lim_{x \to 0^-} -x
-    = \underbrace{\left( \lim_{x \to 0^-} -1 \right)}_{-1} \, \underbrace{\left( \lim_{x \to 0^-} x \right)}_0
-    = 0,
+&(r-x_{k-1})\max_{[x_{k-1},r]}f+(x_k-r)\max_{[r,x_k]}f \\
+\le{}& (r-x_{k-1})\max_{[x_{k-1},x_k]}f+(x_k-r)\max_{[x_{k-1},x_k]}f \\
+={}& (r-x_{k-1}+x_k-r)\max_{[x_{k-1},x_k]}f \\
+={}& (x_k-x_{k-1})\max_{[x_{k-1},x_k]}f.
 \end{align}
 $$
-which shows that $\lim_{x \to 0} g(x)$ is also $0$.
-So, even though $f(x) < g(x)$ for all $x \in \mathbb{R}$, the limits of $f$ and $g$ are equal.
-This means that the graphs go very close to each other, but they never quite touch.
+This shows that the upper sum does not increase when adding one partition number.
+It follows that it does not increase when adding several partition numbers.
+A similar derivation works for lower sums.</p>
+
+<div class="box graybox"><p>Suppose that $f$ is continuous on $[a,b]$, and let $P$ be a partition of $[a,b]$. Then
+$$
+\text{upper sum of $f$ with $P$} \ge \text{upper sum of $f$ with any refinement of $P$}
+$$
+and
+$$
+\text{lower sum of $f$ with $P$} \le \text{lower sum of $f$ with any refinement of $P$}.
+$$
+</p>
+
+</div><p>We may have equality here, and not necessarily $>$ and $<$.
+For example, if $f(x) = 3$ for all $x$, then any upper sum or lower sum on $\leftsquarebracket 2,4]$ is $6$
+(see <a href="integral-def.html#example-integral-of-3">this example</a>).
+</p>
+
+<h2 id="upper-and-lower-sums-of-different-partitions">Upper and lower sums of different partitions<a class="headerlink" href="#upper-and-lower-sums-of-different-partitions" title="Link to this title">¶</a></h2><p>Let $P_1$ and $P_2$ be <b>any</b> partitions of $[a,b]$,
+and let $f$ be a function that is continuous on $[a,b]$.
+Let's make a third partition $R$ by combining all numbers of $P_1$ and $P_2$.</p>
+
+<p><img width="333" height="126" class="asymptote" src="../asymptote/1245b470894d78686cfb23bd8e90140f.svg" /></p><p>Now $R$ is a refinement of both $P_1$ and $P_2$, so
+$$
+\begin{align}
+\text{lower sum of $f$ with $P_1$}
+&\le \text{lower sum of $f$ with $R$} \\
+&\le \text{upper sum of $f$ with $R$} \\
+&\le \text{upper sum of $f$ with $P_2$}.
+\end{align}
+$$</p>
+
+<div class="box graybox"><p>Suppose that a function $f$ is continuous on $[a,b]$. Then
+$$
+\text{any lower sum} \le \text{any upper sum}.
+$$
+for any lower and upper sums of $f$ on $[a,b]$.
+</p>
+
+</div><p>Recall that we defined the integral to be the only number between any lower sum and any upper sum.
+From the above result, it follows that such numbers <b>exist</b>, but there might be more than one of them.
+If there were multiple numbers between any upper sum and any lower sum (the two dots in the below picture),
+then there would be a "gap" between lower sums and upper sums:</p>
+
+<p><img width="470" height="64" class="asymptote" src="../asymptote/6d6c66c9258126f11bf5e5a9319a664d.svg" /></p><p>If $f$ is continuous, there is no gap;
+in other words, you can make the difference between an upper and lower sum as small as you want
+by choosing appropriate partitions.
+In the below picture, the red parts make up the difference of an upper sum and lower sum.</p>
+
+<p><img width="300" height="420" class="asymptote" src="../asymptote/dcf083f9a99ea350131eb6782f3d3eb9.svg" /></p><p>We won't prove this better because it's surprisingly difficult and this is not a university.
 </p>
 
 </div>

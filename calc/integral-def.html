@@ -166,7 +166,7 @@
         <input type="checkbox" id="sidebar-checkbox-15" />
         <label for="sidebar-checkbox-15">Integral</label>
         <div class="dropdown">
-            <a href="integral-def.html">Definition of integral</a>
+            <a href="integral-def.html">Definition of integral</a><a href="integral-refinement.html">Refinement of partition</a>
         </div>
         
         </div>
@@ -179,7 +179,7 @@ But for doing integrals, defining what exactly we mean with the "area" under a g
 so let's do that.
 </p>
 
-<h2 id="partitions">Partitions<a class="headerlink" href="#partitions" title="Link to this title">¶</a></h2><p>Let's split the interval $[a,b]$ into $n$ smaller parts.
+<h2 id="partitions">Partitions<a class="headerlink" href="#partitions" title="Link to this title">¶</a></h2><p>Let's split the interval $[a,b]$ into $n$ smaller parts (not infinitely many parts).
 In the below picture, we have $n = 6$.</p>
 
 <p><img width="402" height="201" class="asymptote" src="../asymptote/6e33a95a897261e9614650db4f7bfbaa.svg" /></p><p>This kind of splitting is called a <b>partition</b> of the interval $[a,b]$.
@@ -207,7 +207,7 @@ For example:
     The interval marked in the above picture is the 4th interval.
 </li></ul></p>
 
-<p>Drawing the upper sums like this creates rectangles, and we see that
+<p>Now we see rectangles and notice that
 $$
 \text{integral} \le \text{first rectangle area} + \text{second rectangle area} + \dots + \text{$n$th rectangle area}.
 $$
@@ -248,9 +248,9 @@ For that reason, <b>we assume that $f$ is continuous</b> from now on.</p>
 <div class="box graybox"><p>Suppose that a function $f$ is continuous on $[a,b]$.
 The <b>integral</b> of $f$ on $[a,b]$ means the only number satisfying
 $$
-\text{lower sum} \le \text{integral} \le \text{upper sum}
+\text{any lower sum} \le \text{integral} \le \text{any upper sum}
 $$
-for any lower sum and any upper sum of $f$ on $[a,b]$.
+for any lower and upper sums of $f$ on $[a,b]$.
 We also write
 $$
 \text{integral} = \int_a^b f(x)\ dx.
@@ -258,8 +258,8 @@ $$
 </p>
 
 </div><p>Above I used the same partition for lower sum and upper sum, but this definition doesn't demand that.
-In the next chapter, we'll show that there is always
-exactly one number that is between any lower sum and any upper sum.</p>
+<a href="integral-refinement.html">Next time</a> I'll explain why there is always
+exactly one number between any lower sum and any upper sum.</p>
 
 <p>In the above notation, $\int$ is known as the integral sign.
 The $f(x)\ dx$ part comes from how we multiply values of $f(x)$ (specifically minimums and maximums)
@@ -275,17 +275,20 @@ If you want to know more about Riemann integrals, then you should go study math 
 <h2 id="why">Why???<a class="headerlink" href="#why" title="Link to this title">¶</a></h2><p>This approach has several advantages over just defining the integral as area under a graph:
 <ul><li>
     We never defined what exactly area is, and this is easier than defining area properly.
+    For this, we needed rectangle area and not much else.
 </li><li>
     The lower sums and upper sums work
     even if the function $f$ has negative values and its graph (or a part of it) is below the $x$ axis.
     We don't need to special-case negative numbers
     when deriving something with upper sums and lower sums.
 </li><li>
-    Some things are easier to derive this way than with areas. See the $\int_0^1 x^2\ dx$ example below.
-</li></ul></p>
+    If you are fine with relying on areas, then you should view what we just did as
+    a way to calculate areas that you can't calculate otherwise.
+    See the $\int_0^2 x^2\ dx$ example below.
+    At this point, calculating integrals is ridulously difficult,
+    but we'll find an easy and powerful way to do it later.
+</li></ul>
 
-<p>At this point, calculating integrals is ridulously difficult (see the examples below).
-Later we'll find a much easier way to do it.
 </p>
 
 <h2 id="example-integral-of-3">Example: integral of 3<a class="headerlink" href="#example-integral-of-3" title="Link to this title">¶</a></h2><p>We calculate
@@ -339,7 +342,7 @@ Let $f(x) = x$.
 Again, it's not very hard to get the right answer by just calculating an area.</p>
 
 <p><img width="257" height="257" class="asymptote" src="../asymptote/588e17d5ef6a894aa52bdfd2fc274a27.svg" /></p><p>We partition the interval $[0,2]$ into 5 equally sized parts.
-Because each parts has length $\frac{2}{5}$ (that is, interval length $2$ divided into $5$ equal pieces),
+Because each part has length $\frac{2}{5}$ (that is, interval length $2$ divided into $5$ equal pieces),
 the first two numbers of the partition will be $0$ and $\frac{2}{5}$.
 The number after those will be $\frac{2}{5}+\frac{2}{5}=\frac{4}{5}$.
 By continuing like this, we see that the partition we want is

@@ -1,0 +1,230 @@
+# Refinement of Partition
+
+Let $P$ and $R$ be partitions of $[a,b]$.
+We say that $R$ is a **refinement** of $P$ if $R$ contains all partition numbers of $P$.
+
+asymptote:
+    unitsize(3cm);
+    draw((-0.5,1)--(3,1), arrow=Arrow(5mm), L=Label("$P$", align=E, position=Relative(1)));
+    draw((-0.5,0)--(3,0), arrow=Arrow(5mm), L=Label("$R$", align=E, position=Relative(1)));
+    real[] P = {0, 0.3, 0.7, 1.6, 2};
+    real[] R = {0, 0.2, 0.3, 0.55, 0.7, 1.4, 1.6, 1.9, 2};
+    for (real x : P) {
+        draw((x,0)--(x,1), p=lightgray);
+        dot((x, 1), p=dotpen+blue);
+    }
+    label(Label((min(P), 1), L="$a$", align=N));
+    label(Label((max(P), 1), L="$b$", align=N));
+    for (real x : R) {
+        bool P_has_x = (find(P == x) >= 0);
+        dot((x, 0), p=(P_has_x ? dotpen+blue : dotpen));
+    }
+
+Note that any partition is a refinement of itself
+because it contains all partition numbers of itself.
+
+
+## Upper and lower sums with refinements
+
+Suppose that $R$ contains one more partition number than $P$,
+and let $f$ be a function that is continuous on $[a,b]$.
+Let $r$ be the partition number that $R$ has but $P$ doesn't have.
+The upper sums look like this:
+
+asymptote:
+    unitsize(2cm);
+
+    real f(real x) { return sin(x)+1.5; }
+    real partition[] = { 1, 1.2, 2.2, 2.5, 3.1, 3.5, 4 };
+    real a = partition[0];
+    real b = partition[partition.length - 1];
+
+    fill(graph(f, a, b)--(b,0)--(a,0)--cycle, lightgreen);
+    axises(-0.5, 6, -0.5, 3);
+    draw(graph(f, -0.5, 6), p=blue, L=Label(rotate(35)*"$y=f(x)$", position=Relative(0.9), align=N));
+    label(Label((a,0), L="$P$", align=S));
+
+    for (int i = 0; i < partition.length; ++i) {
+        real x = partition[i];
+        real xprev = (i == 0 ? x : partition[i-1]);
+        real xnext = (i == partition.length-1 ? x : partition[i+1]);
+        real fmax = max(graph(f, xprev, xnext)).y;
+        draw((x,0)--(x,fmax), p=lightblue);
+    }
+
+    for (int i = 0; i < partition.length - 1; ++i) {
+        real xprev = partition[i];
+        real xnext = partition[i+1];
+        real fmax = max(graph(f, xprev, xnext)).y;
+        draw((xprev, fmax)--(xnext, fmax));
+        if (i == 3) {
+            draw((xprev,0)--(xnext,0), p=red+5);
+            dot((xprev,0), p=dotpen, L="$x_{k-1}$", align=cis(-1.8));
+            dot((xnext,0), p=dotpen, L="$x_k$", align=-cis(1.8));
+        }
+    }
+
+asymptote:
+    unitsize(2cm);
+
+    real f(real x) { return sin(x)+1.5; }
+    real partition[] = { 1, 1.2, 2.2, 2.5, 2.75, 3.1, 3.5, 4 };
+    real a = partition[0];
+    real b = partition[partition.length - 1];
+
+    fill(graph(f, a, b)--(b,0)--(a,0)--cycle, lightgreen);
+    axises(-0.5, 6, -0.5, 3);
+    draw(graph(f, -0.5, 6), p=blue, L=Label(rotate(35)*"$y=f(x)$", position=Relative(0.9), align=N));
+    label(Label((a,0), L="$R$", align=S));
+
+    for (int i = 0; i < partition.length; ++i) {
+        real x = partition[i];
+        real xprev = (i == 0 ? x : partition[i-1]);
+        real xnext = (i == partition.length-1 ? x : partition[i+1]);
+        real fmax = max(graph(f, xprev, xnext)).y;
+        draw((x,0)--(x,fmax), p=lightblue);
+    }
+
+    for (int i = 0; i < partition.length - 1; ++i) {
+        real xprev = partition[i];
+        real xnext = partition[i+1];
+        real fmax = max(graph(f, xprev, xnext)).y;
+        draw((xprev, fmax)--(xnext, fmax));
+        if (i == 3 || i == 4) {
+            draw((xprev,0)--(xnext,0), p=red+5);
+            dot((xprev,0), p=dotpen);
+            dot((xnext,0), p=dotpen);
+        }
+    }
+    label((partition[4],0), Label(L="$r$", align=S));
+
+The upper sum with $R$ seems to be less than the upper sum with $P$.
+We can also verify this without relying on a picture.
+Let $x_1,x_2,\dots,x_n$ be the partition numbers of $P$,
+and let $[x_{k-1},x_k]$ be the interval that contains $r$.
+Now
+$$
+\text{upper sum with $P$} = (x_k-x_{k-1})\max_{[x_{k-1},x_k]}f + \text{other stuff}
+$$
+and
+$$
+\text{upper sum with $R$} = (r-x_{k-1})\max_{[x_{k-1},r]}f+(x_k-r)\max_{[r,x_k]}f + \text{other stuff},
+$$
+where other stuff is the areas of rectangles that are the same in $P$ and $R$.
+Adding more numbers to the interval of a maximum (e.g. $[x_{k-1},r]$ to $[x_{k-1},x_k]$)
+can't make the maximum smaller, so
+$$
+\begin{align}
+&(r-x_{k-1})\max_{[x_{k-1},r]}f+(x_k-r)\max_{[r,x_k]}f \\
+\le{}& (r-x_{k-1})\max_{[x_{k-1},x_k]}f+(x_k-r)\max_{[x_{k-1},x_k]}f \\
+={}& (r-x_{k-1}+x_k-r)\max_{[x_{k-1},x_k]}f \\
+={}& (x_k-x_{k-1})\max_{[x_{k-1},x_k]}f.
+\end{align}
+$$
+This shows that the upper sum does not increase when adding one partition number.
+It follows that it does not increase when adding several partition numbers.
+A similar derivation works for lower sums.
+
+graybox:
+    Suppose that $f$ is continuous on $[a,b]$, and let $P$ be a partition of $[a,b]$. Then
+    $$
+    \text{upper sum of $f$ with $P$} \ge \text{upper sum of $f$ with any refinement of $P$}
+    $$
+    and
+    $$
+    \text{lower sum of $f$ with $P$} \le \text{lower sum of $f$ with any refinement of $P$}.
+    $$
+
+We may have equality here, and not necessarily $>$ and $<$.
+For example, if $f(x) = 3$ for all $x$, then any upper sum or lower sum on $[2,4]$ is $6$
+(see [this example](integral-def.html#example-integral-of-3)).
+
+
+## Upper and lower sums of different partitions
+
+Let $P_1$ and $P_2$ be **any** partitions of $[a,b]$,
+and let $f$ be a function that is continuous on $[a,b]$.
+Let's make a third partition $R$ by combining all numbers of $P_1$ and $P_2$.
+
+asymptote:
+    unitsize(3cm);
+    draw((-0.5,1)--(3,1), arrow=Arrow(5mm), L=Label("$P_1$", align=E, position=Relative(1)));
+    draw((-0.5,0.5)--(3,0.5), arrow=Arrow(5mm), L=Label("$P_2$", align=E, position=Relative(1)));
+    draw((-0.5,0)--(3,0), arrow=Arrow(5mm), L=Label("$R$", align=E, position=Relative(1)));
+
+    real[] P1 = {0, 0.3, 0.7, 1.6, 2};
+    real[] P2 = {0, 0.2, 0.55, 1.4, 1.9, 2};
+    real[] R = sort(concat(P1, P2));
+    for (real x : P1) {
+        dot((x, 1), p=dotpen+blue);
+        if (x != min(P1) && x != max(P1)) {
+            dot((x, 0), p=dotpen+blue);
+        }
+    }
+    for (real x : P2) {
+        dot((x, 0.5), p=dotpen+red);
+        if (x != min(P1) && x != max(P1)) {
+            dot((x, 0), p=dotpen+red);
+        }
+    }
+    dot((min(P1), 0), p=dotpen+deepmagenta, L="$a$", align=S);
+    dot((max(P1), 0), p=dotpen+deepmagenta, L="$b$", align=S);
+
+Now $R$ is a refinement of both $P_1$ and $P_2$, so
+$$
+\begin{align}
+\text{lower sum of $f$ with $P_1$}
+&\le \text{lower sum of $f$ with $R$} \\
+&\le \text{upper sum of $f$ with $R$} \\
+&\le \text{upper sum of $f$ with $P_2$}.
+\end{align}
+$$
+
+graybox:
+    Suppose that a function $f$ is continuous on $[a,b]$. Then
+    $$
+    \text{any lower sum} \le \text{any upper sum}.
+    $$
+    for any lower and upper sums of $f$ on $[a,b]$.
+
+Recall that we defined the integral to be the only number between any lower sum and any upper sum.
+From the above result, it follows that such numbers **exist**, but there might be more than one of them.
+If there were multiple numbers between any upper sum and any lower sum (the two dots in the below picture),
+then there would be a "gap" between lower sums and upper sums:
+
+asymptote:
+    unitsize(3cm);
+    draw((-0.5,0)--(5,0), arrow=Arrow(5mm));
+    draw(brace_with_space((1.9,0), (0,0), 0.1), L="all lower sums", align=S);
+    draw(brace_with_space((4,0), (2.5,0), 0.1), L="all upper sums", align=S);
+    dot((2,0), p=dotpen);
+    dot((2.3,0), p=dotpen);
+
+If $f$ is continuous, there is no gap;
+in other words, you can make the difference between an upper and lower sum as small as you want
+by choosing appropriate partitions.
+In the below picture, the red parts make up the difference of an upper sum and lower sum.
+
+asymptote:
+    unitsize(3cm);
+
+    real f(real x) { return x**2; }
+    real a = 0.5;
+    real b = 2;
+    int n = 30;
+
+    fill(graph(f, a, b)--(b,0)--(a,0)--cycle, lightgreen);
+    axises(-1, 2.5, -0.5, f(2.1));
+    draw(graph(f, -1, 2.1), p=blue);
+
+    for (int i = 0; i <= n; ++i) {
+        real xprev = a + (b-a)*(i-1)/n;
+        real x = a + (b-a)*i/n;
+
+        draw((x,0)--(x,f(xprev)), p=lightblue);
+        if (i != 0) {
+            filldraw(shift(xprev,f(xprev))*scale((b-a)/n, f(x)-f(xprev))*unitsquare, red);
+        }
+    }
+
+We won't prove this better because it's surprisingly difficult and this is not a university.

@@ -178,17 +178,17 @@ graybox:
     Suppose that a function $f$ is continuous on $[a,b]$.
     The **integral** of $f$ on $[a,b]$ means the only number satisfying
     $$
-    \text{lower sum} \le \text{integral} \le \text{upper sum}
+    \text{any lower sum} \le \text{integral} \le \text{any upper sum}
     $$
-    for any lower sum and any upper sum of $f$ on $[a,b]$.
+    for any lower and upper sums of $f$ on $[a,b]$.
     We also write
     $$
     \text{integral} = \int_a^b f(x)\ dx.
     $$
 
 Above I used the same partition for lower sum and upper sum, but this definition doesn't demand that.
-In the next chapter, we'll show that there is always
-exactly one number that is between any lower sum and any upper sum.
+[Next time](integral-refinement.html) I'll explain why there is always
+exactly one number between any lower sum and any upper sum.
 
 In the above notation, $\int$ is known as the integral sign.
 The $f(x)\ dx$ part comes from how we multiply values of $f(x)$ (specifically minimums and maximums)

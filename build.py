@@ -167,6 +167,7 @@ def get_sidebar_content(txtfile):
             ])),
             dropdown("Integral", join([
                 link("Definition of integral", 'calc/integral-def'),
+                link("Refinement of partition", 'calc/integral-refinement'),
             ])),
         ])),
 

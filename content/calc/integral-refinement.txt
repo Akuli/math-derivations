@@ -136,7 +136,7 @@ graybox:
     $$
 
 We may have equality here, and not necessarily $>$ and $<$.
-For example, if $f(x) = 3$ for all $x$, then any upper sum or lower sum on $[2,4]$ is $6$
+For example, if $f(x) = 3$ for all $x$, then any upper sum or lower sum on $\leftsquarebracket 2,4]$ is $6$
 (see [this example](integral-def.html#example-integral-of-3)).
 
 

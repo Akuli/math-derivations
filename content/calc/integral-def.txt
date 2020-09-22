@@ -75,7 +75,6 @@ asymptote:
     }
 
 This kind of splitting is called a **partition** of the interval $[a,b]$.
-Note that there must be a finite number of parts in the partition.
 The partition numbers don't need to split the partition into equally sized parts;
 the sizes may differ, like they do in the above picture.
 
@@ -255,7 +254,7 @@ The maximum of $f$ on any interval is $3$, so we get
 $$
 \text{upper sum} = (3-2)3 + (4-3)3 = 1 \cdot 3 + 1 \cdot 3 = 6.
 $$
-The minimum of $f$ on any interval is also $3$, so the lower sum is also $6$.
+The minimum of $f$ on any interval is also $3$, so the lower sum is $6$ as well.
 Because
 $$
 \text{lower sum} \le \text{integral} \le \text{upper sum},
@@ -270,7 +269,7 @@ $$
 $$
 
 We can also do this using a partition of just two numbers, $2$ and $4$.
-Then we instead get just one rectangle area calculation.
+Then we get just one rectangle area calculation.
 $$
 \text{upper sum} = (4-2) \cdot 3 = 6
 $$
@@ -328,7 +327,7 @@ asymptote:
         draw((x-b/n,f(x))--(x,f(x)));
     }
 
-Because $f$ is increasing, we get the rectangle heights at the right sides of the rectangles,
+Because $f$ is increasing, we get the upper sum rectangle heights at the right sides of the rectangles,
 so
 $$
 \begin{align}

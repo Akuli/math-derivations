@@ -166,7 +166,7 @@ def get_sidebar_content(txtfile):
                 link("Derivative of vector", 'calc/derivative-vector'),
             ])),
             dropdown("Integral", join([
-                link("Definition of integral", 'calc/integral-def'),
+                link("Introduction to integrals", 'calc/integral-intro'),
                 link("Refinement of partition", 'calc/integral-refinement'),
             ])),
         ])),

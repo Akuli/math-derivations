@@ -1,4 +1,4 @@
-# Definition of Integral
+# Introduction to Integrals
 
 An integral of a function $f$ on an interval $[a,b]$ means the area under the graph of $f$ between $a$ and $b$.
 In the below picture, it is the area of the green part.
@@ -214,7 +214,7 @@ Next we'll use this to calculate integrals, and later we'll use this to define w
 
 Also, this is where the notation $\int_a^b f(x)\ dx$ came from;
 it's intended to remind about summing rectangle areas.
-The integral sign $\int$ is a stretched S, S for Sum, $dx$ denotes the width of a rectangle,
+The integral sign $\int$ is a stretched S for Sum, $dx$ denotes the width of a rectangle,
 and $f(x)$ is the corresponding height.
 Then $f(x)\ dx$ is a rectangle area, and $\int_a^b f(x)\ dx$ as a whole means summing those rectangle areas.
 

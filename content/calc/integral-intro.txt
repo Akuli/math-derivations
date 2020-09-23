@@ -49,6 +49,7 @@ we can use that to calculate areas that we otherwise couldn't calculate.
 So far we haven't defined what exactly area means, and it hasn't bothered us too much.
 But for doing integrals, defining what exactly we mean with the "area" under a graph is worth the effort,
 so soon we'll define the integral properly.
+We'll also discuss whether all functions can be integrated.
 
 
 ## Partition

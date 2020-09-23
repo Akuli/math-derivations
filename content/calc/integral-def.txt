@@ -1,0 +1,91 @@
+# Defining the Integral
+
+Let $f$ be a function that has minimums and maximums on $\leftsquarebracket a,b]$
+and all closed subintervals of $\leftsquarebracket a,b]$.
+[Last time](integral-refinement.html#upper-and-lower-sums-of-different-partitions)
+we showed that
+$$
+\text{any lower sum} \le \text{any upper sum},
+$$
+even if the lower and upper sums are from different partitions.
+Based on that, drawing all upper and lower sums on a number line looks something like this:
+
+asymptote:
+    unitsize(3cm);
+    draw((-0.5,0)--(5,0), arrow=Arrow(5mm));
+    draw((0,0)--(1.9,0), p=red+10, L="lower sums", align=S);
+    draw((2.1,0)--(4,0), p=blue+10, L="upper sums", align=S);
+
+Now it is clear that there must be some number between all upper sums and lower sums.
+(Here "between" means that the number may be equal to upper or lower sums,
+which is the case for any function whose graph is a horizontal line.)
+However, it's not clear whether there's just one number or multiple different numbers
+between all upper and lower sums.
+
+In the [examples we did in the beginning](integral-intro.html#example-integral-of-3),
+we calculated integrals based on the inequality
+$$
+\text{any lower sum} \le \text{integral} \le \text{any upper sum}.
+$$
+That was enough to determine the value of the integral every time, so
+there never were multiple numbers between all upper and lower sums.
+We're about to define the integral properly, and we'll make it undefined if
+there are multiple numbers.
+
+graybox:
+    A function $f$ is called **integrable** on $[a,b]$ if
+    it has minimum and maximum values on $[a,b]$ and all closed subintervals of $[a,b]$,
+    and there is only one number between any lower sum and any upper sum.
+    That number is called the **integral** of $f$ on $[a,b]$.
+
+Usually the integral is defined with slightly more "generalized versions" of minimum and maximum,
+but the above definition is good enough for our needs.
+
+
+## Are all functions integrable?
+
+Recall that a number is called rational if it can be written as a fraction of integers,
+and irrational if it can't.
+Let
+$$
+f(x) = \begin{cases}
+    1, & \text{if $x$ is a rational number} \\
+    0, & \text{if $x$ is an irrational number}.
+\end{cases}
+$$
+Unfortunately it's hard to draw a graph of this function.
+
+Because any interval contains rational numbers,
+the minimum of $f$ on any interval is $1$.
+For that reason, an upper sum of $f$ on $[1,2]$ looks something like this, regardless of the partition being used:
+
+asymptote:
+    unitsize(5cm);
+
+    real partition[] = { 1.0, 1.07, 1.4, 1.5, 1.7, 1.83, 2.0 };
+
+    fill(shift(1,0)*unitsquare, p=lightgreen);
+    axises(-0.2, 2.5, -0.2, 1.5);
+    for (real x : partition) {
+        draw((x,0)--(x,1), p=lightblue);
+    }
+    draw((1,1)--(2,1), p=black+5);
+    dot((1,0), p=dotpen, L="$1$", align=S);
+    dot((2,0), p=dotpen, L="$2$", align=S);
+
+Every interval also contains irrational numbers, so all minimums are $0$, and all lower sums looks like this:
+
+asymptote:
+    unitsize(5cm);
+
+    axises(-0.2, 2.5, -0.2, 1.5);
+    draw((1,0)--(2,0), p=black+5);
+    dot((1,0), p=dotpen, L="$1$", align=S);
+    dot((2,0), p=dotpen, L="$2$", align=S);
+
+Because every upper sum is the square area $1^2 = 1$ and every lower sum is zero,
+there are multiple different numbers between all upper sums and lower sums (such as $0$, $\frac{1}{2}$ and $1$),
+and so the function $f$ is not integrable.
+
+graybox:
+    Not all functions are integrable, even if the required minimums and maximums exist.

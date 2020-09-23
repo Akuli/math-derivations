@@ -1,23 +1,29 @@
 # Refinement of Partition
 
-Let $P$ and $R$ be partitions of $[a,b]$.
-We say that $R$ is a **refinement** of $P$ if $R$ contains all partition numbers of $P$.
+On this page, $[a,b]$ is an interval, and
+$f$ is a function that has minimum and maximum values on $[a,b]$ and all closed subintervals of $[a,b]$.
+So, if $[a,b] = [1,4]$, it's not enough that $f$ has a minimum and a maximum on $[1,4]$;
+it also has to have a minimum and a maximum on e.g. $[2,3]$.
+We will need these minimums and maximums for calculations.
+
+Let $P$ be a partition of $[a,b]$.
+A **refinement** of $P$ means another partition of $[a,b]$ that contains all numbers of $P$.
 
 asymptote:
     unitsize(3cm);
     draw((-0.5,1)--(3,1), arrow=Arrow(5mm), L=Label("$P$", align=E, position=Relative(1)));
-    draw((-0.5,0)--(3,0), arrow=Arrow(5mm), L=Label("$R$", align=E, position=Relative(1)));
+    draw((-0.5,0)--(3,0), arrow=Arrow(5mm), L=Label("refinement of $P$", align=E, position=Relative(1)));
     real[] P = {0, 0.3, 0.7, 1.6, 2};
     real[] R = {0, 0.2, 0.3, 0.55, 0.7, 1.4, 1.6, 1.9, 2};
     for (real x : P) {
         draw((x,0)--(x,1), p=lightgray);
-        dot((x, 1), p=dotpen+blue);
+        dot((x, 1), p=dotpen+lightblue);
     }
     label(Label((min(P), 1), L="$a$", align=N));
     label(Label((max(P), 1), L="$b$", align=N));
     for (real x : R) {
         bool P_has_x = (find(P == x) >= 0);
-        dot((x, 0), p=(P_has_x ? dotpen+blue : dotpen));
+        dot((x, 0), p=(P_has_x ? dotpen+lightblue : dotpen));
     }
 
 Note that any partition is a refinement of itself
@@ -26,10 +32,8 @@ because it contains all partition numbers of itself.
 
 ## Upper and lower sums with refinements
 
-Suppose that $R$ contains one more partition number than $P$,
-and let $f$ be a function that is continuous on $[a,b]$.
-Let $r$ be the partition number that $R$ has but $P$ doesn't have.
-The upper sums look like this:
+Suppose that $R$ is a refinement of $P$ that contains one number more than $P$.
+The upper sums of a function $f$ with these partitions look like this:
 
 asymptote:
     unitsize(2cm);
@@ -59,8 +63,8 @@ asymptote:
         draw((xprev, fmax)--(xnext, fmax));
         if (i == 3) {
             draw((xprev,0)--(xnext,0), p=red+5);
-            dot((xprev,0), p=dotpen, L="$x_{k-1}$", align=cis(-1.8));
-            dot((xnext,0), p=dotpen, L="$x_k$", align=-cis(1.8));
+            dot((xprev,0), p=dotpen, L="$n_1$", align=S);
+            dot((xnext,0), p=dotpen, L="$n_2$", align=S);
         }
     }
 
@@ -99,34 +103,45 @@ asymptote:
     label((partition[4],0), Label(L="$r$", align=S));
 
 The upper sum with $R$ seems to be less than the upper sum with $P$.
-We can also verify this without relying on a picture.
-Let $x_1,x_2,\dots,x_n$ be the partition numbers of $P$,
-and let $[x_{k-1},x_k]$ be the interval that contains $r$.
+Next we verify this by calculating.
+
+Let $r$ be the number in $R$ but not in $P$, and
+let $n_1$ and $n_2$ be the "neighbor" partition numbers of $r$ so that $n_1 < r < n_2$.
 Now
 $$
-\text{upper sum with $P$} = (x_k-x_{k-1})\max_{[x_{k-1},x_k]}f + \text{other stuff}
+\text{upper sum with $P$} = (n_2-n_1)\max_{[n_1,n_2]}f + \text{other rectangle areas}
 $$
-and
+where $\max f$ denotes maximum value of $f$ on the interval written below $\max$, and
 $$
-\text{upper sum with $R$} = (r-x_{k-1})\max_{[x_{k-1},r]}f+(x_k-r)\max_{[r,x_k]}f + \text{other stuff},
+\text{upper sum with $R$} = (r-n_1)\max_{[n_1,r]}f+(n_2-r)\max_{[r,n_2]}f + \text{other rectangle areas}.
 $$
-where other stuff is the areas of rectangles that are the same in $P$ and $R$.
-Adding more numbers to the interval of a maximum (e.g. $[x_{k-1},r]$ to $[x_{k-1},x_k]$)
-can't make the maximum smaller, so
+Because every number of $[n_1,r]$ is also in $[n_1,n_2]$, we have
+$$
+\max_{[n_1,r]} f \le \max_{[n_1,n_2]} f,
+$$
+and for the same reason,
+$$
+\max_{[r,n_2]} f \le \max_{[n_1,n_2]} f.
+$$
+With these, we get
 $$
 \begin{align}
-&(r-x_{k-1})\max_{[x_{k-1},r]}f+(x_k-r)\max_{[r,x_k]}f \\
-\le{}& (r-x_{k-1})\max_{[x_{k-1},x_k]}f+(x_k-r)\max_{[x_{k-1},x_k]}f \\
-={}& (r-x_{k-1}+x_k-r)\max_{[x_{k-1},x_k]}f \\
-={}& (x_k-x_{k-1})\max_{[x_{k-1},x_k]}f.
+&(r-n_1)\max_{[x_{k-1},r]}f+(x_k-r)\max_{[r,n_2]}f \\
+\le{}& (r-n_1)\max_{[n_1,n_2]}f+(x_k-r)\max_{[n_1,n_2]}f \\
+={}& (r-n_1+n_2-r)\max_{[n_1,n_2]}f \\
+={}& (n_2-n_1)\max_{[n_1,n_2]}f.
 \end{align}
 $$
-This shows that the upper sum does not increase when adding one partition number.
-It follows that it does not increase when adding several partition numbers.
+Because the other rectangle areas are the same for $P$ and $R$, we get
+$$
+\text{upper sum with $R$} \le \text{upper sum with $P$}.
+$$
+In other words, the upper sum decreases or stays the same when adding one partition number.
+It follows that it decreases or stays the same when adding several partition numbers.
 A similar derivation works for lower sums.
 
 graybox:
-    Suppose that $f$ is continuous on $[a,b]$, and let $P$ be a partition of $[a,b]$. Then
+    Let $P$ be a partition of $[a,b]$. Then
     $$
     \text{upper sum of $f$ with $P$} \ge \text{upper sum of $f$ with any refinement of $P$}
     $$
@@ -135,22 +150,30 @@ graybox:
     \text{lower sum of $f$ with $P$} \le \text{lower sum of $f$ with any refinement of $P$}.
     $$
 
-We may have equality here, and not necessarily $>$ and $<$.
-For example, if $f(x) = 3$ for all $x$, then any upper sum or lower sum on $\leftsquarebracket 2,4]$ is $6$
-(see [this example](integral-def.html#example-integral-of-3)).
+It might be tempting to write
+$$
+\text{upper sum with $P$} > \text{upper sum with any refinement of $P$}
+$$
+and
+$$
+\text{lower sum with $P$} < \text{lower sum with any refinement of $P$},
+$$
+but these aren't always true.
+For example, if $f$ is a function whose graph is a horizontal line,
+then all upper and lower sums are equal.
+Also, any partition is a refinement of itself.
 
 
 ## Upper and lower sums of different partitions
 
-Let $P_1$ and $P_2$ be **any** partitions of $[a,b]$,
-and let $f$ be a function that is continuous on $[a,b]$.
-Let's make a third partition $R$ by combining all numbers of $P_1$ and $P_2$.
+If we take any two partitions of $[a,b]$, say $P_1$ and $P_2$,
+then we can combine their numbers to make a partition that is a refinement of both partitions.
 
 asymptote:
     unitsize(3cm);
     draw((-0.5,1)--(3,1), arrow=Arrow(5mm), L=Label("$P_1$", align=E, position=Relative(1)));
     draw((-0.5,0.5)--(3,0.5), arrow=Arrow(5mm), L=Label("$P_2$", align=E, position=Relative(1)));
-    draw((-0.5,0)--(3,0), arrow=Arrow(5mm), L=Label("$R$", align=E, position=Relative(1)));
+    draw((-0.5,0)--(3,0), arrow=Arrow(5mm), L=Label("refinement", align=E, position=Relative(1)));
 
     real[] P1 = {0, 0.3, 0.7, 1.6, 2};
     real[] P2 = {0, 0.2, 0.55, 1.4, 1.9, 2};
@@ -170,61 +193,19 @@ asymptote:
     dot((min(P1), 0), p=dotpen+deepmagenta, L="$a$", align=S);
     dot((max(P1), 0), p=dotpen+deepmagenta, L="$b$", align=S);
 
-Now $R$ is a refinement of both $P_1$ and $P_2$, so
+Now we get
 $$
 \begin{align}
 \text{lower sum of $f$ with $P_1$}
-&\le \text{lower sum of $f$ with $R$} \\
-&\le \text{upper sum of $f$ with $R$} \\
+&\le \text{lower sum of $f$ with refinement} \\
+&\le \text{upper sum of $f$ with refinement} \\
 &\le \text{upper sum of $f$ with $P_2$}.
 \end{align}
 $$
 
 graybox:
-    Suppose that a function $f$ is continuous on $[a,b]$. Then
+    For any upper and lower sums of $f$ on $[a,b]$, we have
     $$
-    \text{any lower sum} \le \text{any upper sum}.
+    \text{lower sum} \le \text{upper sum},
     $$
-    for any lower and upper sums of $f$ on $[a,b]$.
-
-Recall that we defined the integral to be the only number between any lower sum and any upper sum.
-From the above result, it follows that such numbers **exist**, but there might be more than one of them.
-If there were multiple numbers between any upper sum and any lower sum (the two dots in the below picture),
-then there would be a "gap" between lower sums and upper sums:
-
-asymptote:
-    unitsize(3cm);
-    draw((-0.5,0)--(5,0), arrow=Arrow(5mm));
-    draw(brace_with_space((1.9,0), (0,0), 0.1), L="all lower sums", align=S);
-    draw(brace_with_space((4,0), (2.5,0), 0.1), L="all upper sums", align=S);
-    dot((2,0), p=dotpen);
-    dot((2.3,0), p=dotpen);
-
-If $f$ is continuous, there is no gap;
-in other words, you can make the difference between an upper and lower sum as small as you want
-by choosing appropriate partitions.
-In the below picture, the red parts make up the difference of an upper sum and lower sum.
-
-asymptote:
-    unitsize(3cm);
-
-    real f(real x) { return x**2; }
-    real a = 0.5;
-    real b = 2;
-    int n = 30;
-
-    fill(graph(f, a, b)--(b,0)--(a,0)--cycle, lightgreen);
-    axises(-1, 2.5, -0.5, f(2.1));
-    draw(graph(f, -1, 2.1), p=blue);
-
-    for (int i = 0; i <= n; ++i) {
-        real xprev = a + (b-a)*(i-1)/n;
-        real x = a + (b-a)*i/n;
-
-        draw((x,0)--(x,f(xprev)), p=lightblue);
-        if (i != 0) {
-            filldraw(shift(xprev,f(xprev))*scale((b-a)/n, f(x)-f(xprev))*unitsquare, red);
-        }
-    }
-
-We won't prove this better because it's surprisingly difficult and this is not a university.
+    even if the upper and lower sums are from different partitions.

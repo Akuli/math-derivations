@@ -17,7 +17,7 @@ $ . env/bin/activate
 (env) $ pip install -r requirements.txt
 ```
 
-Run these commands from the virtualenv as needed:
+Run these commands **with the virtualenv activated** as needed:
 
 - Building into `html` directory: `python3 build.py`
 - Building automatically when a file is saved in the editor: `make buildloop`

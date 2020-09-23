@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Definition of Integral
+<title>Defining the Integral
 </title>
 
     <script type="text/x-mathjax-config">
@@ -166,297 +166,116 @@
         <input type="checkbox" id="sidebar-checkbox-15" />
         <label for="sidebar-checkbox-15">Integral</label>
         <div class="dropdown">
-            <a href="integral-def.html">Definition of integral</a><a href="integral-refinement.html">Refinement of partition</a>
+            <a href="integral-intro.html">Introduction to integrals</a><a href="integral-refinement.html">Refinement of partition</a><a href="integral-def.html">Defining the integral</a>
         </div>
         
         </div>
         </div>
-<h1 id="definition-of-integral">Definition of Integral<a class="headerlink" href="#definition-of-integral" title="Link to this title">¶</a></h1><p>An integral of a function $f$ on an interval $[a,b]$ means the area under the graph of $f$ between $a$ and $b$.
-In the below picture, it is the area of the green part.</p>
+<h1 id="defining-the-integral">Defining the Integral<a class="headerlink" href="#defining-the-integral" title="Link to this title">¶</a></h1><p>Let $f$ be a function that has minimums and maximums on $\leftsquarebracket a,b]$
+and all closed subintervals of $\leftsquarebracket a,b]$.
+<a href="integral-refinement.html#upper-and-lower-sums-of-different-partitions">Last time</a>
+we showed that
+$$
+\text{any lower sum} \le \text{any upper sum},
+$$
+even if the lower and upper sums are from different partitions.
+Based on that, drawing all upper and lower sums on a number line looks something like this:</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/4d18efc4a514ca8e85863b4ab10461b0.svg" /></p><p>So far we haven't defined what exactly area means, and it hasn't bothered us too much.
-But for doing integrals, defining what exactly we mean with the "area" under a graph is worth the effort,
-so let's do that.
+<p><img width="470" height="32" class="asymptote" src="../asymptote/433b3c0d13b6b18daa0c407349893842.svg" /></p><p>Now it is clear that there must be some number between all upper sums and lower sums.
+(Here "between" means that the number may be equal to upper or lower sums,
+which is the case for any function whose graph is a horizontal line.)
+However, it's not clear whether there's just one number or multiple different numbers
+between all upper and lower sums.</p>
+
+<p>In the <a href="integral-intro.html#example-integral-of-3">examples we did in the beginning</a>,
+we calculated integrals based on the inequality
+$$
+\text{any lower sum} \le \text{integral} \le \text{any upper sum}.
+$$
+That was enough to determine the value of the integral every time, so
+there never were multiple numbers between all upper and lower sums.
+We're about to define the integral properly, and we'll make it undefined if
+there are multiple numbers.</p>
+
+<div class="box graybox"><p>A function $f$ is called <b>integrable</b> on $[a,b]$ if
+it has minimum and maximum values on $[a,b]$ and all closed subintervals of $[a,b]$,
+and there is only one number between any lower sum and any upper sum.
+That number is called the <b>integral</b> of $f$ on $[a,b]$.
 </p>
 
-<h2 id="partitions">Partitions<a class="headerlink" href="#partitions" title="Link to this title">¶</a></h2><p>Let's split the interval $[a,b]$ into $n$ smaller parts (not infinitely many parts).
-In the below picture, we have $n = 6$.</p>
-
-<p><img width="402" height="201" class="asymptote" src="../asymptote/6e33a95a897261e9614650db4f7bfbaa.svg" /></p><p>This kind of splitting is called a <b>partition</b> of the interval $[a,b]$.
-Note that the first and last partition number $x_0 = a$ and $x_n = b$ are the ends of the interval $[a,b]$,
-and the partition numbers are strictly increasing.
-We can write these requirements as
-$$
-a = x_0 < x_1 < x_2 < \dots < x_n = b.
-$$
-The partition numbers don't need to split the partition into equally sized parts;
-the sizes may differ, like they do in the above picture.
+</div><p>Usually the integral is defined with slightly more "generalized versions" of minimum and maximum,
+but the above definition is good enough for our needs.
 </p>
 
-<h2 id="upper-sums-and-lower-sums">Upper Sums and Lower Sums<a class="headerlink" href="#upper-sums-and-lower-sums" title="Link to this title">¶</a></h2><p>Let's calculate the maximum value of $f$ on an interval of our partition
-and draw that with a line above the interval.
-Doing this for all intervals looks like this:</p>
+<h2 id="are-all-functions-integrable">Are all functions integrable?<a class="headerlink" href="#are-all-functions-integrable" title="Link to this title">¶</a></h2><p>Recall that a number is called rational if it can be written as a fraction of integers,
+and irrational if it can't.
+Let
+$$
+f(x) = \begin{cases}
+    1, & \text{if $x$ is a rational number} \\
+    0, & \text{if $x$ is an irrational number}.
+\end{cases}
+$$
+Unfortunately it's hard to draw a graph of this function.</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/f9310af97185832d957548fb873f75d5.svg" /></p><p>The $k$th interval is $[x_{k-1},x_k]$.
-For example:
-<ul><li>
-    The first (leftmost) interval corresponds to $k=1$, and that is $[x_0,x_1]$.
-</li><li>
-    The last interval corresponds to $k=n$, and that is $[x_{n-1},x_n]$.
-</li><li>
-    The interval marked in the above picture is the 4th interval.
-</li></ul></p>
+<p>Because any interval contains rational numbers,
+the minimum of $f$ on any interval is $1$.
+For that reason, an upper sum of $f$ on $[1,2]$ looks something like this, regardless of the partition being used:</p>
 
-<p>Now we see rectangles and notice that
-$$
-\text{integral} \le \text{first rectangle area} + \text{second rectangle area} + \dots + \text{$n$th rectangle area}.
-$$
-We can write the $k$th rectangle area as
-$$
-(x_k-x_{k-1})\max_{[x_{k-1},x_k]} f,
-$$
-where $\max f$ denotes the maximum of $f$ on the interval $[x_{k-1},x_k]$,
-and $x_k-x_{k-1}$ is the base of the rectangle.
-Rewriting the above result with this, we get
-$$
-\text{integral} \le \underbrace{\sum_{k=1}^n (x_k-x_{k-1})\max_{[x_{k-1},x_k]} f}_{\text{upper sum}},
-$$
-where $\sum$ means sum;
-we calculate the stuff after $\sum$ for all $k$ between $1$ and $n$ (inclusive)
-and add the results.
-The sum of rectangle areas on the right is called the <b>upper sum</b> of $f$ with the partition $x_0,\dots,x_n$.</p>
+<p><img width="385" height="243" class="asymptote" src="../asymptote/ec700088253ab132d2e77971bdf60586.svg" /></p><p>Every interval also contains irrational numbers, so all minimums are $0$, and all lower sums looks like this:</p>
 
-<p>If we had used minimums instead, we would instead get a <b>lower sum</b> like this:
-$$
-\text{integral} \ge \underbrace{\sum_{k=1}^n (x_k-x_{k-1})\min_{[x_{k-1},x_k]} f}_{\text{lower sum}},
-$$
-The picture for the lower sum looks like this:</p>
+<p><img width="385" height="243" class="asymptote" src="../asymptote/91715f29f7e8e6ac978f61043c883003.svg" /></p><p>Because every upper sum is the square area $1^2 = 1$ and every lower sum is zero,
+there are multiple different numbers between all upper sums and lower sums (such as $0$, $\frac{1}{2}$ and $1$),
+and so the function $f$ is not integrable.</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/45018bcb9970c72b46c82e89b6fedd47.svg" /></p><p>By putting the results together, we get
-$$
-\text{lower sum} \le \text{integral} \le \text{upper sum},
-$$
-and you might be able to see where this is going now;
-to find the value of the integral, we can squeeze it between upper sums and lower sums.</p>
-
-<p>The minimums and maximums don't exist for all functions $f$,
-but they do exist if $f$ is continuous (TODO).
-For that reason, <b>we assume that $f$ is continuous</b> from now on.</p>
-
-<p>Now we are ready to define what an integral means.</p>
-
-<div class="box graybox"><p>Suppose that a function $f$ is continuous on $[a,b]$.
-The <b>integral</b> of $f$ on $[a,b]$ means the only number satisfying
-$$
-\text{any lower sum} \le \text{integral} \le \text{any upper sum}
-$$
-for any lower and upper sums of $f$ on $[a,b]$.
-We also write
-$$
-\text{integral} = \int_a^b f(x)\ dx.
-$$
+<div class="box graybox"><p>Not all functions are integrable, even if the required minimums and maximums exist.
 </p>
 
-</div><p>Above I used the same partition for lower sum and upper sum, but this definition doesn't demand that.
-<a href="integral-refinement.html">Next time</a> I'll explain why there is always
-exactly one number between any lower sum and any upper sum.</p>
+</div><h2 id="which-functions-are-integrable">Which functions are integrable?<a class="headerlink" href="#which-functions-are-integrable" title="Link to this title">¶</a></h2><p>Suppose that a function $f$ is increasing (but not necessarily strictly increasing) on $[a,b]$.
+In other words, the graph of $f$ never goes down as you move from left to right.</p>
 
-<p>In the above notation, $\int$ is known as the integral sign.
-The $f(x)\ dx$ part comes from how we multiply values of $f(x)$ (specifically minimums and maximums)
-with a <b>d</b>ifference of $x$ values (specifically $x_k - x_{k-1}$).</p>
+<p><img width="427" height="332" class="asymptote" src="../asymptote/44672e1e0a508f5e0e165536561a8aa6.svg" /></p><p>Let's partition the interval $[a,b]$ into $n$ equally sized pieces and draw the upper and lower sums.
+Because $f$ is increasing, it has a maximum value on any closed interval at the right endpoint of the interval.
+Similarly it has a minimum value at the left endpoint of any closed interval.
+The upper sums look like this:</p>
 
-<p>It's possible to do most of this for some discontinuous functions too.
-To help with that, the integral is usually defined with slightly more general things
-instead of min and max.
-This more general way to define an integral is known as a Riemann integral.
-If you want to know more about Riemann integrals, then you should go study math in a university.
-</p>
+<p><img width="427" height="332" class="asymptote" src="../asymptote/5d840259ffeed6e72cfc7aa08baf8a1e.svg" /></p><p>Lower sums look like this:</p>
 
-<h2 id="why">Why???<a class="headerlink" href="#why" title="Link to this title">¶</a></h2><p>This approach has several advantages over just defining the integral as area under a graph:
-<ul><li>
-    We never defined what exactly area is, and this is easier than defining area properly.
-    For this, we needed rectangle area and not much else.
-</li><li>
-    The lower sums and upper sums work
-    even if the function $f$ has negative values and its graph (or a part of it) is below the $x$ axis.
-    We don't need to special-case negative numbers
-    when deriving something with upper sums and lower sums.
-</li><li>
-    If you are fine with relying on areas, then you should view what we just did as
-    a way to calculate areas that you can't calculate otherwise.
-    See the $\int_0^2 x^2\ dx$ example below.
-    At this point, calculating integrals is ridulously difficult,
-    but we'll find an easy and powerful way to do it later.
-</li></ul>
+<p><img width="427" height="332" class="asymptote" src="../asymptote/94e11a4688ba33f0e1beead474a280c8.svg" /></p><p>Let's look at how much the upper and lower sums differ. I'll draw that with red.</p>
 
-</p>
+<p><img width="427" height="332" class="asymptote" src="../asymptote/088431c26941063f9f63ceaa83659c5d.svg" /></p><p>Now we can move all rectangles together so that they line up:</p>
 
-<h2 id="example-integral-of-3">Example: integral of 3<a class="headerlink" href="#example-integral-of-3" title="Link to this title">¶</a></h2><p>We calculate
+<p><img width="427" height="332" class="asymptote" src="../asymptote/f3f4fb0ee382e59a43f1544b08d86675.svg" /></p><p>This creates a big rectangle whose width is $(b-a)/n$ and height is $f(b)-f(a)$. Its area is
 $$
-\int_2^4 3\ dx.
+\text{upper sum} - \text{lower sum} = \frac{b-a}{n}(f(b)-f(a)),
 $$
-Let $f(x) = 3$.
-Based on the below picture, the integral should be the rectangle area $(4-2) \cdot 3 = 6$.</p>
-
-<p><img width="342" height="286" class="asymptote" src="../asymptote/a9e779647327ecda6f18e929ba78735d.svg" /></p><p>We choose the partition $x_0,x_1,x_2$ with $x_0=2$, $x_1=3$ and $x_2=4$.
-With that we get
+so we get
 $$
 \begin{align}
-\text{upper sum}
-&= \sum_{k=1}^2 (x_k-x_{k-1}) \underbrace{\max_{[x_{k-1},x_k]}f}_3 \\
-&= (x_1-x_0)3 + (x_2-x_1)3 \\
-&= (3-2)3 + (4-3)3 = 3 + 3 = 6.
+\lim_{n \to \infty} (\text{upper sum} - \text{lower sum})
+&= \lim_{n \to \infty} \left( \frac{b-a}{n}(f(b)-f(a)) \right) \\
+&= 0(f(b)-f(a)) = 0.
 \end{align}
 $$
-In lower sum, we have $\min$ instead of $\max$, but the minimum is also 3, so the lower sum is also 6.
-Because
-$$
-\text{lower sum} \le \text{integral} \le \text{upper sum},
-$$
-we have
-$$
-6 \le \int_2^4 3\ dx \le 6,
-$$
-which means that
-$$
-\int_2^4 3\ dx = 6.
-$$
-We can also do this using a partition of just two numbers, $x_0=2$ and $x_1=4$.
-This gives
-$$
-\begin{align}
-\text{upper sum}
-&= \sum_{k=1}^1 (x_k - x_{k-1})\max_{[x_{k-1},x_k]}f \\
-&= (x_1-x_0) \cdot 3
-= (4-2) \cdot 3,
-\end{align}
-$$
-which is the area calculation in the beginning of this example.
+This means that there exists upper sums and lower sums that are as close to each other as we want.
+For that reason, there can't be multiple different numbers between all upper and lower sums.</p>
+
+<div class="box graybox"><p>If a function is increasing on $[a,b]$, then it's integrable on $[a,b]$.
 </p>
 
-<h2 id="example-integral-of-x">Example: integral of $x$<a class="headerlink" href="#example-integral-of-x" title="Link to this title">¶</a></h2><p>We calculate
-$$
-\int_0^2 x\ dx.
-$$
-Let $f(x) = x$.
-Again, it's not very hard to get the right answer by just calculating an area.</p>
+</div><p>A similar derivation works for decreasing functions.</p>
 
-<p><img width="257" height="257" class="asymptote" src="../asymptote/588e17d5ef6a894aa52bdfd2fc274a27.svg" /></p><p>We partition the interval $[0,2]$ into 5 equally sized parts.
-Because each part has length $\frac{2}{5}$ (that is, interval length $2$ divided into $5$ equal pieces),
-the first two numbers of the partition will be $0$ and $\frac{2}{5}$.
-The number after those will be $\frac{2}{5}+\frac{2}{5}=\frac{4}{5}$.
-By continuing like this, we see that the partition we want is
-$$
-x_0=\frac{0}{5}, ~ x_1=\frac{2}{5}, ~ x_2=\frac{4}{5}, ~ x_3=\frac{6}{5}, ~ x_4=\frac{8}{5}, ~ x_5=\frac{10}{5}.
-$$
-The upper and lower sums look like this:</p>
-
-<p><img width="257" height="257" class="asymptote" src="../asymptote/280d70df53b05924f66e94e2bc45b524.svg" /></p><p><img width="257" height="257" class="asymptote" src="../asymptote/d45745275491184a9a1d5f97eb8984eb.svg" /></p><p>Now there is a lot of room between the upper and lower sums,
-certainly much more than one number.
-However, the upper and lower sums would be closer together with more than 5 parts, such as 20 parts below:</p>
-
-<p><img width="257" height="257" class="asymptote" src="../asymptote/7f09c988c8d773efb69d8f9121382f9d.svg" /></p><p>For this reason, we need to do this with $n$ parts and see what happens when $n$ is large.
-By essentially replacing $5$ with $n$ above, we get the partition
-$$
-x_0=\frac{0}{n}, ~ x_1=\frac{2}{n}, ~ x_2=\frac{4}{n}, ~ \dots, ~ x_n=\frac{2n}{n},
-$$
-where we have $x_k = \frac{2k}{n}$ for all $k$.
-Because $f$ is strictly increasing, it gets its
-maximum value on an interval at the right endpoint of the interval and
-minimum value at the left endpoint.
-Specifically,
-$$
-\max_{[x_{k-1},x_k]} f = f(x_k) = x_k
-\quad \text{and} \quad
-\min_{[x_{k-1},x_k]} f = f(x_{k-1}) = x_{k-1}.
-$$
-With <a href="../sums-and-seqs/sums.html#sum-of-positive-integers-up-to-n">a sum formula</a>, we now get
-$$
-\begin{align}
-\text{upper sum}
-&= \sum_{k=1}^n \frac{2}{n} x_k = \sum_{k=1}^n \frac{2}{n} \frac{2k}{n} = \sum_{k=1}^n \frac{4}{n^2} k \\
-&= \frac{4}{n^2}(1+2+\dots+n) = \frac{4}{n^2} \frac{n(n+1)}{2} = 2+\frac{2}{n}
-\end{align}
-$$
-and
-$$
-\begin{align}
-\text{lower sum}
-&= \sum_{k=1}^n \frac{2}{n} x_{k-1} = \sum_{k=1}^n \frac{2}{n} \frac{2(k-1)}{n} = \sum_{k=1}^n \frac{4}{n^2} (k-1) \\
-&= \frac{4}{n^2}(0+1+2+\dots+(n-1)) = \frac{4}{n^2} \frac{(n-1)((n-1)+1)}{2} = 2-\frac{2}{n}.
-\end{align}
-$$
-This means that
-$$
-2-\frac{2}{n} \le \int_0^2 x\ dx \le 2+\frac{2}{n},
-$$
-and because
-$$
-\lim_{n \to \infty} \left( 2 \pm \frac{2}{n} \right) = 2,
-$$
-the only way how that can work for all values of $n$ is
-$$
-\int_0^2 x\ dx = 2.
-$$
+<div class="box graybox"><p>If a function is decreasing on $[a,b]$, then it's integrable on $[a,b]$.
 </p>
 
-<h2 id="example-integral-of-x-2">Example: integral of $x^2$<a class="headerlink" href="#example-integral-of-x-2" title="Link to this title">¶</a></h2><p>We calculate
-$$
-\int_0^2 x^2\ dx.
-$$
-Unlike in the previous examples, we can't just calculate the area in the graph without an integral,
-because we don't have a formula for the area under a parabola.
-We finally have a reason for working with integrals.</p>
+</div><p>We know that if a function is continuous on a closed interval,
+then it gets minimum and maximum values on that interval.
+However, showing that there's only one number between all upper and lower sums of a continuous function
+is more difficult than one might expect, so we'll skip that.</p>
 
-<p><img width="257" height="420" class="asymptote" src="../asymptote/29c52282c26ada2c3c8dd803c076db63.svg" /></p><p>Let $f(x) = x^2$.
-Just like in the previous example,
-we partition the interval $[0,2]$ into $n$ equally sized parts $x_0,x_1,\dots,x_n$
-with $x_k = \frac{2k}{n}$.
-The upper and lower sums look like this for $n=8$:</p>
-
-<p><img width="257" height="420" class="asymptote" src="../asymptote/ed97737bbdb78df20db04d7815c6504d.svg" /></p><p><img width="257" height="420" class="asymptote" src="../asymptote/d8184a62277b12f7b749c36f74be29fe.svg" /></p><p>Because $f$ is strictly increasing on the interval $\leftsquarebracket 0,2]$, we again have
-$$
-\max_{[x_{k-1},x_k]} f = f(x_k) = x_k^2
-\quad \text{and} \quad
-\min_{[x_{k-1},x_k]} f = f(x_{k-1}) = x_{k-1}^2.
-$$
-With <a href="../sums-and-seqs/sums.html#sum-of-squares">the sum of squares formula</a>, we get
-$$
-\begin{align}
-\text{upper sum}
-&= \sum_{k=1}^n \frac{2}{n} x_k^2
-= \sum_{k=1}^n \frac{2}{n} \left( \frac{2k}{n} \right)^2
-= \sum_{k=1}^n \frac{8}{n^3}k^2 \\
-&= \frac{8}{n^3}(1^2+2^2+\dots+n^2) \\
-&= \frac{8}{n^3}\frac{n(n+1)(2n+1)}{6}
-= \frac{8}{3}\left( 1+\frac{1}{n} \right)\left( 1+\frac{1}{2n} \right)
-\end{align}
-$$
-and
-$$
-\begin{align}
-\text{lower sum}
-&= \sum_{k=1}^n \frac{2}{n} x_{k-1}^2
-= \sum_{k=1}^n \frac{2}{n} \left( \frac{2(k-1)}{n} \right)^2
-= \sum_{k=1}^n \frac{8}{n^3}(k-1)^2 \\
-&= \frac{8}{n^3}(0^2+1^2+2^2+\dots+(n-1)^2) \\
-&= \frac{8}{n^3}\frac{(n-1)((n-1)+1)(2(n-1)+1)}{6} \\
-&= \frac{8}{n^3}\frac{(n-1)n(2n-1)}{6}
-= \frac{8}{3}\left( 1-\frac{1}{n} \right)\left( 1-\frac{1}{2n} \right).
-\end{align}
-$$
-This means that
-$$
-\frac{8}{3}\left( 1-\frac{1}{n} \right)\left( 1-\frac{1}{2n} \right)
-\le \int_0^2 x^2\ dx \le
-\frac{8}{3}\left( 1+\frac{1}{n} \right)\left( 1+\frac{1}{2n} \right),
-$$
-and because the limit of upper sum and lower sum is $\frac{8}{3}$, we must have
-$$
-\int_0^2 x^2\ dx = \frac{8}{3}.
-$$
+<div class="box graybox"><p>If a function is continuous on $[a,b]$, then it's integrable on $[a,b]$.
 </p>
 
-</div>
+</div></div>
 </body>
 </html>

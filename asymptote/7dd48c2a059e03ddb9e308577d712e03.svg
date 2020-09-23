@@ -45,8 +45,20 @@
 <use x='263.994948' xlink:href='#g1-41' y='126.32333'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 114.236 310.11)'>
+<path d='M 113.811 0L 113.811 -170.717' fill='none' stroke='#8080ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+</g>
+<g transform='matrix(0.996264 0 0 0.996264 114.236 310.11)'>
+<path d='M 170.717 0L 170.717 -170.717' fill='none' stroke='#8080ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+</g>
+<g transform='matrix(0.996264 0 0 0.996264 114.236 310.11)'>
+<path d='M 227.622 0L 227.622 -170.717' fill='none' stroke='#8080ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+</g>
+<g transform='matrix(0.996264 0 0 0.996264 114.236 310.11)'>
 <circle cx='113.811' cy='-0' r='4.26791' fill='#000000'/>
 </g><use x='221.941979' xlink:href='#g1-50' y='333.500229'/>
+<g transform='matrix(0.996264 0 0 0.996264 114.236 310.11)'>
+<circle cx='170.717' cy='-0' r='4.26791' fill='#000000'/>
+</g><use x='278.634898' xlink:href='#g1-51' y='333.500229'/>
 <g transform='matrix(0.996264 0 0 0.996264 114.236 310.11)'>
 <circle cx='227.622' cy='-0' r='4.26791' fill='#000000'/>
 </g><use x='335.327802' xlink:href='#g1-52' y='333.500229'/>

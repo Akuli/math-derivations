@@ -529,7 +529,7 @@ $$
 \text{upper sum}
 &= \frac{2}{n} \frac{2^2\frac{n(n+1)(2n+1)}{6}}{n^2} \\
 &= \frac{16}{6} \frac{(n+1)(n+1/2)}{n^2} \\
-&= \frac{8}{3} \left( \frac{n}{n}+\frac{1}{n} \right)\left( \frac{n}{n}+\frac{1/2}{n} \right)
+&= \frac{8}{3} \left( \frac{n}{n}+\frac{1}{n} \right)\left( \frac{n}{n}+\frac{1/2}{n} \right) \\
 &= \frac{8}{3} \left( 1+\frac{1}{n} \right)\left( 1+\frac{1/2}{n} \right),
 \end{align}
 $$

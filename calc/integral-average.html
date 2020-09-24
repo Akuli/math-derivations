@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Distance between Line and Point
+<title>Average
 </title>
 
     <script type="text/x-mathjax-config">
@@ -118,25 +118,25 @@
         <input type="checkbox" id="sidebar-checkbox-7" />
         <label for="sidebar-checkbox-7">Transforming curves</label>
         <div class="dropdown">
-            <a href="reflect.html">Reflecting</a><a href="shift.html">Shifting</a><a href="stretch.html">Stretching</a>
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Line</label>
         <div class="dropdown">
-            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="slope-tan.html">Slope and tan</a><a href="line-eq-determinant.html">Equation with determinant</a>
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-9" />
         <label for="sidebar-checkbox-9">Parabola</label>
         <div class="dropdown">
-            <a href="parabola.html">Equation of parabola</a>
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-10" />
         <label for="sidebar-checkbox-10">Hyperbola</label>
         <div class="dropdown">
-            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
         </div>
         
         </div>
@@ -148,89 +148,114 @@
         <input type="checkbox" id="sidebar-checkbox-12" />
         <label for="sidebar-checkbox-12">Limits</label>
         <div class="dropdown">
-            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
+            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Continuity</label>
         <div class="dropdown">
-            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
         <label for="sidebar-checkbox-14">Derivative</label>
         <div class="dropdown">
-            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="derivative-vector.html">Derivative of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-15" />
         <label for="sidebar-checkbox-15">Integral</label>
         <div class="dropdown">
-            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a>
+            <a href="integral-intro.html">Introduction to integrals</a><a href="integral-refinement.html">Refinement of partition</a><a href="integral-def.html">Defining the integral</a><a href="integral-average.html">Average</a>
         </div>
         
         </div>
         </div>
-<h1 id="distance-between-line-and-point">Distance between Line and Point<a class="headerlink" href="#distance-between-line-and-point" title="Link to this title">¶</a></h1><p>On this page, we'll derive the formula for distance between a line and a point,
-given the equation of the line and the coordinates of the point.
-First of all, I <b>don't</b> mean something like this:</p>
+<h1 id="average">Average<a class="headerlink" href="#average" title="Link to this title">¶</a></h1><p>Let's calculate the average of 5 numbers $a,b,c,d,e$.
+Their average is a number $A$ such that
+$$
+A+A+A+A+A = a+b+c+d+e,
+$$
+that is, the sum of all numbers doesn't change if you replace all numbers with the average.
+This leads to
+$$
+5A = a+b+c+d+e,
+$$
+and from here we get
+$$
+A = \frac{a+b+c+d+e}{5}.
+$$
+The average of $n$ numbers for any integer $n \ge 2$ works the same way.</p>
 
-<p><img width="228" height="225" class="asymptote" src="../asymptote/b12162a0d34d6a35f07e807618acd47f.svg" /></p><p>The distance must be perpendicularly to the line, like this:</p>
+<p>Let's do the same with integrals.
+Suppose that a function $f$ is integrable on $[a,b]$.
+The average of $f$ is a number $A$ such that
+$$
+\int_a^b f(x)\ dx = \int_a^b A\ dx.
+$$
+In other words, replacing $f(x)$ with the average $A$ doesn't change the integral.
+In a graph, this means that the area under $y=f(x)$ is same as area under the vertical line $y=A$.</p>
 
-<p><img width="216" height="225" class="asymptote" src="../asymptote/ca6b5f5b15a7719ce8e0fdfb0e420b7e.svg" /></p><p>Let's find the distance between any point $Q$ and any line.
-From <a href="line-eq-normal.html">this line equation derivation</a>,
-we know that the equation of any line can be written as $ax+by+c=0$.
-Here $\vec n = a\I+b\J$ is a normal vector of the line, and
-for any point $P$ on the line, the projection of $\Vec{OP}$ onto $\vec n$ is the same.
-We called it $p$, and we got $c = -p|\vec n|$.
-Let $q$ denote the projection of $\Vec{OQ}$ onto $\vec n$.</p>
+<p><img width="395" height="289" class="asymptote" src="../asymptote/f64125a3d9c49995bdfef923f1b0eb7f.svg" /></p><p><a href="integral-intro.html#example-integral-of-3">Earlier</a> we have calculated an integral of just a number,
+and with similar steps, we get
+$$
+\int_a^b A\ dx = (b-a)A.
+$$
+Now we can solve $A$ and we get
+$$
+A = \frac{\int_a^b A\ dx}{b-a} = \frac{\int_a^b f(x)\ dx}{b-a}.
+$$</p>
 
-<p><img width="401" height="354" class="asymptote" src="../asymptote/944494edb53a6474f0014dadf41cdfc9.svg" /></p><p>In the picture, the distance is $p-q$, but
-if $Q$ was on the other side of the line, it would be $q-p$ instead, because the distance isn't negative.
-In either case, the distance can be written as $|q-p|$.
-This means that we need to calculate $q$ and $p$, and then we'll calculate $|q-p|$ and be done.</p>
-
-<p>Let's start by finding $p$ using $c=-p|\vec n|$,
-which is one of the results we got in the line equation derivation.
+<div class="box graybox"><p>Suppose that $f$ is integrable on $[a,b]$. The number
 $$
-\begin{align}
-c &= -p|\vec n| \\
--c &= p|\vec n| \\
--\frac{c}{|\vec n|} &= p
-\end{align}
+\frac{\int_a^b f(x)\ dx}{b-a}
 $$
-To find $q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$
-with a <a href="../vectors/iwi-jwj.html#example-calculating-projection">dot product</a>:
-$$
-q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
-= \frac{aQ_x+bQ_y}{|\vec n|}
-$$
-Now we can calculate the distance:
-$$
-\begin{align}
-|q-p|
-&= \left|\frac{aQ_x+bQ_y}{|\vec n|} - \left( -\frac{c}{|\vec n|} \right)\right| \\
-&= \left|\frac{aQ_x+bQ_y}{|\vec n|} + \frac{c}{|\vec n|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{|\vec n|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{|a\I+b\J|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{\sqrt{a^2+b^2}} \right| \\
-&= \frac{|aQ_x+bQ_y+c|}{\sqrt{a^2+b^2}}
-\end{align}
-$$
-In the last step, we noticed that it's enough to take the absolute value of the top,
-because the bottom is a square root, which can't be negative.</p>
-
-<div class="box graybox"><p>The distance between a point $Q$ and a line $ax+by+c=0$ is
-$$
-\frac{|aQ_x+bQ_y+c|}{\sqrt{a^2+b^2}}.
-$$
+is called the <b>integral average</b> (or just <b>average</b>) of $f$ on $[a,b]$.
 </p>
 
-</div><p>Notice how the inside of the absolute value is the coordinates of $Q$ plugged into $ax+by+c$,
-and the rest is dividing by the length of the normal vector $a\I+b\J$.
-This is an easy way to remember the formula.
+</div><h2 id="what-happens-if-you-accidentally-swap-a-and-b">What happens if you accidentally swap $a$ and $b$?<a class="headerlink" href="#what-happens-if-you-accidentally-swap-a-and-b" title="Link to this title">¶</a></h2><p>If we write $a$ and $b$ the other way in the above formula, we get
+$$
+\frac{\int_b^a f(x)\ dx}{a-b}.
+$$
+Because we're assuming that $a < b$, the integral on top is now "backwards" (TODO), and we get
+$$
+\begin{align*}
+\frac{\int_b^a f(x)\ dx}{a-b}
+&= \frac{-\int_a^b f(x)\ dx}{-b+a} \\
+&= \frac{-\int_a^b f(x)\ dx}{-(b-a)} \\
+&= \frac{\int_a^b f(x)\ dx}{b-a}.
+\end{align*}
+$$</p>
+
+<div class="box graybox"><p>Swapping $a$ and $b$ does not change the integral average.
 </p>
 
-</div>
+</div><p>This means that if you want to calculate the average of $f$ between two numbers,
+you don't need to care about which number is bigger and which is smaller.
+</p>
+
+<h2 id="average-vs-min-and-max">Average vs min and max<a class="headerlink" href="#average-vs-min-and-max" title="Link to this title">¶</a></h2><p>Let's choose a partition of $[a,b]$ with just two numbers, $a$ and $b$.
+Then
+$$
+\text{upper sum} = (b-a)\max_{[a,b]} f,
+$$
+where $\displaystyle\max_{[a,b]} f$ denotes the maximum value of $f$ on $[a,b]$, and similarly
+$$
+\text{lower sum} = (b-a)\min_{[a,b]} f.
+$$
+The integral is between all upper sums and lower sums, so
+$$
+(b-a)\min_{[a,b]} f \le \int_a^b f(x)\ dx \le (b-a)\max_{[a,b]} f.
+$$
+Dividing everything by $b-a$ gives
+$$
+\min_{[a,b]} f \le \frac{\int_a^b f(x)\ dx}{b-a} \le \max_{[a,b]} f.
+$$</p>
+
+<div class="box graybox"><p>If $f$ is integrable on $[a,b]$, then
+the average of $f$ is between the minimum and maximum values of $f$ on $[a,b]$.
+</p>
+
+</div></div>
 </body>
 </html>

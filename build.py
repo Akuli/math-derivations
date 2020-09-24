@@ -169,6 +169,7 @@ def get_sidebar_content(txtfile):
                 link("Introduction to integrals", 'calc/integral-intro'),
                 link("Refinement of partition", 'calc/integral-refinement'),
                 link("Defining the integral", 'calc/integral-def'),
+                link("Average", 'calc/integral-average'),
             ])),
         ])),
 

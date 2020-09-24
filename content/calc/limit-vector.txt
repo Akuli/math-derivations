@@ -57,7 +57,7 @@ although in many physics problems,
 everything happens in one plane and 2D vectors are enough to describe the situation.
 
 
-## Defining the Limit
+## Defining the limit
 
 To define $\lim_{t \to a} \vec v(t)$, we look at
 what has to be changed in [the definition of limit for real-valued functions](limit-def.html).
@@ -103,7 +103,7 @@ graybox:
     Here I refer to $I_t$ as the *input interval*, and I refer to $C$ as the *output circle*.
 
 
-## Taking Limits of $\I$ and $\J$ parts Separately
+## Taking limits of $\I$ and $\J$ parts separately
 
 Let $\vec v(t) = (f(t), g(t))$ be a 2D-vector-valued function.
 Suppose that the limits $\lim_{t \to a} f(t) = L_x$ and $\lim_{t \to a} g(t) = L_y$ exist.

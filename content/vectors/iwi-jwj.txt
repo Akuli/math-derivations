@@ -96,7 +96,7 @@ The true power is in using this result together with all the visual things that 
 which is what we'll do next.
 
 
-## Example: Pythagorean Theorem Proof
+## Example: Pythagorean theorem proof
 
 Let's prove the Pythagorean theorem.
 We haven't needed it for any of the dot product stuff yet,
@@ -153,7 +153,7 @@ which is the vector length formula.
 We used a picture with positive $a$ and $b$, but this works similarly in other cases (TODO).
 
 
-## Example: Calculating Projection
+## Example: Calculating projection
 
 Let's calculate some things with $\vec v = 2\I+3\J$ and $\vec w = 4\I+5\J$.
 Their dot product is
@@ -178,7 +178,7 @@ p = \frac{\vec v \cdot \vec w}{\abs{\vec w}} = \frac{23}{\sqrt{41}}.
 $$
 
 
-## Example: Calculating Angle Between Vectors
+## Example: Calculating angle between vectors
 
 Let $\vec v$ and $\vec w$ be as above, and let $\theta$ be the angle between them.
 Then, with [angle stuff](angle-between-vectors.html), we get

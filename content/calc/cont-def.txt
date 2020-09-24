@@ -8,7 +8,7 @@ If you dislike relying only on graphs to prove things, don't think of the conten
 instead, think of it as intuitive explanations that aren't supposed to be perfectly rigorous.
 
 
-## "Definition" with Graphs
+## "Definition" with graphs
 
 We say that a function $f$ is continuous on an interval, if
 the part of the graph $y=f(x)$ directly above or below the interval (imagine the interval on the $x$ axis)
@@ -88,7 +88,7 @@ asymptote:
 </li></ul>
 
 
-## Looking for an Alternative Definition
+## Looking for an alternative definition
 
 The above definition of continuity is useful for
 quickly figuring out whether any given function is continuous;
@@ -192,7 +192,8 @@ graybox:
     If a function $f$ is defined for all numbers and $\lim_{x \to a} f(x) = f(a)$ for all numbers $a$,
     then the graph $y=f(x)$ consists of only one part.
 
-## Other Direction
+
+## Other direction
 
 Let $f$ be a function defined for all numbers.
 Now we know that if $\lim_{x \to a} f(x) = f(a)$ for all numbers $a$, then

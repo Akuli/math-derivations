@@ -54,7 +54,7 @@ Sometimes absolute values are easier to work with than intervals of numbers.
 We'll see examples of this next.
 
 
-## Limit of Square Root
+## Limit of square root
 
 Let $a$ be a positive number. We prove that $\lim_{x \to a} \sqrt{x} = \sqrt{a}$.
 
@@ -127,7 +127,7 @@ graybox:
     For any positive number $a$, we have $\lim_{x \to a} \sqrt{x} = \sqrt{a}$.
 
 
-## Limit of Square Root at Zero
+## Limit of square root at zero
 
 We can't calculate $\lim_{x \to 0} \sqrt{x}$, because
 any input interval around $0$ contains negative numbers.

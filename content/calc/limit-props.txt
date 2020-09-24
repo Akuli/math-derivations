@@ -16,7 +16,7 @@ where we used most of the results from [the limit basics page](limit-basics.html
 On this page, we figure out whether this and other similar things work.
 
 
-## Interval Thing
+## Interval thing
 
 Before talking more about limits, we need a result about intervals.
 Suppose that $a$ and $b$ are numbers in the open interval $(-r, r)$, where $r$ is a positive number.
@@ -58,7 +58,7 @@ Usually a more general theorem called triangle inequality is used instead of thi
 but I'm using this instead because it feels somewhat more intuitive to me.
 
 
-## Limit of Sum
+## Limit of sum
 
 Let's go back to the question about limits.
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
@@ -124,7 +124,7 @@ graybox:
     $$
 
 
-## Limit of Product
+## Limit of product
 
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
 I'll show you most of the proof for $\lim_{x \to a} f(x)g(x) = AB$.
@@ -185,7 +185,7 @@ graybox:
     $$
 
 
-## Limit of Difference
+## Limit of difference
 
 Suppose that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist.
 By noticing that $f(x)-g(x) = f(x) + (-1)g(x)$, we get
@@ -214,7 +214,7 @@ graybox:
     $$
 
 
-## Limit of Division
+## Limit of division
 
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
 Is it true that

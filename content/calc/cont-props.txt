@@ -3,7 +3,7 @@
 Make sure that you are familiar with the [two ways to define continuity](cont-def.html).
 
 
-## Moving Limit Inside a Continuous Function
+## Moving limit inside a continuous function
 
 Let $g$ be a function, and suppose that $\lim_{x \to a} g(x) = L$.
 Let $f$ be any function that is continuous at $L$.
@@ -70,7 +70,7 @@ graybox:
     $$
 
 
-## Limit of Division
+## Limit of division
 
 From a graph, we see that the function $h(x) = \frac 1 x$ is continuous on $(-\infty, 0)$ and $(0, \infty)$;
 [the graph is a hyperbola](../analytic-plane-geometry/why-its-hyperbola.html),
@@ -113,7 +113,7 @@ graybox:
 Now we finally know how to calculate limits with division in them.
 
 
-## Continuity of Sum, Difference and Product and Division
+## Continuity of sum, difference and product and division
 
 Let $f$ and $g$ be functions that are continuous at some number $a$. Let $h(x) = f(x)+g(x)$.
 Then, with [limit of sum](limit-props.html#limit-of-sum), we get

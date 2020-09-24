@@ -3,7 +3,7 @@
 We will use derivatives a lot, so we introduce notation for derivatives.
 
 
-## Lagrange's Notation
+## Lagrange's notation
 
 We write the derivative of a function $f$ at $a$ as
 $$
@@ -18,7 +18,7 @@ it's a function that takes in a number, and outputs the derivative of $f$ at tha
 Often the function $f'$ is called the derivative of $f$.
 
 
-## Leibniz's Notation
+## Leibniz's notation
 
 We can also write
 $$

@@ -3,7 +3,7 @@
 To motivate the definition of derivative, we show several different examples.
 
 
-## Walking Speed
+## Walking speed
 
 Let's say that you're walking along a line.
 You might know that
@@ -48,7 +48,7 @@ Here $h \to 0$ means that $h$ can be negative;
 that means measuring the distance between a moment just a little bit before $t$ and the moment $t$.
 
 
-## Download Speed
+## Download speed
 
 Let's say that we are downloading a big file.
 You might know that
@@ -96,7 +96,7 @@ that means calculating the amount of data downloaded
 between a moment just a little bit before $t$ and the moment $t$.
 
 
-## Slope of Tangent Line
+## Slope of tangent line
 
 Let's say that we want to find the tangent line of the parabola $y = x^2$ at the point $(1,1)$.
 
@@ -184,7 +184,7 @@ Calculating this limit is straight-forward
 (expand the top, cancel a lot of things and then use [limit properties](limit-props.html)).
 
 
-## The Definition
+## The definition
 
 All of the above examples resulted in a limit of the form
 $$

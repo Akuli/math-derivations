@@ -8,7 +8,7 @@ other derivative rule derivations aren't as boring as this one,
 and learning to use the result of this derivation is more important than the derivation itself.
 
 
-## The Idea
+## The idea
 
 Let $\approx$ denote an approximation.
 Later we will figure out whether the approximations are accurate enough for our purposes,
@@ -112,7 +112,7 @@ While watching, keep in mind that
 </li></ul>
 
 
-## Estimating the Errors
+## Estimating the errors
 
 Consider the approximation
 $$
@@ -156,7 +156,7 @@ f(g(x)+n) &= f(g(x)) + f'(g(x))n + E_f(n).
 $$
 
 
-## Putting it All Together
+## Putting it all together
 
 With the approximation of $g(x+h)$, we get
 $$
@@ -206,7 +206,7 @@ $$
 The other limit is a bit tricky, and we'll do that next.
 
 
-## Tricky Limit
+## Tricky limit
 
 The idea with this trick is to turn the known limit (see above)
 $$
@@ -247,7 +247,7 @@ by [bringing the limit inside it](cont-props.html#moving-limit-inside-a-continuo
 This is why we needed continuity.
 
 
-## The Result
+## The result
 
 graybox:
     If $g'(x)$ and $f'(g(x))$ exist, then

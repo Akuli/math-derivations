@@ -80,7 +80,7 @@ One-sided limits have all the nice properties that we have proved so far for bot
 modifying the proofs to use one-sided limits instead of both-sided limits is easy.
 
 
-## Connection to Both-Sided Limit
+## Connection to both-sided limit
 
 Suppose that $\lim_{x \to a} f(x) = L$.
 Now, for any output interval $I_y$ centered around $L$,

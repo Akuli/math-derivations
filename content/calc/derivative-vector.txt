@@ -25,7 +25,7 @@ It's very common to use the letter $\vec v$ for the velocity vector,
 and some other letter such as $\vec r$ for the location.
 
 
-## Taking Derivatives of $\I$ and $\J$ parts Separately
+## Taking derivatives of $\I$ and $\J$ parts separately
 
 Let $\vec v(t) = (f(t), g(t))$.
 With the definition of derivative, we get

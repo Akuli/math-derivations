@@ -89,7 +89,7 @@ so this means that the angle between the vectors is 90 degrees; that is, the vec
 </li></ul>
 
 
-## Order Doesn't Matter
+## Order doesn't matter
 
 Let $\theta$ be the angle between two vectors $\vec v$ and $\vec w$.
 It's also the angle between $\vec w$ and $\vec v$;

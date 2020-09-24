@@ -80,7 +80,7 @@ graybox:
 We get other well-known things as special cases.
 
 
-## Pythagorean Theorem
+## Pythagorean theorem
 
 If $\gamma = 90^\circ$, then $\cos(\gamma) = 0$ and
 $$

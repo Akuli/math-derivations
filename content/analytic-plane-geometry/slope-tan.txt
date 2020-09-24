@@ -82,7 +82,7 @@ s = \frac{d_y}{d_x} = \frac{\sin(\alpha)}{\cos(\alpha)} = \tan(\alpha).
 $$
 
 
-## Using Slope for Trig
+## Using slope for trig
 
 This is not only a way to think about slope, but also a way to think about tan:
 $\tan(\alpha)$ is the slope of a line with angle $\alpha$.

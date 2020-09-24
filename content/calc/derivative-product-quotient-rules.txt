@@ -1,7 +1,7 @@
 # Product Rule and Quotient Rule
 
 
-## Product Rule
+## Product rule
 
 Suppose that the derivatives $f'(x)$ and $g'(x)$ exist.
 We calculate $\frac{d}{dx} (f(x)g(x))$.
@@ -110,7 +110,7 @@ $$
 which is the correct result.
 
 
-## Quotient Rule
+## Quotient rule
 
 Suppose that $f'(x)$ and $g'(x)$ exists, and $g(x) \ne 0$.
 We calculate $\frac{d}{dx} \left( \frac{f(x)}{g(x)} \right)$.

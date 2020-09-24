@@ -15,7 +15,7 @@ and the true power of dot products lies in combining these different ways, as we
 When writing this site, I needed to choose one of these ways to start with, and I chose what's on this page.
 
 
-## Defining Dot Product
+## Defining dot product
 
 To tell you what number comes out of the dot product $\vec v \cdot \vec w$,
 I'll first tell about projection.
@@ -141,7 +141,7 @@ I won't use that convention in these derivations,
 but you will likely see it elsewhere.
 
 
-## Dot Product and Sum
+## Dot product and sum
 
 We know that the multiplication of numbers behaves so that
 for all $a,b,c \in \mathbb{R}$, we have $(a+b)c = ac+bc$.
@@ -205,7 +205,7 @@ graybox:
     $$
 
 
-## Dot Product and Number Times Vector
+## Dot product and number times vector
 
 There's another important property that we expect multiplications to have.
 We know that for all numbers $a$, $b$ and $c$, we have $(ab)c = a(bc)$.
@@ -299,7 +299,7 @@ The above result also means that we can write $\vec v \cdot \vec w \, r$ without
 because no matter how parentheses are added, the result is the same either way.
 
 
-## Does Order Matter?
+## Does order matter?
 
 Can we also do the addition thing on the left side of the dot product? Something like this:
 $$

@@ -5,7 +5,7 @@ but how to calculate $\frac{d}{dx} (x^3 + x^4)$?
 How about $\frac{d}{dx}(3x^2-4x+5)$?
 
 
-## Derivative of Sum
+## Derivative of sum
 
 Suppose that the derivatives $\frac{d}{dx} f(x)$ and $\frac{d}{dx} g(x)$ exist. Then
 $$
@@ -27,7 +27,7 @@ graybox:
     $$
 
 
-## Derivative with Constant in Front
+## Derivative with constant in front
 
 Let $c$ be a constant (that is, any number that does not depend on $x$).
 Suppose that $\frac{d}{dx} f(x)$ exists.
@@ -60,7 +60,7 @@ x \cdot \frac{d}{dx} x = x \cdot 1 = x.
 $$
 
 
-## Derivative of Difference
+## Derivative of difference
 
 Suppose that the derivatives $\frac{d}{dx} f(x)$ and $\frac{d}{dx} g(x)$ exist.
 Then by using the above results, we get

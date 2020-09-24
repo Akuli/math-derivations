@@ -10,7 +10,7 @@ I will aim for something in the middle;
 my goal is to show you how limits work without doing anything too difficult.
 
 
-## The Idea
+## The idea
 
 Let's get started by plugging some numbers into the function
 $$
@@ -68,7 +68,7 @@ it won't suffice anymore when we want to do something more generally and we can'
 For that, we need a better definition of limit.
 
 
-## Definition with Intervals
+## Definition with intervals
 
 Consider the open interval $(2.99, 3.01)$; that is,
 the set of all numbers between $2.99$ and $3.01$.
@@ -153,7 +153,7 @@ graybox:
 So far we have worked with $a=1$ and $L=3$.
 
 
-## Things to Note
+## Things to note
 
 Explaining the above definition with words, it says that
 if we want to get the values of a function into any output interval (no matter how small),

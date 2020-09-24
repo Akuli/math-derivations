@@ -7,7 +7,7 @@ Limits are a tool that we need for doing fun, easy and non-abstract things,
 and we're currently building the tool.
 
 
-## Simple Example
+## Simple example
 
 We prove that $\lim_{x \to \red4} x = \green4$.
 I'm using more colors than usual, because the number $4$ appears in two places with two different meanings;
@@ -65,7 +65,7 @@ graybox:
     For all numbers $a$, we have $\lim_{x \to a} x = a$.
 
 
-## Another Simple Example
+## Another simple example
 
 We prove that $\lim_{x \to \red3} \blue5 = \green5$.
 This looks a little bit confusing, but it is of the same form as the equation in the definition of limit;
@@ -120,7 +120,7 @@ graybox:
     For all numbers $a$ and $b$, we have $\lim_{x \to a} b = b$.
 
 
-## Jumping Function
+## Jumping function
 
 Let's define the "jumping function" $J$ by
 $$
@@ -210,7 +210,7 @@ graybox:
     A limit might not exist.
 
 
-## More than One Limit
+## More than one limit
 
 Can we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ for the same function $f$?
 

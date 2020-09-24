@@ -83,7 +83,7 @@ As a special case, the interval $[a,b]$ can be split into just one part, $[a,b]$
 and that's also a valid partition.
 
 
-## Upper Sums and Lower Sums
+## Upper sums and lower sums
 
 Let's calculate the maximum value of $f$ on each part of our partition
 and draw that with a line above the interval.
@@ -222,7 +222,7 @@ Then $f(x)\ dx$ is a rectangle area, and $\int_a^b f(x)\ dx$ as a whole means su
 TODO: verify the "stretched S" thing from wikipedia
 
 
-## Example: integral of 3
+## Example: Integral of 3
 
 We calculate
 $$
@@ -277,7 +277,7 @@ $$
 The rest goes similarly as with the $2,3,4$ partition.
 
 
-## Example: integral of $2x$
+## Example: Integral of $2x$
 
 In the beginning of this page we used a triangle area to calculate
 $$
@@ -441,7 +441,7 @@ $$
 which shows that $\int_0^2 2x\ dx = 4$.
 
 
-## Example: integral of $x^2$
+## Example: Integral of $x^2$
 
 We calculate
 $$

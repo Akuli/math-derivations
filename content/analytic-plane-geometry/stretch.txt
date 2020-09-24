@@ -87,7 +87,7 @@ This is true in general; stretching the point $(0,0)$ does not change it,
 because the coordinates get multiplied by a number, and multiplying $0$ by something does nothing.
 
 
-## Stretching by a Negative Number
+## Stretching by a negative number
 
 The above result works for positive numbers $a$, but what happens for other numbers?
 If $a$ is zero, we end up replacing $x$ with $\frac{x}{0}$; we don't want to divide by zero.

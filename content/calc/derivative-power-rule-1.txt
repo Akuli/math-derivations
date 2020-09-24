@@ -40,7 +40,7 @@ $$
 which looks like it really should be $1$, and indeed it is $1$.
 
 
-## Derivative of Constant
+## Derivative of constant
 
 Let $a$ be any number, and let $f(x) = a$.
 With the definition of derivative, we get
@@ -241,7 +241,7 @@ The power rule $\frac{d}{dx} x^n = nx^{n-1}$ works in the following cases:
 Does it also work for other values of $n$? We'll come back to this [later](derivative-power-rule-2.html).
 
 
-## See Also
+## See also
 
 In [this awesome video](https://www.youtube.com/watch?v=S0_qX4VJhMQ),
 3blue1brown presents some of the results on this page in very visual ways.

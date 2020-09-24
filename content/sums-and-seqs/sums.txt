@@ -68,7 +68,7 @@ graybox:
     $$
 
 
-## Sum of Squares
+## Sum of squares
 
 <small>This derivation is based on [this video](https://www.youtube.com/watch?v=3IX-ukfgZdk).</small>
 
@@ -205,7 +205,7 @@ graybox:
     $$
 
 
-## Sum of Cubes
+## Sum of cubes
 
 As usual, the animation below has $n=7$.
 

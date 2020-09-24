@@ -11,7 +11,7 @@ we saw that the power rule $\frac{d}{dx} x^n = nx^{n-1}$ works in the following 
 Next we'll figure out whether it works in other cases.
 
 
-## Negative Integer
+## Negative integer
 
 Let $n$ be any negative integer.
 Because $n$ is negative, we have $n = (-1)\abs{n}$, and so
@@ -54,7 +54,7 @@ graybox:
     The power rule works when $n$ is a negative integer.
 
 
-## Rational Number
+## Rational number
 
 Let $a$ be any integer, and let $b$ be any positive integer.
 Now

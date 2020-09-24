@@ -2,7 +2,7 @@
 
 insert-function-warning-here
 
-## Definition of Strictly Increasing
+## Definition of strictly increasing
 
 A function $f$ is called **strictly increasing**, if for all numbers $a$ and $b$ satisfying $a < b$,
 we have $f(a) < f(b)$.
@@ -58,7 +58,7 @@ When defining what strictly increasing means,
 we require that this happens for **all** $a$ and $b$ with $a < b$.
 
 
-## Definition of Strictly Decreasing
+## Definition of strictly decreasing
 
 A function $f$ is called **strictly decreasing**, if for all numbers $a$ and $b$ satisfying $a < b$,
 we have $f(a) > f(b)$.
@@ -86,7 +86,7 @@ asymptote:
     draw((b,0)--(b,f(b)), p=deepred+smalldashes, L="$f(b)$", align=W);
 
 
-## The Function $f(x)=sx+h$
+## The function $f(x)=sx+h$
 
 From [line equation with slope](../analytic-plane-geometry/line-eq-slope.html#meaning-of-s-and-h),
 we know that if $s$ and $h$ are any numbers,
@@ -137,7 +137,7 @@ graybox:
 If $s=0$, we get the function $f(x)=h$, which is neither strictly increasing nor strictly decreasing.
 
 
-## Do Strictly Increasing/Decreasing Functions Have an Inverse Function?
+## Do strictly increasing/decreasing functions have an inverse function?
 
 Make sure that you are familiar with [inverse functions](inverse-funcs.html).
 Here are some example functions:
@@ -219,7 +219,7 @@ This function is not strictly increasing because $f(1) > f(2)$,
 and it's also    not strictly decreasing because $f(-1) < f(1)$.
 
 
-## Is the Inverse Strictly Increasing/Decreasing?
+## Is the inverse strictly increasing/decreasing?
 
 Above we showed that a strictly increasing/decreasing function has an inverse.
 Let's see what properties such inverse functions have.

@@ -146,6 +146,6 @@ Note that $d_x$ must be nonzero, because if it's zero,
 we can't divide by it and so we won't have $s = \frac{d_y}{d_x}$.
 
 
-## Example: Slope in DB Usage Graph
+## Example: Slope in DB usage graph
 
 TODO

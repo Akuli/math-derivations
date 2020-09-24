@@ -10,7 +10,7 @@ if $a = 0$, then this is just $y = bx+c$,
 which is [the equation of a line](line-eq-slope.html).
 
 
-## Peak at Origin
+## Peak at origin
 
 Let's start by finding all parabolas whose peaks are at the origin $(0,0)$.
 First of all, there are $y=ax^2+bx+c$ parabolas with peaks elsewhere.
@@ -126,7 +126,7 @@ graybox:
     </li></ul>
 
 
-## Shifting the Parabola
+## Shifting the parabola
 
 All $y=ax^2+bx+c$ parabolas look quite similar,
 even though some are more stretched than others, and some open up while others open down.
@@ -237,7 +237,7 @@ graybox:
     </li></ul>
 
 
-## Sideways Parabola
+## Sideways parabola
 
 The $y = ax^2 + bx + c$ parabolas discussed above can, depending on the sign of $a$, open up or down.
 Either way, these parabolas open in the direction of the $y$ axis.

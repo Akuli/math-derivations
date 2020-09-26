@@ -166,7 +166,7 @@
         <input type="checkbox" id="sidebar-checkbox-15" />
         <label for="sidebar-checkbox-15">Integral</label>
         <div class="dropdown">
-            <a href="integral-intro.html">Introduction to integrals</a><a href="integral-refinement.html">Refinement of partition</a><a href="integral-def.html">Defining the integral</a><a href="integral-average.html">Average</a>
+            <a href="integral-intro.html">Introduction to integrals</a><a href="integral-refinement.html">Refinement of partition</a><a href="integral-def.html">Defining the integral</a><a href="integral-average.html">Average</a><a href="integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="integral-ftoc2.html">Fundamental theorem of calculus, part 2</a>
         </div>
         
         </div>
@@ -179,7 +179,7 @@ other derivative rule derivations aren't as boring as this one,
 and learning to use the result of this derivation is more important than the derivation itself.
 </p>
 
-<h2 id="the-idea">The Idea<a class="headerlink" href="#the-idea" title="Link to this title">¶</a></h2><p>Let $\approx$ denote an approximation.
+<h2 id="the-idea">The idea<a class="headerlink" href="#the-idea" title="Link to this title">¶</a></h2><p>Let $\approx$ denote an approximation.
 Later we will figure out whether the approximations are accurate enough for our purposes,
 but for presenting the idea of this derivation, the $\approx$ sign is good enough.</p>
 
@@ -234,7 +234,7 @@ While watching, keep in mind that
 </li></ul>
 </p>
 
-<h2 id="estimating-the-errors">Estimating the Errors<a class="headerlink" href="#estimating-the-errors" title="Link to this title">¶</a></h2><p>Consider the approximation
+<h2 id="estimating-the-errors">Estimating the errors<a class="headerlink" href="#estimating-the-errors" title="Link to this title">¶</a></h2><p>Consider the approximation
 $$
 g(x+h)-g(x) \approx g'(x)h.
 $$
@@ -276,7 +276,7 @@ f(g(x)+n) &= f(g(x)) + f'(g(x))n + E_f(n).
 $$
 </p>
 
-<h2 id="putting-it-all-together">Putting it All Together<a class="headerlink" href="#putting-it-all-together" title="Link to this title">¶</a></h2><p>With the approximation of $g(x+h)$, we get
+<h2 id="putting-it-all-together">Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Link to this title">¶</a></h2><p>With the approximation of $g(x+h)$, we get
 $$
 f(g(x+h)) = f(g(x) + g'(x)h + E_g(h)).
 $$
@@ -324,7 +324,7 @@ $$
 The other limit is a bit tricky, and we'll do that next.
 </p>
 
-<h2 id="tricky-limit">Tricky Limit<a class="headerlink" href="#tricky-limit" title="Link to this title">¶</a></h2><p>The idea with this trick is to turn the known limit (see above)
+<h2 id="tricky-limit">Tricky limit<a class="headerlink" href="#tricky-limit" title="Link to this title">¶</a></h2><p>The idea with this trick is to turn the known limit (see above)
 $$
 \lim_{n \to 0} \frac{E_f(n)}{n} = 0
 $$
@@ -363,7 +363,7 @@ by <a href="cont-props.html#moving-limit-inside-a-continuous-function">bringing 
 This is why we needed continuity.
 </p>
 
-<h2 id="the-result">The Result<a class="headerlink" href="#the-result" title="Link to this title">¶</a></h2><div class="box graybox"><p>If $g'(x)$ and $f'(g(x))$ exist, then
+<h2 id="the-result">The result<a class="headerlink" href="#the-result" title="Link to this title">¶</a></h2><div class="box graybox"><p>If $g'(x)$ and $f'(g(x))$ exist, then
 $$
 \frac{d}{dx} f(g(x)) = f'(g(x))g'(x).
 $$

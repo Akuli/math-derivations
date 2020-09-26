@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Product Rule and Quotient Rule
+<title>Fundamental Theorem of Calculus, Part 1
 </title>
 
     <script type="text/x-mathjax-config">
@@ -171,151 +171,84 @@
         
         </div>
         </div>
-<h1 id="product-rule-and-quotient-rule">Product Rule and Quotient Rule<a class="headerlink" href="#product-rule-and-quotient-rule" title="Link to this title">¶</a></h1><h2 id="product-rule">Product rule<a class="headerlink" href="#product-rule" title="Link to this title">¶</a></h2><p>Suppose that the derivatives $f'(x)$ and $g'(x)$ exist.
-We calculate $\frac{d}{dx} (f(x)g(x))$.
+<h1 id="fundamental-theorem-of-calculus-part-1">Fundamental Theorem of Calculus, Part 1<a class="headerlink" href="#fundamental-theorem-of-calculus-part-1" title="Link to this title">¶</a></h1><p>So far we have 3 calculus tools: limits, derivatives and integrals.
+We used limits for <a href="derivative-def.html">defining the derivative</a>
+and <a href="integral-intro.html#example-integral-of-2x">calculating integrals</a>,
+but so far we haven't seen any connection between integrals and derivatives.
+For a connection like that, we have two options:</p>
+
+<p><ol><li>
+    Try to integrate a derivative
+</li><li>
+    Try to calculate the derivative of an integral
+</li></ol></p>
+
+<p>We choose option 2 because it turns out to be easier.
+To calculate a derivative, we need a function that takes in a number as an argument and outputs a number.
+We can look at $\int_a^b f(x)\ dx$ as a function that takes in a number $b$, as in
+$$
+I(b) = \int_a^b f(x)\ dx,
+$$
+where I chose to name the function $I$ rather than $f$ because we already have a function named $f$,
+and $I$ reminds about how it's an integral.
 With the definition of derivative, we get
 $$
-f'(x) = \lim_{h \to 0} \frac{~~ \overbrace{f(x+h)-f(x)}^{\text{let's call this }p(h)} ~~}{h}
-= \lim_{h \to 0} \frac{p(h)}{h},
-$$
-and letting $p(h)=f(x+h)-f(x)$ will make this derivation a lot easier to follow.
-Now we also have
-$$
-f(x+h) = f(x)+p(h),
-$$
-which makes sense, given that $p(h)$ is the difference of $f(x)$ and $f(x+h)$.
-Similarly, we let $q(h) = g(x+h)-g(x)$, and we get
-$$
 \begin{align}
-\lim_{h \to 0} \frac{q(h)}{h} &= g'(x), \\
-g(x+h) &= g(x)+q(h).
+I'(b)
+&= \lim_{h \to 0} \frac{I(b+h)-I(b)}{h} \\
+&= \lim_{h \to 0} \frac{\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx}{h}.
 \end{align}
 $$
-Now we get
-$$
-\begin{align}
-\blue{f(x+h)}\green{g(x+h)}
-&= \blue{(f(x) + p(h))}\green{(g(x) + q(h))} \\
-&= \blue{f(x)}\green{g(x)} + \blue{p(h)}\green{g(x)}
-    + \blue{f(x)}\green{q(h)} + \blue{p(h)}\green{q(h)}.
-\end{align}
-$$
-Subtracting $\blue{f(x)}\green{g(x)}$ on both sides gives
-$$
-\blue{f(x+h)}\green{g(x+h)} - \blue{f(x)}\green{g(x)}
-= \blue{p(h)}\green{g(x)} + \blue{f(x)}\green{q(h)} + \blue{p(h)}\green{q(h)}.
-$$
-This can also be seen by calculating areas in the following picture
-(although that doesn't work very well with negative numbers).
-The total area is $\blue{f(x+h)}\green{g(x+h)}$, and
-subtracting the area of the $\blue{f(x)}\green{g(x)}$ rectangle results in the areas of other rectangles.</p>
+I will draw pictures with $h > 0$, but everything works the same way if $h < 0$.
+The integrals we have so far look like this:</p>
 
-<p><img width="573" height="428" class="asymptote" src="../asymptote/0943f75efc11f76fffad1c806d124e2b.svg" /></p><p>Now we get
+<p><img width="402" height="285" class="asymptote" src="../asymptote/36841e47522de6246ca18809138bb142.svg" /></p><p>In the picture, $\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx$ means taking the entire colored area,
+both green and blue parts, and subtracting the green part.
+This gives the area of the blue part, which is $\int_b^{b+h} f(x)\ dx$.
+We can also verify this by splitting the $\int_a^{b+h}$ into two pieces (TODO), as in
+$$
+\int_a^{b+h} f(x)\ dx - \int_a^bf(x)\ dx = \left(\int_a^bf(x)\ dx + \int_b^{b+h}f(x)\ dx\right) - \int_a^bf(x)\ dx.
+$$
+Here the $\int_a^b$ integrals cancel as expected.
+So, we get
+$$
+I'(b) = \lim_{h \to 0} \frac{\int_b^{b+h} f(x)\ dx}{h}
+= \lim_{h \to 0} \frac{\int_b^{b+h} f(x)\ dx}{(b+h)-b}.
+$$
+After $\lim$ we have the <a href="integral-average.html">integral average</a> of $f$ between $b$ and $b+h$.
+If $f$ is continuous, then its graph <a href="cont-def.html">consists of one part</a>, and the average can be written as
+$$
+\frac{\int_b^{b+h} f(x)\ dx}{h} = f(\text{some number between $b$ and $b+h$}),
+$$
+because <a href="integral-average.html#average-vs-min-and-max">the average is between the minimum and maximum</a> of $f$ on $[b, b+h]$.</p>
+
+<p><img width="563" height="273" class="asymptote" src="../asymptote/502530b4ed6ec0cf74eb1994b8aa641b.svg" /></p><p>If $f$ is continuous, then we can also
+<a href="cont-props.html#moving-limit-inside-a-continuous-function">move the limit inside it</a> and we get
 $$
 \begin{align}
-\frac{d}{dx} (f(x)g(x))
-&= \lim_{h \to 0} \frac{\blue{f(x+h)}\green{g(x+h)} - \blue{f(x)}\green{g(x)}}{h} \\
-&= \lim_{h \to 0} \frac{\blue{p(h)}\green{g(x)} + \blue{f(x)}\green{q(h)} + \blue{p(h)}\green{q(h)}}{h} \\
-&= \lim_{h \to 0} \left( \frac{\blue{p(h)}\green{g(x)}}{h}
-        + \frac{\blue{f(x)}\green{q(h)}}{h}
-        + \frac{\blue{p(h)}\green{q(h)}}{h} \right) \\
-&= \lim_{h \to 0} \left( \frac{\blue{p(h)}}{h}\green{g(x)}
-        + \blue{f(x)}\frac{\green{q(h)}}{h}
-        + \frac{\blue{p(h)}}{h} \frac{\green{q(h)}}{h} h \right) \\
-&= f'(x)g(x) + f(x)g'(x) + f'(x)g'(x) \cdot 0 \\
-&= f'(x)g(x) + f(x)g'(x).
+I'(b)
+&= \lim_{h \to 0} f(\text{some number between $b$ and $b+h$}) \\
+&= f\left( \lim_{h \to 0} (\text{some number between $b$ and $b+h$}) \right) \\
+&= f(b).
 \end{align}
 $$</p>
 
-<div class="box graybox"><p>If $f'(x)$ and $g'(x)$ exist, then
+<div class="box graybox"><p>If $f$ is continuous, then the derivative of the function
 $$
-\frac{d}{dx} (f(x)g(x)) = f'(x)g(x) + f(x)g'(x).
+I(b) = \int_a^b f(x)\ dx
 $$
-This is known as the <b>product rule</b>.
+is $f(b)$.
 </p>
 
-</div><p>In general, $\frac{d}{dx} (f(x)g(x))$ and $\left( \frac{d}{dx} f(x) \right)\left( \frac{d}{dx} g(x) \right)$
-are <b>not</b> the same.
-For example,
-$$
-\frac{d}{dx}(x \cdot x) = \frac{d}{dx} x^2 = 2x,
-$$
-but
-$$
-\left( \frac{d}{dx}x \right)\left( \frac{d}{dx} x \right) = 1 \cdot 1 = 1.
-$$
-In this situation, the product rule gives
-$$
-\frac{d}{dx} (x \cdot x)
-= \left( \frac{d}{dx} x \right) x + x \left( \frac{d}{dx} x \right)
-= 1 \cdot x + x \cdot 1 = 2x,
-$$
-which is the correct result.
-</p>
+</div><p>This is known as part 1 of the fundamental theorem of calculus.</p>
 
-<h2 id="quotient-rule">Quotient rule<a class="headerlink" href="#quotient-rule" title="Link to this title">¶</a></h2><p>Suppose that $f'(x)$ and $g'(x)$ exists, and $g(x) \ne 0$.
-We calculate $\frac{d}{dx} \left( \frac{f(x)}{g(x)} \right)$.
-We have
-$$
-\frac{f(x)}{g(x)} = f(x) g(x)^{-1}.
-$$
-By applying the <a href="#product-rule">product rule</a>, we get
-$$
-\frac{d}{dx} \left( f(x) g(x)^{-1} \right)
-= f'(x)g(x)^{-1} + f(x) \cdot \frac{d}{dx} \left( g(x)^{-1} \right).
-$$
-The <a href="derivative-power-rule-1.html#derivative-of-frac-1-x">power rule</a>
-gives $\frac{d}{dx} x^{-1} = (-1)x^{-2}$,
-and by using that with the <a href="#chain-rule">chain rule</a>, we get
-$$
-\frac{d}{dx} \left( g(x)^{-1} \right) = (-1)g(x)^{-2}g'(x).
-$$
-By bringing all this together, we get
-$$
-\begin{align}
-\frac{d}{dx} \frac{f(x)}{g(x)}
-&= \frac{d}{dx} \left( f(x)g(x)^{-1} \right) \\
-&= f'(x)g(x)^{-1} + f(x) \cdot \frac{d}{dx} \left( g(x)^{-1} \right) \\
-&= f'(x)g(x)^{-1} + f(x) \cdot (-1)g(x)^{-2}g'(x) \\
-&= \frac{f'(x)}{g(x)} + (-1)\frac{f(x)g'(x)}{g(x)^2} \\
-&= \frac{f'(x)g(x)}{g(x)^2} - \frac{f(x)g'(x)}{g(x)^2} \\
-&= \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}.
-\end{align}
-$$</p>
+<p>This result makes sense, because the derivative essentially tells how sensitive the function is to changes in input.
+A big derivative means that changing the input of the function a little bit will change the output by a lot,
+and a small derivative means that the output won't change much.
+If $f(b)$ is big, then the graph is high above $x$ axis, and changing $b$ will change the area a lot.
+If $f(b)$ is small, then the area won't change much.</p>
 
-<div class="box graybox"><p>If $f'(x)$ and $g'(x)$ exists, and $g(x) \ne 0$, then
-$$
-\frac{d}{dx} \frac{f(x)}{g(x)} = \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}.
-$$
-This is known as the <b>quotient rule</b>.
-</p>
-
-</div><p>The quotient rule is messy and it doesn't simplify nicely.
-Instead of using the quotient rule, you can always rewrite $\frac{f(x)}{g(x)}$ as $f(x)g(x)^{-1}$
-and then apply other derivative rules, because that's how the quotient rule is derived.
-On the other hand, the quotient rule gets the job done in one step, although that step is ugly.</p>
-
-<p>For example, you can use the quotient rule along with
-<a href="derivative-power-rule-1.html">power rule</a> and <a href="derivative-basic-rules.html">derivative of sum</a> to get
-$$
-\frac{d}{dx} \left( \frac{x^2}{x+x^{-1}} \right)
-= \frac{2x\left( x+x^{-1} \right)-x^2\left( 1 + (-1)x^{-2} \right)}{\left( x + x^{-1} \right)^2}.
-$$
-Without the quotient rule, the calculation looks like this
-(see the derivation of the quotient rule for explanations):
-$$
-\begin{align}
-\frac{d}{dx} \left( \frac{x^2}{x+x^{-1}} \right)
-&= \frac{d}{dx} \left( x^2(x+x^{-1})^{-1} \right) \\
-&= 2x(x+x^{-1})^{-1} + x^2 \cdot \frac{d}{dx}\left( (x+x^{-1})^{-1} \right) \\
-&= 2x(x+x^{-1})^{-1} + x^2(-1)(x+x^{-1})^{-2} \cdot \frac{d}{dx}(x + x^{-1}) \\
-&= 2x(x+x^{-1})^{-1} + x^2(-1)(x+x^{-1})^{-2} \left( 1 + (-1)x^{-2} \right)
-\end{align}
-$$
-Both of these results simplify to
-$$
-\frac{x^2+3}{(x+x^{-1})^2}.
-$$
+<p>TODO: example showing why this doesn't work for discontinuous functions
 </p>
 
 </div>

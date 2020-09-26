@@ -1,6 +1,6 @@
 # Fundamental Theorem of Calculus, Part 2
 
-Let's start with an example to motivate what we're about to do. Let
+Let
 $$
 I(t) = \int_1^b x^2\ dx.
 $$

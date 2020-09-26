@@ -2,19 +2,19 @@
 
 Let's start with an example to motivate what we're about to do. Let
 $$
-I(t) = \int_1^b 3x^2\ dx.
+I(t) = \int_1^b x^2\ dx.
 $$
 (I'm using $t$ instead of $b$ because I want to use the letter $b$ for a different thing later.)
-Because $3x^2$ is continuous, by [part 1 of the fundamental theorem of calculus](integral-ftoc1.html),
-we have $I'(t) = 3t^2$ for all numbers $t$.
+Because $x^2$ is continuous, by [part 1 of the fundamental theorem of calculus](integral-ftoc1.html),
+we have $I'(t) = t^2$ for all numbers $t$.
 On the other hand, we also have
 $$
-\frac{d}{dt} t^3 = 3t^2,
+\frac{d}{dt} \left( \frac{1}{3} t^3 \right) = \frac{1}{3} \frac{d}{dt} t^3 = \frac{1}{3} 3t^2 = t^2,
 $$
 so $t^3$ and $I$ have the same derivative.
 With [derivative of difference](derivative-basic-rules.html#derivative-of-difference), we get
 $$
-\frac{d}{dt} (I(t) - t^3) = I'(t) - 3t^2 = 3t^2 - 3t^2 = 0.
+\frac{d}{dt} \left( I(t) - \frac{1}{3}t^3 \right) = I'(t) - \frac{1}{3}3t^2 = t^2 - t^2 = 0.
 $$
 
 
@@ -28,47 +28,47 @@ its location is constant, and we get
 $$
 h(x) = \text{constant}.
 $$
-In other words, no matter which number you plug in for $x$, or which time it is,
+In other words, no matter which number you plug in for $x$, i.e. what time it is,
 the location $h(x)$ will always be the same.
 
 This works in general, even if the function doesn't represent the location of an object.
-If this was a course in university, then we would prove this without relying on physics.
+If this was a math course in a university, then I would prove this without relying on physics.
 
 graybox:
     If $h'(x)=0$ for all numbers $x$, then $h(x)$ is a constant.
 
 We already knew that the derivative of any constant is zero,
-and this result says that no other functions can have zero derivative for all inputs.
+and this result says that no other function can have zero derivative for all inputs.
 
 
 ## Putting it all together
 
-Let $I(t)=\int_1^t 3x^2\ dx$ like we had before. Because
+Let $I(t)=\int_1^t x^2\ dx$ like we had before. Because
 $$
-\frac{d}{dt} (I(t)-t^3) = 0,
+\frac{d}{dt} \left( I(t)-\frac{1}{3}t^3 \right) = 0,
 $$
-the previous result tells that $I(t) - t^2$ must be a constant.
+the previous result tells that $I(t) - \frac{1}{3}t^3$ must be a constant.
 By calling that constant $C$, we get
 $$
-I(t) - t^3 = C,
+I(t) - \frac{1}{3}t^3 = C,
 $$
 which leads to
 $$
-I(t) = t^3 + C.
+I(t) = \frac{1}{3}t^3 + C.
 $$
-Because $I(1) = \int_1^1 3x^2\ dx = 0$ (TODO), we can plug in $t=1$ to get
+Because $I(1) = \int_1^1 x^2\ dx = 0$ (TODO), we can plug in $t=1$ to get
 $$
-0 = 1^3 + C,
+0 = \frac{1}{3}1^3 + C,
 $$
-which gives $C=-1$. Now we have
+which gives $C=-\frac{1}{3}$. Now we have
 $$
-I(t) = t^3 - 1,
+I(t) = \frac{1}{3}t^3 - \frac{1}{3},
 $$
 so
 $$
-\int_1^2 3x^2\ dx = 2^3 - 1 = 7.
+\int_1^2 3x^2\ dx = I(2) = \frac{1}{3} 2^3 - \frac{1}{3} = \frac{7}{3}.
 $$
-We have calculated an integral without using upper and lower sums!
+We have calculated an integral without having to calculate upper and lower sums!
 
 Let's generalize this awesomeness.
 Suppose that $f$ is continuous on $[a,b]$, and suppose that we know another function $F$ so that $F'(x) = f(x)$.

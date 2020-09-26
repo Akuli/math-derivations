@@ -28,7 +28,7 @@ I'(b)
 &= \lim_{h \to 0} \frac{\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx}{h}.
 \end{align}
 $$
-I will be drawing pictures with $h > 0$, but everything works the same way if $h < 0$.
+I will draw pictures with $h > 0$, but everything works the same way if $h < 0$.
 The integrals we have so far look like this:
 
 asymptote:
@@ -47,15 +47,15 @@ asymptote:
     dot((b,0), p=dotpen, L="$b$", align=S);
     dot((b+h,0), p=dotpen, L="$b+h$", align=(0.5,-1));
 
-Now $\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx$ means taking the entire colored area and subtracting the green part.
+In the picture, $\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx$ means taking the entire colored area,
+both green and blue parts, and subtracting the green part.
 This gives the area of the blue part, which is $\int_b^{b+h} f(x)\ dx$.
 We can also verify this by splitting the $\int_a^{b+h}$ into two pieces (TODO), as in
 $$
-\int_a^{b+h} f(x)\ dx - \int_a^bf(x)\ dx = \left(\int_a^bf(x)\ dx + \int_b^{b+h}f(x)\ dx\right) - \int_a^bf(x)\ dx,
+\int_a^{b+h} f(x)\ dx - \int_a^bf(x)\ dx = \left(\int_a^bf(x)\ dx + \int_b^{b+h}f(x)\ dx\right) - \int_a^bf(x)\ dx.
 $$
-and then the $\int_a^b$ integrals cancel as expected.
-
-We now get
+Here the $\int_a^b$ integrals cancel as expected.
+So, we get
 $$
 I'(b) = \lim_{h \to 0} \frac{\int_b^{b+h} f(x)\ dx}{h}
 = \lim_{h \to 0} \frac{\int_b^{b+h} f(x)\ dx}{(b+h)-b}.
@@ -109,14 +109,14 @@ graybox:
     $$
     I(b) = \int_a^b f(x)\ dx
     $$
-    is $f$.
+    is $f(b)$.
 
 This is known as part 1 of the fundamental theorem of calculus.
 
 This result makes sense, because the derivative essentially tells how sensitive the function is to changes in input.
 A big derivative means that changing the input of the function a little bit will change the output by a lot,
 and a small derivative means that the output won't change much.
-If $f(b)$ is big, then the graph is high above $x$ axis, and changing $b$ will change the area under it a lot.
+If $f(b)$ is big, then the graph is high above $x$ axis, and changing $b$ will change the area a lot.
 If $f(b)$ is small, then the area won't change much.
 
 TODO: example showing why this doesn't work for discontinuous functions

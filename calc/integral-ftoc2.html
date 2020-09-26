@@ -171,7 +171,7 @@
         
         </div>
         </div>
-<h1 id="fundamental-theorem-of-calculus-part-2">Fundamental Theorem of Calculus, Part 2<a class="headerlink" href="#fundamental-theorem-of-calculus-part-2" title="Link to this title">¶</a></h1><p>Let's start with an example to motivate what we're about to do. Let
+<h1 id="fundamental-theorem-of-calculus-part-2">Fundamental Theorem of Calculus, Part 2<a class="headerlink" href="#fundamental-theorem-of-calculus-part-2" title="Link to this title">¶</a></h1><p>Let
 $$
 I(t) = \int_1^b x^2\ dx.
 $$
@@ -189,25 +189,24 @@ $$
 $$
 </p>
 
-<h2 id="what-if-derivative-is-zero-for-all-inputs">What if derivative is zero for all inputs?<a class="headerlink" href="#what-if-derivative-is-zero-for-all-inputs" title="Link to this title">¶</a></h2><p>Suppose that $h$ is a function so that $h'(x) = 0$ for all numbers $x$.
-Let's think of $x$ as time and $h(x)$ as the location of an object at the given time.
-Then $h'(x)$ <a href="derivative-def.html#walking-speed">is the speed</a> of the object,
-and because the speed is zero, the object is simply not moving anywhere;
-its location is constant, and we get
+<h2 id="what-if-derivative-is-zero-for-all-inputs">What if derivative is zero for all inputs?<a class="headerlink" href="#what-if-derivative-is-zero-for-all-inputs" title="Link to this title">¶</a></h2><p>Suppose that $g$ is a function so that $g'(x) = 0$ for all numbers $x$.
+Let's think of $x$ as time and $g(x)$ as the location of an object at time $x$.
+Then $g'(x)$ <a href="derivative-def.html#walking-speed">is the speed</a> of the object,
+and because the speed is zero, the object is not moving at all. In other words,
 $$
-h(x) = \text{constant}.
+g(x) = \text{constant},
 $$
-In other words, no matter which number you plug in for $x$, i.e. what time it is,
-the location $h(x)$ will always be the same.</p>
+so no matter which number you plug in for $x$, i.e. what time it is,
+the location $g(x)$ will always be the same.</p>
 
 <p>This works in general, even if the function doesn't represent the location of an object.
 If this was a math course in a university, then I would prove this without relying on physics.</p>
 
-<div class="box graybox"><p>If $h'(x)=0$ for all numbers $x$, then $h(x)$ is a constant.
+<div class="box graybox"><p>If $g'(x)=0$ for all numbers $x$, then $g(x)$ is a constant.
 </p>
 
-</div><p>We already knew that the derivative of any constant is zero,
-and this result says that no other function can have zero derivative for all inputs.
+</div><p>We already knew that the derivative of a constant is zero,
+but this result says that it's the only way how the the derivative can be zero for all inputs.
 </p>
 
 <h2 id="putting-it-all-together">Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Link to this title">¶</a></h2><p>Let $I(t)=\int_1^t x^2\ dx$ like we had before. Because
@@ -235,7 +234,7 @@ so
 $$
 \int_1^2 x^2\ dx = I(2) = \frac{1}{3} 2^3 - \frac{1}{3} = \frac{7}{3}.
 $$
-We have calculated an integral without having to calculate upper and lower sums!</p>
+We have calculated an integral without having to calculate upper and lower sums.</p>
 
 <p>Let's generalize this awesomeness.
 Suppose that $f$ is continuous on $[a,b]$, and suppose that we know another function $F$ so that $F'(x) = f(x)$.

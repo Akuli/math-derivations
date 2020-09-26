@@ -20,25 +20,24 @@ $$
 
 ## What if derivative is zero for all inputs?
 
-Suppose that $h$ is a function so that $h'(x) = 0$ for all numbers $x$.
-Let's think of $x$ as time and $h(x)$ as the location of an object at the given time.
-Then $h'(x)$ [is the speed](derivative-def.html#walking-speed) of the object,
-and because the speed is zero, the object is simply not moving anywhere;
-its location is constant, and we get
+Suppose that $g$ is a function so that $g'(x) = 0$ for all numbers $x$.
+Let's think of $x$ as time and $g(x)$ as the location of an object at time $x$.
+Then $g'(x)$ [is the speed](derivative-def.html#walking-speed) of the object,
+and because the speed is zero, the object is not moving at all. In other words,
 $$
-h(x) = \text{constant}.
+g(x) = \text{constant},
 $$
-In other words, no matter which number you plug in for $x$, i.e. what time it is,
-the location $h(x)$ will always be the same.
+so no matter which number you plug in for $x$, i.e. what time it is,
+the location $g(x)$ will always be the same.
 
 This works in general, even if the function doesn't represent the location of an object.
 If this was a math course in a university, then I would prove this without relying on physics.
 
 graybox:
-    If $h'(x)=0$ for all numbers $x$, then $h(x)$ is a constant.
+    If $g'(x)=0$ for all numbers $x$, then $g(x)$ is a constant.
 
-We already knew that the derivative of any constant is zero,
-and this result says that no other function can have zero derivative for all inputs.
+We already knew that the derivative of a constant is zero,
+but this result says that it's the only way how the the derivative can be zero for all inputs.
 
 
 ## Putting it all together
@@ -68,7 +67,7 @@ so
 $$
 \int_1^2 x^2\ dx = I(2) = \frac{1}{3} 2^3 - \frac{1}{3} = \frac{7}{3}.
 $$
-We have calculated an integral without having to calculate upper and lower sums!
+We have calculated an integral without having to calculate upper and lower sums.
 
 Let's generalize this awesomeness.
 Suppose that $f$ is continuous on $[a,b]$, and suppose that we know another function $F$ so that $F'(x) = f(x)$.

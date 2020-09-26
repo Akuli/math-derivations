@@ -38,7 +38,7 @@ asymptote:
     fill(graph(f, a, b)--(b,0)--(a,0)--cycle, lightgreen);
     axises(-0.5, 6, -0.5, 4);
     draw(graph(f, 0.5, 6), p=blue, L=Label(rotate(-15)*"$y=f(x)$", position=Relative(0.9), align=N));
-    draw((-0.5,average)--(6,average), p=deepgreen, L=Label("$y={}$average", align=S, position=Relative(0.9)));
+    draw((-0.5,average)--(6,average), p=darkorange, L=Label("$y={}$average", align=S, position=Relative(0.9)));
     dot((a,0), p=dotpen, L="$a$", align=S);
     dot((b,0), p=dotpen, L="$b$", align=S);
 

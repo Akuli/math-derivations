@@ -1,0 +1,138 @@
+# Fundamental Theorem of Calculus, Part 2
+
+Let's start with an example to motivate what we're about to do. Let
+$$
+I(t) = \int_1^b 3x^2\ dx.
+$$
+(I'm using $t$ instead of $b$ because I want to use the letter $b$ for a different thing later.)
+Because $3x^2$ is continuous, by [part 1 of the fundamental theorem of calculus](integral-ftoc1.html),
+we have $I'(t) = 3t^2$ for all numbers $t$.
+On the other hand, we also have
+$$
+\frac{d}{dt} t^3 = 3t^2,
+$$
+so $t^3$ and $I$ have the same derivative.
+With [derivative of difference](derivative-basic-rules.html#derivative-of-difference), we get
+$$
+\frac{d}{dt} (I(t) - t^3) = I'(t) - 3t^2 = 3t^2 - 3t^2 = 0.
+$$
+
+
+## What if derivative is zero for all inputs?
+
+Suppose that $h$ is a function so that $h'(x) = 0$ for all numbers $x$.
+Let's think of $x$ as time and $h(x)$ as the location of an object at the given time.
+Then $h'(x)$ [is the speed](derivative-def.html#walking-speed) of the object,
+and because the speed is zero, the object is simply not moving anywhere;
+its location is constant, and we get
+$$
+h(x) = \text{constant}.
+$$
+In other words, no matter which number you plug in for $x$, or which time it is,
+the location $h(x)$ will always be the same.
+
+This works in general, even if the function doesn't represent the location of an object.
+If this was a course in university, then we would prove this without relying on physics.
+
+graybox:
+    If $h'(x)=0$ for all numbers $x$, then $h(x)$ is a constant.
+
+We already knew that the derivative of any constant is zero,
+and this result says that no other functions can have zero derivative for all inputs.
+
+
+## Putting it all together
+
+Let $I(t)=\int_1^t 3x^2\ dx$ like we had before. Because
+$$
+\frac{d}{dt} (I(t)-t^3) = 0,
+$$
+the previous result tells that $I(t) - t^2$ must be a constant.
+By calling that constant $C$, we get
+$$
+I(t) - t^3 = C,
+$$
+which leads to
+$$
+I(t) = t^3 + C.
+$$
+Because $I(1) = \int_1^1 3x^2\ dx = 0$ (TODO), we can plug in $t=1$ to get
+$$
+0 = 1^3 + C,
+$$
+which gives $C=-1$. Now we have
+$$
+I(t) = t^3 - 1,
+$$
+so
+$$
+\int_1^2 3x^2\ dx = 2^3 - 1 = 7.
+$$
+We have calculated an integral without using upper and lower sums!
+
+Let's generalize this awesomeness.
+Suppose that $f$ is continuous on $[a,b]$, and suppose that we know another function $F$ so that $F'(x) = f(x)$.
+Let
+$$
+I(t) = \int_a^t f(x)\ dx.
+$$
+With part 1 of the fundamental theorem of calculus, we get $I'(t) = f(t)$, so
+$$
+\frac{d}{dt} (I(t) - F(t)) = I'(t) - F'(t) = f(t)-f(t) = 0.
+$$
+Because of this, there is a constant $C$ such that $I(t)-F(t)=C$, which leads to $I(t)=F(t)+C$.
+Because
+$$
+I(a)=\int_a^a f(x)\ dx = 0,
+$$
+but also
+$$
+I(a)=F(a)+C,
+$$
+we must have $F(a)+C=0$ and $C=-F(a)$.
+Now we get
+$$
+\int_a^b f(x)\ dx = I(b) = F(b)+C = F(b)-F(a).
+$$
+
+graybox:
+    If $f$ is continuous on $[a,b]$ and $F'(x)=f(x)$, then
+    $$
+    \int_a^b f(x)\ dx = F(b) - F(a).
+    $$
+
+This is known as part 2 of the fundamental theorem of calculus.
+
+
+## Example: Area under sine wave
+
+Let's calculate how much area there is below one of the "bumps" of $y=\sin(x)$.
+
+asymptote:
+    unitsize(3cm);
+    fill(graph(sin, 0, pi)--cycle, lightgreen);
+    axises(-0.5, 5.5, -1.2, 1.5);
+    draw(graph(sin, -0.5, 5.5), p=blue, L=Label("$y=\sin(x)$", position=Relative(0.9)));
+    dot((pi, 0), p=dotpen, L="$\pi$", align=(-0.5,-1));
+
+We can find this area with the integral
+$$
+\int_0^\pi \sin(x)\ dx.
+$$
+Because
+$$
+\frac{d}{dx} \cos(x) = -\sin(x),
+$$
+we have
+$$
+\frac{d}{dx} (-\cos(x)) = (-1)\frac{d}{dx} \cos(x) = -(-\sin(x)) = \sin(x).
+$$
+By letting $F(x) = -\cos(x)$, we get
+$$
+\begin{align*}
+\int_0^\pi \sin(x)\ dx
+&= F(\pi) - F(0) \\
+&= -\cos(\pi) - (-\cos(0)) \\
+&= -(-1)-(-1)=2.
+\end{align*}
+$$

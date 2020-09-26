@@ -170,6 +170,8 @@ def get_sidebar_content(txtfile):
                 link("Refinement of partition", 'calc/integral-refinement'),
                 link("Defining the integral", 'calc/integral-def'),
                 link("Average", 'calc/integral-average'),
+                link("Fundamental theorem of calculus, part 1", 'calc/integral-ftoc1'),
+                link("Fundamental theorem of calculus, part 2", 'calc/integral-ftoc2'),
             ])),
         ])),
 

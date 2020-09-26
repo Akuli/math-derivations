@@ -1,0 +1,122 @@
+# Fundamental Theorem of Calculus, Part 1
+
+So far we have 3 calculus tools: limits, derivatives and integrals.
+We used limits for [defining the derivative](derivative-def.html)
+and [calculating integrals](integral-intro.html#example-integral-of-2x),
+but so far we haven't seen any connection between integrals and derivatives.
+For a connection like that, we have two options:
+
+<ol><li>
+    Try to integrate a derivative
+</li><li>
+    Try to calculate the derivative of an integral
+</li></ol>
+
+We choose option 2 because it turns out to be easier.
+To calculate a derivative, we need a function that takes in a number as an argument and outputs a number.
+We can look at $\int_a^b f(x)\ dx$ as a function that takes in a number $b$, as in
+$$
+I(b) = \int_a^b f(x)\ dx,
+$$
+where I chose to name the function $I$ rather than $f$ because we already have a function named $f$,
+and $I$ reminds about how it's an integral.
+With the definition of derivative, we get
+$$
+\begin{align}
+I'(b)
+&= \lim_{h \to 0} \frac{I(b+h)-I(b)}{h} \\
+&= \lim_{h \to 0} \frac{\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx}{h}.
+\end{align}
+$$
+I will be drawing pictures with $h > 0$, but everything works the same way if $h < 0$.
+The integrals we have so far look like this:
+
+asymptote:
+    unitsize(2cm);
+
+    real f(real x) { return 3  - sin(2x); }
+    real a = 1;
+    real b = 4.5;
+    real h = 0.5;
+
+    fill(graph(f, a, b)--(b,0)--(a,0)--cycle, lightgreen);
+    fill(graph(f, b, b+h)--(b+h,0)--(b,0)--cycle, lightblue);
+    axises(-0.5, 6, -0.5, 4);
+    draw(graph(f, 0.5, 6), p=blue, L=Label("$y=f(x)$", position=Relative(0.95), align=N));
+    dot((a,0), p=dotpen, L="$a$", align=S);
+    dot((b,0), p=dotpen, L="$b$", align=S);
+    dot((b+h,0), p=dotpen, L="$b+h$", align=(0.5,-1));
+
+Now $\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx$ means taking the entire colored area and subtracting the green part.
+This gives the area of the blue part, which is $\int_b^{b+h} f(x)\ dx$.
+We can also verify this by splitting the $\int_a^{b+h}$ into two pieces (TODO), as in
+$$
+\int_a^{b+h} f(x)\ dx - \int_a^bf(x)\ dx = \left(\int_a^bf(x)\ dx + \int_b^{b+h}f(x)\ dx\right) - \int_a^bf(x)\ dx,
+$$
+and then the $\int_a^b$ integrals cancel as expected.
+
+We now get
+$$
+I'(b) = \lim_{h \to 0} \frac{\int_b^{b+h} f(x)\ dx}{h}
+= \lim_{h \to 0} \frac{\int_b^{b+h} f(x)\ dx}{(b+h)-b}.
+$$
+After $\lim$ we have the [integral average](integral-average.html) of $f$ between $b$ and $b+h$.
+If $f$ is continuous, then its graph [consists of one part](cont-def.html), and the average can be written as
+$$
+\frac{\int_b^{b+h} f(x)\ dx}{h} = f(\text{some number between $b$ and $b+h$}),
+$$
+because [the average is between the minimum and maximum](integral-average.html#average-vs-min-and-max) of $f$ on $[b, b+h]$.
+
+asymptote:
+    unitsize(2cm);
+
+    real b = 1;
+    real h = 3;
+    real f(real x) { return 3  - sin(x); }
+    real F(real x) { return 3x + cos(x); }
+    real fmin = 2;
+    real fmax = f(b+h);
+
+    real average = (F(b+h)-F(b))/h;
+
+    fill(graph(f, b, b+h)--(b+h,0)--(b,0)--cycle, lightblue);
+    axises(-2, 6, 0,0);
+    draw(graph(f, 0.5, 6), p=blue, L=Label("$y=f(x)$", position=Relative(1), align=E));
+
+    draw((-1.5,fmax)--(5,fmax), p=deepgreen, L=Label("$y={}$maximum", align=N, position=Relative(0.1)));
+    draw((-1.5,average)--(5,average), p=darkorange, L=Label("$y={}$average", align=N, position=Relative(0.1)));
+    draw((-1.5,fmin)--(5,fmin), p=deepred, L=Label("$y={}$minimum", align=N, position=Relative(0.1)));
+
+    pair intersects[] = intersectionpoints(graph(f, b, b+h), (b, average)--(b+h, average));
+    draw(intersects[0]--(intersects[0].x, 0), p=darkorange+smalldashes);
+
+    dot((b,0), p=dotpen, L="$b$", align=S);
+    dot((b+h,0), p=dotpen, L="$b+h$", align=S);
+
+If $f$ is continuous, then we can also
+[move the limit inside it](cont-props.html#moving-limit-inside-a-continuous-function) and we get
+$$
+\begin{align}
+I'(b)
+&= \lim_{h \to 0} f(\text{some number between $b$ and $b+h$}) \\
+&= f\left( \lim_{h \to 0} (\text{some number between $b$ and $b+h$}) \right) \\
+&= f(b).
+\end{align}
+$$
+
+graybox:
+    If $f$ is continuous, then the derivative of the function
+    $$
+    I(b) = \int_a^b f(x)\ dx
+    $$
+    is $f$.
+
+This is known as part 1 of the fundamental theorem of calculus.
+
+This result makes sense, because the derivative essentially tells how sensitive the function is to changes in input.
+A big derivative means that changing the input of the function a little bit will change the output by a lot,
+and a small derivative means that the output won't change much.
+If $f(b)$ is big, then the graph is high above $x$ axis, and changing $b$ will change the area under it a lot.
+If $f(b)$ is small, then the area won't change much.
+
+TODO: example showing why this doesn't work for discontinuous functions

@@ -136,3 +136,52 @@ $$
 &= -(-1)-(-1)=2.
 \end{align*}
 $$
+
+
+## Example: Download speed
+
+Here's a screenshot of my network usage graph while downloading a big file.
+
+<img src="../images/network1.png" style="max-width: calc(max(100%,600px));">
+
+On the $x$ axis, there's time as seconds.
+The right edge of the graph represents "now", and the left edge is 60 seconds ago.
+The $y$ axis represents mibibytes per second, where 1 mibibyte means $2^{20} = 1048576$ bytes.
+For example, the peak of the graph at 40 seconds ago was when the download speed was fastest,
+about 1.8 mibibytes per second.
+(Ignore the red line. It's the upload speed.)
+
+Because [download speed is derivative of downloaded data](derivative-def.html#download-speed),
+part 2 of fundamental theorem of calculus says that
+$$
+\begin{align}
+&~~~~ \int_a^b \text{download speed}\ dx \\
+&= (\text{downloaded data at time $b$}) - (\text{downloaded data at time $a$}) \\
+&= \text{how much data was downloaded between $a$ and $b$}.
+\end{align}
+$$
+For example, this area tells how much data was downloaded between "50 seconds ago" and "30 seconds ago":
+
+<img src="../images/network2.png" style="max-width: calc(max(100%,600px));">
+
+Calculating the area precisely is difficult, but
+it's easy to make a rough approximation with straight lines:
+
+<img src="../images/network3.png" style="max-width: calc(max(100%,600px));">
+
+The top and bottom of the triangle seem to be at about 1.6 MiB/sec and 0.7 MiB/sec.
+The area of the triangle is approximately
+$$
+\frac{20~\text{sec} \cdot (1.6~\text{MiB/sec} - 0.7~\text{MiB/sec})}{2}
+= 9~\text{MiB},
+$$
+where the seconds canceled nicely as expected.
+There's also a rectangle below the triangle, and its area is
+$$
+20~\text{sec} \cdot 0.7~\text{MiB/sec} = 14~\text{MiB},
+$$
+so the amount of downloaded data is approximately
+$$
+9~\text{MiB}+14~\text{MiB}=23~\text{MiB}.
+$$
+This is one reason why integrals are interesting: they allow representing different real-world things as areas.

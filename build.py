@@ -42,6 +42,7 @@ builder.infile2outfile = lambda infile: os.path.join(
 
 builder.additional_files.append('css')
 builder.additional_files.append('js')
+builder.additional_files.extend(glob.glob('images/*'))
 
 
 def get_sidebar_content(txtfile):

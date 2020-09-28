@@ -183,4 +183,10 @@ so the amount of downloaded data is approximately
 $$
 9~\text{MiB}+14~\text{MiB}=23~\text{MiB}.
 $$
-This is one reason why integrals are interesting: they allow representing different real-world things as areas.
+This is one reason why integrals are interesting: they allow representing real-world things as areas.
+
+This also works when $y$ axis is the speed of a moving object instead of a download speed.
+For example, if you graph the speed of a moving car, with kilometres per hour on the $y$ axis,
+then the area under the graph correspond to total distance travelled by the car.
+At a high level, an integral combines changes that build up over time, represented by the derivative,
+and we get the total change as a result.

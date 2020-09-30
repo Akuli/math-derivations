@@ -65,7 +65,7 @@ If $f$ is continuous, then its graph [consists of one part](cont-def.html), and 
 $$
 \frac{\int_b^{b+h} f(x)\ dx}{h} = f(\text{some number between $b$ and $b+h$}),
 $$
-because [the average is between the minimum and maximum](integral-average.html#average-vs-min-and-max) of $f$ on $[b, b+h]$.
+because [the average is between the minimum and maximum](integral-average.html#average-vs-min-and-max) of $f$ between $b$ and $b+h$.
 
 asymptote:
     unitsize(2cm);

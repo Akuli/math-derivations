@@ -328,8 +328,10 @@ asymptote:
         draw((x-b/n,f(x))--(x,f(x)));
     }
 
-Because $f$ is increasing, we get the upper sum rectangle heights at the right sides of the rectangles,
-so
+Because $f$ is increasing, it gets its maximum value on any closed interval
+at the right end point of the inteval, and those are used as the upper sum rectangle heights.
+For example, the height of the first rectangle is the maximum of $f$ on $[0, 2/5]$, which is $f(2/5)$.
+By doing this for all rectangles, we get
 $$
 \begin{align}
 \text{upper sum}

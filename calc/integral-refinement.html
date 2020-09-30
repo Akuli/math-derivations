@@ -187,43 +187,31 @@ because it contains all partition numbers of itself.
 <h2 id="upper-and-lower-sums-with-refinements">Upper and lower sums with refinements<a class="headerlink" href="#upper-and-lower-sums-with-refinements" title="Link to this title">¶</a></h2><p>Suppose that $R$ is a refinement of $P$ that contains one number more than $P$.
 The upper sums of a function $f$ with these partitions look like this:</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/27aee8d10f9fa19181c14a5cfe0092e2.svg" /></p><p><img width="402" height="201" class="asymptote" src="../asymptote/2ba54afac7a44281cdbd5ae815e5fe4b.svg" /></p><p>The upper sum with $R$ seems to be less than the upper sum with $P$.
-Next we verify this by calculating.</p>
+<p><img width="402" height="201" class="asymptote" src="../asymptote/27aee8d10f9fa19181c14a5cfe0092e2.svg" /></p><p><img width="402" height="201" class="asymptote" src="../asymptote/2ba54afac7a44281cdbd5ae815e5fe4b.svg" /></p><p>The upper sum with $R$ is less than the upper sum with $P$ because
+the bar between $r$ and $n_2$ is lower than before.
+That's because the maximum value of $f$ on $[n_1,n_2]$ came from $[n,r]$, and not from $[r,n_2]$;
+all values of $f$ on $[r,n_2]$ are less than the maximum on $[n_1,n_2]$.</p>
 
-<p>Let $r$ be the number in $R$ but not in $P$, and
-let $n_1$ and $n_2$ be the "neighbor" partition numbers of $r$ so that $n_1 < r < n_2$.
-Now
+<p>In general, this explains why the upper sum can't increase when adding a number to the partition,
+but the upper sum doesn't necessarily decrease either.
+For example, if the graph of $f$ is a horizontal line, then all upper sums are equal,
+and adding partition numbers doesn't change them.</p>
+
+<p>A similar reasoning shows that lower sums increase or stay the same when adding a partition number.</p>
+
+<div class="box graybox"><p>Let $P$ be a partition of $[a,b]$ and let $R$ be its refinement that has only one more number than $P$. Then
 $$
-\text{upper sum with $P$} = (n_2-n_1)\max_{[n_1,n_2]}f + \text{other rectangle areas}
+\text{upper sum of $f$ with $P$} \ge \text{upper sum of $f$ with $R$}
 $$
-where $\max f$ denotes maximum value of $f$ on the interval written below $\max$, and
+and
 $$
-\text{upper sum with $R$} = (r-n_1)\max_{[n_1,r]}f+(n_2-r)\max_{[r,n_2]}f + \text{other rectangle areas}.
+\text{lower sum of $f$ with $P$} \le \text{lower sum of $f$ with $R$}.
 $$
-Because every number of $[n_1,r]$ is also in $[n_1,n_2]$, we have
-$$
-\max_{[n_1,r]} f \le \max_{[n_1,n_2]} f,
-$$
-and for the same reason,
-$$
-\max_{[r,n_2]} f \le \max_{[n_1,n_2]} f.
-$$
-With these, we get
-$$
-\begin{align}
-&(r-n_1)\max_{[x_{k-1},r]}f+(x_k-r)\max_{[r,n_2]}f \\
-\le{}& (r-n_1)\max_{[n_1,n_2]}f+(x_k-r)\max_{[n_1,n_2]}f \\
-={}& (r-n_1+n_2-r)\max_{[n_1,n_2]}f \\
-={}& (n_2-n_1)\max_{[n_1,n_2]}f.
-\end{align}
-$$
-Because the other rectangle areas are the same for $P$ and $R$, we get
-$$
-\text{upper sum with $R$} \le \text{upper sum with $P$}.
-$$
-In other words, the upper sum decreases or stays the same when adding one partition number.
-It follows that it decreases or stays the same when adding several partition numbers.
-A similar derivation works for lower sums.</p>
+</p>
+
+</div><p>By adding "new" partition numbers one by one, we see that this also works when
+the refinement contains multiple partition numbers that are not in $P$.
+Because we're writing $\ge$ and $\le$, it also works with how any partition is a refinement of itself.</p>
 
 <div class="box graybox"><p>Let $P$ be a partition of $[a,b]$. Then
 $$
@@ -235,21 +223,7 @@ $$
 $$
 </p>
 
-</div><p>It might be tempting to write
-$$
-\text{upper sum with $P$} > \text{upper sum with any refinement of $P$}
-$$
-and
-$$
-\text{lower sum with $P$} < \text{lower sum with any refinement of $P$},
-$$
-but these aren't always true.
-For example, if $f$ is a function whose graph is a horizontal line,
-then all upper and lower sums are equal.
-Also, any partition is a refinement of itself.
-</p>
-
-<h2 id="upper-and-lower-sums-of-different-partitions">Upper and lower sums of different partitions<a class="headerlink" href="#upper-and-lower-sums-of-different-partitions" title="Link to this title">¶</a></h2><p>If we take any two partitions of $[a,b]$, say $P_1$ and $P_2$,
+</div><h2 id="upper-and-lower-sums-of-different-partitions">Upper and lower sums of different partitions<a class="headerlink" href="#upper-and-lower-sums-of-different-partitions" title="Link to this title">¶</a></h2><p>If we take any two partitions of $[a,b]$, say $P_1$ and $P_2$,
 then we can combine their numbers to make a partition that is a refinement of both partitions.</p>
 
 <p><img width="413" height="126" class="asymptote" src="../asymptote/d7267de36cb4318f300fdedf7488af28.svg" /></p><p>Now we get

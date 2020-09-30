@@ -109,7 +109,7 @@ That's because the maximum value of $f$ on $[n_1,n_2]$ came from $[n_1,r]$, and 
 all values of $f$ on $[r,n_2]$ are less than the maximum on $[n_1,n_2]$.
 
 In general, this explains why the upper sum can't increase when adding a number to the partition,
-but the upper sum doesn't necessarily decrease either.
+but the upper sum doesn't necessarily decrease.
 For example, if the graph of $f$ is a horizontal line, then all upper sums are equal,
 and adding partition numbers doesn't change them.
 

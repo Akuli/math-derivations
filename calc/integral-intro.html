@@ -296,7 +296,7 @@ The rest goes similarly as with the $2,3,4$ partition.
 
 <h2 id="example-integral-of-2x">Example: Integral of $2x$<a class="headerlink" href="#example-integral-of-2x" title="Link to this title">¶</a></h2><p>In the beginning of this page we used a triangle area to calculate
 $$
-\int_0^2 x\ dx.
+\int_0^2 2x\ dx.
 $$
 Let's calculate that again with upper and lower sums.</p>
 
@@ -311,8 +311,10 @@ $$
 $$
 The upper sum looks like this:</p>
 
-<p><img width="172" height="296" class="asymptote" src="../asymptote/a5ba1d323051d3eff58455600bdf563e.svg" /></p><p>Because $f$ is increasing, we get the upper sum rectangle heights at the right sides of the rectangles,
-so
+<p><img width="172" height="296" class="asymptote" src="../asymptote/a5ba1d323051d3eff58455600bdf563e.svg" /></p><p>Because $f$ is increasing, it gets its maximum value on any closed interval
+at the right end point of the inteval, and those are used as the upper sum rectangle heights.
+For example, the height of the first rectangle is the maximum of $f$ on $[0, 2/5]$, which is $f(2/5)$.
+By doing this for all rectangles, we get
 $$
 \begin{align}
 \text{upper sum}

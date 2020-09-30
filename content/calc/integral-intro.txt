@@ -281,7 +281,7 @@ The rest goes similarly as with the $2,3,4$ partition.
 
 In the beginning of this page we used a triangle area to calculate
 $$
-\int_0^2 x\ dx.
+\int_0^2 2x\ dx.
 $$
 Let's calculate that again with upper and lower sums.
 

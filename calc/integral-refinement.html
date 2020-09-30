@@ -185,11 +185,12 @@ because it contains all partition numbers of itself.
 </p>
 
 <h2 id="upper-and-lower-sums-with-refinements">Upper and lower sums with refinements<a class="headerlink" href="#upper-and-lower-sums-with-refinements" title="Link to this title">¶</a></h2><p>Suppose that $R$ is a refinement of $P$ that contains one number more than $P$.
+Below $r$ is the number in $R$ but not in $P$, and $n_1$ and $n_2$ are its "neighbor" partition numbers.
 The upper sums of a function $f$ with these partitions look like this:</p>
 
 <p><img width="402" height="201" class="asymptote" src="../asymptote/27aee8d10f9fa19181c14a5cfe0092e2.svg" /></p><p><img width="402" height="201" class="asymptote" src="../asymptote/2ba54afac7a44281cdbd5ae815e5fe4b.svg" /></p><p>The upper sum with $R$ is less than the upper sum with $P$ because
-the bar between $r$ and $n_2$ is lower than before.
-That's because the maximum value of $f$ on $[n_1,n_2]$ came from $[n,r]$, and not from $[r,n_2]$;
+the rectangle between $r$ and $n_2$ is lower than before.
+That's because the maximum value of $f$ on $[n_1,n_2]$ came from $[n_1,r]$, and not from $[r,n_2]$;
 all values of $f$ on $[r,n_2]$ are less than the maximum on $[n_1,n_2]$.</p>
 
 <p>In general, this explains why the upper sum can't increase when adding a number to the partition,

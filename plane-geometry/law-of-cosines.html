@@ -185,16 +185,16 @@ $$
 $$
 and for deriving that (TODO), we only needed $(a-b)c=ac-bc$ and $ab=ba$.
 These also work with dot product of vectors instead of multiplication of numbers
-(see <a href="../vectors/dot-projection.html#dot-product-and-sum">this</a>
+(see <a href="../vectors/dot-projection.html#dot-product-and-difference">this</a>
 and <a href="../vectors/angle-between-vectors.html#order-doesn-t-matter">this</a>),
 so the $(a-b)^2$ formula works
 if $a$ and $b$ are vectors and we replace all multiplications with dot products:
 $$
-(\vec a - \vec b)\cdot(\vec a - \vec b) = (\vec a\cdot\vec a) + 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b)
+(\vec a - \vec b)\cdot(\vec a - \vec b) = (\vec a\cdot\vec a) - 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b)
 $$
 By putting everything together, we get
 $$
-(\vec c \cdot \vec c)^2 = (\vec a\cdot\vec a) + 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b).
+(\vec c \cdot \vec c)^2 = (\vec a\cdot\vec a) - 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b).
 $$
 Because $\vec a \cdot \vec a = |\vec a|^2$
 (see <a href="../vectors/dot-projection.html#defining-dot-product">here</a>)

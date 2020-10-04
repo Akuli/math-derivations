@@ -173,6 +173,7 @@ def get_sidebar_content(txtfile):
                 link("Average", 'calc/integral-average'),
                 link("Fundamental theorem of calculus, part 1", 'calc/integral-ftoc1'),
                 link("Fundamental theorem of calculus, part 2", 'calc/integral-ftoc2'),
+                link("More notation for integrals", 'calc/integral-notation'),
             ])),
         ])),
 

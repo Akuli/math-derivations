@@ -141,6 +141,103 @@ I won't use that convention in these derivations,
 but you will likely see it elsewhere.
 
 
+## Minus signs
+
+Let $\vec a$ and $\vec b$ be nonzero and non-perpendicular vectors, and
+let $p$ be the projection of $\vec a$ onto $\vec b$.
+Then the projection of $-\vec a$ onto $\vec b$ is $-p$, because
+it has the same absolute value as $p$, but with the opposite sign;
+it's positive when $p$ is negative, and negative when $p$ is positive.
+
+asymptote:
+    unitsize(2cm);
+
+    pair b=(4,0);
+    pair a=(1.5,2);
+
+    draw((0,0)--b, arrow=Arrow(5mm), L="$\vec b$", p=deepred, align=N);
+    draw((0,0)--a, arrow=Arrow(5mm), L="$\vec a$", p=deepgreen);
+    draw((0,0)-- -a, arrow=Arrow(5mm), L="$-\vec a$", p=deepgreen);
+    draw(a--(a.x,0), p=gray+smalldashes);
+    draw((-a)--(-a.x,0)--(0,0), p=gray+smalldashes);
+    draw(brace_with_space((a.x,0), (0,0), 0.1), L="$p>0$", align=S);
+    draw(brace_with_space((-a.x,0), (0,0), 0.1), L="$-p<0$", align=N);
+
+asymptote:
+    unitsize(2cm);
+
+    pair b=(4,0);
+    pair a=(-1.5,2);
+
+    draw((0,0)--b, arrow=Arrow(5mm), L="$\vec b$", p=deepred, align=N);
+    draw((0,0)--a, arrow=Arrow(5mm), L="$\vec a$", p=deepgreen);
+    draw((0,0)-- -a, arrow=Arrow(5mm), L="$-\vec a$", p=deepgreen);
+    draw(a--(a.x,0)--(0,0), p=gray+smalldashes);
+    draw((-a)--(-a.x,0), p=gray+smalldashes);
+    draw(brace_with_space((0,0), (-a.x,0), 0.1), L="$-p>0$", align=N);
+    draw(brace_with_space((0,0), (a.x,0), 0.1), L="$p<0$", align=S);
+
+Because the projection of $-\vec a$ onto $\vec b$ is $-p$, we get
+$$
+(-\vec a) \cdot \vec b = -p\abs{\vec b} = -(\vec a \cdot \vec b).
+$$
+This means that you can move a minus sign from $-\vec a$ to front of the dot product $\vec a \cdot \vec b$.
+
+Above we had a minus sign in front of $\vec a$, and now we consider what happens if it's in front of $\vec b$.
+Just like before, $p$ denotes the projection of $\vec a$ onto $\vec b$.
+If $p > 0$, then $\vec b$ doesn't have to be "extended" for calculating the projection onto $\vec b$,
+but extending is needed for projection onto $-\vec b$.
+
+asymptote:
+    unitsize(2cm);
+
+    pair b=(3,0);
+    pair a=(1,2);
+
+    draw((0,0)--b, arrow=Arrow(5mm), L="$\vec b$", p=deepred, align=S);
+    draw((0,0)-- -b, arrow=Arrow(5mm), L="$-\vec b$", p=deepblue, align=S);
+    draw((0,0)--a, arrow=Arrow(5mm), L="$\vec a$", p=deepgreen);
+    draw(a--(a.x,0), p=gray+smalldashes);
+    draw(brace_with_space((a.x,0), (0,0), 0.1), L="$p>0$", align=S);
+
+If $p < 0$, then it's the opposite:
+extending is needed for projection onto $\vec b$ but not for projection onto $-\vec b$.
+
+asymptote:
+    unitsize(2cm);
+
+    pair b=(3,0);
+    pair a=(-1,2);
+
+    draw((0,0)--b, arrow=Arrow(5mm), L="$\vec b$", p=deepred, align=S);
+    draw((0,0)-- -b, arrow=Arrow(5mm), L="$-\vec b$", p=deepblue, align=S);
+    draw((0,0)--a, arrow=Arrow(5mm), L="$\vec a$", p=deepgreen);
+    draw(a--(a.x,0), p=gray+smalldashes);
+    draw(brace_with_space((0,0), (a.x,0), 0.1), L="$p<0$", align=S);
+
+In both cases, the projection of $\vec a$ onto $-\vec b$ is $-p$, and we get
+$$
+\vec a \cdot (-\vec b) = -p\abs{-\vec b} = -p\abs{\vec b}=-(\vec a \cdot \vec b),
+$$
+which means that you can also move a minus sign from $-\vec b$ to front of dot product.
+
+These rules also work when $\vec a$ and $\vec b$ are perpendicular or one or both of them are zero vectors,
+because in that case, all dot products of $\pm \vec a$ and $\pm \vec b$ are zero.
+
+graybox:
+    For all vectors $\vec a$ and $\vec b$, we have
+    $$
+    \begin{align}
+    (-\vec a) \cdot \vec b &= -(\vec a \cdot \vec b), \\
+    \vec a \cdot (-\vec b) &= -(\vec a \cdot \vec b).
+    \end{align}
+    $$
+
+On the rest of this page, these rules are used for getting other results to work with negative numbers.
+I will derive dot product rules with positive numbers, and
+then generalize them for negative numbers by bringing the minus signs to front.
+
+
 ## Dot product and sum
 
 We know that the multiplication of numbers behaves so that
@@ -205,6 +302,28 @@ graybox:
     $$
 
 
+## Dot product and difference
+
+By combining the dot product of sum with moving minuses to front,
+we see that the rule for $(\vec a + \vec b) \cdot \vec c$ also works with $-$ instead of $+$:
+$$
+\begin{align}
+(\vec a - \vec b) \cdot \vec c
+&= (\vec a + (-\vec b))\cdot\vec c \\
+&= \vec a \cdot \vec c + (-\vec b)\cdot \vec c \\
+&= \vec a \cdot \vec c + (-(\vec b \cdot \vec c)) \\
+&= \vec a \cdot \vec c - \vec b \cdot \vec c \\
+\end{align}
+$$
+
+graybox:
+    For all vectors $\vec a$, $\vec b$ and $\vec c$, we have
+    $$
+    (\vec a - \vec b) \cdot \vec c = \vec a \cdot \vec c - \vec b \cdot \vec c.
+    $$
+
+
+
 ## Dot product and number times vector
 
 There's another important property that we expect multiplications to have.
@@ -239,55 +358,21 @@ Plugging these in gives
 $$
 \vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r.
 $$
-
-We needed the positiviness of $r$ above, but let's see what happens for other values of $r$.
-For negative $r$, things get a bit weird, because
-the projection of $\vec v$ onto $\vec w$ and the projection of $\vec v$ onto $\vec w \, r$ are different:
-
-asymptote:
-    unitsize(2cm);
-
-    pair v=(1.5,2);
-    pair w=(4,0);
-
-    draw((0,0)--w, arrow=Arrow(5mm), L="$\vec w$", p=deepred, align=N);
-    draw((0,0)--v, arrow=Arrow(5mm), L="$\vec v$", p=deepgreen, align=W);
-    draw(v--(v.x,0), p=gray+smalldashes);
-    draw(brace_with_space((v.x,0), (0,0), 0.1), L="$p>0$", align=S);
-
-asymptote:
-    unitsize(2cm);
-
-    pair v=(1.5,2);
-    pair w=(4,0);
-
-    draw((0,0)--v, arrow=Arrow(5mm), L="$\vec v$", p=deepgreen, align=W);
-    draw((0,0)--(-0.5w), arrow=Arrow(5mm), L="$\vec w \, r$", p=blue);
-    draw(v--(v.x,0)--(0,0), p=gray+smalldashes);
-    draw(brace_with_space((v.x,0), (0,0), 0.1), L="$-p<0$", align=S);
-
-One of the vectors $\vec w$ and $\vec w \, r$ needs to be "extended",
-and the other one doesn't need to.
-In the picture, $\vec w \, r$ had to be extended and $\vec w$ wasn't extended,
-but this could also be vice versa.
-This means that one of the projections is positive and the other is negative,
-although they have the same absolute value.
-So, if the projection onto $\vec w$ is $p$,
-then the projection onto $\vec w \, r$ is $p$ with the opposite sign, which is $-p$.
-We get
+We needed the positiviness of $r$ above.
+If $r$ is negative, we have $r=-\abs{r}$,
+and by bringing minuses to front and using the above result with $\abs{r}$, we get
 $$
+\begin{align}
 \vec v \cdot (\vec w \, r)
-= (-p) \abs{\vec w \, r}
-= (-p) \abs{\vec w} \abs{r}
-= \underbrace{p\abs{\vec w}}_{\vec v \cdot \vec w} \, \underbrace{(-\abs{r})}_{r},
+&= \vec v \cdot (-\vec w\abs{r}) \\
+&= -(\vec v \cdot (\vec w\abs{r})) \\
+&= -(\vec v \cdot \vec w)\abs{r} \\
+&= (\vec v \cdot \vec w)r.
+\end{align}
 $$
-and again, we have
-$$
-\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w) r.
-$$
-
-The above equation also works for $r=0$, because then it just says $0=0$.
-This is also the case if $\vec v = \vec0$ or $\vec w = \vec0$.
+If $r=0$, then we still have $\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r$,
+because that's just $0=0$.
+That also happens if $\vec v = \vec0$ or $\vec w = \vec0$.
 
 graybox:
     For all vectors $\vec v$ and $\vec w$, and for all numbers $r \in \mathbb{R}$, we have
@@ -295,17 +380,17 @@ graybox:
     \vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w) r.
     $$
 
-The above result also means that we can write $\vec v \cdot \vec w \, r$ without parentheses,
+Now we can write $\vec v \cdot \vec w \, r$ without parentheses,
 because no matter how parentheses are added, the result is the same either way.
 
 
 ## Does order matter?
 
-Can we also do the addition thing on the left side of the dot product? Something like this:
+Can we also do the addition thing on the right side of the dot product? Something like this:
 $$
 \vec a \cdot (\vec b + \vec c) \mathop{=}^{?} \vec a \cdot \vec b + \vec a \cdot \vec c
 $$
-How about the number multiplication thing?
+How about multiplying by a number on the left side?
 $$
 (r\vec a) \cdot \vec b \mathop{=}^{?} r(\vec a \cdot \vec b)
 $$

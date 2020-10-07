@@ -145,9 +145,9 @@ Here's a screenshot of my network usage graph while downloading a big file.
 
 On the $x$ axis, there's time as seconds.
 The right edge of the graph represents "now", and the left edge is 60 seconds ago.
-The $y$ axis represents mibibytes per second, where 1 mibibyte means $2^{20} = 1048576$ bytes.
+The $y$ axis represents mebibytes per second, where 1 mebibyte means $2^{20} = 1048576$ bytes.
 For example, the peak of the graph at 40 seconds ago was when the download speed was fastest,
-about 1.8 mibibytes per second.
+about 1.8 mebibytes per second.
 (Ignore the red line. It's the upload speed.)
 
 Because [download speed is derivative of downloaded data](derivative-def.html#download-speed),

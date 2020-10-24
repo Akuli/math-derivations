@@ -1,0 +1,161 @@
+# U Substitution
+
+On this page, we assume that $f$ is a continuous function and $F$ is one of its antiderivatives.
+(According to [part 1 of the fundamental theorem of calculus](integral-ftoc2.html),
+a continuous function has an antiderivative.)
+We also assume that $g$ is a function whose derivative $g'$ exists and is continuous.
+
+
+
+## Substitution for antiderivatives
+
+With the [chain rule](derivative-chain-rule.html), we get
+$$
+\frac{d}{dx} F(g(x)) = F'(g(x))g'(x) = f(g(x))g'(x),
+$$
+so we have
+$$
+\int f(g(x))g'(x)\ dx = F(g(x))+C.
+$$
+This is useful, but let's turn this into something that is easier to use.
+The right side is what we get if we calculate $\int f(u)\ du$ and then replace $u$ with $g(x)$, so we can write
+$$
+\int f(g(x))g'(x)\ dx = \int f(u)\ du.
+$$
+For the left side, we can also plug in $g(x)=u$ and $g'(x)=\frac{du}{dx}$ ([Leibniz's notation](derivative-notation.html)), and we get
+$$
+\int f(u)\frac{du}{dx}\ dx = \int f(u)\ du.
+$$
+This **looks** like canceling away the $dx$, but that's not what's happening;
+one $dx$ is a part of notation for derivatives, and the other is a part of notation for integrals.
+What we have shown is that in this case, you can cancel $dx$ as if it was a number, and it will work.
+
+graybox:
+    To calculate $\int f(g(x))g'(x)\ dx$, set $g(x)=u$ and $g'(x)=\frac{du}{dx}$, and then cancel the $dx$.
+    When you are done, replace $u$ with $g(x)$.
+
+This technique is known as **u substitution**, because $u$ is the variable name that is most commonly used for this.
+Of course, you can use any other variable name you want.
+
+Note that for using this technique, the derivative of the inner function $g(x)$ must be multiplied in the integral.
+If it isn't, then you need to use some other technique instead.
+
+
+## Example: $\int 2x\cos(x^2)\ dx$
+
+Because the derivative of $x^2$ is $2x$ and we have that in the integral, we can use the substitution $u=x^2$.
+Then we get $\frac{du}{dx}=2x$ and
+$$
+\begin{align}
+\int 2x\cos(x^2)\ dx
+&= \int \cos(x^2)2x\ dx \\
+&= \int\cos(u)\frac{du}{dx}\ dx \\
+&= \int\cos(u)\ du \\
+&= \sin(u)+C \\
+&= \sin(x^2)+C.
+\end{align}
+$$
+We can check this by calculating
+$$
+\frac{d}{dx} \left(\sin(x^2)+C\right) = \cos(x^2)2x + 0 = 2x\cos(x^2).
+$$
+
+
+## Example: $\int x\cos(x^2)\ dx$
+
+Because the derivative of $x^2$ is $2x$ and we instead have $x$ in the integral,
+we can't substitute $u=x^2$.
+However, we can cleverly write
+$$
+\int x\cos(x^2)\ dx = \int \frac{1}{2} 2x\cos(x^2)\ dx = \int \frac{1}{2}\cos(x^2)2x\ dx,
+$$
+and because we now have $2x$ in the integral, we can substitute $u=x^2$ and $\frac{du}{dx}=2x$ to get
+$$
+\int \frac{1}{2}\cos(u)\ du = \frac{1}{2}\int \cos(u)\ du=\frac{1}{2}\sin(u)+C=\frac{1}{2}\sin(x^2)+C.
+$$
+
+
+## Example: $\int \cos(x^2)\ dx$
+
+Now the derivative of $x^2$ is not in the integral,
+but just like in the above example, we can try to be clever and we get
+$$
+\int \cos(x^2)\ dx = \int \frac{1}{2x} \cos(x^2) 2x\ dx.
+$$
+For substituting $u=x^2$, we now need to write $\frac{1}{2x}\cos(x^2)$ using only $u$,
+and assuming that $x$ is positive, that's $\frac{1}{2\sqrt{u}}\cos(u)$.
+Now our integral becomes
+$$
+\int \frac{1}{2\sqrt{u}}\cos(u)\frac{du}{dx}\ dx = \frac{1}{2}\int\frac{\cos(u)}{\sqrt{u}}\ du.
+$$
+This integral is not easy, because
+even though we [moved the constant](integral-rules.html#constant-in-front) $\frac{1}{2}$ to front,
+we can't move all of $\frac{1}{2\sqrt{u}}$ to front because that isn't a constant.
+In this case, substituting turned one difficult integral into another difficult integral.
+
+
+## Example: $\int \tan(x)\ dx$
+
+First we notice that
+$$
+\tan(x) = \frac{\sin(x)}{\cos(x)} = \frac{1}{\cos(x)}\sin(x).
+$$
+The derivative of $\cos(x)$ is $-\sin(x)$, and this time, we can get it into the integral nicely:
+$$
+\int \frac{\sin(x)}{\cos(x)}\ dx
+= \int \frac{1}{\cos(x)}\sin(x)\ dx
+= \int \frac{1}{\cos(x)}(-1)(-\sin(x))\ dx
+$$
+If we now substitute $u=\cos(x)$, we get $\frac{du}{dx}=-\sin(x)$ and
+$$
+\begin{align}
+\int \frac{\sin(x)}{\cos(x)}\ dx
+&= \int \frac{1}{u}(-1)\frac{du}{dx}\ dx \\
+&= (-1)\int \frac{1}{u}\ du \\
+&= -\ln\abs{u}+C \\
+&= -\ln\abs{\cos(x)}+C.
+\end{align}
+$$
+
+
+## Treating $dx$ as a number
+
+It's quite common to "multiply" both sides of $\frac{du}{dx}=g'(x)$ by $dx$ to get $du=g'(x)\ dx$,
+as if $dx$ was a number and not a part of the derivative notation,
+and then replace $g'(x)\ dx$ in the integral with $du$.
+That works too, because it gives
+$$
+\int f(g(x))g'(x)\ dx = \int f(u)\ du,
+$$
+which is same as what we get by canceling.
+
+Some people don't like treating $dx$ as a number,
+because it's difficult to tell when and why that actually works.
+However, it's very common in the context of u substitutions.
+
+
+## Substitution for integrals (as in not antiderivatives)
+
+From the above calculations, or by using the chain rule directly, we get
+$$
+\int f(g(x))g'(x)\ dx = F(g(x))+C,
+$$
+where $F$ is an antiderivative of $f$.
+By using the fundamental theorem of calculus twice, we get
+$$
+\int_a^b f(g(x))g'(x)\ dx = F(g(b))-F(g(a)) = \int_{g(a)}^{g(b)} f(u)\ du.
+$$
+
+graybox:
+    To calculate $\int_a^b f(g(x))g'(x)\ dx$, set $g(x)=u$ and $g'(x)=\frac{du}{dx}$.
+    Then cancel the $dx$, and replace $a$ with $g(a)$ and $b$ with $g(b)$.
+
+For example, by substituting $u=x^2$ and $\frac{du}{dx}=2x$, we get
+$$
+\begin{align}
+\int_0^{\sqrt{\pi}} 2x\cos(x^2)\ dx
+&= \int_0^{\sqrt{\pi}} \cos(u)\frac{du}{dx}\ dx \\
+&= \int_{0^2}^{(\sqrt{\pi})^2} \cos(u)\ du \\
+&= \sin(\pi)-\sin(0) = 0.
+\end{align}
+$$

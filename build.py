@@ -174,6 +174,8 @@ def get_sidebar_content(txtfile):
                 link("Fundamental theorem of calculus, part 1", 'calc/integral-ftoc1'),
                 link("Fundamental theorem of calculus, part 2", 'calc/integral-ftoc2'),
                 link("More notation for integrals", 'calc/integral-notation'),
+                link("Integral rules", 'calc/integral-rules'),
+                link("U substitution", 'calc/integral-usub'),
             ])),
         ])),
 

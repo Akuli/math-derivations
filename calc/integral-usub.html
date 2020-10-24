@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Derivative of a Vector-valued Function
+<title>U Substitution
 </title>
 
     <script type="text/x-mathjax-config">
@@ -171,71 +171,153 @@
         
         </div>
         </div>
-<h1 id="derivative-of-a-vector-valued-function">Derivative of a Vector-valued Function<a class="headerlink" href="#derivative-of-a-vector-valued-function" title="Link to this title">¶</a></h1><p>Let $\vec v$ be a vector-valued function.
-If we just try to apply the definition of derivative to it, we get
-$$
-\vec v'(t) = \lim_{h \to 0} \frac{\vec v(t+h) - \vec v(t)}{h}.
-$$
-This works, although the meanings of the operations involved change a bit.
-On the top, we are now subtracting vectors instead of numbers, and the result is a vector.
-When we divide by $h$, we divide a vector by a number, which results in a vector,
-so we end up taking a <a href="limit-vector.html">limit of a vector</a>.
-Just like before, we call this the derivative of $v$, and we write
-$$
-\frac{d}{dt} \vec v(t) = \vec v'(t),
-$$
-although now we use $t$ instead of $x$ everywhere, so we have $\frac{d}{dt}$ instead of $\frac{d}{dx}$.</p>
+<h1 id="u-substitution">U Substitution<a class="headerlink" href="#u-substitution" title="Link to this title">¶</a></h1><p>On this page, we assume that $f$ is a continuous function and $F$ is one of its antiderivatives.
+(According to <a href="integral-ftoc2.html">part 1 of the fundamental theorem of calculus</a>,
+a continuous function has an antiderivative.)
+We also assume that $g$ is a function whose derivative $g'$ exists and is continuous.
 
-<p>The physical meaning of this derivative is similar to the derivative of a real-valued function;
-if $\vec v(t)$ is the location of an object at time $t$, thought of as a point in space,
-then $\vec v'(t)$ is the velocity vector,
-indicating in which direction and how fast the object is moving.
-To see why, do <a href="derivative-def.html">the things that we did with real-valued functions</a>,
-replacing the walked distance with a vector representing the location.
-It's very common to use the letter $\vec v$ for the velocity vector,
-and some other letter such as $\vec r$ for the location.
 </p>
 
-<h2 id="taking-derivatives-of-i-and-j-parts-separately">Taking derivatives of $\I$ and $\J$ parts separately<a class="headerlink" href="#taking-derivatives-of-i-and-j-parts-separately" title="Link to this title">¶</a></h2><p>Let $\vec v(t) = (f(t), g(t))$.
-With the definition of derivative, we get
+<h2 id="substitution-for-antiderivatives">Substitution for antiderivatives<a class="headerlink" href="#substitution-for-antiderivatives" title="Link to this title">¶</a></h2><p>With the <a href="derivative-chain-rule.html">chain rule</a>, we get
 $$
-\begin{align}
-\vec v'(t)
-&= \lim_{h \to 0} \frac{\vec v(t+h) - \vec v(t)}{h} \\
-&= \lim_{h \to 0} \frac{(f(t+h), g(t+h)) - (f(t), g(t))}{h}.
-\end{align}
+\frac{d}{dx} F(g(x)) = F'(g(x))g'(x) = f(g(x))g'(x),
 $$
-Let's switch to using the $\I$ and $\J$ notation of vectors. Now we get
+so we have
 $$
-\begin{align}
-\vec v'(t)
-&= \lim_{h \to 0} \frac{( f(t+h)\I + g(t+h)\J ) - ( f(t)\I + g(t)\J )}{h} \\
-&= \lim_{h \to 0} \frac{f(t+h)\I + g(t+h)\J - f(t)\I - g(t)\J}{h} \\
-&= \lim_{h \to 0} \frac{(f(t+h) - f(t))\I + (g(t+h) - g(t))\J}{h} \\
-&= \lim_{h \to 0} \left( \frac{f(t+h) - f(t)}{h}\I + \frac{g(t+h) - g(t)}{h}\J \right).
-\end{align}
+\int f(g(x))g'(x)\ dx = F(g(x))+C.
 $$
-By <a href="limit-vector.html#taking-limits-of-i-and-j-parts-separately">taking limits of $\I$ and $\J$ parts
-separately</a>, we get
+This is useful, but let's turn this into something that is easier to use.
+The right side is what we get if we calculate $\int f(u)\ du$ and then replace $u$ with $g(x)$, so we can write
 $$
-\vec v'(t)
-= \underbrace{\left( \lim_{h \to 0} \frac{f(t+h) - f(t)}{h} \right)}_{f'(t)}\I
-+ \underbrace{\left( \lim_{h \to 0} \frac{g(t+h) - g(t)}{h} \right)}_{g'(t)}\J.
+\int f(g(x))g'(x)\ dx = \int f(u)\ du.
 $$
-So, we can not only calculate any limit of a vector-valued function as two limits of real-valued functions,
-but also calculate any derivative of a vector-valued function as two derivatives of real-valued functions.
-Here the derivative $\vec v'(t)$ exists if and only if $f'(t)$ and $g'(t)$ exist;
-this follows from the "if and only if" in the result for taking limits of $\I$ and $\J$ parts separately.</p>
+For the left side, we can also plug in $g(x)=u$ and $g'(x)=\frac{du}{dx}$ (<a href="derivative-notation.html">Leibniz's notation</a>), and we get
+$$
+\int f(u)\frac{du}{dx}\ dx = \int f(u)\ du.
+$$
+This <b>looks</b> like canceling away the $dx$, but that's not what's happening;
+one $dx$ is a part of notation for derivatives, and the other is a part of notation for integrals.
+What we have shown is that in this case, you can cancel $dx$ as if it was a number, and it will work.</p>
 
-<div class="box graybox"><p>Let $f$ and $g$ be real-valued functions.
-Then the derivative $\frac{d}{dt} (f(t),g(t))$ exists
-if and only if $\frac{d}{dt} f(t)$ and $\frac{d}{dt} g(t)$ exist,
-and in that case, we have
+<div class="box graybox"><p>To calculate $\int f(g(x))g'(x)\ dx$, set $g(x)=u$ and $g'(x)=\frac{du}{dx}$, and then cancel the $dx$.
+When you are done, replace $u$ with $g(x)$.
+</p>
+
+</div><p>This technique is known as <b>u substitution</b>, because $u$ is the variable name that is most commonly used for this.
+Of course, you can use any other variable name you want.</p>
+
+<p>Note that for using this technique, the derivative of the inner function $g(x)$ must be multiplied in the integral.
+If it isn't, then you need to use some other technique instead.
+</p>
+
+<h2 id="example-int-2x-cos-x-2-dx">Example: $\int 2x\cos(x^2)\ dx$<a class="headerlink" href="#example-int-2x-cos-x-2-dx" title="Link to this title">¶</a></h2><p>Because the derivative of $x^2$ is $2x$ and we have that in the integral, we can use the substitution $u=x^2$.
+Then we get $\frac{du}{dx}=2x$ and
 $$
-\frac{d}{dt} (f(t),g(t)) = \left( \frac{d}{dt} f(t), ~ \frac{d}{dt} g(t) \right).
+\begin{align}
+\int 2x\cos(x^2)\ dx
+&= \int \cos(x^2)2x\ dx \\
+&= \int\cos(u)\frac{du}{dx}\ dx \\
+&= \int\cos(u)\ du \\
+&= \sin(u)+C \\
+&= \sin(x^2)+C.
+\end{align}
+$$
+We can check this by calculating
+$$
+\frac{d}{dx} \left(\sin(x^2)+C\right) = \cos(x^2)2x + 0 = 2x\cos(x^2).
 $$
 </p>
 
-</div></div>
+<h2 id="example-int-x-cos-x-2-dx">Example: $\int x\cos(x^2)\ dx$<a class="headerlink" href="#example-int-x-cos-x-2-dx" title="Link to this title">¶</a></h2><p>Because the derivative of $x^2$ is $2x$ and we instead have $x$ in the integral,
+we can't substitute $u=x^2$.
+However, we can cleverly write
+$$
+\int x\cos(x^2)\ dx = \int \frac{1}{2} 2x\cos(x^2)\ dx = \int \frac{1}{2}\cos(x^2)2x\ dx,
+$$
+and because we now have $2x$ in the integral, we can substitute $u=x^2$ and $\frac{du}{dx}=2x$ to get
+$$
+\int \frac{1}{2}\cos(u)\ du = \frac{1}{2}\int \cos(u)\ du=\frac{1}{2}\sin(u)+C=\frac{1}{2}\sin(x^2)+C.
+$$
+</p>
+
+<h2 id="example-int-cos-x-2-dx">Example: $\int \cos(x^2)\ dx$<a class="headerlink" href="#example-int-cos-x-2-dx" title="Link to this title">¶</a></h2><p>Now the derivative of $x^2$ is not in the integral,
+but just like in the above example, we can try to be clever and we get
+$$
+\int \cos(x^2)\ dx = \int \frac{1}{2x} \cos(x^2) 2x\ dx.
+$$
+For substituting $u=x^2$, we now need to write $\frac{1}{2x}\cos(x^2)$ using only $u$,
+and assuming that $x$ is positive, that's $\frac{1}{2\sqrt{u}}\cos(u)$.
+Now our integral becomes
+$$
+\int \frac{1}{2\sqrt{u}}\cos(u)\frac{du}{dx}\ dx = \frac{1}{2}\int\frac{\cos(u)}{\sqrt{u}}\ du.
+$$
+This integral is not easy, because
+even though we <a href="integral-rules.html#constant-in-front">moved the constant</a> $\frac{1}{2}$ to front,
+we can't move all of $\frac{1}{2\sqrt{u}}$ to front because that isn't a constant.
+In this case, substituting turned one difficult integral into another difficult integral.
+</p>
+
+<h2 id="example-int-tan-x-dx">Example: $\int \tan(x)\ dx$<a class="headerlink" href="#example-int-tan-x-dx" title="Link to this title">¶</a></h2><p>First we notice that
+$$
+\tan(x) = \frac{\sin(x)}{\cos(x)} = \frac{1}{\cos(x)}\sin(x).
+$$
+The derivative of $\cos(x)$ is $-\sin(x)$, and this time, we can get it into the integral nicely:
+$$
+\int \frac{\sin(x)}{\cos(x)}\ dx
+= \int \frac{1}{\cos(x)}\sin(x)\ dx
+= \int \frac{1}{\cos(x)}(-1)(-\sin(x))\ dx
+$$
+If we now substitute $u=\cos(x)$, we get $\frac{du}{dx}=-\sin(x)$ and
+$$
+\begin{align}
+\int \frac{\sin(x)}{\cos(x)}\ dx
+&= \int \frac{1}{u}(-1)\frac{du}{dx}\ dx \\
+&= (-1)\int \frac{1}{u}\ du \\
+&= -\ln\abs{u}+C \\
+&= -\ln\abs{\cos(x)}+C.
+\end{align}
+$$
+</p>
+
+<h2 id="treating-dx-as-a-number">Treating $dx$ as a number<a class="headerlink" href="#treating-dx-as-a-number" title="Link to this title">¶</a></h2><p>It's quite common to "multiply" both sides of $\frac{du}{dx}=g'(x)$ by $dx$ to get $du=g'(x)\ dx$,
+as if $dx$ was a number and not a part of the derivative notation,
+and then replace $g'(x)\ dx$ in the integral with $du$.
+That works too, because it gives
+$$
+\int f(g(x))g'(x)\ dx = \int f(u)\ du,
+$$
+which is same as what we get by canceling.</p>
+
+<p>Some people don't like treating $dx$ as a number,
+because it's difficult to tell when and why that actually works.
+However, it's very common in the context of u substitutions.
+</p>
+
+<h2 id="substitution-for-integrals-as-in-not-antiderivatives">Substitution for integrals (as in not antiderivatives)<a class="headerlink" href="#substitution-for-integrals-as-in-not-antiderivatives" title="Link to this title">¶</a></h2><p>From the above calculations, or by using the chain rule directly, we get
+$$
+\int f(g(x))g'(x)\ dx = F(g(x))+C,
+$$
+where $F$ is an antiderivative of $f$.
+By using the fundamental theorem of calculus twice, we get
+$$
+\int_a^b f(g(x))g'(x)\ dx = F(g(b))-F(g(a)) = \int_{g(a)}^{g(b)} f(u)\ du.
+$$</p>
+
+<div class="box graybox"><p>To calculate $\int_a^b f(g(x))g'(x)\ dx$, set $g(x)=u$ and $g'(x)=\frac{du}{dx}$.
+Then cancel the $dx$, and replace $a$ with $g(a)$ and $b$ with $g(b)$.
+</p>
+
+</div><p>For example, by substituting $u=x^2$ and $\frac{du}{dx}=2x$, we get
+$$
+\begin{align}
+\int_0^{\sqrt{\pi}} 2x\cos(x^2)\ dx
+&= \int_0^{\sqrt{\pi}} \cos(u)\frac{du}{dx}\ dx \\
+&= \int_{0^2}^{(\sqrt{\pi})^2} \cos(u)\ du \\
+&= \sin(\pi)-\sin(0) = 0.
+\end{align}
+$$
+</p>
+
+</div>
 </body>
 </html>

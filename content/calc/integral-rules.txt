@@ -206,6 +206,14 @@ If $x$ is negative, then $-x=\abs{x}$ is positive, and with the [chain rule](der
 $$
 \frac{d}{dx} \ln(-x) = \frac{1}{-x} \frac{d}{dx}(-x) = \frac{1}{-x}(-1) = \frac{1}{x}.
 $$
+So, we have
+$$
+\int \frac{1}{x}\ dx = \begin{cases}
+    \ln(x)+C, & \text{if $x > 0$} \\
+    \ln(-x)+C, & \text{if $x < 0$.}
+\end{cases}
+$$
+These cases can be combined together with absolute value, like this:
 
 graybox:
     $$

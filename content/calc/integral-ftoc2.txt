@@ -2,7 +2,7 @@
 
 Let
 $$
-I(t) = \int_1^b x^2\ dx.
+I(t) = \int_1^t x^2\ dx.
 $$
 (I'm using $t$ instead of $b$ because I want to use the letter $b$ for a different thing later.)
 Because $x^2$ is continuous, by [part 1 of the fundamental theorem of calculus](integral-ftoc1.html),

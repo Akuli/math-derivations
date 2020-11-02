@@ -166,7 +166,7 @@ as in $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
 If $A$ is positive, then we can pick $r = \frac{\epsi}{3A}$, because using the fact $q \in (-r,r)$ gives
 $-r < q < r$, which is same as
 $$
--\frac{s}{3A} < q < \frac{s}{3A}.
+-\frac{\epsi}{3A} < q < \frac{\epsi}{3A}.
 $$
 Multiplying both sides by $A$ (assuming that it's positive) gives
 $$

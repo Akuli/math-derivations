@@ -176,6 +176,7 @@ def get_sidebar_content(txtfile):
                 link("More notation for integrals", 'calc/integral-notation'),
                 link("Integral rules", 'calc/integral-rules'),
                 link("U substitution", 'calc/integral-usub'),
+                link("Volume of solid of revolution", 'calc/integral-sor'),
             ])),
         ])),
 

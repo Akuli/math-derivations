@@ -1,0 +1,315 @@
+# Volume of Solid of Revolution
+
+Suppose that a function $f$ is continuous and nonnegative on $[a,b]$.
+
+asymptote:
+    unitsize(1.7cm);
+    real f(real x) { return sin(x)+1.7; }
+    axises(-0.5, 7, -0.5, 3);
+    draw(graph(f, 0.5, 6.5), p=blue, L=Label("$y=f(x)$", align=N, position=Relative(1)));
+    dot((1,0), p=dotpen, L="$a$", align=S);
+    dot((6,0), p=dotpen, L="$b$", align=S);
+
+Let's rotate this curve about the $x$ axis.
+
+asymptote3d:
+    unitsize(1.7cm);
+    currentprojection = perspective(camera=(8,5,10), up=Y);
+    real f(real x) { return sin(x)+1.7; }
+    axises3d(-0.5, 7, -3, 3, 0, 0);
+
+    for (real angle = 0; angle < 360; angle += 360/10) {
+        draw(rotate(angle, X)*path3(graph(f, 1, 6)), p=blue);
+    }
+    dot((1,0,0), p=dotpen, L="$a$", align=S);
+    dot((6,0,0), p=dotpen, L="$b$", align=S);
+
+    draw(shift(1,0,0)*circle(O, f(1), normal=X), gray+smalldashes);
+    draw(shift(6,0,0)*circle(O, f(6), normal=X), gray+smalldashes);
+
+This forms a 3D object called **solid of revolution** of $f$ on the interval $[a,b]$.
+Our goal is to calculate the volume of this object.
+
+asymptote3d:
+    unitsize(1.7cm);
+
+    currentprojection = perspective(camera=(8,5,10), up=Y);
+    real f(real x) { return sin(x)+1.7; }
+    axises3d(-0.5, 7, -3, 3, 0, 0);
+
+    draw(path3(graph(f, 0.5, 6.5)), p=blue);
+    draw(surface(path3(graph(f, 1, 6)), c=O, axis=X), yellow+opacity(0.8));
+    dot((1,0,0), p=dotpen, L="$a$", align=S);
+    dot((6,0,0), p=dotpen, L="$b$", align=S);
+
+Consider a partition of $[a,b]$.
+Let's name the intervals of the partition $I_1,I_2,\dots,I_n$, where $n$ is the number of intervals.
+In the picture, we have $n=5$.
+
+asymptote:
+    unitsize(1.7cm);
+    real f(real x) { return sin(x)+1.7; }
+    axises(-0.5, 7, -0.5, 3);
+    draw(graph(f, 0.5, 6.5), p=blue, L=Label("$y=f(x)$", align=N, position=Relative(1)));
+
+    real P[] = { 1, 2.4, 3, 4, 5.5, 6 };
+    for (real x : P) {
+        draw((x,0)--(x,f(x)), p=deepgreen+smalldashes);
+    }
+    for (int i = 1; i < P.length; ++i) {
+        real start = P[i-1];
+        real end = P[i];
+        label(origin=((start+end)/2, 0), L="$I_" + (string)i + "$", align=N);
+    }
+    dot((1,0), p=dotpen, L="$a$", align=S);
+    dot((6,0), p=dotpen, L="$b$", align=S);
+
+On each interval of the partition, we create a cylinder that
+touches the surface of the solid of revolution but is as small as possible.
+
+asymptote3d:
+    unitsize(1.7cm);
+    currentprojection = perspective(camera=(8,5,10), up=Y);
+    real f(real x) { return sin(x)+1.7; }
+    axises3d(-0.5, 7, -3, 3, 0, 0);
+
+    real P[] = { 1, 2.4, 3, 4, 5.5, 6 };
+    for (int i = 1; i < P.length; ++i) {
+        real start = P[i-1];
+        real end = P[i];
+
+        real fmin = 100;
+        for (real x = start; x < end; x += 0.01) {
+            fmin = min(fmin, f(x));
+        }
+
+        if (i != 1){
+            draw(surface(path3((start,fmin)--(start,f(start))), c=O, axis=X), green);
+        }
+        draw(surface(path3((start,fmin)--(end,fmin)), c=O, axis=X), red);
+        if (i == P.length - 1) {
+           draw(surface(path3((end,0)--(end,fmin)), c=O, axis=X), green);
+        }
+    }
+
+    draw(path3(graph(f, 0.5, 6.5)), p=blue);
+    draw(surface(path3(graph(f, 1, 6)), c=O, axis=X), yellow+opacity(0.7));
+    dot((1,0,0), p=dotpen, L="$a$", align=S);
+    dot((6,0,0), p=dotpen, L="$b$", align=S);
+
+This might be easier to see without the solid of revolution in the way:
+
+asymptote3d:
+    unitsize(1.7cm);
+    currentprojection = perspective(camera=(8,5,10), up=Y);
+    real f(real x) { return sin(x)+1.7; }
+    axises3d(-0.5, 7, -3, 3, 0, 0);
+
+    real P[] = { 1, 2.4, 3, 4, 5.5, 6 };
+    for (int i = 1; i < P.length; ++i) {
+        real start = P[i-1];
+        real end = P[i];
+
+        real fmin = 100;
+        for (real x = start; x < end; x += 0.01) {
+            fmin = min(fmin, f(x));
+        }
+
+        if (i != 1){
+            draw(surface(path3((start,fmin)--(start,f(start))), c=O, axis=X), green);
+        }
+        draw(surface(path3((start,fmin)--(end,fmin)), c=O, axis=X), red);
+        if (i == P.length - 1) {
+           draw(surface(path3((end,0)--(end,fmin)), c=O, axis=X), green);
+        }
+    }
+
+    draw(path3(graph(f, 0.5, 6.5)), p=blue);
+    dot((1,0,0), p=dotpen, L="$a$", align=S);
+    dot((6,0,0), p=dotpen, L="$b$", align=S);
+
+Here's what it looks like from the side:
+
+asymptote:
+    unitsize(1.7cm);
+    real f(real x) { return sin(x)+1.7; }
+    axises(-0.5, 7, -0.5, 3);
+    draw(graph(f, 0.5, 6.5), p=blue, L=Label("$y=f(x)$", align=N, position=Relative(1)));
+
+    real P[] = { 1, 2.4, 3, 4, 5.5, 6 };
+    for (real x : P) {
+        draw((x,0)--(x,f(x)), p=deepgreen+smalldashes);
+    }
+    for (int i = 1; i < P.length; ++i) {
+        real start = P[i-1];
+        real end = P[i];
+
+        real fmin = 100;
+        for (real x = start; x < end; x += 0.01) {
+            fmin = min(fmin, f(x));
+        }
+        draw((start, fmin)--(end, fmin), p=red);
+        label(origin=((start+end)/2, 0), L="$I_" + (string)i + "$", align=N);
+    }
+
+    dot((1,0), p=dotpen, L="$a$", align=S);
+    dot((6,0), p=dotpen, L="$b$", align=S);
+
+Let $I$ be one of the intervals, and consider the cylinder corresponding to it.
+Because the cylinder touches the surface of the solid of revolution,
+its radius is $f(x)$, with some $x \in I$.
+Then the area of its flat side is $\pi f(x)^2$.
+Because we chose the cylinder to be as small as possible,
+the area is the smallest of these areas we can have with $x \in I$.
+We can write this as
+$$
+\text{cylinder flat side area} = \min_{x \in I} \left(\pi f(x)^2\right).
+$$
+The thickness of the cylinder is length of the interval $I$, and
+$$
+\begin{align}
+\text{cylinder volume}
+&= \text{thickness} \cdot \text{flat side area} \\
+&= (\text{length of $I$})\min_{x \in I} \left(\pi f(x)^2\right).
+\end{align}
+$$
+We get
+$$
+\begin{align}
+\text{total volume of cylinders}
+&= (\text{length of $I_1$})\min_{x \in I_1} \left(\pi f(x)^2\right) \\
+&\quad {}+ (\text{length of $I_2$})\min_{x \in I_2} \left(\pi f(x)^2\right) \\
+&\quad {}+\dots \\
+&\quad {}+ (\text{length of $I_n$})\min_{x \in I_n} \left(\pi f(x)^2\right).
+\end{align}
+$$
+This is the lower sum of $\pi f(x)^2$ on $\leftsquarebracket a,b]$ with the partition we have.
+Because all cylinders are inside the solid of revolution, we get
+$$
+\text{volume of solid of revolution} \ge \text{lower sum of $\pi f(x)^2$ on $[a,b]$}.
+$$
+By instead placing cylinders outside the solid of revolution, we similarly get
+$$
+\text{volume of solid of revolution} \le \text{upper sum of $\pi f(x)^2$ on $[a,b]$}.
+$$
+Because the volume of solid of revolution is between all upper and lower sums
+of $\pi f(x)^2$ on $\leftsquarebracket a,b]$,
+by [definition of integral](integral-def.html), it must be $\int_a^b \pi f(x)^2\ dx$.
+
+graybox:
+    Suppose that a function $f$ is continuous on $[a,b]$ and assume that $f(x) \ge 0$ for all $x \in [a,b]$.
+    Then the volume of the solid of revolution of $f$ on $[a,b]$ is
+    $$
+    \int_a^b \pi f(x)^2\ dx.
+    $$
+
+    asymptote3d:
+        unitsize(1.7cm);
+        real f(real x) { return 2sin(x-1)+0.6(x-1); }
+
+        currentprojection = perspective(camera=(8,5,10), up=Y);
+        real f(real x) { return sin(x)+1.7; }
+        axises3d(-0.5, 7, -3, 3, 0, 0);
+
+        draw(path3(graph(f, 0.5, 6.5)), p=blue, L=Label("$y=f(x)$", position=Relative(1)));
+        draw(surface(path3(graph(f, 1, 6)), c=O, axis=X), yellow+opacity(0.8));
+        dot((1,0,0), p=dotpen, L="$a$", align=S);
+        dot((6,0,0), p=dotpen, L="$b$", align=S);
+
+
+## Example: solid of revolution of parabola
+
+Consider the solid of revolution created by rotating $y=x^2$ on $[-2,2]$ about the x-axis.
+
+asymptote:
+    unitsize(2cm);
+    real f(real x) { return x^2; }
+    axises(-2.5, 2.8, -0.5, 4.5);
+    draw(graph(f, -2, 2), p=blue, L=Label("$y=x^2$", align=N, position=Relative(1)));
+
+    draw((-2,0)--(-2,f(-2)), p=smalldashes);
+    draw((2,0)--(2,f(2)), p=smalldashes);
+    dot((-2,0), p=dotpen, L="$-2$", align=S);
+    dot((2,0), p=dotpen, L="$2$", align=S);
+
+asymptote3d:
+    unitsize(1.7cm);
+    real f(real x) { return x^2; }
+
+    currentprojection = perspective(camera=(3,5,10), up=Y);
+    axises3d(-2.5, 2.8, -0.5, 4.5, 0, 0);
+
+
+    draw(path3(graph(f, -2.2, 2.2)), p=blue);
+    draw(path3((-2,0)--(-2,f(-2))), p=smalldashes);
+    draw(path3((2,0)--(2,f(2))), p=smalldashes);
+
+    draw(surface(path3((-2,0)--(-2,f(2))), c=O, axis=X), green+opacity(0.7));
+    draw(surface(path3(graph(f, -2, 2)), c=O, axis=X), orange+opacity(0.8));
+    draw(surface(path3((2,0)--(2,f(2))), c=O, axis=X), green+opacity(0.7));
+
+    dot((-2,0,0), p=dotpen, L="$-2$", align=S);
+    dot((2,0,0), p=dotpen, L="$2$", align=S);
+
+By choosing $f(x)=x^2$ in the above result, we get that the volume of this solid of revolution is
+$$
+\begin{align}
+\int_{-2}^2 \pi(x^2)^2\ dx
+&= \pi\int_{-2}^2 x^5\ dx
+= \pi\left[ \frac{1}{5}x^5 \right]_{-2}^2 \\
+&= \pi\left( \frac{1}{5} 2^5-\frac{1}{5}(-2)^5 \right)
+= \frac{64}{5}\pi.
+\end{align}
+$$
+
+
+## Example: volume of ball
+
+Consider the upper half of the circle with radius $r$ centered at $(0,0)$.
+
+asymptote:
+    unitsize(5cm);
+    axises(-1.2, 1.4, -0.2, 1.4);
+    draw(arc((0,0), 1, 0, 180), p=blue);
+
+    dot((-1,0), p=dotpen, L="$-r$", align=S);
+    dot((1,0), p=dotpen, L="$r$", align=S);
+
+The solid of revolution of this arc is a ball of radius $r$.
+
+asymptote3d:
+    unitsize(5cm);
+
+    currentprojection = perspective(camera=(8,5,10), up=Y);
+    axises3d(-1.2, 1.4, -0.2, 1.4, 0, 0);
+
+    draw(path3(arc((0,0), 1, 0, 180)), p=blue);
+    draw(unitsphere, cyan+opacity(0.8));
+    dot((-1,0,0), p=dotpen, L="$-r$", align=S);
+    dot((1,0,0), p=dotpen, L="$r$", align=S);
+
+For calculating the volume of this ball, we need to write the circle arc as $y=f(x)$, with some function $f$.
+The equation of this circle (TODO) is
+$$
+x^2 + y^2 = r^2,
+$$
+and from here, we can solve
+$$
+y = \pm\sqrt{r^2-x^2}.
+$$
+The upper half of the circle corresponds to $y \ge 0$, so we choose the solution with $+$.
+The volume of the ball is
+$$
+\begin{align}
+\int_{-r}^r \pi\left(\sqrt{r^2-x^2}\right)^2\ dx
+&= \int_{-r}^r \pi(r^2-x^2)\ dx \\
+&= \pi\left( \int_{-r}^r r^2\ dx - \int_{-r}^r x^2\ dx \right) \\
+&= \pi\left( \left[ r^2x \right]_{-r}^r - \left[ \frac{1}{3}x^3 \right]_{-r}^r \right) \\
+&= \pi\left( r^3-r^2(-r) - \left( \frac{1}{3}r^3 - \frac{1}{3}(-r)^3 \right)\right) \\
+&= \pi\left( 2r^3 - \frac{2}{3}r^3 \right)
+= \frac{4}{3}\pi r^3.
+\end{align}
+$$
+
+graybox:
+    The volume of a ball with radius $r$ is $\frac{4}{3} \pi r^3$.

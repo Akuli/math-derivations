@@ -2,7 +2,7 @@ import three;
 import boilerplate;
 
 void axises3d(real xmin, real xmax, real ymin, real ymax, real zmin, real zmax,
-              string xlabel="$x$", string ylabel="$y$", string zlabel="$z$",
+              string xlabel="", string ylabel="", string zlabel="",
               real labeldistance=0.2) {
     draw((xmin,0,0)--(xmax,0,0), arrow=Arrow3(size=0.7cm));
     label(xlabel, (xmax+labeldistance,0,0));

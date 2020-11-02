@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Integral Rules
+<title>Volume of Solid of Revolution
 </title>
 
     <script type="text/x-mathjax-config">
@@ -171,247 +171,115 @@
         
         </div>
         </div>
-<h1 id="integral-rules">Integral Rules<a class="headerlink" href="#integral-rules" title="Link to this title">¶</a></h1><p>Every derivative rule tells something about antiderivatives.
-Next we explore what we can do with different derivative rules that we know.
-</p>
+<h1 id="volume-of-solid-of-revolution">Volume of Solid of Revolution<a class="headerlink" href="#volume-of-solid-of-revolution" title="Link to this title">¶</a></h1><p>Suppose that a function $f$ is continuous and nonnegative on $[a,b]$.</p>
 
-<h2 id="antiderivatives-of-sin-and-cos">Antiderivatives of sin and cos<a class="headerlink" href="#antiderivatives-of-sin-and-cos" title="Link to this title">¶</a></h2><p>Because $\frac{d}{dx}\sin(x)=\cos(x)$ (TODO), we get the following result.</p>
+<p><img width="386" height="173" class="asymptote" src="../asymptote/854767b96f18fd5b6e5dc64b9d05c37c.svg" /></p><p>Let's rotate this curve about the $x$ axis.</p>
 
-<div class="box graybox"><p>$$
-\int \cos(x)\ dx = \sin(x)+C
+<p><img  class="asymptote" src="../asymptote/4295ef08df6af77e7b3b87e626a7f4e0.png" /></p><p>This forms a 3D object called <b>solid of revolution</b> of $f$ on the interval $[a,b]$.
+Our goal is to calculate the volume of this object.</p>
+
+<p><img  class="asymptote" src="../asymptote/6437023352ff7fd43d4fa048e99241b6.png" /></p><p>Consider a partition of $[a,b]$.
+Let's name the intervals of the partition $I_1,I_2,\dots,I_n$, where $n$ is the number of intervals.
+In the picture, we have $n=5$.</p>
+
+<p><img width="386" height="173" class="asymptote" src="../asymptote/cfed806405da821f8ca6854be9e8cf7c.svg" /></p><p>On each interval of the partition, we create a cylinder that
+touches the surface of the solid of revolution but is as small as possible.</p>
+
+<p><img  class="asymptote" src="../asymptote/56aa6d7cdf46affce9062172865b1815.png" /></p><p>This might be easier to see without the solid of revolution in the way:</p>
+
+<p><img  class="asymptote" src="../asymptote/88fff54c206ffc2f3e4d0ceb6295217e.png" /></p><p>Here's what it looks like from the side:</p>
+
+<p><img width="386" height="173" class="asymptote" src="../asymptote/0323614b5df635bc0e04a61b0a71ba2c.svg" /></p><p>Let $I$ be one of the intervals, and consider the cylinder corresponding to it.
+Because the cylinder touches the surface of the solid of revolution,
+its radius is $f(x)$, with some $x \in I$.
+Then the area of its flat side is $\pi f(x)^2$.
+Because we chose the cylinder to be as small as possible,
+the area is the smallest of these areas we can have with $x \in I$.
+We can write this as
 $$
-</p>
-
-</div><p>On the other hand, $\frac{d}{dx}\cos(x) = -\sin(x)$, with an annoying minus sign.
-To get rid of that, we can add another minus sign in front of $\cos(x)$, and the minuses will cancel:
+\text{cylinder flat side area} = \min_{x \in I} \left(\pi f(x)^2\right).
+$$
+The thickness of the cylinder is length of the interval $I$, and
 $$
 \begin{align}
-\frac{d}{dx}(-\cos(x))
-&= (-1)\frac{d}{dx}\cos(x)\\
-&= (-1)(-\sin(x)) = \sin(x)
+\text{cylinder volume}
+&= \text{thickness} \cdot \text{flat side area} \\
+&= (\text{length of $I$})\min_{x \in I} \left(\pi f(x)^2\right).
+\end{align}
+$$
+We get
+$$
+\begin{align}
+\text{total volume of cylinders}
+&= (\text{length of $I_1$})\min_{x \in I_1} \left(\pi f(x)^2\right) \\
+&\quad {}+ (\text{length of $I_2$})\min_{x \in I_2} \left(\pi f(x)^2\right) \\
+&\quad {}+\dots \\
+&\quad {}+ (\text{length of $I_n$})\min_{x \in I_n} \left(\pi f(x)^2\right).
+\end{align}
+$$
+This is the lower sum of $\pi f(x)^2$ on $\leftsquarebracket a,b]$ with the partition we have.
+Because all cylinders are inside the solid of revolution, we get
+$$
+\text{volume of solid of revolution} \ge \text{lower sum of $\pi f(x)^2$ on $[a,b]$}.
+$$
+By instead placing cylinders outside the solid of revolution, we similarly get
+$$
+\text{volume of solid of revolution} \le \text{upper sum of $\pi f(x)^2$ on $[a,b]$}.
+$$
+Because the volume of solid of revolution is between all upper and lower sums
+of $\pi f(x)^2$ on $\leftsquarebracket a,b]$,
+by <a href="integral-def.html">definition of integral</a>, it must be $\int_a^b \pi f(x)^2\ dx$.</p>
+
+<div class="box graybox"><p>Suppose that a function $f$ is continuous on $[a,b]$ and assume that $f(x) \ge 0$ for all $x \in [a,b]$.
+Then the volume of the solid of revolution of $f$ on $[a,b]$ is
+$$
+\int_a^b \pi f(x)^2\ dx.
+$$</p>
+
+<p><img  class="asymptote" src="../asymptote/2e20168817de86876a2d31d6aea007e1.png" /></p></div><h2 id="example-solid-of-revolution-of-parabola">Example: solid of revolution of parabola<a class="headerlink" href="#example-solid-of-revolution-of-parabola" title="Link to this title">¶</a></h2><p>Consider the solid of revolution created by rotating $y=x^2$ on $[-2,2]$ about the x-axis.</p>
+
+<p><img width="303" height="291" class="asymptote" src="../asymptote/9b5fe7c4002b9dcb45638afd16583ebc.svg" /></p><p><img  class="asymptote" src="../asymptote/a48c9c9aee2ee0401a8a601eb84409e1.png" /></p><p>By choosing $f(x)=x^2$ in the above result, we get that the volume of this solid of revolution is
+$$
+\begin{align}
+\int_{-2}^2 \pi(x^2)^2\ dx
+&= \pi\int_{-2}^2 x^5\ dx
+= \pi\left[ \frac{1}{5}x^5 \right]_{-2}^2 \\
+&= \pi\left( \frac{1}{5} 2^5-\frac{1}{5}(-2)^5 \right)
+= \frac{64}{5}\pi.
+\end{align}
+$$
+</p>
+
+<h2 id="example-volume-of-ball">Example: volume of ball<a class="headerlink" href="#example-volume-of-ball" title="Link to this title">¶</a></h2><p>Consider the upper half of the circle with radius $r$ centered at $(0,0)$.</p>
+
+<p><img width="371" height="229" class="asymptote" src="../asymptote/0f8c0698d2961e52b5b4c159c0bfa5c3.svg" /></p><p>The solid of revolution of this arc is a ball of radius $r$.</p>
+
+<p><img  class="asymptote" src="../asymptote/f7747ed10a8c33a10292dfe0f0d6a5bf.png" /></p><p>For calculating the volume of this ball, we need to write the circle arc as $y=f(x)$, with some function $f$.
+The equation of this circle (TODO) is
+$$
+x^2 + y^2 = r^2,
+$$
+and from here, we can solve
+$$
+y = \pm\sqrt{r^2-x^2}.
+$$
+The upper half of the circle corresponds to $y \ge 0$, so we choose the solution with $+$.
+The volume of the ball is
+$$
+\begin{align}
+\int_{-r}^r \pi\left(\sqrt{r^2-x^2}\right)^2\ dx
+&= \int_{-r}^r \pi(r^2-x^2)\ dx \\
+&= \pi\left( \int_{-r}^r r^2\ dx - \int_{-r}^r x^2\ dx \right) \\
+&= \pi\left( \left[ r^2x \right]_{-r}^r - \left[ \frac{1}{3}x^3 \right]_{-r}^r \right) \\
+&= \pi\left( r^3-r^2(-r) - \left( \frac{1}{3}r^3 - \frac{1}{3}(-r)^3 \right)\right) \\
+&= \pi\left( 2r^3 - \frac{2}{3}r^3 \right)
+= \frac{4}{3}\pi r^3.
 \end{align}
 $$</p>
 
-<div class="box graybox"><p>$$
-\int \sin(x)\ dx = -\cos(x)+C
-$$
+<div class="box graybox"><p>The volume of a ball with radius $r$ is $\frac{4}{3} \pi r^3$.
 </p>
 
-</div><p>I don't recommend memorizing these integral rules;
-it's better to learn deriving them from the derivative rules in your head.
-We will find the antiderivatives of $\tan$ <a href="integral-usub.html#example-int-tan-x-dx">later</a>.
-</p>
-
-<h2 id="sum">Sum<a class="headerlink" href="#sum" title="Link to this title">¶</a></h2><p>Let's say you want to find the antiderivatives of $2x + \cos(x)$.
-Because
-$$
-\frac{d}{dx}(x^2 + \sin(x)) = \frac{d}{dx} x^2 + \frac{d}{dx} \sin(x) = 2x+\cos(x),
-$$
-we get
-$$
-\int(2x+\cos(x))\ dx = x^2+\sin(x)+C.
-$$
-More generally, if $F$ is an antiderivative of $f$ and $G$ is an antiderivative of $g$, then
-$$
-\int (f(x)+g(x))\ dx = F(x)+G(x)+C.
-$$
-Usually this result is written like this:</p>
-
-<div class="box graybox"><p>If $f$ and $g$ have antiderivatives, then
-$$
-\int (f(x)+g(x))\ dx = \int f(x)\ dx + \int g(x)\ dx.
-$$
-</p>
-
-</div><p>Each $\int \dots \ dx$ on the right side creates its own $+C$,
-so technically using this rule should look like this:
-$$
-\begin{align}
-\int (2x+\cos(x))\ dx
-&= \int 2x\ dx + \int \cos(x)\ dx \\
-&= (x^2+C_1)+(\sin(x)+C_2) \\
-&= x^2+\sin(x)+\underbrace{(C_1+C_2)}_{\text{let's call this $C$}} \\
-&= x^2+\sin(x)+C
-\end{align}
-$$
-Here $C_1$ came from $\int 2x\ dx$ and $C_2$ came from $\int \cos(x)\ dx$.
-Letting $C=C_1+C_2$ simplified the result.
-In practice, that is unnecessary, and we just write
-$$
-\int (2x+\cos(x))\ dx
-= \int 2x\ dx + \int \cos(x)\ dx
-= x^2+\sin(x)+C.
-$$</p>
-
-<p>Let's see if the same rule works for integrals (as in area, not integrals as in antiderivative).
-For using <a href="integral-ftoc2.html">part 2 of the fundamental theorem of calculus</a>,
-we assume that $f$ and $g$ are continuous and they have antiderivatives $F$ and $G$.
-Then, with <a href="integral-notation.html#new-notation-for-f-b-f-a">handy notation</a>, we get
-$$
-\begin{align}
-\int_a^b (f(x)+g(x))\ dx
-&= \left[ F(x)+G(x) \right]_a^b \\
-&= (F(b)+G(b))-(F(a)+G(a)) \\
-&= F(b)-F(a)+G(b)-G(a) \\
-&= \int_a^bf(x)\ dx + \int_a^bg(x)\ dx.
-\end{align}
-$$</p>
-
-<div class="box graybox"><p>If $f$ and $g$ are continuous on $[a,b]$, then
-$$
-\int_a^b (f(x)+g(x))\ dx = \int_a^b f(x)\ dx + \int_a^b g(x)\ dx.
-$$
-</p>
-
-</div><h2 id="constant-in-front">Constant in front<a class="headerlink" href="#constant-in-front" title="Link to this title">¶</a></h2><p>For any constant $k$ and function $f$ with antiderivative $F$, we have
-$$
-\frac{d}{dx} (kF(x)) = kF'(x) = kf(x),
-$$
-so
-$$
-\int kf(x)\ dx = kF(x)+C.
-$$
-This result is typically written like this:</p>
-
-<div class="box graybox"><p>If $k$ is a constant and $f$ has antiderivatives, then
-$$
-\int kf(x)\ dx = k\int f(x)\ dx
-$$
-</p>
-
-</div><p>Just like with derivatives, this does <b>not</b> work if $k$ is not a constant. For example,
-$$
-\int 3x \cdot 2x\ dx = \int 6x^2\ dx = 2x^3 + C,
-$$
-but
-$$
-3x\int 2x\ dx = 3x(x^2 + C) = 3x^3 + 3Cx.
-$$</p>
-
-<p>Also, the above way to write this result is slightly broken.
-If $k=0$, then the left side is
-$$
-\int 0f(x)\ dx = \int 0\ dx = C,
-$$
-but the right side is
-$$
-0\int f(x)\ dx = 0,
-$$
-because multiplying anything with $0$ always gives $0$.
-This can be solved by simply writing one $+C$ at the end of the antiderivative calculation, e.g. like this:
-$$
-\int 0\cos(x)\ dx = 0\int \cos(x)\ dx = 0\sin(x) + C = C
-$$</p>
-
-<p>For integrals (not antiderivatives), we get
-$$
-\begin{align}
-\int_a^b kf(x)\ dx
-&= \left[ kF(x) \right]_a^b \\
-&= kF(b)-kF(a) \\
-&= k(F(b)-F(a)) \\
-&= k\int_a^b f(x)\ dx,
-\end{align}
-$$
-and in this calculation, nothing breaks if $k=0$.
-</p>
-
-<div class="box graybox"><p>If $k$ is a constant and $f$ is continuous on $[a,b]$, then
-$$
-\int_a^b kf(x)\ dx = k\int_a^b f(x)\ dx.
-$$
-</p>
-
-</div><h2 id="antiderivatives-of-x-n-for-n-ne-1">Antiderivatives of $x^n$ for $n \ne -1$<a class="headerlink" href="#antiderivatives-of-x-n-for-n-ne-1" title="Link to this title">¶</a></h2><p>Let's calculate the antiderivative of $x^5$. According to <a href="derivative-power-rule-1.html">the power rule</a>
-$$
-\frac{d}{dx} x^6 = 6x^5.
-$$
-To get rid of $6$, we can multiply by $\frac{1}{6}$ to cancel it, and we get
-$$
-\frac{d}{dx}\left( \frac{1}{6}x^6 \right) = \frac{1}{6} 6x^5 = x^5.
-$$
-With any other number $n$ instead of $5$, we have $n+1$ instead of $6$.
-To avoid division by zero in $\frac{1}{n+1}$, we need to assume that $n \ne -1$.</p>
-
-<div class="box graybox"><p>For any number $n$ except $-1$, we have
-$$
-\int x^n\ dx = \frac{1}{n+1} x^{n+1} + C.
-$$
-</p>
-
-</div><h2 id="antiderivatives-of-x-1">Antiderivatives of $x^{-1}$<a class="headerlink" href="#antiderivatives-of-x-1" title="Link to this title">¶</a></h2><p>The above calculation does not work for $n=-1$.
-This does <b>not</b> mean that the function $f(x)=x^{-1}=1/x$ does not have an antiderivative.
-In fact, that function is continuous everywhere except at zero,
-so it has some antiderivative everywhere except at zero.</p>
-
-<p><img width="439" height="439" class="asymptote" src="../asymptote/0d4ae2dda8ec8ab952003867ce910749.svg" /></p><p>From logarithms (TODO), we know that
-$$
-\frac{d}{dx} \ln(x) = \frac{1}{x},
-$$
-so
-$$
-\int \frac{1}{x}\ dx = \ln(x).
-$$
-However, this only works when $x$ is positive, because $\ln(x)$ is not defined for $x \le 0$.
-If $x$ is negative, then $-x=\abs{x}$ is positive, and with the <a href="derivative-chain-rule.html">chain rule</a>, we get
-$$
-\frac{d}{dx} \ln(-x) = \frac{1}{-x} \frac{d}{dx}(-x) = \frac{1}{-x}(-1) = \frac{1}{x}.
-$$
-So, we have
-$$
-\int \frac{1}{x}\ dx = \begin{cases}
-    \ln(x)+C, & \text{if $x > 0$} \\
-    \ln(-x)+C, & \text{if $x < 0$.}
-\end{cases}
-$$
-These cases can be combined together with absolute value, like this:</p>
-
-<div class="box graybox"><p>$$
-\int \frac{1}{x}\ dx = \ln\abs{x} + C
-$$
-</p>
-
-</div><p>You need to be somewhat careful when using the above result. For example, it might be tempting to do this:
-$$
-\int_{-2}^2 \frac{1}{x}\ dx = \left[ \ln\abs{x} \right]_{-2}^2 = \ln\abs{2} - \ln\abs{-2} = \ln(2)-\ln(2) = 0
-$$
-This is wrong.
-Because $\frac{1}{x}$ is undefined at $0$, it's not <a href="integral-def.html">integrable</a> on $\leftsquarebracket-2,2]$,
-and the <a href="integral-ftoc2.html">fundamental theorem of calculus</a> doesn't apply.
-In general, we have
-$$
-\int_a^b \frac{1}{x}\ dx
-= \begin{cases}
-    \ln\abs{b}-\ln\abs{a}, & \text{if $a$ and $b$ are both positive or both negative} \\
-    \text{undefined} & \text{in all other cases}.
-\end{cases}
-$$
-</p>
-
-<h2 id="antiderivatives-of-exponent-functions">Antiderivatives of exponent functions<a class="headerlink" href="#antiderivatives-of-exponent-functions" title="Link to this title">¶</a></h2><p>Because $\frac{d}{dx} e^x = e^x$ (TODO), we get the following result.</p>
-
-<div class="box graybox"><p>$$
-\int e^x\ dx = e^x + C
-$$
-</p>
-
-</div><p>More generally, for any positive base $b$, the derivative of $b^x$ is $b^x \ln(b)$ (TODO).
-So, if $\ln(b) \ne 0$, we have
-$$
-\frac{d}{dx} \left( \frac{1}{\ln(b)}b^x \right) = \frac{1}{\ln(b)} \frac{d}{dx} b^x = \frac{1}{\ln(b)}b^x\ln(b) = b^x.
-$$
-Note that $\ln(1) = 0$. Because $\ln$ is strictly increasing, this is the only way how $\ln$ can be zero.</p>
-
-<div class="box graybox"><p>If $b > 0$ and $b \ne 1$, then
-$$
-\int b^x\ dx = \frac{1}{\ln(b)}b^x + C.
-$$
-</p>
-
-</div><p>For $b=1$, we have $b^x = 1^x = 1$ and $\int 1\ dx = x+C$.
-Also note that $\ln(e)=\ln(e^1)=1$, so for $b=e$, the two results give the same formula.
-</p>
-
-</div>
+</div></div>
 </body>
 </html>

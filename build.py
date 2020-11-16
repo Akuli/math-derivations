@@ -177,6 +177,7 @@ def get_sidebar_content(txtfile):
                 link("Integral rules", 'calc/integral-rules'),
                 link("U substitution", 'calc/integral-usub'),
                 link("Volume of solid of revolution", 'calc/integral-sor-volume'),
+                link("Area of surface of revolution", 'calc/integral-sor-area'),
             ])),
         ])),
 

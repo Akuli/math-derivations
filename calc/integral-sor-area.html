@@ -328,7 +328,7 @@ $$
 \int_a^b 2\pi f(x) \sqrt{1+f'(x)^2}\ dx.
 $$</p>
 
-<p><img  class="asymptote" src="../asymptote/2e20168817de86876a2d31d6aea007e1.png" /></p></div><h2 id="example-area-of-cone-again">Example: area of cone (again)<a class="headerlink" href="#example-area-of-cone-again" title="Link to this title">¶</a></h2><p>Just like in <a href="integral-sor-volume.html#example-volume-of-cone">this example</a>,
+<p><img  class="asymptote" src="asymptote/2e20168817de86876a2d31d6aea007e1.png" /></p></div><h2 id="example-area-of-cone-again">Example: area of cone (again)<a class="headerlink" href="#example-area-of-cone-again" title="Link to this title">¶</a></h2><p>Just like in <a href="integral-sor-volume.html#example-volume-of-cone">this example</a>,
 we get a cone with height $h$ and radius $r$ when
 the graph $y=\frac{r}{h}x$ rotates about the $x$ axis on $[0,h]$.</p>
 
@@ -383,6 +383,73 @@ $$</p>
 
 </div><p>The area is somewhat surprisingly 4 times the corresponding circle area.
 For different ways to derive this, see <a href="https://www.youtube.com/watch?v=GNcFjFmqEc8">this 3blue1brown video</a>.
+</p>
+
+<h2 id="example-area-and-volume-with-y-1-x">Example: area and volume with $y=1/x$<a class="headerlink" href="#example-area-and-volume-with-y-1-x" title="Link to this title">¶</a></h2><p>Let $b > 1$. Consider the "horn" created by $y=1/x$ as it rotates about the $x$ axis on $[1,b]$.</p>
+
+<p><img  class="asymptote" src="../asymptote/9c9ba65899d7ac3ad60e9efd496287f6.png" /></p><p>The volume of this solid of revolution is
+$$
+\begin{align}
+\int_1^b \pi\left( \frac{1}{x} \right)^2\ dx
+&= \pi\int_1^b x^{-2}\ dx
+= \pi\left[ \frac{1}{-1} x^{-1} \right]_1^b \\
+&= \pi\left( -\frac{1}{b}-(-1) \right)
+= \pi-\frac{\pi}{b}.
+\end{align}
+$$
+This is always less than $\pi$, no matter how long the horn is.
+On the other hand, because
+$$
+\frac{d}{dx} \left( \frac{1}{x} \right) = \frac{d}{dx}x^{-1} = (-1)x^{-2},
+$$
+the area of the surface of revolution is
+$$
+\begin{align}
+\text{area}
+= \int_1^b 2\pi\frac{1}{x}\sqrt{1+\left((-1)x^{-2}\right)^2}\ dx
+= 2\pi\int_1^b \frac{1}{x}\sqrt{1+\frac{1}{x^4}}\ dx.
+\end{align}
+$$
+Calculating this integral is difficult, but because $\frac{1}{x^4} > 0$,
+we have $\sqrt{1 + \frac{1}{x^4}} > 1$, and so
+$$
+\frac{1}{x}\sqrt{1 + \frac{1}{x^4}} > \frac{1}{x}
+$$
+and we get
+$$
+\text{area} \ge 2\pi\int_1^b \frac{1}{x}\ dx = 2\pi(\ln(b)-\underbrace{\ln(1)}_0)=2\pi\ln(b).
+$$
+Because $2\pi > 1$, the area is greater than $\ln(b)$.</p>
+
+<p>By choosing a long enough horn (that is, a large enough $b$),
+we can make $\ln(b)$ as big as we want, and hence make the area as big as we want.
+For example, if you want the area to be greater than $100$,
+you can choose $b = e^{100}$, which gives
+$$
+\text{area} > \ln(b) = \ln(e^{100}) = 100.
+$$
+This also works for any other positive number instead of $100$.</p>
+
+<p>Now consider the infinitely long horn of $y=1/x$ rotating on $[1,\infty)$.</p>
+
+<ul><li>The infinitely long horn has finite volume.
+  Any finitely long part of the horn has volume less than $\pi$,
+  so the total volume can't be greater than $\pi$.</li><li>The infinitely long horn has infinite area.
+  If its area was finite,
+  then a finitely long part of it would have an even bigger greater area,
+  which is impossible.
+</li></ul><div class="box graybox"><p>The area of an object can be infinite even if the volume is finite.
+</p>
+
+</div><p>This result feels weird.
+From the above calculations, you can see that
+this is essentially the weirdness of how
+<a href="integral-rules.html#antiderivatives-of-x-n-for-n-ne-1">antiderivative of $x^n$</a>
+splits into two different cases depending on whether $n$ is $-1$ or something else.</p>
+
+<p>Like most other "weird" results in mathematics,
+this result involves an object that does not exist in the real world,
+because any actual horn in the real world is only finitely long.
 </p>
 
 </div>

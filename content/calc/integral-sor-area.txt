@@ -379,3 +379,88 @@ graybox:
 
 The area is somewhat surprisingly 4 times the corresponding circle area.
 For different ways to derive this, see [this 3blue1brown video](https://www.youtube.com/watch?v=GNcFjFmqEc8).
+
+
+## Example: area and volume with $y=1/x$
+
+Let $b > 1$. Consider the "horn" created by $y=1/x$ as it rotates about the $x$ axis on $[1,b]$.
+
+asymptote3d:
+    unitsize(1.7cm);
+
+    currentprojection = perspective(camera=(8,5,10), up=Y);
+    real f(real x) { return 1/x; }
+    axises3d(-0.5, 7, -3, 3, 0, 0);
+
+    draw(path3(graph(f, 0.5, 6.4)), p=blue, L=Label("$y=1/x$", align=NE, position=Relative(0)));
+    draw(surface(path3(graph(f, 1, 6)), c=O, axis=X), yellow+opacity(0.8));
+    draw((1,0,0)--(1,f(1),0), p=gray+smalldashes);
+    draw((6,0,0)--(6,f(6),0), p=gray+smalldashes);
+    dot((1,0,0), p=dotpen, L="$1$", align=S);
+    dot((6,0,0), p=dotpen, L="$b$", align=S);
+
+The volume of this solid of revolution is
+$$
+\begin{align}
+\int_1^b \pi\left( \frac{1}{x} \right)^2\ dx
+&= \pi\int_1^b x^{-2}\ dx
+= \pi\left[ \frac{1}{-1} x^{-1} \right]_1^b \\
+&= \pi\left( -\frac{1}{b}-(-1) \right)
+= \pi-\frac{\pi}{b}.
+\end{align}
+$$
+This is always less than $\pi$, no matter how long the horn is.
+On the other hand, because
+$$
+\frac{d}{dx} \left( \frac{1}{x} \right) = \frac{d}{dx}x^{-1} = (-1)x^{-2},
+$$
+the area of the surface of revolution is
+$$
+\begin{align}
+\text{area}
+= \int_1^b 2\pi\frac{1}{x}\sqrt{1+\left((-1)x^{-2}\right)^2}\ dx
+= 2\pi\int_1^b \frac{1}{x}\sqrt{1+\frac{1}{x^4}}\ dx.
+\end{align}
+$$
+Calculating this integral is difficult, but because $\frac{1}{x^4} > 0$,
+we have $\sqrt{1 + \frac{1}{x^4}} > 1$, and so
+$$
+\frac{1}{x}\sqrt{1 + \frac{1}{x^4}} > \frac{1}{x}
+$$
+and we get
+$$
+\text{area} \ge 2\pi\int_1^b \frac{1}{x}\ dx = 2\pi(\ln(b)-\underbrace{\ln(1)}_0)=2\pi\ln(b).
+$$
+Because $2\pi > 1$, the area is greater than $\ln(b)$.
+
+By choosing a long enough horn (that is, a large enough $b$),
+we can make $\ln(b)$ as big as we want, and hence make the area as big as we want.
+For example, if you want the area to be greater than $100$,
+you can choose $b = e^{100}$, which gives
+$$
+\text{area} > \ln(b) = \ln(e^{100}) = 100.
+$$
+This also works for any other positive number instead of $100$.
+
+Now consider the infinitely long horn of $y=1/x$ rotating on $[1,\infty)$.
+
+* The infinitely long horn has finite volume.
+  Any finitely long part of the horn has volume less than $\pi$,
+  so the total volume can't be greater than $\pi$.
+* The infinitely long horn has infinite area.
+  If its area was finite,
+  then a finitely long part of it would have an even bigger greater area,
+  which is impossible.
+
+graybox:
+    The area of an object can be infinite even if the volume is finite.
+
+This result feels weird.
+From the above calculations, you can see that
+this is essentially the weirdness of how
+[antiderivative of $x^n$](integral-rules.html#antiderivatives-of-x-n-for-n-ne-1)
+splits into two different cases depending on whether $n$ is $-1$ or something else.
+
+Like most other "weird" results in mathematics,
+this result involves an object that does not exist in the real world,
+because any actual horn in the real world is only finitely long.

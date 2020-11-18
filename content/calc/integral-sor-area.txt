@@ -399,7 +399,7 @@ asymptote3d:
     dot((1,0,0), p=dotpen, L="$1$", align=S);
     dot((6,0,0), p=dotpen, L="$b$", align=S);
 
-The volume of this solid of revolution is
+The [volume](integral-sor-volume.html) of this solid of revolution is
 $$
 \begin{align}
 \int_1^b \pi\left( \frac{1}{x} \right)^2\ dx

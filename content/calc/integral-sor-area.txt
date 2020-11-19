@@ -449,7 +449,7 @@ Now consider the infinitely long horn of $y=1/x$ rotating on $[1,\infty)$.
   so the total volume can't be greater than $\pi$.
 * The infinitely long horn has infinite area.
   If its area was finite,
-  then a finitely long part of it would have an even bigger greater area,
+  then a finitely long part of it would have an even bigger area,
   which is impossible.
 
 graybox:

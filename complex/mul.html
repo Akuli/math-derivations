@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Multiplying Complex Numbers
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            // funny operator name used only in one file
+            rotate: [ "\\operatorname{rotate}", 0 ],
+
+            // darkred is too dark, red is too bright
+            red: [ "\\color{##c00}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            magenta: [ "\\color{magenta}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+            leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/animation.css">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Sums and sequences</label>
+        <div class="dropdown">
+            <a href="../sums-and-seqs/sums.html">Sums</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Circle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Triangle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-16" />
+        <label for="sidebar-checkbox-16">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-12" />
+        <label for="sidebar-checkbox-12">Limits</label>
+        <div class="dropdown">
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-13" />
+        <label for="sidebar-checkbox-13">Continuity</label>
+        <div class="dropdown">
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-14" />
+        <label for="sidebar-checkbox-14">Derivative</label>
+        <div class="dropdown">
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-15" />
+        <label for="sidebar-checkbox-15">Integral</label>
+        <div class="dropdown">
+            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a><a href="../calc/integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="../calc/integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="../calc/integral-notation.html">More notation for integrals</a><a href="../calc/integral-rules.html">Integral rules</a><a href="../calc/integral-usub.html">U substitution</a><a href="../calc/integral-sor-volume.html">Volume of solid of revolution</a><a href="../calc/integral-sor-area.html">Area of surface of revolution</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-17" />
+        <label for="sidebar-checkbox-17">Complex numbers</label>
+        <div class="dropdown">
+            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplying complex numbers</a>
+        </div>
+        </div>
+<h1 id="multiplying-complex-numbers">Multiplying Complex Numbers<a class="headerlink" href="#multiplying-complex-numbers" title="Link to this title">¶</a></h1><p>Our goal is to define a multiplication for complex numbers.
+It will be an operation that takes in two complex numbers, $z$ and $w$,
+and outputs another complex number, denoted $zw$.
+We want it to have at least these properties,
+for all real numbers $a,b \in \mathbb{R}$ and complex numbers $v,w,z \in \mathbb{C}$:</p>
+
+<ul><li>"Backwards compatibility" with real number multiplication:
+  $(a + 0i)(b + 0i)$ as a complex number multiplication and
+  $ab$ as a real number multiplication must produce the same result.</li><li>The complex number multiplication $(b + 0i)(0 + 1i)$ gives the complex number $0+bi$.
+  In other words, the complex number multiplication $bi$
+  is consistent with how we write complex numbers as $a + bi$.</li><li>The number $0$ behaves as expected: $0z = 0$</li><li>The number $1$ behaves as expected: $1z = z$</li><li>The number $i$ behaves as expected: $i^2 = -1$
+  (here $i^2$ means $i$ multiplied with itself, using the complex number multiplication)</li><li>Order doesn't matter: $zw=wz$</li><li>Parentheses don't matter: $z(vw)=(zv)w$
+  (when this rule applies, we can write $zvw$ without any parentheses,
+  and it doesn't matter whether it means $(zv)w$ or $z(vw)$)</li><li>Distributing: $z(v+w)=zv+zw$
+</li></ul><p>On the rest of this page, I will call this the <b>wish list</b>.</p>
+
+<p>Using only the wish list, we can for example calculate
+$$
+(-1)z = (-1)z + 1z - z = (-1 + 1)z - z = 0z - z = 0 - z,
+$$
+which shows that $(-1)z = -z$ as expected.
+Rules like $(a+b)^2 = a^2 + 2ab + b^2$ also follow from the wish list.
+We can even multiply any two complex numbers $a + bi$ and $x + yi$:
+$$
+\begin{align}
+(a + bi)(x + yi)
+&= (a + bi)x + (a + bi)(yi) \\
+&= ax + (bi)x + (a + bi)(yi) \\
+&= ax + (bi)x + (yi)(a + bi) \\
+&= ax + (bi)x + (yi)a + (yi)(bi) \\
+&= ax + bxi + ayi + byi^2 \\
+&= ax + bxi + ayi + by(-1) \\
+&= ax + bxi + ayi + (-by) \\
+&= (ax - by) + (bx + ay)i
+\end{align}
+$$
+I don't recommend memorizing the resulting formula.
+To calculate a complex number multiplication like $(2+3i)(4-5i)$,
+just expand it as you would usually do and apply $i^2 = -1$;
+the wish list essentially says that it's how complex number multiplication works.</p>
+
+<div class="box graybox"><p>Any complex number multiplication can be calculated using only the wish list.
+</p>
+
+</div><p>Note that the complex number multiplication is
+neither <a href="../vectors/dot-projection.html">dot product</a> nor cross product (TODO);
+it's something different.
+To see this, note that
+<a href="intro.html#borrowing-operations-from-vectors">the vector corresponding to</a> $i$
+is $\J$. Its dot product with itself is
+$$
+\J \cdot \J = (0\I + 1\J) \cdot (0\I + 1\J) = 0^2 + 1^2 = 1,
+$$
+and its cross product with itself, when $i$ is thought of as the vector $0\I+1\J+0\K$, is
+$$
+\begin{vmatrix}
+\I & \J & \K \\
+0 & 1 & 0 \\
+0 & 1 & 0
+\end{vmatrix}
+= \I(0-0) - \J(0-0) + \K(0-0) = \vec 0.
+$$
+Neither of these is $-1$, and we required $i^2 = -1$.</p>
+
+<p>Also note that multiplying a complex number $a + bi$ by a real number $c$ behaves so that
+$$
+c(a + bi) = ca + c(bi) = ca + (cb)i,
+$$
+just like multiplying a vector $a\I + b\J$ gives
+$$
+c(a\I+b\J) = (ca)\I + (cb)\J.
+$$
+That's why we can use everything we know about multiplying a vector and a real number
+when multiplying a complex number and a real number.</p>
+
+<p>The wish list is good for calculating complex number multiplications,
+but currently we don't have any way to visualize the multiplication like
+we can visualize <a href="intro.html#borrowing-operations-from-vectors">complex number addition</a>.
+Let's fix that.
+</p>
+
+<h2 id="observations">Observations<a class="headerlink" href="#observations" title="Link to this title">¶</a></h2><p>Notice that
+$$
+(2i)(2 + 3i) = (2i)2 + (2i)(3i) = 4i + 6i^2 = 4i - 6 = -6 + 4i.
+$$
+Here are the vectors corresponding to $2+3i$ and $-6+4i$:</p>
+
+<p><img width="328" height="172" class="asymptote" src="../asymptote/2cc3380b49ac70d46fdb78efc7afd88c.svg" /></p><p>Let's make these observations (using <a href="angle-and-len.html">angles and lengths</a>):</p>
+
+<ul><li>The blue angle in the picture looks like 90 degrees, and it actually is 90 degrees.
+  To verify this, you can <a href="../vectors/iwi-jwj.html">calculate the dot product</a> of
+  the vectors corresponding to $2+3i$ and $-6+4i$.
+  You should get $0$, which means that the vectors are perpendicular.</li><li>The length of $(2i)(2+3i)$ is two times the length of $2+3i$.
+</li></ul><p>Note that the angle of $2i$ is 90 degrees and the length of $2i$ is $2$.
+What seems to be happening is that when calculating a complex number multiplication,
+the angles get added and the lengths get multiplied.</p>
+
+<p>Let's do another example. We multiply $1+i$ with itself.</p>
+
+<p><img width="257" height="257" class="asymptote" src="../asymptote/f1ed9dc0633a4002ad84e0b670fe38b2.svg" /></p><p>The angle of this complex number is 45 degrees, and its length is
+$$
+\sqrt{1^2 + 1^2} = \sqrt{2}.
+$$
+To multiply $1+i$ with itself, we can use $(a+b)^2 = a^2 + 2ab + b^2$,
+because the derivation of that rule (TODO) can be done using only the wish list properties,
+and we get
+$$
+(1+i)^2
+= 1^2 + 2i + i^2
+= 1+2i-1 = 2i,
+$$
+which is a complex number with length $2=\sqrt{2}\sqrt{2}$ and angle $90^\circ = 45^\circ+45^\circ$ as expected.</p>
+
+<p><img width="257" height="342" class="asymptote" src="../asymptote/736033ed81f655a1ab36aa6c0e0e4d6d.svg" /></p><h2 id="why-do-angles-get-added-and-lengths-get-multiplied">Why do angles get added and lengths get multiplied?<a class="headerlink" href="#why-do-angles-get-added-and-lengths-get-multiplied" title="Link to this title">¶</a></h2><p>Let's define an operation that takes in two complex numbers $z$ and $w$,
+and results in another complex number that we shall denote with $z \star w$.
+(I don't think anyone else uses this notation, and I won't use it after this derivation.)
+We define the $\star$ operation to do what the multiplication $zw$ seems to do:
+$z \star w$ is a complex number such that
+$$
+\text{length of $(z \star w)$} = (\text{length of $z$})(\text{length of $w$})
+$$
+and
+$$
+\text{angle of $(z \star w)$} = (\text{angle of $z$}) + (\text{angle of $w$}).
+$$
+The angle of $0$ is undefined, but that doesn't matter;
+if $z=0$ or $w=0$, then the length of $z \star w$ will be zero anyway,
+and so $z \star w = 0$ as well, regardless of the angle.</p>
+
+<p>This operation satisfies all properties of the wish list;
+that is, for all $v,w,z \in \mathbb{C}$:</p>
+
+<p><ul><li>
+For <b>real numbers</b> $a,b \in \mathbb{R}$,
+we have $a \star b = ab$, where on the right side, $ab$ is a multiplication of real numbers.
+To see why, first notice that in real number multiplication,
+absolute values (lengths) get multiplied, just like with $\star$,
+and the angles also match in all of the following cases:
+    <ul><li>
+    If one of $a$ and $b$ is zero, then $ab$ and $a \star b$ are both zero and angles don't matter.
+    </li><li>
+    If $a$ and $b$ are both positive, their angles are zero,
+    so the angle of $(a+0i) \star (b+0i)$ is $0+0=0$.
+    Because $ab$ is a positive real number, its angle is also zero.
+    </li><li>
+    If one of $a$ and $b$ is positive and the other is negative,
+    their angles are 0 degrees and 180 degrees,
+    so the angle of $(a+0i) \star (b+0i)$ is $0+180=180$ degrees.
+    Because $ab$ is a negative real number, its angle is also 180 degrees.
+    </li><li>
+    If $a$ and $b$ are both negative, their angles are 180 degrees,
+    so the angle of $(a+0i) \star (b+0i)$ is $180+180=360$ degrees.
+    We treat this angle as zero because it differs from zero by 360 degrees.
+    Because $ab$ is a positive real number, its angle is also zero.
+    </li></ul>
+</li><li>
+If $b$ is a nonzero real number, then $b \star i$ has the same length (absolute value) as $b$
+and has angle $90+0=90$ degrees or $90+180=270$ degrees,
+where $0$ or $180$ degrees is the angle of $b$, depending on whether $b$ is positive or negative.
+This is the same as the angle of the complex number $0+bi$
+(note that 270 degrees and -90 degrees differ by 360 degrees).
+Hence $b \star i = 0+bi$, at least whenever $b$ is positive or negative.
+Also, $0 \star i = 0 = 0+0i$.
+</li><li>
+$0 \star z = 0$, like explained above.
+</li><li>
+$1 \star z = 1$, because multiplying by $1$ (length of $1$)
+or adding $0$ (angle of $1$) does nothing.
+</li><li>
+Because the length of $i$ is 1 and the angle is 90 degrees,
+the length of $i \star i$ is also 1 and its angle is 180 degrees.
+So, we have $i \star i = -1$.
+</li><li>
+Order and parentheses don't matter when adding or multiplying real numbers.
+Because calculations like $z\star v$ or $(z \star v) \star w$
+add the angles and multiply the lengths of all the vectors involved,
+order and parentheses don't matter with $\star$ either.
+</li><li>
+Consider a rotation around $0$ by the angle of $z$.
+This can be described like this: $\rotate(w)$ is a complex number
+just like $w$ but with the angle of $z$ added to its angle.
+Now $z \star w$ is just like $\rotate(w)$, but with the length multiplied by the length of $z$.
+In other words,
+$$
+z \star w = \abs{z} \rotate(w),
+$$
+where the multiplication on the right side multiplies the length by $\abs{z}$ without changing the angle,
+because it behaves like multiplying a number and a vector.
+The following picture shows that $\rotate(v+w)=\rotate(v)+\rotate(w)$,
+because the entire triangle created by $v$, $w$ and $v+w$ gets rotated:</p>
+
+<p><img width="467" height="257" class="asymptote" src="../asymptote/78feb35b5e7beed1e934293d2bd013c5.svg" /></p><p>By multiplying both sides of $\rotate(v+w)=\rotate(v)+\rotate(w)$ with $\abs{z}$
+and distributing it like we usually do when multiplying vectors and numbers, we get
+$$
+\underbrace{\abs{z}\rotate(v+w)}_{z \star (v+w)}
+= \underbrace{\abs{z}\rotate(v)}_{z \star v}
++ \underbrace{\abs{z}\rotate(w)}_{z \star w}.
+$$
+The angle of $z$ is undefined when $z = 0$,
+but $z\star(v+w)=(z \star v) + (z \star w)$ is also true in that case;
+then it just says that $0 = 0+0$.
+</li></ul></p>
+
+<p>Because the complex number product $zw$ can be calculated using only the wish list properties
+and the $\star$ operation satisfies the wish list properties,
+$z \star w$ must be the complex number product $zw$.
+So, our $\star$ operation really is the complex number multiplication.</p>
+
+<div class="box graybox"><p>When multiplying complex numbers, we can add the angles and multiply the lengths.
+</p>
+
+</div><h2 id="de-moivre-s-formula">De Moivre's formula<a class="headerlink" href="#de-moivre-s-formula" title="Link to this title">¶</a></h2><p>Let $z$ be a complex number with angle $\theta$ and length 1.
+It is on the unit circle of radius $1$ centered at $0$, at the angle $\theta$.</p>
+
+<p><img width="371" height="371" class="asymptote" src="../asymptote/80bf2e27c3eaa34d09270c8fe447724c.svg" /></p><p>With trig, we see that $z = \cos(\theta) + i\sin(\theta)$.</p>
+
+<p>We calculate $z^n$ for any positive integer $n$.
+Because the length of $z$ is 1,
+the length of $z^2$ is also $1$, and so is the length of $z^3 = z^2 \cdot z$ and so on.
+So, the length of $z^n$ is $1$.
+The angle of $z^2$ is $\theta+\theta=2\theta$,
+the angle of $z^3$ is $2\theta+\theta=3\theta$, and so on,
+so the angle of $z^n$ is $n\theta$.
+Because $z^n$ has length $1$, it's on the unit circle,
+just like $z$ but with angle $n\theta$ instead of $\theta$, and we get
+$$
+z^n = \cos(n\theta) +i\sin(n\theta).
+$$</p>
+
+<div class="box graybox"><p>For any real number $\theta$ and positive integer $n$, we have
+$$
+(\cos(\theta)+i\sin(\theta))^n = \cos(n\theta)+i\sin(n\theta).
+$$
+This is known as De Moivre's formula.
+</p>
+
+</div><h2 id="example-sin-2-theta-and-cos-2-theta">Example: $\sin(2\theta)$ and $\cos(2\theta)$<a class="headerlink" href="#example-sin-2-theta-and-cos-2-theta" title="Link to this title">¶</a></h2><p>By plugging in $n=2$ to De Moivre's formula and using $(a+b)^2=a^2+2ab+b^2$, we get
+$$
+\begin{align}
+\cos(2\theta) + i\sin(2\theta)
+&= (\cos(\theta) + i\sin(\theta))^2 \\
+&= (\cos(\theta))^2 + 2\cos(\theta)i\sin(\theta) + (i\sin(\theta))^2 \\
+&= \cos^2(\theta) - \sin^2(\theta) + 2\sin(\theta)\cos(\theta)i,
+\end{align}
+$$
+where the minus in front of $\sin^2(\theta)$ came from $i^2=-1$.
+By comparing the real parts and imaginary parts
+($x$ and $y$ coordinates of vectors corresponding to the complex numbers)
+on both sides, we get
+$$
+\begin{align}
+\cos(2\theta) &= \cos^2(\theta) - \sin^2(\theta), \\
+\sin(2\theta) &= 2\sin(\theta)\cos(\theta).
+\end{align}
+$$
+A similar derivation can be used to write $\sin(n\theta)$ and $\cos(n\theta)$
+using only $\sin(\theta)$ and $\cos(\theta)$,
+with any other positive integer $n$.
+For doing that, one needs to expand $(a+b)^n$, and
+the binomial theorem (TODO) can be used for that.
+</p>
+
+</div>
+</body>
+</html>

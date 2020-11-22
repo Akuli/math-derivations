@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Refinement of Partition
+<title>Angle and Length
 </title>
 
     <script type="text/x-mathjax-config">
@@ -151,25 +151,25 @@
         <input type="checkbox" id="sidebar-checkbox-12" />
         <label for="sidebar-checkbox-12">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Continuity</label>
         <div class="dropdown">
-            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
         <label for="sidebar-checkbox-14">Derivative</label>
         <div class="dropdown">
-            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="derivative-vector.html">Derivative of vector</a>
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-15" />
         <label for="sidebar-checkbox-15">Integral</label>
         <div class="dropdown">
-            <a href="integral-intro.html">Introduction to integrals</a><a href="integral-refinement.html">Refinement of partition</a><a href="integral-def.html">Defining the integral</a><a href="integral-average.html">Average</a><a href="integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="integral-notation.html">More notation for integrals</a><a href="integral-rules.html">Integral rules</a><a href="integral-usub.html">U substitution</a><a href="integral-sor-volume.html">Volume of solid of revolution</a><a href="integral-sor-area.html">Area of surface of revolution</a>
+            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a><a href="../calc/integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="../calc/integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="../calc/integral-notation.html">More notation for integrals</a><a href="../calc/integral-rules.html">Integral rules</a><a href="../calc/integral-usub.html">U substitution</a><a href="../calc/integral-sor-volume.html">Volume of solid of revolution</a><a href="../calc/integral-sor-area.html">Area of surface of revolution</a>
         </div>
         
         </div>
@@ -177,82 +177,56 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplying complex numbers</a>
+            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplying complex numbers</a>
         </div>
         </div>
-<h1 id="refinement-of-partition">Refinement of Partition<a class="headerlink" href="#refinement-of-partition" title="Link to this title">¶</a></h1><p>On this page, $[a,b]$ is an interval, and
-$f$ is a function that has minimum and maximum values on $[a,b]$ and all closed subintervals of $[a,b]$.
-So, if $[a,b] = [1,4]$, it's not enough that $f$ has a minimum and a maximum on $[1,4]$;
-it also has to have a minimum and a maximum on e.g. $[2,3]$.
-We will need these minimums and maximums for calculations.</p>
+<h1 id="angle-and-length">Angle and Length<a class="headerlink" href="#angle-and-length" title="Link to this title">¶</a></h1><p>Instead of thinking about a complex number as with $x$ and $y$ coordinates,
+as in $x + yi$, we can think of it as an angle and length of the vector.
+Just like in unit circle trig (TODO),
+a bigger angle means counter-clockwise and zero means right.</p>
 
-<p>Let $P$ be a partition of $[a,b]$.
-A <b>refinement</b> of $P$ means another partition of $[a,b]$ that contains all numbers of $P$.</p>
+<p><img width="161" height="201" class="asymptote" src="../asymptote/bc08c9fca5f697b20756b7767e0b6b4a.svg" /></p><p>The angle may be bigger than 180 degrees:</p>
 
-<p><img width="465" height="124" class="asymptote" src="../asymptote/08b88df37b9119463f9193ed0ed097e1.svg" /></p><p>Note that any partition is a refinement of itself
-because it contains all partition numbers of itself.
+<p><img width="201" height="201" class="asymptote" src="../asymptote/b980340f44f77e4070ac3afa6a60303c.svg" /></p><p>Alternatively, the angle can be negative:</p>
+
+<p><img width="278" height="201" class="asymptote" src="../asymptote/12364db6eb24f676b10d2afb504024c8.svg" /></p><p>In general, angles that differ by a full turn (360 degrees or $2\pi$ radians) are considered to be the same.
+This ensures that the angles in the above two pictures are considered the same.</p>
+
+<p>Examples:</p>
+
+<p><ul><li>
+The length of $i$ is $1$. The angle of $i$ is 90 degrees, which is $\pi/2$ radians.</p>
+
+<p><img width="280" height="201" class="asymptote" src="../asymptote/36237d6657370dea14d991b2ab163a8b.svg" /></p><p></li><li>
+The length of $5$ is $5$.
+The angle is zero.</p>
+
+<p><img width="280" height="161" class="asymptote" src="../asymptote/f4164fb7fd535bf549195aa488600d68.svg" /></p><p></li><li>
+The length of $-5$ is $5$.
+The angle is 180 degrees.</p>
+
+<p><img width="320" height="161" class="asymptote" src="../asymptote/6dfc3c8f6e0c40e3d20cacb6c5bf7989.svg" /></p><p></li><li>
+The length of $0$ is $0$. The angle is undefined.
+Remember this somewhat annoying detail when you want to use the angle of a complex number.
+</li></ul></p>
+
+<p>Generally, the length of a complex number $a + bi$ is the vector length $\sqrt{a^2+b^2}$ (TODO).
+The angle is more difficult to calculate.
+In computer programming, you can use <a href="https://en.wikipedia.org/wiki/Atan2">atan2</a> to calculate the angle.
+TODO: explain how to calculate angle in general
 </p>
 
-<h2 id="upper-and-lower-sums-with-refinements">Upper and lower sums with refinements<a class="headerlink" href="#upper-and-lower-sums-with-refinements" title="Link to this title">¶</a></h2><p>Suppose that $R$ is a refinement of $P$ that contains one number more than $P$.
-Below $r$ is the number in $R$ but not in $P$, and $n_1$ and $n_2$ are its "neighbor" partition numbers.
-The upper sums of a function $f$ with these partitions look like this:</p>
-
-<p><img width="402" height="201" class="asymptote" src="../asymptote/27aee8d10f9fa19181c14a5cfe0092e2.svg" /></p><p><img width="402" height="201" class="asymptote" src="../asymptote/2ba54afac7a44281cdbd5ae815e5fe4b.svg" /></p><p>The upper sum with $R$ is less than the upper sum with $P$ because
-the rectangle between $r$ and $n_2$ is lower than before.
-That's because the maximum value of $f$ on $[n_1,n_2]$ came from $[n_1,r]$, and not from $[r,n_2]$;
-all values of $f$ on $[r,n_2]$ are less than the maximum on $[n_1,n_2]$.</p>
-
-<p>In general, this explains why the upper sum can't increase when adding a number to the partition,
-but the upper sum doesn't necessarily decrease.
-For example, if the graph of $f$ is a horizontal line, then all upper sums are equal,
-and adding partition numbers doesn't change them.</p>
-
-<p>A similar reasoning shows that lower sums increase or stay the same when adding a partition number.</p>
-
-<div class="box graybox"><p>Let $P$ be a partition of $[a,b]$ and let $R$ be its refinement that has only one more number than $P$. Then
+<h2 id="absolute-value-of-complex-number">Absolute value of complex number<a class="headerlink" href="#absolute-value-of-complex-number" title="Link to this title">¶</a></h2><p>Like in the above examples, we see that the length of a real number is its absolute value.
+Now we can define the absolute value of a complex number $a+bi$ as its length:
 $$
-\text{upper sum of $f$ with $P$} \ge \text{upper sum of $f$ with $R$}
+\abs{a+bi} = \text{length of $a+bi$} = \sqrt{a^2+b^2}
 $$
-and
-$$
-\text{lower sum of $f$ with $P$} \le \text{lower sum of $f$ with $R$}.
-$$
+Because the length of a real number is its absolute value,
+this behaves as expected when $a+bi$ happens to be a real number (that is, $b=0$).
+
+
 </p>
 
-</div><p>By adding "new" partition numbers one by one, we see that this also works when
-the refinement contains multiple partition numbers that are not in $P$.
-Because we're writing $\ge$ and $\le$, it also works with how any partition is a refinement of itself.</p>
-
-<div class="box graybox"><p>Let $P$ be a partition of $[a,b]$. Then
-$$
-\text{upper sum of $f$ with $P$} \ge \text{upper sum of $f$ with any refinement of $P$}
-$$
-and
-$$
-\text{lower sum of $f$ with $P$} \le \text{lower sum of $f$ with any refinement of $P$}.
-$$
-</p>
-
-</div><h2 id="upper-and-lower-sums-of-different-partitions">Upper and lower sums of different partitions<a class="headerlink" href="#upper-and-lower-sums-of-different-partitions" title="Link to this title">¶</a></h2><p>If we take any two partitions of $[a,b]$, say $P_1$ and $P_2$,
-then we can combine their numbers to make a partition that is a refinement of both partitions.</p>
-
-<p><img width="413" height="126" class="asymptote" src="../asymptote/d7267de36cb4318f300fdedf7488af28.svg" /></p><p>Now we get
-$$
-\begin{align}
-\text{lower sum of $f$ with $P_1$}
-&\le \text{lower sum of $f$ with refinement} \\
-&\le \text{upper sum of $f$ with refinement} \\
-&\le \text{upper sum of $f$ with $P_2$}.
-\end{align}
-$$</p>
-
-<div class="box graybox"><p>For any upper and lower sums of $f$ on $[a,b]$, we have
-$$
-\text{lower sum} \le \text{upper sum},
-$$
-even if the upper and lower sums are from different partitions.
-</p>
-
-</div></div>
+</div>
 </body>
 </html>

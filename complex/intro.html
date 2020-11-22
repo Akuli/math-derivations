@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Refinement of Partition
+<title>Introduction to Complex Numbers
 </title>
 
     <script type="text/x-mathjax-config">
@@ -151,25 +151,25 @@
         <input type="checkbox" id="sidebar-checkbox-12" />
         <label for="sidebar-checkbox-12">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Continuity</label>
         <div class="dropdown">
-            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
         <label for="sidebar-checkbox-14">Derivative</label>
         <div class="dropdown">
-            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="derivative-vector.html">Derivative of vector</a>
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-15" />
         <label for="sidebar-checkbox-15">Integral</label>
         <div class="dropdown">
-            <a href="integral-intro.html">Introduction to integrals</a><a href="integral-refinement.html">Refinement of partition</a><a href="integral-def.html">Defining the integral</a><a href="integral-average.html">Average</a><a href="integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="integral-notation.html">More notation for integrals</a><a href="integral-rules.html">Integral rules</a><a href="integral-usub.html">U substitution</a><a href="integral-sor-volume.html">Volume of solid of revolution</a><a href="integral-sor-area.html">Area of surface of revolution</a>
+            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a><a href="../calc/integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="../calc/integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="../calc/integral-notation.html">More notation for integrals</a><a href="../calc/integral-rules.html">Integral rules</a><a href="../calc/integral-usub.html">U substitution</a><a href="../calc/integral-sor-volume.html">Volume of solid of revolution</a><a href="../calc/integral-sor-area.html">Area of surface of revolution</a>
         </div>
         
         </div>
@@ -177,82 +177,72 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplying complex numbers</a>
+            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplying complex numbers</a>
         </div>
         </div>
-<h1 id="refinement-of-partition">Refinement of Partition<a class="headerlink" href="#refinement-of-partition" title="Link to this title">¶</a></h1><p>On this page, $[a,b]$ is an interval, and
-$f$ is a function that has minimum and maximum values on $[a,b]$ and all closed subintervals of $[a,b]$.
-So, if $[a,b] = [1,4]$, it's not enough that $f$ has a minimum and a maximum on $[1,4]$;
-it also has to have a minimum and a maximum on e.g. $[2,3]$.
-We will need these minimums and maximums for calculations.</p>
+<h1 id="introduction-to-complex-numbers">Introduction to Complex Numbers<a class="headerlink" href="#introduction-to-complex-numbers" title="Link to this title">¶</a></h1><p>The basic idea with complex numbers is to introduce a "number" called $i$
+which behaves so that $i^2 = -1$.
+This is not a number in the usual sense,
+because $x^2$ is not negative for any real number $x \in \mathbb{R}$.
+This $i$ is something else.</p>
 
-<p>Let $P$ be a partition of $[a,b]$.
-A <b>refinement</b> of $P$ means another partition of $[a,b]$ that contains all numbers of $P$.</p>
+<p>The usual numbers will be called <b>real numbers</b>.
+The results of multiplying real numbers with $i$, such as $2i$ and $-0.6i$,
+are called <b>imaginary numbers</b>.
+A <b>complex number</b> is the result of adding a real number and an imaginary number,
+such as $2+3i$ or $4-5i$.</p>
 
-<p><img width="465" height="124" class="asymptote" src="../asymptote/08b88df37b9119463f9193ed0ed097e1.svg" /></p><p>Note that any partition is a refinement of itself
-because it contains all partition numbers of itself.
-</p>
+<p>The set of complex numbers is denoted with $\mathbb{C}$, just like $\mathbb{R}$ is the set of real numbers.</p>
 
-<h2 id="upper-and-lower-sums-with-refinements">Upper and lower sums with refinements<a class="headerlink" href="#upper-and-lower-sums-with-refinements" title="Link to this title">¶</a></h2><p>Suppose that $R$ is a refinement of $P$ that contains one number more than $P$.
-Below $r$ is the number in $R$ but not in $P$, and $n_1$ and $n_2$ are its "neighbor" partition numbers.
-The upper sums of a function $f$ with these partitions look like this:</p>
+<p>A common way to visualize complex numbers is to think of them as points in the 2D plane
+so that $a + bi$, with $a,b \in \mathbb{R}$, corresponds with the point $(a,b)$.</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/27aee8d10f9fa19181c14a5cfe0092e2.svg" /></p><p><img width="402" height="201" class="asymptote" src="../asymptote/2ba54afac7a44281cdbd5ae815e5fe4b.svg" /></p><p>The upper sum with $R$ is less than the upper sum with $P$ because
-the rectangle between $r$ and $n_2$ is lower than before.
-That's because the maximum value of $f$ on $[n_1,n_2]$ came from $[n_1,r]$, and not from $[r,n_2]$;
-all values of $f$ on $[r,n_2]$ are less than the maximum on $[n_1,n_2]$.</p>
+<p><img width="340" height="300" class="asymptote" src="../asymptote/9af0ebb9083bdb23ccaa0923b2d31eaf.svg" /></p><p>This is also a common way to define complex numbers;
+they are just pairs of two real numbers $(a,b)$, also written as $a + bi$.
+There is an exception though:
+in the case $b=0$,
+the complex number $a + 0i$ and the real number $a$ are the same,
+even though a real number $a$ can't be equal to a pair of real numbers $(a,b)$.</p>
 
-<p>In general, this explains why the upper sum can't increase when adding a number to the partition,
-but the upper sum doesn't necessarily decrease.
-For example, if the graph of $f$ is a horizontal line, then all upper sums are equal,
-and adding partition numbers doesn't change them.</p>
+<p>A 2D vector is also a pair of real numbers,
+so we can also think of complex numbers as vectors,
+so that $a + bi$ corresponds with $a\I + b\J$.
+Note that $i$ as a complex number means "up", but $\I$ as a vector means "right".</p>
 
-<p>A similar reasoning shows that lower sums increase or stay the same when adding a partition number.</p>
-
-<div class="box graybox"><p>Let $P$ be a partition of $[a,b]$ and let $R$ be its refinement that has only one more number than $P$. Then
-$$
-\text{upper sum of $f$ with $P$} \ge \text{upper sum of $f$ with $R$}
-$$
-and
-$$
-\text{lower sum of $f$ with $P$} \le \text{lower sum of $f$ with $R$}.
-$$
-</p>
-
-</div><p>By adding "new" partition numbers one by one, we see that this also works when
-the refinement contains multiple partition numbers that are not in $P$.
-Because we're writing $\ge$ and $\le$, it also works with how any partition is a refinement of itself.</p>
-
-<div class="box graybox"><p>Let $P$ be a partition of $[a,b]$. Then
-$$
-\text{upper sum of $f$ with $P$} \ge \text{upper sum of $f$ with any refinement of $P$}
-$$
-and
-$$
-\text{lower sum of $f$ with $P$} \le \text{lower sum of $f$ with any refinement of $P$}.
-$$
-</p>
-
-</div><h2 id="upper-and-lower-sums-of-different-partitions">Upper and lower sums of different partitions<a class="headerlink" href="#upper-and-lower-sums-of-different-partitions" title="Link to this title">¶</a></h2><p>If we take any two partitions of $[a,b]$, say $P_1$ and $P_2$,
-then we can combine their numbers to make a partition that is a refinement of both partitions.</p>
-
-<p><img width="413" height="126" class="asymptote" src="../asymptote/d7267de36cb4318f300fdedf7488af28.svg" /></p><p>Now we get
+<p><img width="340" height="300" class="asymptote" src="../asymptote/d06cc43413a3d008cf40863164b99c28.svg" /></p><p><img width="340" height="300" class="asymptote" src="../asymptote/be117031281b75434a1e17751cd0e072.svg" /></p><h2 id="borrowing-operations-from-vectors">Borrowing operations from vectors<a class="headerlink" href="#borrowing-operations-from-vectors" title="Link to this title">¶</a></h2><p>We can add and subtract any 2D vectors $a\I+b\J$ and $x\I+y\J$ with these rules:
 $$
 \begin{align}
-\text{lower sum of $f$ with $P_1$}
-&\le \text{lower sum of $f$ with refinement} \\
-&\le \text{upper sum of $f$ with refinement} \\
-&\le \text{upper sum of $f$ with $P_2$}.
+(a\I + b\J) + (x\I + y\J) &= (a+x)\I + (b+y)\J \\
+(a\I + b\J) - (x\I + y\J) &= (a-x)\I + (b-y)\J
 \end{align}
 $$</p>
 
-<div class="box graybox"><p>For any upper and lower sums of $f$ on $[a,b]$, we have
+<p>Let's use these addition and subtraction operations the same way with complex numbers
+so that the complex number $a + bi$ corresponds with the vector $a\I + b\J$.</p>
+
+<div class="box graybox"><p>Let $a+bi$ and $x+yi$ be complex numbers.
+Their addition and subtraction is defined like this:
 $$
-\text{lower sum} \le \text{upper sum},
+\begin{align}
+(a + bi) + (x + yi) &= (a+x) + (b+y)i \\
+(a + bi) - (x + yi) &= (a-x) + (b-y)i \\
+\end{align}
 $$
-even if the upper and lower sums are from different partitions.
 </p>
 
-</div></div>
+</div><p>Just like with real numbers and vectors, $-w$ means $0-w$ when $w$ is a complex number, so
+$$
+-(a+bi) = (-a) + (-b)i
+$$
+as expected.</p>
+
+<p>Because these operations are actually just the usual vector operations,
+they satisfy familiar rules, such as $(a+b)-c = a+(b-c)$,
+and they look just like the vector operations:</p>
+
+<p><img width="242" height="194" class="asymptote" src="../asymptote/0304dc5c08eb4361b610ec3f844bcaec.svg" /></p><p>The <a href="mul.html">next page</a> is all about multiplying complex numbers with each other.
+</p>
+
+</div>
 </body>
 </html>

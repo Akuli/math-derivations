@@ -1,0 +1,90 @@
+# Angle and Length
+
+Instead of thinking about a complex number as with $x$ and $y$ coordinates,
+as in $x + yi$, we can think of it as an angle and length of the vector.
+Just like in unit circle trig (TODO),
+a bigger angle means counter-clockwise and zero means right.
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-1,3,-1,4);
+    pair z = (2,3);
+    draw((0,0)--z, L="$z$", arrow=Arrow(5mm), p=deepred);
+    draw(rarc((0,0), 0.6, 0, atan2(z.y, z.x)), L="angle", p=deepgreen);
+
+The angle may be bigger than 180 degrees:
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-3,2,-3,2);
+    pair z = (-2,-2);
+    draw((0,0)--z, L="$z$", arrow=Arrow(5mm), p=deepred);
+    draw(rarc((0,0), 0.6, -2pi, atan2(z.y, z.x)), L="angle", p=deepgreen);
+
+Alternatively, the angle can be negative:
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-3,2,-3,2);
+    pair z = (-2,-2);
+    draw((0,0)--z, L="$z$", arrow=Arrow(5mm), p=deepred);
+    draw(rarc((0,0), 0.6, 0, atan2(z.y, z.x)), L="negative angle", align=SE, p=deepgreen);
+
+In general, angles that differ by a full turn (360 degrees or $2\pi$ radians) are considered to be the same.
+This ensures that the angles in the above two pictures are considered the same.
+
+Examples:
+
+<ul><li>
+The length of $i$ is $1$. The angle of $i$ is 90 degrees, which is $\pi/2$ radians.
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-4,3,-1,4);
+    pair z = (0,1);
+    draw((0,0)--z, L="$i$", align=W, arrow=Arrow(5mm), p=deepred);
+    draw(rarc((0,0), 0.4, 0, atan2(z.y, z.x)), L="$90^\circ$", p=deepgreen);
+
+</li><li>
+The length of $5$ is $5$.
+The angle is zero.
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-1,6,-1,3);
+    pair z = (5,0);
+    draw((0,0)--z, L="$5$", arrow=Arrow(5mm), p=deepred);
+
+</li><li>
+The length of $-5$ is $5$.
+The angle is 180 degrees.
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-6,2,-1,3);
+    pair z = (-5,0);
+    draw((0,0)--z, L="$-5$", arrow=Arrow(5mm), p=deepred);
+    draw(rarc((0,0), 0.4, 0, pi), L="$180^\circ$", p=deepgreen, align=NE);
+
+</li><li>
+The length of $0$ is $0$. The angle is undefined.
+Remember this somewhat annoying detail when you want to use the angle of a complex number.
+</li></ul>
+
+Generally, the length of a complex number $a + bi$ is the vector length $\sqrt{a^2+b^2}$ (TODO).
+The angle is more difficult to calculate.
+In computer programming, you can use [atan2](https://en.wikipedia.org/wiki/Atan2) to calculate the angle.
+TODO: explain how to calculate angle in general
+
+
+## Absolute value of complex number
+
+Like in the above examples, we see that the length of a real number is its absolute value.
+Now we can define the absolute value of a complex number $a+bi$ as its length:
+$$
+\abs{a+bi} = \text{length of $a+bi$} = \sqrt{a^2+b^2}
+$$
+Because the length of a real number is its absolute value,
+this behaves as expected when $a+bi$ happens to be a real number (that is, $b=0$).
+
+

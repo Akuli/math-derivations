@@ -1,0 +1,329 @@
+# Multiplying Complex Numbers
+
+Our goal is to define a multiplication for complex numbers.
+It will be an operation that takes in two complex numbers, $z$ and $w$,
+and outputs another complex number, denoted $zw$.
+We want it to have at least these properties,
+for all real numbers $a,b \in \mathbb{R}$ and complex numbers $v,w,z \in \mathbb{C}$:
+
+* "Backwards compatibility" with real number multiplication:
+  $(a + 0i)(b + 0i)$ as a complex number multiplication and
+  $ab$ as a real number multiplication must produce the same result.
+* The complex number multiplication $(b + 0i)(0 + 1i)$ gives the complex number $0+bi$.
+  In other words, the complex number multiplication $bi$
+  is consistent with how we write complex numbers as $a + bi$.
+* The number $0$ behaves as expected: $0z = 0$
+* The number $1$ behaves as expected: $1z = z$
+* The number $i$ behaves as expected: $i^2 = -1$
+  (here $i^2$ means $i$ multiplied with itself, using the complex number multiplication)
+* Order doesn't matter: $zw=wz$
+* Parentheses don't matter: $z(vw)=(zv)w$
+  (when this rule applies, we can write $zvw$ without any parentheses,
+  and it doesn't matter whether it means $(zv)w$ or $z(vw)$)
+* Distributing: $z(v+w)=zv+zw$
+
+On the rest of this page, I will call this the **wish list**.
+
+Using only the wish list, we can for example calculate
+$$
+(-1)z = (-1)z + 1z - z = (-1 + 1)z - z = 0z - z = 0 - z,
+$$
+which shows that $(-1)z = -z$ as expected.
+Rules like $(a+b)^2 = a^2 + 2ab + b^2$ also follow from the wish list.
+We can even multiply any two complex numbers $a + bi$ and $x + yi$:
+$$
+\begin{align}
+(a + bi)(x + yi)
+&= (a + bi)x + (a + bi)(yi) \\
+&= ax + (bi)x + (a + bi)(yi) \\
+&= ax + (bi)x + (yi)(a + bi) \\
+&= ax + (bi)x + (yi)a + (yi)(bi) \\
+&= ax + bxi + ayi + byi^2 \\
+&= ax + bxi + ayi + by(-1) \\
+&= ax + bxi + ayi + (-by) \\
+&= (ax - by) + (bx + ay)i
+\end{align}
+$$
+I don't recommend memorizing the resulting formula.
+To calculate a complex number multiplication like $(2+3i)(4-5i)$,
+just expand it as you would usually do and apply $i^2 = -1$;
+the wish list essentially says that it's how complex number multiplication works.
+
+graybox:
+    Any complex number multiplication can be calculated using only the wish list.
+
+Note that the complex number multiplication is
+neither [dot product](../vectors/dot-projection.html) nor cross product (TODO);
+it's something different.
+To see this, note that
+[the vector corresponding to](intro.html#borrowing-operations-from-vectors) $i$
+is $\J$. Its dot product with itself is
+$$
+\J \cdot \J = (0\I + 1\J) \cdot (0\I + 1\J) = 0^2 + 1^2 = 1,
+$$
+and its cross product with itself, when $i$ is thought of as the vector $0\I+1\J+0\K$, is
+$$
+\begin{vmatrix}
+\I & \J & \K \\
+0 & 1 & 0 \\
+0 & 1 & 0
+\end{vmatrix}
+= \I(0-0) - \J(0-0) + \K(0-0) = \vec 0.
+$$
+Neither of these is $-1$, and we required $i^2 = -1$.
+
+Also note that multiplying a complex number $a + bi$ by a real number $c$ behaves so that
+$$
+c(a + bi) = ca + c(bi) = ca + (cb)i,
+$$
+just like multiplying a vector $a\I + b\J$ gives
+$$
+c(a\I+b\J) = (ca)\I + (cb)\J.
+$$
+That's why we can use everything we know about multiplying a vector and a real number
+when multiplying a complex number and a real number.
+
+The wish list is good for calculating complex number multiplications,
+but currently we don't have any way to visualize the multiplication like
+we can visualize [complex number addition](intro.html#borrowing-operations-from-vectors).
+Let's fix that.
+
+
+## Observations
+
+Notice that
+$$
+(2i)(2 + 3i) = (2i)2 + (2i)(3i) = 4i + 6i^2 = 4i - 6 = -6 + 4i.
+$$
+Here are the vectors corresponding to $2+3i$ and $-6+4i$:
+
+asymptote:
+    unitsize(1.2cm);
+    axises(-6,3,-1,4);
+    draw((0,0)--(2,3), L="$2+3i$", arrow=Arrow(5mm), p=deepred);
+    draw((0,0)--(-6,4), L="$(2i)(2+3i)$", arrow=Arrow(5mm), p=deepgreen, align=SW);
+    draw(rarc((0,0), 1, atan(3/2), atan(3/2)+pi/2), p=blue);
+
+Let's make these observations (using [angles and lengths](angle-and-len.html)):
+
+* The blue angle in the picture looks like 90 degrees, and it actually is 90 degrees.
+  To verify this, you can [calculate the dot product](../vectors/iwi-jwj.html) of
+  the vectors corresponding to $2+3i$ and $-6+4i$.
+  You should get $0$, which means that the vectors are perpendicular.
+* The length of $(2i)(2+3i)$ is two times the length of $2+3i$.
+
+Note that the angle of $2i$ is 90 degrees and the length of $2i$ is $2$.
+What seems to be happening is that when calculating a complex number multiplication,
+the angles get added and the lengths get multiplied.
+
+Let's do another example. We multiply $1+i$ with itself.
+
+asymptote:
+    unitsize(3cm);
+    axises(-1,2,-1,2);
+    draw((0,0)--(1,1), L=rotate(45)*"$1+i$", arrow=Arrow(5mm), align=NW, p=deepred);
+    draw((1,0)--(1,1), p=gray+smalldashes);
+    draw(shift(1,0)*scale(0.2)*rotate(90)*((1,0)--(1,1)--(0,1)));
+
+The angle of this complex number is 45 degrees, and its length is
+$$
+\sqrt{1^2 + 1^2} = \sqrt{2}.
+$$
+To multiply $1+i$ with itself, we can use $(a+b)^2 = a^2 + 2ab + b^2$,
+because the derivation of that rule (TODO) can be done using only the wish list properties,
+and we get
+$$
+(1+i)^2
+= 1^2 + 2i + i^2
+= 1+2i-1 = 2i,
+$$
+which is a complex number with length $2=\sqrt{2}\sqrt{2}$ and angle $90^\circ = 45^\circ+45^\circ$ as expected.
+
+asymptote:
+    unitsize(3cm);
+    axises(-1,2,-1,3);
+    draw((0,0)--(0,2), L="$2i$", arrow=Arrow(5mm), p=deepgreen);
+    draw((0,0)--(1,1), L=rotate(45)*"$1+i$", arrow=Arrow(5mm), align=NW, p=deepred);
+    draw((1,0)--(1,1), p=gray+smalldashes);
+    draw(shift(1,0)*scale(0.2)*rotate(90)*((1,0)--(1,1)--(0,1)));
+
+
+## Why do angles get added and lengths get multiplied?
+
+Let's define an operation that takes in two complex numbers $z$ and $w$,
+and results in another complex number that we shall denote with $z \star w$.
+(I don't think anyone else uses this notation, and I won't use it after this derivation.)
+We define the $\star$ operation to do what the multiplication $zw$ seems to do:
+$z \star w$ is a complex number such that
+$$
+\text{length of $(z \star w)$} = (\text{length of $z$})(\text{length of $w$})
+$$
+and
+$$
+\text{angle of $(z \star w)$} = (\text{angle of $z$}) + (\text{angle of $w$}).
+$$
+The angle of $0$ is undefined, but that doesn't matter;
+if $z=0$ or $w=0$, then the length of $z \star w$ will be zero anyway,
+and so $z \star w = 0$ as well, regardless of the angle.
+
+This operation satisfies all properties of the wish list;
+that is, for all $v,w,z \in \mathbb{C}$:
+
+<ul><li>
+For **real numbers** $a,b \in \mathbb{R}$,
+we have $a \star b = ab$, where on the right side, $ab$ is a multiplication of real numbers.
+To see why, first notice that in real number multiplication,
+absolute values (lengths) get multiplied, just like with $\star$,
+and the angles also match in all of the following cases:
+    <ul><li>
+    If one of $a$ and $b$ is zero, then $ab$ and $a \star b$ are both zero and angles don't matter.
+    </li><li>
+    If $a$ and $b$ are both positive, their angles are zero,
+    so the angle of $(a+0i) \star (b+0i)$ is $0+0=0$.
+    Because $ab$ is a positive real number, its angle is also zero.
+    </li><li>
+    If one of $a$ and $b$ is positive and the other is negative,
+    their angles are 0 degrees and 180 degrees,
+    so the angle of $(a+0i) \star (b+0i)$ is $0+180=180$ degrees.
+    Because $ab$ is a negative real number, its angle is also 180 degrees.
+    </li><li>
+    If $a$ and $b$ are both negative, their angles are 180 degrees,
+    so the angle of $(a+0i) \star (b+0i)$ is $180+180=360$ degrees.
+    We treat this angle as zero because it differs from zero by 360 degrees.
+    Because $ab$ is a positive real number, its angle is also zero.
+    </li></ul>
+</li><li>
+If $b$ is a nonzero real number, then $b \star i$ has the same length (absolute value) as $b$
+and has angle $90+0=90$ degrees or $90+180=270$ degrees,
+where $0$ or $180$ degrees is the angle of $b$, depending on whether $b$ is positive or negative.
+This is the same as the angle of the complex number $0+bi$
+(note that 270 degrees and -90 degrees differ by 360 degrees).
+Hence $b \star i = 0+bi$, at least whenever $b$ is positive or negative.
+Also, $0 \star i = 0 = 0+0i$.
+</li><li>
+$0 \star z = 0$, like explained above.
+</li><li>
+$1 \star z = 1$, because multiplying by $1$ (length of $1$)
+or adding $0$ (angle of $1$) does nothing.
+</li><li>
+Because the length of $i$ is 1 and the angle is 90 degrees,
+the length of $i \star i$ is also 1 and its angle is 180 degrees.
+So, we have $i \star i = -1$.
+</li><li>
+Order and parentheses don't matter when adding or multiplying real numbers.
+Because calculations like $z\star v$ or $(z \star v) \star w$
+add the angles and multiply the lengths of all the vectors involved,
+order and parentheses don't matter with $\star$ either.
+</li><li>
+Consider a rotation around $0$ by the angle of $z$.
+This can be described like this: $\rotate(w)$ is a complex number
+just like $w$ but with the angle of $z$ added to its angle.
+Now $z \star w$ is just like $\rotate(w)$, but with the length multiplied by the length of $z$.
+In other words,
+$$
+z \star w = \abs{z} \rotate(w),
+$$
+where the multiplication on the right side multiplies the length by $\abs{z}$ without changing the angle,
+because it behaves like multiplying a number and a vector.
+The following picture shows that $\rotate(v+w)=\rotate(v)+\rotate(w)$,
+because the entire triangle created by $v$, $w$ and $v+w$ gets rotated:
+
+asymptote:
+    unitsize(2cm);
+    axises(-1,4,-1,3.5);
+
+    pair v = (3,2);
+    pair w = (-0.2,1);
+
+    void draw_stuff(string prefix, string suffix, transform R, real p, real q) {
+        draw((0,0)--(R*v), L=Label(prefix+"v"+suffix, position=Relative(p)), arrow=Arrow(5mm), p=deepgreen);
+        draw((R*v)--(R*(v+w)), L=prefix+"w"+suffix, arrow=Arrow(5mm), p=deepred);
+        draw((0,0)--(R*(v+w)), L=Label(prefix+"v+w"+suffix, position=Relative(q)), arrow=Arrow(5mm), p=blue, align=R*NW);
+    }
+
+    draw_stuff("$", "$", rotate(0), 0.5, 0.8);
+    draw_stuff("rotate$(", ")$", rotate(100), 0.8, 0.5);
+
+By multiplying both sides of $\rotate(v+w)=\rotate(v)+\rotate(w)$ with $\abs{z}$
+and distributing it like we usually do when multiplying vectors and numbers, we get
+$$
+\underbrace{\abs{z}\rotate(v+w)}_{z \star (v+w)}
+= \underbrace{\abs{z}\rotate(v)}_{z \star v}
++ \underbrace{\abs{z}\rotate(w)}_{z \star w}.
+$$
+The angle of $z$ is undefined when $z = 0$,
+but $z\star(v+w)=(z \star v) + (z \star w)$ is also true in that case;
+then it just says that $0 = 0+0$.
+</li></ul>
+
+Because the complex number product $zw$ can be calculated using only the wish list properties
+and the $\star$ operation satisfies the wish list properties,
+$z \star w$ must be the complex number product $zw$.
+So, our $\star$ operation really is the complex number multiplication.
+
+graybox:
+    When multiplying complex numbers, we can add the angles and multiply the lengths.
+
+
+## De Moivre's formula
+
+Let $z$ be a complex number with angle $\theta$ and length 1.
+It is on the unit circle of radius $1$ centered at $0$, at the angle $\theta$.
+
+asymptote:
+    unitsize(5cm);
+    axises(-1.2, 1.4, -1.2, 1.4);
+    real theta = 2;
+    draw(unitcircle, p=blue);
+    draw((0,0)--cis(theta), L="$z$", arrow=Arrow(5mm), p=deepred, align=SW);
+    draw(rarc((0,0), 0.3, 0, theta), L="$\theta$", p=deepgreen);
+
+With trig, we see that $z = \cos(\theta) + i\sin(\theta)$.
+
+We calculate $z^n$ for any positive integer $n$.
+Because the length of $z$ is 1,
+the length of $z^2$ is also $1$, and so is the length of $z^3 = z^2 \cdot z$ and so on.
+So, the length of $z^n$ is $1$.
+The angle of $z^2$ is $\theta+\theta=2\theta$,
+the angle of $z^3$ is $2\theta+\theta=3\theta$, and so on,
+so the angle of $z^n$ is $n\theta$.
+Because $z^n$ has length $1$, it's on the unit circle,
+just like $z$ but with angle $n\theta$ instead of $\theta$, and we get
+$$
+z^n = \cos(n\theta) +i\sin(n\theta).
+$$
+
+graybox:
+    For any real number $\theta$ and positive integer $n$, we have
+    $$
+    (\cos(\theta)+i\sin(\theta))^n = \cos(n\theta)+i\sin(n\theta).
+    $$
+    This is known as De Moivre's formula.
+
+
+## Example: $\sin(2\theta)$ and $\cos(2\theta)$
+
+By plugging in $n=2$ to De Moivre's formula and using $(a+b)^2=a^2+2ab+b^2$, we get
+$$
+\begin{align}
+\cos(2\theta) + i\sin(2\theta)
+&= (\cos(\theta) + i\sin(\theta))^2 \\
+&= (\cos(\theta))^2 + 2\cos(\theta)i\sin(\theta) + (i\sin(\theta))^2 \\
+&= \cos^2(\theta) - \sin^2(\theta) + 2\sin(\theta)\cos(\theta)i,
+\end{align}
+$$
+where the minus in front of $\sin^2(\theta)$ came from $i^2=-1$.
+By comparing the real parts and imaginary parts
+($x$ and $y$ coordinates of vectors corresponding to the complex numbers)
+on both sides, we get
+$$
+\begin{align}
+\cos(2\theta) &= \cos^2(\theta) - \sin^2(\theta), \\
+\sin(2\theta) &= 2\sin(\theta)\cos(\theta).
+\end{align}
+$$
+A similar derivation can be used to write $\sin(n\theta)$ and $\cos(n\theta)$
+using only $\sin(\theta)$ and $\cos(\theta)$,
+with any other positive integer $n$.
+For doing that, one needs to expand $(a+b)^n$, and
+the binomial theorem (TODO) can be used for that.

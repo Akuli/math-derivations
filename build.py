@@ -181,6 +181,11 @@ def get_sidebar_content(txtfile):
             ])),
         ])),
 
+        dropdown("Complex numbers", join([
+            link("Introduction", 'complex/intro'),
+            link("Angle and length", 'complex/angle-and-len'),
+            link("Multiplying complex numbers", 'complex/mul'),
+        ])),
     ])
 
 
@@ -204,6 +209,9 @@ def get_head_extras(filename):
             I: [ "\\\\vec{i}", 0 ],
             J: [ "\\\\vec{j}", 0 ],
             K: [ "\\\\vec{k}", 0 ],
+
+            // funny operator name used only in one file
+            rotate: [ "\\\\operatorname{rotate}", 0 ],
 
             // darkred is too dark, red is too bright
             red: [ "\\\\color{##c00}{#1}", 1 ],

@@ -1,0 +1,117 @@
+# Introduction to Complex Numbers
+
+The basic idea with complex numbers is to introduce a "number" called $i$
+which behaves so that $i^2 = -1$.
+This is not a number in the usual sense,
+because $x^2$ is not negative for any real number $x \in \mathbb{R}$.
+This $i$ is something else.
+
+The usual numbers will be called **real numbers**.
+The results of multiplying real numbers with $i$, such as $2i$ and $-0.6i$,
+are called **imaginary numbers**.
+A **complex number** is the result of adding a real number and an imaginary number,
+such as $2+3i$ or $4-5i$.
+
+The set of complex numbers is denoted with $\mathbb{C}$, just like $\mathbb{R}$ is the set of real numbers.
+
+A common way to visualize complex numbers is to think of them as points in the 2D plane
+so that $a + bi$, with $a,b \in \mathbb{R}$, corresponds with the point $(a,b)$.
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-3,5.5,-3,4.5);
+
+    for (int n = -2; n <= 4; ++n) {
+        if (n != 0) {
+            dot((n,0), p=dotpen, L="$"+string(n)+"$", align=S);
+        }
+    }
+    for (int n = -2; n <= 3; ++n) {
+        if (n != 0) {
+            dot((0,n), p=dotpen, L="$"+(n==1 ? "" : n==-1 ? "-" : string(n))+"i$", align=E);
+        }
+    }
+
+    dot((2,3), L="$2+3i$", p=dotpen+deepred);
+    dot((4,-1), L="$4-i$", p=dotpen+deepgreen);
+
+This is also a common way to define complex numbers;
+they are just pairs of two real numbers $(a,b)$, also written as $a + bi$.
+There is an exception though:
+in the case $b=0$,
+the complex number $a + 0i$ and the real number $a$ are the same,
+even though a real number $a$ can't be equal to a pair of real numbers $(a,b)$.
+
+A 2D vector is also a pair of real numbers,
+so we can also think of complex numbers as vectors,
+so that $a + bi$ corresponds with $a\I + b\J$.
+Note that $i$ as a complex number means "up", but $\I$ as a vector means "right".
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-3,5.5,-3,4.5);
+
+    draw((-2,1.5)--(-2+1,1.5), L="$\I$", align=S, arrow=Arrow(5mm));
+    draw((-2,1.5)--(-2,1.5+1), L="$\J$", align=W, arrow=Arrow(5mm));
+
+    draw((0,0)--(2,3), L="$2\I+3\J$", arrow=Arrow(5mm), p=deepred);
+    draw((0,0)--(4,-1), L="$4\I-\J$", arrow=Arrow(5mm), p=deepgreen);
+
+asymptote:
+    unitsize(1.4cm);
+    axises(-3,5.5,-3,4.5);
+
+    draw((-2,1.5)--(-2+1,1.5), L="$1$", align=S, arrow=Arrow(5mm));
+    draw((-2,1.5)--(-2,1.5+1), L="$i$", align=W, arrow=Arrow(5mm));
+
+    draw((0,0)--(2,3), L="$2+3i$", arrow=Arrow(5mm), p=deepred);
+    draw((0,0)--(4,-1), L="$4-i$", arrow=Arrow(5mm), p=deepgreen);
+
+
+## Borrowing operations from vectors
+
+We can add and subtract any 2D vectors $a\I+b\J$ and $x\I+y\J$ with these rules:
+$$
+\begin{align}
+(a\I + b\J) + (x\I + y\J) &= (a+x)\I + (b+y)\J \\
+(a\I + b\J) - (x\I + y\J) &= (a-x)\I + (b-y)\J
+\end{align}
+$$
+
+Let's use these addition and subtraction operations the same way with complex numbers
+so that the complex number $a + bi$ corresponds with the vector $a\I + b\J$.
+
+graybox:
+    Let $a+bi$ and $x+yi$ be complex numbers.
+    Their addition and subtraction is defined like this:
+    $$
+    \begin{align}
+    (a + bi) + (x + yi) &= (a+x) + (b+y)i \\
+    (a + bi) - (x + yi) &= (a-x) + (b-y)i \\
+    \end{align}
+    $$
+
+Just like with real numbers and vectors, $-w$ means $0-w$ when $w$ is a complex number, so
+$$
+-(a+bi) = (-a) + (-b)i
+$$
+as expected.
+
+Because these operations are actually just the usual vector operations,
+they satisfy familiar rules, such as $(a+b)-c = a+(b-c)$,
+and they look just like the vector operations:
+
+asymptote:
+    unitsize(1.5cm);
+    axises(-1,4,-1,3.5);
+
+    pair z = (3,2);
+    pair w = (-1,1);
+    pair h = scale(0.1)*rotate(-90)*w;
+
+    draw((0,0)--z, L="$z$", arrow=Arrow(5mm), p=deepgreen);
+    draw(z--(z+w), L="$w$", align=SW, arrow=Arrow(5mm), p=deepred);
+    draw((0,0)--(z+w), L=rrotate(atan(3/2))*"$z+w$", arrow=Arrow(5mm), p=blue, align=NW);
+    draw((z+h)--(z+h-w), L="$-w$", arrow=Arrow(5mm), align=NE, p=deepred);
+
+The [next page](mul.html) is all about multiplying complex numbers with each other.

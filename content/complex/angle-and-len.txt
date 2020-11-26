@@ -1,6 +1,6 @@
 # Angle and Length
 
-Instead of thinking about a complex number as with $x$ and $y$ coordinates,
+Instead of thinking about a complex number with $x$ and $y$ coordinates,
 as in $x + yi$, we can think of it as an angle and length of the vector.
 Just like in unit circle trig (TODO),
 a bigger angle means counter-clockwise and zero means right.
@@ -30,8 +30,8 @@ asymptote:
     draw((0,0)--z, L="$z$", arrow=Arrow(5mm), p=deepred);
     draw(rarc((0,0), 0.6, 0, atan2(z.y, z.x)), L="negative angle", align=SE, p=deepgreen);
 
-In general, angles that differ by a full turn (360 degrees or $2\pi$ radians) are considered to be the same.
-This ensures that the angles in the above two pictures are considered the same.
+In general, angles that differ by a full turn (360 degrees or $2\pi$ radians),
+such as the ones in the above two pictures, are considered to be the same.
 
 Examples:
 
@@ -79,12 +79,9 @@ TODO: explain how to calculate angle in general
 
 ## Absolute value of complex number
 
-Like in the above examples, we see that the length of a real number is its absolute value.
-Now we can define the absolute value of a complex number $a+bi$ as its length:
+The absolute value of a complex number $a+bi$ is defined to be its length:
 $$
 \abs{a+bi} = \text{length of $a+bi$} = \sqrt{a^2+b^2}
 $$
 Because the length of a real number is its absolute value,
 this behaves as expected when $a+bi$ happens to be a real number (that is, $b=0$).
-
-

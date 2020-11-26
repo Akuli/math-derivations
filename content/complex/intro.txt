@@ -98,7 +98,7 @@ $$
 as expected.
 
 Because these operations are actually just the usual vector operations,
-they satisfy familiar rules, such as $(a+b)-c = a+(b-c)$,
+they satisfy familiar rules, such as $(z+v)-w = z+(v-w)$,
 and they look just like the vector operations:
 
 asymptote:
@@ -114,4 +114,4 @@ asymptote:
     draw((0,0)--(z+w), L=rrotate(atan(3/2))*"$z+w$", arrow=Arrow(5mm), p=blue, align=NW);
     draw((z+h)--(z+h-w), L="$-w$", arrow=Arrow(5mm), align=NE, p=deepred);
 
-The [next page](mul.html) is all about multiplying complex numbers with each other.
+We will talk about multiplying complex numbers with each other [later](mul.html).

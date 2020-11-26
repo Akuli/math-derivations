@@ -137,8 +137,7 @@ $$
 Now the division was easy to calculate because we divided by a real number.
 
 graybox:
-    To calculate $\frac{x+yi}{a+bi}$, with real numbers $a,b,x,y$ and $a+bi$ nonzero,
-    multiply top and bottom by $a-bi$.
+    To calculate $\frac{x+yi}{a+bi}$, multiply top and bottom by $a-bi$.
     Then the bottom should simplify to a real number.
 
 This always works because

@@ -184,7 +184,8 @@ def get_sidebar_content(txtfile):
         dropdown("Complex numbers", join([
             link("Introduction", 'complex/intro'),
             link("Angle and length", 'complex/angle-and-len'),
-            link("Multiplying complex numbers", 'complex/mul'),
+            link("Multiplication", 'complex/mul'),
+            link("Division", 'complex/div'),
         ])),
     ])
 

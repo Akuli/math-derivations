@@ -10,19 +10,19 @@
 <path d='M 179.252 0L -170.717 -0' fill='none' stroke='#000000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 227.622 253.417)'>
-<path d='M 199.169 -2.58747e-15L 179.252 -5.33673L 179.252 5.33673L 199.169 -2.58747e-15Z' fill='#000000'/>
+<path d='M 199.169 0L 179.252 -5.33673L 179.252 5.33673L 199.169 0Z' fill='#000000'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 227.622 253.417)'>
-<path d='M 199.169 -2.58747e-15L 179.252 -5.33673L 179.252 5.33673L 199.169 -2.58747e-15Z' fill='none' stroke='#000000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+<path d='M 199.169 0L 179.252 -5.33673L 179.252 5.33673L 199.169 0Z' fill='none' stroke='#000000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 227.622 253.417)'>
 <path d='M 0 -179.252L 0 170.717' fill='none' stroke='#000000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 227.622 253.417)'>
-<path d='M -3.30137e-15 -199.169L -5.33673 -179.252L 5.33673 -179.252L -3.30137e-15 -199.169Z' fill='#000000'/>
+<path d='M 0 -199.169L -5.33673 -179.252L 5.33673 -179.252L 0 -199.169Z' fill='#000000'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 227.622 253.417)'>
-<path d='M -3.30137e-15 -199.169L -5.33673 -179.252L 5.33673 -179.252L -3.30137e-15 -199.169Z' fill='none' stroke='#000000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
+<path d='M 0 -199.169L -5.33673 -179.252L 5.33673 -179.252L 0 -199.169Z' fill='none' stroke='#000000' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>
 </g>
 <g transform='matrix(0.996264 0 0 0.996264 227.622 253.417)'>
 <path d='M 142.264 0C 142.264 -78.5701 78.5701 -142.264 0 -142.264C -78.5701 -142.264 -142.264 -78.5701 -142.264 -0C -142.264 78.5701 -78.5701 142.264 0 142.264C 78.5701 142.264 142.264 78.5701 142.264 0Z' fill='none' stroke='#0000ff' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10.0375' stroke-width='2.27622'/>

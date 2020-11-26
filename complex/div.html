@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Angle and Length
+<title>Dividing Complex Numbers
 </title>
 
     <script type="text/x-mathjax-config">
@@ -180,53 +180,172 @@
             <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a>
         </div>
         </div>
-<h1 id="angle-and-length">Angle and Length<a class="headerlink" href="#angle-and-length" title="Link to this title">¶</a></h1><p>Instead of thinking about a complex number as with $x$ and $y$ coordinates,
-as in $x + yi$, we can think of it as an angle and length of the vector.
-Just like in unit circle trig (TODO),
-a bigger angle means counter-clockwise and zero means right.</p>
+<h1 id="dividing-complex-numbers">Dividing Complex Numbers<a class="headerlink" href="#dividing-complex-numbers" title="Link to this title">¶</a></h1><p>Now we have addition, subtraction and <a href="mul.txt">multiplication</a> for complex numbers,
+but we don't have division.</p>
 
-<p><img width="161" height="201" class="asymptote" src="../asymptote/bc08c9fca5f697b20756b7767e0b6b4a.svg" /></p><p>The angle may be bigger than 180 degrees:</p>
+<p>Let's start with a reminder of how division works with real numbers.
+The division $a/b$ answers the question "what number times $b$ gives $a$".
+As long as we are not trying to divide by zero ($b \ne 0$), a number like that exist.
+Also, there can't be multiple such numbers,
+because changing the number that $b$ is multiplied with will also change the result of the multiplication.</p>
 
-<p><img width="201" height="201" class="asymptote" src="../asymptote/b980340f44f77e4070ac3afa6a60303c.svg" /></p><p>Alternatively, the angle can be negative:</p>
+<p>For defining $z/w$, with complex numbers $z$ and $w$, consider the equation
+$$
+\text{what} \cdot w = z.
+$$
+Because complex number multiplication <a href="mul.html#why-do-angles-get-added-and-lengths-get-multiplied">adds angles and multiplies lengths</a>,
+we have
+$$
+\abs{\text{what}} \abs{w} = \abs{z}
+$$
+where I <a href="angle-and-len.html#absolute-value-of-complex-number">wrote the lengths as absolute values</a>.
+If we are not dividing by zero, we have $\abs{w} \ne 0$ and we get
+$$
+\abs{\text{what}} = \frac{\abs{z}}{\abs{w}}.
+$$
+A similar calculation with angles gives
+$$
+(\text{angle of what}) + (\text{angle of $w$}) = \text{angle of $z$}
+$$
+and then
+$$
+\text{angle of what} = (\text{angle of $z$}) - (\text{angle of $w$}),
+$$
+where we also need to assume $z \ne 0$ for using the angle of $z$.
+So, if both $z$ and $w$ are nonzero, there is one and only one complex number
+that gives $z$ when multiplied with $w$;
+it's the complex number whose length is $\abs{z}/\abs{w}$ and angle is $(\text{angle of $z$}) - (\text{angle of $w$})$.
+We can call that $z/w$.</p>
 
-<p><img width="278" height="201" class="asymptote" src="../asymptote/12364db6eb24f676b10d2afb504024c8.svg" /></p><p>In general, angles that differ by a full turn (360 degrees or $2\pi$ radians) are considered to be the same.
-This ensures that the angles in the above two pictures are considered the same.</p>
+<p>With real numbers, we also have $0/b = 0$ whenever $b \ne 0$.
+For a nonzero complex number $w$, $0/w$ corresponds with
+$$
+\text{what} \cdot w = 0,
+$$
+and by looking at lengths on both sides, we see that this works if and only if $\abs{\text{what}}=0$,
+which means that the complex number denoted with $\text{what}$ is zero.
+So, we have $0/b=0$ as expected.</p>
 
-<p>Examples:</p>
+<p>Division by zero is undefined for the exact same reason as with real numbers.
+A division like $z/0$ corresponds with $\text{what} \cdot 0 = z$,
+and there can never be exactly one number satisfying that;
+it's always true for all complex numbers or for no complex numbers, depending on the value of $z$.</p>
 
-<p><ul><li>
-The length of $i$ is $1$. The angle of $i$ is 90 degrees, which is $\pi/2$ radians.</p>
-
-<p><img width="280" height="201" class="asymptote" src="../asymptote/36237d6657370dea14d991b2ab163a8b.svg" /></p><p></li><li>
-The length of $5$ is $5$.
-The angle is zero.</p>
-
-<p><img width="280" height="161" class="asymptote" src="../asymptote/f4164fb7fd535bf549195aa488600d68.svg" /></p><p></li><li>
-The length of $-5$ is $5$.
-The angle is 180 degrees.</p>
-
-<p><img width="320" height="161" class="asymptote" src="../asymptote/6dfc3c8f6e0c40e3d20cacb6c5bf7989.svg" /></p><p></li><li>
-The length of $0$ is $0$. The angle is undefined.
-Remember this somewhat annoying detail when you want to use the angle of a complex number.
-</li></ul></p>
-
-<p>Generally, the length of a complex number $a + bi$ is the vector length $\sqrt{a^2+b^2}$ (TODO).
-The angle is more difficult to calculate.
-In computer programming, you can use <a href="https://en.wikipedia.org/wiki/Atan2">atan2</a> to calculate the angle.
-TODO: explain how to calculate angle in general
+<div class="box graybox"><p>Complex number division is defined whenever we are not dividing by zero.
+When dividing, you can subtract the angles and divide the lengths:
+\begin{align*}
+\text{angle of $\frac{z}{w}$} &= (\text{angle of $z$})-(\text{angle of $w$}) \\
+\abs{\frac{z}{w}} &= \frac{\abs{z}}{\abs{w}}
+\end{align*}
 </p>
 
-<h2 id="absolute-value-of-complex-number">Absolute value of complex number<a class="headerlink" href="#absolute-value-of-complex-number" title="Link to this title">¶</a></h2><p>Like in the above examples, we see that the length of a real number is its absolute value.
-Now we can define the absolute value of a complex number $a+bi$ as its length:
-$$
-\abs{a+bi} = \text{length of $a+bi$} = \sqrt{a^2+b^2}
-$$
-Because the length of a real number is its absolute value,
-this behaves as expected when $a+bi$ happens to be a real number (that is, $b=0$).
-
-
+</div><p>Subtracting angles and dividing lengths should make sense,
+because when multiplying, we add angles and multiply lengths.
 </p>
 
-</div>
+<h2 id="rules">Rules<a class="headerlink" href="#rules" title="Link to this title">¶</a></h2><p>The division of complex numbers has mostly the same handy rules as division of real numbers,
+and they can be proved in the same way.
+As an example, we derive
+$$
+\frac{vz}{wz} = \frac{v}{w}
+$$
+for complex numbers $v,w,z$, with $w$ and $z$ nonzero.
+The division $\frac{vz}{wz}$ corresponds with
+$$
+\text{what} \cdot wz = vz,
+$$
+and that indeed is $\frac{v}{w}$ because
+$$
+\frac{v}{w} \cdot wz = \left( \frac{v}{w} w \right)z = vz.
+$$
+Here $\frac{v}{w} w = v$ because $\frac{v}{w}$ means the number that gives $v$ when multiplied with $w$.</p>
+
+<p>If you want to see more division rule derivations,
+you can try doing it yourself or you can ask me to write more derivations here.</p>
+
+<div class="box graybox"><p>The usual calculating rules apply for division of complex numbers.
+</p>
+
+</div><h2 id="how-to-divide-without-angles-and-lengths">How to divide without angles and lengths<a class="headerlink" href="#how-to-divide-without-angles-and-lengths" title="Link to this title">¶</a></h2><p>Let's say we want to calculate $(1+2i)/(3+4i)$.
+One way to do it would be to find angles and lengths of $1+2i$ and $3+4i$,
+but finding angles is difficult (TODO).
+A slightly better way to do it might be letting
+$$
+x + yi = \frac{1+2i}{3+4i},
+$$
+which gives
+$$
+\begin{align}
+1+2i
+&= (x+yi)(3+4i) \\
+&= 3x + 4xi + 3yi + 4yi^2 \\
+&= 3x - 4y + (4x + 3y)i.
+\end{align}
+$$
+Comparing the real and imaginary parts on both sides gives
+$$
+\left\{\begin{aligned}
+    3x-4y &= 1 \cr
+    4x+3y &= 2
+\end{aligned}\right.
+$$
+Solving a system of equations like this is not hard, but it's quite long and error-prone
+(although it's not too bad with the $2 \times 2$ inverse matrix formula (TODO)).
+An easier way to do it is to use $\frac{vz}{wz} = \frac{v}{w}$ right-to-left,
+multiplying top and bottom by $z=3-4i$:
+$$
+\frac{1+2i}{3+4i} = \frac{(1+2i)(3-4i)}{(3+4i)(3-4i)}
+$$
+By using the formula for $(a+b)(a-b)$ (TODO), we get
+$$
+(3+4i)(3-4i) = 3^2 - (4i)^2 = 3^2 + 4^2 = 25,
+$$
+where we used $-i^2 = +1$. Because this is a real number, dividing by it is easy.
+We still have to calculate the top, and that gives
+$$
+(1+2i)(3-4i) = 3 - 4i + 6i - 8i^2 = 11 + 2i.
+$$
+By putting it all together, we get
+$$
+\frac{1+2i}{3+4i} = \frac{11+2i}{25} = \frac{11}{25} + \frac{2}{25}i.
+$$
+Now the division was easy to calculate because we divided by a real number.</p>
+
+<div class="box graybox"><p>To calculate $\frac{x+yi}{a+bi}$, with real numbers $a,b,x,y$ and $a+bi$ nonzero,
+multiply top and bottom by $a-bi$.
+Then the bottom should simplify to a real number.
+</p>
+
+</div><p>This always works because
+$$
+(a+bi)(a-bi) = a^2 - (bi)^2 = a^2 + b^2.
+$$</p>
+
+<p>The complex number $a-bi$ is called the <b>conjugate</b> of $a+bi$, and it's usually denoted with
+$\overline{a+bi}$ or $(a+bi)^\star$.</p>
+
+<p>There's also a visual way to explain why this happens.
+When thinking of complex numbers as points,
+conjugate mirrors a complex number to the opposite side of the $x$ axis.</p>
+
+<p><img width="339" height="257" class="asymptote" src="../asymptote/c2b0ebb01c646cb8754322d7904e5329.svg" /></p><p>For that reason, if the angle of $z=a+bi$ is $\alpha$, then the angle of $z^{\star}=a-bi$ is $-\alpha$.</p>
+
+<p><img width="300" height="257" class="asymptote" src="../asymptote/1a555569f86e4c7cf48d734c39ac3d95.svg" /></p><p>Then the angle of $z\,z^{\star}$ is $\alpha + (-\alpha) = 0$, so $z\,z^{\star}$ must be a positive real number.
+That's why it's equal to its <a href="angle-and-len.html#absolute-value-of-complex-number">absolute value</a>.
+Because the length doesn't change when taking the conjugate, we have $\abs{z^{\star}}=\abs{z}$ and we get
+$$
+z\,z^{\star}=\abs{z\,z^{\star}}=\abs{z}\abs{z^{\star}} = \abs{z}^2,
+$$
+and because $\abs{z}=\sqrt{a^2+b^2}$, we have $z\,z^{\star}=a^2+b^2$.
+This even works if $z=0$, because as usual, we have $0=0$ in that case.</p>
+
+<div class="box graybox"><p>For any complex number $z=a+bi$, we have
+$$
+z\,z^{\star} = \abs{z}^2 = a^2 + b^2,
+$$
+where $z^{\star}=a-bi$ is the conjugate of $z$.
+</p>
+
+</div></div>
 </body>
 </html>

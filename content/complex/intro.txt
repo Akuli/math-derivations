@@ -42,6 +42,9 @@ in the case $b=0$,
 the complex number $a + 0i$ and the real number $a$ are the same,
 even though a real number $a$ can't be equal to a pair of real numbers $(a,b)$.
 
+In this context, the $x$ axis is called the **real axis** because it contains all the real numbers,
+and similarly, the $y$ axis is called the **imaginary axis**.
+
 A 2D vector is also a pair of real numbers,
 so we can also think of complex numbers as vectors,
 so that $a + bi$ corresponds with $a\I + b\J$.

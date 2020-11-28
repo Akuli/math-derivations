@@ -60,7 +60,8 @@ graybox:
     \end{align*}
 
 Subtracting angles and dividing lengths should make sense,
-because when multiplying, we add angles and multiply lengths.
+because when multiplying, we add angles and multiply lengths;
+dividing does the opposite.
 
 
 ## Rules
@@ -140,13 +141,13 @@ graybox:
     To calculate $\frac{x+yi}{a+bi}$, multiply top and bottom by $a-bi$.
     Then the bottom should simplify to a real number.
 
-This always works because
+The complex number $a-bi$ is called the **conjugate** of $a+bi$, and it's usually denoted with
+$\overline{a+bi}$ or $(a+bi)^\star$.
+Multiplying top and bottom by the conjugate of the bottom always works because
 $$
 (a+bi)(a-bi) = a^2 - (bi)^2 = a^2 + b^2.
 $$
 
-The complex number $a-bi$ is called the **conjugate** of $a+bi$, and it's usually denoted with
-$\overline{a+bi}$ or $(a+bi)^\star$.
 
 There's also a visual way to explain why this happens.
 When thinking of complex numbers as points,

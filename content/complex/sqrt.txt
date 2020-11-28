@@ -1,0 +1,258 @@
+# Square Root of Complex Number
+
+The square root of a real number $a \ge 0$ is a number that gives $a$ when multiplied with itself.
+For example, $\sqrt{4}=2$ because $2^2 = 4$.
+However, we also have $(-2)^2 = 4$, so it seems like $\sqrt{4}=-2$.
+To avoid getting $2=-2$, we require that $\sqrt{a}$ is not negative.
+Then all numbers that give $a$ when multiplied with themselves are $\pm \sqrt{a}$,
+which is why $\pm$ appears in front of square root so often.
+
+Let's generalize this to complex numbers.
+
+
+## With angles and lengths
+
+We can define the square root of any complex number $z$ by requiring $(\sqrt{z})^2 = z$,
+just like with real numbers.
+Because of how [multiplication adds angles and multiplies lengths](mul.html#why-do-angles-get-added-and-lengths-get-multiplied),
+this means that
+$$
+\begin{align}
+\abs{\sqrt{z}}^2 &= \abs{z}, \\
+2(\text{angle of $\sqrt{z}$}) &= \text{angle of $z$}.
+\end{align}
+$$
+Solving for the length and angle of $\sqrt{z}$, we get
+$$
+\begin{align}
+\abs{\sqrt{z}} &= \sqrt{\abs{z}}, \\
+\text{angle of $\sqrt{z}$} &= \frac{\text{angle of $z$}}{2}.
+\end{align}
+$$
+As usual, if $z = 0$, the angle equation is not needed because the length formula gives $\sqrt{0}=0$.
+Any nonzero complex number $z \ne 0$ has infinitely many angles, differing from each other by $2\pi$,
+[which can be written as](angle-and-len.html#argument)
+$$
+\text{all angles of $z$} = \arg(z) + k2\pi,
+$$
+where $k$ is any integer. Then we have
+$$
+\text{angle of $\sqrt{z}$} = \frac{\arg(z) + k2\pi}{2} = \frac{\arg(z)}{2} + k\pi.
+$$
+If $k$ is even, then $+k\pi$ adds some number of full turns to the angle and can be ignored.
+If $k$ is odd, then $+k\pi$ adds some number of full turns,
+and also adds a half-turn $\pi$ which means flipping to the opposite side of $0$.
+So, we get two possible values of $\sqrt{z}$, with equal lengths but on opposite sides of $0$.
+In the below picture, the blue dots are the possible values of $\sqrt{z}$.
+
+asymptote:
+    unitsize(1.5cm);
+    axises(-3,4,-2,4);
+    dot(4*cis(1), p=dotpen+deepred, L="$z$");
+    dot(2*cis(0.5), p=dotpen+blue);
+    dot(-2*cis(0.5), p=dotpen+blue);
+    draw((-2*cis(0.5))--(2cis(0.5)), p=blue+smalldashes);
+    draw((0,0)--(4cis(1)), p=deepred+smalldashes);
+
+    draw(rarc((0,0),1,0,0.5),p=deepgreen);
+    draw(rarc((0,0),0.7,0,1),p=darkorange);
+    draw((3,1)..(2.9,0.9)..(1.2cis(0.25))..(1.1cis(0.25)), arrow=Arrow(3mm), p=deepgreen);
+    draw((2.5,1.5)..(2.4,1.5)..(1.1cis(0.75))..(0.8cis(0.75)), arrow=Arrow(3mm), p=darkorange);
+    label((2.5,1.5), "angle gets divided by 2", align=E);
+
+The only thing left to do is to decide which of these should be called $\sqrt{z}$.
+Because of the flipping, the other one will then be $-\sqrt{z}$,
+and $\pm\sqrt{z}$ will appear commonly just like with real numbers.
+
+graybox:
+    Let $z$ be any complex number.
+    Then $\pm\sqrt{z}$ are the only numbers that give $z$ when multiplied with themselves.
+
+    * If one of $\pm\sqrt{z}$ is on the right side of the imaginary axis and the other is on the left side,
+      then the one on the right side is called $\sqrt{z}$.
+    * Otherwise both of $\pm\sqrt{z}$ are on the imaginary axis, and $\sqrt{z}$ is the one that is above the real axis.
+
+Note that now we can put any complex number inside square root, including negative real numbers.
+
+Examples:
+
+<ul><li>
+The length of $\pm\sqrt{-1}$ is $\sqrt{\abs{-1}}=1$.
+Because the angle of $-1$ is 180 degrees, one of $\pm\sqrt{-1}$ has angle 90 degrees.
+So, one of $\pm\sqrt{i}$ is $i$ and the other is $-i$.
+Because $i$ and $-i$ are both on the imaginary axis, with $i$ above $-i$, we have $\sqrt{-1} = i$.
+
+asymptote:
+    unitsize(2.5cm);
+    axises(-1.5,1.4,-1.5,2);
+    dot((-1,0), p=dotpen+deepred, L="$-1$", align=N);
+    dot((0,1), L="$i=\sqrt{-1}$", p=dotpen+blue);
+    dot((0,-1), L="$-i=-\sqrt{-1}$", p=dotpen+blue);
+
+</li><li>
+The length of $\pm\sqrt{4}$ is $2$. Because the angle of $4$ is $0$, one of $\pm\sqrt{4}$ has angle $0/2=0$,
+i.e. one of $\pm\sqrt{4}$ is a positive real number.
+The other one will then be a negative real number.
+So, $\pm\sqrt{4}$ are $2$ and $-2$. Because $2$ is on the right side of the imaginary axis, $\sqrt{4}=2$.
+This works with any positive number instead of $4$,
+so the square root we have defined is compatible with the square root of nonnegative real numbers.
+</li></ul>
+
+The below picture shows how distinguisihing $\sqrt{z}$ and $-\sqrt{z}$ works.
+Blue complex numbers can be written as $\sqrt{z}$, with some complex number $z$,
+and red numbers are the corresponding $-\sqrt{z}$ numbers.
+
+asymptote:
+    unitsize(4cm);
+    axises(-1.2,1.6,-1.5,1.7);
+
+    for (real angle = 0.1; angle < 0.1 + 2pi; angle += pi/20) {
+        dot(cis(angle), p=dotpen+(cos(angle) > 0 ? blue : red));
+    }
+
+    dot(1.3cis(-pi/2), p=dotpen+red, L="$\arg=-\pi/2$");
+    dot(1.3cis(pi/2), p=dotpen+blue, L="$\arg=\pi/2$");
+
+Using [the convention](angle-and-len.html#argument) $-\pi < \arg(z) \le \pi$,
+the distinguishing of $\pm\sqrt{z}$ becomes
+$$
+\arg(\sqrt{z}) \in \left( -\frac{\pi}{2},\frac{\pi}{2} \right]
+\quad \text{and} \quad
+\arg(-\sqrt{z}) \notin \left( -\frac{\pi}{2},\frac{\pi}{2} \right].
+$$
+Now we get
+$$
+-\pi < 2\arg(\sqrt{z}) \le \pi.
+$$
+Because angles get added when multiplying complex numbers,
+$2\arg(\sqrt{z})$ is an angle of $(\sqrt{z})^2=z$.
+Another angle of $z$ is $\arg(z)$, for which we also have $-\pi < \arg(z) \le \pi$.
+Because only one angle of $z$ is between $-\pi$ and $\pi$, we must have $\arg(z)=2\arg(\sqrt{z})$.
+
+graybox:
+    Using the convention $-\pi < \arg(z) \le \pi$, we have
+    $$
+    \arg(\sqrt{z}) = \frac{\arg(z)}{2}.
+    $$
+
+
+## Broken rules
+
+The rules
+$$
+\sqrt{zw}=\sqrt{z}\sqrt{w} \quad \text{and} \quad \sqrt{\frac{z}{w}}=\frac{\sqrt{z}}{\sqrt{w}}
+$$
+do **not** work with complex numbers $z$ and $w$.
+To show that the first rule doesn't work, we can choose $z=w=-1$. Then we get
+$$
+\sqrt{-1}\sqrt{-1} = (\sqrt{-1})^2 = -1
+$$
+and
+$$
+\sqrt{(-1)(-1)} = \sqrt{1} = 1.
+$$
+For the second rule, we can choose $z=1$ and $w=-1$. We get
+$$
+\sqrt{\frac{1}{-1}} = \sqrt{-1} = i
+$$
+and
+$$
+\frac{\sqrt{1}}{\sqrt{-1}} = \frac{1}{i} = \frac{i}{i^2} = \frac{i}{-1} = -i.
+$$
+From these examples, it seems like the rules might work with additional $\pm$ signs, as in
+$$
+\sqrt{zw}=\pm\sqrt{z}\sqrt{w} \quad \text{and} \quad \sqrt{\frac{z}{w}}=\pm\frac{\sqrt{z}}{\sqrt{w}}.
+$$
+This is indeed true. To see why, notice that
+$$
+\begin{align}
+(\sqrt{zw})^2 &= zw, \\
+(\sqrt{z}\sqrt{w})^2 &= (\sqrt{z})^2(\sqrt{w})^2 = zw, \\
+\left(\sqrt{\frac{z}{w}}\right)^2 &= \frac{z}{w}, \\
+\left(\frac{\sqrt{z}}{\sqrt{w}}\right)^2 &= \frac{(\sqrt{z})^2}{(\sqrt{w})^2} = \frac{z}{w}.
+\end{align}
+$$
+So, if $a$ is the left side of one of the rules (such as $\sqrt{zw}$)
+and $b$ is the corresponding right side (such as $\sqrt{z}\sqrt{w}$), then we have $a^2=b^2$.
+Let's rewrite that:
+$$
+\begin{align}
+a^2 &= b^2 \\
+a^2-b^2 &= 0 \\
+(a+b)(a-b) &= 0 \\
+a+b=0 \quad \text{or}& \quad a-b=0 \\
+a=-b \quad \text{or}& \quad a=b
+\end{align}
+$$
+So, $a^2=b^2$ is same as $a=\pm b$, even if $a$ and $b$ are complex numbers.
+
+graybox:
+    For all complex numbers $z$ and $w$, we have
+    $$
+    \sqrt{zw}=\pm\sqrt{z}\sqrt{w}.
+    $$
+    If $w \ne 0$, then
+    $$
+    \sqrt{\frac{z}{w}}=\pm\frac{\sqrt{z}}{\sqrt{w}}.
+    $$
+
+For any positive real number $p$, we have
+$$
+\text{angle of $zp$} = \text{angle of $z$},
+$$
+and because the angle of square root depends only on the angle of the complex number inside, we get
+$$
+\text{angle of $\sqrt{zp}$} = \text{angle of $\sqrt{z}$}.
+$$
+On the other hand, because $\sqrt{p}$ is also positive, we also have
+$$
+\text{angle of $\sqrt{z}\sqrt{p}$} = \text{angle of $\sqrt{z}$}.
+$$
+By combining these results, we get
+$$
+\text{angle of $\sqrt{zp}$} = \text{angle of $\sqrt{z}\sqrt{p}$},
+$$
+so the $\pm$ in $\sqrt{zp}=\pm\sqrt{z}\sqrt{p}$ must be $+$,
+and it actually works without $\pm$.
+That also works for $p=0$, because then both sides are zero.
+
+graybox:
+    If $p$ is a real number and $p \ge 0$, then
+    $$
+    \sqrt{zp} = \sqrt{z}\sqrt{p}.
+    $$
+
+Using this, we can for example calculate
+$$
+\sqrt{-5} = \sqrt{(-1)5} = \sqrt{-1}\sqrt{5} = i\sqrt{5}.
+$$
+We also get
+$$
+\sqrt{\frac{z}{p}}
+= \sqrt{z\frac{1}{p}}
+= \sqrt{z}\sqrt{\frac{1}{p}}
+= \sqrt{z}\frac{\sqrt{1}}{\sqrt{p}}
+= \frac{\sqrt{z}}{\sqrt{p}}
+$$
+for any positive $p$, where we used $\sqrt{a/b}=\sqrt{a}/\sqrt{b}$ with positive real numbers $a=1$ and $b=p$.
+We obviously can't allow $p=0$.
+
+graybox:
+    If $p$ is a real number and $p > 0$, then
+    $$
+    \sqrt{\frac{z}{p}} = \frac{\sqrt{z}}{\sqrt{p}}.
+    $$
+
+
+## Without angles and lengths
+
+TODO
+
+
+## Example: $\sin(x/2)$ and $\cos(x/2)$
+
+TODO
+
+
+comment:
+    TODO: create separate page of nth roots, for integers n >= 2

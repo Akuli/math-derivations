@@ -256,13 +256,17 @@ but $z\star(v+w)=(z \star v) + (z \star w)$ is also true in that case;
 then it just says that $0 = 0+0$.
 </li></ul>
 
-Because the complex number product $zw$ can be calculated using only the wish list properties
+Because any complex number multiplication $zw$ can be calculated using only the wish list properties
 and the $\star$ operation satisfies the wish list properties,
-$z \star w$ must be the complex number product $zw$.
+$z \star w$ must be $zw$.
 So, our $\star$ operation really is the complex number multiplication.
 
 graybox:
-    When multiplying complex numbers, we can add the angles and multiply the lengths.
+    When multiplying complex numbers, we can add the angles and multiply the lengths:
+    \begin{align*}
+    \text{angle of $zw$} &= (\text{angle of $z$})+(\text{angle of $w$}) \\
+    \abs{zw} &= \abs{z}\,\abs{w}
+    \end{align*}
 
 
 ## De Moivre's formula

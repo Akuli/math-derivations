@@ -186,6 +186,7 @@ def get_sidebar_content(txtfile):
             link("Angle and length", 'complex/angle-and-len'),
             link("Multiplication", 'complex/mul'),
             link("Division", 'complex/div'),
+            link("Square root", 'complex/sqrt'),
         ])),
     ])
 

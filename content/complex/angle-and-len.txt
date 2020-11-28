@@ -85,3 +85,29 @@ $$
 $$
 Because the length of a real number is its absolute value,
 this behaves as expected when $a+bi$ happens to be a real number (that is, $b=0$).
+
+
+## Argument
+
+The notation $\arg(z)$ means an angle of a nonzero complex number $z$.
+Because $z$ has infinitely many different angles that differ from each other by a full turn $2\pi$,
+we need to somehow choose which angle is called $\arg(z)$.
+A common choice is $-\pi < \arg(z) \le \pi$:
+
+asymptote:
+    unitsize(4cm);
+    axises(-1.2,1.4,-1.2,1.4);
+
+    dot(cis(0), p=dotpen+blue, L="$\arg=0$", align=N);
+    dot(1.6cis(0.25pi), p=dotpen+deepgreen, L="$\arg=\frac{\pi}{4}$");
+    dot(0.7cis(0.5pi), p=dotpen+deepred, L="$\arg=\frac{\pi}{2}$");
+    dot(0.7cis(-0.5pi), p=dotpen+deepred, L="$\arg=-\frac{\pi}{2}$");
+    dot(cis(pi), p=dotpen+deepmagenta, L="$\arg=\pi$", align=N);
+    dot(0.8*cis(-0.99pi), p=dotpen+darkorange, L="$\arg=-0.99\pi$", align=S);
+
+So, $\arg(z)$ increases as $z$ rotates around $0$ counter-clockwise, but it "jumps" at $\pi$.
+It must jump somewhere, because it's periodic and so it can't increase forever.
+
+I [sometimes](sqrt.html) need to represent any angle of a complex number,
+and I use $\arg(z)+n2\pi$ for that, with an arbitrary integer $n$.
+For this purpose, the choice of $\arg(z)$ doesn't matter, because we get all the possible angles anyway.

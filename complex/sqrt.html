@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Law of Cosines
+<title>Square Root of Complex Number
 </title>
 
     <script type="text/x-mathjax-config">
@@ -103,13 +103,13 @@
         <input type="checkbox" id="sidebar-checkbox-4" />
         <label for="sidebar-checkbox-4">Circle</label>
         <div class="dropdown">
-            <a href="inscribed-angle-theorem.html">Inscribed angle theorem</a>
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-5" />
         <label for="sidebar-checkbox-5">Triangle</label>
         <div class="dropdown">
-            <a href="law-of-sines.html">Law of sines</a><a href="law-of-cosines.html">Law of cosines</a>
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a>
         </div>
         
         </div>
@@ -177,93 +177,215 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a>
+            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a>
         </div>
         </div>
-<h1 id="law-of-cosines">Law of Cosines<a class="headerlink" href="#law-of-cosines" title="Link to this title">¶</a></h1><p>Let $\vec a$, $\vec b$ and $\vec c$ be the vectors connecting the corners of any triangle
-so that $\vec a$ and $\vec b$ are pointing away from the same triangle corner.
-Let $\gamma$ be the angle at that triangle corner.</p>
+<h1 id="square-root-of-complex-number">Square Root of Complex Number<a class="headerlink" href="#square-root-of-complex-number" title="Link to this title">¶</a></h1><p>The square root of a real number $a \ge 0$ is a number that gives $a$ when multiplied with itself.
+For example, $\sqrt{4}=2$ because $2^2 = 4$.
+However, we also have $(-2)^2 = 4$, so it seems like $\sqrt{4}=-2$.
+To avoid getting $2=-2$, we require that $\sqrt{a}$ is not negative.
+Then all numbers that give $a$ when multiplied with themselves are $\pm \sqrt{a}$,
+which is why $\pm$ appears in front of square root so often.</p>
 
-<p><img width="174" height="209" class="asymptote" src="../asymptote/b6c6d08f90ca721bb1620da42bafead2.svg" /></p><p>In the above picture, $-\vec b$ goes from the bottom corner to the top right corner, so
-$$
-\vec c = (-\vec b) + \vec a = \vec a - \vec b.
-$$
-We know that if $a$ and $b$ are numbers, then
-$$
-(a-b)^2 = a^2 - 2ab + b^2,
-$$
-and for deriving that (TODO), we only needed $(a-b)c=ac-bc$ and $ab=ba$.
-These also work with dot product of vectors instead of multiplication of numbers
-(see <a href="../vectors/dot-projection.html#dot-product-and-difference">this</a>
-and <a href="../vectors/angle-between-vectors.html#order-doesn-t-matter">this</a>),
-so the $(a-b)^2$ formula works
-if $a$ and $b$ are vectors and we replace all multiplications with dot products:
-$$
-(\vec a - \vec b)\cdot(\vec a - \vec b) = (\vec a\cdot\vec a) - 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b)
-$$
-By putting everything together, we get
-$$
-(\vec c \cdot \vec c)^2 = (\vec a\cdot\vec a) - 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b).
-$$
-Because $\vec a \cdot \vec a = |\vec a|^2$
-(see <a href="../vectors/dot-projection.html#defining-dot-product">here</a>)
-and similarly for all other vectors, we have
-$$
-|\vec c|^2 = |\vec a|^2 - 2(\vec a \cdot \vec b) + |\vec b|^2.
-$$
-We can
-<a href="https://akuli.github.io/math-derivations/vectors/angle-between-vectors.html">write the dot product with angle between vectors</a>
-to get
-$$
-\vec a \cdot \vec b = |\vec a| |\vec b| \cos(\gamma).
-$$
-By plugging this in we get
-$$
-|\vec c|^2 = |\vec a|^2 + |\vec b|^2 - 2|\vec a||\vec b|\cos(\gamma).
-$$
-Finally, we can define $a = |\vec a|$ and similarly for $b$ and $c$.
-These are the side lengths of the triangle.</p>
-
-<p><img width="174" height="209" class="asymptote" src="../asymptote/f6e12125d238b54debce694cf40683be.svg" /></p><div class="box graybox"><p>Let $a$, $b$ and $c$ be the sides of any triangle,
-and let $\gamma$ be the angle opposite to $c$.
-Then
-$$
-c^2 = a^2 + b^2 - 2ab\cos(\gamma).
-$$
-This is known as the <b>law of cosines</b>.
+<p>Let's generalize this to complex numbers.
 </p>
 
-</div><p>We get other well-known things as special cases.
+<h2 id="with-angles-and-lengths">With angles and lengths<a class="headerlink" href="#with-angles-and-lengths" title="Link to this title">¶</a></h2><p>We can define the square root of any complex number $z$ by requiring $(\sqrt{z})^2 = z$,
+just like with real numbers.
+Because of how <a href="mul.html#why-do-angles-get-added-and-lengths-get-multiplied">multiplication adds angles and multiplies lengths</a>,
+this means that
+$$
+\begin{align}
+\abs{\sqrt{z}}^2 &= \abs{z}, \\
+2(\text{angle of $\sqrt{z}$}) &= \text{angle of $z$}.
+\end{align}
+$$
+Solving for the length and angle of $\sqrt{z}$, we get
+$$
+\begin{align}
+\abs{\sqrt{z}} &= \sqrt{\abs{z}}, \\
+\text{angle of $\sqrt{z}$} &= \frac{\text{angle of $z$}}{2}.
+\end{align}
+$$
+As usual, if $z = 0$, the angle equation is not needed because the length formula gives $\sqrt{0}=0$.
+Any nonzero complex number $z \ne 0$ has infinitely many angles, differing from each other by $2\pi$,
+<a href="angle-and-len.html#argument">which can be written as</a>
+$$
+\text{all angles of $z$} = \arg(z) + k2\pi,
+$$
+where $k$ is any integer. Then we have
+$$
+\text{angle of $\sqrt{z}$} = \frac{\arg(z) + k2\pi}{2} = \frac{\arg(z)}{2} + k\pi.
+$$
+If $k$ is even, then $+k\pi$ adds some number of full turns to the angle and can be ignored.
+If $k$ is odd, then $+k\pi$ adds some number of full turns,
+and also adds a half-turn $\pi$ which means flipping to the opposite side of $0$.
+So, we get two possible values of $\sqrt{z}$, with equal lengths but on opposite sides of $0$.
+In the below picture, the blue dots are the possible values of $\sqrt{z}$.</p>
+
+<p><img width="474" height="257" class="asymptote" src="../asymptote/d752f4f8ee3b6edc806298750e7abbdf.svg" /></p><p>The only thing left to do is to decide which of these should be called $\sqrt{z}$.
+Because of the flipping, the other one will then be $-\sqrt{z}$,
+and $\pm\sqrt{z}$ will appear commonly just like with real numbers.</p>
+
+<div class="box graybox"><p>Let $z$ be any complex number.
+Then $\pm\sqrt{z}$ are the only numbers that give $z$ when multiplied with themselves.</p>
+
+<ul><li>If one of $\pm\sqrt{z}$ is on the right side of the imaginary axis and the other is on the left side,
+  then the one on the right side is called $\sqrt{z}$.</li><li>Otherwise both of $\pm\sqrt{z}$ are on the imaginary axis, and $\sqrt{z}$ is the one that is above the real axis.
+</li></ul></div><p>Note that now we can put any complex number inside square root, including negative real numbers.</p>
+
+<p>Examples:</p>
+
+<p><ul><li>
+The length of $\pm\sqrt{-1}$ is $\sqrt{\abs{-1}}=1$.
+Because the angle of $-1$ is 180 degrees, one of $\pm\sqrt{-1}$ has angle 90 degrees.
+So, one of $\pm\sqrt{i}$ is $i$ and the other is $-i$.
+Because $i$ and $-i$ are both on the imaginary axis, with $i$ above $-i$, we have $\sqrt{-1} = i$.</p>
+
+<p><img width="247" height="250" class="asymptote" src="../asymptote/966bdc977ae1678037d15d7676c14079.svg" /></p><p></li><li>
+The length of $\pm\sqrt{4}$ is $2$. Because the angle of $4$ is $0$, one of $\pm\sqrt{4}$ has angle $0/2=0$,
+i.e. one of $\pm\sqrt{4}$ is a positive real number.
+The other one will then be a negative real number.
+So, $\pm\sqrt{4}$ are $2$ and $-2$. Because $2$ is on the right side of the imaginary axis, $\sqrt{4}=2$.
+This works with any positive number instead of $4$,
+so the square root we have defined is compatible with the square root of nonnegative real numbers.
+</li></ul></p>
+
+<p>The below picture shows how distinguisihing $\sqrt{z}$ and $-\sqrt{z}$ works.
+Blue complex numbers can be written as $\sqrt{z}$, with some complex number $z$,
+and red numbers are the corresponding $-\sqrt{z}$ numbers.</p>
+
+<p><img width="320" height="365" class="asymptote" src="../asymptote/0b910bc5f6a5fa8efe1d2b5dd2dd097a.svg" /></p><p>Using <a href="angle-and-len.html#argument">the convention</a> $-\pi < \arg(z) \le \pi$,
+the distinguishing of $\pm\sqrt{z}$ becomes
+$$
+\arg(\sqrt{z}) \in \left( -\frac{\pi}{2},\frac{\pi}{2} \right]
+\quad \text{and} \quad
+\arg(-\sqrt{z}) \notin \left( -\frac{\pi}{2},\frac{\pi}{2} \right].
+$$
+Now we get
+$$
+-\pi < 2\arg(\sqrt{z}) \le \pi.
+$$
+Because angles get added when multiplying complex numbers,
+$2\arg(\sqrt{z})$ is an angle of $(\sqrt{z})^2=z$.
+Another angle of $z$ is $\arg(z)$, for which we also have $-\pi < \arg(z) \le \pi$.
+Because only one angle of $z$ is between $-\pi$ and $\pi$, we must have $\arg(z)=2\arg(\sqrt{z})$.</p>
+
+<div class="box graybox"><p>Using the convention $-\pi < \arg(z) \le \pi$, we have
+$$
+\arg(\sqrt{z}) = \frac{\arg(z)}{2}.
+$$
 </p>
 
-<h2 id="pythagorean-theorem">Pythagorean theorem<a class="headerlink" href="#pythagorean-theorem" title="Link to this title">¶</a></h2><p>If $\gamma = 90^\circ$, then $\cos(\gamma) = 0$ and
+</div><h2 id="broken-rules">Broken rules<a class="headerlink" href="#broken-rules" title="Link to this title">¶</a></h2><p>The rules
 $$
-c^2 = a^2 + b^2.
+\sqrt{zw}=\sqrt{z}\sqrt{w} \quad \text{and} \quad \sqrt{\frac{z}{w}}=\frac{\sqrt{z}}{\sqrt{w}}
 $$
-This is the Pythagorean theorem.</p>
+do <b>not</b> work with complex numbers $z$ and $w$.
+To show that the first rule doesn't work, we can choose $z=w=-1$. Then we get
+$$
+\sqrt{-1}\sqrt{-1} = (\sqrt{-1})^2 = -1
+$$
+and
+$$
+\sqrt{(-1)(-1)} = \sqrt{1} = 1.
+$$
+For the second rule, we can choose $z=1$ and $w=-1$. We get
+$$
+\sqrt{\frac{1}{-1}} = \sqrt{-1} = i
+$$
+and
+$$
+\frac{\sqrt{1}}{\sqrt{-1}} = \frac{1}{i} = \frac{i}{i^2} = \frac{i}{-1} = -i.
+$$
+From these examples, it seems like the rules might work with additional $\pm$ signs, as in
+$$
+\sqrt{zw}=\pm\sqrt{z}\sqrt{w} \quad \text{and} \quad \sqrt{\frac{z}{w}}=\pm\frac{\sqrt{z}}{\sqrt{w}}.
+$$
+This is indeed true. To see why, notice that
+$$
+\begin{align}
+(\sqrt{zw})^2 &= zw, \\
+(\sqrt{z}\sqrt{w})^2 &= (\sqrt{z})^2(\sqrt{w})^2 = zw, \\
+\left(\sqrt{\frac{z}{w}}\right)^2 &= \frac{z}{w}, \\
+\left(\frac{\sqrt{z}}{\sqrt{w}}\right)^2 &= \frac{(\sqrt{z})^2}{(\sqrt{w})^2} = \frac{z}{w}.
+\end{align}
+$$
+So, if $a$ is the left side of one of the rules (such as $\sqrt{zw}$)
+and $b$ is the corresponding right side (such as $\sqrt{z}\sqrt{w}$), then we have $a^2=b^2$.
+Let's rewrite that:
+$$
+\begin{align}
+a^2 &= b^2 \\
+a^2-b^2 &= 0 \\
+(a+b)(a-b) &= 0 \\
+a+b=0 \quad \text{or}& \quad a-b=0 \\
+a=-b \quad \text{or}& \quad a=b
+\end{align}
+$$
+So, $a^2=b^2$ is same as $a=\pm b$, even if $a$ and $b$ are complex numbers.</p>
 
-<p><img width="192" height="249" class="asymptote" src="../asymptote/95a7336f6f999e4c1673171c54978fa8.svg" /></p><p>Alternatively, you can go back to the law of cosines derivation and use the fact that
-if $\vec a$ and $\vec b$ are perpendicular, then $\vec a \cdot \vec b = 0$.
+<div class="box graybox"><p>For all complex numbers $z$ and $w$, we have
+$$
+\sqrt{zw}=\pm\sqrt{z}\sqrt{w}.
+$$
+If $w \ne 0$, then
+$$
+\sqrt{\frac{z}{w}}=\pm\frac{\sqrt{z}}{\sqrt{w}}.
+$$
 </p>
 
-<h2 id="a-b-2-for-numbers">$(a-b)^2$ for numbers<a class="headerlink" href="#a-b-2-for-numbers" title="Link to this title">¶</a></h2><p>If $\gamma = 0$, then the triangle is flat,
-and it's a bit questionable whether we can still call it a triangle.</p>
+</div><p>For any positive real number $p$, we have
+$$
+\text{angle of $zp$} = \text{angle of $z$},
+$$
+and because the angle of square root depends only on the angle of the complex number inside, we get
+$$
+\text{angle of $\sqrt{zp}$} = \text{angle of $\sqrt{z}$}.
+$$
+On the other hand, because $\sqrt{p}$ is also positive, we also have
+$$
+\text{angle of $\sqrt{z}\sqrt{p}$} = \text{angle of $\sqrt{z}$}.
+$$
+By combining these results, we get
+$$
+\text{angle of $\sqrt{zp}$} = \text{angle of $\sqrt{z}\sqrt{p}$},
+$$
+so the $\pm$ in $\sqrt{zp}=\pm\sqrt{z}\sqrt{p}$ must be $+$,
+and it actually works without $\pm$.
+That also works for $p=0$, because then both sides are zero.</p>
 
-<p><img width="352" height="93" class="asymptote" src="../asymptote/4f33ddcf9f5ed9f3974d34a7876c0fc4.svg" /></p><p>The above derivation still works, and because $\cos(0)=1$, we get
+<div class="box graybox"><p>If $p$ is a real number and $p \ge 0$, then
 $$
-c^2 = a^2 + b^2 - 2ab.
+\sqrt{zp} = \sqrt{z}\sqrt{p}.
 $$
-In the picture, $a$ is longer than $b$ so we have $c = a-b$.
-If $b$ was longer than $a$, then we would instead have $c = b-a$.
-Either way, we have $c = \abs{a-b}$ and
+</p>
+
+</div><p>Using this, we can for example calculate
 $$
-c^2 = \abs{a-b}^2 = (a-b)^2.
+\sqrt{-5} = \sqrt{(-1)5} = \sqrt{-1}\sqrt{5} = i\sqrt{5}.
 $$
-By putting all this together, we get
+We also get
 $$
-(a-b)^2 = a^2 - 2ab + b^2,
+\sqrt{\frac{z}{p}}
+= \sqrt{z\frac{1}{p}}
+= \sqrt{z}\sqrt{\frac{1}{p}}
+= \sqrt{z}\frac{\sqrt{1}}{\sqrt{p}}
+= \frac{\sqrt{z}}{\sqrt{p}}
 $$
-which is the formula that we used (and generalized) earlier on this page.
+for any positive $p$, where we used $\sqrt{a/b}=\sqrt{a}/\sqrt{b}$ with positive real numbers $a=1$ and $b=p$.
+We obviously can't allow $p=0$.</p>
+
+<div class="box graybox"><p>If $p$ is a real number and $p > 0$, then
+$$
+\sqrt{\frac{z}{p}} = \frac{\sqrt{z}}{\sqrt{p}}.
+$$
+</p>
+
+</div><h2 id="without-angles-and-lengths">Without angles and lengths<a class="headerlink" href="#without-angles-and-lengths" title="Link to this title">¶</a></h2><p>TODO
+</p>
+
+<h2 id="example-sin-x-2-and-cos-x-2">Example: $\sin(x/2)$ and $\cos(x/2)$<a class="headerlink" href="#example-sin-x-2-and-cos-x-2" title="Link to this title">¶</a></h2><p>TODO
 </p>
 
 </div>

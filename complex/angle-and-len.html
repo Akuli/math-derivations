@@ -177,7 +177,7 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a>
+            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a>
         </div>
         </div>
 <h1 id="angle-and-length">Angle and Length<a class="headerlink" href="#angle-and-length" title="Link to this title">¶</a></h1><p>Instead of thinking about a complex number with $x$ and $y$ coordinates,
@@ -222,6 +222,19 @@ $$
 $$
 Because the length of a real number is its absolute value,
 this behaves as expected when $a+bi$ happens to be a real number (that is, $b=0$).
+</p>
+
+<h2 id="argument">Argument<a class="headerlink" href="#argument" title="Link to this title">¶</a></h2><p>The notation $\arg(z)$ means an angle of a nonzero complex number $z$.
+Because $z$ has infinitely many different angles that differ from each other by a full turn $2\pi$,
+we need to somehow choose which angle is called $\arg(z)$.
+A common choice is $-\pi < \arg(z) \le \pi$:</p>
+
+<p><img width="377" height="297" class="asymptote" src="../asymptote/797c227d10c4991b92df3441cef4e01a.svg" /></p><p>So, $\arg(z)$ increases as $z$ rotates around $0$ counter-clockwise, but it "jumps" at $\pi$.
+It must jump somewhere, because it's periodic and so it can't increase forever.</p>
+
+<p>I <a href="sqrt.html">sometimes</a> need to represent any angle of a complex number,
+and I use $\arg(z)+n2\pi$ for that, with an arbitrary integer $n$.
+For this purpose, the choice of $\arg(z)$ doesn't matter, because we get all the possible angles anyway.
 </p>
 
 </div>

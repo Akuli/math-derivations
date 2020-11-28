@@ -177,7 +177,7 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a>
+            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a>
         </div>
         </div>
 <h1 id="multiplying-complex-numbers">Multiplying Complex Numbers<a class="headerlink" href="#multiplying-complex-numbers" title="Link to this title">¶</a></h1><p>Our goal is to define a multiplication for complex numbers.
@@ -383,12 +383,16 @@ but $z\star(v+w)=(z \star v) + (z \star w)$ is also true in that case;
 then it just says that $0 = 0+0$.
 </li></ul></p>
 
-<p>Because the complex number product $zw$ can be calculated using only the wish list properties
+<p>Because any complex number multiplication $zw$ can be calculated using only the wish list properties
 and the $\star$ operation satisfies the wish list properties,
-$z \star w$ must be the complex number product $zw$.
+$z \star w$ must be $zw$.
 So, our $\star$ operation really is the complex number multiplication.</p>
 
-<div class="box graybox"><p>When multiplying complex numbers, we can add the angles and multiply the lengths.
+<div class="box graybox"><p>When multiplying complex numbers, we can add the angles and multiply the lengths:
+\begin{align*}
+\text{angle of $zw$} &= (\text{angle of $z$})+(\text{angle of $w$}) \\
+\abs{zw} &= \abs{z}\,\abs{w}
+\end{align*}
 </p>
 
 </div><h2 id="de-moivre-s-formula">De Moivre's formula<a class="headerlink" href="#de-moivre-s-formula" title="Link to this title">¶</a></h2><p>Let $z$ be a complex number with angle $\theta$ and length 1.

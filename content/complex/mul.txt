@@ -298,7 +298,7 @@ z^n = \cos(n\theta) +i\sin(n\theta).
 $$
 
 graybox:
-    For any real number $\theta$ and positive integer $n$, we have
+    For any angle $\theta$ and positive integer $n$, we have
     $$
     (\cos(\theta)+i\sin(\theta))^n = \cos(n\theta)+i\sin(n\theta).
     $$
@@ -319,13 +319,17 @@ $$
 where the minus in front of $\sin^2(\theta)$ came from $i^2=-1$.
 By comparing the real parts and imaginary parts
 ($x$ and $y$ coordinates of vectors corresponding to the complex numbers)
-on both sides, we get
-$$
-\begin{align}
-\cos(2\theta) &= \cos^2(\theta) - \sin^2(\theta), \\
-\sin(2\theta) &= 2\sin(\theta)\cos(\theta).
-\end{align}
-$$
+on both sides, we get the following result.
+
+graybox:
+    For any angle $\theta$, we have
+    $$
+    \begin{align}
+    \cos(2\theta) &= \cos^2(\theta) - \sin^2(\theta), \\
+    \sin(2\theta) &= 2\sin(\theta)\cos(\theta).
+    \end{align}
+    $$
+
 A similar derivation can be used to write $\sin(n\theta)$ and $\cos(n\theta)$
 using only $\sin(\theta)$ and $\cos(\theta)$,
 with any other positive integer $n$.

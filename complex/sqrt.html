@@ -281,7 +281,7 @@ $$
 $$
 \sqrt{zw}=\sqrt{z}\sqrt{w} \quad \text{and} \quad \sqrt{\frac{z}{w}}=\frac{\sqrt{z}}{\sqrt{w}}
 $$
-do <b>not</b> work with complex numbers $z$ and $w$.
+do <b>not</b> work for all complex numbers $z$ and $w$.
 To show that the first rule doesn't work, we can choose $z=w=-1$. Then we get
 $$
 \sqrt{-1}\sqrt{-1} = (\sqrt{-1})^2 = -1
@@ -296,7 +296,7 @@ $$
 $$
 and
 $$
-\frac{\sqrt{1}}{\sqrt{-1}} = \frac{1}{i} = \frac{i}{i^2} = \frac{i}{-1} = -i.
+\frac{\sqrt{1}}{\sqrt{-1}} = \frac{1}{i} = \frac{-i}{i(-i)} = \frac{-i}{-(-1)} = -i.
 $$
 From these examples, it seems like the rules might work with additional $\pm$ signs, as in
 $$
@@ -382,12 +382,119 @@ $$
 $$
 </p>
 
-</div><h2 id="without-angles-and-lengths">Without angles and lengths<a class="headerlink" href="#without-angles-and-lengths" title="Link to this title">¶</a></h2><p>TODO
+</div><h2 id="without-angles-and-lengths">Without angles and lengths<a class="headerlink" href="#without-angles-and-lengths" title="Link to this title">¶</a></h2><p>We find a formula for $\sqrt{a+bi}$ that doesn't require calculating the angle of $a+bi$.
+Let $x+yi = \sqrt{a+bi}$. Then we have
+$$
+a+bi = (x+yi)^2 = x^2 + 2xyi + i^2y^2 = x^2-y^2 + 2xyi.
+$$
+By comparing real and imaginary parts, we get
+$$
+\left\{\begin{aligned}
+    x^2-y^2 &= a \\
+    2xy &= b.
+\end{aligned}\right.
+$$
+We already know how to calculate the square root of a real number (both negative and nonnegative),
+so we can assume $b \ne 0$.
+From the second equation, we see that then $x$ and $y$ are nonzero too.
+So, we can divide by $x$ and we get $y = \frac{b}{2x}$ from the second equation.
+Let's plug that into the first equation:
+$$
+\begin{align}
+x^2 - \left( \frac{b}{2x} \right)^2 &= a \\
+x^2 - \frac{b^2}{4x^2} &= a \\
+(x^2)^2 - \frac{b^2}{4} &= ax^2 \\
+(x^2)^2 - ax^2 - \frac{b^2}{4} &= 0
+\end{align}
+$$
+By applying the quadratic formula (TODO) with $x^2$ instead of $x$, we get
+$$
+x^2 = \frac{-(-a) \pm\sqrt{(-a)^2 - 4\left(-\frac{b^2}{4}\right)}}{2} = \frac{a\pm\sqrt{a^2+b^2}}{2}.
+$$
+Because $b$ is a nonzero real number, we have $b^2 > 0$ and so
+$$
+\sqrt{a^2+b^2} > \sqrt{a^2} = \abs{a}.
+$$
+This means that $a-\sqrt{a^2+b^2}$ is negative, regardless of whether $a$ is positive, negative or zero.
+Because $x^2$ is not negative, we must choose $+$ and we get
+$$
+x^2 = \frac{\sqrt{a^2+b^2}+a}{2}.
+$$
+Because the point corresponding to the square root of a complex number cannot be on the left side of the imaginary axis,
+we must have $x \ge 0$.
+So, we get
+$$
+x = \sqrt{\frac{\sqrt{a^2+b^2}+a}{2}}.
+$$
+We actually have $x > 0$ because $2xy \ne 0$.
+Now $y = \frac{b}{2x}$ has the same sign as $b$; it's positive if $b$ is positive, and negative if $b$ is negative.
+To actually find $y$, we can use $x^2-y^2=a$, and we get
+$$
+y^2 = x^2-a = \frac{\sqrt{a^2+b^2}+a}{2}-a = \frac{\sqrt{a^2+b^2}-a}{2}.
+$$
+So, we have
+$$
+y = \pm\sqrt{\frac{\sqrt{a^2+b^2}-a}{2}},
+$$
+where $\pm$ is $+$ when $b$ is positive and $-$ when $b$ is negative.</p>
+
+<div class="box graybox"><p>Let $a+bi$ be a complex number with $b \ne 0$. Then
+$$
+\sqrt{a+bi} = \sqrt{\frac{\sqrt{a^2+b^2}+a}{2}} \pm i\sqrt{\frac{\sqrt{a^2+b^2}-a}{2}},
+$$
+where $\pm$ is $+$ when $b$ is positive and $-$ when $b$ is negative.
 </p>
 
-<h2 id="example-sin-x-2-and-cos-x-2">Example: $\sin(x/2)$ and $\cos(x/2)$<a class="headerlink" href="#example-sin-x-2-and-cos-x-2" title="Link to this title">¶</a></h2><p>TODO
+</div><p>If $b=0$, then the right side of the formula becomes
+$$
+\sqrt{\frac{\abs{a}+a}{2}} \pm i\sqrt{\frac{\abs{a}-a}{2}}.
+$$
+If $a$ is positive or zero, this is $\sqrt{a} \pm 0$,
+and if $a$ is negative, this is $0 \pm i\sqrt{\abs{a}}$.
+So, if we choose $+$ whenever $b=0$,
+this result also works in that case.
 </p>
 
-</div>
+<h2 id="example-sin-x-2-and-cos-x-2">Example: $\sin(x/2)$ and $\cos(x/2)$<a class="headerlink" href="#example-sin-x-2-and-cos-x-2" title="Link to this title">¶</a></h2><p>Let $\theta$ be any angle, and
+let $z$ be a complex number on the origin-centered unit circle with angle $\theta/2$.
+Like in the <a href="mul.html#de-moivre-s-formula">derivation of de Moivre's formula</a>,
+$z^2$ is also on the unit circle, with angle $\theta$, and we have
+$$
+\begin{align}
+z&=\cos\left(\frac{\theta}{2}\right)+i\sin\left(\frac{\theta}{2}\right), \\
+z^2&=\cos(\theta)+i\sin(\theta).
+\end{align}
+$$</p>
+
+<p><img width="371" height="371" class="asymptote" src="../asymptote/558f8ba75c6295987aafae173d535216.svg" /></p><p>Because $z = \pm\sqrt{z^2}$, we have
+$$
+\cos\left(\frac{\theta}{2}\right)+i\sin\left(\frac{\theta}{2}\right) = \pm\sqrt{\cos(\theta)+i\sin(\theta)}.
+$$
+Now we can use the formula for $\sqrt{a+bi}$ with $a=\cos(\theta)$ and $b=\sin(\theta)$.
+Because $z^2$ is on the unit circle, its length is $\sqrt{a^2+b^2}=1$, and we get
+$$
+\cos\left(\frac{\theta}{2}\right)+i\sin\left(\frac{\theta}{2}\right)
+= \pm\left(
+    \sqrt{\frac{1+\cos(\theta)}{2}}
+    \pm i\sqrt{\frac{1-\cos(\theta)}{2}}
+\right).
+$$
+By comparing real and imaginary parts, we get the following result.</p>
+
+<div class="box graybox"><p>For all angles $\theta$, we have
+$$
+\begin{align}
+\cos\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1+\cos(\theta)}{2}}, \\
+\sin\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1-\cos(\theta)}{2}}.
+\end{align}
+$$
+</p>
+
+</div><p>To figure out whether you should have $+$ or $-$,
+you can draw the angle on the unit circle and pick the correct sign that way.
+For example, if the angle is on the left side of $y$ axis but above $x$ axis,
+then the $x$ coordinate $\cos(\theta)$ is negative and the $y$ coordinate $\sin(\theta)$ is positive.</p>
+
+<p><img width="229" height="229" class="asymptote" src="../asymptote/44b6e6758cf57eeaf6cecdf3612894d1.svg" /></p></div>
 </body>
 </html>

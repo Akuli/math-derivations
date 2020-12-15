@@ -141,7 +141,7 @@ asymptote:
 If we do $\frac{v_y}{v_x}$, we don't quite get the slope of the tangent line
 because $\vec v$ doesn't go in the direction of the tangent line.
 However, if the point $P$ is near $(1,1)$,
-then $\vec v$ goes almost in the direction of the graph and $\frac{v_y}{v_x}$ is almost equal to the slope:
+then $\vec v$ goes almost in the direction of the tangent line and $\frac{v_y}{v_x}$ is almost equal to the slope:
 
 asymptote:
     unitsize(1.5cm);

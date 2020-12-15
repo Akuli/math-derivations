@@ -4,7 +4,7 @@ insert-function-warning-here
 
 Limit is a very important concept in calculus.
 There are two common ways to introduce it:
-teaching students to calculate limits without talk much about why they work like they do (high schools), and
+teaching students to calculate limits without talking much about why they work like they do (high schools), and
 proving all the properties of limits needed very carefully with somewhat difficult proofs (university).
 I will aim for something in the middle;
 my goal is to show you how limits work without doing anything too difficult.

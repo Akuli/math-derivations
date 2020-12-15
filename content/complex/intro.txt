@@ -107,7 +107,7 @@ With these definitions, writing $a+bi$ to denote a complex number actually makes
 $bi$ is a multiplication of a real number and a complex number, and
 $a+bi$ adds the complex numbers $a=a+0i$ and $bi=0+bi$.
 
-Also note that the operations defined above are compatible with the corresponding real number operations:
+Also note that the operations defined above are compatible with the corresponding real number operations;
 if $a$ and $b$ are real numbers, then
 the above operations with $a+0i$ and $b+0i$ give the same results as the usual real number operations:
 <ul><li>

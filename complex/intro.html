@@ -190,9 +190,11 @@ This $i$ is something else.</p>
 The results of multiplying real numbers with $i$, such as $2i$ and $-0.6i$,
 are called <b>imaginary numbers</b>.
 A <b>complex number</b> is the result of adding a real number and an imaginary number,
-such as $2+3i$ or $4-5i$.</p>
+such as $2+3i$ or $4-5i$.
+The set of complex numbers is denoted with $\mathbb{C}$, just like $\mathbb{R}$ is the set of real numbers.</p>
 
-<p>The set of complex numbers is denoted with $\mathbb{C}$, just like $\mathbb{R}$ is the set of real numbers.</p>
+<p>Note that any real number $r$ is also a complex number $r+0i$,
+and so is any imaginary number $ri=0+ri$.</p>
 
 <p>A common way to visualize complex numbers is to think of them as points in the 2D plane
 so that $a + bi$, with $a,b \in \mathbb{R}$, corresponds with the point $(a,b)$.</p>
@@ -218,22 +220,49 @@ $$
 (a\I + b\J) + (x\I + y\J) &= (a+x)\I + (b+y)\J \\
 (a\I + b\J) - (x\I + y\J) &= (a-x)\I + (b-y)\J
 \end{align}
-$$</p>
-
-<p>Let's use these addition and subtraction operations the same way with complex numbers
+$$
+Multiplying a real number $c$ and a 2D vector works like this:
+$$
+c(a\I+b\J) = (ca)\I + (cb)\J
+$$
+Let's use these operations the same way with complex numbers
 so that the complex number $a + bi$ corresponds with the vector $a\I + b\J$.</p>
 
-<div class="box graybox"><p>Let $a+bi$ and $x+yi$ be complex numbers.
-Their addition and subtraction is defined like this:
+<div class="box graybox"><p>Let $a+bi$ and $x+yi$ be complex numbers, and let $c$ be a real number.
+Addition and subtraction of complex numbers is defined like this:
 $$
 \begin{align}
 (a + bi) + (x + yi) &= (a+x) + (b+y)i \\
-(a + bi) - (x + yi) &= (a-x) + (b-y)i \\
+(a + bi) - (x + yi) &= (a-x) + (b-y)i
 \end{align}
+$$
+Multiplying a real number and a complex number is defined like this:
+$$
+c(a+bi) = (ca)+(cb)i
 $$
 </p>
 
-</div><p>Just like with real numbers and vectors, $-w$ means $0-w$ when $w$ is a complex number, so
+</div><p>With these definitions, writing $a+bi$ to denote a complex number actually makes sense;
+$bi$ is a multiplication of a real number and a complex number, and
+$a+bi$ adds the complex numbers $a=a+0i$ and $bi=0+bi$.</p>
+
+<p>Also note that the operations defined above are compatible with the corresponding real number operations:
+if $a$ and $b$ are real numbers, then
+the above operations with $a+0i$ and $b+0i$ give the same results as the usual real number operations:
+<ul><li>
+The complex number addition $(a + 0i)+(b + 0i)$ gives $(a+b) + 0i$, which is just the real number addition $a+b$.
+</li><li>
+We similarly get $(a + 0i)-(b + 0i)=(a-b)+0i$.
+</li><li>
+For multiplication, we calculate
+$$
+a(b+0i) = (ab) + (a \cdot 0)i = ab + 0i.
+$$
+Here $a(b+0i)$ is a multiplication of a real number and a complex number,
+and all other multiplications are real number multiplications.
+</li></ul></p>
+
+<p>Just like with real numbers and vectors, $-w$ means $0-w$ when $w$ is a complex number, so
 $$
 -(a+bi) = (-a) + (-b)i
 $$
@@ -243,7 +272,9 @@ as expected.</p>
 they satisfy familiar rules, such as $(z+v)-w = z+(v-w)$,
 and they look just like the vector operations:</p>
 
-<p><img width="242" height="194" class="asymptote" src="../asymptote/0304dc5c08eb4361b610ec3f844bcaec.svg" /></p><p>We will talk about multiplying complex numbers with each other <a href="mul.html">later</a>.
+<p><img width="242" height="194" class="asymptote" src="../asymptote/0304dc5c08eb4361b610ec3f844bcaec.svg" /></p><p>Note that we have <b>not</b> defined yet what multiplying two complex numbers does,
+so writing $i^2 = -1$ doesn't actually make sense yet.
+We'll come back to this <a href="mul.html">later</a>.
 </p>
 
 </div>

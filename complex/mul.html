@@ -180,29 +180,20 @@
             <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a>
         </div>
         </div>
-<h1 id="multiplying-complex-numbers">Multiplying Complex Numbers<a class="headerlink" href="#multiplying-complex-numbers" title="Link to this title">¶</a></h1><p>Our goal is to define a multiplication for complex numbers.
+<h1 id="multiplying-complex-numbers">Multiplying Complex Numbers<a class="headerlink" href="#multiplying-complex-numbers" title="Link to this title">¶</a></h1><p>We already know <a href="intro.html">what multiplying a real number and a complex number does</a>,
+$c(a+bi) = (ca)+(cb)i$ for all real numbers $c$ and complex numbers $a+bi$.
+Now our goal is to define a multiplication for all complex numbers.
 It will be an operation that takes in two complex numbers, $z$ and $w$,
 and outputs another complex number, denoted $zw$.
 We want it to have at least these properties,
-for all real numbers $a,b \in \mathbb{R}$ and complex numbers $v,w,z \in \mathbb{C}$:</p>
+for all real numbers $a,b,c \in \mathbb{R}$ and complex numbers $v,w,z \in \mathbb{C}$:</p>
 
-<ul><li>"Backwards compatibility" with real number multiplication:
-  $(a + 0i)(b + 0i)$ as a complex number multiplication and
-  $ab$ as a real number multiplication must produce the same result.</li><li>The complex number multiplication $(b + 0i)(0 + 1i)$ gives the complex number $0+bi$.
-  In other words, the complex number multiplication $bi$
-  is consistent with how we write complex numbers as $a + bi$.</li><li>The number $0$ behaves as expected: $0z = 0$</li><li>The number $1$ behaves as expected: $1z = z$</li><li>The number $i$ behaves as expected: $i^2 = -1$
-  (here $i^2$ means $i$ multiplied with itself, using the complex number multiplication)</li><li>Order doesn't matter: $zw=wz$</li><li>Parentheses don't matter: $z(vw)=(zv)w$
+<ul><li>Compatibility with the multiplication defined previously:
+  $(c + 0i)(a + bi)$ as a complex number multiplication must produce $(ca) + (cb)i$</li><li>Multiplying $i$ with itself behaves as expected: $i^2 = -1$</li><li>Order doesn't matter: $zw=wz$</li><li>Parentheses don't matter: $z(vw)=(zv)w$
   (when this rule applies, we can write $zvw$ without any parentheses,
   and it doesn't matter whether it means $(zv)w$ or $z(vw)$)</li><li>Distributing: $z(v+w)=zv+zw$
-</li></ul><p>On the rest of this page, I will call this the <b>wish list</b>.</p>
-
-<p>Using only the wish list, we can for example calculate
-$$
-(-1)z = (-1)z + 1z - z = (-1 + 1)z - z = 0z - z = 0 - z,
-$$
-which shows that $(-1)z = -z$ as expected.
-Rules like $(a+b)^2 = a^2 + 2ab + b^2$ also follow from the wish list.
-We can even multiply any two complex numbers $a + bi$ and $x + yi$:
+</li></ul><p>On the rest of this page, I will call this the <b>wish list</b>.
+Using the wish list, we can multiply any two complex numbers $a + bi$ and $x + yi$:
 $$
 \begin{align}
 (a + bi)(x + yi)
@@ -226,7 +217,7 @@ the wish list essentially says that it's how complex number multiplication works
 
 </div><p>Note that the complex number multiplication is
 neither <a href="../vectors/dot-projection.html">dot product</a> nor cross product (TODO);
-it's something different.
+it's something else.
 To see this, note that
 <a href="intro.html#borrowing-operations-from-vectors">the vector corresponding to</a> $i$
 is $\J$. Its dot product with itself is
@@ -244,24 +235,13 @@ $$
 $$
 Neither of these is $-1$, and we required $i^2 = -1$.</p>
 
-<p>Also note that multiplying a complex number $a + bi$ by a real number $c$ behaves so that
-$$
-c(a + bi) = ca + c(bi) = ca + (cb)i,
-$$
-just like multiplying a vector $a\I + b\J$ gives
-$$
-c(a\I+b\J) = (ca)\I + (cb)\J.
-$$
-That's why we can use everything we know about multiplying a vector and a real number
-when multiplying a complex number and a real number.</p>
-
 <p>The wish list is good for calculating complex number multiplications,
 but currently we don't have any way to visualize the multiplication like
 we can visualize <a href="intro.html#borrowing-operations-from-vectors">complex number addition</a>.
 Let's fix that.
 </p>
 
-<h2 id="observations">Observations<a class="headerlink" href="#observations" title="Link to this title">¶</a></h2><p>Notice that
+<h2 id="observations">Observations<a class="headerlink" href="#observations" title="Link to this title">¶</a></h2><p>With the wish list, we get
 $$
 (2i)(2 + 3i) = (2i)2 + (2i)(3i) = 4i + 6i^2 = 4i - 6 = -6 + 4i.
 $$
@@ -310,44 +290,35 @@ if $z=0$ or $w=0$, then the length of $z \star w$ will be zero anyway,
 and so $z \star w = 0$ as well, regardless of the angle.</p>
 
 <p>This operation satisfies all properties of the wish list;
-that is, for all $v,w,z \in \mathbb{C}$:</p>
+that is, for all $a,b,c \in \mathbb{R}$ and $v,w,z \in \mathbb{C}$:</p>
 
 <p><ul><li>
-For <b>real numbers</b> $a,b \in \mathbb{R}$,
-we have $a \star b = ab$, where on the right side, $ab$ is a multiplication of real numbers.
-To see why, first notice that in real number multiplication,
-absolute values (lengths) get multiplied, just like with $\star$,
-and the angles also match in all of the following cases:
-    <ul><li>
-    If one of $a$ and $b$ is zero, then $ab$ and $a \star b$ are both zero and angles don't matter.
-    </li><li>
-    If $a$ and $b$ are both positive, their angles are zero,
-    so the angle of $(a+0i) \star (b+0i)$ is $0+0=0$.
-    Because $ab$ is a positive real number, its angle is also zero.
-    </li><li>
-    If one of $a$ and $b$ is positive and the other is negative,
-    their angles are 0 degrees and 180 degrees,
-    so the angle of $(a+0i) \star (b+0i)$ is $0+180=180$ degrees.
-    Because $ab$ is a negative real number, its angle is also 180 degrees.
-    </li><li>
-    If $a$ and $b$ are both negative, their angles are 180 degrees,
-    so the angle of $(a+0i) \star (b+0i)$ is $180+180=360$ degrees.
-    We treat this angle as zero because it differs from zero by 360 degrees.
-    Because $ab$ is a positive real number, its angle is also zero.
-    </li></ul>
+To show that we have $c \star(a+bi) = (ca)+(cb)i$,
+we ensure that both sides have the same length and angle.
+The length of $(ca)+(cb)i$ is the length of $a+bi$ multiplied by the absolute value $\abs{c}$,
+just like with vectors,
+and because $\abs{c}$ is the length of $c$ when $c$ is viewed as a complex number,
+that's also the length of $c \star (a+bi)$.
+Let's check that the angles match too:
+<ul><br /><li>
+If $c$ is positive, then the angle of $(ca)+(cb)i$ is the angle of $a+bi$,
+because the vector gets "stretched" to be $c$ times longer, without changing the angle.</p>
+
+<p><img width="198" height="229" class="asymptote" src="../asymptote/e396c97d31ba0a807b0fe45dff570a8f.svg" /></p><p>In this case, the angle of $c \star (a+bi)$ is
+$$
+(\text{angle of $a+bi$}) + \underbrace{(\text{angle of $c$})}_0,
+$$
+so that too is just the angle of $a+bi$.
 </li><li>
-If $b$ is a nonzero real number, then $b \star i$ has the same length (absolute value) as $b$
-and has angle $90+0=90$ degrees or $90+180=270$ degrees,
-where $0$ or $180$ degrees is the angle of $b$, depending on whether $b$ is positive or negative.
-This is the same as the angle of the complex number $0+bi$
-(note that 270 degrees and -90 degrees differ by 360 degrees).
-Hence $b \star i = 0+bi$, at least whenever $b$ is positive or negative.
-Also, $0 \star i = 0 = 0+0i$.
+If $c$ is negative, then $a+bi$ and $(ca)+(cb)i$ are on the opposite sides of $0$:</p>
+
+<p><img width="238" height="229" class="asymptote" src="../asymptote/81dc22727f98f1249972afaf1f6277f3.svg" /></p><p>Because the angle of $c$ is 180 degrees,
+the angle of $c \star (a+bi)$ is 180 degrees more than the angle of $a+bi$,
+so that too is on the opposite side of $0$.
+Again, it has the same angle as $(ca)+(cb)i$.
 </li><li>
-$0 \star z = 0$, like explained above.
-</li><li>
-$1 \star z = 1$, because multiplying by $1$ (length of $1$)
-or adding $0$ (angle of $1$) does nothing.
+If $c=0$ (or $a+bi=0$), then $c \star(a+bi)$ and $(ca)+(cb)i$ are both zero.
+</li><br /></ul>
 </li><li>
 Because the length of $i$ is 1 and the angle is 90 degrees,
 the length of $i \star i$ is also 1 and its angle is 180 degrees.
@@ -355,19 +326,18 @@ So, we have $i \star i = -1$.
 </li><li>
 Order and parentheses don't matter when adding or multiplying real numbers.
 Because calculations like $z\star v$ or $(z \star v) \star w$
-add the angles and multiply the lengths of all the vectors involved,
+add the angles and multiply the lengths of all complex numbers involved,
 order and parentheses don't matter with $\star$ either.
 </li><li>
+Let's check that the distributing $z(v+w)=zv+zw$ works.
 Consider a rotation around $0$ by the angle of $z$.
 This can be described like this: $\rotate(w)$ is a complex number
 just like $w$ but with the angle of $z$ added to its angle.
 Now $z \star w$ is just like $\rotate(w)$, but with the length multiplied by the length of $z$.
 In other words,
 $$
-z \star w = \abs{z} \rotate(w),
+z \star w = \abs{z} \rotate(w).
 $$
-where the multiplication on the right side multiplies the length by $\abs{z}$ without changing the angle,
-because it behaves like multiplying a number and a vector.
 The following picture shows that $\rotate(v+w)=\rotate(v)+\rotate(w)$,
 because the entire triangle created by $v$, $w$ and $v+w$ gets rotated:</p>
 

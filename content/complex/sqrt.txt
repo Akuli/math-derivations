@@ -79,7 +79,7 @@ Examples:
 <ul><li>
 The length of $\pm\sqrt{-1}$ is $\sqrt{\abs{-1}}=1$.
 Because the angle of $-1$ is 180 degrees, one of $\pm\sqrt{-1}$ has angle 90 degrees.
-So, one of $\pm\sqrt{i}$ is $i$ and the other is $-i$.
+So, one of $\pm\sqrt{-1}$ is $i$ and the other is $-i$.
 Because $i$ and $-i$ are both on the imaginary axis, with $i$ above $-i$, we have $\sqrt{-1} = i$.
 
 asymptote:
@@ -165,26 +165,18 @@ $$
 $$
 This is indeed true. To see why, notice that
 $$
-\begin{align}
-(\sqrt{zw})^2 &= zw, \\
-(\sqrt{z}\sqrt{w})^2 &= (\sqrt{z})^2(\sqrt{w})^2 = zw, \\
-\left(\sqrt{\frac{z}{w}}\right)^2 &= \frac{z}{w}, \\
-\left(\frac{\sqrt{z}}{\sqrt{w}}\right)^2 &= \frac{(\sqrt{z})^2}{(\sqrt{w})^2} = \frac{z}{w}.
-\end{align}
+(\sqrt{z}\sqrt{w})^2 = (\sqrt{z})^2(\sqrt{w})^2 = zw.
 $$
-So, if $a$ is the left side of one of the rules (such as $\sqrt{zw}$)
-and $b$ is the corresponding right side (such as $\sqrt{z}\sqrt{w}$), then we have $a^2=b^2$.
-Let's rewrite that:
+The only two numbers that give $zw$ when squared are $\sqrt{zw}$ and $-\sqrt{zw}$,
+and because $\sqrt{z}\sqrt{w}$ is one of them, we must have
 $$
-\begin{align}
-a^2 &= b^2 \\
-a^2-b^2 &= 0 \\
-(a+b)(a-b) &= 0 \\
-a+b=0 \quad \text{or}& \quad a-b=0 \\
-a=-b \quad \text{or}& \quad a=b
-\end{align}
+\sqrt{z}\sqrt{w}= \pm \sqrt{zw},
 $$
-So, $a^2=b^2$ is same as $a=\pm b$, even if $a$ and $b$ are complex numbers.
+or written slightly differently,
+$$
+\sqrt{zw} = \pm \sqrt{z}\sqrt{w}.
+$$
+We can similarly derive the rule for division.
 
 graybox:
     For all complex numbers $z$ and $w$, we have
@@ -273,43 +265,48 @@ x^2 - \frac{b^2}{4x^2} &= a \\
 $$
 By applying the quadratic formula (TODO) with $x^2$ instead of $x$, we get
 $$
-x^2 = \frac{-(-a) \pm\sqrt{(-a)^2 - 4\left(-\frac{b^2}{4}\right)}}{2} = \frac{a\pm\sqrt{a^2+b^2}}{2}.
+\begin{align}
+x^2
+&= \frac{-(-a) \pm\sqrt{(-a)^2 - 4\left(-\frac{b^2}{4}\right)}}{2} \\
+&= \frac{a\pm\sqrt{a^2+b^2}}{2} = \frac{a\pm r}{2},
+\end{align}
 $$
+where $r = \sqrt{a^2+b^2}$ is the length of $a+bi$.
 Because $b$ is a nonzero real number, we have $b^2 > 0$ and so
 $$
-\sqrt{a^2+b^2} > \sqrt{a^2} = \abs{a}.
+r = \sqrt{a^2+b^2} > \sqrt{a^2} = \abs{a}.
 $$
-This means that $a-\sqrt{a^2+b^2}$ is negative, regardless of whether $a$ is positive, negative or zero.
+This means that $a-r$ is negative, regardless of whether $a$ is positive, negative or zero.
 Because $x^2$ is not negative, we must choose $+$ and we get
 $$
-x^2 = \frac{\sqrt{a^2+b^2}+a}{2}.
+x^2 = \frac{r+a}{2}.
 $$
 Because the point corresponding to the square root of a complex number cannot be on the left side of the imaginary axis,
 we must have $x \ge 0$.
 So, we get
 $$
-x = \sqrt{\frac{\sqrt{a^2+b^2}+a}{2}}.
+x = \sqrt{\frac{r+a}{2}}.
 $$
 We actually have $x > 0$ because $2xy \ne 0$.
 Now $y = \frac{b}{2x}$ has the same sign as $b$; it's positive if $b$ is positive, and negative if $b$ is negative.
 To actually find $y$, we can use $x^2-y^2=a$, and we get
 $$
-y^2 = x^2-a = \frac{\sqrt{a^2+b^2}+a}{2}-a = \frac{\sqrt{a^2+b^2}-a}{2}.
+y^2 = x^2-a = \frac{r+a}{2}-a = \frac{r+a-2a}{2} = \frac{r-a}{2}.
 $$
 So, we have
 $$
-y = \pm\sqrt{\frac{\sqrt{a^2+b^2}-a}{2}},
+y = \pm\sqrt{\frac{r-a}{2}},
 $$
 where $\pm$ is $+$ when $b$ is positive and $-$ when $b$ is negative.
 
 graybox:
     Let $a+bi$ be a complex number with $b \ne 0$. Then
     $$
-    \sqrt{a+bi} = \sqrt{\frac{\sqrt{a^2+b^2}+a}{2}} \pm i\sqrt{\frac{\sqrt{a^2+b^2}-a}{2}},
+    \sqrt{a+bi} = \sqrt{\frac{r+a}{2}} \pm i\sqrt{\frac{r-a}{2}},
     $$
-    where $\pm$ is $+$ when $b$ is positive and $-$ when $b$ is negative.
+    where $r=\abs{a+bi}=\sqrt{a^2+b^2}$, and $\pm$ is $+$ when $b$ is positive and $-$ when $b$ is negative.
 
-If $b=0$, then the right side of the formula becomes
+If $b=0$, then we have $r=\abs{a}$ and the right side of the formula becomes
 $$
 \sqrt{\frac{\abs{a}+a}{2}} \pm i\sqrt{\frac{\abs{a}-a}{2}}.
 $$
@@ -319,16 +316,16 @@ So, if we choose $+$ whenever $b=0$,
 this result also works in that case.
 
 
-## Example: $\sin(x/2)$ and $\cos(x/2)$
+## Example: $\sin^2(\theta)$ and $\cos^2(\theta)$
 
 Let $\theta$ be any angle, and
-let $z$ be a complex number on the origin-centered unit circle with angle $\theta/2$.
+let $z$ be a complex number on the origin-centered unit circle with angle $\theta$.
 Like in the [derivation of de Moivre's formula](mul.html#de-moivre-s-formula),
-$z^2$ is also on the unit circle, with angle $\theta$, and we have
+$z^2$ is also on the unit circle with angle $2\theta$, and we have
 $$
 \begin{align}
-z&=\cos\left(\frac{\theta}{2}\right)+i\sin\left(\frac{\theta}{2}\right), \\
-z^2&=\cos(\theta)+i\sin(\theta).
+z&=\cos(\theta) + i\sin(\theta), \\
+z^2&=\cos(2\theta)+i\sin(2\theta).
 \end{align}
 $$
 
@@ -339,47 +336,46 @@ asymptote:
     draw(unitcircle, p=blue);
     draw((0,0)--cis(theta), L=Label("$z$", position=Relative(0.8)), arrow=Arrow(5mm), p=deepred);
     draw((0,0)--cis(2theta), L=Label("$z^2$", position=Relative(0.8)), arrow=Arrow(5mm), p=deepgreen);
-    draw(rarc((0,0), 0.4, 0, theta), L="$\theta/2$", p=darkorange);
-    draw(rarc((0,0), 0.3, 0, 2theta), L=Label("$\theta$", align=S, position=Relative(0.4)), p=blue);
+    draw(rarc((0,0), 0.3, 0, theta), L="$\theta$", align=cis(-2.8), p=darkorange);
+    draw(rarc((0,0), 0.4, 0, 2theta), L=Label("$2\theta$", align=NE, position=Relative(0.4)), p=blue);
 
 Because $z = \pm\sqrt{z^2}$, we have
 $$
-\cos\left(\frac{\theta}{2}\right)+i\sin\left(\frac{\theta}{2}\right) = \pm\sqrt{\cos(\theta)+i\sin(\theta)}.
+\cos(\theta)+i\sin(\theta) = \pm\sqrt{\cos(2\theta)+i\sin(2\theta)}.
 $$
-Now we can use the formula for $\sqrt{a+bi}$ with $a=\cos(\theta)$ and $b=\sin(\theta)$.
-Because $z^2$ is on the unit circle, its length is $\sqrt{a^2+b^2}=1$, and we get
+Now we can use the formula for $\sqrt{a+bi}$ with $a=\cos(2\theta)$ and $b=\sin(2\theta)$.
+Because $z^2$ is on the unit circle, its length is $r=\sqrt{a^2+b^2}=1$, and we get
 $$
-\cos\left(\frac{\theta}{2}\right)+i\sin\left(\frac{\theta}{2}\right)
+\cos(\theta)+i\sin(\theta)
 = \pm\left(
-    \sqrt{\frac{1+\cos(\theta)}{2}}
-    \pm i\sqrt{\frac{1-\cos(\theta)}{2}}
+    \sqrt{\frac{1+\cos(2\theta)}{2}}
+    \pm i\sqrt{\frac{1-\cos(2\theta)}{2}}
 \right).
 $$
-By comparing real and imaginary parts, we get the following result.
+By comparing real and imaginary parts, we get
+$$
+\begin{align}
+\cos(\theta) &= \pm \sqrt{\frac{1+\cos(2\theta)}{2}} \\
+\sin(\theta) &= \pm \sqrt{\frac{1-\cos(2\theta)}{2}},
+\end{align}
+$$
+where we combined the two $\pm$ signs into another $\pm$ sign for the imaginary part of the right side.
+Finally, to get rid of all $\pm$ signs and square roots, we can square both sides to get
+$$
+\begin{align}
+\cos^2(\theta) &= \frac{1+\cos(2\theta)}{2} \\
+\sin^2(\theta) &= \frac{1-\cos(2\theta)}{2}.
+\end{align}
+$$
 
 graybox:
     For all angles $\theta$, we have
     $$
     \begin{align}
-    \cos\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1+\cos(\theta)}{2}}, \\
-    \sin\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1-\cos(\theta)}{2}}.
+    \cos^2(\theta) &= \frac{1+\cos(2\theta)}{2}, \\
+    \sin^2(\theta) &= \frac{1-\cos(2\theta)}{2}.
     \end{align}
     $$
-
-To figure out whether you should have $+$ or $-$,
-you can draw the angle on the unit circle and pick the correct sign that way.
-For example, if the angle is on the left side of $y$ axis but above $x$ axis,
-then the $x$ coordinate $\cos(\theta)$ is negative and the $y$ coordinate $\sin(\theta)$ is positive.
-
-asymptote:
-    unitsize(2cm);
-    axises(-2,2,-2,2);
-    for (int x = -1; x < 2; x += 2) {
-        for (int y = -1; y < 2; y += 2) {
-            label((x,y), "$\cos"+(x < 0 ? "<" : ">")+"0$", align=N);
-            label((x,y), "$\sin"+(y < 0 ? "<" : ">")+"0$", align=S);
-        }
-    }
 
 comment:
     TODO: create separate page of nth roots, for integers n >= 2

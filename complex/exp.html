@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Exponent function
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            // funny operator name used only in one file
+            rotate: [ "\\operatorname{rotate}", 0 ],
+
+            // darkred is too dark, red is too bright
+            red: [ "\\color{##c00}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            magenta: [ "\\color{magenta}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+            leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/animation.css">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Sums and sequences</label>
+        <div class="dropdown">
+            <a href="../sums-and-seqs/sums.html">Sums</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Circle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Triangle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-16" />
+        <label for="sidebar-checkbox-16">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-12" />
+        <label for="sidebar-checkbox-12">Limits</label>
+        <div class="dropdown">
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-13" />
+        <label for="sidebar-checkbox-13">Continuity</label>
+        <div class="dropdown">
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-14" />
+        <label for="sidebar-checkbox-14">Derivative</label>
+        <div class="dropdown">
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-15" />
+        <label for="sidebar-checkbox-15">Integral</label>
+        <div class="dropdown">
+            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a><a href="../calc/integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="../calc/integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="../calc/integral-notation.html">More notation for integrals</a><a href="../calc/integral-rules.html">Integral rules</a><a href="../calc/integral-usub.html">U substitution</a><a href="../calc/integral-sor-volume.html">Volume of solid of revolution</a><a href="../calc/integral-sor-area.html">Area of surface of revolution</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-17" />
+        <label for="sidebar-checkbox-17">Complex numbers</label>
+        <div class="dropdown">
+            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a><a href="derivative.html">Derivative</a><a href="exp.html">Exponent function</a>
+        </div>
+        </div>
+<h1 id="exponent-function">Exponent function<a class="headerlink" href="#exponent-function" title="Link to this title">¶</a></h1><p>We know what $e^x$ is (TODO), and next we want to define $e^z$ for a complex number $z$.
+We first define $e^{ix}$.
+</p>
+
+<h2 id="defining-e-ix">Defining $e^{ix}$<a class="headerlink" href="#defining-e-ix" title="Link to this title">¶</a></h2><p>Let's start by figuring out which properties we want $e^{ix}$ to have,
+similarly to how <a href="mul.html">we defined multiplication</a>.</p>
+
+<p>We need $e^{i \cdot 0} = 1$, because otherwise $e^0$ would depend on how you interpret it:
+on the one hand, $0$ is a real number, and from powers of real numbers we know $e^0 = 1$ (TODO),
+but on the other hand, $0 = i \cdot 0$ and $e^0$ is whatever $e^{ix}$ happens to be for $x=0$.
+This requirement alone is not enough, because there are plenty of functions that output $1$ when you plug in $x=0$.</p>
+
+<p>If $a$ is a real number, we can use the <a href="../calc/derivative-chain-rule.html">chain rule</a> to get
+$$
+\frac{d}{dx} e^{ax} = e^{ax} \frac{d}{dx}(ax) = a e^{ax}.
+$$
+Let's require that this also works for $a=i$.
+So, we want to define $e^{ix} = f(x)$, where $f$ is a complex-valued function that has these properties:</p>
+
+<ul><li>$f(0) = 1$</li><li>$f'(x) = i f(x)$
+</li></ul><p>Let's try to find a function $f$ satisfying these conditions.
+Let's write $f(x) = g(x) + ih(x)$, with real-valued functions $g$ and $h$.
+Now we can <a href="derivative.html">calculate derivatives of real and imaginary parts separately</a> to get
+$$
+f'(x) = g'(x) + ih'(x),
+$$
+and by expanding, we get
+$$
+if(x)=ig(x)+i^2h(x)=ig(x)-h(x).
+$$
+Setting these equal gives
+$$
+g'(x) + ih'(x) = ig(x)-h(x)
+$$
+and by comparing real and imaginary parts on both sides, we get
+$$
+\left\{\begin{aligned}
+    h'(x) &= g(x) \\
+    g'(x) &= -h(x).
+\end{aligned}\right.
+$$
+So, when calculating the derivative of one of $g$ and $h$, you get the other function,
+possibly with a minus sign in front.
+This is exactly how derivatives of $\sin$ and $\cos$ behave, so one possibility is
+$$
+h(x) = \sin(x), \quad g(x) = \cos(x)
+$$
+and so
+$$
+e^{ix} = f(x) = \cos(x) + i\sin(x).
+$$
+This also satisfies $f(0)=1$: because $1$ is on the origin-centered unit circle at angle $0$,
+we have $1 = \cos(0) + i\sin(0)$.</p>
+
+<p><img width="232" height="232" class="asymptote" src="../asymptote/b35c5374f459d3bbb26e4bb80f4080f7.svg" /></p><p>For example, by plugging in $x=\pi$, we get
+$$
+e^{i\pi} = \cos(\pi) + i\sin(\pi) = -1,
+$$
+because $\pi$ radians means half of the full turn $2\pi$,
+and so $\cos(\pi) + i\sin(\pi)$ is at left on the unit circle.</p>
+
+<p><img width="252" height="232" class="asymptote" src="../asymptote/635ae113313b60b2628fb8630e952dcf.svg" /></p><p>See <a href="https://www.youtube.com/watch?v=v0YEaeIClKY">this 3blue1brown video</a>
+for a more visual way to understand why $\cos(x)+i\sin(x)$ satisfies our conditions.</p>
+
+<p>The equation $e^{ix} = \cos(x) + i\sin(x)$ and its special case $e^{i\pi}=-1$ feel weird,
+and we don't actually know whether that's true yet;
+maybe there are multiple different solutions to our equations $f'(x)=if(x)$ and $f(0)=1$.
+We found one solution by guessing, and next we check if there are other solutions.</p>
+
+<p>Let $f$ be any complex-valued function satisfying $f'(x)=if(x)$ and $f(0)=1$.
+We compare it to the function we already found by dividing; that is, we look at
+$$
+\frac{f(x)}{\cos(x)+i\sin(x)}.
+$$
+By <a href="div.html#how-to-divide-without-angles-and-lengths">multiplying with conjugate of bottom</a>, we get
+$$
+\begin{align}
+\frac{f(x)}{\cos(x)+i\sin(x)}
+&= \frac{f(x)(\cos(x)-i\sin(x))}{(\cos(x)+i\sin(x))(\cos(x)-i\sin(x))} \\
+&= \frac{f(x)(\cos(x)-i\sin(x))}{\cos^2(x) - i^2\sin^2(x)} \\
+&= f(x)(\cos(x)-i\sin(x)),
+\end{align}
+$$
+where the bottom became $\cos^2(x)+\sin^2(x)=1$.
+Another way to see why this happens is to consider what multiplying $\cos(x)+i\sin(x)$ with its conjugate does;
+that gives $\abs{\cos(x)+i\sin(x)}^2$,
+where the length is $\abs{\cos(x)+i\sin(x)}=1$
+because $\cos(x)+i\sin(x)$ is on the origin-centered unit circle.</p>
+
+<p>Now <a href="derivative.html#derivative-rules">we can use the product rule</a> and $f'(x)=if(x)$ to get
+$$
+\begin{align}
+\frac{d}{dx}\left( \frac{f(x)}{\cos(x)+i\sin(x)} \right)
+&= \frac{d}{dx}\Bigl( f(x)(\cos(x)-i\sin(x)) \Bigr) \\
+&= f'(x)(\cos(x)-i\sin(x)) + f(x)\frac{d}{dx}\left( \cos(x)-i\sin(x) \right) \\
+&= if(x)(\cos(x)-i\sin(x)) + f(x)(-\sin(x)-i\cos(x)) \\
+&= f(x)(i\cos(x)-i^2\sin(x)) - f(x)(\sin(x)+i\cos(x)) \\
+&= f(x)(i\cos(x)+\sin(x)) - f(x)(i\cos(x)+\sin(x)) \\
+&= 0.
+\end{align}
+$$
+Because the derivative is zero, $\frac{f(x)}{\cos(x)+i\sin(x)}$ must be a constant.
+To find the value of that constant, we can plug in $x=0$, and we get
+$$
+\begin{align}
+\frac{f(x)}{\cos(x)+i\sin(x)}
+&= \text{constant} \\
+&= \frac{f(0)}{\cos(0)+i\sin(0)} \\
+&= \frac{1}{1} = 1.
+\end{align}
+$$
+Now we can multiply both sides by $\cos(x)+i\sin(x)$ and we get
+$$
+f(x)=\cos(x)+i\sin(x).
+$$
+So, <b>any</b> solution to our conditions $f'(x)=if(x)$ and $f(0)=1$ is actually just $\cos(x)+i\sin(x)$.
+This means that $\cos(x)+i\sin(x)$ is the only solution,
+and if we want $e^{i \cdot 0} = 1$ and $\frac{d}{dx} e^{ix} = ie^{ix}$, we must do this:</p>
+
+<div class="box graybox"><p>We define
+$$
+e^{ix} = \cos(x)+i\sin(x)
+$$
+for all real numbers $x$.
+In particular, we have $e^{i\pi}=-1$.
+</p>
+
+</div><p>These results are known as Euler's formula and Euler's identity.</p>
+
+<p>Note that the conjugate of $e^{ix}$ is $e^{-ix}$, or written slightly differently, $e^{i(-x)}$;
+a complex number on the unit circle, just like $e^{ix}$, but at the opposite angle $-x$.
+We will need this soon.</p>
+
+<p><img width="371" height="371" class="asymptote" src="../asymptote/cf6a73b24ef976a1834318aa7cd08dd3.svg" /></p><h2 id="defining-e-a-ix">Defining $e^{a+ix}$<a class="headerlink" href="#defining-e-a-ix" title="Link to this title">¶</a></h2><p>With real numbers $a$ and $b$, we have
+$$
+\frac{d}{dx} e^{a+bx} = be^{a+bx},
+$$
+because the derivative of $a+bx$ is $b$, and we can use the chain rule just like in the beginning of this page.
+Again, we want this to also work for $b=i$, so
+$$
+\frac{d}{dx} e^{a+ix} = ie^{a+ix}.
+$$
+So, we want the function $f(x)=e^{a+ix}$ to satisfy $f'(x)=ig(x)$.
+For plugging in $x=0$, we want to get
+$$
+f(0)=e^a,
+$$
+so this is just like what we had previously, but with $f(0)=e^a$ instead of $f(0)=1$.
+Again, we solve this by guessing a solution and then showing that no other solutions exist.</p>
+
+<p>With real numbers, we have $e^{x+y}=e^xe^y$, and so we can expect to have
+$$
+e^{a+ix}=e^ae^{ix},
+$$
+where $e^{ix}$ is what we just defined and can be calculated with Euler's formula.
+This indeed satisfies the conditions:</p>
+
+<ul><li>Plugging in $x=0$ to $e^a e^{ix}$ gives $e^a$.</li><li>By moving the constant $e^a$ in front of the derivative, we get
+    $$
+    \frac{d}{dx}(e^ae^{ix}) = e^a\frac{d}{dx}e^{ix} = e^aie^{ix}=i(e^ae^{ix}).
+    $$
+</li></ul><p>Let $f$ be any complex-valued function satisfying $f(0)=e^a$ and $f'(x)=ig(x)$.
+Because $f'(x) = ig(x)$, based on what we calculated above,
+we have
+$$
+\frac{d}{dx}\frac{f(x)}{e^{ix}} = 0,
+$$
+and so $\frac{f(x)}{e^{ix}}$ must be a constant.
+To determine the value of the constant, we can again plug in $x=0$, and we get
+$$
+\frac{f(x)}{e^{ix}} = \frac{f(0)}{e^{0}} = f(0) = e^a,
+$$
+and so
+$$
+f(x) = e^ae^{ix},
+$$
+and that's the only solution to our equations $f'(x)=ig(x)$ and $f(0)=e^a$.</p>
+
+<div class="box graybox"><p>We define
+$$
+e^{a+bi}=e^ae^{bi},
+$$
+where $e^{bi}=\cos(b)+i\sin(b)$ and $e^a$ is the exponent function for real numbers.
+</p>
+
+</div><p>Note that by plugging in $a=0$ or $b=0$, we get
+$$
+e^{0+bi}=e^0e^{bi} = 1e^{bi} = e^{bi}
+$$
+and
+$$
+e^{a+0i}=e^a\underbrace{(\cos(0)+i\sin(0))}_1=e^a
+$$
+as expected.
+Also note that $e^z$ can't be zero, no matter which complex number $z$ is,
+because neither of $e^a$ and $e^{bi}$ is zero;
+$e^a$ is always positive and $e^{bi}$ is on the origin-centered unit circle.
+</p>
+
+<h2 id="rules">Rules<a class="headerlink" href="#rules" title="Link to this title">¶</a></h2><p>Because <a href="mul.html#why-do-angles-get-added-and-lengths-get-multiplied">multiplication adds angles and multiplies lengths</a>,
+multiplying two complex numbers with length 1 and angles $\alpha$ and $\beta$
+gives another complex number with length 1 and angle $\alpha+\beta$.
+Because the complex number with length 1 and angle $\theta$ is
+$$
+\cos(\theta) + i\sin(\theta) = e^{i\theta},
+$$
+we can write this as
+$$
+e^{i(\alpha+\beta)} = e^{i\alpha}e^{i\theta}.
+$$
+So, if $z=i\alpha$ and $w=i\beta$, with real numbers $\alpha$ and $\beta$, we have $e^{z+w}=e^ze^w$.
+This is also known to work when $z$ and $w$ are real numbers.</p>
+
+<p>Now, let $z=a+bi$ and $w=x+yi$ be any complex numbers. We get
+$$
+e^{z+w}=e^{a+x+(b+y)i}=e^{a+x}e^{(b+y)i} = e^ae^xe^{bi}e^{yi},
+$$
+where the second equality comes from definition of $e^{a+bi}$, with $a+x$ instead of $a$ and $b+y$ instead of $b$,
+and the third equality comes from applying $e^{z+w}=e^ze^w$ in the two cases where we already know it works.
+On the other hand, we have
+$$
+e^ze^w=e^{a+bi}e^{x+yi}=e^ae^{bi}e^xe^{yi} = e^ae^xe^{bi}e^{yi},
+$$
+which is same as what we got from $e^{z+w}$.</p>
+
+<div class="box graybox"><p>For all complex numbers $z$ and $w$, we have
+$$
+e^{z+w}=e^ze^w.
+$$
+</p>
+
+</div><p>Other well-known rules for the exponent function follow from this rule. Examples:</p>
+
+<ul><li>Because $e^{z-w}e^w = e^{z-w+w}=e^z$, we have $e^{z-w}=e^z/e^w$.</li><li>Because $e^{-w}e^w=e^{-w+w}=e^0=1$, we have $e^{-w}=1/e^w$.</li><li>For a positive integer $n$, we get
+    $$
+    \begin{align}
+    (e^z)^n
+    &= \underbrace{e^z e^z e^z e^z \dots e^z}_{\text{$n$ times}} \\
+    &= e^{z+z}\underbrace{e^z e^z \dots e^z}_{\text{$n-2$ times}} \\
+    &= e^{z+z+z}\underbrace{e^z \dots e^z}_{\text{$n-3$ times}} \\
+    &= e^{z+z+z+\dots+z} = e^{nz},
+    \end{align}
+    $$
+    where we used $e^ze^w=e^{z+w}$ several times, depending on what number $n$ is.
+    Overall, $n$ copies of $e^z$ multiplied turns into $e^{z+z+\dots+z}$,
+    with $n$ copies of $z$ added.</li><li>If $n=-\abs{n}$ is a negative integer, then from the above results, we get
+    $$
+    (e^z)^n = \frac{1}{(e^z)^{\abs{n}}} = \frac{1}{e^{\abs{n}z}} = e^{-\abs{n}z}=e^{nz}.
+    $$
+</li></ul></div>
+</body>
+</html>

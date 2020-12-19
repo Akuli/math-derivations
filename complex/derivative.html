@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Inscribed Angle Theorem
+<title>Derivative of complex-valued function
 </title>
 
     <script type="text/x-mathjax-config">
@@ -103,13 +103,13 @@
         <input type="checkbox" id="sidebar-checkbox-4" />
         <label for="sidebar-checkbox-4">Circle</label>
         <div class="dropdown">
-            <a href="inscribed-angle-theorem.html">Inscribed angle theorem</a>
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-5" />
         <label for="sidebar-checkbox-5">Triangle</label>
         <div class="dropdown">
-            <a href="law-of-sines.html">Law of sines</a><a href="law-of-cosines.html">Law of cosines</a>
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a>
         </div>
         
         </div>
@@ -177,68 +177,142 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
+            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a><a href="derivative.html">Derivative</a><a href="exp.html">Exponent function</a>
         </div>
         </div>
-<h1 id="inscribed-angle-theorem">Inscribed Angle Theorem<a class="headerlink" href="#inscribed-angle-theorem" title="Link to this title">¶</a></h1><p>Some people think that this theorem is very useful while others think that it it's
-very useless. I'll present it to you anyway because I need it for deriving
-the <a href="law-of-sines.html">law of sines</a>.</p>
+<h1 id="derivative-of-complex-valued-function">Derivative of complex-valued function<a class="headerlink" href="#derivative-of-complex-valued-function" title="Link to this title">¶</a></h1><p>Let $f$ be a function that takes in a real number and outputs a complex number.
+We define the limit $\lim_{x \to a} f(x)$ and derivative $f'(x)$
+just like the <a href="../calc/limit-vector.html">limit</a> and <a href="../calc/derivative-vector.html">derivative</a>
+of vector-valued functions, similarly to how we
+<a href="intro.html#borrowing-operations-from-vectors">borrowed other operations from vectors</a>.</p>
 
-<p>Pick any three different points along the circumference of a circle.
-Then draw lines from one point (blue) and the center of the circle
-to the other two points (green).
-The lines form angles in the center of the circle and near the blue point.</p>
+<p>Note that we assume that the input $x$ is a real number;
+only the output $f(x)$ is assumed to be a complex number.
+It's possible to generalize limits and derivatives so that the input can be a complex number,
+but that's beyond the scope of these derivations.</p>
 
-<p><img width="286" height="286" class="asymptote" src="../asymptote/b5628fe6ad75bca0c652b50387bdf951.svg" /></p><p>Our goal is to figure out how the green and blue angles compare to each other.
-Let's draw another line from the blue point to center.</p>
+<p>With vectors, we can take limits and derivatives of $\I$ parts and $\J$ parts separately,
+as derived <a href="../calc/limit-vector.html#taking-limits-of-i-and-j-parts-separately">here</a>
+and <a href="../calc/derivative-vector.html#taking-derivatives-of-i-and-j-parts-separately">here</a>.
+For complex numbers,
+this corresponds to calculating limits or derivatives of real and imaginary parts separately, like this:</p>
 
-<p><img width="286" height="286" class="asymptote" src="../asymptote/d4b7a3894944e35267d5341a1ff02997.svg" /></p><p>The blue angle got split into two pieces, $\alpha$ and $\beta$.
-We also have two triangles whose two sides are the circle radius.
-Because these triangles have two sides with the same length,
-they have two angles that are equal
-(TODO: explain why this works?).</p>
-
-<p><img width="286" height="286" class="asymptote" src="../asymptote/af3359c12d4060b0c637cac6ef6bf68e.svg" /></p><p>Because the sum of a triangle's angles is $180^\circ$ (TODO),
-we get the remaining angle of each triangle by subtracting other angles from $180^\circ$.</p>
-
-<p><img width="532" height="286" class="asymptote" src="../asymptote/941eaaa0f599de1c95b9b14645c97c60.svg" /></p><p>The sum of all angles drawn to the center of the circle is $360^\circ$, so
+<div class="box graybox"><p>Let $h(x)=f(x)+ig(x)$ be any complex-valued function,
+where $f$ and $g$ are real-valued and the input $x$ is a real number.
+Then
 $$
 \begin{align}
-\green{\text{green angle}}
-&= 360^\circ - (180^\circ - 2\alpha) - (180^\circ - 2\beta) \\
-&= 360^\circ - 180^\circ - 180^\circ + 2\alpha + 2\beta \\
-&= 2\underbrace{(\alpha + \beta)}_{\blue{\text{blue angle}}}.
+\lim_{x \to a} h(x) &= \left( \lim_{x \to a} f(x) \right) + i\left( \lim_{x \to a} g(x) \right), \\
+h'(x) &= f'(x)+ig'(x),
 \end{align}
-$$</p>
-
-<p><div class="box graybox"></p>
-
-<p>Consider any three different points of a circle's circumference.
-Connect two of them to center and the third point with lines.
-Then the angle in the center of the circle is twice as big as
-the angle at the third circumference point.</p>
-
-<p><img width="286" height="286" class="asymptote" src="../asymptote/b3c73b4450106e3b37f9ca61ea3dd547.svg" /></p><p></div></p>
-
-<p>This result is known as the inscribed angle theorem.</p>
-
-<p>The above derivation won't work
-when the lines connecting each green point to the blue point
-are on the same side of the center.
-For example:</p>
-
-<p><img width="287" height="286" class="asymptote" src="../asymptote/f6dcbe854f7859a71664c4c2afb47ab6.svg" /></p><p>The same result still applies, although the derivation for this case looks a bit different.
+$$
+where the limit or derivative on the left side exists
+if and only if the limit or derivative on the right side exists.
 </p>
 
-<h2 id="example-thales-s-theorem">Example: Thales's theorem<a class="headerlink" href="#example-thales-s-theorem" title="Link to this title">¶</a></h2><p>Consider a diameter of a circle.
-Pick any point from the circumference other than the end points of the diameter,
-and draw lines from the end points of the diameter to that point.</p>
+</div><p>For example, the derivative of the complex-valued function $h(x)=\cos(x) + i\sin(x)$ is
+$$
+h'(x) = -\sin(x) + i\cos(x),
+$$
+and that derivative exists for all real numbers $x$ because the derivatives of $\cos$ and $\sin$ exist.
+</p>
 
-<p><img width="286" height="286" class="asymptote" src="../asymptote/61f5ee914fc2b334f9a4188c1e708648.svg" /></p><p>The angle at top looks like it's 90 degrees.
-This is known as Thales's theorem.
-To explain why it works, we can use the inscribed angle theorem:</p>
+<h2 id="limit-rules">Limit rules<a class="headerlink" href="#limit-rules" title="Link to this title">¶</a></h2><p>We want to figure out whether <a href="../calc/limit-props.html#limit-of-sum">limit of sum</a> and
+<a href="../calc/limit-props.html#limit-of-product">limit of product</a> work with complex-valued functions.
+We could modify the derivations of the limit rules to work with complex numbers,
+but that too is beyond the scope of these derivations.
+Instead, we do this by calculating limits of real and imaginary parts separately.</p>
 
-<p><img width="286" height="286" class="asymptote" src="../asymptote/5badcca881497f03668d97d3a1bc9b8e.svg" /></p><p>The blue angle is half of the green angle, and the green angle is 180 degrees.
+<p>Let $f$ and $g$ be complex-valued functions,
+and suppose that the limits $\lim_{x \to a} f(x)=A+Bi$ and $\lim_{x \to a} g(x)=C+Di$ exist.
+We write
+$$
+f(x) = f_1(x)+if_2(x) \quad \text{and} \quad g(x) = g_1(x)+ig_2(x),
+$$
+where $f_1$, $f_2$, $g_1$ and $g_2$ are real-valued, and now we have
+$$
+\begin{align}
+\lim_{x \to a} f_1(x) &= A, \\
+\lim_{x \to a} f_2(x) &= B, \\
+\lim_{x \to a} g_1(x) &= C, \\
+\lim_{x \to a} g_2(x) &= D.
+\end{align}
+$$
+By expanding and grouping real and imaginary parts together, we get
+$$
+f(x)+g(x) = f_1(x)+g_1(x)+i(f_2(x)+g_2(x)).
+$$
+By calculating limits of $i$ and $j$ parts separately
+and then applying limit rules for real-valued functions, we get
+$$
+\begin{align}
+\lim_{x \to a} (f(x)+g(x))
+&= \lim_{x \to a}(f_1(x)+g_1(x))+i\lim_{x \to a}(f_2(x)+g_2(x)) \\
+&= \left(\lim_{x \to a}f_1(x)+\lim_{x \to a}g_1(x)\right)+i\left(\lim_{x \to a}f_2(x)+\lim_{x \to a}g_2(x)\right) \\
+&= A+C+i(B+D).
+\end{align}
+$$
+On the other hand, we have
+$$
+\begin{align}
+\left(\lim_{x \to a} f(x)\right)+\left(\lim_{x \to a} g(x)\right)
+&= (A+Bi)+(C+Di) \\
+&= (A+C)+i(B+D),
+\end{align}
+$$
+so
+$$
+\lim_{x \to a} (f(x)+g(x)) = \left(\lim_{x \to a} f(x)\right)+\left(\lim_{x \to a} g(x)\right).
+$$</p>
+
+<div class="box graybox"><p>The rule for limit of sum works with complex-valued functions.
+</p>
+
+</div><p>A similar calculation works with multiplication, but we skip that because it's messier.
+You can do it yourself if you are interested. Let me know if you need help with it.</p>
+
+<div class="box graybox"><p>The rule for limit of product works with complex-valued functions.
+</p>
+
+</div><h2 id="derivative-rules">Derivative rules<a class="headerlink" href="#derivative-rules" title="Link to this title">¶</a></h2><p>We will need these derivative rules for complex-valued functions $f$ and $g$:</p>
+
+<ul><li>If $f(x) = 0$ for all real numbers $x$, then $f(x)$ is a constant.</li><li>Product rule: if $f'(x)$ and $g'(x)$ exists, then $\frac{d}{dx} (f(x)g(x)) = f'(x)g(x)+f(x)g'(x)$.
+</li></ul><p>For the first of these rules, we can write $f(x)$ as $f_1(x) + if_2(x)$, where $f_1$ and $f_2$ are real-valued functions.
+By calculating derivatives of real and imaginary parts separately, we get
+$$
+f_1'(x) + if_2'(x) = f'(x) = 0 = 0+0i,
+$$
+and comparing real and imaginary parts on both sides gives $f_1'(x)=0$ and $f_2'(x)=0$ for all real numbers $x$.
+Because $f_1$ and $f_2$ are real-valued, we know
+from <a href="../calc/integral-ftoc2.html#what-if-derivative-is-zero-for-all-inputs">this derivation</a>
+that they must be constants, so $f$ is also a constant.</p>
+
+<div class="box graybox"><p>If $f$ is a complex-valued function and $f'(x)=0$ for all real numbers $x$, then $f(x)$ is a constant.
+</p>
+
+</div><p>To get product rule to work, let's look at <a href="../calc/derivative-product-quotient-rules.html#product-rule">its derivation</a>.
+The derivation contains a drawing that doesn't work with complex-valued functions,
+but it also has calculations that can be used instead of the drawing,
+and those calculations work fine with complex numbers.
+At the end of the derivation, we also used
+<a href="../calc/limit-props.html#limit-of-sum">limit of sum</a> and
+<a href="../calc/limit-props.html#limit-of-product">limit of product</a>,
+and we just derived those for complex-valued functions.</p>
+
+<div class="box graybox"><p>The derivative product rule works with complex-valued functions.
+</p>
+
+</div><p>We can similarly get many other derivative rule derivations to work,
+such as all derivations on <a href="../calc/derivative-basic-rules.html">this page</a>.
+However, we <b>cannot</b> get the chain rule
+$$
+\frac{d}{dx} f(g(x)) = f'(g(x))g'(x)
+$$
+to work when $g(x)$ is a complex number,
+because we haven't defined what the derivative means when the function takes complex numbers as input,
+and $g(x)$ is the input of $f$ and $f'$ here.
+This also means that we don't know whether e.g. quotient rule works,
+because <a href="../calc/derivative-product-quotient-rules.html#quotient-rule">the derivation of the quotient rule</a> uses the chain rule.
 </p>
 
 </div>

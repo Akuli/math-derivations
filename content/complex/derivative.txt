@@ -1,14 +1,15 @@
 # Derivative of complex-valued function
 
 Let $f$ be a function that takes in a real number and outputs a complex number.
-We define the limit $\lim_{x \to a} f(x)$ and derivative $f'(x)$
+We call functions like this complex-valued,
+and we define the limit $\lim_{x \to a} f(x)$ and derivative $f'(x)$
 just like the [limit](../calc/limit-vector.html) and [derivative](../calc/derivative-vector.html)
 of vector-valued functions, similarly to how we
 [borrowed other operations from vectors](intro.html#borrowing-operations-from-vectors).
 
-Note that we assume that the input $x$ is a real number;
+We assume that the input $x$ is a real number;
 only the output $f(x)$ is assumed to be a complex number.
-It's possible to generalize limits and derivatives so that the input can be a complex number,
+It's possible to define limits and derivatives so that the input can be a complex number too,
 but that's beyond the scope of these derivations.
 
 With vectors, we can take limits and derivatives of $\I$ parts and $\J$ parts separately,
@@ -28,7 +29,7 @@ graybox:
     \end{align}
     $$
     where the limit or derivative on the left side exists
-    if and only if the limit or derivative on the right side exists.
+    if and only if both limits or derivatives on the right side exists.
 
 For example, the derivative of the complex-valued function $h(x)=\cos(x) + i\sin(x)$ is
 $$

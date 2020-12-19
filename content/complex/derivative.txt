@@ -1,0 +1,142 @@
+# Derivative of complex-valued function
+
+Let $f$ be a function that takes in a real number and outputs a complex number.
+We define the limit $\lim_{x \to a} f(x)$ and derivative $f'(x)$
+just like the [limit](../calc/limit-vector.html) and [derivative](../calc/derivative-vector.html)
+of vector-valued functions, similarly to how we
+[borrowed other operations from vectors](intro.html#borrowing-operations-from-vectors).
+
+Note that we assume that the input $x$ is a real number;
+only the output $f(x)$ is assumed to be a complex number.
+It's possible to generalize limits and derivatives so that the input can be a complex number,
+but that's beyond the scope of these derivations.
+
+With vectors, we can take limits and derivatives of $\I$ parts and $\J$ parts separately,
+as derived [here](../calc/limit-vector.html#taking-limits-of-i-and-j-parts-separately)
+and [here](../calc/derivative-vector.html#taking-derivatives-of-i-and-j-parts-separately).
+For complex numbers,
+this corresponds to calculating limits or derivatives of real and imaginary parts separately, like this:
+
+graybox:
+    Let $h(x)=f(x)+ig(x)$ be any complex-valued function,
+    where $f$ and $g$ are real-valued and the input $x$ is a real number.
+    Then
+    $$
+    \begin{align}
+    \lim_{x \to a} h(x) &= \left( \lim_{x \to a} f(x) \right) + i\left( \lim_{x \to a} g(x) \right), \\
+    h'(x) &= f'(x)+ig'(x),
+    \end{align}
+    $$
+    where the limit or derivative on the left side exists
+    if and only if the limit or derivative on the right side exists.
+
+For example, the derivative of the complex-valued function $h(x)=\cos(x) + i\sin(x)$ is
+$$
+h'(x) = -\sin(x) + i\cos(x),
+$$
+and that derivative exists for all real numbers $x$ because the derivatives of $\cos$ and $\sin$ exist.
+
+
+## Limit rules
+
+We want to figure out whether [limit of sum](../calc/limit-props.html#limit-of-sum) and
+[limit of product](../calc/limit-props.html#limit-of-product) work with complex-valued functions.
+We could modify the derivations of the limit rules to work with complex numbers,
+but that too is beyond the scope of these derivations.
+Instead, we do this by calculating limits of real and imaginary parts separately.
+
+Let $f$ and $g$ be complex-valued functions,
+and suppose that the limits $\lim_{x \to a} f(x)=A+Bi$ and $\lim_{x \to a} g(x)=C+Di$ exist.
+We write
+$$
+f(x) = f_1(x)+if_2(x) \quad \text{and} \quad g(x) = g_1(x)+ig_2(x),
+$$
+where $f_1$, $f_2$, $g_1$ and $g_2$ are real-valued, and now we have
+$$
+\begin{align}
+\lim_{x \to a} f_1(x) &= A, \\
+\lim_{x \to a} f_2(x) &= B, \\
+\lim_{x \to a} g_1(x) &= C, \\
+\lim_{x \to a} g_2(x) &= D.
+\end{align}
+$$
+By expanding and grouping real and imaginary parts together, we get
+$$
+f(x)+g(x) = f_1(x)+g_1(x)+i(f_2(x)+g_2(x)).
+$$
+By calculating limits of $i$ and $j$ parts separately
+and then applying limit rules for real-valued functions, we get
+$$
+\begin{align}
+\lim_{x \to a} (f(x)+g(x))
+&= \lim_{x \to a}(f_1(x)+g_1(x))+i\lim_{x \to a}(f_2(x)+g_2(x)) \\
+&= \left(\lim_{x \to a}f_1(x)+\lim_{x \to a}g_1(x)\right)+i\left(\lim_{x \to a}f_2(x)+\lim_{x \to a}g_2(x)\right) \\
+&= A+C+i(B+D).
+\end{align}
+$$
+On the other hand, we have
+$$
+\begin{align}
+\left(\lim_{x \to a} f(x)\right)+\left(\lim_{x \to a} g(x)\right)
+&= (A+Bi)+(C+Di) \\
+&= (A+C)+i(B+D),
+\end{align}
+$$
+so
+$$
+\lim_{x \to a} (f(x)+g(x)) = \left(\lim_{x \to a} f(x)\right)+\left(\lim_{x \to a} g(x)\right).
+$$
+
+graybox:
+    The rule for limit of sum works with complex-valued functions.
+
+A similar calculation works with multiplication, but we skip that because it's messier.
+You can do it yourself if you are interested. Let me know if you need help with it.
+
+graybox:
+    The rule for limit of product works with complex-valued functions.
+
+
+## Derivative rules
+
+We will need these derivative rules for complex-valued functions $f$ and $g$:
+
+* If $f(x) = 0$ for all real numbers $x$, then $f(x)$ is a constant.
+* Product rule: if $f'(x)$ and $g'(x)$ exists, then $\frac{d}{dx} (f(x)g(x)) = f'(x)g(x)+f(x)g'(x)$.
+
+For the first of these rules, we can write $f(x)$ as $f_1(x) + if_2(x)$, where $f_1$ and $f_2$ are real-valued functions.
+By calculating derivatives of real and imaginary parts separately, we get
+$$
+f_1'(x) + if_2'(x) = f'(x) = 0 = 0+0i,
+$$
+and comparing real and imaginary parts on both sides gives $f_1'(x)=0$ and $f_2'(x)=0$ for all real numbers $x$.
+Because $f_1$ and $f_2$ are real-valued, we know
+from [this derivation](../calc/integral-ftoc2.html#what-if-derivative-is-zero-for-all-inputs)
+that they must be constants, so $f$ is also a constant.
+
+graybox:
+    If $f$ is a complex-valued function and $f'(x)=0$ for all real numbers $x$, then $f(x)$ is a constant.
+
+To get product rule to work, let's look at [its derivation](../calc/derivative-product-quotient-rules.html#product-rule).
+The derivation contains a drawing that doesn't work with complex-valued functions,
+but it also has calculations that can be used instead of the drawing,
+and those calculations work fine with complex numbers.
+At the end of the derivation, we also used
+[limit of sum](../calc/limit-props.html#limit-of-sum) and
+[limit of product](../calc/limit-props.html#limit-of-product),
+and we just derived those for complex-valued functions.
+
+graybox:
+    The derivative product rule works with complex-valued functions.
+
+We can similarly get many other derivative rule derivations to work,
+such as all derivations on [this page](../calc/derivative-basic-rules.html).
+However, we **cannot** get the chain rule
+$$
+\frac{d}{dx} f(g(x)) = f'(g(x))g'(x)
+$$
+to work when $g(x)$ is a complex number,
+because we haven't defined what the derivative means when the function takes complex numbers as input,
+and $g(x)$ is the input of $f$ and $f'$ here.
+This also means that we don't know whether e.g. quotient rule works,
+because [the derivation of the quotient rule](../calc/derivative-product-quotient-rules.html#quotient-rule) uses the chain rule.

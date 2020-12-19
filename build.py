@@ -187,6 +187,8 @@ def get_sidebar_content(txtfile):
             link("Multiplication", 'complex/mul'),
             link("Division", 'complex/div'),
             link("Square root", 'complex/sqrt'),
+            link("Derivative", 'complex/derivative'),
+            link("Exponent function", 'complex/exp'),
         ])),
     ])
 

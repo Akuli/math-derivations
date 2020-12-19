@@ -180,11 +180,11 @@
             <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a><a href="derivative.html">Derivative</a><a href="exp.html">Exponent function</a>
         </div>
         </div>
-<h1 id="exponent-function">Exponent function<a class="headerlink" href="#exponent-function" title="Link to this title">¶</a></h1><p>We know what $e^x$ is (TODO), and next we want to define $e^z$ for a complex number $z$.
-We first define $e^{ix}$.
+<h1 id="exponent-function">Exponent function<a class="headerlink" href="#exponent-function" title="Link to this title">¶</a></h1><p>We know how $e^x$ behaves when $x$ is a real number (TODO),
+and next we want to define $e^z$ for a complex number $z$. We first define $e^{ix}$.
 </p>
 
-<h2 id="defining-e-ix">Defining $e^{ix}$<a class="headerlink" href="#defining-e-ix" title="Link to this title">¶</a></h2><p>Let's start by figuring out which properties we want $e^{ix}$ to have,
+<h2 id="defining-e-i-cdot-text-real">Defining $e^{i \cdot \text{real}}$<a class="headerlink" href="#defining-e-i-cdot-text-real" title="Link to this title">¶</a></h2><p>Let's start by figuring out which properties we want $e^{ix}$ to have,
 similarly to how <a href="mul.html">we defined multiplication</a>.</p>
 
 <p>We need $e^{i \cdot 0} = 1$, because otherwise $e^0$ would depend on how you interpret it:
@@ -212,7 +212,7 @@ if(x)=ig(x)+i^2h(x)=ig(x)-h(x).
 $$
 Setting these equal gives
 $$
-g'(x) + ih'(x) = ig(x)-h(x)
+g'(x) + ih'(x) = ig(x)-h(x),
 $$
 and by comparing real and imaginary parts on both sides, we get
 $$
@@ -309,11 +309,7 @@ In particular, we have $e^{i\pi}=-1$.
 
 </div><p>These results are known as Euler's formula and Euler's identity.</p>
 
-<p>Note that the conjugate of $e^{ix}$ is $e^{-ix}$, or written slightly differently, $e^{i(-x)}$;
-a complex number on the unit circle, just like $e^{ix}$, but at the opposite angle $-x$.
-We will need this soon.</p>
-
-<p><img width="371" height="371" class="asymptote" src="../asymptote/cf6a73b24ef976a1834318aa7cd08dd3.svg" /></p><h2 id="defining-e-a-ix">Defining $e^{a+ix}$<a class="headerlink" href="#defining-e-a-ix" title="Link to this title">¶</a></h2><p>With real numbers $a$ and $b$, we have
+<h2 id="defining-e-text-complex">Defining $e^{\text{complex}}$<a class="headerlink" href="#defining-e-text-complex" title="Link to this title">¶</a></h2><p>With real numbers $a$ and $b$, we have
 $$
 \frac{d}{dx} e^{a+bx} = be^{a+bx},
 $$
@@ -322,7 +318,7 @@ Again, we want this to also work for $b=i$, so
 $$
 \frac{d}{dx} e^{a+ix} = ie^{a+ix}.
 $$
-So, we want the function $f(x)=e^{a+ix}$ to satisfy $f'(x)=ig(x)$.
+So, we want the function $f(x)=e^{a+ix}$ to satisfy $f'(x)=if(x)$.
 For plugging in $x=0$, we want to get
 $$
 f(0)=e^a,
@@ -341,8 +337,8 @@ This indeed satisfies the conditions:</p>
     $$
     \frac{d}{dx}(e^ae^{ix}) = e^a\frac{d}{dx}e^{ix} = e^aie^{ix}=i(e^ae^{ix}).
     $$
-</li></ul><p>Let $f$ be any complex-valued function satisfying $f(0)=e^a$ and $f'(x)=ig(x)$.
-Because $f'(x) = ig(x)$, based on what we calculated above,
+</li></ul><p>Let $f$ be any complex-valued function satisfying $f(0)=e^a$ and $f'(x)=if(x)$.
+Because $f'(x) = if(x)$, based on what we calculated above,
 we have
 $$
 \frac{d}{dx}\frac{f(x)}{e^{ix}} = 0,
@@ -356,7 +352,7 @@ and so
 $$
 f(x) = e^ae^{ix},
 $$
-and that's the only solution to our equations $f'(x)=ig(x)$ and $f(0)=e^a$.</p>
+and that's the only solution to our equations $f'(x)=if(x)$ and $f(0)=e^a$.</p>
 
 <div class="box graybox"><p>We define
 $$
@@ -376,8 +372,7 @@ $$
 as expected.
 Also note that $e^z$ can't be zero, no matter which complex number $z$ is,
 because neither of $e^a$ and $e^{bi}$ is zero;
-$e^a$ is always positive and $e^{bi}$ is on the origin-centered unit circle.
-</p>
+$e^a$ is always positive and $e^{bi}$ is on the origin-centered unit circle.</p>
 
 <h2 id="rules">Rules<a class="headerlink" href="#rules" title="Link to this title">¶</a></h2><p>Because <a href="mul.html#why-do-angles-get-added-and-lengths-get-multiplied">multiplication adds angles and multiplies lengths</a>,
 multiplying two complex numbers with length 1 and angles $\alpha$ and $\beta$
@@ -397,8 +392,9 @@ This is also known to work when $z$ and $w$ are real numbers.</p>
 $$
 e^{z+w}=e^{a+x+(b+y)i}=e^{a+x}e^{(b+y)i} = e^ae^xe^{bi}e^{yi},
 $$
-where the second equality comes from definition of $e^{a+bi}$, with $a+x$ instead of $a$ and $b+y$ instead of $b$,
-and the third equality comes from applying $e^{z+w}=e^ze^w$ in the two cases where we already know it works.
+where the equality in the middle comes from the definition of $e^{a+bi}$,
+with $a+x$ instead of $a$ and $b+y$ instead of $b$,
+and the last equality comes from applying $e^{z+w}=e^ze^w$ in the two cases where we already know it works.
 On the other hand, we have
 $$
 e^ze^w=e^{a+bi}e^{x+yi}=e^ae^{bi}e^xe^{yi} = e^ae^xe^{bi}e^{yi},
@@ -416,19 +412,20 @@ $$
 <ul><li>Because $e^{z-w}e^w = e^{z-w+w}=e^z$, we have $e^{z-w}=e^z/e^w$.</li><li>Because $e^{-w}e^w=e^{-w+w}=e^0=1$, we have $e^{-w}=1/e^w$.</li><li>For a positive integer $n$, we get
     $$
     \begin{align}
-    (e^z)^n
-    &= \underbrace{e^z e^z e^z e^z \dots e^z}_{\text{$n$ times}} \\
+    \underbrace{e^z e^z e^z e^z \dots e^z}_{\text{$n$ times}}
     &= e^{z+z}\underbrace{e^z e^z \dots e^z}_{\text{$n-2$ times}} \\
     &= e^{z+z+z}\underbrace{e^z \dots e^z}_{\text{$n-3$ times}} \\
-    &= e^{z+z+z+\dots+z} = e^{nz},
+    &= e^{z+z+z+\dots+z},
     \end{align}
     $$
     where we used $e^ze^w=e^{z+w}$ several times, depending on what number $n$ is.
-    Overall, $n$ copies of $e^z$ multiplied turns into $e^{z+z+\dots+z}$,
-    with $n$ copies of $z$ added.</li><li>If $n=-\abs{n}$ is a negative integer, then from the above results, we get
+    So, $n$ copies of $e^z$ multiplied is same as $e^{z+z+\dots+z}$,
+    with $n$ copies of $z$ added.
+    We write this as $(e^z)^n = e^{nz}$.</li><li>If $n=-\abs{n}$ is a negative integer, then from the above results, we get
     $$
     (e^z)^n = \frac{1}{(e^z)^{\abs{n}}} = \frac{1}{e^{\abs{n}z}} = e^{-\abs{n}z}=e^{nz}.
     $$
+    If $n=0$, then $(e^z)^n$ and $e^{nz}$ are both zero, and $(e^z)^n=e^{nz}$ works in that case too.
 </li></ul></div>
 </body>
 </html>

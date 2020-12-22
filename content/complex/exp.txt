@@ -291,4 +291,4 @@ Other well-known rules for the exponent function follow from this rule. Examples
     $$
     (e^z)^n = \frac{1}{(e^z)^{\abs{n}}} = \frac{1}{e^{\abs{n}z}} = e^{-\abs{n}z}=e^{nz}.
     $$
-    If $n=0$, then $(e^z)^n$ and $e^{nz}$ are both zero, and $(e^z)^n=e^{nz}$ works in that case too.
+    If $n=0$, then $(e^z)^n$ and $e^{nz}$ are both $1$, and $(e^z)^n=e^{nz}$ works in that case too.

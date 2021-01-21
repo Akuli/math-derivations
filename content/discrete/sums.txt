@@ -1,4 +1,4 @@
-# Sums
+# Sum Formulas
 
 The results on this page work for any integer $n \ge 1$.
 I animated the derivations with $n=7$, but similar derivations work for any other $n$ too.

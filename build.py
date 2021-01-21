@@ -90,8 +90,8 @@ def get_sidebar_content(txtfile):
             ])),
         ])),
 
-        dropdown("Sums and sequences", join([
-            link("Sums", 'sums-and-seqs/sums'),
+        dropdown("Discrete math", join([
+            link("Sum formulas", 'discrete/sums'),
         ])),
 
         dropdown("Plane geometry", join([
@@ -274,7 +274,7 @@ stylesheet">
         <script src="{relative_path_prefix}/js/common.js"></script>
         <script src="{relative_path_prefix}/js/projection-demo.js"></script>
         '''
-    if filename == 'content/sums-and-seqs/sums.txt':
+    if filename == 'content/discrete/sums.txt':
         result += f'''
         <script src="{relative_path_prefix}/js/animator.js"></script>
         '''

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Binomial Coefficients
+</title>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/CommonHTML"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] },
+        TeX: {
+          Macros: {
+            // awesome, latex inside javascript inside html inside python
+            // https://xkcd.com/1638/
+            Vec: [ "\\overrightarrow{#1}", 1 ],
+            abs: [ "\\left| {#1} \\right|", 1 ],
+            I: [ "\\vec{i}", 0 ],
+            J: [ "\\vec{j}", 0 ],
+            K: [ "\\vec{k}", 0 ],
+
+            // funny operator name used only in one file
+            rotate: [ "\\operatorname{rotate}", 0 ],
+
+            // darkred is too dark, red is too bright
+            red: [ "\\color{##c00}{#1}", 1 ],
+            blue: [ "\\color{blue}{#1}", 1 ],
+            green: [ "\\color{green}{#1}", 1 ],
+            magenta: [ "\\color{magenta}{#1}", 1 ],
+
+            epsi: [ "\\varepsilon", 0 ],
+            leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/animation.css">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Discrete math</label>
+        <div class="dropdown">
+            <a href="sums.html">Sum formulas</a><a href="binom.html">Binomial coefficients</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Circle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Triangle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-16" />
+        <label for="sidebar-checkbox-16">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-12" />
+        <label for="sidebar-checkbox-12">Limits</label>
+        <div class="dropdown">
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-13" />
+        <label for="sidebar-checkbox-13">Continuity</label>
+        <div class="dropdown">
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-14" />
+        <label for="sidebar-checkbox-14">Derivative</label>
+        <div class="dropdown">
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-15" />
+        <label for="sidebar-checkbox-15">Integral</label>
+        <div class="dropdown">
+            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a><a href="../calc/integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="../calc/integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="../calc/integral-notation.html">More notation for integrals</a><a href="../calc/integral-rules.html">Integral rules</a><a href="../calc/integral-usub.html">U substitution</a><a href="../calc/integral-sor-volume.html">Volume of solid of revolution</a><a href="../calc/integral-sor-area.html">Area of surface of revolution</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-17" />
+        <label for="sidebar-checkbox-17">Complex numbers</label>
+        <div class="dropdown">
+            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
+        </div>
+        </div>
+<h1 id="binomial-coefficients">Binomial Coefficients<a class="headerlink" href="#binomial-coefficients" title="Link to this title">¶</a></h1><p>There are several ways to think about the binomial coefficients.
+On this page I explain some of the most common ways.
+On this page, $n$ and $k$ are integers such that $0 \le k \le n$.
+</p>
+
+<h2 id="binomial-formula">Binomial formula<a class="headerlink" href="#binomial-formula" title="Link to this title">¶</a></h2><p>Consider the formula
+$$
+(a+b)^2 = a^2+2ab+b^2.
+$$
+There is a similar formula for $(a+b)^3$. To get it from this one, we can calculate
+$$
+\begin{align}
+(a+b)^3 &= (a+b)^2(a+b) \\
+&= (a^2+2ab+b^2)(a+b) \\
+&= (a^2+2ab+b^2)a + (a^2+2ab+b^2)b \\
+&= a^3+2a^2b+ab^2+a^2b+2ab^2+b^3 \\
+&= a^3+3a^2b+3ab^2+b^3.
+\end{align}
+$$
+By multiplying this with $(a+b)$ again, we can get a formula for $(a+b)^4$:
+$$
+\begin{align}
+(a+b)^4 &= (a+b)^3(a+b) \\
+&= (a^3+3a^2b+3ab^2+b^3)(a+b) \\
+&= a^4+3a^3b+3a^2b^2+ab^3+a^3b+3a^2b^2+3ab^3+b^4 \\
+&= a^4+4a^3b+6a^2b^2+4ab^3+b^4
+\end{align}
+$$</p>
+
+<p>In general, we can make the formula for $(a+b)^n$ from the previous $(a+b)^{n-1}$ formula.
+Notice the formulas produced this way have these properties:</p>
+
+<ul><li>The formulas are sums of terms with an integer, some number of $a$'s, and some number of $b$'s multiplied.
+  For example, in $3a^2b$, the integer is $3$ and there is two $a$'s and one $b$.
+  In $a^2$, we have zero $b$'s, and the integer is $1$.</li><li>The total number of $a$'s and $b$'s in each term is $n$.
+  For example, $3a^2b$ contains two $a$'s and one $b$, $2+1=3=n$ in total.
+  So, if $a$ occurs $k$ times in the $(a+b)^n$ formula, as in $a^k$,
+  then $b$ occurs $n-k$ times and we have $a^kb^{n-k}$ multiplied by some integer,
+  such as $a^2b$ for $n=3$ and $k=2$.
+  This happens for all $n$ because if it happens for the previous $(a+b)^{n-1}$ formula,
+  then we end up with one more $a$ or $b$ everywhere in the $(a+b)^n$ formula.</li><li>If we know the integers in front of $a^k b^{n-k}$ for each $k$ in the range $0 \le k \le n$,
+  then we know the entire $(a+b)^n$ formula.
+</li></ul><p>The integer in front of $a^kb^{n-k}$ when expanding $(a+b)^n$ is called the <b>binomial coefficient</b>,
+and it's denoted with
+$$
+\binom{n}{k}.
+$$
+So for example, because there is $3$ in front of $a^2b$ in the $(a+b)^3$ formula, we have
+$$
+\binom{3}{2}=3,
+$$
+and for all $n$, the numbers in front of $a^n$ and $b^n$ are
+$$
+\binom{n}{n} = 1, \quad \binom{n}{0} = 1.
+$$</p>
+
+<div class="box graybox"><p>For any numbers $a$ and $b$, we have
+$$
+(a+b)^n = \binom{n}{n}a^n + \binom{n}{n-1}a^{n-1}b + \dots + \binom{n}{1} ab^{n-1} + \binom{n}{0}b^n,
+$$
+where each $\binom{n}{k}$ is an integer known as the <b>binomial coefficient</b>.
+This result is known as the <b>binomial formula</b>.
+</p>
+
+</div><p>This also works for $n=1$ and $n=0$ with all binomial coefficients being $1$, because
+$$
+\begin{align}
+(a+b)^1 &= 1a^1b^0 + 1a^0b^1, \\
+(a+b)^0 &= 1a^0b^0.
+\end{align}
+$$
+Next we find a way to calculate binomial coefficients.
+</p>
+
+<h2 id="pascal-s-triangle">Pascal's triangle<a class="headerlink" href="#pascal-s-triangle" title="Link to this title">¶</a></h2><p>Let's arrange all binomial coefficients we know into a big triangle-shaped drawing like this:
+$$
+\begin{matrix}
+&&&&\binom{0}{0}&&&& \\
+&&&\binom{1}{0}&&\binom{1}{1}&&& \\
+&&\binom{2}{0}&&\binom{2}{1}&&\binom{2}{2}&& \\
+&\binom{3}{0}&&\binom{3}{1}&&\binom{2}{2}&&\binom{3}{3}& \\
+\binom{4}{0}&&\binom{4}{1}&&\binom{4}{2}&&\binom{4}{3}&&\binom{4}{4} \\
+&&&&\vdots&&&&
+\end{matrix}
+$$
+The three dots in the bottom of the drawing mean that it goes on infinitely;
+by making more $(a+b)^n$ formulas, we can extend the triangle downwards as much as we want.
+By plugging in the numbers from the formulas we know, the triangle becomes
+$$
+\begin{matrix}
+&&&&1&&&&\\
+&&&1&&1&&&\\
+&&1&&2&&1&&\\
+&1&&3&&3&&1&\\
+1&&4&&6&&4&&1 \\
+&&&&\vdots&&&&
+\end{matrix}
+$$
+This is known as <b>Pascal's triangle</b>.</p>
+
+<p>If you look carefully, you might notice that whenever there's two numbers next to each other,
+their sum is below them. For example, below I colored $\green3+\blue3 = \red6$:
+$$
+\begin{matrix}
+&&&&1&&&&\\
+&&&1&&1&&&\\
+&&1&&2&&1&&\\
+&1&&\green3&&\blue3&&1&\\
+1&&4&&\red6&&4&&1 \\
+&&&&\vdots&&&&
+\end{matrix}
+$$
+So, we noticed that
+$$
+\green{\binom{3}{1}}+\blue{\binom{3}{2}}=\red{\binom{4}{2}},
+$$
+and more generally, it seems like
+$$
+\green{\binom{n}{k}}+\blue{\binom{n}{k+1}}=\red{\binom{n+1}{k+1}}.
+$$
+To see why this happens, consider
+$$
+(a+b)^n = \binom{n}{n}a^n + \dots + \blue{\binom{n}{2}}a^2b^{n-2} + \green{\binom{n}{1}}ab^{n-1} + \binom{n}{0}b^n.
+$$
+Let's multiply this with $a$ and $b$:
+$$
+\begin{alignat}{9}
+(a+b)^na &= \binom{n}{n}a^{n+1} &+ \dots &+ \blue{\binom{n}{2}}a^3b^{n-1} &+ \green{\binom{n}{1}}a^2b^{n-1} &+ \binom{n}{0}ab^n \\
+(a+b)^nb &=& \binom{n}{n}a^nb &+ \dots &+ \blue{\binom{n}{2}}a^2b^{n-1} &+ \green{\binom{n}{1}}ab^n &+ \binom{n}{0}b^{n+1}& \\
+\end{alignat}
+$$
+By adding these equations, we get
+$$
+(a+b)^{n+1} = \dots + \left( \green{\binom{n}{1}}+\blue{\binom{n}{2}} \right)a^2b^{n-1} + \dots,
+$$
+where $\dots$ does not contain any $a^2b^{n-1}$. So, the number in front of $a^2b^{n-1}$ is
+$$
+\green{\binom{n}{1}}+\blue{\binom{n}{2}},
+$$
+and because on the other hand, there should be $\red{\binom{n+1}{2}}$ in front of $a^2b^{(n+1)-2}$, we get
+$$
+\green{\binom{n}{1}}+\blue{\binom{n}{2}} = \red{\binom{n+1}{2}},
+$$
+which is the equation we wanted for $k=1$.
+It works the same for any other $k$, too:
+each $a^{k+1}b^{(n+1)-(k+1)}$ in the expansion of $(a+b)^{n+1} = (a+b)^n(a+b)$ must come from
+$$
+a \cdot \green{\binom{n}{k}}a^kb^{n-k}
+$$
+or
+$$
+b \cdot \blue{\binom{n}{k+1}}a^{k+1}b^{n-(k+1)},
+$$
+and when combined, these give
+$$
+\underbrace{\left( \green{\binom{n}{k}} + \blue{\binom{n}{k+1}} \right)}_{
+    \textstyle\red{ \binom{n+1}{k+1} }
+}a^{k+1}b^{(n+1)-(k+1)}.
+$$</p>
+
+<div class="box graybox"><p>Binomial coefficients can be taken from Pascal's triangle, which can be drawn like this:
+First draw ones at the edges.
+Then fill in other places with sums of the two numbers above.
+$$
+\begin{matrix}
+&&&&1&&&&\\
+&&&1&&1&&&\\
+&&1&&2&&1&&\\
+&1&&3&&3&&1&\\
+1&&4&&6&&4&&1 \\
+&&&&\vdots&&&&
+\end{matrix}
+$$
+</p>
+
+</div><h2 id="subsets">Subsets<a class="headerlink" href="#subsets" title="Link to this title">¶</a></h2><p>Consider a set of two elements, $\{A,B\}$.
+It has these subsets:</p>
+
+<ul><li>The empty set</li><li>$\{A\}$</li><li>$\{B\}$</li><li>$\{A,B\}$
+</li></ul><p>In particular, note that any set is a subset of itself.
+Also, the same element can't occur several times in a set, and order does not matter;
+$\{A,B\}$ and $\{B,A\}$ are the same set.</p>
+
+<p>A set of 3 elements, $\{A,B,C\}$, has these subsets:</p>
+
+<ul><li>The empty set</li><li>$\{A\}$</li><li>$\{B\}$</li><li>$\{C\}$</li><li>$\{A,B\}$</li><li>$\{A,C\}$</li><li>$\{B,C\}$</li><li>$\{A,B,C\}$
+</li></ul><p>Note that a set of 2 elements has 1 subset of 0 elements, 2 subsets of 1 element and 1 subset of 2 elements,
+$1\,\,2\,\,1$.
+The sizes of subsets of a set of 3 elements are $1\,\,3\,\,3\,\,1$.
+These are rows $2$ and $3$ of Pascal's triangle
+when we think of the first row as row $0$ and first column of each row as column $0$.
+In other words, it seems like a set of $n$ elements has $\binom{n}{k}$ subsets of $k$ elements.
+Next we explain why this happens.</p>
+
+<p>Let $C(n,k)$ denote the number of subsets of $k$ elements in a set of size $n$.
+Consider the triangle
+$$
+\begin{matrix}
+&&&C(0,0)&&& \\
+&&C(1,0)&&C(1,1)&& \\
+&C(2,0)&&C(2,1)&&C(2,2)& \\
+C(3,0)&&C(3,1)&&C(2,2)&&C(3,3) \\
+&&&\vdots&&&
+\end{matrix}
+$$
+Next we explain why this triangle is same as Pascal's triangle. We need to ensure two things:</p>
+
+<ul><li>This triangle has $1$ at the edges: $C(n,0)=1$ and $C(n,n)=1$</li><li>Each number in this triangle is the sum of the two numbers above: $C(n,k)+C(n,k+1)=C(n+1,k+1)$
+</li></ul><p>The first property is clear; a set of $n$ elements has
+only one subset of zero elements (empty set) and only one subset of $n$ elements (the set itself).
+For the second property, imagine going into shop that sells $n+1$ different products,
+milk and $n$ other things, with a shopping bag that fits exactly $k+1$ products.
+We calculate the number of ways how you can fill the shopping bag without choosing the same product twice:</p>
+
+<ul><li>If you choose milk, then you need to fill the shopping bag with $k$ more products,
+  chosen out of the $n$ remaining products (milk excluded).
+  This can be done in $C(n,k)$ different ways.</li><li>If you don't choose milk, then you need to choose $k+1$ other products to fill the shopping bag,
+  out of the $n$ non-milk products available. This can be done in $C(n,k+1)$ different ways.
+</li></ul><p>In total,
+$$
+\begin{align}
+C(n+1,k+1)
+&= \text{number of ways to fill shopping bag} \\
+&= \underbrace{C(n,k)}_{\text{milk}} + \underbrace{C(n,k+1)}_{\text{no milk}}.
+\end{align}
+$$
+This shows that these $C(n,k)$ numbers are binomial coefficients, because they form Pascal's triangle.</p>
+
+<div class="box graybox"><p>A set of size $n$ has $\binom{n}{k}$ subsets of size $k$.
+</p>
+
+</div><p>For this reason, a common way to spell $\binom{n}{k}$ is "$n$ choose $k$";
+it represents the number of different ways to choose $k$ items from $n$ items
+when the order of the items is ignored and you can't choose the same item twice.
+</p>
+
+<h2 id="formula">Formula<a class="headerlink" href="#formula" title="Link to this title">¶</a></h2><p>We still don't have a formula for calculating binomial coefficients,
+although looking them up from Pascal's triangle is easy enough for small-ish values of $n$.
+Next we derive a formula for $\binom{n}{k}$.</p>
+
+<p>Consider a shop with $n$ products and a shopping bag that fits exactly $k$ products.
+There are $\binom{n}{k}$ ways to fill the shopping bag without choosing the same product twice.
+To find a formula for $\binom{n}{k}$,
+we just need a different way to calculate the number of ways to fill the shopping bag.</p>
+
+<ul><li>If $k=0$, there's only one thing you can do: leave the shop with an empty shopping bag.
+  $$
+  \binom{n}{0} = 1
+  $$</li><li>If $k=1$, there are $n$ ways to fill the shopping bag, because you choose one of the $n$ available products.
+  $$
+  \binom{n}{1} = n
+  $$</li><li>If $k=2$, you have $n$ choices for the first product to buy,
+  but only $n-1$ choices for the second product because you can't choose the same product twice.
+  This gives a total of $n(n-1)$ choices.
+  But now we calculated $\{ \text{milk}, \text{bread} \}$ and $\{ \text{bread}, \text{milk} \}$
+  as two different subsets of the set of products in the store,
+  because you can choose milk first and then bread, or vice versa.
+  For that reason, $n(n-1)$ is not the number we are looking for;
+  it's two times too big, since each subset was counted twice.
+  To correct this, we must divide by 2, and we get
+  $$
+  \binom{n}{2} = \frac{n(n-1)}{2}.
+  $$</li><li>If $k=3$, you have $n(n-1)$ choices for the first two products, including different orders,
+  and $n-2$ choices for the third product, giving a total of $n(n-1)(n-2)$ choices.
+  Now every subset got counted 6 times, because there are 6 ways to sort 3 products:
+  $$
+  \begin{align}
+  \{ \text{milk},\text{bread},\text{cheese} \} \\
+  \{ \text{milk},\text{cheese},\text{bread} \} \\
+  \{ \text{cheese},\text{milk},\text{bread} \} \\
+  \{ \text{cheese},\text{bread},\text{milk} \} \\
+  \{ \text{bread},\text{cheese},\text{milk} \} \\
+  \{ \text{bread},\text{milk},\text{cheese} \}
+  \end{align}
+  $$
+  To correct this, we must divide by 6 and we get
+  $$
+  \binom{n}{3} = \frac{n(n-1)(n-2)}{6}.
+  $$
+</li></ul><p>In general,
+$$
+\binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ times}}}{\text{number of ways to sort a set of $k$ items}},
+$$
+where on top, we have the first $k$ numbers of $n,~ n-1,~ n-2,~ n-3,~ \dots$ multiplied.
+Next find the ways that a set of $k$ items can be sorted.
+If $k=n$, then on top we multiply all integers between $n$ and $1$ (inclusive). We call that
+$$
+n! = n(n-1)(n-2)\dots 1,
+$$
+so for example, $5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1$. Now we get
+$$
+\binom{n}{n} = \frac{n!}{\text{number of ways to sort a set of $n$ items}},
+$$
+and because $\binom{n}{n} = 1$, we get
+$$
+\text{number of ways to sort a set of $n$ items} = n!.
+$$
+By using this with $k$ instead of $n$, we get the following result.</p>
+
+<div class="box graybox"><p>$$
+\binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ times}}}{k!}
+$$
+</p>
+
+</div></div>
+</body>
+</html>

@@ -198,7 +198,7 @@ def get_head_extras(filename):
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/HTML-CSS"],
+        jax: ["input/TeX", "output/CommonHTML"],
         tex2jax: {
           inlineMath: [ ['$','$'] ],
           displayMath: [ ['$$','$$'] ],

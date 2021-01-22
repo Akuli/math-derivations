@@ -92,6 +92,7 @@ def get_sidebar_content(txtfile):
 
         dropdown("Discrete math", join([
             link("Sum formulas", 'discrete/sums'),
+            link("Binomial coefficients", 'discrete/binom'),
         ])),
 
         dropdown("Plane geometry", join([

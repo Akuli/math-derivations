@@ -335,3 +335,8 @@ graybox:
     $$
     \binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ times}}}{k!}
     $$
+
+For example,
+$$
+\binom{8}{3} = \frac{8 \cdot 7 \cdot 6}{3 \cdot 2 \cdot 1} = 56.
+$$

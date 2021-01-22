@@ -15,6 +15,7 @@ $ python3 -m pip install --user wheel
 $ python3 -m venv env
 $ . env/bin/activate
 (env) $ pip install -r requirements.txt
+(env) $ ./imagecachesync.sh
 ```
 
 Run these commands **with the virtualenv activated** as needed:

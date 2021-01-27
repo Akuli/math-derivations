@@ -313,7 +313,7 @@ we just need a different way to calculate the number of ways to fill the shoppin
 
 In general,
 $$
-\binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ times}}}{\text{number of ways to sort a set of $k$ items}},
+\binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}}}{\text{number of ways to sort a set of $k$ items}},
 $$
 where on top, we have the first $k$ numbers of $n,~ n-1,~ n-2,~ n-3,~ \dots$ multiplied.
 Next find the ways that a set of $k$ items can be sorted.
@@ -333,7 +333,7 @@ By using this with $k$ instead of $n$, we get the following result.
 
 graybox:
     $$
-    \binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ times}}}{k!}
+    \binom{n}{k} = \frac{~~ \overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}} ~~}{k!}
     $$
 
 For example,

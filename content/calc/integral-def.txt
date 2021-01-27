@@ -56,7 +56,7 @@ $$
 Unfortunately it's hard to draw a graph of this function.
 
 Because any interval contains rational numbers,
-the minimum of $f$ on any interval is $1$.
+the maximum of $f$ on any interval is $1$.
 For that reason, an upper sum of $f$ on $[1,2]$ looks something like this, regardless of the partition being used:
 
 asymptote:

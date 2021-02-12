@@ -35,6 +35,10 @@
 
             epsi: [ "\\varepsilon", 0 ],
             leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
+
+            // binom doesn't work on adder's computer
+            // mybinom works, but it's too tall for inline math
+            mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
           }
         }
       });
@@ -228,7 +232,7 @@ $$
 Unfortunately it's hard to draw a graph of this function.</p>
 
 <p>Because any interval contains rational numbers,
-the minimum of $f$ on any interval is $1$.
+the maximum of $f$ on any interval is $1$.
 For that reason, an upper sum of $f$ on $[1,2]$ looks something like this, regardless of the partition being used:</p>
 
 <p><img width="385" height="243" class="asymptote" src="../asymptote/ec700088253ab132d2e77971bdf60586.svg" /></p><p>Every interval also contains irrational numbers, so all minimums are $0$, and all lower sums looks like this:</p>

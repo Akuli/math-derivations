@@ -226,6 +226,10 @@ def get_head_extras(filename):
 
             epsi: [ "\\\\varepsilon", 0 ],
             leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
+
+            // binom doesn't work on adder's computer
+            // mybinom works, but it's too tall for inline math
+            mybinom: [ "\\\\begin{pmatrix} {#1} \\\\\\\\ {#2} \\\\end{pmatrix}", 2 ],
           }
         }
       });

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Law of Cosines
+<title>Inscribed Circle
 </title>
 
     <script type="text/x-mathjax-config">
@@ -184,92 +184,34 @@
             <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
         </div>
         </div>
-<h1 id="law-of-cosines">Law of Cosines<a class="headerlink" href="#law-of-cosines" title="Link to this title">¶</a></h1><p>Let $\vec a$, $\vec b$ and $\vec c$ be the vectors connecting the corners of any triangle
-so that $\vec a$ and $\vec b$ are pointing away from the same triangle corner.
-Let $\gamma$ be the angle at that triangle corner.</p>
+<h1 id="inscribed-circle">Inscribed Circle<a class="headerlink" href="#inscribed-circle" title="Link to this title">¶</a></h1><p>As a part of <a href="law-of-sines.html#different-derivation">this derivation</a>,
+we got a formula for the radius of a circle drawn around a triangle.
+In this derivation, we will find a formula for a circle drawn inside a triangle.</p>
 
-<p><img width="174" height="209" class="asymptote" src="../asymptote/b6c6d08f90ca721bb1620da42bafead2.svg" /></p><p>In the above picture, $-\vec b$ goes from the bottom corner to the top right corner, so
-$$
-\vec c = (-\vec b) + \vec a = \vec a - \vec b.
-$$
-We know that if $a$ and $b$ are numbers, then
-$$
-(a-b)^2 = a^2 - 2ab + b^2,
-$$
-and for deriving that (TODO), we only needed $(a-b)c=ac-bc$ and $ab=ba$.
-These also work with dot product of vectors instead of multiplication of numbers
-(see <a href="../vectors/dot-projection.html#dot-product-and-difference">this</a>
-and <a href="../vectors/angle-between-vectors.html#order-doesn-t-matter">this</a>),
-so the $(a-b)^2$ formula works
-if $a$ and $b$ are vectors and we replace all multiplications with dot products:
-$$
-(\vec a - \vec b)\cdot(\vec a - \vec b) = (\vec a\cdot\vec a) - 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b)
-$$
-By putting everything together, we get
-$$
-(\vec c \cdot \vec c)^2 = (\vec a\cdot\vec a) - 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b).
-$$
-Because $\vec a \cdot \vec a = |\vec a|^2$
-(see <a href="../vectors/dot-projection.html#defining-dot-product">here</a>)
-and similarly for all other vectors, we have
-$$
-|\vec c|^2 = |\vec a|^2 - 2(\vec a \cdot \vec b) + |\vec b|^2.
-$$
-We can
-<a href="https://akuli.github.io/math-derivations/vectors/angle-between-vectors.html">write the dot product with angle between vectors</a>
-to get
-$$
-\vec a \cdot \vec b = |\vec a| |\vec b| \cos(\gamma).
-$$
-By plugging this in we get
-$$
-|\vec c|^2 = |\vec a|^2 + |\vec b|^2 - 2|\vec a||\vec b|\cos(\gamma).
-$$
-Finally, we can define $a = |\vec a|$ and similarly for $b$ and $c$.
-These are the side lengths of the triangle.</p>
+<p>Consider any triangle with any side lengths $a$, $b$ and $c$,
+and draw a circle inside it so that it touches each side as in the picture below.
+A circle like this is called the <b>inscribed circle</b> of the triangle.
+Our goal is to find its radius $r$.</p>
 
-<p><img width="174" height="209" class="asymptote" src="../asymptote/f6e12125d238b54debce694cf40683be.svg" /></p><div class="box graybox"><p>Let $a$, $b$ and $c$ be the sides of any triangle,
-and let $\gamma$ be the angle opposite to $c$.
-Then
+<p><img width="178" height="253" class="asymptote" src="../asymptote/45b1cafbaaede88a8b583213ffa07afa.svg" /></p><p>Let's split the triangle into 3 smaller triangles by connecting the corners to the center of the circle:</p>
+
+<p><img width="178" height="253" class="asymptote" src="../asymptote/82de898a191f844256b229b2b2702ad8.svg" /></p><p>Because the radius $r$ is perpendicular to the side with length $a$,
+the area of the green part is $ar/2$.
+Areas of the other parts are similarly $br/2$ and $cr/2$.
+Letting $A$ denote the area of the whole triangle, we get
 $$
-c^2 = a^2 + b^2 - 2ab\cos(\gamma).
+A = \frac{ar}{2} + \frac{br}{2} + \frac{cr}{2} = \frac{(a+b+c)r}{2}.
 $$
-This is known as the <b>law of cosines</b>.
+Multiplying both sides by $2$ and dividing by $a+b+c$ gives the following result.</p>
+
+<div class="box graybox"><p>Consider any triangle.
+Let $a$, $b$ and $c$ denote its side lengths, let $A$ denote its area,
+and let $r$ denote the radius of the inscribed circle. Then
+$$
+r = \frac{2A}{a+b+c}.
+$$
 </p>
 
-</div><p>We get other well-known things as special cases.
-</p>
-
-<h2 id="pythagorean-theorem">Pythagorean theorem<a class="headerlink" href="#pythagorean-theorem" title="Link to this title">¶</a></h2><p>If $\gamma = 90^\circ$, then $\cos(\gamma) = 0$ and
-$$
-c^2 = a^2 + b^2.
-$$
-This is the Pythagorean theorem.</p>
-
-<p><img width="192" height="249" class="asymptote" src="../asymptote/95a7336f6f999e4c1673171c54978fa8.svg" /></p><p>Alternatively, you can go back to the law of cosines derivation and use the fact that
-if $\vec a$ and $\vec b$ are perpendicular, then $\vec a \cdot \vec b = 0$.
-</p>
-
-<h2 id="a-b-2-for-numbers">$(a-b)^2$ for numbers<a class="headerlink" href="#a-b-2-for-numbers" title="Link to this title">¶</a></h2><p>If $\gamma = 0$, then the triangle is flat,
-and it's a bit questionable whether we can still call it a triangle.</p>
-
-<p><img width="352" height="93" class="asymptote" src="../asymptote/4f33ddcf9f5ed9f3974d34a7876c0fc4.svg" /></p><p>The above derivation still works, and because $\cos(0)=1$, we get
-$$
-c^2 = a^2 + b^2 - 2ab.
-$$
-In the picture, $a$ is longer than $b$ so we have $c = a-b$.
-If $b$ was longer than $a$, then we would instead have $c = b-a$.
-Either way, we have $c = \abs{a-b}$ and
-$$
-c^2 = \abs{a-b}^2 = (a-b)^2.
-$$
-By putting all this together, we get
-$$
-(a-b)^2 = a^2 - 2ab + b^2,
-$$
-which is the formula that we used (and generalized) earlier on this page.
-</p>
-
-</div>
+</div></div>
 </body>
 </html>

@@ -93,14 +93,14 @@ $$
 $$
 Multiplying everything by $2$ and dividing by $abc$ gives
 $$
-\frac{\sin(\alpha)}{a} = \frac{\sin(\beta)}{b} = \frac{\sin(\gamma)}{b}.
+\frac{\sin(\alpha)}{a} = \frac{\sin(\beta)}{b} = \frac{\sin(\gamma)}{c}.
 $$
 Finally, we rewrite this slightly to get what is typically presented in text books.
 By raising all sides to power $-1$, we get
 $$
 \left( \frac{\sin(\alpha)}{a} \right)^{-1}
 = \left( \frac{\sin(\beta)}{b} \right)^{-1}
-= \left( \frac{\sin(\gamma)}{b} \right)^{-1},
+= \left( \frac{\sin(\gamma)}{c} \right)^{-1},
 $$
 and because power $-1$ flips a fraction around, we have
 $$

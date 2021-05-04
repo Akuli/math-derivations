@@ -1,0 +1,70 @@
+# Inscribed Circle
+
+As a part of [this derivation](law-of-sines.html#different-derivation),
+we got a formula for the radius of a circle drawn around a triangle.
+In this derivation, we will find a formula for a circle drawn inside a triangle.
+
+Consider any triangle with any side lengths $a$, $b$ and $c$,
+and draw a circle inside it so that it touches each side as in the picture below.
+A circle like this is called the **inscribed circle** of the triangle.
+Our goal is to find its radius $r$.
+
+asymptote:
+    unitsize(2cm);
+
+    // Create a triangle with inscribed circle centered around origin
+    path line1 = rotate(60)*((-10, 1)--(10, 1));
+    path line2 = rotate(190)*((-10, 1)--(10, 1));
+    path line3 = rotate(280)*((-10, 1)--(10, 1));
+    pair A = intersectionpoint(line1, line2);
+    pair B = intersectionpoint(line1, line3);
+    pair C = intersectionpoint(line2, line3);
+
+    filldraw(A--B--C--cycle, paleyellow);
+    draw(unitcircle, deepred);
+    draw(cis(pi/2 + 280*2pi/360)--(0,0), blue, L="$r$");
+
+    label(Label("$a$", (B+C)/2), align=unit(B+C));
+    label(Label("$b$", (A+C)/2), align=unit(A+C));
+    label(Label("$c$", (A+B)/2), align=unit(A+B));
+
+Let's split the triangle into 3 smaller triangles by connecting the corners to the center of the circle:
+
+asymptote:
+    unitsize(2cm);
+
+    // Create a triangle with inscribed circle centered around origin
+    path line1 = rotate(60)*((-10, 1)--(10, 1));
+    path line2 = rotate(190)*((-10, 1)--(10, 1));
+    path line3 = rotate(280)*((-10, 1)--(10, 1));
+    pair A = intersectionpoint(line1, line2);
+    pair B = intersectionpoint(line1, line3);
+    pair C = intersectionpoint(line2, line3);
+
+    fill(A--B--(0,0)--cycle, paleblue);
+    fill(A--C--(0,0)--cycle, palered);
+    fill(B--C--(0,0)--cycle, palegreen);
+    draw(C--B--A--cycle);
+    draw(unitcircle, deepred);
+    draw(cis(pi/2 + 280*2pi/360)--(0,0), blue, L="$r$");
+
+    label(Label("$a$", (B+C)/2), align=unit(B+C));
+    label(Label("$b$", (A+C)/2), align=unit(A+C));
+    label(Label("$c$", (A+B)/2), align=unit(A+B));
+
+Because the radius $r$ is perpendicular to the side with length $a$,
+the area of the green part is $ar/2$.
+Areas of the other parts are similarly $br/2$ and $cr/2$.
+Letting $A$ denote the area of the whole triangle, we get
+$$
+A = \frac{ar}{2} + \frac{br}{2} + \frac{cr}{2} = \frac{(a+b+c)r}{2}.
+$$
+Multiplying both sides by $2$ and dividing by $a+b+c$ gives the following result.
+
+graybox:
+    Consider any triangle.
+    Let $a$, $b$ and $c$ denote its side lengths, let $A$ denote its area,
+    and let $r$ denote the radius of the inscribed circle. Then
+    $$
+    r = \frac{2A}{a+b+c}.
+    $$

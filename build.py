@@ -107,6 +107,7 @@ def get_sidebar_content(txtfile):
                 # TODO: triangle area
                 link("Law of sines", 'plane-geometry/law-of-sines'),
                 link("Law of cosines", 'plane-geometry/law-of-cosines'),
+                link("Inscribed circle", 'plane-geometry/inscribed-circle'),
             ])),
         ])),
 

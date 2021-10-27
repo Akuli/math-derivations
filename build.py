@@ -192,6 +192,9 @@ def get_sidebar_content(txtfile):
             link("Derivative", 'complex/derivative'),
             link("Exponent function", 'complex/exp'),
         ])),
+        dropdown("Linear algebra", join([
+            link("Introduction (rotating a vector)", "linalg/rotating-intro"),
+        ])),
     ])
 
 

@@ -1,0 +1,332 @@
+# Introduction to linear algebra (rotating a vector)
+
+To introduce linear algebra, we start by solving a problem:
+how to rotate a point by a given angle.
+This is useful in programming games, for example.
+
+asymptote:
+    unitsize(3cm);
+    transform R = rotate(40);
+
+    pair v = (2,1);
+
+    draw(arc((0,0), length(v), 10, 80), p=smalldashes+gray);
+    draw((0,0)--v, p=dotted+gray);
+    draw((0,0)--(R*v), p=dotted+gray);
+    draw(arc((0,0), 0.4, degrees(v), degrees(R*v)),  L="angle", p=blue, align=NE);
+
+    dot((0,0), p=dotpen, L="Center of rotation", align=S);
+    dot(v, p=dotpen+deepgreen, L="Original point", align=E);
+    dot(R*v, p=dotpen+deepred, L="Rotated point", align=E);
+
+On this page, we assume that the center of rotation is $(0,0)$.
+It simplifies rotating, and if your rotation center is not $(0,0)$,
+it isn't hard to temporarily move the points so that the center of rotation becomes $(0,0)$.
+Let me know if you need more details about how to do this.
+
+2D rotations can also be done [with complex numbers](../complex/mul.html),
+but that's not the point.
+Doing it with linear algebra is a good way to learn linear algebra basics.
+
+
+## 90 degrees counter-clockwise
+
+Let's rotate the point $(2,1)$ counter-clockwise by 90 degrees.
+
+asymptote:
+    unitsize(2cm);
+    axises(-2, 3, -0.5, 3);
+
+    transform R = rotate(90);
+    pair v = (2,1);
+
+    draw(arc((0,0), length(v), -5, 145), p=smalldashes+gray);
+    dot(v, p=dotpen+deepgreen, L="$(2,1)$", align=E);
+    dot(R*v, p=dotpen+deepred, L="Rotated point", align=W);
+
+To find the rotated point, consider the triangle below it, and rotate that.
+
+asymptote:
+    unitsize(2cm);
+    pair v = (2,1);
+    transform R = rotate(90);
+
+    path triangle = (0,0)--(v.x,0)--v--cycle;
+    fill(triangle, lightblue);
+    fill(R*triangle, lightblue);
+    axises(-2, 3, -0.5, 3);
+
+    draw(arc((0,0), length(v), -5, 145), p=smalldashes+gray);
+    dot(v, p=dotpen+deepgreen, L="$(2,1)$", align=E);
+    dot(R*v, p=dotpen+deepred, L="$(-1,2)$", align=W);
+
+The $y$ coordinate of the rotated point is $2$, because that's the length of the longer side of the triangle.
+The $x$ coordinate is $-1$, because the shorter side has length $1$,
+but it is now on the other side of the $y$ axis.
+This works simialrly with any other point, even if the coordinates are negative or zero.
+
+graybox:
+    The point $(x,y)$ rotated counter-clockwise by 90 degrees around $(0,0)$ is $(-y, x)$.
+
+    asymptote:
+        unitsize(1.5cm);
+        pair v = (3,-1);
+        transform R = rotate(90);
+
+        axises(-1, 4, -1, 4);
+
+        draw(arc((0,0), length(v), -30, 100), p=smalldashes+gray);
+        dot(v, p=dotpen+deepgreen, L="$(x,y)$", align=E);
+        dot(R*v, p=dotpen+deepred, L="$(-y,x)$", align=NE);
+
+To check whether this makes sense, we can view the points as arrows starting from $(0,0)$,
+so that $(x,y)$ corresponds with $x\I+y\J$.
+In linear algebra, it is very common to not distinguish between points and arrows.
+A vector can be interpreted as a point or as an arrow, whichever is more useful.
+
+asymptote:
+    unitsize(2cm);
+    pair v = (3,-1);
+    transform R = rotate(90);
+
+    axises(-1, 4, -1, 4);
+
+    draw(arc((0,0), length(v), -30, 100), p=smalldashes+gray);
+    draw((0,0)--v, L="$(x,y)$", arrow=Arrow(5mm), align=S, p=deepgreen);
+    draw((0,0)--(R*v), L="$(-y,x)$", arrow=Arrow(5mm), align=E, p=deepred);
+
+Now we can use [dot products](../vectors/iwi-jwj.html) to check whether we did the rotating correctly:
+<ul><li>
+    The dot product between the vectors is
+    $$
+    (x,y) \cdot (-y,x) = x(-y) + yx = 0,
+    $$
+    so they are perpendicular.
+</li><li>
+    The length of $(-y,x)$ is
+    $$
+    |(-y,x)| = \sqrt{(-y)^2+x^2},
+    $$
+    which is simplifies to $\sqrt{x^2+y^2}$, so it has the length as $(x,y)$.
+    This makes sense, because the length of the vector is
+    the distance between origin and the corresponding point,
+    and that shouldn't change when rotating.
+</li></ul>
+
+
+## Arbitrary angle
+
+Now we can rotate by 90 degrees, but how to rotate by any other angle?
+To do this with linear algebra, we start by rotating simple points,
+and then generalize it to work with any point.
+
+Let's start by rotating $(1,0)$ by any angle $\theta$.
+
+asymptote:
+    unitsize(5.5cm);
+    axises(-0.5, 1.5, -0.5, 1.5);
+
+    transform R = rotate(35);
+
+    draw((0,0)--R*(1,0), p=dotted+deepred);
+    draw(arc((0,0), 1, -15, 130), p=smalldashes+gray);
+    dot((1,0), p=dotpen+deepred, L="$(1,0)$", align=SE);
+    dot(R*(1,0), p=dotpen+deepred, L="Rotated $(1,0)$", align=NE);
+
+The rotated point is on the unit circle at angle $\theta$, so it is $(\cos(\theta),\sin(\theta))$.
+
+asymptote:
+    unitsize(5.5cm);
+    axises(-0.5, 1.5, -0.5, 1.5);
+
+    transform R = rotate(35);
+
+    draw((0,0)--R*(1,0), p=dotted+deepred);
+    draw(arc((0,0), 1, -15, 130), p=smalldashes+gray);
+    dot((1,0), p=dotpen+deepred, L="$(1,0)$", align=SE);
+    dot(R*(1,0), p=dotpen+deepred, L="$(\cos(\theta),\sin(\theta))$", align=E);
+
+To rotate any point on the $x$ axis, such as $(2,0)$ or $(-\frac{1}{2}, 0)$,
+we can multiply $(\cos(\theta),\sin(\theta))$ by a number to stretch it.
+
+asymptote:
+    unitsize(5.5cm);
+    axises(-1, 1.5, -0.5, 1.5);
+
+    transform R = rotate(35);
+
+    draw((R*(-0.5,0))--R*(2,0), p=dotted+deepred);
+    draw(arc((0,0), 1, -15, 130), p=smalldashes+gray);
+    dot((1,0), p=dotpen+deepred, L="$(1,0)$", align=SE);
+    dot(R*(1,0), p=dotpen+deepred, L="$(\cos(\theta),\sin(\theta))$", align=E);
+    dot((2,0), p=dotpen+deepred, L="$(2,0)$", align=SE);
+    dot(R*(2,0), p=dotpen+deepred, L="$(2\cos(\theta),2\sin(\theta))$", align=N);
+    dot((-0.5,0), p=dotpen+deepred, L="$(-\frac{1}{2},0)$", align=N);
+    dot(R*(-0.5,0), p=dotpen+deepred, L="$(-\frac{1}{2}\cos(\theta),-\frac{1}{2}\sin(\theta))$", align=S);
+
+To rotate $(0,1)$, we can take $(\cos(\theta),\sin(\theta))$, and rotate it by 90 degrees more.
+Because rotating $(x,y)$ by 90 degrees generally gives $(-y,x)$ (see above),
+we get $(-\sin(\theta),\cos(\theta))$.
+
+asymptote:
+    unitsize(5.5cm);
+    axises(-0.5, 1.5, -0.5, 1.5);
+
+    transform R = rotate(35);
+
+    draw((0,0)--R*(1,0), p=dotted+deepred);
+    draw((0,0)--R*(0,1), p=dotted+blue);
+    draw(arc((0,0), 1, -15, 130), p=smalldashes+gray);
+    dot((1,0), p=dotpen+deepred, L="$(1,0)$", align=SE);
+    dot(R*(1,0), p=dotpen+deepred, L="$(\cos(\theta),\sin(\theta))$", align=E);
+    dot((0,1), p=dotpen+blue, L="$(0,1)$", align=NE);
+    dot(R*(0,1), p=dotpen+blue, L="$(-\sin(\theta),\cos(\theta))$", align=NW);
+
+We can now similarly multiply $(-\sin(\theta),\cos(\theta))$ by a number
+to rotate points on the $y$ axis.
+The minuses can cancel: when multiplying by $-\frac{1}{2}$,
+we get $(\frac{1}{2}\sin(\theta), -\frac{1}{2}\cos(\theta))$,
+with a positive $x$ coordinate.
+
+asymptote:
+    unitsize(5.5cm);
+    axises(-0.5, 1.5, -0.5, 1.5);
+
+    transform R = rotate(35);
+
+    draw((0,0)--R*(1,0), p=dotted+deepred);
+    draw((R*(0,-0.5))--(R*(0,2)), p=dotted+blue);
+    draw(arc((0,0), 1, -15, 130), p=smalldashes+gray);
+    dot((1,0), p=dotpen+deepred, L="$(1,0)$", align=SE);
+    dot(R*(1,0), p=dotpen+deepred, L="$(\cos(\theta),\sin(\theta))$", align=E);
+    dot((0,1), p=dotpen+blue, L="$(0,1)$", align=NE);
+    dot(R*(0,1), p=dotpen+blue, L="$(-\sin(\theta),\cos(\theta))$", align=NW);
+    dot((0,2), p=dotpen+blue, L="$(0,2)$", align=SE);
+    dot(R*(0,2), p=dotpen+blue, L="$(-2\sin(\theta),2\cos(\theta))$", align=N);
+    dot((0,-0.5), p=dotpen+blue, L="$(0,-\frac{1}{2})$", align=W);
+    dot(R*(0,-0.5), p=dotpen+blue, L="$(\frac{1}{2}\sin(\theta),-\frac{1}{2}\cos(\theta))$", align=E);
+
+To rotate any point $(x,y)$, we first write it as $(x,0) + (0,y)$,
+thinking of $(x,0)$ and $(0,y)$ as arrows, not as points.
+We can then rotate the arrows separately.
+
+asymptote:
+    unitsize(5.5cm);
+    axises(-0.5, 1.8, -0.5, 1.5);
+
+    transform R = rotate(35);
+
+    draw((0,0)--R*(1,0), p=dotted+deepred);
+    draw((0,0)--(R*(0,1)), p=dotted+blue);
+    draw(arc((0,0), 1, -15, 130), p=smalldashes+gray);
+    dot((1,0), p=dotpen+deepred);
+    dot(R*(1,0), p=dotpen+deepred);
+    dot((0,1), p=dotpen+blue);
+    dot(R*(0,1), p=dotpen+blue);
+
+    real x = 1.5;
+    real y = 0.5;
+    draw((0,0)--(x,0), p=deepgreen+4, arrow=Arrow(5mm), L="$(x,0)$", align=S);
+    draw((x,0)--(x,y), p=deepgreen+4, arrow=Arrow(5mm), L="$(0,y)$", align=E);
+    draw(R*((0,0)--(x,0)), p=deepgreen+4, arrow=Arrow(5mm), L=R*"rotated $(x,0)$", align=R*S);
+    draw(R*((x,0)--(x,y)), p=deepgreen+4, arrow=Arrow(5mm), L=R*"rotated $(0,y)$", align=R*E);
+    dot((x,y), p=dotpen, L="$(x,y)$", align=N);
+    dot(R*(x,y), p=dotpen, L="rotated $(x,y)$", align=N);
+
+graybox:
+    Any point $(x,0)$ on the $x$ axis can be rotated by first rotating $(1,0)$ and multiplying the result by $x$.
+
+    Any point $(0,y)$ on the $y$ axis can be rotated by first rotating $(0,1)$ and multiplying the result by $y$.
+
+    Any point $(x,y)$ can be rotated by splitting it into $(x,0)+(0,y)$
+    and rotating the two parts separately.
+
+So for example, to rotate $(2,\frac{1}{2})$, we would calculate
+$$
+\begin{align}
+% don't know why \operatorname{rotate} doesn't work
+\operatorname{rotate}\left(2,\frac{1}{2}\right)
+&= \operatorname{rotate}(2,0)+\operatorname{rotate}\left(0,\frac{1}{2}\right) \\
+&= 2\operatorname{rotate}(1,0)+\frac{1}{2}\operatorname{rotate}\left(0,1\right) \\
+&= 2(\cos(\theta),\sin(\theta))+\frac{1}{2}(-\sin(\theta),\cos(\theta)) \\
+&= \left( 2\cos(\theta)-\frac{1}{2}\sin(\theta), 2\sin(\theta)+\frac{1}{2}\cos(\theta) \right).
+\end{align}
+$$
+
+
+## Definitions
+
+Note how the whole rotation is fully determined by how it rotates $(1,0)$ and $(0,1)$,
+because we can write any other vector as a combination of $(1,0)$ and $(0,1)$.
+Combinations like this are called **linear combinations** of $(1,0)$ and $(0,1)$.
+It means that the vectors were multiplied by some numbers and then added.
+
+graybox:
+    A **linear combination**
+    is a vector you get by multiplying each of finitely many vectors with a number,
+    and adding the resulting vectors.
+    The numbers are called **coefficients**.
+    In other words, a linear combination of vectors $\vec{v_1},\dots,\vec{v_n}$
+    with coefficients $a_1,\dots,a_n$ is
+    $$
+    a_1\vec{v_1}+a_2\vec{v_2}+\dots+a_n\vec{v_n}.
+    $$
+
+To determine the whole rotation from rotated $(1,0)$ and rotated $(0,1)$,
+we first wrote the vector as a linear combination of $(1,0)$ and $(0,1)$,
+and then used these important properties of the rotation:
+<ul><li>
+    Moving numbers to front: $\operatorname{rotate}(2(1,0)) = 2\operatorname{rotate}(1,0)$.
+    This allowed us to rotate any point on the $x$ axis once we could rotate $(1,0)$.
+</li><li>
+    Rotating each part of a sum separately: $\rotate\left((2,0)+\left(0,\frac{1}{2}\right)\right) = \operatorname{rotate}(2,0)+\operatorname{rotate}\left(0,\frac{1}{2}\right)$.
+    This allowed us to rotate any point after rewriting it as consisting of horizontal and vertical parts.
+</li></ul>
+
+A **linear function**, also known as a **linear transform**,
+is any function that satisfies the last two properties.
+
+graybox:
+    A function $f$ taking vectors as arguments and outputting vectors
+    is **linear**, if $f(a\vec{v})=af(\vec{v})$ for all numbers $a$ and vectors $\vec{v}$,
+    and $f(\vec v+\vec w)=f(\vec v)+f(\vec w)$ for all vectors $\vec v$ and $\vec w$.
+
+Now we can rewrite our rotation result in a more general way.
+It works in the same way with any linear function $f$, not just rotations.
+
+graybox:
+    Let $f$ be a linear function taking 2D vectors as inputs.
+    If we know $f(1,0)$ and $f(0,1)$,
+    then we can calculate $f(x,y)$ for any $x$ and $y$ using linearity:
+    $$
+    f(x,y) = xf(1,0) + yf(0,1)
+    $$
+
+This is a **very** important idea in linear algebra!
+
+This works similarly in 3D:
+if $f$ is linear and we know $f(1,0,0)$, $f(0,1,0)$ and $f(0,0,1)$,
+then
+$$
+f(x,y,z) = xf(1,0,0) + yf(0,1,0) + zf(0,0,1).
+$$
+Or in 4D:
+$$
+f(x,y,z,w) = xf(1,0,0,0) + yf(0,1,0,0) + zf(0,0,1,0) + wf(0,0,1,0)
+$$
+All this works with $n$-dimensional vectors too.
+We can have $n > 3$, and it's useful in many applications of linear algebra
+even though we can't visualize it nicely.
+For example, in statistics, $n$ can easily be 100 or 1000,
+depending on how much data has been collected.
+That's why the concept of a vector is often defined like this:
+
+graybox:
+    An $n$-dimensional vector $\vec{v}$ is a sequence of $n$ numbers:
+    $$
+    \vec{v} = (a_1,a_2,\dots,a_n).
+    $$
+
+We will use mostly 2D and 3D vectors in examples,
+because they can be visualized as arrows or as points,
+whichever is more convenient.

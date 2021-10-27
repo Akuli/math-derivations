@@ -1,6 +1,6 @@
 # Dividing Complex Numbers
 
-Now we have addition, subtraction and [multiplication](mul.txt) for complex numbers,
+Now we have addition, subtraction and [multiplication](mul.html) for complex numbers,
 but we don't have division.
 
 Let's start with a reminder of how division works with real numbers.

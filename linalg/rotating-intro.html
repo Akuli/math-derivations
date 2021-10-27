@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Angle and Length
+<title>Introduction to linear algebra (rotating a vector)
 </title>
 
     <script type="text/x-mathjax-config">
@@ -181,70 +181,184 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a><a href="derivative.html">Derivative</a><a href="exp.html">Exponent function</a>
+            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a>
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a>
         </div>
         </div>
-<h1 id="angle-and-length">Angle and Length<a class="headerlink" href="#angle-and-length" title="Link to this title">¶</a></h1><p>Instead of thinking about a complex number with $x$ and $y$ coordinates,
-as in $x + yi$, we can think of it as an angle and length of the vector.
-Just like in unit circle trig (TODO),
-a bigger angle means counter-clockwise and zero means right.</p>
+<h1 id="introduction-to-linear-algebra-rotating-a-vector">Introduction to linear algebra (rotating a vector)<a class="headerlink" href="#introduction-to-linear-algebra-rotating-a-vector" title="Link to this title">¶</a></h1><p>To introduce linear algebra, we start by solving a problem:
+how to rotate a point by a given angle.
+This is useful in programming games, for example.</p>
 
-<p><img width="161" height="201" class="asymptote" src="../asymptote/bc08c9fca5f697b20756b7767e0b6b4a.svg" /></p><p>The angle may be bigger than 180 degrees:</p>
+<p><img width="412" height="216" class="asymptote" src="../asymptote/3e54423bfc7b3e0fbd77ace3c4b748f6.svg" /></p><p>On this page, we assume that the center of rotation is $(0,0)$.
+It simplifies rotating, and if your rotation center is not $(0,0)$,
+it isn't hard to temporarily move the points so that the center of rotation becomes $(0,0)$.
+Let me know if you need more details about how to do this.</p>
 
-<p><img width="201" height="201" class="asymptote" src="../asymptote/b980340f44f77e4070ac3afa6a60303c.svg" /></p><p>Alternatively, the angle can be negative:</p>
+<p>2D rotations can also be done <a href="../complex/mul.html">with complex numbers</a>,
+but that's not the point.
+Doing it with linear algebra is a good way to learn linear algebra basics.
+</p>
 
-<p><img width="278" height="201" class="asymptote" src="../asymptote/12364db6eb24f676b10d2afb504024c8.svg" /></p><p>In general, angles that differ by a full turn (360 degrees or $2\pi$ radians),
-such as the ones in the above two pictures, are considered to be the same.</p>
+<h2 id="90-degrees-counter-clockwise">90 degrees counter-clockwise<a class="headerlink" href="#90-degrees-counter-clockwise" title="Link to this title">¶</a></h2><p>Let's rotate the point $(2,1)$ counter-clockwise by 90 degrees.</p>
 
-<p>Examples:</p>
+<p><img width="381" height="201" class="asymptote" src="../asymptote/a3db4548a52a47906a2913acf9f8e235.svg" /></p><p>To find the rotated point, consider the triangle below it, and rotate that.</p>
 
-<p><ul><li>
-The length of $i$ is $1$. The angle of $i$ is 90 degrees, which is $\pi/2$ radians.</p>
+<p><img width="312" height="201" class="asymptote" src="../asymptote/3ef6a57d54d3b18b94d6bae5edce1068.svg" /></p><p>The $y$ coordinate of the rotated point is $2$, because that's the length of the longer side of the triangle.
+The $x$ coordinate is $-1$, because the shorter side has length $1$,
+but it is now on the other side of the $y$ axis.
+This works simialrly with any other point, even if the coordinates are negative or zero.</p>
 
-<p><img width="280" height="201" class="asymptote" src="../asymptote/36237d6657370dea14d991b2ab163a8b.svg" /></p><p></li><li>
-The length of $5$ is $5$.
-The angle is zero.</p>
+<div class="box graybox"><p>The point $(x,y)$ rotated counter-clockwise by 90 degrees around $(0,0)$ is $(-y, x)$.</p>
 
-<p><img width="280" height="161" class="asymptote" src="../asymptote/f4164fb7fd535bf549195aa488600d68.svg" /></p><p></li><li>
-The length of $-5$ is $5$.
-The angle is 180 degrees.</p>
+<p><img width="236" height="240" class="asymptote" src="../asymptote/f0b6bfe3cb49d77f9c7af6f0987b6fd6.svg" /></p></div><p>To check whether this makes sense, we can view the points as arrows starting from $(0,0)$,
+so that $(x,y)$ corresponds with $x\I+y\J$.
+In linear algebra, it is very common to not distinguish between points and arrows.
+A vector can be interpreted as a point or as an arrow, whichever is more useful.</p>
 
-<p><img width="320" height="161" class="asymptote" src="../asymptote/6dfc3c8f6e0c40e3d20cacb6c5bf7989.svg" /></p><p></li><li>
-The length of $0$ is $0$. The angle is undefined.
-Remember this somewhat annoying detail when you want to use the angle of a complex number.
+<p><img width="286" height="319" class="asymptote" src="../asymptote/b6789b5dc46fa13f45f1eeb18a47d6a7.svg" /></p><p>Now we can use <a href="../vectors/iwi-jwj.html">dot products</a> to check whether we did the rotating correctly:
+<ul><li>
+    The dot product between the vectors is
+    $$
+    (x,y) \cdot (-y,x) = x(-y) + yx = 0,
+    $$
+    so they are perpendicular.
+</li><li>
+    The length of $(-y,x)$ is
+    $$
+    |(-y,x)| = \sqrt{(-y)^2+x^2},
+    $$
+    which is simplifies to $\sqrt{x^2+y^2}$, so it has the length as $(x,y)$.
+    This makes sense, because the length of the vector is
+    the distance between origin and the corresponding point,
+    and that shouldn't change when rotating.
+</li></ul>
+</p>
+
+<h2 id="arbitrary-angle">Arbitrary angle<a class="headerlink" href="#arbitrary-angle" title="Link to this title">¶</a></h2><p>Now we can rotate by 90 degrees, but how to rotate by any other angle?
+To do this with linear algebra, we start by rotating simple points,
+and then generalize it to work with any point.</p>
+
+<p>Let's start by rotating $(1,0)$ by any angle $\theta$.</p>
+
+<p><img width="376" height="314" class="asymptote" src="../asymptote/b1ad3de926ec422d29ae3b188b2dc688.svg" /></p><p>The rotated point is on the unit circle at angle $\theta$, so it is $(\cos(\theta),\sin(\theta))$.</p>
+
+<p><img width="385" height="314" class="asymptote" src="../asymptote/be237de6e0a1cd446f869d0d2473898e.svg" /></p><p>To rotate any point on the $x$ axis, such as $(2,0)$ or $(-\frac{1}{2}, 0)$,
+we can multiply $(\cos(\theta),\sin(\theta))$ by a number to stretch it.</p>
+
+<p><img width="544" height="319" class="asymptote" src="../asymptote/ebab8cabd8ab063448d62c700e96f3a1.svg" /></p><p>To rotate $(0,1)$, we can take $(\cos(\theta),\sin(\theta))$, and rotate it by 90 degrees more.
+Because rotating $(x,y)$ by 90 degrees generally gives $(-y,x)$ (see above),
+we get $(-\sin(\theta),\cos(\theta))$.</p>
+
+<p><img width="550" height="314" class="asymptote" src="../asymptote/66746ed6b22d030b8d92ef1166715644.svg" /></p><p>We can now similarly multiply $(-\sin(\theta),\cos(\theta))$ by a number
+to rotate points on the $y$ axis.
+The minuses can cancel: when multiplying by $-\frac{1}{2}$,
+we get $(\frac{1}{2}\sin(\theta), -\frac{1}{2}\cos(\theta))$,
+with a positive $x$ coordinate.</p>
+
+<p><img width="563" height="412" class="asymptote" src="../asymptote/8698ea2264df4df8eac619cc820884a2.svg" /></p><p>To rotate any point $(x,y)$, we first write it as $(x,0) + (0,y)$,
+thinking of $(x,0)$ and $(0,y)$ as arrows, not as points.
+We can then rotate the arrows separately.</p>
+
+<p><img width="398" height="339" class="asymptote" src="../asymptote/af4a2d2f4efe02d2116a217c463047cd.svg" /></p><div class="box graybox"><p>Any point $(x,0)$ on the $x$ axis can be rotated by first rotating $(1,0)$ and multiplying the result by $x$.</p>
+
+<p>Any point $(0,y)$ on the $y$ axis can be rotated by first rotating $(0,1)$ and multiplying the result by $y$.</p>
+
+<p>Any point $(x,y)$ can be rotated by splitting it into $(x,0)+(0,y)$
+and rotating the two parts separately.
+</p>
+
+</div><p>So for example, to rotate $(2,\frac{1}{2})$, we would calculate
+$$
+\begin{align}
+% don't know why \operatorname{rotate} doesn't work
+\operatorname{rotate}\left(2,\frac{1}{2}\right)
+&= \operatorname{rotate}(2,0)+\operatorname{rotate}\left(0,\frac{1}{2}\right) \\
+&= 2\operatorname{rotate}(1,0)+\frac{1}{2}\operatorname{rotate}\left(0,1\right) \\
+&= 2(\cos(\theta),\sin(\theta))+\frac{1}{2}(-\sin(\theta),\cos(\theta)) \\
+&= \left( 2\cos(\theta)-\frac{1}{2}\sin(\theta), 2\sin(\theta)+\frac{1}{2}\cos(\theta) \right).
+\end{align}
+$$
+</p>
+
+<h2 id="definitions">Definitions<a class="headerlink" href="#definitions" title="Link to this title">¶</a></h2><p>Note how the whole rotation is fully determined by how it rotates $(1,0)$ and $(0,1)$,
+because we can write any other vector as a combination of $(1,0)$ and $(0,1)$.
+Combinations like this are called <b>linear combinations</b> of $(1,0)$ and $(0,1)$.
+It means that the vectors were multiplied by some numbers and then added.</p>
+
+<div class="box graybox"><p>A <b>linear combination</b>
+is a vector you get by multiplying each of finitely many vectors with a number,
+and adding the resulting vectors.
+The numbers are called <b>coefficients</b>.
+In other words, a linear combination of vectors $\vec{v_1},\dots,\vec{v_n}$
+with coefficients $a_1,\dots,a_n$ is
+$$
+a_1\vec{v_1}+a_2\vec{v_2}+\dots+a_n\vec{v_n}.
+$$
+</p>
+
+</div><p>To determine the whole rotation from rotated $(1,0)$ and rotated $(0,1)$,
+we first wrote the vector as a linear combination of $(1,0)$ and $(0,1)$,
+and then used these important properties of the rotation:
+<ul><li>
+    Moving numbers to front: $\operatorname{rotate}(2(1,0)) = 2\operatorname{rotate}(1,0)$.
+    This allowed us to rotate any point on the $x$ axis once we could rotate $(1,0)$.
+</li><li>
+    Rotating each part of a sum separately: $\rotate\left((2,0)+\left(0,\frac{1}{2}\right)\right) = \operatorname{rotate}(2,0)+\operatorname{rotate}\left(0,\frac{1}{2}\right)$.
+    This allowed us to rotate any point after rewriting it as consisting of horizontal and vertical parts.
 </li></ul></p>
 
-<p>Generally, the length of a complex number $a + bi$ is the vector length $\sqrt{a^2+b^2}$ (TODO).
-The angle is more difficult to calculate.
-In computer programming, you can use <a href="https://en.wikipedia.org/wiki/Atan2">atan2</a> to calculate the angle.
-TODO: explain how to calculate angle in general
+<p>A <b>linear function</b>, also known as a <b>linear transform</b>,
+is any function that satisfies the last two properties.</p>
+
+<div class="box graybox"><p>A function $f$ taking vectors as arguments and outputting vectors
+is <b>linear</b>, if $f(a\vec{v})=af(\vec{v})$ for all numbers $a$ and vectors $\vec{v}$,
+and $f(\vec v+\vec w)=f(\vec v)+f(\vec w)$ for all vectors $\vec v$ and $\vec w$.
 </p>
 
-<h2 id="absolute-value-of-complex-number">Absolute value of complex number<a class="headerlink" href="#absolute-value-of-complex-number" title="Link to this title">¶</a></h2><p>The absolute value of a complex number $a+bi$ is defined to be its length:
+</div><p>Now we can rewrite our rotation result in a more general way.
+It works in the same way with any linear function $f$, not just rotations.</p>
+
+<div class="box graybox"><p>Let $f$ be a linear function taking 2D vectors as inputs.
+If we know $f(1,0)$ and $f(0,1)$,
+then we can calculate $f(x,y)$ for any $x$ and $y$ using linearity:
 $$
-\abs{a+bi} = \text{length of $a+bi$} = \sqrt{a^2+b^2}
+f(x,y) = xf(1,0) + yf(0,1)
 $$
-Because the length of a real number is its absolute value,
-this behaves as expected when $a+bi$ happens to be a real number (that is, $b=0$).
 </p>
 
-<h2 id="argument">Argument<a class="headerlink" href="#argument" title="Link to this title">¶</a></h2><p>The notation $\arg(z)$ means an angle of a nonzero complex number $z$.
-Because $z$ has infinitely many different angles that differ from each other by a full turn $2\pi$,
-we need to somehow choose which angle is called $\arg(z)$.
-A common choice is $-\pi < \arg(z) \le \pi$:</p>
+</div><p>This is a <b>very</b> important idea in linear algebra!</p>
 
-<p><img width="377" height="297" class="asymptote" src="../asymptote/797c227d10c4991b92df3441cef4e01a.svg" /></p><p>So, $\arg(z)$ increases as $z$ rotates around $0$ counter-clockwise, but it "jumps" at $\pi$.
-It must jump somewhere, because it's periodic and so it can't increase forever.</p>
+<p>This works similarly in 3D:
+if $f$ is linear and we know $f(1,0,0)$, $f(0,1,0)$ and $f(0,0,1)$,
+then
+$$
+f(x,y,z) = xf(1,0,0) + yf(0,1,0) + zf(0,0,1).
+$$
+Or in 4D:
+$$
+f(x,y,z,w) = xf(1,0,0,0) + yf(0,1,0,0) + zf(0,0,1,0) + wf(0,0,1,0)
+$$
+All this works with $n$-dimensional vectors too.
+We can have $n > 3$, and it's useful in many applications of linear algebra
+even though we can't visualize it nicely.
+For example, in statistics, $n$ can easily be 100 or 1000,
+depending on how much data has been collected.
+That's why the concept of a vector is often defined like this:</p>
 
-<p>I <a href="sqrt.html">sometimes</a> need to represent any angle of a complex number,
-and I use $\arg(z)+n2\pi$ for that, with an arbitrary integer $n$.
-For this purpose, the choice of $\arg(z)$ doesn't matter, because we get all the possible angles anyway.
+<div class="box graybox"><p>An $n$-dimensional vector $\vec{v}$ is a sequence of $n$ numbers:
+$$
+\vec{v} = (a_1,a_2,\dots,a_n).
+$$
+</p>
+
+</div><p>We will use mostly 2D and 3D vectors in examples,
+because they can be visualized as arrows or as points,
+whichever is more convenient.
 </p>
 
 </div>

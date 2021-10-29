@@ -28,6 +28,9 @@ graybox:
     is a matrix whose columns are $f(1,0,0,\dots,0)$, $f(0,1,0,\dots,0)$, $\dots$, $f(0,0,\dots,0,1)$,
     written vertically.
 
+A matrix with 2 rows and 3 columns is also called a $2 \times 3$ matrix.
+Note that the number of rows goes first, even though usually $x$ goes before $y$.
+
 Examples:
 <ul><li>
     Any rotation around the origin is a linear function.
@@ -83,7 +86,7 @@ In general, 3blue1brown's linear algebra videos are really good and you should w
     This matrix is called the **identity matrix**,
     and the "do nothing" function is correspondingly called the **identity function**.
     This also works with any other dimension instead of 2.
-    For example, the 4-dimensional identity matrix is
+    For example, the $4 \times 4$ identity matrix is
     $$
     I = \begin{bmatrix} 1&0&0&0 \\ 0&1&0&0 \\ 0&0&1&0 \\ 0&0&0&1 \end{bmatrix}.
     $$

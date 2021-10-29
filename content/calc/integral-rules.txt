@@ -30,7 +30,7 @@ graybox:
 
 I don't recommend memorizing these integral rules;
 it's better to learn deriving them from the derivative rules in your head.
-We will find the antiderivatives of $\tan$ [later](integral-usub.html#example-int-tan-x-dx).
+We will find the antiderivative of $\tan$ [later](integral-usub.html#example-int-tan-x-dx).
 
 
 ## Sum

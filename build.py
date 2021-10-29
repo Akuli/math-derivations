@@ -195,6 +195,7 @@ def get_sidebar_content(txtfile):
         ])),
         dropdown("Linear algebra", join([
             link("Introduction (rotating a vector)", "linalg/rotating-intro"),
+            link("Matrix times vector", "linalg/matrix-vector"),
         ])),
     ])
 

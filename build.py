@@ -301,23 +301,7 @@ old_get_title = builder.get_title
 builder.get_title = lambda path: old_get_title(path) + " - Math Derivations"
 
 
-@builder.converter.add_inliner(r'\\\*')
-def escaped_star(match, filename):
-    return r'*'
-
-
-@builder.converter.add_multiliner(r'^indent2:\n')
-def indent2_handler(match, filename):
-    markup = textwrap.dedent(match.string[match.end():])
-    assert markup, "blank line after 'indent2:'"
-    yield '<div class="indent">'
-    yield '<div class="indent">'
-    yield from builder.converter.convert(markup, filename)
-    yield '</div>'
-    yield '</div>'
-
-
-# without this, two underlines in math make the latex code get <ul> tags
+# without this, two underscores in math make the latex code get <ul> tags
 @builder.converter.add_inliner(r'\$\$\n[\S\s]*?\n\$\$')
 def math_handler(match, filename):
     return match.group(0)

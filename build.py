@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import glob
 import hashlib
 import itertools
@@ -294,6 +295,9 @@ stylesheet">
 builder.get_sidebar_content = get_sidebar_content
 builder.get_head_extras = get_head_extras
 
+old_get_title = builder.get_title
+builder.get_title = lambda path: old_get_title(path) + " - Math Derivations"
+
 
 @builder.converter.add_inliner(r'\\\*')
 def escaped_star(match, filename):
@@ -396,3 +400,10 @@ builder.run()
 
 # tell github pages to do the right thing
 open(os.path.join(builder.outputdir, '.nojekyll'), 'x').close()
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--reload-browser", action='store_true')
+args = parser.parse_args()
+if args.reload_browser:
+    # https://itectec.com/unixlinux/refresh-reload-active-browser-tab-from-command-line/
+    subprocess.call('xdotool search --name "Math Derivations" windowactivate windowfocus key F5', shell=True)

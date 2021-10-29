@@ -25,7 +25,8 @@ $$
 
 graybox:
     The **matrix** of a linear function $f$
-    is a matrix whose columns are $f(1,0,0,\dots,0)$, $f(0,1,0,\dots,0)$, $\dots$, $f(0,0,\dots,0,1)$.
+    is a matrix whose columns are $f(1,0,0,\dots,0)$, $f(0,1,0,\dots,0)$, $\dots$, $f(0,0,\dots,0,1)$,
+    written vertically.
 
 Examples:
 <ul><li>
@@ -45,7 +46,7 @@ Examples:
     $$
     \begin{bmatrix} \red{\cos(\theta)} & \blue {-\sin(\theta)} \\ \red{\sin(\theta)} & \blue{\cos(\theta)} \end{bmatrix}.
     $$
-    If you plug in $\theta=90^\circ$, you should get the same matrix as above.
+    This is called a **rotation matrix**. If you plug in $\theta=90^\circ$, you should get the same matrix as above.
 </li><li>
     The function $f(x,y)=(x,y)$ (i.e. do nothing) is a linear function.
     Because $\red{f(1,0)=(1,0)}$ and $\blue{f(0,1)=(0,1)}$, its matrix is
@@ -59,19 +60,31 @@ Examples:
     $$
     I = \begin{bmatrix} 1&0&0&0 \\ 0&1&0&0 \\ 0&0&1&0 \\ 0&0&0&1 \end{bmatrix}.
     $$
-    In linear algebra, the letter $I$ may refer to an identity matrix of any size,
+    In linear algebra, the letter $I$ can mean an identity matrix of any size,
     and the size should be clear from how $I$ is used.
+</li><li>
+    The **zero matrix**
+    $$
+    O = \begin{bmatrix} 0&0 \\ 0&0 \end{bmatrix}
+    $$
+    corresponds with a linear function that always outputs a zero vector.
+    As with $I$, the letter $O$ can refer to a zero matrix of any size.
 </li></ul>
 
 
 ## Matrix-vector multiplication
 
+In this context, instead of writing vectors like $(10,20)$,
+they are usually written like
+$$
+\begin{bmatrix}10\\20\end{bmatrix}.
+$$
 Writing a matrix and a vector next to each other, e.g.
 $$
 \begin{bmatrix}2&4 \\ 3&5 \end{bmatrix}\begin{bmatrix}10\\20\end{bmatrix}
 $$
 means $f(\text{the vector})$, where $f$ is the linear function corresponding to the matrix.
-For example, with 2D linear functions, we have $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$,
+For example, with a 2D linear function $f$, we have $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$,
 so if $\red{f(1,0)=(2,3)}$ and $\blue{f(0,1)=(4,5)}$, we get
 $$
 \begin{align}
@@ -88,8 +101,52 @@ graybox:
     **Multiplying a matrix and a vector** means
     creating a linear combination of the columns of the matrix
     with numbers from the vector as coefficients.
+    This calculates $f(\text{the vector})$,
+    where $f$ is the linear function corresponding to the matrix.
 
 I will later explain why this operation is called multiplying.
+
+Examples:
+<ul><li>
+    To rotate the vector $(2,1)$ counter-clockwise 90 degrees, you can calculate
+    $$
+    \begin{bmatrix} \red 0 & \blue{-1} \\ \red{1} & \blue 0 \end{bmatrix}
+    \begin{bmatrix} 2 \\ 1 \end{bmatrix}
+    = 2\red{\begin{bmatrix}0\\1\end{bmatrix}}+1\blue{\begin{bmatrix}-1\\0\end{bmatrix}}
+    = \begin{bmatrix}-1\\2\end{bmatrix}.
+    $$
+    This is the same result we got [here](rotating-intro.html#90-degrees-counter-clockwise).
+</li><li>
+    To rotate $(2,1)$ counter-clockwise by any angle $\theta$, we can now calculate
+    $$
+    \begin{bmatrix} \red{\cos(\theta)} & \blue {-\sin(\theta)} \\ \red{\sin(\theta)} & \blue{\cos(\theta)} \end{bmatrix}
+    \begin{bmatrix}2\\1\end{bmatrix}
+    = 2\red{\begin{bmatrix}\cos(\theta)\\ \sin(\theta)\end{bmatrix}}+1\blue{\begin{bmatrix}-\sin(\theta)\\ \cos(\theta)\end{bmatrix}}
+    = \begin{bmatrix}2\cos(\theta)-\sin(\theta)\\ 2\sin(\theta)+\cos(\theta)\end{bmatrix}.
+    $$
+    This would be difficult to do without linear algebra,
+    but this way it's easy.
+</li><li>
+    Multiplying a vector by the identity matrix $I$ does nothing:
+    $$
+    \begin{bmatrix} \red 1 & \blue 0 & \green 0 \\ \red 0 & \blue 1 & \green 0 \\ \red 0 & \blue 0 & \green 1 \end{bmatrix}
+    \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
+    = 1\red{\begin{bmatrix}1\\0\\0\end{bmatrix}}
+    + 2\blue{\begin{bmatrix}0\\1\\0\end{bmatrix}}
+    + 3\green{\begin{bmatrix}0\\0\\1\end{bmatrix}}
+    = \begin{bmatrix}1\\2\\3\end{bmatrix}
+    $$
+</li><li>
+    Multiplying a vector by the zero matrix $O$ always results in the zero vector:
+    $$
+    \begin{bmatrix} \red 0 & \blue 0 & \green 0 \\ \red 0 & \blue 0 & \green 0 \\ \red 0 & \blue 0 & \green 0 \end{bmatrix}
+    \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
+    = 1\red{\begin{bmatrix}0\\0\\0\end{bmatrix}}
+    + 2\blue{\begin{bmatrix}0\\0\\0\end{bmatrix}}
+    + 3\green{\begin{bmatrix}0\\0\\0\end{bmatrix}}
+    = \begin{bmatrix}0\\0\\0\end{bmatrix}
+    $$
+</li></ul>
 
 Because the numbers in the input vector correspond with the columns of the matrix,
 there must be the same number of columns as there are numbers in the vector.

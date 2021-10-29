@@ -133,7 +133,7 @@ asymptote:
     dot((1,0), p=dotpen+deepred, L="$(1,0)$", align=SE);
     dot(R*(1,0), p=dotpen+deepred, L="Rotated $(1,0)$", align=NE);
 
-The rotated point is on the unit circle at angle $\theta$, so it is $(\cos(\theta),\sin(\theta))$.
+The rotated point is on the unit circle at angle $\theta$, so it is $\red{(\cos(\theta),\sin(\theta))}$.
 
 asymptote:
     unitsize(5.5cm);
@@ -147,7 +147,7 @@ asymptote:
     dot(R*(1,0), p=dotpen+deepred, L="$(\cos(\theta),\sin(\theta))$", align=E);
 
 To rotate any point on the $x$ axis, such as $(2,0)$ or $(-\frac{1}{2}, 0)$,
-we can multiply $(\cos(\theta),\sin(\theta))$ by a number to stretch it.
+we can multiply $\red{(\cos(\theta),\sin(\theta))}$ by a number to stretch it.
 
 asymptote:
     unitsize(5.5cm);
@@ -164,9 +164,9 @@ asymptote:
     dot((-0.5,0), p=dotpen+deepred, L="$(-\frac{1}{2},0)$", align=N);
     dot(R*(-0.5,0), p=dotpen+deepred, L="$(-\frac{1}{2}\cos(\theta),-\frac{1}{2}\sin(\theta))$", align=S);
 
-To rotate $(0,1)$, we can take $(\cos(\theta),\sin(\theta))$, and rotate it by 90 degrees more.
+To rotate $(0,1)$, we can take $\red{(\cos(\theta),\sin(\theta))}$, and rotate it by 90 degrees more.
 Because rotating $(x,y)$ by 90 degrees generally gives $(-y,x)$ (see above),
-we get $(-\sin(\theta),\cos(\theta))$.
+we get $\blue{(-\sin(\theta),\cos(\theta))}$.
 
 asymptote:
     unitsize(5.5cm);
@@ -182,7 +182,7 @@ asymptote:
     dot((0,1), p=dotpen+blue, L="$(0,1)$", align=NE);
     dot(R*(0,1), p=dotpen+blue, L="$(-\sin(\theta),\cos(\theta))$", align=NW);
 
-We can now similarly multiply $(-\sin(\theta),\cos(\theta))$ by a number
+We can now similarly multiply $\blue{(-\sin(\theta),\cos(\theta))}$ by a number
 to rotate points on the $y$ axis.
 The minuses can cancel: when multiplying by $-\frac{1}{2}$,
 we get $(\frac{1}{2}\sin(\theta), -\frac{1}{2}\cos(\theta))$,
@@ -244,11 +244,10 @@ graybox:
 So for example, to rotate $(2,\frac{1}{2})$, we would calculate
 $$
 \begin{align}
-% don't know why \operatorname{rotate} doesn't work
-\operatorname{rotate}\left(2,\frac{1}{2}\right)
-&= \operatorname{rotate}(2,0)+\operatorname{rotate}\left(0,\frac{1}{2}\right) \\
-&= 2\operatorname{rotate}(1,0)+\frac{1}{2}\operatorname{rotate}\left(0,1\right) \\
-&= 2(\cos(\theta),\sin(\theta))+\frac{1}{2}(-\sin(\theta),\cos(\theta)) \\
+\rotate\left(2,\frac{1}{2}\right)
+&= \rotate(2,0)+\rotate\left(0,\frac{1}{2}\right) \\
+&= 2\red{\rotate(1,0)}+\frac{1}{2}\blue{\rotate(0,1)} \\
+&= 2\red{(\cos(\theta),\sin(\theta))}+\frac{1}{2}\blue{(-\sin(\theta),\cos(\theta))} \\
 &= \left( 2\cos(\theta)-\frac{1}{2}\sin(\theta), 2\sin(\theta)+\frac{1}{2}\cos(\theta) \right).
 \end{align}
 $$
@@ -276,10 +275,10 @@ To determine the whole rotation from rotated $(1,0)$ and rotated $(0,1)$,
 we first wrote the vector as a linear combination of $(1,0)$ and $(0,1)$,
 and then used these important properties of the rotation:
 <ul><li>
-    Moving numbers to front: $\operatorname{rotate}(2(1,0)) = 2\operatorname{rotate}(1,0)$.
+    Moving numbers to front: $\rotate(2(1,0)) = 2\rotate(1,0)$.
     This allowed us to rotate any point on the $x$ axis once we could rotate $(1,0)$.
 </li><li>
-    Rotating each part of a sum separately: $\rotate\left((2,0)+\left(0,\frac{1}{2}\right)\right) = \operatorname{rotate}(2,0)+\operatorname{rotate}\left(0,\frac{1}{2}\right)$.
+    Rotating each part of a sum separately: $\rotate\left((2,0)+\left(0,\frac{1}{2}\right)\right) = \rotate(2,0)+\rotate\left(0,\frac{1}{2}\right)$.
     This allowed us to rotate any point after rewriting it as consisting of horizontal and vertical parts.
 </li></ul>
 
@@ -296,25 +295,25 @@ It works in the same way with any linear function $f$, not just rotations.
 
 graybox:
     Let $f$ be a linear function taking 2D vectors as inputs.
-    If we know $f(1,0)$ and $f(0,1)$,
+    If we know $\red{f(1,0)}$ and $\blue{f(0,1)}$,
     then we can calculate $f(x,y)$ for any $x$ and $y$ using linearity:
     $$
-    f(x,y) = xf(1,0) + yf(0,1)
+    f(x,y) = x\red{f(1,0)} + y\blue{f(0,1)}
     $$
 
 This is a **very** important idea in linear algebra!
 
 This works similarly in 3D:
-if $f$ is linear and we know $f(1,0,0)$, $f(0,1,0)$ and $f(0,0,1)$,
+if $f$ is linear and we know $\red{f(1,0,0)}$, $\blue{f(0,1,0)}$ and $\green{f(0,0,1)}$,
 then
 $$
-f(x,y,z) = xf(1,0,0) + yf(0,1,0) + zf(0,0,1).
+f(x,y,z) = x\red{f(1,0,0)} + y\blue{f(0,1,0)} + z\green{f(0,0,1)}.
 $$
 Or in 4D:
 $$
-f(x,y,z,w) = xf(1,0,0,0) + yf(0,1,0,0) + zf(0,0,1,0) + wf(0,0,1,0)
+f(x,y,z,w) = x\red{f(1,0,0,0)} + y\blue{f(0,1,0,0)} + z\green{f(0,0,1,0)} + w\magenta{f(0,0,0,1)}
 $$
-All this works with $n$-dimensional vectors too.
+All this works with $n$-dimensional vectors too, for any $n$.
 We can have $n > 3$, and it's useful in many applications of linear algebra
 even though we can't visualize it nicely.
 For example, in statistics, $n$ can easily be 100 or 1000,

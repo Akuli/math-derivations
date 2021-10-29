@@ -204,6 +204,9 @@ asymptote:
     $$
 </li></ul>
 
+
+## Input and output dimensions
+
 Because the numbers in the input vector correspond with the columns of the matrix,
 there must be the same number of columns as there are numbers in the vector.
 For example, this matrix-vector multiplication is undefined,

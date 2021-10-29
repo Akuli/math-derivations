@@ -20,6 +20,7 @@ texpreamble("\newcommand{\K}{\vec k}");
 texpreamble("\newcommand{\abs}[1]{\left| {#1} \right|}");
 texpreamble("\newcommand{\epsi}{\varepsilon}");
 define_tex_color("blue", blue);
+define_tex_color("red", deepred);
 define_tex_color("green", deepgreen);
 
 // TODO: stop using a weird mixture of mm and raw numbers?

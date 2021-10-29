@@ -5,20 +5,21 @@ the resulting function is called the composition of $f$ and $g$.
 If $f$ and $g$ are linear, the composition is also linear:
 <ul><li>
     You can compute it separately for each part of a sum:
-    for all vectors $v$ and $w$,
+    For all vectors $\vec v$ and $\vec w$,
     we have $g(\vec v+\vec w)=g(\vec v)+g(\vec w)$ because $g$ is linear,
-    and $f(g(\vec v)+g(\vec w))=f(g(\vec v))+f(g(\vec w))$ because $f$ is linear, so
+    and $f(g(\vec v)+g(\vec w))=f(g(\vec v))+f(g(\vec w))$ because $f$ is linear.
+    Putting all that together, we get
     $$
     f(g(\vec v + \vec w)) = f(g(\vec v))+f(g(\vec w)).
     $$
 </li><li>
     You can move numbers to front, because it works with $f$ and with $g$:
-    if $a$ is a number, then $f(g(a\vec v))=f(ag(\vec v))=af(g(\vec v))$.
+    for any number $a$, we get $f(g(a\vec v))=f(ag(\vec v))=af(g(\vec v))$.
 </li></ul>
 
 For example, let's say we want to first rotate by 90 degrees ($g$) and then shear ($f$).
 Rotation and shear are both linear functions,
-so the resulting "rotate and then shear" function is linear,
+so the resulting "rotate and then shear" function $f(g(\vec v))$ is linear,
 and it must have a corresponding matrix.
 To find the matrix, we can rotate and shear the vectors $(1,0)$ and $(0,1)$,
 and the resulting vectors are the columns of the "rotate and then shear" matrix.
@@ -61,8 +62,7 @@ $$
 \begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}.
 $$
 
-comment:
-    //asymptote:
+asymptote:
     unitsize(2cm);
     axises(-1.2,1.5,-0.2,1.5);
     transform T = shift(4,0);
@@ -82,45 +82,23 @@ comment:
     draw(T*T*((0,0)--(1,1)), p=deepred+4, arrow=Arrow(4mm), L=Label("$(1,1)$", position=Relative(1)), align=N);
     draw(T*T*((0,0)--(-1,0)), p=blue+4, arrow=Arrow(4mm), L="$(-1,0)$", align=S);
 
-Now we can rotate and shear any vector $(x,y)$ in two ways:
-either by applying the "rotate and then shear" matrix,
-or with separate rotation and shear matrices.
-$$
-\underbrace{\begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}}_{\text{rotate and shear}}
-\begin{bmatrix}x\\y\end{bmatrix}
-=
-\underbrace{
-    \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
-}_{\text{shear}}
-\underbrace{
-    \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}
-}_{\text{rotation}}
-\begin{bmatrix}x\\y\end{bmatrix}
-$$
-Let's just write the same thing without $\begin{bmatrix}x\\y\end{bmatrix}$:
-$$
-\underbrace{\begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}}_{\text{rotate and shear}}
-=
-\underbrace{
-    \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
-}_{\text{shear}}
-\underbrace{
-    \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}
-}_{\text{rotation}}
-$$
-This is how we define multiplying two matrices $A$ and $B$:
-it is the matrix that describes first applying $B$ and then $A$.
+From now on, combining two matrices into one like this will be called **matrix multiplication**.
 
 graybox:
     Matrix multiplication $AB$ produces the matrix
     that represents first applying $B$ and then $A$.
 
-With this definition, we don't have to use parentheses
-when multiplying two matrices $A$ and $B$ with a vector $\vec v$.
-It doesn't matter whether $AB\vec v$ gets interpreted
-as $A(B \vec v)$ with two matrix-vector multiplications,
-or as $(AB)\vec v$ with one matrix-matrix multiplication
-and one matrix-vector multiplication.
+So for example,
+$$
+\underbrace{
+    \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+}_{\text{shear}}
+\underbrace{
+    \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}
+}_{\text{rotate}}
+=
+\underbrace{\begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}}_{\text{rotate and shear}}.
+$$
 
 Note that the order is reversed, in the sense that the second matrix is applied first.
 The order really matters:
@@ -158,15 +136,21 @@ asymptote:
     label((10.5,1), "$\begin{bmatrix}\red1&\blue{-1}\\\red1&\blue0\end{bmatrix}$");
     label(U*(10.5,1), "$\begin{bmatrix}\red0&\blue{-1}\\\red1&\blue1\end{bmatrix}$");
 
+Also note that we don't have to use parentheses
+when multiplying two matrices $A$ and $B$ with a vector $\vec v$.
+It doesn't matter whether $AB\vec v$ gets interpreted
+as $A(B \vec v)$ with two matrix-vector multiplications,
+or as $(AB)\vec v$ with one matrix-matrix multiplication
+and one matrix-vector multiplication.
+
 I will later (TODO) explain why matrix-matrix multiplication is called multiplication.
 
 
 ## Size problems
 
 Not all matrices can be multiplied together.
-For example, if you try to multiply
-a $3 \times 3$ matrix with a $2 \times 2$ matrix,
-you get problems:
+For example, let's try to multiply a $3 \times 3$ matrix with a $2 \times 2$ matrix.
+To find the left column of the result, we calculate
 $$
 \red{\begin{bmatrix}
 1 & 4 & 7 \\
@@ -191,10 +175,12 @@ $$
 +\blue 2 \red{\begin{bmatrix}4\\5\\6\end{bmatrix}}
 +{\blue{???}}\red{\begin{bmatrix}7\\8\\9\end{bmatrix}}
 $$
-The problem is that the matrix-vector multiplication
+The matrix-vector multiplication
 with a $2 \times 2$ matrix produced a 2D vector as a result,
 but a matrix-vector multiplication with a $3 \times 3$ matrix
 needs a 3D vector as input.
+This just doesn't work.
+
 Recall that [the width of a matrix is the dimension of the input vectors
 and the height is the dimension of output vectors](matrix-vector.html#input-and-output-dimensions).
 

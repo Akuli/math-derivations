@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dividing Complex Numbers
+<title>Matrix-vector multiplication
  - Math Derivations</title>
 
     <script type="text/x-mathjax-config">
@@ -181,179 +181,205 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a><a href="derivative.html">Derivative</a><a href="exp.html">Exponent function</a>
+            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a>
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a>
         </div>
         </div>
-<h1 id="dividing-complex-numbers">Dividing Complex Numbers<a class="headerlink" href="#dividing-complex-numbers" title="Link to this title">¶</a></h1><p>Now we have addition, subtraction and <a href="mul.html">multiplication</a> for complex numbers,
-but we don't have division.</p>
+<h1 id="matrix-vector-multiplication">Matrix-vector multiplication<a class="headerlink" href="#matrix-vector-multiplication" title="Link to this title">¶</a></h1><p>Let $f$ be a linear function with 2D vectors as inputs.
+<a href="rotating-intro.html">Previously</a> we noticed that the whole function is completely defined by $\red{f(1,0)}$ and $\blue{f(0,1)}$;
+if you know what those are, you can calculate $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$ with any $x$ and $y$.
+We will now introduce some notation to make this easier.</p>
 
-<p>Let's start with a reminder of how division works with real numbers.
-The division $a/b$ answers the question "what number times $b$ gives $a$".
-As long as we are not trying to divide by zero ($b \ne 0$), a number like that exist.
-Also, there can't be multiple such numbers,
-because changing the number that $b$ is multiplied with will also change the result of the multiplication.</p>
+<h2 id="matrices-as-a-way-to-write-a-linear-function">Matrices as a way to write a linear function<a class="headerlink" href="#matrices-as-a-way-to-write-a-linear-function" title="Link to this title">¶</a></h2><p>It is common to write the vectors $\red{f(1,0)}$ and $\blue{f(0,1)}$ into a matrix
+so that $\red{f(1,0)}$ is the first column and $\blue{f(0,1)}$ is the second column.
+For example, for $\red{f(1,0) = (2,3)}$ and $\blue{f(0,1) = (4,5)}$,
+the matrix would be
+$$
+\begin{bmatrix} \red2&\blue4 \\ \red3&\blue5 \end{bmatrix}.
+$$
+A matrix is just a grid of numbers.
+It doesn't have to be the same size in both directions.
+For example, if $f$ takes 3D inputs and produces 2D outputs,
+so that $\red{f(1,0,0)=(2,3)}$, $\blue{f(0,1,0)=(4,5)}$ and $\green{f(0,0,1)=(6,7)}$,
+the matrix would be
+$$
+\begin{bmatrix} \red2&\blue4&\green6 \\ \red3&\blue5&\green7 \end{bmatrix}.
+$$</p>
 
-<p>For defining $z/w$, with complex numbers $z$ and $w$, consider the equation
-$$
-\text{what} \cdot w = z.
-$$
-Because complex number multiplication <a href="mul.html#why-do-angles-get-added-and-lengths-get-multiplied">adds angles and multiplies lengths</a>,
-we have
-$$
-\abs{\text{what}} \abs{w} = \abs{z}
-$$
-where I <a href="angle-and-len.html#absolute-value-of-complex-number">wrote the lengths as absolute values</a>.
-If we are not dividing by zero, we have $\abs{w} \ne 0$ and we get
-$$
-\abs{\text{what}} = \frac{\abs{z}}{\abs{w}}.
-$$
-A similar calculation with angles gives
-$$
-(\text{angle of what}) + (\text{angle of $w$}) = \text{angle of $z$}
-$$
-and then
-$$
-\text{angle of what} = (\text{angle of $z$}) - (\text{angle of $w$}),
-$$
-where we also need to assume $z \ne 0$ for using the angle of $z$.
-So, if both $z$ and $w$ are nonzero, there is one and only one complex number
-that gives $z$ when multiplied with $w$;
-it's the complex number whose length is $\abs{z}/\abs{w}$ and angle is $(\text{angle of $z$}) - (\text{angle of $w$})$.
-We can call that $z/w$.</p>
-
-<p>With real numbers, we also have $0/b = 0$ whenever $b \ne 0$.
-For a nonzero complex number $w$, $0/w$ corresponds with
-$$
-\text{what} \cdot w = 0,
-$$
-and by looking at lengths on both sides, we see that this works if and only if $\abs{\text{what}}=0$,
-which means that the complex number denoted with $\text{what}$ is zero.
-So, we have $0/b=0$ as expected.</p>
-
-<p>Division by zero is undefined for the exact same reason as with real numbers.
-A division like $z/0$ corresponds with $\text{what} \cdot 0 = z$,
-and there can never be exactly one number satisfying that;
-it's always true for all complex numbers or for no complex numbers, depending on the value of $z$.</p>
-
-<div class="box graybox"><p>Complex number division is defined whenever we are not dividing by zero.
-When dividing, you can subtract the angles and divide the lengths:
-\begin{align*}
-\text{angle of $\frac{z}{w}$} &= (\text{angle of $z$})-(\text{angle of $w$}) \\
-\abs{\frac{z}{w}} &= \frac{\abs{z}}{\abs{w}}
-\end{align*}
+<div class="box graybox"><p>The <b>matrix</b> of a linear function $f$
+is a matrix whose columns are $f(1,0,0,\dots,0)$, $f(0,1,0,\dots,0)$, $\dots$, $f(0,0,\dots,0,1)$,
+written vertically.
 </p>
 
-</div><p>Subtracting angles and dividing lengths should make sense,
-because when multiplying, we add angles and multiply lengths;
-dividing does the opposite.
+</div><p>A matrix with 2 rows and 3 columns is also called a $2 \times 3$ matrix.
+Note that the number of rows goes first, even though usually $x$ goes before $y$.</p>
+
+<p>Examples:
+<ul><li>
+    Any rotation around the origin is a linear function.
+    With 90 degrees counter-clockwise,
+    $(1,0)$ rotates to $\red{(0,1)}$ and $(0,1)$ rotates to $\blue{(-1,0)}$,
+    so the matrix
+    $$
+    \begin{bmatrix} \red 0 & \blue{-1} \\ \red{1} & \blue 0 \end{bmatrix}
+    $$
+    represents a rotation by 90 degrees counter-clockwise.
+</li><li>
+    Rotating $(1,0)$ counter-clockwise by any angle $\theta$ gives $\red{(\cos(\theta),\sin(\theta))}$,
+    and rotating $(0,1)$ gives $\blue{(-\sin(\theta),\cos(\theta))}$.
+    This was explained in <a href="rotating-intro.html#arbitrary-angle">the previous derivation</a>.
+    This means that the matrix representing a 90-degree rotation is
+    $$
+    \begin{bmatrix} \red{\cos(\theta)} & \blue {-\sin(\theta)} \\ \red{\sin(\theta)} & \blue{\cos(\theta)} \end{bmatrix}.
+    $$
+    This is called a <b>rotation matrix</b>. If you plug in $\theta=90^\circ$, you should get the same matrix as above.
+</li><li>
+    The matrix
+    $$
+    \begin{bmatrix} \red 1 & \blue{1} \\ \red{0} & \blue 1 \end{bmatrix}
+    $$
+    corresponds with a linear function $f$ for which $f(1,0)=(1,0)$ unchanged,
+    but $f(0,1)=(1,1)$ is more to the right than $(0,1)$ was originally,
+    like with <i>italic text</i>.
+    This linear function is called a <b>shear</b>.</p>
+
+<p><img width="513" height="172" class="asymptote" src="../asymptote/985b4f092bb6a12c8f3f0c6c583b9088.svg" /></p><p>For a better visualization of the shear, see
+<a href="https://www.youtube.com/watch?v=kYB8IZa5AuE&t=8m30s">this 3blue1brown video</a> starting at 8:30.
+In general, 3blue1brown's linear algebra videos are really good and you should watch them.</p>
+
+<p></li><li>
+    The function $f(x,y)=(x,y)$ (i.e. do nothing) is a linear function.
+    Because $\red{f(1,0)=(1,0)}$ and $\blue{f(0,1)=(0,1)}$, its matrix is
+    $$
+    I = \begin{bmatrix} \red 1 & \blue 0 \\ \red 0 & \blue 1 \end{bmatrix}.
+    $$
+    This matrix is called the <b>identity matrix</b>,
+    and the "do nothing" function is correspondingly called the <b>identity function</b>.
+    This also works with any other dimension instead of 2.
+    For example, the $4 \times 4$ identity matrix is
+    $$
+    I = \begin{bmatrix} 1&0&0&0 \\ 0&1&0&0 \\ 0&0&1&0 \\ 0&0&0&1 \end{bmatrix}.
+    $$
+    In linear algebra, the letter $I$ can mean an identity matrix of any size,
+    and the size should be clear from how $I$ is used.
+</li><li>
+    The <b>zero matrix</b>
+    $$
+    O = \begin{bmatrix} 0&0 \\ 0&0 \end{bmatrix}
+    $$
+    corresponds with a linear function that always outputs a zero vector.
+    As with $I$, the letter $O$ can refer to a zero matrix of any size.
+</li></ul>
 </p>
 
-<h2 id="rules">Rules<a class="headerlink" href="#rules" title="Link to this title">¶</a></h2><p>The division of complex numbers has mostly the same handy rules as division of real numbers,
-and they can be proved in the same way.
-As an example, we derive
+<h2 id="matrix-vector-multiplication">Matrix-vector multiplication<a class="headerlink" href="#matrix-vector-multiplication" title="Link to this title">¶</a></h2><p>In this context, instead of writing vectors like $(10,20)$,
+they are usually written like
 $$
-\frac{vz}{wz} = \frac{v}{w}
+\begin{bmatrix}10\\20\end{bmatrix}.
 $$
-for complex numbers $v,w,z$, with $w$ and $z$ nonzero.
-The division $\frac{vz}{wz}$ corresponds with
+Writing a matrix and a vector next to each other, e.g.
 $$
-\text{what} \cdot wz = vz,
+\begin{bmatrix}2&4 \\ 3&5 \end{bmatrix}\begin{bmatrix}10\\20\end{bmatrix}
 $$
-and that indeed is $\frac{v}{w}$ because
-$$
-\frac{v}{w} \cdot wz = \left( \frac{v}{w} w \right)z = vz.
-$$
-Here $\frac{v}{w} w = v$ because $\frac{v}{w}$ means the number that gives $v$ when multiplied with $w$.</p>
-
-<p>If you want to see more division rule derivations,
-you can try doing it yourself or you can ask me to write more derivations here.</p>
-
-<div class="box graybox"><p>The usual calculating rules apply for division of complex numbers.
-</p>
-
-</div><h2 id="how-to-divide-without-angles-and-lengths">How to divide without angles and lengths<a class="headerlink" href="#how-to-divide-without-angles-and-lengths" title="Link to this title">¶</a></h2><p>Let's say we want to calculate $(1+2i)/(3+4i)$.
-One way to do it would be to find angles and lengths of $1+2i$ and $3+4i$,
-but finding angles is difficult (TODO).
-A slightly better way to do it might be letting
-$$
-x + yi = \frac{1+2i}{3+4i},
-$$
-which gives
+means $f(\text{the vector})$, where $f$ is the linear function corresponding to the matrix.
+For example, with a 2D linear function $f$, we have $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$,
+so if $\red{f(1,0)=(2,3)}$ and $\blue{f(0,1)=(4,5)}$, we get
 $$
 \begin{align}
-1+2i
-&= (x+yi)(3+4i) \\
-&= 3x + 4xi + 3yi + 4yi^2 \\
-&= 3x - 4y + (4x + 3y)i.
+f({10},{20})&={10}\red{f(1,0)}+{20}\blue{f(0,1)} \\
+= \begin{bmatrix} \red2 & \blue4 \\ \red3 & \blue5 \end{bmatrix}
+    \begin{bmatrix} {10} \\ {20} \end{bmatrix}
+&= {10}\red{\begin{bmatrix} 2 \\ 3 \end{bmatrix}} + {20}\blue{\begin{bmatrix}4 \\ 5 \end{bmatrix}}
+=\begin{bmatrix} 20+80 \\ 30+100 \end{bmatrix}
+= \begin{bmatrix} 100 \\ 130 \end{bmatrix}.
 \end{align}
-$$
-Comparing the real and imaginary parts on both sides gives
-$$
-\left\{\begin{aligned}
-    3x-4y &= 1 \cr
-    4x+3y &= 2
-\end{aligned}\right.
-$$
-Solving a system of equations like this is not hard, but it's quite long and error-prone
-(although it's not too bad with the $2 \times 2$ inverse matrix formula (TODO)).
-An easier way to do it is to use $\frac{vz}{wz} = \frac{v}{w}$ right-to-left,
-multiplying top and bottom by $z=3-4i$:
-$$
-\frac{1+2i}{3+4i} = \frac{(1+2i)(3-4i)}{(3+4i)(3-4i)}
-$$
-By using the formula for $(a+b)(a-b)$ (TODO), we get
-$$
-(3+4i)(3-4i) = 3^2 - (4i)^2 = 3^2 + 4^2 = 25,
-$$
-where we used $-i^2 = +1$. Because this is a real number, dividing by it is easy.
-We still have to calculate the top, and that gives
-$$
-(1+2i)(3-4i) = 3 - 4i + 6i - 8i^2 = 11 + 2i.
-$$
-By putting it all together, we get
-$$
-\frac{1+2i}{3+4i} = \frac{11+2i}{25} = \frac{11}{25} + \frac{2}{25}i.
-$$
-Now the division was easy to calculate because we divided by a real number.</p>
+$$</p>
 
-<div class="box graybox"><p>To calculate $\frac{x+yi}{a+bi}$, multiply top and bottom by $a-bi$.
-Then the bottom should simplify to a real number.
+<div class="box graybox"><p><b>Multiplying a matrix and a vector</b> means
+creating a linear combination of the columns of the matrix
+with numbers from the vector as coefficients.
+This calculates $f(\text{the vector})$,
+where $f$ is the linear function corresponding to the matrix.
 </p>
 
-</div><p>The complex number $a-bi$ is called the <b>conjugate</b> of $a+bi$, and it's usually denoted with
-$\overline{a+bi}$ or $(a+bi)^\star$.
-Multiplying top and bottom by the conjugate of the bottom always works because
-$$
-(a+bi)(a-bi) = a^2 - (bi)^2 = a^2 + b^2.
-$$
-</p>
+</div><p>I will later explain why this operation is called multiplying.</p>
 
-<p>There's also a visual way to explain why this happens.
-When thinking of complex numbers as points,
-conjugate mirrors a complex number to the opposite side of the $x$ axis.</p>
+<p>Examples:
+<ul><li>
+    To rotate the vector $(2,1)$ counter-clockwise 90 degrees, you can calculate
+    $$
+    \begin{bmatrix} \red 0 & \blue{-1} \\ \red{1} & \blue 0 \end{bmatrix}
+    \begin{bmatrix} 2 \\ 1 \end{bmatrix}
+    = 2\red{\begin{bmatrix}0\\1\end{bmatrix}}+1\blue{\begin{bmatrix}-1\\0\end{bmatrix}}
+    = \begin{bmatrix}-1\\2\end{bmatrix}.
+    $$
+    This is the same result we got <a href="rotating-intro.html#90-degrees-counter-clockwise">here</a>.
+</li><li>
+    To rotate $(2,1)$ counter-clockwise by any angle $\theta$, we can now calculate
+    $$
+    \begin{bmatrix} \red{\cos(\theta)} & \blue {-\sin(\theta)} \\ \red{\sin(\theta)} & \blue{\cos(\theta)} \end{bmatrix}
+    \begin{bmatrix}2\\1\end{bmatrix}
+    = 2\red{\begin{bmatrix}\cos(\theta)\\ \sin(\theta)\end{bmatrix}}+1\blue{\begin{bmatrix}-\sin(\theta)\\ \cos(\theta)\end{bmatrix}}
+    = \begin{bmatrix}2\cos(\theta)-\sin(\theta)\\ 2\sin(\theta)+\cos(\theta)\end{bmatrix}.
+    $$
+    This would be difficult to do without linear algebra,
+    but this way it's easy.
+</li><li>
+    Applying the shear to $(1,1)$ gives
+    $$
+    \begin{bmatrix} \red 1 & \blue{1} \\ \red{0} & \blue 1 \end{bmatrix}
+    \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+    = 1\red{\begin{bmatrix}1\\0\end{bmatrix}} + 1\blue{\begin{bmatrix}1\\1\end{bmatrix}}
+    = \begin{bmatrix}2\\1\end{bmatrix}.
+    $$</p>
 
-<p><img width="339" height="257" class="asymptote" src="../asymptote/c2b0ebb01c646cb8754322d7904e5329.svg" /></p><p>For that reason, if the angle of $z=a+bi$ is $\alpha$, then the angle of $z^{\star}=a-bi$ is $-\alpha$.</p>
+<p><img width="633" height="172" class="asymptote" src="../asymptote/875c75cbc61309a7f6017ded7c1b62a0.svg" /></p><p></li><li>
+    Multiplying a vector by the identity matrix $I$ does nothing:
+    $$
+    \begin{bmatrix} \red 1 & \blue 0 & \green 0 \\ \red 0 & \blue 1 & \green 0 \\ \red 0 & \blue 0 & \green 1 \end{bmatrix}
+    \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
+    = 1\red{\begin{bmatrix}1\\0\\0\end{bmatrix}}
+    + 2\blue{\begin{bmatrix}0\\1\\0\end{bmatrix}}
+    + 3\green{\begin{bmatrix}0\\0\\1\end{bmatrix}}
+    = \begin{bmatrix}1\\2\\3\end{bmatrix}
+    $$
+</li><li>
+    Multiplying a vector by the zero matrix $O$ always results in the zero vector:
+    $$
+    \begin{bmatrix} \red 0 & \blue 0 & \green 0 \\ \red 0 & \blue 0 & \green 0 \\ \red 0 & \blue 0 & \green 0 \end{bmatrix}
+    \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
+    = 1\red{\begin{bmatrix}0\\0\\0\end{bmatrix}}
+    + 2\blue{\begin{bmatrix}0\\0\\0\end{bmatrix}}
+    + 3\green{\begin{bmatrix}0\\0\\0\end{bmatrix}}
+    = \begin{bmatrix}0\\0\\0\end{bmatrix}
+    $$
+</li></ul></p>
 
-<p><img width="300" height="257" class="asymptote" src="../asymptote/1a555569f86e4c7cf48d734c39ac3d95.svg" /></p><p>Then the angle of $z\,z^{\star}$ is $\alpha + (-\alpha) = 0$, so $z\,z^{\star}$ must be a positive real number.
-That's why it's equal to its <a href="angle-and-len.html#absolute-value-of-complex-number">absolute value</a>.
-Because the length doesn't change when taking the conjugate, we have $\abs{z^{\star}}=\abs{z}$ and we get
+<p>Because the numbers in the input vector correspond with the columns of the matrix,
+there must be the same number of columns as there are numbers in the vector.
+For example, this matrix-vector multiplication is undefined,
+because the vector contains 2 numbers but the matrix has 3 columns:
 $$
-z\,z^{\star}=\abs{z\,z^{\star}}=\abs{z}\abs{z^{\star}} = \abs{z}^2,
+\begin{bmatrix} \red1&\blue3&\green5 \\ \red2&\blue4&\green6 \end{bmatrix} \begin{bmatrix} 7 \\ 8 \end{bmatrix}
+= 7\red{\begin{bmatrix}1 \\ 2\end{bmatrix}} + 8\blue{\begin{bmatrix}3 \\ 4\end{bmatrix}} + \text{???}\green{\begin{bmatrix}5 \\ 6\end{bmatrix}}
 $$
-and because $\abs{z}=\sqrt{a^2+b^2}$, we have $z\,z^{\star}=a^2+b^2$.
-This even works if $z=0$, because as usual, we have $0=0$ in that case.</p>
+Here's a matrix-vector multiplication that actually works:
+$$
+\begin{bmatrix} \red1&\blue3&\green5 \\ \red2&\blue4&\green6 \end{bmatrix} \begin{bmatrix} 7\\8\\9 \end{bmatrix}
+= 7\red{\begin{bmatrix}1 \\ 2\end{bmatrix}} + 8\blue{\begin{bmatrix}3 \\ 4\end{bmatrix}} + 9\green{\begin{bmatrix}5 \\ 6\end{bmatrix}}
+= \begin{bmatrix}76 \\ 100\end{bmatrix}
+$$
+Here the width of the matrix is 3 and the height is 2.
+It can be multiplied with 3D vectors, and the result is a 2D vector.
+This works in general.</p>
 
-<div class="box graybox"><p>For any complex number $z=a+bi$, we have
-$$
-z\,z^{\star} = \abs{z}^2 = a^2 + b^2,
-$$
-where $z^{\star}=a-bi$ is the conjugate of $z$.
+<div class="box graybox"><p>The width of a matrix is the dimension of its input vectors.
+The height of a matrix is the dimension of its output vectors.
 </p>
 
 </div></div>

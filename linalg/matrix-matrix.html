@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Matrix-vector multiplication
+<title>Matrix multiplication
  - Math Derivations</title>
 
     <script type="text/x-mathjax-config">
@@ -190,199 +190,242 @@
             <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a>
         </div>
         </div>
-<h1 id="matrix-vector-multiplication">Matrix-vector multiplication<a class="headerlink" href="#matrix-vector-multiplication" title="Link to this title">¶</a></h1><p>Let $f$ be a linear function with 2D vectors as inputs.
-<a href="rotating-intro.html">Previously</a> we noticed that the whole function is completely defined by $\red{f(1,0)}$ and $\blue{f(0,1)}$;
-if you know what those are, you can calculate $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$ with any $x$ and $y$.
-We will now introduce some notation to make this easier.</p>
+<h1 id="matrix-multiplication">Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Link to this title">¶</a></h1><p>If we apply two functions like $f(g(\vec v))$,
+the resulting function is called the composition of $f$ and $g$.
+If $f$ and $g$ are linear, the composition is also linear:
+<ul><li>
+    You can compute it separately for each part of a sum:
+    For all vectors $\vec v$ and $\vec w$,
+    we have $g(\vec v+\vec w)=g(\vec v)+g(\vec w)$ because $g$ is linear,
+    and $f(g(\vec v)+g(\vec w))=f(g(\vec v))+f(g(\vec w))$ because $f$ is linear.
+    Putting all that together, we get
+    $$
+    f(g(\vec v + \vec w)) = f(g(\vec v))+f(g(\vec w)).
+    $$
+</li><li>
+    You can move numbers to front, because it works with $f$ and with $g$:
+    for any number $a$, we get $f(g(a\vec v))=f(ag(\vec v))=af(g(\vec v))$.
+</li></ul></p>
 
-<h2 id="matrices-as-a-way-to-write-a-linear-function">Matrices as a way to write a linear function<a class="headerlink" href="#matrices-as-a-way-to-write-a-linear-function" title="Link to this title">¶</a></h2><p>It is common to write the vectors $\red{f(1,0)}$ and $\blue{f(0,1)}$ into a matrix
-so that $\red{f(1,0)}$ is the first column and $\blue{f(0,1)}$ is the second column.
-For example, for $\red{f(1,0) = (2,3)}$ and $\blue{f(0,1) = (4,5)}$,
-the matrix would be
+<p>For example, let's say we want to first rotate by 90 degrees ($g$) and then shear ($f$).
+Rotation and shear are both linear functions,
+so the resulting "rotate and then shear" function $f(g(\vec v))$ is linear,
+and it must have a corresponding matrix.
+To find the matrix, we can rotate and shear the vectors $(1,0)$ and $(0,1)$,
+and the resulting vectors are the columns of the "rotate and then shear" matrix.</p>
+
+<p>Using <a href="matrix-vector.html">the matrices of rotation and shear</a>,
+with $(1,0)$ we get
 $$
-\begin{bmatrix} \red2&\blue4 \\ \red3&\blue5 \end{bmatrix}.
+\underbrace{
+    \begin{bmatrix} \magenta 1 & \green 1 \\ \magenta 0 & \green 1 \end{bmatrix}
+}_{\text{shear}}
+\underbrace{
+    \begin{bmatrix} \red 0 & \blue{-1} \\ \red 1 & \blue 0 \end{bmatrix}
+}_{\text{rotation}}
+\begin{bmatrix}1\\0\end{bmatrix}
+= \underbrace{
+    \begin{bmatrix} \magenta 1 & \green 1 \\ \magenta 0 & \green 1 \end{bmatrix}
+}_{\text{shear}}\red{\begin{bmatrix}0 \\ 1 \end{bmatrix}}
+= \red 0 \magenta{\begin{bmatrix}1\\0\end{bmatrix}}
++ \red 1\green{\begin{bmatrix}1\\1\end{bmatrix}}
+= \begin{bmatrix}1\\1\end{bmatrix},
 $$
-A matrix is just a grid of numbers.
-It doesn't have to be the same size in both directions.
-For example, if $f$ takes 3D inputs and produces 2D outputs,
-so that $\red{f(1,0,0)=(2,3)}$, $\blue{f(0,1,0)=(4,5)}$ and $\green{f(0,0,1)=(6,7)}$,
-the matrix would be
+and with $(0,1)$ we get
 $$
-\begin{bmatrix} \red2&\blue4&\green6 \\ \red3&\blue5&\green7 \end{bmatrix}.
+\underbrace{
+    \begin{bmatrix} \magenta 1 & \green 1 \\ \magenta 0 & \green 1 \end{bmatrix}
+}_{\text{shear}}
+\underbrace{
+    \begin{bmatrix} \red 0 & \blue{-1} \\ \red 1 & \blue 0 \end{bmatrix}
+}_{\text{rotation}}
+\begin{bmatrix}0\\1\end{bmatrix}
+= \underbrace{
+    \begin{bmatrix} \magenta 1 & \green 1 \\ \magenta 0 & \green 1 \end{bmatrix}
+}_{\text{shear}}\blue{\begin{bmatrix}-1 \\ 0 \end{bmatrix}}
+= \blue{(-1)} \magenta{\begin{bmatrix}1\\0\end{bmatrix}}
++ \blue{0}\green{\begin{bmatrix}1\\1\end{bmatrix}}
+= \begin{bmatrix}-1\\0\end{bmatrix}.
+$$
+So the "rotate and then shear" matrix is
+$$
+\begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}.
 $$</p>
 
-<div class="box graybox"><p>The <b>matrix</b> of a linear function $f$
-is a matrix whose columns are $f(1,0,0,\dots,0)$, $f(0,1,0,\dots,0)$, $\dots$, $f(0,0,\dots,0,1)$,
-written vertically.
+<p><img width="609" height="127" class="asymptote" src="../asymptote/52b164123a08f85a0fda1b202c64e4c9.svg" /></p><p>From now on, combining two matrices into one like this will be called <b>matrix multiplication</b>.</p>
+
+<div class="box graybox"><p>Matrix multiplication $AB$ produces the matrix
+that represents first applying $B$ and then $A$.
 </p>
 
-</div><p>A matrix with 2 rows and 3 columns is also called a $2 \times 3$ matrix.
-Note that the number of rows goes first, even though usually $x$ goes before $y$.</p>
-
-<p>Examples:
-<ul><li>
-    Any rotation around the origin is a linear function.
-    With 90 degrees counter-clockwise,
-    $(1,0)$ rotates to $\red{(0,1)}$ and $(0,1)$ rotates to $\blue{(-1,0)}$,
-    so the matrix
-    $$
-    \begin{bmatrix} \red 0 & \blue{-1} \\ \red{1} & \blue 0 \end{bmatrix}
-    $$
-    represents a rotation by 90 degrees counter-clockwise.
-</li><li>
-    Rotating $(1,0)$ counter-clockwise by any angle $\theta$ gives $\red{(\cos(\theta),\sin(\theta))}$,
-    and rotating $(0,1)$ gives $\blue{(-\sin(\theta),\cos(\theta))}$.
-    This was explained in <a href="rotating-intro.html#arbitrary-angle">the previous derivation</a>.
-    This means that the matrix representing a 90-degree rotation is
-    $$
-    \begin{bmatrix} \red{\cos(\theta)} & \blue {-\sin(\theta)} \\ \red{\sin(\theta)} & \blue{\cos(\theta)} \end{bmatrix}.
-    $$
-    This is called a <b>rotation matrix</b>. If you plug in $\theta=90^\circ$, you should get the same matrix as above.
-</li><li>
-    The matrix
-    $$
-    \begin{bmatrix} \red 1 & \blue{1} \\ \red{0} & \blue 1 \end{bmatrix}
-    $$
-    corresponds with a linear function $f$ for which $f(1,0)=(1,0)$ unchanged,
-    but $f(0,1)=(1,1)$ is more to the right than $(0,1)$ was originally,
-    like with <i>italic text</i>.
-    This linear function is called a <b>shear</b>.</p>
-
-<p><img width="513" height="172" class="asymptote" src="../asymptote/985b4f092bb6a12c8f3f0c6c583b9088.svg" /></p><p>For a better visualization of the shear, see
-<a href="https://www.youtube.com/watch?v=kYB8IZa5AuE&t=8m30s">this 3blue1brown video</a> starting at 8:30.
-In general, 3blue1brown's linear algebra videos are really good and you should watch them.</p>
-
-<p></li><li>
-    The function $f(x,y)=(x,y)$ (i.e. do nothing) is a linear function.
-    Because $\red{f(1,0)=(1,0)}$ and $\blue{f(0,1)=(0,1)}$, its matrix is
-    $$
-    I = \begin{bmatrix} \red 1 & \blue 0 \\ \red 0 & \blue 1 \end{bmatrix}.
-    $$
-    This matrix is called the <b>identity matrix</b>,
-    and the "do nothing" function is correspondingly called the <b>identity function</b>.
-    This also works with any other dimension instead of 2.
-    For example, the $4 \times 4$ identity matrix is
-    $$
-    I = \begin{bmatrix} 1&0&0&0 \\ 0&1&0&0 \\ 0&0&1&0 \\ 0&0&0&1 \end{bmatrix}.
-    $$
-    In linear algebra, the letter $I$ can mean an identity matrix of any size,
-    and the size should be clear from how $I$ is used.
-</li><li>
-    The <b>zero matrix</b>
-    $$
-    O = \begin{bmatrix} 0&0 \\ 0&0 \end{bmatrix}
-    $$
-    corresponds with a linear function that always outputs a zero vector.
-    As with $I$, the letter $O$ can refer to a zero matrix of any size.
-</li></ul>
-</p>
-
-<h2 id="matrix-vector-multiplication">Matrix-vector multiplication<a class="headerlink" href="#matrix-vector-multiplication" title="Link to this title">¶</a></h2><p>In this context, instead of writing vectors like $(10,20)$,
-they are usually written like
+</div><p>So for example,
 $$
-\begin{bmatrix}10\\20\end{bmatrix}.
-$$
-Writing a matrix and a vector next to each other, e.g.
-$$
-\begin{bmatrix}2&4 \\ 3&5 \end{bmatrix}\begin{bmatrix}10\\20\end{bmatrix}
-$$
-means $f(\text{the vector})$, where $f$ is the linear function corresponding to the matrix.
-For example, with a 2D linear function $f$, we have $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$,
-so if $\red{f(1,0)=(2,3)}$ and $\blue{f(0,1)=(4,5)}$, we get
-$$
-\begin{align}
-f({10},{20})&={10}\red{f(1,0)}+{20}\blue{f(0,1)} \\
-= \begin{bmatrix} \red2 & \blue4 \\ \red3 & \blue5 \end{bmatrix}
-    \begin{bmatrix} {10} \\ {20} \end{bmatrix}
-&= {10}\red{\begin{bmatrix} 2 \\ 3 \end{bmatrix}} + {20}\blue{\begin{bmatrix}4 \\ 5 \end{bmatrix}}
-=\begin{bmatrix} 20+80 \\ 30+100 \end{bmatrix}
-= \begin{bmatrix} 100 \\ 130 \end{bmatrix}.
-\end{align}
+\underbrace{
+    \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+}_{\text{shear}}
+\underbrace{
+    \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}
+}_{\text{rotate}}
+=
+\underbrace{\begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}}_{\text{rotate and shear}}.
 $$</p>
 
-<div class="box graybox"><p><b>Multiplying a matrix and a vector</b> means
-creating a linear combination of the columns of the matrix
-with numbers from the vector as coefficients.
-This calculates $f(\text{the vector})$,
-where $f$ is the linear function corresponding to the matrix.
+<p>Note that the order is reversed, in the sense that the second matrix is applied first.
+The order really matters:
+"shear and then rotate" does not produce the same results as "rotate and then shear".</p>
+
+<p><img width="633" height="191" class="asymptote" src="../asymptote/9a7861cd7132c669deb9975d41c70762.svg" /></p><p>Also note that we don't have to use parentheses
+when multiplying two matrices $A$ and $B$ with a vector $\vec v$.
+It doesn't matter whether $AB\vec v$ gets interpreted
+as $A(B \vec v)$ with two matrix-vector multiplications,
+or as $(AB)\vec v$ with one matrix-matrix multiplication
+and one matrix-vector multiplication.</p>
+
+<p>I will later (TODO) explain why matrix-matrix multiplication is called multiplication.
 </p>
 
-</div><p>I will later explain why this operation is called multiplying.</p>
+<h2 id="size-problems">Size problems<a class="headerlink" href="#size-problems" title="Link to this title">¶</a></h2><p>Not all matrices can be multiplied together.
+For example, let's try to multiply a $3 \times 3$ matrix with a $2 \times 2$ matrix.
+To find the left column of the result, we calculate
+$$
+\red{\begin{bmatrix}
+1 & 4 & 7 \\
+2 & 5 & 8 \\
+3 & 6 & 9
+\end{bmatrix}}
+\blue{\begin{bmatrix}
+1 & 3 \\
+2 & 4
+\end{bmatrix}}
+\begin{bmatrix}1\\0\end{bmatrix}
+= \red{\begin{bmatrix}
+1 & 4 & 7 \\
+2 & 5 & 8 \\
+3 & 6 & 9
+\end{bmatrix}}
+\blue{\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}}
+= \blue 1 \red{\begin{bmatrix}1\\2\\3\end{bmatrix}}
++\blue 2 \red{\begin{bmatrix}4\\5\\6\end{bmatrix}}
++{\blue{???}}\red{\begin{bmatrix}7\\8\\9\end{bmatrix}}
+$$
+The matrix-vector multiplication
+with a $2 \times 2$ matrix produced a 2D vector as a result,
+but a matrix-vector multiplication with a $3 \times 3$ matrix
+needs a 3D vector as input.
+This just doesn't work.</p>
 
-<p>Examples:
-<ul><li>
-    To rotate the vector $(2,1)$ counter-clockwise 90 degrees, you can calculate
-    $$
-    \begin{bmatrix} \red 0 & \blue{-1} \\ \red{1} & \blue 0 \end{bmatrix}
-    \begin{bmatrix} 2 \\ 1 \end{bmatrix}
-    = 2\red{\begin{bmatrix}0\\1\end{bmatrix}}+1\blue{\begin{bmatrix}-1\\0\end{bmatrix}}
-    = \begin{bmatrix}-1\\2\end{bmatrix}.
-    $$
-    This is the same result we got <a href="rotating-intro.html#90-degrees-counter-clockwise">here</a>.
-</li><li>
-    To rotate $(2,1)$ counter-clockwise by any angle $\theta$, we can now calculate
-    $$
-    \begin{bmatrix} \red{\cos(\theta)} & \blue {-\sin(\theta)} \\ \red{\sin(\theta)} & \blue{\cos(\theta)} \end{bmatrix}
-    \begin{bmatrix}2\\1\end{bmatrix}
-    = 2\red{\begin{bmatrix}\cos(\theta)\\ \sin(\theta)\end{bmatrix}}+1\blue{\begin{bmatrix}-\sin(\theta)\\ \cos(\theta)\end{bmatrix}}
-    = \begin{bmatrix}2\cos(\theta)-\sin(\theta)\\ 2\sin(\theta)+\cos(\theta)\end{bmatrix}.
-    $$
-    This would be difficult to do without linear algebra,
-    but this way it's easy.
-</li><li>
-    Applying the shear to $(1,1)$ gives
-    $$
-    \begin{bmatrix} \red 1 & \blue{1} \\ \red{0} & \blue 1 \end{bmatrix}
-    \begin{bmatrix} 1 \\ 1 \end{bmatrix}
-    = 1\red{\begin{bmatrix}1\\0\end{bmatrix}} + 1\blue{\begin{bmatrix}1\\1\end{bmatrix}}
-    = \begin{bmatrix}2\\1\end{bmatrix}.
-    $$</p>
+<p>Recall that <a href="matrix-vector.html#input-and-output-dimensions">the width of a matrix is the dimension of the input vectors
+and the height is the dimension of output vectors</a>.</p>
 
-<p><img width="633" height="172" class="asymptote" src="../asymptote/875c75cbc61309a7f6017ded7c1b62a0.svg" /></p><p></li><li>
-    Multiplying a vector by the identity matrix $I$ does nothing:
-    $$
-    \begin{bmatrix} \red 1 & \blue 0 & \green 0 \\ \red 0 & \blue 1 & \green 0 \\ \red 0 & \blue 0 & \green 1 \end{bmatrix}
-    \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
-    = 1\red{\begin{bmatrix}1\\0\\0\end{bmatrix}}
-    + 2\blue{\begin{bmatrix}0\\1\\0\end{bmatrix}}
-    + 3\green{\begin{bmatrix}0\\0\\1\end{bmatrix}}
-    = \begin{bmatrix}1\\2\\3\end{bmatrix}
-    $$
-</li><li>
-    Multiplying a vector by the zero matrix $O$ always results in the zero vector:
-    $$
-    \begin{bmatrix} \red 0 & \blue 0 & \green 0 \\ \red 0 & \blue 0 & \green 0 \\ \red 0 & \blue 0 & \green 0 \end{bmatrix}
-    \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
-    = 1\red{\begin{bmatrix}0\\0\\0\end{bmatrix}}
-    + 2\blue{\begin{bmatrix}0\\0\\0\end{bmatrix}}
-    + 3\green{\begin{bmatrix}0\\0\\0\end{bmatrix}}
-    = \begin{bmatrix}0\\0\\0\end{bmatrix}
-    $$
-</li></ul>
+<div class="box graybox"><p>The matrix multiplication $AB$ is undefined
+if the width of $A$ is not same as the height of $B$.
 </p>
 
-<h2 id="input-and-output-dimensions">Input and output dimensions<a class="headerlink" href="#input-and-output-dimensions" title="Link to this title">¶</a></h2><p>Because the numbers in the input vector correspond with the columns of the matrix,
-there must be the same number of columns as there are numbers in the vector.
-For example, this matrix-vector multiplication is undefined,
-because the vector contains 2 numbers but the matrix has 3 columns:
+</div><h2 id="a-different-way-to-multiply">A different way to multiply<a class="headerlink" href="#a-different-way-to-multiply" title="Link to this title">¶</a></h2><p>Let $A$ and $B$ be matrices so that $A$'s width is $B$'s height.
+For example, if $A$'s width and $B$'s height are both 3, we have something like
 $$
-\begin{bmatrix} \red1&\blue3&\green5 \\ \red2&\blue4&\green6 \end{bmatrix} \begin{bmatrix} 7 \\ 8 \end{bmatrix}
-= 7\red{\begin{bmatrix}1 \\ 2\end{bmatrix}} + 8\blue{\begin{bmatrix}3 \\ 4\end{bmatrix}} + \text{???}\green{\begin{bmatrix}5 \\ 6\end{bmatrix}}
+A = \begin{bmatrix} \red1&\red2&\red3 \\ \magenta4&\magenta5&\magenta6 \\ &\vdots& \end{bmatrix}
+\quad \text{and} \quad
+B = \begin{bmatrix} \blue7&\green{10}& \\ \blue8&\green{11} & \cdots \\ \blue9&\green{12}&  \end{bmatrix}.
 $$
-Here's a matrix-vector multiplication that actually works:
+Then the first column of $AB$ is
 $$
-\begin{bmatrix} \red1&\blue3&\green5 \\ \red2&\blue4&\green6 \end{bmatrix} \begin{bmatrix} 7\\8\\9 \end{bmatrix}
-= 7\red{\begin{bmatrix}1 \\ 2\end{bmatrix}} + 8\blue{\begin{bmatrix}3 \\ 4\end{bmatrix}} + 9\green{\begin{bmatrix}5 \\ 6\end{bmatrix}}
-= \begin{bmatrix}76 \\ 100\end{bmatrix}
+AB\begin{bmatrix}1\\0\\0\\ \vdots\end{bmatrix}
+= \blue7\begin{bmatrix} \red1 \\ \magenta4 \\ \vdots \end{bmatrix}
++ \blue8\begin{bmatrix} \red2 \\ \magenta5 \\ \vdots \end{bmatrix}
++ \blue9\begin{bmatrix} \red3 \\ \magenta6 \\ \vdots \end{bmatrix}
+= \begin{bmatrix}
+    \blue7\cdot\red1+\blue8\cdot\red2+\blue9\cdot\red3 \\
+    \blue7\cdot\magenta4+\blue8\cdot\magenta5+\blue9\cdot\magenta6 \\
+    \vdots
+\end{bmatrix},
 $$
-Here the width of the matrix is 3 and the height is 2.
-It can be multiplied with 3D vectors, and the result is a 2D vector.
-This works in general.</p>
+and the second column is
+$$
+AB\begin{bmatrix}0\\1\\0\\ \vdots\end{bmatrix}
+= \green{10}\begin{bmatrix} \red1 \\ \magenta4 \\ \vdots \end{bmatrix}
++ \green{11}\begin{bmatrix} \red2 \\ \magenta5 \\ \vdots \end{bmatrix}
++ \green{12}\begin{bmatrix} \red3 \\ \magenta6 \\ \vdots \end{bmatrix}
+= \begin{bmatrix}
+    \green{10}\cdot\red1+\green{11}\cdot\red2+\green{12}\cdot\red3 \\
+    \green{10}\cdot\magenta4+\green{11}\cdot\magenta5+\green{12}\cdot\magenta6 \\
+    \vdots
+\end{bmatrix}.
+$$
+So
+$$
+AB = \begin{bmatrix}
+    \blue7\cdot\red1+\blue8\cdot\red2+\blue9\cdot\red3 &\quad \green{10}\cdot\red1+\green{11}\cdot\red2+\green{12}\cdot\red3 & \\
+    \blue7\cdot\magenta4+\blue8\cdot\magenta5+\blue9\cdot\magenta6 &\quad \green{10}\cdot\magenta4+\green{11}\cdot\magenta5+\green{12}\cdot\magenta6 & \cdots \\
+    & \vdots &
+\end{bmatrix}.
+$$
+In the top-left corner of $AB$, we have numbers from the top row of $A$ and left column of $B$,
+multiplied and then added.
+We can write these as <a href="../vectors/iwi-jwj.html">dot products</a>, e.g.
+$$
+\blue7\cdot\red1+\blue8\cdot\red2+\blue9\cdot\red3 = \red{(1,2,3)} \cdot \blue{(7,8,9)},
+$$
+and we get
+$$
+AB = \begin{bmatrix}
+    \red{(1,2,3)}\cdot\blue{(7,8,9)} &\quad \red{(1,2,3)}\cdot\green{(10,11,12)} & \\
+    \magenta{(4,5,6)}\cdot\blue{(7,8,9)} &\quad \magenta{(4,5,6)}\cdot\green{(10,11,12)} & \cdots \\
+    & \vdots &
+\end{bmatrix}.
+$$</p>
 
-<div class="box graybox"><p>The width of a matrix is the dimension of its input vectors.
-The height of a matrix is the dimension of its output vectors.
+<div class="box graybox"><p>Each number in $AB$ can be calculated as a dot product of
+the corresponding row from $A$ and column from $B$.
 </p>
 
-</div></div>
+</div><p>This is how students usually learn to do matrix multiplication,
+but I don't like using it as a definition,
+because it isn't clear why this has anything to do with $f(g(\vec v))$.
+</p>
+
+<h2 id="notation-ambiguity">Notation ambiguity<a class="headerlink" href="#notation-ambiguity" title="Link to this title">¶</a></h2><p>Consider any matrix-vector multiplication, such as
+$$
+\begin{bmatrix} \red1 & \red2 \\ \magenta3 & \magenta4 \end{bmatrix}
+\underbrace{
+    \begin{bmatrix}\blue 5\\ \blue6\end{bmatrix}
+}_{
+    ~~~2 \times 1 \\ \text{matrix?}
+} = \blue5\begin{bmatrix} \red1 \\ \magenta3 \end{bmatrix}
++ \blue6\begin{bmatrix} \red2 \\ \magenta4 \end{bmatrix}
+= \begin{bmatrix} \blue5\cdot\red1 + \blue6\cdot\red2 \\ \blue5\cdot\magenta3 + \blue6\cdot\magenta4 \end{bmatrix}
+= \underbrace{\begin{bmatrix} 17 \\ 39 \end{bmatrix}}_{\text{vector}}.
+$$
+But what if it is actually not a matrix-vector multiplication,
+but a matrix-matrix multiplication with a matrix that has only one column?
+If a matrix has only one column, it means that it can be multiplied with one-dimensional vectors,
+and there's no reason why we couldn't have $n$-dimensional vectors with $n=1$.</p>
+
+<p>Computing the matrix multiplication with dot products (see above) gives
+$$
+\underbrace{
+    \begin{bmatrix} \red1 & \red2 \\ \magenta3 & \magenta4 \end{bmatrix}
+    \begin{bmatrix}\blue5\\\blue6\end{bmatrix}
+}_{\text{matrix multiplication}}
+= \begin{bmatrix}\red{(1,2)} \cdot \blue{(5,6)} \\ \magenta{(3,4)} \cdot \blue{(5,6)}\end{bmatrix}
+= \begin{bmatrix} \blue5\cdot\red1 + \blue6\cdot\red2 \\ \blue5\cdot\magenta3 + \blue6\cdot\magenta4 \end{bmatrix}
+= \underbrace{\begin{bmatrix} 17 \\ 39 \end{bmatrix}}_{\text{matrix}}.
+$$
+So matrix-matrix multiplication and matrix-vector multiplication produce the "same" result,
+where "same" means that even though one is a matrix and the other is a vector,
+they contain the same numbers.</p>
+
+<div class="box graybox"><p>If you think of vectors as matrices that have only one column,
+then matrix-vector multiplication is matrix-matrix multiplication.
+</p>
+
+</div><p>This is important because when calculating with a computer,
+matrix-vector multiplications are usually done as matrix-matrix multiplications.
+</p>
+
+</div>
 </body>
 </html>

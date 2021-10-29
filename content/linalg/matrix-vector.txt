@@ -48,6 +48,33 @@ Examples:
     $$
     This is called a **rotation matrix**. If you plug in $\theta=90^\circ$, you should get the same matrix as above.
 </li><li>
+    The matrix
+    $$
+    \begin{bmatrix} \red 1 & \blue{1} \\ \red{0} & \blue 1 \end{bmatrix}
+    $$
+    corresponds with a linear function $f$ for which $f(1,0)=(1,0)$ unchanged,
+    but $f(0,1)=(1,1)$ is more to the right than $(0,1)$ was originally,
+    like with *italic text*.
+    This linear function is called a **shear**.
+
+asymptote:
+    unitsize(3cm);
+    axises(-0.5,1.5,-0.5,1.5);
+    draw((0,0)--(1,0), p=deepred+4, arrow=Arrow(4mm), L="$(1,0)$", align=S);
+    draw((0,0)--(0,1), p=blue+4, arrow=Arrow(4mm), L="$(0,1)$", align=E);
+
+    draw((1.8,0.5)--(3,0.5), arrow=Arrow(6mm), p=defaultpen+5, L="shear", align=N);
+
+    transform T = shift(4,0);
+    axises(-0.5,1.5,-0.5,1.5,T=T);
+    draw(T*((0,0)--(1,0)), p=deepred+4, arrow=Arrow(4mm), L="$f(1,0)$", align=S);
+    draw(T*((0,0)--(1,1)), p=blue+4, arrow=Arrow(4mm), L="$f(0,1)$", align=E);
+
+For a better visualization of the shear, see
+[this 3blue1brown video](https://www.youtube.com/watch?v=kYB8IZa5AuE&t=8m30s) starting at 8:30.
+In general, 3blue1brown's linear algebra videos are really good and you should watch them.
+
+</li><li>
     The function $f(x,y)=(x,y)$ (i.e. do nothing) is a linear function.
     Because $\red{f(1,0)=(1,0)}$ and $\blue{f(0,1)=(0,1)}$, its matrix is
     $$
@@ -126,6 +153,32 @@ Examples:
     $$
     This would be difficult to do without linear algebra,
     but this way it's easy.
+</li><li>
+    Applying the shear to $(1,1)$ gives
+    $$
+    \begin{bmatrix} \red 1 & \blue{1} \\ \red{0} & \blue 1 \end{bmatrix}
+    \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+    = 1\red{\begin{bmatrix}1\\0\end{bmatrix}} + 1\blue{\begin{bmatrix}1\\1\end{bmatrix}}
+    = \begin{bmatrix}2\\1\end{bmatrix}.
+    $$
+
+asymptote:
+    unitsize(3cm);
+    axises(-0.5,1.5,-0.5,1.5);
+    draw((1,0)--(1,1)--(0,1), p=gray+dotted);
+    draw((0,0)--(1,0), p=deepred+4, arrow=Arrow(4mm), L="$(1,0)$", align=S);
+    draw((0,0)--(0,1), p=blue+4, arrow=Arrow(4mm), L="$(0,1)$", align=W);
+    draw((0,0)--(1,1), p=deepgreen+4, arrow=Arrow(4mm), L=Label("$(1,1)$", position=Relative(1)), align=E);
+
+    draw((1.8,0.5)--(3,0.5), arrow=Arrow(6mm), p=defaultpen+5, L="shear", align=N);
+
+    transform T = shift(4,0);
+    axises(-0.5,1.5,-0.5,1.5,T=T);
+    draw(T*((1,0)--(2,1)--(1,1)), p=gray+dotted);
+    draw(T*((0,0)--(1,0)), p=deepred+4, arrow=Arrow(4mm), L="$(1,0)$", align=S);
+    draw(T*((0,0)--(1,1)), p=blue+4, arrow=Arrow(4mm), L="$(1,1)$", align=cis(2));
+    draw(T*((0,0)--(2,1)), p=deepgreen+4, arrow=Arrow(4mm), L=Label("$(2,1)$", position=Relative(1)), align=E);
+
 </li><li>
     Multiplying a vector by the identity matrix $I$ does nothing:
     $$

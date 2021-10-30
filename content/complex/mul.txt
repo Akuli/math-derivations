@@ -313,4 +313,4 @@ A similar derivation can be used to write $\sin(n\theta)$ and $\cos(n\theta)$
 using only $\sin(\theta)$ and $\cos(\theta)$,
 with any other positive integer $n$.
 For doing that, one needs to expand $(a+b)^n$, and
-the binomial theorem (TODO) can be used for that.
+the [binomial formula](../discrete/binom.html#binomial-formula) can be used for that.

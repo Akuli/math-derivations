@@ -334,20 +334,9 @@ $$
 \green{\mybinom{n}{1}}+\blue{\mybinom{n}{2}} = \red{\mybinom{n+1}{2}},
 $$
 which is the equation we wanted for $k=1$.
-It works the same for any other $k$, too:
-each $a^{k+1}b^{(n+1)-(k+1)}$ in the expansion of $(a+b)^{n+1} = (a+b)^n(a+b)$ must come from
+It works the same way for any other $k$, and we get
 $$
-a \cdot \green{\mybinom{n}{k}}a^kb^{n-k}
-$$
-or
-$$
-b \cdot \blue{\mybinom{n}{k+1}}a^{k+1}b^{n-(k+1)},
-$$
-and when combined, these give
-$$
-\underbrace{\left( \green{\mybinom{n}{k}} + \blue{\mybinom{n}{k+1}} \right)}_{
-    \textstyle\red{ \mybinom{n+1}{k+1} }
-}a^{k+1}b^{(n+1)-(k+1)}.
+\green{\mybinom{n}{k}}+\blue{\mybinom{n}{k+1}} = \red{\mybinom{n+1}{k+1}}.
 $$</p>
 
 <div class="box graybox"><p>Binomial coefficients can be taken from Pascal's triangle, which can be drawn like this:
@@ -494,9 +483,11 @@ $$
 $$
 By using this with $k$ instead of $n$, we get the following result.</p>
 
-<div class="box graybox"><p>$$
-\mybinom{n}{k} = \frac{~~ \overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}} ~~}{k!}
+<div class="box graybox"><p>Binomial coefficients can be calculated as
 $$
+\mybinom{n}{k} = \frac{~~ \overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}} ~~}{k!},
+$$
+where $k!=k(k-1)\dots3\cdot2\cdot1$ is the number of ways to sort a list of $k$ items.
 </p>
 
 </div><p>For example,

@@ -96,37 +96,10 @@ The true power is in using this result together with all the visual things that 
 which is what we'll do next.
 
 
-## Example: Pythagorean theorem proof
+## Vector length formula
 
-Let's prove the Pythagorean theorem.
-We haven't needed it for any of the dot product stuff yet,
-so we can use everything we know about dot products in our proof.
-However, we used the Pythagorean theorem to derive the formula for length of a vector (TODO),
-so we can't use the vector length formula.
-
-Consider any triangle with a 90 degree corner.
-Let's first rotate and move the triangle so that it's on the $x$ axis like this:
-
-asymptote:
-    unitsize(2cm);
-    pair v=(3,2);
-
-    fill((0,0)--(v.x,0)--v--cycle, p=lightgreen);   // axises go on top of this
-    axises(-1,4,-1,2);
-
-    draw((v.x, 0)--v);
-
-    label((v.x/2, 0), L="$a$", align=S);
-    label((v.x, v.y/2), L="$b$", align=E);
-    draw((0,0)--v, p=deepred, L=rrotate(atan2(v.y, v.x))*Label("$a\I+b\J$"), arrow=Arrow(5mm),
-        align=rotate(90)*unit(v));
-
-    dot(v, L="$(a,b)$", p=blue+dotpen, align=NE);
-    draw(shift(v.x, 0)*scale(0.3)*rotate(90)*((1,0)--(1,1)--(0,1)));
-
-We have also seen that for any vector $\vec v$, we have $\vec v \cdot \vec v = \abs{\vec v}^2$.
-As a reminder, here are two ways to see it without the Pythagorean theorem:
-
+We find a formula to calculate the length of any vector $\vec v$.
+As a reminder, here are two ways to see why $\vec v \cdot \vec v = |\vec v|^2$:
 <ul><li>
 With [angle between vectors](angle-between-vectors.html):
     The angle between $\vec v$ and $\vec v$ (that is, the angle between the vector and itself) is zero,
@@ -138,19 +111,46 @@ With [projection](dot-projection.html):
     which is also $\abs{\vec v}$.
 </li></ul>
 
-Combining this with the "$\I$'s with $\I$'s, $\J$'s with $\J$'s" rule, we get
+Combining this with the "$\I$'s with $\I$'s, $\J$'s with $\J$'s" rule gives
 $$
-\abs{a\I + b\J}^2 = (a\I + b\J) \cdot (a\I + b\J) = a^2 + b^2,
+|a\I+b\J|^2 = (a\I+b\J)\cdot(a\I+b\J) = aa+bb = a^2+b^2.
 $$
-and letting $c = \abs{a\I+b\J}$ denote the length of the longest side of the triangle
-gives the Pythagorean theorem.
+We can now take the square root on both sides.
 
-Also, square rooting both sides above (and noticing that vector length isn't negative) gives
-$$
-\abs{a\I + b\J} = \sqrt{a^2 + b^2},
-$$
-which is the vector length formula.
-We used a picture with positive $a$ and $b$, but this works similarly in other cases (TODO).
+graybox:
+    The length of any 2D vector $a\I+b\J$ is $\sqrt{a^2+b^2}$.
+
+The Pythagorean theorem is a special case of this.
+Any triangle with a 90 degree angle
+can be rotated and moved so that it sits on the $x$ axis with a tip at origin, like this:
+
+asymptote:
+    unitsize(2cm);
+    pair v=(3,2);
+
+    fill((0,0)--(v.x,0)--v--cycle, p=lightgreen);   // axises go on top of this
+    axises(-1,4,-1,2);
+
+    draw((v.x, 0)--v);
+
+    label((v.x/2, 0), Label("$a$", align=S));
+    label((v.x, v.y/2), Label("$b$", align=E));
+    draw((0,0)--v, p=deepred, L=rrotate(atan2(v.y, v.x))*Label("$a\I+b\J$", align=rotate(90)*unit(v)), arrow=Arrow(5mm));
+
+    draw(shift(v.x, 0)*scale(0.3)*rotate(90)*((1,0)--(1,1)--(0,1)));
+
+By the vector length formula, the length of the longest side is $\sqrt{a^2+b^2}$,
+where $a$ and $b$ are the sides that are perpendicular to each other.
+The length of the longest side is often called $c$, and the result is written like this:
+
+graybox:
+    In a trigangle with a 90-degree angle and side lengths $a,b,c$,
+    where $c$ is the longest side (opposite to the 90-degree angle),
+    we have
+    $$
+    a^2+b^2=c^2.
+    $$
+    This is known as the **Pythagorean theorem**.
 
 
 ## Example: Calculating projection

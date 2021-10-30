@@ -71,7 +71,8 @@ The length of $0$ is $0$. The angle is undefined.
 Remember this somewhat annoying detail when you want to use the angle of a complex number.
 </li></ul>
 
-Generally, the length of a complex number $a + bi$ is the vector length $\sqrt{a^2+b^2}$ (TODO).
+Generally, the length of a complex number $a + bi$ is
+the [vector length](../vectors/iwi-jwj.html#vector-length-formula) $\sqrt{a^2+b^2}$.
 The angle is more difficult to calculate.
 In computer programming, you can use [atan2](https://en.wikipedia.org/wiki/Atan2) to calculate the angle.
 TODO: explain how to calculate angle in general

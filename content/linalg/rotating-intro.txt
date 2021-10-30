@@ -95,15 +95,15 @@ asymptote:
     draw((0,0)--v, L="$(x,y)$", arrow=Arrow(5mm), align=S, p=deepgreen);
     draw((0,0)--(R*v), L="$(-y,x)$", arrow=Arrow(5mm), align=E, p=deepred);
 
-Now we can use [dot products](../vectors/iwi-jwj.html) to check whether we did the rotating correctly:
+Now we can check whether we did this correctly:
 <ul><li>
-    The dot product between the vectors is
+    The [dot product](../vectors/iwi-jwj.html) between the vectors is
     $$
     (x,y) \cdot (-y,x) = x(-y) + yx = 0,
     $$
     so they are perpendicular.
 </li><li>
-    The length of $(-y,x)$ is
+    The [length](../vectors/iwi-jwj.html#vector-length-formula) of $(-y,x)$ is
     $$
     |(-y,x)| = \sqrt{(-y)^2+x^2},
     $$

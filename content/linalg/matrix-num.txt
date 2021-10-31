@@ -1,0 +1,102 @@
+# Multiplying matrices and numbers
+
+We can multiply vectors and numbers like this:
+$$
+2\begin{bmatrix} 3 \\ 4 \end{bmatrix}
+= \begin{bmatrix} 2 \cdot 3 \\ 2 \cdot 4 \end{bmatrix}
+$$
+Let's extend this to matrices of any size in the obvious way. For example,
+$$
+10 \begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}
+= \begin{bmatrix} 10 \cdot 1 & 10 \cdot 3 & 10 \cdot 5 \\ 10 \cdot 2 & 10 \cdot 4 & 10 \cdot 6 \end{bmatrix}.
+$$
+Sometimes the number is written on the right, and it means the same thing:
+$$
+\begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}10
+= \begin{bmatrix} 10 \cdot 1 & 10 \cdot 3 & 10 \cdot 5 \\ 10 \cdot 2 & 10 \cdot 4 & 10 \cdot 6 \end{bmatrix}.
+$$
+
+
+## Matrix-matrix and number-matrix multiplication
+
+Recall that
+[each number in $AB$ is a dot product of a row from $A$ and a column from $B$](matrix-matrix.html#a-different-way-to-multiply).
+For example:
+$$
+\begin{bmatrix} \red1&\red3 \\ \magenta2&\magenta4 \end{bmatrix}
+\begin{bmatrix} \blue5&\green7 \\ \blue6&\green8  \end{bmatrix}
+= \begin{bmatrix}
+    \red1 \cdot \blue5 + \red3 \cdot \blue6 & \red1 \cdot \green7 + \red3 \cdot \green8 \\
+    \magenta2 \cdot \blue5 + \magenta4 \cdot \blue6 & \magenta2 \cdot \green7 + \magenta4 \cdot \green8
+\end{bmatrix}
+$$
+If the first matrix is multiplied by $c$,
+that multiplies the resulting matrix by $c$:
+$$
+\begin{align}
+\begin{bmatrix} \red1c&\red3c \\ \magenta2c&\magenta4c \end{bmatrix}
+\begin{bmatrix} \blue5&\green7 \\ \blue6&\green8  \end{bmatrix}
+&= \begin{bmatrix}
+    \red1c \cdot \blue5 + \red3c \cdot \blue6 & \red1c \cdot \green7 + \red3c \cdot \green8 \\
+    \magenta2c \cdot \blue5 + \magenta4c \cdot \blue6 & \magenta2c \cdot \green7 + \magenta4c \cdot \green8
+\end{bmatrix} \\
+&= \begin{bmatrix}
+    c(\red1 \cdot \blue5 + \red3 \cdot \blue6) & c(\red1 \cdot \green7 + \red3 \cdot \green8) \\
+    c(\magenta2 \cdot \blue5 + \magenta4 \cdot \blue6) & c(\magenta2 \cdot \green7 + \magenta4 \cdot \green8)
+\end{bmatrix} \\
+&= c\begin{bmatrix}
+    \red1 \cdot \blue5 + \red3 \cdot \blue6 & \red1 \cdot \green7 + \red3 \cdot \green8 \\
+    \magenta2 \cdot \blue5 + \magenta4 \cdot \blue6 & \magenta2 \cdot \green7 + \magenta4 \cdot \green8
+\end{bmatrix}
+\end{align}
+$$
+Multiplying the second matrix by $c$ does the same thing,
+so we get the following result:
+
+graybox:
+    If $A$ and $B$ are matrices and $AB$ is defined,
+    then $(cA)B=A(cB)=c(AB)$.
+
+This is different from how matrix multiplication works in general:
+even though $AB$ is not necessarily $BA$, you can put the $c$ wherever you want,
+and the result will get multiplied by $c$ regardless of where you inserted $c$.
+
+Because [matrix-vector multiplication can be calculated as a matrix-matrix multiplication](matrix-matrix.html#notation-ambiguity),
+we can use the above result with a vector instead of $C$,
+and we get $(cA)\vec v = A(c \vec v) = c(A\vec v)$.
+For example, the matrix
+$$
+A = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}
+$$
+rotates by 90 degrees counter-clockwise (explained [here](matrix-vector.html)).
+Because $(5A)\vec v = 5(A \vec v)$, the matrix
+$$
+5A = \begin{bmatrix} 0 & -5 \\ 5 & 0 \end{bmatrix}
+$$
+rotates by 90 degrees and also makes the vector $5$ times longer.
+We would also get the same result by starting with a vector that is 5 times longer,
+as in $A(5\vec v)$.
+
+
+## Subtracting matrices
+
+For matrices $A$ and $B$, we can now define $-B=(-1)B$, and $A-B=A + (-B)$.
+These operations behave like you would expect:
+just flip the sign of each number in the matrix or subtract the corresponding elements.
+For example,
+$$
+- {\begin{bmatrix} 5 & 7 \\ 6 & 8 \end{bmatrix}}
+= \begin{bmatrix} (-1)5 & (-1)7 \\ (-1)6 & (-1)8 \end{bmatrix}
+= \begin{bmatrix} -5 & -7 \\ -6 & -8 \end{bmatrix}
+$$
+and
+$$
+\begin{align}
+\red{\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}}
+- \blue{\begin{bmatrix} 5 & 7 \\ 6 & 8 \end{bmatrix}}
+&= \red{\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}}
++ \begin{bmatrix} -\blue 5 & -\blue 7 \\ -\blue 6 & -\blue8 \end{bmatrix} \\
+&= \begin{bmatrix} \red1+(-\blue5) & \red3+(-\blue7) \\ \red2+(-\blue6) & \red4+(-\blue8) \end{bmatrix} \\
+&= \begin{bmatrix} \red1-\blue5 & \red3-\blue7 \\ \red2-\blue6 & \red4-\blue8 \end{bmatrix}.
+\end{align}
+$$

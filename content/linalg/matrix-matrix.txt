@@ -254,6 +254,72 @@ but I don't like using it as a definition,
 because it isn't clear why this has anything to do with $f(g(\vec v))$.
 
 
+## Example: $\sin(2\theta)$ and $\cos(2\theta)$
+
+As mentioned [here](matrix-vector.html#matrices-as-a-way-to-write-a-linear-function),
+the rotation matrix that rotates counter-clockwise by an angle $\theta$ is
+$$
+\begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{bmatrix},
+$$
+so the matrix multiplication
+$$
+\begin{bmatrix} \red{\cos(\theta)} & \red {-\sin(\theta)} \\ \magenta{\sin(\theta)} & \magenta{\cos(\theta)} \end{bmatrix}
+\begin{bmatrix} \blue{\cos(\theta)} & \green {-\sin(\theta)} \\ \blue{\sin(\theta)} & \green{\cos(\theta)} \end{bmatrix}
+$$
+produces a matrix that rotates by $\theta$ twice.
+On the one hand, we can calculate it with dot products, and we get
+$$
+\begin{bmatrix}
+    \red{(\cos(\theta), -\sin(\theta))} \cdot \blue{(\cos(\theta), \sin(\theta))} &
+    \red{(\cos(\theta), -\sin(\theta))} \cdot \green{(-\sin(\theta), \cos(\theta))} \\
+    \magenta{(\sin(\theta), \cos(\theta))} \cdot \blue{(\cos(\theta), \sin(\theta))} &
+    \magenta{(\sin(\theta), \cos(\theta))} \cdot \green{(-\sin(\theta), \cos(\theta))}
+\end{bmatrix},
+$$
+
+comment:
+    $$
+    \begin{bmatrix}
+        \red{\cos(\theta)}\blue{\cos(\theta)} + \red{(-\sin(\theta))}\blue{\sin(\theta)} &
+        \red{\cos(\theta)}\green{(-\sin(\theta))} + \red{(-\sin(\theta))}\green{\cos(\theta)} \\
+        \magenta{\sin(\theta)}\blue{\cos(\theta)} + \magenta{\cos(\theta)}\blue{\sin(\theta)} &
+        \magenta{\sin(\theta)}\green{(-\sin(\theta))} + \magenta{\cos(\theta)}\green{\cos(\theta)}
+    \end{bmatrix},
+    $$
+
+which simplifies to
+$$
+\begin{bmatrix}
+    \cos^2(\theta)-\sin^2(\theta) & -2\sin(\theta)\cos(\theta) \\
+    2\sin(\theta)\cos(\theta) & \cos^2(\theta)-\sin^2(\theta)
+\end{bmatrix}.
+$$
+On the other hand, rotating by $\theta$ twice
+creates a total rotation of angle $2\theta$,
+so the above matrix must be same as
+$$
+\begin{bmatrix}
+    \cos(2\theta) & -\sin(2\theta) \\
+    \sin(2\theta) & \cos(2\theta)
+\end{bmatrix}.
+$$
+By comparing these matrices, we get the following result.
+
+graybox:
+    For any angle $\theta$, we have
+    $$
+    \cos(2\theta)=\cos^2(\theta)-\sin^2(\theta)
+    $$
+    and
+    $$
+    \sin(2\theta)=2\sin(\theta)\cos(\theta).
+    $$
+
+This would be difficult to prove without linear algebra or [complex numbers](../complex/mul.html#example-sin-2-theta-and-cos-2-theta).
+By multiplying the rotation matrices of two different angles,
+you can similarly find formulas for $\cos(\alpha+\beta)$ and $\sin(\alpha+\beta)$.
+
+
 ## Notation ambiguity
 
 Consider any matrix-vector multiplication, such as

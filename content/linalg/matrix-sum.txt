@@ -1,0 +1,127 @@
+# Adding matrices
+
+We can add vectors by just adding the corresponding numbers:
+$$
+\red{\begin{bmatrix} 1 \\ 2 \end{bmatrix}}
++ \blue{\begin{bmatrix} 3 \\ 4 \end{bmatrix}}
+= \begin{bmatrix} \red1+\blue3 \\ \red2+\blue4 \end{bmatrix}.
+$$
+Let's extend this to matrices of any size like this:
+$$
+\begin{align}
+\red{\begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}}
++ \blue{\begin{bmatrix} 7 & 9 & 11 \\ 8 & 10 & 12 \end{bmatrix}}
+&= \begin{bmatrix} \red1+\blue7 & \red3+\blue9 & \red5+\blue{11} \\ \red2+\blue8 & \red4+\blue{10} & \red6+\blue{12} \end{bmatrix}.
+\end{align}
+$$
+Note that $A+B$ is undefined if the matrices $A$ and $B$ have different sizes,
+because then you can't choose the corresponding elements from them.
+
+
+## Added matrices with matrix-vector multiplication
+
+If we multiply the matrix above with a vector, e.g. $\green{(13,14,15)}$, we get
+$$
+\begin{align}
+&~~~~ \begin{bmatrix} \red1+\blue7 & \red3+\blue9 & \red5+\blue{11} \\ \red2+\blue8 & \red4+\blue{10} & \red6+\blue{12} \end{bmatrix}
+\begin{bmatrix}\green{13}\\\green{14}\\\green{15}\end{bmatrix} \\
+&= \green{13}\begin{bmatrix} \red1+\blue7 \\ \red2+\blue8 \end{bmatrix}
++ \green{14}\begin{bmatrix} \red3+\blue9 \\ \red4+\blue{10} \end{bmatrix}
++ \green{15}\begin{bmatrix} \red5+\blue{11} \\ \red6+\blue{12} \end{bmatrix} \\
+%&= \begin{bmatrix} \green{13}(\red1+\blue7) \\ \green{13}(\red2+\blue8) \end{bmatrix}
+%+ \begin{bmatrix} \green{14}(\red3+\blue9) \\ \green{14}(\red4+\blue{10}) \end{bmatrix}
+%+ \begin{bmatrix} \green{15}(\red5+\blue{11}) \\ \green{15}(\red6+\blue{12}) \end{bmatrix} \\
+%&= \begin{bmatrix}
+%    \green{13}(\red1+\blue7) + \green{14}(\red3+\blue9) + \green{15}(\red5+\blue{11}) \\
+%    \green{13}(\red2+\blue8) + \green{14}(\red4+\blue{10}) + \green{15}(\red6+\blue{12})
+&= \begin{bmatrix}512\\596\end{bmatrix}.
+\end{align}
+$$
+If we multiply the vector separately with the two original matrices, we get
+$$
+\begin{align}
+&~~~~ \red{\begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}}\begin{bmatrix}\green{13}\\\green{14}\\\green{15}\end{bmatrix}
++ \blue{\begin{bmatrix} 7 & 9 & 11 \\ 8 & 10 & 12 \end{bmatrix}}\begin{bmatrix}\green{13}\\\green{14}\\\green{15}\end{bmatrix} \\
+&= \green{13}\red{\begin{bmatrix} 1 \\ 2 \end{bmatrix}}
++ \green{14}\red{\begin{bmatrix} 3 \\ 4 \end{bmatrix}}
++ \green{15}\red{\begin{bmatrix} 5 \\ 6 \end{bmatrix}} \\
+&\qquad + \green{13}\blue{\begin{bmatrix} 7 \\ 8 \end{bmatrix}}
++ \green{14}\blue{\begin{bmatrix} 9 \\ 10 \end{bmatrix}}
++ \green{15}\blue{\begin{bmatrix} 11 \\ 12 \end{bmatrix}} \\
+&= \green{13}\left(\red{\begin{bmatrix} 1 \\ 2 \end{bmatrix}}+\blue{\begin{bmatrix} 7 \\ 8 \end{bmatrix}}\right)
++ \green{14}\left(\red{\begin{bmatrix} 3 \\ 4 \end{bmatrix}}+\blue{\begin{bmatrix} 9 \\ 10 \end{bmatrix}}\right)
++ \green{15}\left(\red{\begin{bmatrix} 5 \\ 6 \end{bmatrix}}+\blue{\begin{bmatrix} 11 \\ 12 \end{bmatrix}}\right) \\
+&= \begin{bmatrix}512\\596\end{bmatrix}.
+\end{align}
+$$
+We got the same result, and this works in general
+whenever the sizes of the matrices and the vector are correct.
+
+graybox:
+    Let $A$ and $B$ be matrices of the same size,
+    and let $\vec v$ be a vector whose dimension is the width of $A$ and $B$.
+    Then
+    $$
+    (A+B)\vec v = A\vec v+B\vec v.
+    $$
+
+This explains why matrix-vector multiplication is called multiplication.
+We have $(a+b)c=ac+bc$ with numbers,
+and by writing matrix-vector multiplication similarly to the multiplication of numbers,
+the same rule works for it too.
+
+This is also a good way to understand the linear function corresponding to $A+B$.
+It calculates the values of $A$'s and $B$'s linear functions,
+and adds the resulting vectors.
+
+We already know this works when adding vectors instead of matrices, as in
+$$
+A(\vec v + \vec w) = A\vec v + A\vec w,
+$$
+because this is same as $f(\vec v + \vec w) = f(\vec v) + f(\vec w)$,
+where $f$ is the linear function corresponding to $A$.
+
+
+## Added matrices with matrix-matrix multiplication
+
+Recall that [matrix-matrix-vector multiplications can be safely written without parentheses](matrix-matrix.html#parentheses-are-unnecessary).
+
+Consider any matrix multiplication with a sum on the left side, like $(A+B)C$.
+For a vector $\vec v$, we can use the previous result with the vector $C\vec v$, and we get
+$$
+(A+B)C\vec v = AC\vec v+BC\vec v.
+$$
+On the other hand, for the matrices $AC$ and $BC$ it gives
+$$
+(AC + BC)\vec v = AC\vec v + BC\vec v.
+$$
+By putting all this together, we get
+$$
+(A+B)C\vec v = (AC+BC)\vec v.
+$$
+By choosing $\vec v = (1,0,0,\dots,0)$,
+we see that $(A+B)C$ and $AC+BC$ have the same left column.
+With $\vec v = (0,1,0,\dots,0)$,
+we see that they have the same second column, and so on.
+
+graybox:
+    $(A+B)C=AC+BC$ works with matrices.
+
+This doesn't prove that we have $A(B+C)=AC+BC$,
+because [the order matters](matrix-matrix.html#order-matters).
+However, we can derive $A(B+C)=AC+BC$ similarly.
+For a vector $\vec v$, we get
+$$
+A(B+C)\vec v = A(B\vec v + C\vec v) = AB\vec v + AC\vec v,
+$$
+and on the other hand,
+$$
+(AB+AC)\vec v = AB\vec v + AC\vec v.
+$$
+The rest goes just like in the previous derivation.
+
+graybox:
+    $A(B+C)=AB+AC$ works with matrices.
+
+These results explain why matrix multiplication is called multiplication:
+when combined with $+$, it follows the same rules as the multiplication of numbers.

@@ -99,10 +99,15 @@ $$
 =
 \underbrace{\begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}}_{\text{rotate and shear}}.
 $$
-
 Note that the order is reversed, in the sense that the second matrix is applied first.
-The order really matters:
-"shear and then rotate" does not produce the same results as "rotate and then shear".
+Also, the order really matters (see below).
+
+I will [later](matrix-sum.html#added-matrices-with-matrix-vector-multiplication) explain why matrix-matrix multiplication is called multiplication.
+
+
+## Order matters
+
+"Shear and then rotate" does not produce the same results as "rotate and then shear".
 
 asymptote:
     unitsize(1.8cm);
@@ -136,14 +141,25 @@ asymptote:
     label((10.5,1), "$\begin{bmatrix}\red1&\blue{-1}\\\red1&\blue0\end{bmatrix}$");
     label(U*(10.5,1), "$\begin{bmatrix}\red0&\blue{-1}\\\red1&\blue1\end{bmatrix}$");
 
-Also note that we don't have to use parentheses
-when multiplying two matrices $A$ and $B$ with a vector $\vec v$.
-It doesn't matter whether $AB\vec v$ gets interpreted
-as $A(B \vec v)$ with two matrix-vector multiplications,
-or as $(AB)\vec v$ with one matrix-matrix multiplication
-and one matrix-vector multiplication.
 
-I will later (TODO) explain why matrix-matrix multiplication is called multiplication.
+## Parentheses are unnecessary
+
+$AB\vec v$ can mean two different things:
+<ul><li>
+    $(AB)\vec v$, with one matrix-matrix multiplication and one matrix-vector multiplication.
+</li><li>
+    $A(B \vec v)$, with two matrix-vector multiplications.
+</li></ul>
+
+However, these produce the same result, because in both cases,
+we apply first $B$ and then $A$ to the vector $\vec v$.
+That's why it's fine to write $AB\vec v$ without any parentheses.
+
+The same goes for multiplying 3 or more matrices.
+A matrix-matrix-matrix multiplication like $ABC$
+can be interpreted as $(AB)C$ or $A(BC)$,
+but those are the same matrix,
+because both of them first apply $C$, then $B$, then $A$.
 
 
 ## Size problems

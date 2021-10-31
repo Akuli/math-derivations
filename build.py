@@ -197,6 +197,7 @@ def get_sidebar_content(txtfile):
             link("Introduction (rotating a vector)", "linalg/rotating-intro"),
             link("Matrix times vector", "linalg/matrix-vector"),
             link("Matrix times matrix", "linalg/matrix-matrix"),
+            link("Matrix plus matrix", "linalg/matrix-sum"),
         ])),
     ])
 

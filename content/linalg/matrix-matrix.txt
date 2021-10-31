@@ -102,7 +102,7 @@ $$
 Note that the order is reversed, in the sense that the second matrix is applied first.
 Also, the order really matters (see below).
 
-I will [later](matrix-sum.html#added-matrices-with-matrix-vector-multiplication) explain why matrix-matrix multiplication is called multiplication.
+I will [later](matrix-sum.html#added-matrices-with-matrix-matrix-multiplication) explain why matrix-matrix multiplication is called multiplication.
 
 
 ## Order matters

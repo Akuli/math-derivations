@@ -134,7 +134,7 @@ graybox:
     This calculates $f(\text{the vector})$,
     where $f$ is the linear function corresponding to the matrix.
 
-I will later explain why this operation is called multiplying.
+I will [later](matrix-sum.html#added-matrices-with-matrix-vector-multiplication) explain why this operation is called multiplying.
 
 Examples:
 <ul><li>

@@ -187,7 +187,7 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a>
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a>
         </div>
         </div>
 <h1 id="matrix-multiplication">Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Link to this title">¶</a></h1><p>If we apply two functions like $f(g(\vec v))$,
@@ -268,20 +268,31 @@ $$
 }_{\text{rotate}}
 =
 \underbrace{\begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}}_{\text{rotate and shear}}.
-$$</p>
+$$
+Note that the order is reversed, in the sense that the second matrix is applied first.
+Also, the order really matters (see below).</p>
 
-<p>Note that the order is reversed, in the sense that the second matrix is applied first.
-The order really matters:
-"shear and then rotate" does not produce the same results as "rotate and then shear".</p>
+<p>I will <a href="matrix-sum.html#added-matrices-with-matrix-matrix-multiplication">later</a> explain why matrix-matrix multiplication is called multiplication.
+</p>
 
-<p><img width="633" height="191" class="asymptote" src="../asymptote/9a7861cd7132c669deb9975d41c70762.svg" /></p><p>Also note that we don't have to use parentheses
-when multiplying two matrices $A$ and $B$ with a vector $\vec v$.
-It doesn't matter whether $AB\vec v$ gets interpreted
-as $A(B \vec v)$ with two matrix-vector multiplications,
-or as $(AB)\vec v$ with one matrix-matrix multiplication
-and one matrix-vector multiplication.</p>
+<h2 id="order-matters">Order matters<a class="headerlink" href="#order-matters" title="Link to this title">¶</a></h2><p>"Shear and then rotate" does not produce the same results as "rotate and then shear".</p>
 
-<p>I will later (TODO) explain why matrix-matrix multiplication is called multiplication.
+<p><img width="633" height="191" class="asymptote" src="../asymptote/9a7861cd7132c669deb9975d41c70762.svg" /></p><h2 id="parentheses-are-unnecessary">Parentheses are unnecessary<a class="headerlink" href="#parentheses-are-unnecessary" title="Link to this title">¶</a></h2><p>$AB\vec v$ can mean two different things:
+<ul><li>
+    $(AB)\vec v$, with one matrix-matrix multiplication and one matrix-vector multiplication.
+</li><li>
+    $A(B \vec v)$, with two matrix-vector multiplications.
+</li></ul></p>
+
+<p>However, these produce the same result, because in both cases,
+we apply first $B$ and then $A$ to the vector $\vec v$.
+That's why it's fine to write $AB\vec v$ without any parentheses.</p>
+
+<p>The same goes for multiplying 3 or more matrices.
+A matrix-matrix-matrix multiplication like $ABC$
+can be interpreted as $(AB)C$ or $A(BC)$,
+but those are the same matrix,
+because both of them first apply $C$, then $B$, then $A$.
 </p>
 
 <h2 id="size-problems">Size problems<a class="headerlink" href="#size-problems" title="Link to this title">¶</a></h2><p>Not all matrices can be multiplied together.

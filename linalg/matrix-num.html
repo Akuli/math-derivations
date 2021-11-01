@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Distance between Line and Point
+<title>Multiplying matrices and numbers
  - Math Derivations</title>
 
     <script type="text/x-mathjax-config">
@@ -125,25 +125,25 @@
         <input type="checkbox" id="sidebar-checkbox-7" />
         <label for="sidebar-checkbox-7">Transforming curves</label>
         <div class="dropdown">
-            <a href="reflect.html">Reflecting</a><a href="shift.html">Shifting</a><a href="stretch.html">Stretching</a>
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Line</label>
         <div class="dropdown">
-            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="slope-tan.html">Slope and tan</a><a href="line-eq-determinant.html">Equation with determinant</a>
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-9" />
         <label for="sidebar-checkbox-9">Parabola</label>
         <div class="dropdown">
-            <a href="parabola.html">Equation of parabola</a>
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-10" />
         <label for="sidebar-checkbox-10">Hyperbola</label>
         <div class="dropdown">
-            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
         </div>
         
         </div>
@@ -187,67 +187,113 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a>
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a>
         </div>
         </div>
-<h1 id="distance-between-line-and-point">Distance between Line and Point<a class="headerlink" href="#distance-between-line-and-point" title="Link to this title">¶</a></h1><p>On this page, we'll derive the formula for distance between a line and a point,
-given the equation of the line and the coordinates of the point.
-First of all, I <b>don't</b> mean something like this:</p>
-
-<p><img width="228" height="225" class="asymptote" src="../asymptote/b12162a0d34d6a35f07e807618acd47f.svg" /></p><p>The distance must be perpendicularly to the line, like this:</p>
-
-<p><img width="216" height="225" class="asymptote" src="../asymptote/ca6b5f5b15a7719ce8e0fdfb0e420b7e.svg" /></p><p>Let's find the distance between any point $Q$ and any line.
-From <a href="line-eq-normal.html">this line equation derivation</a>,
-we know that the equation of any line can be written as $ax+by+c=0$.
-Here $\vec n = a\I+b\J$ is a normal vector of the line, and
-for any point $P$ on the line, the projection of $\Vec{OP}$ onto $\vec n$ is the same.
-We called it $p$, and we got $c = -p|\vec n|$.
-Let $q$ denote the projection of $\Vec{OQ}$ onto $\vec n$.</p>
-
-<p><img width="401" height="354" class="asymptote" src="../asymptote/944494edb53a6474f0014dadf41cdfc9.svg" /></p><p>In the picture, the distance is $p-q$, but
-if $Q$ was on the other side of the line, it would be $q-p$ instead, because the distance isn't negative.
-In either case, the distance can be written as $|q-p|$.
-This means that we need to calculate $q$ and $p$, and then we'll calculate $|q-p|$ and be done.</p>
-
-<p>Let's start by finding $p$ using $c=-p|\vec n|$,
-which is one of the results we got in the line equation derivation.
+<h1 id="multiplying-matrices-and-numbers">Multiplying matrices and numbers<a class="headerlink" href="#multiplying-matrices-and-numbers" title="Link to this title">¶</a></h1><p>We can multiply vectors and numbers like this:
 $$
-\begin{align}
-c &= -p|\vec n| \\
--c &= p|\vec n| \\
--\frac{c}{|\vec n|} &= p
-\end{align}
+2\begin{bmatrix} 3 \\ 4 \end{bmatrix}
+= \begin{bmatrix} 2 \cdot 3 \\ 2 \cdot 4 \end{bmatrix}
 $$
-To find $q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$
-with a <a href="../vectors/iwi-jwj.html#example-calculating-projection">dot product</a>:
+Let's extend this to matrices of any size in the obvious way. For example,
 $$
-q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
-= \frac{aQ_x+bQ_y}{|\vec n|}
+10 \begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}
+= \begin{bmatrix} 10 \cdot 1 & 10 \cdot 3 & 10 \cdot 5 \\ 10 \cdot 2 & 10 \cdot 4 & 10 \cdot 6 \end{bmatrix}.
 $$
-Now we can calculate the distance:
+Sometimes the number is written on the right, and it means the same thing:
 $$
-\begin{align}
-|q-p|
-&= \left|\frac{aQ_x+bQ_y}{|\vec n|} - \left( -\frac{c}{|\vec n|} \right)\right| \\
-&= \left|\frac{aQ_x+bQ_y}{|\vec n|} + \frac{c}{|\vec n|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{|\vec n|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{|a\I+b\J|} \right| \\
-&= \left|\frac{aQ_x+bQ_y+c}{\sqrt{a^2+b^2}} \right| \\
-&= \frac{|aQ_x+bQ_y+c|}{\sqrt{a^2+b^2}}
-\end{align}
-$$
-In the last step, we noticed that it's enough to take the absolute value of the top,
-because the bottom is a square root, which can't be negative.</p>
-
-<div class="box graybox"><p>The distance between a point $Q$ and a line $ax+by+c=0$ is
-$$
-\frac{|aQ_x+bQ_y+c|}{\sqrt{a^2+b^2}}.
+\begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}10
+= \begin{bmatrix} 10 \cdot 1 & 10 \cdot 3 & 10 \cdot 5 \\ 10 \cdot 2 & 10 \cdot 4 & 10 \cdot 6 \end{bmatrix}.
 $$
 </p>
 
-</div><p>Notice how the inside of the absolute value is the coordinates of $Q$ plugged into $ax+by+c$,
-and the rest is dividing by the length of the normal vector $a\I+b\J$.
-This is an easy way to remember the formula.
+<h2 id="matrix-matrix-and-number-matrix-multiplication">Matrix-matrix and number-matrix multiplication<a class="headerlink" href="#matrix-matrix-and-number-matrix-multiplication" title="Link to this title">¶</a></h2><p>Recall that
+<a href="matrix-matrix.html#a-different-way-to-multiply">each number in $AB$ is a dot product of a row from $A$ and a column from $B$</a>.
+For example:
+$$
+\begin{bmatrix} \red1&\red3 \\ \magenta2&\magenta4 \end{bmatrix}
+\begin{bmatrix} \blue5&\green7 \\ \blue6&\green8  \end{bmatrix}
+= \begin{bmatrix}
+    \red1 \cdot \blue5 + \red3 \cdot \blue6 & \red1 \cdot \green7 + \red3 \cdot \green8 \\
+    \magenta2 \cdot \blue5 + \magenta4 \cdot \blue6 & \magenta2 \cdot \green7 + \magenta4 \cdot \green8
+\end{bmatrix}
+$$
+If the first matrix is multiplied by $c$,
+that multiplies the resulting matrix by $c$.
+$$
+\begin{align}
+\begin{bmatrix} \red1c&\red3c \\ \magenta2c&\magenta4c \end{bmatrix}
+\begin{bmatrix} \blue5&\green7 \\ \blue6&\green8  \end{bmatrix}
+&= \begin{bmatrix}
+    \red1c \cdot \blue5 + \red3c \cdot \blue6 & \red1c \cdot \green7 + \red3c \cdot \green8 \\
+    \magenta2c \cdot \blue5 + \magenta4c \cdot \blue6 & \magenta2c \cdot \green7 + \magenta4c \cdot \green8
+\end{bmatrix} \\
+&= \begin{bmatrix}
+    c(\red1 \cdot \blue5 + \red3 \cdot \blue6) & c(\red1 \cdot \green7 + \red3 \cdot \green8) \\
+    c(\magenta2 \cdot \blue5 + \magenta4 \cdot \blue6) & c(\magenta2 \cdot \green7 + \magenta4 \cdot \green8)
+\end{bmatrix} \\
+&= c\begin{bmatrix}
+    \red1 \cdot \blue5 + \red3 \cdot \blue6 & \red1 \cdot \green7 + \red3 \cdot \green8 \\
+    \magenta2 \cdot \blue5 + \magenta4 \cdot \blue6 & \magenta2 \cdot \green7 + \magenta4 \cdot \green8
+\end{bmatrix}
+\end{align}
+$$
+Multiplying the second matrix by $c$ does the same thing,
+so we get the following result:</p>
+
+<div class="box graybox"><p>If $A$ and $B$ are matrices and $AB$ is defined,
+then $(cA)B=A(cB)=c(AB)$.
+</p>
+
+</div><p>This is different from how matrix multiplication works in general:
+even though $AB$ is not necessarily $BA$, you can put the $c$ wherever you want,
+and the result will get multiplied by $c$ regardless of where you inserted the $c$.</p>
+
+<p>Because <a href="matrix-matrix.html#notation-ambiguity">matrix-vector multiplication can be calculated as a matrix-matrix multiplication</a>,
+we can also use the above result with a vector instead of $C$,
+and we get $(cA)\vec v = A(c \vec v) = c(A\vec v)$.
+For example, the matrix
+$$
+A = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}
+$$
+rotates by 90 degrees counter-clockwise (explained <a href="matrix-vector.html">here</a>).
+Because $(5A)\vec v = 5(A \vec v)$, the matrix
+$$
+5A = \begin{bmatrix} 0 & -5 \\ 5 & 0 \end{bmatrix}
+$$
+rotates by 90 degrees and also makes the vector $5$ times longer.
+We would also get the same result by starting with a vector that is 5 times longer,
+as in $A(5\vec v)$.</p>
+
+<h2 id="subtracting-matrices">Subtracting matrices<a class="headerlink" href="#subtracting-matrices" title="Link to this title">¶</a></h2><p>For matrices $A$ and $B$, we can now define $-B=(-1)B$, and $A-B=A + (-B)$.
+These operations behave like you would expect:
+just flip the sign of each number in the matrix or subtract the corresponding elements.
+For example,
+$$
+- {\begin{bmatrix} 5 & 7 \\ 6 & 8 \end{bmatrix}}
+= \begin{bmatrix} (-1)5 & (-1)7 \\ (-1)6 & (-1)8 \end{bmatrix}
+= \begin{bmatrix} -5 & -7 \\ -6 & -8 \end{bmatrix}
+$$
+and
+$$
+\begin{align}
+\red{\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}}
+- \blue{\begin{bmatrix} 5 & 7 \\ 6 & 8 \end{bmatrix}}
+&= \red{\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}}
++ \begin{bmatrix} -\blue 5 & -\blue 7 \\ -\blue 6 & -\blue8 \end{bmatrix} \\
+&= \begin{bmatrix} \red1+(-\blue5) & \red3+(-\blue7) \\ \red2+(-\blue6) & \red4+(-\blue8) \end{bmatrix} \\
+&= \begin{bmatrix} \red1-\blue5 & \red3-\blue7 \\ \red2-\blue6 & \red4-\blue8 \end{bmatrix}.
+\end{align}
+$$
+Subtraction also works with matrix multiplication like you would expect:
+we have
+$$
+(A-B)C = (A + (-1)B)C = AC + (-1)BC = AC - BC,
+$$
+and we similarly get
+$$
+A(B-C) = AB-AC.
+$$
 </p>
 
 </div>

@@ -199,6 +199,7 @@ def get_sidebar_content(txtfile):
             link("Matrix times matrix", "linalg/matrix-matrix"),
             link("Matrix plus matrix", "linalg/matrix-sum"),
             link("Matrix times number", "linalg/matrix-num"),
+            link("Span and linear dependence", "linalg/span-and-dep"),
         ])),
     ])
 

@@ -5,45 +5,6 @@
 <title>Fundamental Theorem of Calculus, Part 2
  - Math Derivations</title>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/CommonHTML"],
-        tex2jax: {
-          inlineMath: [ ['$','$'] ],
-          displayMath: [ ['$$','$$'] ],
-        },
-        "HTML-CSS": { availableFonts: ["TeX"] },
-        TeX: {
-          Macros: {
-            // awesome, latex inside javascript inside html inside python
-            // https://xkcd.com/1638/
-            Vec: [ "\\overrightarrow{#1}", 1 ],
-            abs: [ "\\left| {#1} \\right|", 1 ],
-            I: [ "\\vec{i}", 0 ],
-            J: [ "\\vec{j}", 0 ],
-            K: [ "\\vec{k}", 0 ],
-
-            // funny operator name used only in one file
-            rotate: [ "\\operatorname{rotate}", 0 ],
-
-            // darkred is too dark, red is too bright
-            red: [ "\\color{##c00}{#1}", 1 ],
-            blue: [ "\\color{blue}{#1}", 1 ],
-            green: [ "\\color{green}{#1}", 1 ],
-            magenta: [ "\\color{magenta}{#1}", 1 ],
-
-            epsi: [ "\\varepsilon", 0 ],
-            leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
-
-            // binom doesn't work on adder's computer
-            // mybinom works, but it's too tall for inline math
-            mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
-          }
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
     <script>
@@ -72,7 +33,48 @@
     </script>
     <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/animation.css">
-</head>
+
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/CommonHTML"],
+            tex2jax: {
+              inlineMath: [ ['$','$'] ],
+              displayMath: [ ['$$','$$'] ],
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] },
+            TeX: {
+              Macros: {
+                // awesome, latex inside javascript inside html inside python
+                // https://xkcd.com/1638/
+                bigvec: [ "\\overrightarrow{#1}", 1 ],
+                abs: [ "\\left| {#1} \\right|", 1 ],
+                Span: [ "\\operatorname{span}", 0 ],
+                I: [ "\\vec{i}", 0 ],
+                J: [ "\\vec{j}", 0 ],
+                K: [ "\\vec{k}", 0 ],
+
+                // funny operator name used only in one file
+                rotate: [ "\\operatorname{rotate}", 0 ],
+
+                // darkred is too dark, red is too bright
+                red: [ "\\color{##c00}{#1}", 1 ],
+                blue: [ "\\color{blue}{#1}", 1 ],
+                green: [ "\\color{green}{#1}", 1 ],
+                magenta: [ "\\color{magenta}{#1}", 1 ],
+
+                epsi: [ "\\varepsilon", 0 ],
+                leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
+
+                // binom doesn't work on adder's computer
+                // mybinom works, but it's too tall for inline math
+                mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
+              }
+            }
+          });
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+        </head>
 <body>
 <div id="content">
 <div id="sidebar"><a href="../index.html">Front page</a>
@@ -187,7 +189,7 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a>
+            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a><a href="../linalg/span-and-dep.html">Span and linear dependence</a>
         </div>
         </div>
 <h1 id="fundamental-theorem-of-calculus-part-2">Fundamental Theorem of Calculus, Part 2<a class="headerlink" href="#fundamental-theorem-of-calculus-part-2" title="Link to this title">¶</a></h1><p>Let

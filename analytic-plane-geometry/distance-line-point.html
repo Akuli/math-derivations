@@ -5,45 +5,6 @@
 <title>Distance between Line and Point
  - Math Derivations</title>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/CommonHTML"],
-        tex2jax: {
-          inlineMath: [ ['$','$'] ],
-          displayMath: [ ['$$','$$'] ],
-        },
-        "HTML-CSS": { availableFonts: ["TeX"] },
-        TeX: {
-          Macros: {
-            // awesome, latex inside javascript inside html inside python
-            // https://xkcd.com/1638/
-            Vec: [ "\\overrightarrow{#1}", 1 ],
-            abs: [ "\\left| {#1} \\right|", 1 ],
-            I: [ "\\vec{i}", 0 ],
-            J: [ "\\vec{j}", 0 ],
-            K: [ "\\vec{k}", 0 ],
-
-            // funny operator name used only in one file
-            rotate: [ "\\operatorname{rotate}", 0 ],
-
-            // darkred is too dark, red is too bright
-            red: [ "\\color{##c00}{#1}", 1 ],
-            blue: [ "\\color{blue}{#1}", 1 ],
-            green: [ "\\color{green}{#1}", 1 ],
-            magenta: [ "\\color{magenta}{#1}", 1 ],
-
-            epsi: [ "\\varepsilon", 0 ],
-            leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
-
-            // binom doesn't work on adder's computer
-            // mybinom works, but it's too tall for inline math
-            mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
-          }
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
     <script>
@@ -72,7 +33,48 @@
     </script>
     <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/animation.css">
-</head>
+
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/CommonHTML"],
+            tex2jax: {
+              inlineMath: [ ['$','$'] ],
+              displayMath: [ ['$$','$$'] ],
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] },
+            TeX: {
+              Macros: {
+                // awesome, latex inside javascript inside html inside python
+                // https://xkcd.com/1638/
+                bigvec: [ "\\overrightarrow{#1}", 1 ],
+                abs: [ "\\left| {#1} \\right|", 1 ],
+                Span: [ "\\operatorname{span}", 0 ],
+                I: [ "\\vec{i}", 0 ],
+                J: [ "\\vec{j}", 0 ],
+                K: [ "\\vec{k}", 0 ],
+
+                // funny operator name used only in one file
+                rotate: [ "\\operatorname{rotate}", 0 ],
+
+                // darkred is too dark, red is too bright
+                red: [ "\\color{##c00}{#1}", 1 ],
+                blue: [ "\\color{blue}{#1}", 1 ],
+                green: [ "\\color{green}{#1}", 1 ],
+                magenta: [ "\\color{magenta}{#1}", 1 ],
+
+                epsi: [ "\\varepsilon", 0 ],
+                leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
+
+                // binom doesn't work on adder's computer
+                // mybinom works, but it's too tall for inline math
+                mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
+              }
+            }
+          });
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
+        </head>
 <body>
 <div id="content">
 <div id="sidebar"><a href="../index.html">Front page</a>
@@ -187,7 +189,7 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a>
+            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a><a href="../linalg/span-and-dep.html">Span and linear dependence</a>
         </div>
         </div>
 <h1 id="distance-between-line-and-point">Distance between Line and Point<a class="headerlink" href="#distance-between-line-and-point" title="Link to this title">¶</a></h1><p>On this page, we'll derive the formula for distance between a line and a point,
@@ -200,11 +202,11 @@ First of all, I <b>don't</b> mean something like this:</p>
 From <a href="line-eq-normal.html">this line equation derivation</a>,
 we know that the equation of any line can be written as $ax+by+c=0$.
 Here $\vec n = a\I+b\J$ is a normal vector of the line, and
-for any point $P$ on the line, the projection of $\Vec{OP}$ onto $\vec n$ is the same.
+for any point $P$ on the line, the projection of $\bigvec{OP}$ onto $\vec n$ is the same.
 We called it $p$, and we got $c = -p|\vec n|$.
-Let $q$ denote the projection of $\Vec{OQ}$ onto $\vec n$.</p>
+Let $q$ denote the projection of $\bigvec{OQ}$ onto $\vec n$.</p>
 
-<p><img width="401" height="354" class="asymptote" src="../asymptote/944494edb53a6474f0014dadf41cdfc9.svg" /></p><p>In the picture, the distance is $p-q$, but
+<p><img width="400" height="353" class="asymptote" src="../asymptote/380015be6363bb8bd2c2ca412fbc0c82.svg" /></p><p>In the picture, the distance is $p-q$, but
 if $Q$ was on the other side of the line, it would be $q-p$ instead, because the distance isn't negative.
 In either case, the distance can be written as $|q-p|$.
 This means that we need to calculate $q$ and $p$, and then we'll calculate $|q-p|$ and be done.</p>
@@ -218,10 +220,10 @@ c &= -p|\vec n| \\
 -\frac{c}{|\vec n|} &= p
 \end{align}
 $$
-To find $q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$
+To find $q$, we calculate the projection of $\bigvec{OQ}$ onto $\vec n$
 with a <a href="../vectors/iwi-jwj.html#example-calculating-projection">dot product</a>:
 $$
-q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
+q = \frac{\bigvec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
 = \frac{aQ_x+bQ_y}{|\vec n|}
 $$
 Now we can calculate the distance:

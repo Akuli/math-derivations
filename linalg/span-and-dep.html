@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Defining span, linear dependence and linear independence
+ - Math Derivations</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/animation.css">
+
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [ ['$','$'] ],
+                displayMath: [ ['$$','$$'] ],
+                macros: {
+                    // awesome, latex inside javascript inside html inside python
+                    // https://xkcd.com/1638/
+                    span: '\\operatorname{span}',
+                    // darkred is too dark, red is too bright
+                    red: [ "{\\color{##c00}{#1}}", 1 ],
+                    blue: [ "{\\color{blue}{#1}}", 1 ],
+                    green: [ "{\\color{green}{#1}}", 1 ],
+                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                }
+            }
+        };
+        </script>
+        </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Discrete math</label>
+        <div class="dropdown">
+            <a href="../discrete/sums.html">Sum formulas</a><a href="../discrete/binom.html">Binomial coefficients</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Circle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Triangle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a><a href="../plane-geometry/inscribed-circle.html">Inscribed circle</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-16" />
+        <label for="sidebar-checkbox-16">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-12" />
+        <label for="sidebar-checkbox-12">Limits</label>
+        <div class="dropdown">
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-13" />
+        <label for="sidebar-checkbox-13">Continuity</label>
+        <div class="dropdown">
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-14" />
+        <label for="sidebar-checkbox-14">Derivative</label>
+        <div class="dropdown">
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-15" />
+        <label for="sidebar-checkbox-15">Integral</label>
+        <div class="dropdown">
+            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a><a href="../calc/integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="../calc/integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="../calc/integral-notation.html">More notation for integrals</a><a href="../calc/integral-rules.html">Integral rules</a><a href="../calc/integral-usub.html">U substitution</a><a href="../calc/integral-sor-volume.html">Volume of solid of revolution</a><a href="../calc/integral-sor-area.html">Area of surface of revolution</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-17" />
+        <label for="sidebar-checkbox-17">Complex numbers</label>
+        <div class="dropdown">
+            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-18" />
+        <label for="sidebar-checkbox-18">Linear algebra</label>
+        <div class="dropdown">
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep.html">Span and linear dependence</a>
+        </div>
+        </div>
+<h1 id="defining-span-linear-dependence-and-linear-independence">Defining span, linear dependence and linear independence<a class="headerlink" href="#defining-span-linear-dependence-and-linear-independence" title="Link to this title">¶</a></h1><p>Recall that a linear combination of vectors
+means the result of multiplying each vector by a number (called a coefficient)
+and adding the resulting vectors.
+For example, $(2,3) + 4(5,6) - 7(8,9)$ is
+a linear combination of the vectors $(2,3)$, $(5,6)$ and $(8,9)$,
+with coefficients $1$, $4$ and $-7$.
+We now look at all linear combinations that can be made from given vectors.</p>
+
+<div class="box graybox"><p>The <b>span</b> of vectors $\vec{v_1},\vec{v_2},\dots,\vec{v_n}$
+means the set of all their linear combinations.
+It is denoted with $\span(\vec{v_1},\dots,\vec{v_n})$.
+</p>
+
+</div><p>Examples:
+<ul><li>
+    By combining the vectors $(1,0,0)$, $(0,1,0)$ and $(0,0,1)$,
+    we can create any 3D vector $(x,y,z)$,
+    because $x(1,0,0) + y(0,1,0) + z(0,0,1) = (x,y,z)$.
+    In other words, the span of $(1,0,0)$, $(0,1,0)$ and $(0,0,1)$
+    is the set of all 3D vectors.
+    We can write this as
+    $$
+    \span((1,0,0), (0,1,0), (0,0,1)) = \mathbb{R}^3.
+    $$
+    Here $\mathbb{R}$ means the set of all numbers,
+    and $\mathbb{R}^3$ means the set of all sequences of 3 numbers,
+    i.e. the set of all 3D vectors.
+</li><li>
+    The span of only $(1,0,0)$ and $(0,1,0)$ is the set of vectors like
+    $$
+    x(1,0,0) + y(0,1,0) = (x,y,0),
+    $$
+    where $x$ and $y$ are any numbers.
+    In other words, this is the set of all 3D vectors whose $z$ coordinate is zero.
+    This set is known as the xy plane.</p>
+
+<p><img  class="asymptote" src="../asymptote/aa69ed4d0b7da17e74a10b4c5608d08f.png" /></p><p>The span is infinitely big in all directions,
+but because an image can't be infinitely big,
+I only drew a square-shaped part of the span.</p>
+
+<p></li><li>
+    We can also take the span of only one vector.
+    For example, the span of $(1,1)$ is the set of all vectors like $a(1,1)$,
+    where $a$ is any number.
+    They form a line going through origin
+    with <a href="../analytic-plane-geometry/line-eq-slope.html#meaning-of-s-and-h">slope</a> 1.</p>
+
+<p><img width="414" height="257" class="asymptote" src="../asymptote/408790522b8cb08065b0fd85088b8fff.svg" /></p><p></li><li>
+    $\span((2,2))$ is the same set as $\span((1,1))$,
+    because the vectors go in the same direction,
+    and therefore their spans produce the same line.
+    In general, the length of the original vectors doesn't affect their span,
+    because the vectors get multiplied by all numbers anyway.
+</li><li>
+    The span of $\blue{(1,1,0)}$ and $\red{(0,0,1)}$
+    is a plane.
+    On the xy plane, it looks just like the previous $\blue{\span((1,1))}$ example.
+    Including $\red{(0,0,1)}$ basically adds a vertical direction to the span.</p>
+
+<p><img  class="asymptote" src="../asymptote/998a10fd17144e3c9ef67d26bf4c032e.png" /></p><p></li></ul></p>
+
+<p>See also <a href="https://www.youtube.com/watch?v=k7RM-ot2NWY">3blue1brown's video</a>
+for better visualizations of spans.
+</p>
+
+<h2 id="linear-dependence">Linear dependence<a class="headerlink" href="#linear-dependence" title="Link to this title">¶</a></h2><p>We consider what happens when adding a vector $\vec w$
+to a span of other vectors $\vec{v_1}$, $\vec{v_2}$ and $\vec{v_3}$.
+To make this easier to follow,
+we call $\span(\vec{v_1},\vec{v_2},\vec{v_3})$ the old span, and
+we call $\span(\vec{v_1},\vec{v_2},\vec{v_3},\vec w)$ the new span.</p>
+
+<p>Because you can choose to not use $\vec w$
+by making its coefficient zero,
+such as $2\vec{v_1}+4\vec{v_2}-5\vec{v_3}+0\vec w$,
+any vector in the old span is also in the new span.
+However, the new span can also contain other vectors that aren't in the old span.
+To see when that happens, we split this into two cases:
+<ul><li>
+    Assume that $\blue{\vec w}$ is in the old span.
+    Consider any vector of the new span,
+    such as $\green{\vec{v_1}+4\vec{v_2} + 7\vec{v_3}} + 6\blue{\vec w}$.
+    Because $\blue{\vec w}$ is in the old span,
+    we can replace it with a linear combination of other vectors.
+    For example, if $\blue{\vec w = 2\vec{v_1} + 3\vec{v_2} - 2\vec{v_3}}$, we get
+    $$
+    \begin{align}
+    \green{\vec{v_1} + 4\vec{v_2} + 7\vec{v_3}} + 6\blue{\vec w}
+    &= \green{\vec{v_1} + 4\vec{v_2} + 7\vec{v_3}} + 6\blue{( 2\vec{v_1} + 3\vec{v_2} - 2\vec{v_3})} \\
+    &= (\green{1} + 6 \cdot \blue2)\vec{v_1} + (\green{4} + 6 \cdot \blue3)\vec{v_2} + (\green7 + 6 \cdot \blue{(-2)}) \vec{v_3} \\
+    &= 13\vec{v_1} + 22\vec{v_2} - 5\vec{v_3},
+    \end{align}
+    $$
+    which is a vector in the old span.
+    Because any vector in the new span is also in the old span,
+    and any vector in the old span is also in the new span,
+    the spans must be the same set.
+</li><li>
+    Even if $\red{\vec w}$ is not in the old span,
+    it is in the new span, because it can be written as
+    $$
+    \red{\vec w} = 0\vec{v_1} + 0\vec{v_2} + 0\vec{v_3} + 1\red{\vec{w}}.
+    $$
+</li></ul></p>
+
+<p>In short, you can't "expand" a span to contain more vectors by using vectors from the span itself,
+but it can be done by adding a new vector that isn't already in the span.</p>
+
+<div class="box graybox"><p>Adding a vector to a span
+can either do nothing or make the span bigger,
+depending on whether the vector is already in the span:
+<ul><li>
+    If $\blue{\vec w}$ is already in $\span(\vec{v_1},\dots,\vec{v_n})$,
+    then $\span(\vec{v_1},\dots,\vec{v_n},\blue{\vec w})=\span(\vec{v_1},\dots,\vec{v_n})$.
+</li><li>
+    If $\red{\vec w}$ is not in $\span(\vec{v_1},\dots,\vec{v_n})$,
+    then $\span(\vec{v_1},\dots,\vec{v_n},\red{\vec w})$ contains
+    all vectors of $\span(\vec{v_1},\dots,\vec{v_n})$
+    and other vectors too (such as $\red{\vec w}$).
+</li></ul>
+</p>
+
+</div><p>Let's now define a couple new concepts:</p>
+
+<div class="box graybox"><p>We say that vectors $\vec{v_1},\vec{v_2},\dots,\vec{v_n}$
+are <b>linearly dependent</b>,
+if one of the vectors is a linear combination of others.
+</p>
+
+</div><p>Based on our previous result,
+linearly dependent means that the span has an unnecessary vector,
+and would be the same with one of the vectors removed.
+If this can't be done, i.e. if every vector is needed to get the span,
+then we say that the vectors are linearly independent.</p>
+
+<div class="box graybox"><p>We say that vectors $\vec{v_1},\dots,\vec{v_n}$ are <b>linearly independent</b>
+if they are not linearly dependent;
+that is, if no vector can be written as a linear combination of others.
+</p>
+
+</div><p>Examples:
+<ul><li>
+    The vectors $(1,0,0)$, $(0,1,0)$ and $(0,0,1)$ are linearly independent.
+    For example, you can't write $(0,0,1)$
+    as a linear combination of $(1,0,0)$ and $(0,1,0)$,
+    because any combination of those vectors is within the xy plane,
+    but $(0,0,1)$ isn't.
+    This means that all three vectors are needed
+    for $\span((1,0,0), (0,1,0), (0,0,1))$ to be
+    the set of all 3D vectors.
+</li><li>
+    The vectors $(1,1)$ and $(2,2)$ are linearly dependent,
+    because you can write $(2,2)$ as the linear combination $2(1,1)$.
+    Therefore $(2,2)$ is unnecessary in $\span((1,1),(2,2))$,
+    and we have
+    $$
+    \span((1,1),(2,2)) = \span((1,1)).
+    $$
+    On the other hand, we can also view $(1,1)$ as the unnecessary vector,
+    because $(1,1) = \frac{1}{2}(2,2)$, and therefore
+    $$
+    \span((1,1),(2,2)) = \span((2,2)).
+    $$
+    Earlier on this page I explained visually why $\span((1,1))=\span((2,2))$,
+    and now we found a different way to arrive at the same result.
+</li><li>
+    Linear dependence means that you can remove some vector without affecting the span.
+    This doesn't mean that you can remove any vector you want.
+    For example, the vectors $(0,0)$, $(1,0)$ and $(0,1)$
+    are linearly dependent,
+    and $(0,0)$ can be removed from $\span((0,0),(1,0),(0,1))$ without affecting it, because
+    $$
+    (0,0) = 0(1,0) + 0(0,1).
+    $$
+    However, removing $(0,1)$ affects the span, because $\span((0,0),(1,0))$ is the $x$ axis,
+    even though $\span((0,0),(1,0),(0,1))=\mathbb{R}^2$ is the set of all 2D vectors.
+    Removing $(1,0)$ also affects the span.</p>
+
+<p><img width="230" height="215" class="asymptote" src="../asymptote/89d92468cfb838ed07c4a456a77f2100.svg" /></p><p></li></ul>
+</p>
+
+<h2 id="adding-multiples-doesn-t-affect-span">Adding multiples doesn't affect span<a class="headerlink" href="#adding-multiples-doesn-t-affect-span" title="Link to this title">¶</a></h2><p>Consider the spans
+$$
+\span(\red{\vec u}, \blue{\vec v}) \quad \text{and} \quad
+\span(\red{\vec u}, \green{\vec v + 2\vec u}).
+$$
+Because $\green{\vec v + 2\vec u}$ is a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
+adding it to their span doesn't change anything:
+$$
+\span(\red{\vec u}, \blue{\vec v}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+$$
+On the other hand,
+$$
+\blue{\vec v} = \green{\vec v + 2\vec u} - 2\red{\vec u}
+$$
+is a linear combination of $\green{\vec v + 2\vec u}$ and $\red{\vec u}$, so
+$$
+\span(\red{\vec u}, \green{\vec v + 2\vec u}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+$$
+By putting it all together, we get
+$$
+\span(\red{\vec u}, \blue{\vec v}) =
+\span(\red{\vec u}, \green{\vec v + 2\vec u}).
+$$
+This also works with any number instead of 2, and also with more than two vectors.</p>
+
+<div class="box graybox"><p>The span doesn't change when adding a multiple of one vector to another.
+</p>
+
+</div><p>Here a multiple of a vector means the vector multiplied by some number.
+For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
+are multiples of $\red{\vec u}$.
+</p>
+
+<h2 id="adding-multiples-doesn-t-affect-linear-dependency">Adding multiples doesn't affect linear dependency<a class="headerlink" href="#adding-multiples-doesn-t-affect-linear-dependency" title="Link to this title">¶</a></h2><p>TODO
+</p>
+
+</div>
+</body>
+</html>

@@ -115,7 +115,7 @@ even though $AB$ is not necessarily $BA$, you can put the $c$ wherever you want,
 and the result will get multiplied by $c$ regardless of where you inserted the $c$.
 
 Because [matrix-vector multiplication can be calculated as a matrix-matrix multiplication](matrix-matrix.html#notation-ambiguity),
-we can also use the above result with a vector instead of $C$,
+we can also use the above result with a vector $\vec v$ instead of $B$,
 and we get $(cA)\vec v = A(c \vec v) = c(A\vec v)$.
 For example, the matrix
 $$

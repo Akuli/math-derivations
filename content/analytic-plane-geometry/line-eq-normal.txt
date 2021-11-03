@@ -66,22 +66,22 @@ asymptote:
     draw((normal_start_x, f(normal_start_x))--(0,0), p=deepred+smalldashes);
     label("$p$", (normal_start_x, f(normal_start_x)) / 2, p=deepred, align=W);
 
-    draw((0,0)--P, p=heavygreen, arrow=Arrow(vectorarrowsize), L=Label("$\Vec{OP}$"), align=W);
-    draw((0,0)--Q, p=gray, arrow=Arrow(vectorarrowsize), L=Label("$\Vec{OQ}$"));
+    draw((0,0)--P, p=heavygreen, arrow=Arrow(vectorarrowsize), L=Label("$\bigvec{OP}$"), align=W);
+    draw((0,0)--Q, p=gray, arrow=Arrow(vectorarrowsize), L=Label("$\bigvec{OQ}$"));
     draw((q_line_x, -1/slope*q_line_x)--Q, p=gray+smalldashes);
 
     dot((0,0), p=dotpen, L="$O$");
     dot(P, p=dotpen, L="$P$", align=NW);
     dot(Q, p=dotpen, L="$Q$");
 
-We notice that the projection of $\Vec{OP}$ onto $\vec n$ is the same for any point $P$ on the line.
+We notice that the projection of $\bigvec{OP}$ onto $\vec n$ is the same for any point $P$ on the line.
 We call this projection $p$.
 In the picture, we have a positive $p$,
 but it could also be zero for a line going through origin,
 or negative in case $\vec n$ points toward the origin.
 
 We also notice that for a point $Q$ not on the line,
-the projection of $\Vec{OQ}$ onto the line will be something else than $p$.
+the projection of $\bigvec{OQ}$ onto the line will be something else than $p$.
 In the picture, it's less than $p$,
 but it would be greater than $p$ if $Q$ was on the other side of the line.
 

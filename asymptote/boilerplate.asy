@@ -13,12 +13,14 @@ void define_tex_color(string name, pen asy_color) {
 }
 
 texpreamble("\usepackage[dvipsnames]{xcolor}");
-texpreamble("\newcommand{\Vec}[1]{\overrightarrow{#1}}");
+texpreamble("\usepackage{amsmath}");
+texpreamble("\newcommand{\bigvec}[1]{\overrightarrow{#1}}");
 texpreamble("\newcommand{\I}{\vec i}");
 texpreamble("\newcommand{\J}{\vec j}");
 texpreamble("\newcommand{\K}{\vec k}");
 texpreamble("\newcommand{\abs}[1]{\left| {#1} \right|}");
 texpreamble("\newcommand{\epsi}{\varepsilon}");
+texpreamble("\newcommand{\Span}{\operatorname{span}}");  // span already defined, that's why Span
 define_tex_color("blue", blue);
 define_tex_color("red", deepred);
 define_tex_color("green", deepgreen);

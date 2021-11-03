@@ -97,7 +97,7 @@ graybox:
 
 If we know two points of the line, $P$ and $Q$, then we can choose
 $$
-\vec d = \Vec{PQ} = (Q_x-P_x)\I + (Q_y-P_y)\J.
+\vec d = \bigvec{PQ} = (Q_x-P_x)\I + (Q_y-P_y)\J.
 $$
 This must not be the zero vector, so we need $P \ne Q$.
 

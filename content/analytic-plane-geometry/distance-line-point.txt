@@ -39,9 +39,9 @@ Let's find the distance between any point $Q$ and any line.
 From [this line equation derivation](line-eq-normal.html),
 we know that the equation of any line can be written as $ax+by+c=0$.
 Here $\vec n = a\I+b\J$ is a normal vector of the line, and
-for any point $P$ on the line, the projection of $\Vec{OP}$ onto $\vec n$ is the same.
+for any point $P$ on the line, the projection of $\bigvec{OP}$ onto $\vec n$ is the same.
 We called it $p$, and we got $c = -p|\vec n|$.
-Let $q$ denote the projection of $\Vec{OQ}$ onto $\vec n$.
+Let $q$ denote the projection of $\bigvec{OQ}$ onto $\vec n$.
 
 asymptote:
     unitsize(1.5cm);
@@ -74,8 +74,8 @@ asymptote:
     draw(brace_with_space((0,0), (normal_start_x, f(normal_start_x)), 0.9), L="$p$", align=W, p=deepred);
     draw(brace_with_space((0,0), (q_line_x, -1/slope*q_line_x), 0.2), L="$q$", align=W, p=gray);
 
-    draw((0,0)--P, p=heavygreen, arrow=Arrow(vectorarrowsize), L=Label("$\Vec{OP}$"), align=W);
-    draw((0,0)--Q, p=gray, arrow=Arrow(vectorarrowsize), L=Label("$\Vec{OQ}$"));
+    draw((0,0)--P, p=heavygreen, arrow=Arrow(vectorarrowsize), L=Label("$\bigvec{OP}$"), align=W);
+    draw((0,0)--Q, p=gray, arrow=Arrow(vectorarrowsize), L=Label("$\bigvec{OQ}$"));
     draw((q_line_x, -1/slope*q_line_x)--Q, p=gray+smalldashes);
 
     dot((0,0), p=dotpen, L="$O=(0,0)$");
@@ -96,10 +96,10 @@ c &= -p|\vec n| \\
 -\frac{c}{|\vec n|} &= p
 \end{align}
 $$
-To find $q$, we calculate the projection of $\Vec{OQ}$ onto $\vec n$
+To find $q$, we calculate the projection of $\bigvec{OQ}$ onto $\vec n$
 with a [dot product](../vectors/iwi-jwj.html#example-calculating-projection):
 $$
-q = \frac{\Vec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
+q = \frac{\bigvec{OQ} \cdot \vec n}{|\vec n|} = \frac{(Q_x\I + Q_y\J) \cdot (a\I+b\J)}{|\vec n|}
 = \frac{aQ_x+bQ_y}{|\vec n|}
 $$
 Now we can calculate the distance:

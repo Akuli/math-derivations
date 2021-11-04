@@ -344,7 +344,7 @@ $$
 \underbrace{
     \begin{bmatrix}\blue 5\\ \blue6\end{bmatrix}
 }_{
-    ~~~2 \times 1 \\ \text{matrix?}
+    \substack{2 \times 1 \\ \text{matrix?}}
 } = \blue5\begin{bmatrix} \red1 \\ \magenta3 \end{bmatrix}
 + \blue6\begin{bmatrix} \red2 \\ \magenta4 \end{bmatrix}
 = \begin{bmatrix} \blue5\cdot\red1 + \blue6\cdot\red2 \\ \blue5\cdot\magenta3 + \blue6\cdot\magenta4 \end{bmatrix}

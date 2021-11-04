@@ -261,11 +261,6 @@ legacy_mathjax_v2_pages = [
     "content/eqs-and-funcs/incdec-funcs.txt",
     "content/eqs-and-funcs/inverse-funcs.txt",
     "content/index.txt",
-    "content/linalg/matrix-matrix.txt",
-    "content/linalg/matrix-num.txt",
-    "content/linalg/matrix-sum.txt",
-    "content/linalg/matrix-vector.txt",
-    "content/linalg/rotating-intro.txt",
     "content/plane-geometry/inscribed-angle-theorem.txt",
     "content/plane-geometry/inscribed-circle.txt",
     "content/plane-geometry/law-of-cosines.txt",
@@ -327,7 +322,7 @@ stylesheet">
         '''
 
     if filename in legacy_mathjax_v2_pages:
-        result += '''
+        result += r'''
         <script type="text/x-mathjax-config">
           MathJax.Hub.Config({
             extensions: ["tex2jax.js"],
@@ -339,30 +334,27 @@ stylesheet">
             "HTML-CSS": { availableFonts: ["TeX"] },
             TeX: {
               Macros: {
-                // awesome, latex inside javascript inside html inside python
-                // https://xkcd.com/1638/
-                bigvec: [ "\\\\overrightarrow{#1}", 1 ],
-                abs: [ "\\\\left| {#1} \\\\right|", 1 ],
-                Span: [ "\\\\operatorname{span}", 0 ],
-                I: [ "\\\\vec{i}", 0 ],
-                J: [ "\\\\vec{j}", 0 ],
-                K: [ "\\\\vec{k}", 0 ],
+                bigvec: [ "\\overrightarrow{#1}", 1 ],
+                abs: [ "\\left| {#1} \\right|", 1 ],
+                Span: [ "\\operatorname{span}", 0 ],
+                rotate: [ "\\operatorname{rotate}", 0 ],
+                I: [ "\\vec{i}", 0 ],
+                J: [ "\\vec{j}", 0 ],
+                K: [ "\\vec{k}", 0 ],
 
-                // funny operator name used only in one file
-                rotate: [ "\\\\operatorname{rotate}", 0 ],
 
                 // darkred is too dark, red is too bright
-                red: [ "\\\\color{##c00}{#1}", 1 ],
-                blue: [ "\\\\color{blue}{#1}", 1 ],
-                green: [ "\\\\color{green}{#1}", 1 ],
-                magenta: [ "\\\\color{magenta}{#1}", 1 ],
+                red: [ "\\color{##c00}{#1}", 1 ],
+                blue: [ "\\color{blue}{#1}", 1 ],
+                green: [ "\\color{green}{#1}", 1 ],
+                magenta: [ "\\color{magenta}{#1}", 1 ],
 
-                epsi: [ "\\\\varepsilon", 0 ],
+                epsi: [ "\\varepsilon", 0 ],
                 leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
 
                 // binom doesn't work on adder's computer
                 // mybinom works, but it's too tall for inline math
-                mybinom: [ "\\\\begin{pmatrix} {#1} \\\\\\\\ {#2} \\\\end{pmatrix}", 2 ],
+                mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
               }
             }
           });
@@ -370,7 +362,7 @@ stylesheet">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
         '''
     else:
-        result += '''
+        result += r'''
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
         <script>
         MathJax = {
@@ -378,14 +370,16 @@ stylesheet">
                 inlineMath: [ ['$','$'] ],
                 displayMath: [ ['$$','$$'] ],
                 macros: {
-                    // awesome, latex inside javascript inside html inside python
-                    // https://xkcd.com/1638/
-                    span: '\\\\operatorname{span}',
+                    span: '\\operatorname{span}',
+                    rotate: '\\operatorname{rotate}',
+                    I: '\\vec{i}',
+                    J: '\\vec{j}',
+                    K: '\\vec{k}',
                     // darkred is too dark, red is too bright
-                    red: [ "{\\\\color{##c00}{#1}}", 1 ],
-                    blue: [ "{\\\\color{blue}{#1}}", 1 ],
-                    green: [ "{\\\\color{green}{#1}}", 1 ],
-                    magenta: [ "{\\\\color{magenta}{#1}}", 1 ],
+                    red: [ "{\\color{##c00}{#1}}", 1 ],
+                    blue: [ "{\\color{blue}{#1}}", 1 ],
+                    green: [ "{\\color{green}{#1}}", 1 ],
+                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
                 }
             }
         };

@@ -10,9 +10,12 @@ def _stringify(num, parens=False):
 
 
 def _stringify_multiplication(a, b, b_color=(lambda x: x)):
-    if a >= 0 and b >= 0 and a == int(a) and b == int(b):
-        return rf"{a} \cdot {b_color(b)}"
-    return _stringify(a, parens=True) + b_color(_stringify(b, parens=True))
+    # Do not require b to be int, so 1 * 2/3 doesn't show as "1 2/3" which could mean 5/3 or 2/3
+    if a >= 0 and b >= 0 and a == int(a):
+        sep = r" \cdot "
+    else:
+        sep = " "
+    return _stringify(a, parens=True) + sep + b_color(_stringify(b, parens=True))
 
 
 class MatrixWithRowOperations:
@@ -44,6 +47,27 @@ class MatrixWithRowOperations:
                 for color, row in zip(self._current_colors, self._rows)
             ]
         )
+
+    # rows[index] *= by
+    def multiply_row(self, index, by):
+        assert index >= 0
+        assert by != 0
+        self._output.append(r'&\to')
+        [new_color] = set(self._all_colors) - set(self._current_colors)
+        self._append_matrix_to_output(
+            [
+                [_stringify_multiplication(by, v, color) for v in row]
+                if y == index
+                else [color(_stringify(v)) for v in row]
+                for y, (color, row) in enumerate(zip(self._current_colors, self._rows))
+            ]
+        )
+
+        self._rows[index] = [by*v for v in self._rows[index]]
+        self._current_colors[index] = new_color
+        self._output.append('=')
+        self._append_current_state_to_output()
+        self._output.append(r'\\')
 
     # rows[dest] += scalar*rows[src]
     def add_multiple(self, src, dest, scalar):

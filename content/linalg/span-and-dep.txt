@@ -351,17 +351,13 @@ graybox:
 ## Checking linear dependence/independence
 
 Using the above result, you can check whether given vectors are linearly dependent or independent
-by repeatedly adding multiples of one vector from another
-until you arrive at vectors that are obviously dependent or independent,
-e.g. they contain mostly zeros.
-You can also change the order of the vectors, if you want;
-that doesn't affect dependence or independence either.
+by repeatedly adding multiples of one vector from another.
 In this context, it is common to write the vectors in a matrix
 so that each row of the matrix represents one vector.
+The goal is to **get as much zeros as possible**,
+so that you can easily see whether the vectors are dependent or independent.
 
-TODO: switch example vectors to be dependent
-
-For example, let's check if the vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, -1)$
+For example, let's check if the vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, 8)$
 are linearly dependent or independent.
 
 python:
@@ -370,24 +366,28 @@ python:
     matrix = MatrixWithRowOperations([
         [2, 4, 4],
         [0, 2, 0],
-        [4, 2, -1],
+        [4, 2, 8],
     ])
     matrix.add_multiple(src=1, dest=2, scalar=-1)
     matrix.add_multiple(src=1, dest=0, scalar=-2)
     matrix.add_multiple(src=0, dest=2, scalar=-2)
-    matrix.add_multiple(src=2, dest=0, scalar=Fraction(4, 9))
     return "$$" + matrix.get_output() + "$$"
 
-The numbers to multiply by are chosen so that we get as much zeros as possible.
-For example, in the first step, I multiplied by 2 because that resulted in
+The numbers to multiply by are chosen so that we get new zeros.
+For example, the $-1$ was chosen because that resulted in
 $\green{2} + (-1)\blue{2} = \magenta0$ in the bottom row.
 
-The resulting vectors $\magenta{(2,0,0)}$, $\blue{(0,2,0)}$ and $\red{(0,0,-9)}$ are linearly independent,
-because none of them is a linear combination of others:
-for example, every linear combination of $\magenta{(2,0,0)}$ and $\blue{(0,2,0)}$
-is on the xy plane, but $\red{(0,0,-9)}$ isn't.
-This means that the original vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, -1)$
-are also linearly independent.
+Because one of the resulting vectors is $\red{(0,0,0)}$,
+it is a linear combination of other vectors:
+$$
+\red{(0,0,0)} = 0\green{(2,0,4)} + 0\blue{(0,2,0)}
+$$
+This means that the resulting vectors $\green{(2,0,4)}$, $0\blue{(0,2,0)}$ and $\red{(0,0,0)}$
+are linearly dependent,
+so the original vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, 8)$
+are also linearly dependent.
+
+comment:
 
 As a second example, let's check whether the vectors
 $(2,4,5)$, $(0,-5,-9)$ and $(3,5,5)$ are linearly dependent or independent.
@@ -407,11 +407,14 @@ python:
     matrix.add_multiple(src=1, dest=2, scalar=Fraction(5, 7))
     return "$$" + matrix.get_output() + "$$"
 
-Again, the resulting vectors $(2,0,0)$, $(0,0,\frac{7}{2})$ and $(0,-1,0)$ are linearly independent,
-so the original vectors are independent too.
-However, we ended up having to calculate with fractions,
-which is error-prone when doing calculations by hand.
+Now the resulting vectors $(2,0,0)$, $(0,0,\frac{7}{2})$ and $(0,-1,0)$ are linearly independent,
+because none of them is a linear combination of others:
+for example, every linear combination of $\magenta{(2,0,0)}$ and $\blue{(0,2,0)}$
+is on the xy plane, but $\red{(0,0,-9)}$ isn't.
+This means that the original vectors are independent too.
 
+We ended up having to calculate with fractions,
+which is error-prone when calculating by hand.
 To avoid fractions, you can multiply a row by 2 whenever a fraction like $\frac{7}{2}$ appears in it.
 This doesn't affect the linear dependence or independence,
 but it can make the calculations easier to do.

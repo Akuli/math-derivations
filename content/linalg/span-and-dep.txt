@@ -1,4 +1,4 @@
-# Defining span, linear dependence and linear independence
+# Span, linear dependence and linear independence
 
 Recall that a linear combination of vectors
 means the result of multiplying each vector by a number (called a coefficient)
@@ -299,41 +299,128 @@ then by counting $\vec u$ on both sides we would get $1 = 0$,
 because there's one $\vec u$ on the left side and none on the right side.
 
 
-## Adding multiples doesn't affect span
-
-Consider the spans
-$$
-\span(\red{\vec u}, \blue{\vec v}) \quad \text{and} \quad
-\span(\red{\vec u}, \green{\vec v + 2\vec u}).
-$$
-Because $\green{\vec v + 2\vec u}$ is a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
-adding it to their span doesn't change anything:
-$$
-\span(\red{\vec u}, \blue{\vec v}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
-$$
-On the other hand,
-$$
-\blue{\vec v} = \green{\vec v + 2\vec u} - 2\red{\vec u}
-$$
-is a linear combination of $\green{\vec v + 2\vec u}$ and $\red{\vec u}$, so
-$$
-\span(\red{\vec u}, \green{\vec v + 2\vec u}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
-$$
-By putting it all together, we get
-$$
-\span(\red{\vec u}, \blue{\vec v}) =
-\span(\red{\vec u}, \green{\vec v + 2\vec u}).
-$$
-This also works with any number instead of 2, and also with more than two vectors.
-
-graybox:
-    The span doesn't change when adding a multiple of one vector to another.
-
-Here a multiple of a vector means the vector multiplied by some number.
-For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
-are multiples of $\red{\vec u}$.
-
-
 ## Adding multiples doesn't affect linear dependence
 
-TODO
+Let $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ be linearly independent vectors.
+If $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ are linearly dependent,
+we get a contradiction:
+<ul><li>
+    If $\red{\vec u}$ was a linear combination of $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$,
+    it would also be some linear combination of $\blue{\vec v}$ and $\green{\vec w}$.
+    This is impossible, because $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent.
+</li><li>
+    If $\green{\vec w} + 2\blue{\vec v}$ was a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
+    it would lead to
+    $$
+    \green{\vec w} + 2\blue{\vec v} = a\red{\vec u} + b\blue{\vec v},
+    $$
+    with some numbers $a$ and $b$,
+    and now counting the vector $\green{\vec w}$ on both sides (see above) would give $1=0$.
+</li><li>
+    If $\blue{\vec v}$ was a linear combination of $\red{\vec u}$ and $\green{\vec w} + 2\blue{\vec v}$,
+    we would have
+    $$
+    \blue{\vec v} = a\red{\vec u} + b(\green{\vec w} + 2\blue{\vec v}).
+    $$
+    We can now count $\green{\vec w}$ on both sides to get $0=b$,
+    which leads to $\blue{\vec v} = a\red{\vec u}$.
+    This is impossible, because now $\blue{\vec v}$ is a linear combination of $\red{\vec u}$ (and $\green{\vec w}$),
+    even though $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly indepepdent.
+</li></ul>
+
+So if $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent,
+then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\green{\vec w}$ are also linearly independent:
+adding $2\blue{\vec v}$ to $\green{\vec w}$ preserves the linear independence.
+
+The same also works with dependent instead of independent:
+if $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly dependent,
+then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ are also linearly dependent.
+They cannot be independent, because if they were,
+then you could add $-2\blue{\vec v}$ to get $\green{\vec w} + 2\blue{\vec v}$ back to just $\green{\vec w}$;
+this would lead to $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ being linearly independent.
+
+These results work with any number instead of $2$
+(in other words, with any multiple of $\blue{\vec v}$ instead of $2\blue{\vec v}$),
+and also with any number (zero or more) vectors instead of one vector $\red{\vec u}$.
+
+graybox:
+    With two or more vectors,
+    adding a multiple of one vector to another doesn't affect linear dependence or independence.
+
+
+## Checking linear dependence/independence
+
+Using the above result, you can check whether given vectors are linearly dependent or independent
+by repeatedly adding multiples of one vector from another
+until you arrive at vectors that are obviously dependent or independent,
+e.g. they contain mostly zeros.
+You can also change the order of the vectors, if you want;
+that doesn't affect dependence or independence either.
+In this context, it is common to write the vectors in a matrix
+so that each row of the matrix represents one vector.
+
+For example, let's check if the vectors $(3, -2, 0)$, $(5, 1, 2)$ and $(-2, 4, 3)$
+are linearly dependent or independent.
+$$
+\begin{align}
+\begin{bmatrix} \red3&\red{-2}&\red0 \\ \blue5&\blue1&\blue2 \\ \green{-2}&\green4&\green3 \end{bmatrix}
+&\to\begin{bmatrix} \red3&\red{-2}&\red0 \\ \blue5&\blue1&\blue2 \\ \green{-2}+2\cdot\red3&\green4+2\red{(-2)}&\green3+2\cdot\red0 \end{bmatrix}
+=   \begin{bmatrix} \red3&\red{-2}&\red0 \\ \blue5&\blue1&\blue2 \\ \magenta4&\magenta0&\magenta3 \end{bmatrix} \\
+&\to\begin{bmatrix} \red3&\red{-2}&\red0 \\ \blue5+\frac{1}{2}\red3&\blue1+\frac{1}{2}\red{(-2)}&\blue2+\frac{1}{2}\red0 \\ \magenta4&\magenta0&\magenta3 \end{bmatrix}
+=   \begin{bmatrix} \red3&\red{-2}&\red0 \\ \green{\frac{13}{2}}&\green0&\green2 \\ \magenta4&\magenta0&\magenta3 \end{bmatrix} \\
+&\to\begin{bmatrix} \red3&\red{-2}&\red0 \\ \green{\frac{13}{2}}&\green0&\green2 \\ \magenta4 + (-\frac{3}{2})\green{\frac{13}{2}}&\magenta0 + (-\frac{3}{2})\green0&\magenta3 + (-\frac{3}{2})\green2 \end{bmatrix}
+=   \begin{bmatrix} \red3&\red{-2}&\red0 \\ \green{\frac{13}{2}}&\green0&\green2 \\ \blue{-\frac{23}{4}}&\blue0&\blue0 \end{bmatrix} \\
+&\to\begin{bmatrix} \red3&\red{-2}&\red0 \\ \green{\frac{13}{2}}+\frac{26}{23}\blue{\left(-\frac{23}{4}\right)}&\green0+\frac{26}{23}\blue0&\green2+\frac{26}{23}\blue0 \\ \blue{-\frac{23}{4}}&\blue0&\blue0 \end{bmatrix}
+=   \begin{bmatrix} \red3&\red{-2}&\red0 \\ \magenta0&\magenta0&\magenta2 \\ \blue{-\frac{23}{4}}&\blue0&\blue0 \end{bmatrix} \\
+&\to\begin{bmatrix} \red3+\frac{12}{23}\blue{\left( -\frac{23}{4} \right)}&\red{-2}+\frac{12}{23}\blue0&\red0+\frac{12}{23}\blue0 \\ \magenta0&\magenta0&\magenta2 \\ \blue{-\frac{23}{4}}&\blue0&\blue0 \end{bmatrix}
+=   \begin{bmatrix} \green0&\green{-2}&\green0 \\ \magenta0&\magenta0&\magenta2 \\ \blue{-\frac{23}{4}}&\blue0&\blue0 \end{bmatrix}
+\end{align}
+$$
+The resulting vectors $\green{(0,-2,0)}$, $\magenta{(0,0,2)}$ and $\blue{(-23/4,0,0)}$ are linearly independent,
+because none of them is a linear combination of others:
+for example, every linear combination of $\green{(0,-2,0)}$ and $\magenta{(0,0,2)}$
+starts with zero, but $\blue{(-23/4,0,0)}$ doesn't.
+This means that the original vectors $(3, -2, 0)$, $(5, 1, 2)$ and $(-2, 4, 3)$
+are also linearly independent.
+
+As you can see, this easily results in a mess of fractions.
+To avoid it, you can at any time multiply a row by a nonzero number;
+this doesn't affect the linear dependence or independence.
+For example, I could have multiplied the row $\green{(\frac{13}{2},0,2)}$ by 2
+to get $(13,0,4)$.
+
+
+comment:
+    ## Adding multiples doesn't affect span
+
+    Consider the spans
+    $$
+    \span(\red{\vec u}, \blue{\vec v}) \quad \text{and} \quad
+    \span(\red{\vec u}, \green{\vec v + 2\vec u}).
+    $$
+    Because $\green{\vec v + 2\vec u}$ is a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
+    adding it to their span doesn't change anything:
+    $$
+    \span(\red{\vec u}, \blue{\vec v}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+    $$
+    On the other hand,
+    $$
+    \blue{\vec v} = \green{\vec v + 2\vec u} - 2\red{\vec u}
+    $$
+    is a linear combination of $\green{\vec v + 2\vec u}$ and $\red{\vec u}$, so
+    $$
+    \span(\red{\vec u}, \green{\vec v + 2\vec u}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+    $$
+    By putting it all together, we get
+    $$
+    \span(\red{\vec u}, \blue{\vec v}) =
+    \span(\red{\vec u}, \green{\vec v + 2\vec u}).
+    $$
+    This also works with any number instead of 2, and also with more than two vectors.
+
+    graybox:
+        The span doesn't change when adding a multiple of one vector to another.
+
+    Here a multiple of a vector means the vector multiplied by some number.
+    For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
+    are multiples of $\red{\vec u}$.

@@ -363,87 +363,20 @@ For example, let's check if the vectors $(3, -2, 0)$, $(5, 1, 2)$ and $(-2, 4, 3
 are linearly dependent or independent.
 
 python:
-    all_colors = [
-        r'\red{%s}'.__mod__,
-        r'\blue{%s}'.__mod__,
-        r'\green{%s}'.__mod__,
-        r'\magenta{%s}'.__mod__,
-    ]
-    rows = [
+    from fractions import Fraction as F
+    from linalg_utils import MatrixWithRowOperations
+
+    matrix = MatrixWithRowOperations([
         [3, -2, 0],
         [5, 1, 2],
         [-2, 4, 3],
-    ]
-    current_colors = all_colors[:3]
-    output = []
-
-    def append_matrix_to_output(matrix):
-        lines = []
-        for index, row in enumerate(matrix):
-            line = " " * 4 + " & ".join(row)
-            if index < len(matrix):
-                line += r" \\"
-            lines.append(line)
-
-        lines.insert(0, r"\begin{bmatrix}")
-        lines.append(r"\end{bmatrix}")
-        output.append("\n".join(lines))
-
-    def stringify(num, parens=False):
-        string = str(num)
-        if "/" in string:
-            string = r"\frac{%s}{%s}" % (abs(num).numerator, abs(num).denominator)
-            if num < 0:
-                string = "-" + string
-        if num < 0 and parens:
-            return "(" + string + ")"
-        return string
-
-    def stringify_multiplication(a, b, b_color=(lambda x: x)):
-        if a >= 0 and b >= 0 and a == int(a) and b == int(b):
-            return rf"{a} \cdot {b_color(b)}"
-        return stringify(a, parens=True) + b_color(stringify(b, parens=True))
-
-    def append_current_state_to_output():
-        append_matrix_to_output([[color(stringify(v)) for v in row] for color, row in zip(current_colors, rows)])
-
-    # rows[dest] += scalar*rows[src]
-    def add_multiple(src, dest, scalar):
-        assert src != dest
-        output.append(r'&\to')
-        [new_color] = set(all_colors) - set(current_colors)
-        append_matrix_to_output([
-            [
-                color(stringify(v)) + " + " + stringify_multiplication(
-                    scalar, s, current_colors[src]
-                )
-                for s, v in zip(rows[src], row)
-            ]
-            if y == dest
-            else [color(stringify(v)) for v in row]
-            for y, (color, row) in enumerate(zip(current_colors, rows))
-        ])
-
-        rows[dest] = [a + scalar*b for a, b in zip(rows[dest], rows[src])]
-        current_colors[dest] = new_color
-        output.append('=')
-        append_current_state_to_output()
-        output.append(r'\\')
-
-    append_current_state_to_output()
-    from fractions import Fraction as F
-    add_multiple(src=0, dest=2, scalar=2)
-    add_multiple(src=0, dest=1, scalar=F(1,2))
-    add_multiple(src=1, dest=2, scalar=F(-3,2))
-    add_multiple(src=2, dest=1, scalar=F(26,23))
-    add_multiple(src=2, dest=0, scalar=F(12,23))
-
-    assert output[-1] == r'\\'
-    del output[-1]
-
-    output.insert(0, r"$$ \begin{align}")
-    output.append("\end{align} $$")
-    return "\n".join(output)
+    ])
+    matrix.add_multiple(src=0, dest=2, scalar=2)
+    matrix.add_multiple(src=0, dest=1, scalar=F(1,2))
+    matrix.add_multiple(src=1, dest=2, scalar=F(-3,2))
+    matrix.add_multiple(src=2, dest=1, scalar=F(26,23))
+    matrix.add_multiple(src=2, dest=0, scalar=F(12,23))
+    return "$$" + matrix.get_output() + "$$"
 
 The resulting vectors $\green{(0,-2,0)}$, $\magenta{(0,0,2)}$ and $\blue{(-23/4,0,0)}$ are linearly independent,
 because none of them is a linear combination of others:

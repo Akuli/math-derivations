@@ -375,11 +375,12 @@ stylesheet">
                     I: '\\vec{i}',
                     J: '\\vec{j}',
                     K: '\\vec{k}',
-                    // darkred is too dark, red is too bright
+                    // colors chosen so that they are distinguishable when together
                     red: [ "{\\color{##c00}{#1}}", 1 ],
                     blue: [ "{\\color{blue}{#1}}", 1 ],
                     green: [ "{\\color{green}{#1}}", 1 ],
                     magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                    darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
                 }
             }
         };

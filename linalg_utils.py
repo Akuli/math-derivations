@@ -97,5 +97,7 @@ class MatrixWithRowOperations:
         self._output.append(r'\\')
 
     def get_output(self):
-        assert self._output[-1] == r'\\'
-        return r"\begin{align}" + "\n" + "\n".join(self._output[:-1]) + "\n" + r"\end{align}"
+        output = self._output.copy()
+        if output[-1] == '\\':
+            output.pop()
+        return r"\begin{align}" + "\n" + "\n".join(output) + "\n" + r"\end{align}"

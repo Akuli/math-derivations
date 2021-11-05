@@ -359,60 +359,84 @@ that doesn't affect dependence or independence either.
 In this context, it is common to write the vectors in a matrix
 so that each row of the matrix represents one vector.
 
-For example, let's check if the vectors $(3, -2, 0)$, $(5, 1, 2)$ and $(-2, 4, 3)$
+TODO: switch example vectors to be dependent
+
+For example, let's check if the vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, -1)$
 are linearly dependent or independent.
 
 python:
-    from fractions import Fraction as F
+    from fractions import Fraction
     from linalg_utils import MatrixWithRowOperations
     matrix = MatrixWithRowOperations([
-        [3, -2, 0],
-        [5, 1, 2],
-        [-2, 4, 3],
+        [2, 4, 4],
+        [0, 2, 0],
+        [4, 2, -1],
     ])
-    matrix.add_multiple(src=0, dest=2, scalar=2)
-    matrix.add_multiple(src=0, dest=1, scalar=F(1,2))
-    matrix.add_multiple(src=1, dest=2, scalar=F(-3,2))
-    matrix.add_multiple(src=2, dest=1, scalar=F(26,23))
-    matrix.add_multiple(src=2, dest=0, scalar=F(12,23))
+    matrix.add_multiple(src=1, dest=2, scalar=-1)
+    matrix.add_multiple(src=1, dest=0, scalar=-2)
+    matrix.add_multiple(src=0, dest=2, scalar=-2)
+    matrix.add_multiple(src=2, dest=0, scalar=Fraction(4, 9))
     return "$$" + matrix.get_output() + "$$"
 
 The numbers to multiply by are chosen so that we get as much zeros as possible.
 For example, in the first step, I multiplied by 2 because that resulted in
-$\green{4} + 2\red{(-2)} = \magenta0$ in the bottom row.
+$\green{2} + (-1)\blue{2} = \magenta0$ in the bottom row.
 
-The resulting vectors $\green{(0,-2,0)}$, $\magenta{(0,0,2)}$ and $\blue{(-23/4,0,0)}$ are linearly independent,
+The resulting vectors $\magenta{(2,0,0)}$, $\blue{(0,2,0)}$ and $\red{(0,0,-9)}$ are linearly independent,
 because none of them is a linear combination of others:
-for example, every linear combination of $\green{(0,-2,0)}$ and $\magenta{(0,0,2)}$
-starts with zero, but $\blue{(-23/4,0,0)}$ doesn't.
-This means that the original vectors $(3, -2, 0)$, $(5, 1, 2)$ and $(-2, 4, 3)$
+for example, every linear combination of $\magenta{(2,0,0)}$ and $\blue{(0,2,0)}$
+is on the xy plane, but $\red{(0,0,-9)}$ isn't.
+This means that the original vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, -1)$
 are also linearly independent.
 
-As you can see, this easily turns into a mess of fractions.
-To avoid it, you can at any time multiply a row by a nonzero number;
-this doesn't affect the linear dependence or independence.
-For example, when you get a row like $\green{(\frac{13}{2},0,2)}$,
-you can multiply it by 2 to get $\blue{(13,0,4)}$ instead.
+As a second example, let's check whether the vectors
+$(2,4,5)$, $(0,-5,-9)$ and $(3,5,5)$ are linearly dependent or independent.
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [2, 4, 5],
+        [0, -5, -9],
+        [3, 5, 5],
+    ])
+    matrix.add_multiple(src=0, dest=2, scalar=Fraction(-3,2))
+    matrix.add_multiple(src=2, dest=0, scalar=4)
+    matrix.add_multiple(src=2, dest=1, scalar=-5)
+    matrix.add_multiple(src=1, dest=0, scalar=Fraction(10, 7))
+    matrix.add_multiple(src=1, dest=2, scalar=Fraction(5, 7))
+    return "$$" + matrix.get_output() + "$$"
+
+Again, the resulting vectors $(2,0,0)$, $(0,0,\frac{7}{2})$ and $(0,-1,0)$ are linearly independent,
+so the original vectors are independent too.
+However, we ended up having to calculate with fractions,
+which is error-prone when doing calculations by hand.
+
+To avoid fractions, you can multiply a row by 2 whenever a fraction like $\frac{7}{2}$ appears in it.
+This doesn't affect the linear dependence or independence,
+but it can make the calculations easier to do.
+The same works with any other nonzero number instead of 2.
 Here's the same calculation again, but with this trick in use:
 
 python:
-    from fractions import Fraction as F
+    from fractions import Fraction
     from linalg_utils import MatrixWithRowOperations
     matrix = MatrixWithRowOperations([
-        [3, -2, 0],
-        [5, 1, 2],
-        [-2, 4, 3],
+        [2, 4, 5],
+        [0, -5, -9],
+        [3, 5, 5],
     ])
-    matrix.add_multiple(src=0, dest=2, scalar=2)
-    matrix.add_multiple(src=0, dest=1, scalar=F(1,2))
+    matrix.add_multiple(src=0, dest=2, scalar=Fraction(-3,2))
+    matrix.add_multiple(src=2, dest=0, scalar=4)
+    matrix.multiply_row(2, by=2)
+    matrix.add_multiple(src=2, dest=1, scalar=Fraction(-5, 2))
     matrix.multiply_row(1, by=2)
-    matrix.add_multiple(src=1, dest=2, scalar=F(-3,4))
-    matrix.multiply_row(2, by=F(4,23))
-    matrix.add_multiple(src=2, dest=1, scalar=13)
-    matrix.add_multiple(src=2, dest=0, scalar=3)
+    matrix.multiply_row(1, by=Fraction(1, 7))
+    matrix.add_multiple(src=1, dest=0, scalar=5)
+    matrix.add_multiple(src=1, dest=2, scalar=5)
     return "$$" + matrix.get_output() + "$$"
 
-As you can see, there are more steps, but each step is easier to follow.
+There are now more steps, but each step is easier to follow.
 
 
 comment:

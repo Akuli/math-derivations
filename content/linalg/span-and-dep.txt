@@ -412,8 +412,7 @@ python:
     matrix.add_multiple(src=2, dest=0, scalar=3)
     return "$$" + matrix.get_output() + "$$"
 
-As you can see, there are more steps, but each step is easier to follow,
-because there are no fractions involved.
+As you can see, there are more steps, but each step is easier to follow.
 
 
 comment:

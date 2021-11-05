@@ -304,10 +304,6 @@ Let $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ be linearly independent
 If $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ are linearly dependent,
 we get a contradiction:
 <ul><li>
-    If $\red{\vec u}$ was a linear combination of $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$,
-    it would also be some linear combination of $\blue{\vec v}$ and $\green{\vec w}$.
-    This is impossible, because $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent.
-</li><li>
     If $\green{\vec w} + 2\blue{\vec v}$ was a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
     it would lead to
     $$
@@ -325,10 +321,17 @@ we get a contradiction:
     which leads to $\blue{\vec v} = a\red{\vec u}$.
     This is impossible, because now $\blue{\vec v}$ is a linear combination of $\red{\vec u}$ (and $\green{\vec w}$),
     even though $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly indepepdent.
+</li><li>
+    If $\red{\vec u}$ was a linear combination of $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$,
+    we would have
+    $$
+    \red{\vec u} = a\blue{\vec v} + b(\green{\vec w} + 2\blue{\vec v}).
+    $$
+    By counting $\vec u$ on both sides, we get $1=0$, so this isn't possible either.
 </li></ul>
 
 So if $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent,
-then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\green{\vec w}$ are also linearly independent:
+then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\green{\vec w}$ must also be linearly independent:
 adding $2\blue{\vec v}$ to $\green{\vec w}$ preserves the linear independence.
 
 The same also works with dependent instead of independent:
@@ -340,7 +343,7 @@ this would lead to $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ being li
 
 These results work with any number instead of $2$
 (in other words, with any multiple of $\blue{\vec v}$ instead of $2\blue{\vec v}$),
-and also with any number (zero or more) vectors instead of one vector $\red{\vec u}$.
+and in any span consisting of two or more vectors.
 
 graybox:
     With two or more vectors,

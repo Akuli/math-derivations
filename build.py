@@ -459,6 +459,13 @@ def asymptote(match, filename):
     return html.replace('<img', '<img %s class="asymptote"' % extrainfo, 1)
 
 
+@builder.converter.add_multiliner(r'^python:\n')
+def python(match, filename):
+    namespace = {}
+    exec("def get_the_string():\n" + match.string[match.end():], namespace)
+    return eval("get_the_string()", namespace)
+
+
 @builder.converter.add_multiliner(r'^animation:(.*)\n')
 def animation(match, filename):
     the_id = match.group(1).strip()

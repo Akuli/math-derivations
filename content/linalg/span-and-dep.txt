@@ -378,14 +378,14 @@ python:
 
 The numbers to multiply by are chosen so that we get new zeros.
 For example, the $-1$ was chosen because that resulted in
-$\green{2} + (-1)\blue{2} = \magenta0$ in the bottom row.
+$\magenta{2} + (-1)\blue{2} = \green0$ in the bottom row.
 
 Because one of the resulting vectors is $\red{(0,0,0)}$,
 it is a linear combination of other vectors:
 $$
-\red{(0,0,0)} = 0\green{(2,0,4)} + 0\blue{(0,2,0)}
+\red{(0,0,0)} = 0\darkyellow{(2,0,4)} + 0\blue{(0,2,0)}
 $$
-This means that the resulting vectors $\green{(2,0,4)}$, $0\blue{(0,2,0)}$ and $\red{(0,0,0)}$
+This means that the resulting vectors $\darkyellow{(2,0,4)}$, $\blue{(0,2,0)}$ and $\red{(0,0,0)}$
 are linearly dependent,
 so the original vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, 8)$
 are also linearly dependent.
@@ -408,10 +408,10 @@ python:
     matrix.add_multiple(src=1, dest=2, scalar=Fraction(5, 7))
     return "$$" + matrix.get_output() + "$$"
 
-Now the resulting vectors $(2,0,0)$, $(0,0,\frac{7}{2})$ and $(0,-1,0)$ are linearly independent,
+Now the resulting vectors $\blue{(2,0,0)}$, $\red{(0,0,\frac{7}{2})}$ and $\magenta{(0,-1,0)}$ are linearly independent,
 because none of them is a linear combination of others:
-for example, every linear combination of $\magenta{(2,0,0)}$ and $\blue{(0,2,0)}$
-is on the xy plane, but $\red{(0,0,-9)}$ isn't.
+for example, every linear combination of $\blue{(2,0,0)}$ and $\magenta{(0,-1,0)}$
+is on the xy plane, but $\red{(0,0,\frac{7}{2})}$ isn't.
 This means that the original vectors are independent too.
 
 We ended up having to calculate with fractions,
@@ -431,8 +431,8 @@ python:
         [3, 5, 5],
     ])
     matrix.add_multiple(src=0, dest=2, scalar=Fraction(-3,2))
-    matrix.add_multiple(src=2, dest=0, scalar=4)
     matrix.multiply_row(2, by=2)
+    matrix.add_multiple(src=2, dest=0, scalar=2)
     matrix.add_multiple(src=2, dest=1, scalar=Fraction(-5, 2))
     matrix.multiply_row(1, by=2)
     matrix.multiply_row(1, by=Fraction(1, 7))
@@ -440,7 +440,7 @@ python:
     matrix.add_multiple(src=1, dest=2, scalar=5)
     return "$$" + matrix.get_output() + "$$"
 
-There are now more steps, but each step is easier to follow.
+Now there are more steps, but less fractions.
 
 
 comment:

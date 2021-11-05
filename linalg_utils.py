@@ -2,23 +2,14 @@ import itertools
 
 
 def _stringify(num, parens=False):
-    string = str(num)
+    string = str(abs(num))
     if "/" in string:
         string = r"\frac{%s}{%s}" % (abs(num).numerator, abs(num).denominator)
-        if num < 0:
-            string = "-" + string
+    if num < 0:
+        string = "-" + string
     if num < 0 and parens:
-        return "(" + string + ")"
+        string = fr"\left( {string} \right)"
     return string
-
-
-def _stringify_multiplication(a, b, b_color=(lambda x: x)):
-    # Do not require b to be int, so 1 * 2/3 doesn't show as "1 2/3" which could mean 5/3 or 2/3
-    if a >= 0 and b >= 0 and a == int(a):
-        sep = r" \cdot "
-    else:
-        sep = " "
-    return _stringify(a, parens=True) + sep + b_color(_stringify(b, parens=True))
 
 
 class MatrixWithRowOperations:
@@ -44,22 +35,14 @@ class MatrixWithRowOperations:
             if color not in self._current_colors:
                 return color
 
-    def _append_matrix_to_output(self, matrix):
+    def _append_current_state_to_output(self):
         self._output.append(r"\begin{bmatrix}")
-        for index, row in enumerate(matrix):
-            line = " " * 4 + " & ".join(row)
-            if index < len(matrix):
+        for index, (color, row) in enumerate(zip(self._current_colors, self._rows)):
+            line = " " * 4 + " & ".join(color(_stringify(v)) for v in row)
+            if index < len(self._rows):
                 line += r" \\"
             self._output.append(line)
         self._output.append(r"\end{bmatrix}")
-
-    def _append_current_state_to_output(self):
-        self._append_matrix_to_output(
-            [
-                [color(_stringify(v)) for v in row]
-                for color, row in zip(self._current_colors, self._rows)
-            ]
-        )
 
     # rows[index] *= by
     def multiply_row(self, index, by):
@@ -75,10 +58,7 @@ class MatrixWithRowOperations:
 
         self._output.append(r"\quad")
         self._output.append(new_color(r"\text{new %s}" % self._row_name(index)))
-        if by < 0:
-            self._output.append(r"= \left(%s\right) \cdot " % _stringify(by))
-        else:
-            self._output.append(r"= %s \cdot " % _stringify(by))
+        self._output.append(r"= %s \cdot " % _stringify(by, parens=True))
         self._output.append(old_color(r"\text{old %s}" % self._row_name(index)))
         self._output.append(r'\\')
 
@@ -103,10 +83,7 @@ class MatrixWithRowOperations:
         self._output.append(new_color(r"\text{new %s}" % self._row_name(dest)))
         self._output.append("=")
         self._output.append(old_color(r"\text{old %s}" % self._row_name(dest)))
-        if scalar < 0:
-            self._output.append(r"+ \left(%s\right) \cdot " % _stringify(scalar))
-        else:
-            self._output.append(r"+ %s \cdot " % _stringify(scalar))
+        self._output.append(r"+ %s \cdot " % _stringify(scalar, parens=True))
         self._output.append(self._current_colors[src](r"\text{%s}" % self._row_name(src)))
         self._output.append(r'\\')
 

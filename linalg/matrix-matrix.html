@@ -34,46 +34,27 @@
     <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/animation.css">
 
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-            extensions: ["tex2jax.js"],
-            jax: ["input/TeX", "output/CommonHTML"],
-            tex2jax: {
-              inlineMath: [ ['$','$'] ],
-              displayMath: [ ['$$','$$'] ],
-            },
-            "HTML-CSS": { availableFonts: ["TeX"] },
-            TeX: {
-              Macros: {
-                // awesome, latex inside javascript inside html inside python
-                // https://xkcd.com/1638/
-                bigvec: [ "\\overrightarrow{#1}", 1 ],
-                abs: [ "\\left| {#1} \\right|", 1 ],
-                Span: [ "\\operatorname{span}", 0 ],
-                I: [ "\\vec{i}", 0 ],
-                J: [ "\\vec{j}", 0 ],
-                K: [ "\\vec{k}", 0 ],
-
-                // funny operator name used only in one file
-                rotate: [ "\\operatorname{rotate}", 0 ],
-
-                // darkred is too dark, red is too bright
-                red: [ "\\color{##c00}{#1}", 1 ],
-                blue: [ "\\color{blue}{#1}", 1 ],
-                green: [ "\\color{green}{#1}", 1 ],
-                magenta: [ "\\color{magenta}{#1}", 1 ],
-
-                epsi: [ "\\varepsilon", 0 ],
-                leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
-
-                // binom doesn't work on adder's computer
-                // mybinom works, but it's too tall for inline math
-                mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
-              }
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [ ['$','$'] ],
+                displayMath: [ ['$$','$$'] ],
+                macros: {
+                    span: '\\operatorname{span}',
+                    rotate: '\\operatorname{rotate}',
+                    I: '\\vec{i}',
+                    J: '\\vec{j}',
+                    K: '\\vec{k}',
+                    // darkred is too dark, red is too bright
+                    red: [ "{\\color{##c00}{#1}}", 1 ],
+                    blue: [ "{\\color{blue}{#1}}", 1 ],
+                    green: [ "{\\color{green}{#1}}", 1 ],
+                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                }
             }
-          });
+        };
         </script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
         </head>
 <body>
 <div id="content">
@@ -460,7 +441,7 @@ $$
 \underbrace{
     \begin{bmatrix}\blue 5\\ \blue6\end{bmatrix}
 }_{
-    ~~~2 \times 1 \\ \text{matrix?}
+    \substack{2 \times 1 \\ \text{matrix?}}
 } = \blue5\begin{bmatrix} \red1 \\ \magenta3 \end{bmatrix}
 + \blue6\begin{bmatrix} \red2 \\ \magenta4 \end{bmatrix}
 = \begin{bmatrix} \blue5\cdot\red1 + \blue6\cdot\red2 \\ \blue5\cdot\magenta3 + \blue6\cdot\magenta4 \end{bmatrix}

@@ -252,6 +252,53 @@ comment:
         The span doesn't change if you multiply one of the vectors by a nonzero number.
 
 
+## Counting vectors on both sides
+
+Let $\vec u$, $\vec v$ and $\vec w$ be linearly independent vectors.
+Consider the equation
+$$
+a\vec{u}+b\vec{v}+c\vec{w} = x\vec{u}+y\vec{v}+z\vec{w}.
+$$
+This can be rewritten as
+$$
+(a-x)\vec{u} = (y-b)\vec{v} + (z-c)\vec{w}.
+$$
+We must have $a-x = 0$, because otherwise we could divide by $a-x$, and we would get
+$$
+\vec{u} = \frac{y-b}{a-x}\vec v + \frac{z-c}{a-x}\vec w,
+$$
+which is impossible, because the vectors are linearly indepependent
+and therefore $\vec u$ can't be a linear combination of $\vec v$ and $\vec w$.
+Because $a-x=0$, we must have $a=x$,
+and we similarly get $b=y$ and $c=z$.
+This works the same way with any number ($n$ below) of linearly independent vectors.
+
+graybox:
+    Let $\vec{v_1},\dots,\vec{v_n}$ be linearly independent vectors.
+    If two of their linear combinations produce the same vector,
+    then the coefficients of the two linear combinations must match.
+    In other words, if
+    $$
+    a_1\vec{v_1}+a_2\vec{v_2}+\dots+a_n\vec{v_n} = b_1\vec{v_1}+b_2\vec{v_2}+\dots+b_n\vec{v_n}
+    $$
+    with some coefficients $a_1,\dots,a_n$ and $b_1,\dots,b_n$,
+    then $a_1=b_1$, $a_2=b_2$, and so on.
+
+From now on, I will refer to this as **counting vectors on both sides**,
+because we essentially count how many $\vec{v_1}$'s, $\vec{v_2}$'s etc. there is on each side.
+
+Another way to interpret this result is that
+there can't be multiple ways to write the same vector
+as a linear combination of $\vec{v_1},\dots,\vec{v_n}$,
+because any two ways must in fact be the same way,
+in the sense that they have the same coefficients.
+
+Counting vectors on both sides doesn't work with linearly dependent vectors.
+For example, if $\vec u = 2\vec v + 3\vec w$,
+then by counting $\vec u$ on both sides we would get $1 = 0$,
+because there's one $\vec u$ on the left side and none on the right side.
+
+
 ## Adding multiples doesn't affect span
 
 Consider the spans
@@ -287,6 +334,6 @@ For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
 are multiples of $\red{\vec u}$.
 
 
-## Adding multiples doesn't affect linear dependency
+## Adding multiples doesn't affect linear dependence
 
 TODO

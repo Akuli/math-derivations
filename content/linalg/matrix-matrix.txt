@@ -292,17 +292,6 @@ $$
     \magenta{(\sin(\theta), \cos(\theta))} \cdot \green{(-\sin(\theta), \cos(\theta))}
 \end{bmatrix},
 $$
-
-comment:
-    $$
-    \begin{bmatrix}
-        \red{\cos(\theta)}\blue{\cos(\theta)} + \red{(-\sin(\theta))}\blue{\sin(\theta)} &
-        \red{\cos(\theta)}\green{(-\sin(\theta))} + \red{(-\sin(\theta))}\green{\cos(\theta)} \\
-        \magenta{\sin(\theta)}\blue{\cos(\theta)} + \magenta{\cos(\theta)}\blue{\sin(\theta)} &
-        \magenta{\sin(\theta)}\green{(-\sin(\theta))} + \magenta{\cos(\theta)}\green{\cos(\theta)}
-    \end{bmatrix},
-    $$
-
 which simplifies to
 $$
 \begin{bmatrix}

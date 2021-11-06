@@ -19,51 +19,6 @@ $$
 
 ## Matrix-matrix and number-matrix multiplication
 
-comment:
-    Multiplying a matrix by a number $c$ makes all vectors get multiplied by $c$ in matrix-vector multiplications.
-    For example:
-    $$
-    \begin{align}
-    \begin{bmatrix} c\red1&c\blue3 \\ c\red2&c\blue4 \end{bmatrix}
-    \begin{bmatrix} x \\ y \end{bmatrix}
-    &= x\begin{bmatrix} c\red1 \\ c\red2 \end{bmatrix}
-    + y\begin{bmatrix} c\blue3 \\ c\blue4 \end{bmatrix} \\
-    &= c\underbrace{\left( x\begin{bmatrix} \red1 \\ \red2 \end{bmatrix}
-    + y\begin{bmatrix} \blue3 \\ \blue4 \end{bmatrix} \right)
-    }_{\text{matrix multiplication} \\ \qquad \text{without $c$}}
-    \end{align}
-    $$
-
-    Recall that a matrix describes a linear function,
-    and any linear function satisfies $f(c\vec v)=cf(\vec v)$,
-    where $c$ is a number and $\vec v$ is a vector.
-    For a matrix $A$, this becomes $A(c\vec v) = c(A\vec v)$.
-    Think of this as preserving the extra $c$:
-    if the input is multiplied by $c$,
-    then the $c$ will also be present in the output.
-
-    Now consider what each of these matrices does to a vector:
-    <ul><li>
-        $c(AB)$: just like $AB$, but the resulting vector is multiplied by $c$
-    </li><li>
-        $(cA)B$: just like $AB$, but the left matrix multiplies vectors by $c$
-    </li><li>
-        $(Ac)B$: same as above
-    </li><li>
-        $A(cB)$: right matrix multiplies vectors by $c$, left matrix preserves the $c$
-    </li><li>
-        $A(Bc)$: same as above
-    </li><li>
-        $(AB)c$: same as $c(AB)$
-    </li></ul>
-
-    All of the above matrices do the same thing to any vector:
-    exactly what $AB$ would do, but also a multiplication by $c$.
-    Therefore they must all be the same matrix.
-    For example, if you multiply the matrices with a vector like $(0,1,0,0,\dots,0)$,
-    you get the second column of each matrix,
-    which in each case is the same vector.
-
 Recall that
 [each number in $AB$ is a dot product of a row from $A$ and a column from $B$](matrix-matrix.html#a-different-way-to-multiply).
 For example:
@@ -101,14 +56,6 @@ so we get the following result:
 graybox:
     If $A$ and $B$ are matrices and $AB$ is defined,
     then $(cA)B=A(cB)=c(AB)$.
-
-comment:
-    graybox:
-        If the matrix multiplication $AB$ is defined and $c$ is a number,
-        then
-        $$
-        c(AB)=(cA)B=(Ac)B=A(cB)=A(Bc)=(AB)c.
-        $$
 
 This is different from how matrix multiplication works in general:
 even though $AB$ is not necessarily $BA$, you can put the $c$ wherever you want,

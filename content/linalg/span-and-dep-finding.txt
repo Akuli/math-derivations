@@ -48,48 +48,15 @@ then you could add $-2\blue{\vec v}$ to get $\green{\vec w} + 2\blue{\vec v}$ ba
 this would lead to $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ being linearly independent.
 
 These results work with any number instead of $2$
-(in other words, with any multiple of $\blue{\vec v}$ instead of $2\blue{\vec v}$),
-and in any span consisting of two or more vectors.
+(in other words, with any multiple of $\blue{\vec v}$ instead of $2\blue{\vec v}$).
 
 graybox:
     With two or more vectors,
     adding a multiple of one vector to another doesn't affect linear dependence or independence.
 
-
-comment:
-    ## Adding multiples doesn't affect span
-
-    Consider the spans
-    $$
-    \span(\red{\vec u}, \blue{\vec v}) \quad \text{and} \quad
-    \span(\red{\vec u}, \green{\vec v + 2\vec u}).
-    $$
-    Because $\green{\vec v + 2\vec u}$ is a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
-    adding it to their span doesn't change anything:
-    $$
-    \span(\red{\vec u}, \blue{\vec v}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
-    $$
-    On the other hand,
-    $$
-    \blue{\vec v} = \green{\vec v + 2\vec u} - 2\red{\vec u}
-    $$
-    is a linear combination of $\green{\vec v + 2\vec u}$ and $\red{\vec u}$, so
-    $$
-    \span(\red{\vec u}, \green{\vec v + 2\vec u}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
-    $$
-    By putting it all together, we get
-    $$
-    \span(\red{\vec u}, \blue{\vec v}) =
-    \span(\red{\vec u}, \green{\vec v + 2\vec u}).
-    $$
-    This also works with any number instead of 2, and also with more than two vectors.
-
-    graybox:
-        The span doesn't change when adding a multiple of one vector to another.
-
-    Here a multiple of a vector means the vector multiplied by some number.
-    For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
-    are multiples of $\red{\vec u}$.
+Here a multiple of a vector means the vector multiplied by some number.
+For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
+are multiples of $\red{\vec u}$.
 
 
 comment:
@@ -163,8 +130,43 @@ are linearly dependent,
 so the original vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, 8)$
 are also linearly dependent.
 
-As a second example, let's check whether the vectors
-$(2,4,5)$, $(0,-5,-9)$ and $(3,5,5)$ are linearly dependent or independent.
+
+## Finding the span
+
+Consider the spans
+$$
+\span(\red{\vec u}, \blue{\vec v}) \quad \text{and} \quad
+\span(\red{\vec u}, \green{\vec v + 2\vec u}).
+$$
+Because $\green{\vec v + 2\vec u}$ is a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
+adding it to their span doesn't change anything:
+$$
+\span(\red{\vec u}, \blue{\vec v}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+$$
+On the other hand,
+$$
+\blue{\vec v} = \green{\vec v + 2\vec u} - 2\red{\vec u}
+$$
+is a linear combination of $\green{\vec v + 2\vec u}$ and $\red{\vec u}$, so
+$$
+\span(\red{\vec u}, \green{\vec v + 2\vec u}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+$$
+By putting it all together, we get
+$$
+\span(\red{\vec u}, \blue{\vec v}) =
+\span(\red{\vec u}, \green{\vec v + 2\vec u}).
+$$
+This also works with any number instead of 2, and also with more than two vectors.
+
+graybox:
+    The span doesn't change when adding a multiple of one vector to another.
+
+This means that you can find a span in the exact same way
+as you would check for linear dependence or independence (see above):
+add multiples of the vectors to each other
+until it is clear what the span will be.
+
+For example, let's find $\span((2,4,5), (0,-5,-9), (3,5,5))$:
 
 python:
     from fractions import Fraction
@@ -181,18 +183,42 @@ python:
     matrix.add_multiple(src=1, dest=2, scalar=Fraction(5, 7))
     return "$$" + matrix.get_output() + "$$"
 
-Now the resulting vectors $\blue{(2,0,0)}$, $\red{(0,0,\frac{7}{2})}$ and $\magenta{(0,-1,0)}$ are linearly independent,
-because none of them is a linear combination of others:
-for example, every linear combination of $\blue{(2,0,0)}$ and $\magenta{(0,-1,0)}$
-is on the xy plane, but $\red{(0,0,\frac{7}{2})}$ isn't.
-This means that the original vectors are independent too.
+This calculation shows two things:
+<ul><li>
+    The vectors are linearly independent,
+    because the resulting vectors
+    $\blue{(2,0,0)}$, $\red{(0,0,\frac{7}{2})}$ and $\magenta{(0,-1,0)}$ are linearly independent.
+    None of them is a linear combination of others;
+    for example, any linear combination of $\blue{(2,0,0)}$ and $\magenta{(0,-1,0)}$ is on the xy plane,
+    but $\red{(0,0,\frac{7}{2})}$ isn't.
+</li><li>
+    The span of the vectors is
+    $$
+    \span((2,4,5), (0,-5,-9), (3,5,5))
+    = \span(\blue{(2,0,0)}, \red{(0,0,\frac{7}{2})}, \magenta{(0,-1,0)}),
+    $$
+    which is the set of all 3D vectors,
+    because any 3D vector $(x,y,z)$ can be written as
+    $$
+    (x,y,z) = \frac{x}{2}\blue{(2,0,0)} + \frac{2y}{7}\red{(0,0,\frac{7}{2})} - z\magenta{(0,-1,0)}.
+    $$
+</li></ul>
 
-We ended up having to calculate with fractions,
+
+## Multiplying a row
+
+In the previous example, we ended up having to calculate with fractions,
 which is error-prone when calculating by hand.
 To avoid fractions, you can multiply a row by 2 whenever a fraction like $\frac{7}{2}$ appears in it.
-This doesn't affect the linear dependence or independence,
-but it can make the calculations easier to do.
 The same works with any other nonzero number instead of 2.
+
+This doesn't affect the span:
+because the span consists of all linear combinations,
+the vectors get multiplied by all numbers anyway,
+and the original length of the vectors doesn't matter.
+The same goes for linear dependence and independence.
+Let me know if this isn't clear to you and you would like to see more details.
+
 Here's the same calculation again, but with this trick in use:
 
 python:
@@ -214,6 +240,10 @@ python:
     return "$$" + matrix.get_output() + "$$"
 
 Now there are more steps, but less fractions.
+
+Note that multiplying a row by a number is optional,
+and you don't have to do it if you don't want to.
+I introduce it here only to avoid dealing with annoying fractions.
 
 
 ## Maximum number of independent vectors
@@ -292,7 +322,7 @@ To ensure that the first column has the needed zeros, we can do this:
     If the first row starts with $x$ and another row starts with $y$,
     we can set
     $$
-    \text{new other row} = \text{old other row} + \left(-\frac y x \right)\text{first row}.
+    \text{new other row} = \text{old other row} + \left(-\frac y x \right) \cdot \text{first row}.
     $$
     This way, the first number in the second row becomes
     $$
@@ -302,7 +332,7 @@ To ensure that the first column has the needed zeros, we can do this:
     because we needed to divide by $x$.
 </li><li>
     If the first row starts with zero but some other row doesn't,
-    we can change the order of the rows so that the row not starting with 0 is first,
+    we can change the order of the rows so that the row not starting with zero is first,
     and then proceed as above.
     Swapping the vectors doesn't affect linear dependence or independence.
 </li><li>
@@ -312,8 +342,8 @@ To ensure that the first column has the needed zeros, we can do this:
 
 Once this is done, we can ignore the first row and first column of the matrix,
 and repeat the same process with the remaining two columns and three rows.
-Because these rows already have zeros in the left column,
-adding multiples of them to each other won't change the left column.
+Because these rows already have zeros in the leftmost column,
+adding multiples of them to each other won't change the leftmost column.
 After repeating this for all columns,
 ignoring one more row every time we move on to the next column,
 we have the zeros.

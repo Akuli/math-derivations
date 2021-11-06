@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Span, linear dependence and linear independence
+<title>Defining span, linear dependence and linear independence
  - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
@@ -46,11 +46,12 @@
                     I: '\\vec{i}',
                     J: '\\vec{j}',
                     K: '\\vec{k}',
-                    // darkred is too dark, red is too bright
+                    // colors chosen so that they are distinguishable when together
                     red: [ "{\\color{##c00}{#1}}", 1 ],
                     blue: [ "{\\color{blue}{#1}}", 1 ],
                     green: [ "{\\color{green}{#1}}", 1 ],
                     magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                    darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
                 }
             }
         };
@@ -170,10 +171,10 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep.html">Span and linear dependence</a>
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="span-and-dep-finding.html">Finding span and checking linear (in)dependence</a>
         </div>
         </div>
-<h1 id="span-linear-dependence-and-linear-independence">Span, linear dependence and linear independence<a class="headerlink" href="#span-linear-dependence-and-linear-independence" title="Link to this title">¶</a></h1><p>Recall that a linear combination of vectors
+<h1 id="defining-span-linear-dependence-and-linear-independence">Defining span, linear dependence and linear independence<a class="headerlink" href="#defining-span-linear-dependence-and-linear-independence" title="Link to this title">¶</a></h1><p>Recall that a linear combination of vectors
 means the result of multiplying each vector by a number (called a coefficient)
 and adding the resulting vectors.
 For example, $(2,3) + 4(5,6) - 7(8,9)$ is
@@ -353,23 +354,28 @@ that is, if no vector can be written as a linear combination of others.
 <p><img width="230" height="215" class="asymptote" src="../asymptote/89d92468cfb838ed07c4a456a77f2100.svg" /></p><p></li></ul>
 </p>
 
-<h2 id="counting-vectors-on-both-sides">Counting vectors on both sides<a class="headerlink" href="#counting-vectors-on-both-sides" title="Link to this title">¶</a></h2><p>Let $\vec u$, $\vec v$ and $\vec w$ be linearly independent vectors.
+<h2 id="counting-vectors-on-both-sides">Counting vectors on both sides<a class="headerlink" href="#counting-vectors-on-both-sides" title="Link to this title">¶</a></h2><p>We now have two ways to look at linear dependence and independence:
+on the one hand, linear dependence means that some vector is a linear combination of others,
+but on the other hand, it means that some vector can be removed without affecting the span.
+We introduce one more way to think about linear independence.</p>
+
+<p>Let $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ be linearly independent vectors.
 Consider the equation
 $$
-a\vec{u}+b\vec{v}+c\vec{w} = x\vec{u}+y\vec{v}+z\vec{w}.
+\red{a\vec{u}}+\blue{b\vec{v}}+\green{c\vec{w}} = \red{x\vec{u}}+\blue{y\vec{v}}+\green{z\vec{w}}.
 $$
 This can be rewritten as
 $$
-(a-x)\vec{u} = (y-b)\vec{v} + (z-c)\vec{w}.
+\red{(a-x)\vec{u}} = \blue{(y-b)\vec{v}} + \green{(z-c)\vec{w}}.
 $$
-We must have $a-x = 0$, because otherwise we could divide by $a-x$, and we would get
+We must have $\red{a-x} = 0$, because otherwise we could divide by $a-x$, and we would get
 $$
-\vec{u} = \frac{y-b}{a-x}\vec v + \frac{z-c}{a-x}\vec w,
+\red{\vec u} = \frac{\blue{y-b}}{\red{a-x}}\blue{\vec v} + \frac{\green{z-c}}{\red{a-x}}\green{\vec w},
 $$
 which is impossible, because the vectors are linearly indepependent
-and therefore $\vec u$ can't be a linear combination of $\vec v$ and $\vec w$.
-Because $a-x=0$, we must have $a=x$,
-and we similarly get $b=y$ and $c=z$.
+and therefore $\red{\vec u}$ can't be a linear combination of $\blue{\vec v}$ and $\green{\vec w}$.
+Because $\red{a-x}=0$, we must have $\red a=\red x$,
+and we similarly get $\blue b=\blue y$ and $\green c=\green z$.
 This works the same way with any number ($n$ below) of linearly independent vectors.</p>
 
 <div class="box graybox"><p>Let $\vec{v_1},\dots,\vec{v_n}$ be linearly independent vectors.
@@ -396,252 +402,6 @@ in the sense that they have the same coefficients.</p>
 For example, if $\vec u = 2\vec v + 3\vec w$,
 then by counting $\vec u$ on both sides we would get $1 = 0$,
 because there's one $\vec u$ on the left side and none on the right side.
-</p>
-
-<h2 id="adding-multiples-doesn-t-affect-linear-dependence">Adding multiples doesn't affect linear dependence<a class="headerlink" href="#adding-multiples-doesn-t-affect-linear-dependence" title="Link to this title">¶</a></h2><p>Let $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ be linearly independent vectors.
-If $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ are linearly dependent,
-we get a contradiction:
-<ul><li>
-    If $\red{\vec u}$ was a linear combination of $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$,
-    it would also be some linear combination of $\blue{\vec v}$ and $\green{\vec w}$.
-    This is impossible, because $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent.
-</li><li>
-    If $\green{\vec w} + 2\blue{\vec v}$ was a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
-    it would lead to
-    $$
-    \green{\vec w} + 2\blue{\vec v} = a\red{\vec u} + b\blue{\vec v},
-    $$
-    with some numbers $a$ and $b$,
-    and now counting the vector $\green{\vec w}$ on both sides (see above) would give $1=0$.
-</li><li>
-    If $\blue{\vec v}$ was a linear combination of $\red{\vec u}$ and $\green{\vec w} + 2\blue{\vec v}$,
-    we would have
-    $$
-    \blue{\vec v} = a\red{\vec u} + b(\green{\vec w} + 2\blue{\vec v}).
-    $$
-    We can now count $\green{\vec w}$ on both sides to get $0=b$,
-    which leads to $\blue{\vec v} = a\red{\vec u}$.
-    This is impossible, because now $\blue{\vec v}$ is a linear combination of $\red{\vec u}$ (and $\green{\vec w}$),
-    even though $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly indepepdent.
-</li></ul></p>
-
-<p>So if $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent,
-then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\green{\vec w}$ are also linearly independent:
-adding $2\blue{\vec v}$ to $\green{\vec w}$ preserves the linear independence.</p>
-
-<p>The same also works with dependent instead of independent:
-if $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly dependent,
-then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ are also linearly dependent.
-They cannot be independent, because if they were,
-then you could add $-2\blue{\vec v}$ to get $\green{\vec w} + 2\blue{\vec v}$ back to just $\green{\vec w}$;
-this would lead to $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ being linearly independent.</p>
-
-<p>These results work with any number instead of $2$
-(in other words, with any multiple of $\blue{\vec v}$ instead of $2\blue{\vec v}$),
-and also with any number (zero or more) vectors instead of one vector $\red{\vec u}$.</p>
-
-<div class="box graybox"><p>With two or more vectors,
-adding a multiple of one vector to another doesn't affect linear dependence or independence.
-</p>
-
-</div><h2 id="checking-linear-dependence-independence">Checking linear dependence/independence<a class="headerlink" href="#checking-linear-dependence-independence" title="Link to this title">¶</a></h2><p>Using the above result, you can check whether given vectors are linearly dependent or independent
-by repeatedly adding multiples of one vector from another
-until you arrive at vectors that are obviously dependent or independent,
-e.g. they contain mostly zeros.
-You can also change the order of the vectors, if you want;
-that doesn't affect dependence or independence either.
-In this context, it is common to write the vectors in a matrix
-so that each row of the matrix represents one vector.</p>
-
-<p>For example, let's check if the vectors $(3, -2, 0)$, $(5, 1, 2)$ and $(-2, 4, 3)$
-are linearly dependent or independent.</p>
-
-$$\begin{align}
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{5} & \blue{1} & \blue{2} \\
-    \green{-2} & \green{4} & \green{3} \\
-\end{bmatrix}
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{5} & \blue{1} & \blue{2} \\
-    \green{-2} + 2 \cdot \red{3} & \green{4} + 2 \red{(-2)} & \green{3} + 2 \cdot \red{0} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{5} & \blue{1} & \blue{2} \\
-    \magenta{4} & \magenta{0} & \magenta{3} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{5} + \frac{1}{2} \red{3} & \blue{1} + \frac{1}{2} \red{(-2)} & \blue{2} + \frac{1}{2} \red{0} \\
-    \magenta{4} & \magenta{0} & \magenta{3} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \green{\frac{13}{2}} & \green{0} & \green{2} \\
-    \magenta{4} & \magenta{0} & \magenta{3} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \green{\frac{13}{2}} & \green{0} & \green{2} \\
-    \magenta{4} + (-\frac{3}{2}) \green{\frac{13}{2}} & \magenta{0} + (-\frac{3}{2}) \green{0} & \magenta{3} + (-\frac{3}{2}) \green{2} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \green{\frac{13}{2}} & \green{0} & \green{2} \\
-    \blue{-\frac{23}{4}} & \blue{0} & \blue{0} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \green{\frac{13}{2}} + \frac{26}{23} \blue{(-\frac{23}{4})} & \green{0} + \frac{26}{23} \blue{0} & \green{2} + \frac{26}{23} \blue{0} \\
-    \blue{-\frac{23}{4}} & \blue{0} & \blue{0} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \magenta{0} & \magenta{0} & \magenta{2} \\
-    \blue{-\frac{23}{4}} & \blue{0} & \blue{0} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} + \frac{12}{23} \blue{(-\frac{23}{4})} & \red{-2} + \frac{12}{23} \blue{0} & \red{0} + \frac{12}{23} \blue{0} \\
-    \magenta{0} & \magenta{0} & \magenta{2} \\
-    \blue{-\frac{23}{4}} & \blue{0} & \blue{0} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \green{0} & \green{-2} & \green{0} \\
-    \magenta{0} & \magenta{0} & \magenta{2} \\
-    \blue{-\frac{23}{4}} & \blue{0} & \blue{0} \\
-\end{bmatrix}
-\end{align}$$<p>The numbers to multiply by are chosen so that we get as much zeros as possible.
-For example, in the first step, I multiplied by 2 because that resulted in
-$\green{4} + 2\red{(-2)} = \magenta0$ in the bottom row.</p>
-
-<p>The resulting vectors $\green{(0,-2,0)}$, $\magenta{(0,0,2)}$ and $\blue{(-23/4,0,0)}$ are linearly independent,
-because none of them is a linear combination of others:
-for example, every linear combination of $\green{(0,-2,0)}$ and $\magenta{(0,0,2)}$
-starts with zero, but $\blue{(-23/4,0,0)}$ doesn't.
-This means that the original vectors $(3, -2, 0)$, $(5, 1, 2)$ and $(-2, 4, 3)$
-are also linearly independent.</p>
-
-<p>As you can see, this easily turns into a mess of fractions.
-To avoid it, you can at any time multiply a row by a nonzero number;
-this doesn't affect the linear dependence or independence.
-For example, when you get a row like $\green{(\frac{13}{2},0,2)}$,
-you can multiply it by 2 to get $\blue{(13,0,4)}$ instead.
-Here's the same calculation again, but with this trick in use:</p>
-
-$$\begin{align}
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{5} & \blue{1} & \blue{2} \\
-    \green{-2} & \green{4} & \green{3} \\
-\end{bmatrix}
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{5} & \blue{1} & \blue{2} \\
-    \green{-2} + 2 \cdot \red{3} & \green{4} + 2 \red{(-2)} & \green{3} + 2 \cdot \red{0} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{5} & \blue{1} & \blue{2} \\
-    \magenta{4} & \magenta{0} & \magenta{3} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{5} + \frac{1}{2} \red{3} & \blue{1} + \frac{1}{2} \red{(-2)} & \blue{2} + \frac{1}{2} \red{0} \\
-    \magenta{4} & \magenta{0} & \magenta{3} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \green{\frac{13}{2}} & \green{0} & \green{2} \\
-    \magenta{4} & \magenta{0} & \magenta{3} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    2 \cdot \green{\frac{13}{2}} & 2 \cdot \green{0} & 2 \cdot \green{2} \\
-    \magenta{4} & \magenta{0} & \magenta{3} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{13} & \blue{0} & \blue{4} \\
-    \magenta{4} & \magenta{0} & \magenta{3} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{13} & \blue{0} & \blue{4} \\
-    \magenta{4} + (-\frac{3}{4}) \blue{13} & \magenta{0} + (-\frac{3}{4}) \blue{0} & \magenta{3} + (-\frac{3}{4}) \blue{4} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{13} & \blue{0} & \blue{4} \\
-    \green{-\frac{23}{4}} & \green{0} & \green{0} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{13} & \blue{0} & \blue{4} \\
-    \frac{4}{23} \green{(-\frac{23}{4})} & \frac{4}{23} \green{0} & \frac{4}{23} \green{0} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{13} & \blue{0} & \blue{4} \\
-    \magenta{-1} & \magenta{0} & \magenta{0} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \blue{13} + 13 \magenta{(-1)} & \blue{0} + 13 \cdot \magenta{0} & \blue{4} + 13 \cdot \magenta{0} \\
-    \magenta{-1} & \magenta{0} & \magenta{0} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \red{3} & \red{-2} & \red{0} \\
-    \green{0} & \green{0} & \green{4} \\
-    \magenta{-1} & \magenta{0} & \magenta{0} \\
-\end{bmatrix}
-\\
-&\to
-\begin{bmatrix}
-    \red{3} + 3 \magenta{(-1)} & \red{-2} + 3 \cdot \magenta{0} & \red{0} + 3 \cdot \magenta{0} \\
-    \green{0} & \green{0} & \green{4} \\
-    \magenta{-1} & \magenta{0} & \magenta{0} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-    \blue{0} & \blue{-2} & \blue{0} \\
-    \green{0} & \green{0} & \green{4} \\
-    \magenta{-1} & \magenta{0} & \magenta{0} \\
-\end{bmatrix}
-\end{align}$$<p>As you can see, there are more steps, but each step is easier to follow,
-because there are no fractions involved.
 </p>
 
 </div>

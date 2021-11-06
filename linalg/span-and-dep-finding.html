@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Finding span and checking linear dependence
+ - Math Derivations</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/animation.css">
+
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [ ['$','$'] ],
+                displayMath: [ ['$$','$$'] ],
+                macros: {
+                    span: '\\operatorname{span}',
+                    rotate: '\\operatorname{rotate}',
+                    I: '\\vec{i}',
+                    J: '\\vec{j}',
+                    K: '\\vec{k}',
+                    // colors chosen so that they are distinguishable when together
+                    red: [ "{\\color{##c00}{#1}}", 1 ],
+                    blue: [ "{\\color{blue}{#1}}", 1 ],
+                    green: [ "{\\color{green}{#1}}", 1 ],
+                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                    darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
+                }
+            }
+        };
+        </script>
+        </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Discrete math</label>
+        <div class="dropdown">
+            <a href="../discrete/sums.html">Sum formulas</a><a href="../discrete/binom.html">Binomial coefficients</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Circle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Triangle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a><a href="../plane-geometry/inscribed-circle.html">Inscribed circle</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-16" />
+        <label for="sidebar-checkbox-16">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-12" />
+        <label for="sidebar-checkbox-12">Limits</label>
+        <div class="dropdown">
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-13" />
+        <label for="sidebar-checkbox-13">Continuity</label>
+        <div class="dropdown">
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-14" />
+        <label for="sidebar-checkbox-14">Derivative</label>
+        <div class="dropdown">
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-15" />
+        <label for="sidebar-checkbox-15">Integral</label>
+        <div class="dropdown">
+            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a><a href="../calc/integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="../calc/integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="../calc/integral-notation.html">More notation for integrals</a><a href="../calc/integral-rules.html">Integral rules</a><a href="../calc/integral-usub.html">U substitution</a><a href="../calc/integral-sor-volume.html">Volume of solid of revolution</a><a href="../calc/integral-sor-area.html">Area of surface of revolution</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-17" />
+        <label for="sidebar-checkbox-17">Complex numbers</label>
+        <div class="dropdown">
+            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-18" />
+        <label for="sidebar-checkbox-18">Linear algebra</label>
+        <div class="dropdown">
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="span-and-dep-finding.html">Finding span and checking linear (in)dependence</a>
+        </div>
+        </div>
+<h1 id="finding-span-and-checking-linear-dependence">Finding span and checking linear dependence<a class="headerlink" href="#finding-span-and-checking-linear-dependence" title="Link to this title">¶</a></h1><p>On this page, we find a way to check whether given vectors are linearly dependent or independent.
+</p>
+
+<h2 id="adding-multiples-doesn-t-affect-linear-dependence">Adding multiples doesn't affect linear dependence<a class="headerlink" href="#adding-multiples-doesn-t-affect-linear-dependence" title="Link to this title">¶</a></h2><p>Let $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ be linearly independent vectors.
+If $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ are linearly dependent,
+we get a contradiction:
+<ul><li>
+    If $\green{\vec w} + 2\blue{\vec v}$ was a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
+    it would lead to
+    $$
+    \green{\vec w} + 2\blue{\vec v} = a\red{\vec u} + b\blue{\vec v},
+    $$
+    with some numbers $a$ and $b$,
+    and now <a href="span-and-dep-defs.html#counting-vectors-on-both-sides">counting the vector</a>
+    $\green{\vec w}$ on both sides (see above) would give $1=0$.
+</li><li>
+    If $\blue{\vec v}$ was a linear combination of $\red{\vec u}$ and $\green{\vec w} + 2\blue{\vec v}$,
+    we would have
+    $$
+    \blue{\vec v} = a\red{\vec u} + b(\green{\vec w} + 2\blue{\vec v}).
+    $$
+    We can now count $\green{\vec w}$ on both sides to get $0=b$,
+    which leads to $\blue{\vec v} = a\red{\vec u}$.
+    This is impossible, because now $\blue{\vec v}$ is a linear combination of $\red{\vec u}$ (and $\green{\vec w}$),
+    even though $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly indepepdent.
+</li><li>
+    If $\red{\vec u}$ was a linear combination of $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$,
+    we would have
+    $$
+    \red{\vec u} = a\blue{\vec v} + b(\green{\vec w} + 2\blue{\vec v}).
+    $$
+    By counting $\vec u$ on both sides, we get $1=0$, so this isn't possible either.
+</li></ul></p>
+
+<p>So if $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent,
+then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ must also be linearly independent:
+adding $2\blue{\vec v}$ to $\green{\vec w}$ preserves the linear independence.</p>
+
+<p>The same also works with dependent instead of independent:
+if $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly dependent,
+then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ are also linearly dependent.
+They cannot be independent, because if they were,
+then you could add $-2\blue{\vec v}$ to get $\green{\vec w} + 2\blue{\vec v}$ back to just $\green{\vec w}$;
+this would lead to $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ being linearly independent.</p>
+
+<p>These results work with any number instead of $2$
+(in other words, with any multiple of $\blue{\vec v}$ instead of $2\blue{\vec v}$).</p>
+
+<div class="box graybox"><p>With two or more vectors,
+adding a multiple of one vector to another doesn't affect linear dependence or independence.
+</p>
+
+</div><p>Here a multiple of a vector means the vector multiplied by some number.
+For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
+are multiples of $\red{\vec u}$.
+</p>
+
+<h2 id="checking-linear-dependence-independence">Checking linear dependence/independence<a class="headerlink" href="#checking-linear-dependence-independence" title="Link to this title">¶</a></h2><p>Using the above result, you can check whether given vectors are linearly dependent or independent
+by repeatedly adding multiples of one vector from another.
+In this context, it is common to write the vectors in a matrix
+so that each row of the matrix represents one vector.
+The goal is to <b>get as much zeros as possible</b>,
+so that you can easily see whether the vectors are dependent or independent.</p>
+
+<p>For example, let's check if the vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, 8)$
+are linearly dependent or independent.</p>
+
+$$\begin{align}
+\begin{bmatrix}
+    \red{2} & \red{4} & \red{4} \\
+    \blue{0} & \blue{2} & \blue{0} \\
+    \magenta{4} & \magenta{2} & \magenta{8} \\
+\end{bmatrix}
+&\to
+\begin{bmatrix}
+    \red{2} & \red{4} & \red{4} \\
+    \blue{0} & \blue{2} & \blue{0} \\
+    \green{4} & \green{0} & \green{8} \\
+\end{bmatrix}
+\quad
+\green{\text{new bottom}}
+=
+\magenta{\text{old bottom}}
++ \left( -1 \right) \cdot 
+\blue{\text{middle}}
+\\
+&\to
+\begin{bmatrix}
+    \darkyellow{2} & \darkyellow{0} & \darkyellow{4} \\
+    \blue{0} & \blue{2} & \blue{0} \\
+    \green{4} & \green{0} & \green{8} \\
+\end{bmatrix}
+\quad
+\darkyellow{\text{new top}}
+=
+\red{\text{old top}}
++ \left( -2 \right) \cdot 
+\blue{\text{middle}}
+\\
+&\to
+\begin{bmatrix}
+    \darkyellow{2} & \darkyellow{0} & \darkyellow{4} \\
+    \blue{0} & \blue{2} & \blue{0} \\
+    \red{0} & \red{0} & \red{0} \\
+\end{bmatrix}
+\quad
+\red{\text{new bottom}}
+=
+\green{\text{old bottom}}
++ \left( -2 \right) \cdot 
+\darkyellow{\text{top}}
+\\
+\end{align}$$<p>The numbers to multiply by are chosen so that we get new zeros.
+For example, the $-1$ was chosen because that resulted in
+$\magenta{2} + (-1)\blue{2} = \green0$ in the bottom row.</p>
+
+<p>Because one of the resulting vectors is $\red{(0,0,0)}$,
+it is a linear combination of other vectors:
+$$
+\red{(0,0,0)} = 0\darkyellow{(2,0,4)} + 0\blue{(0,2,0)}
+$$
+This means that the resulting vectors $\darkyellow{(2,0,4)}$, $\blue{(0,2,0)}$ and $\red{(0,0,0)}$
+are linearly dependent,
+so the original vectors $(2, 4, 4)$, $(0, 2, 0)$ and $(4, 2, 8)$
+are also linearly dependent.
+</p>
+
+<h2 id="finding-the-span">Finding the span<a class="headerlink" href="#finding-the-span" title="Link to this title">¶</a></h2><p>Consider the spans
+$$
+\span(\red{\vec u}, \blue{\vec v}) \quad \text{and} \quad
+\span(\red{\vec u}, \green{\vec v + 2\vec u}).
+$$
+Because $\green{\vec v + 2\vec u}$ is a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
+adding it to their span doesn't change anything:
+$$
+\span(\red{\vec u}, \blue{\vec v}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+$$
+On the other hand,
+$$
+\blue{\vec v} = \green{\vec v + 2\vec u} - 2\red{\vec u}
+$$
+is a linear combination of $\green{\vec v + 2\vec u}$ and $\red{\vec u}$, so
+$$
+\span(\red{\vec u}, \green{\vec v + 2\vec u}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+$$
+By putting it all together, we get
+$$
+\span(\red{\vec u}, \blue{\vec v}) =
+\span(\red{\vec u}, \green{\vec v + 2\vec u}).
+$$
+This also works with any number instead of 2, and also with more than two vectors.</p>
+
+<div class="box graybox"><p>The span doesn't change when adding a multiple of one vector to another.
+</p>
+
+</div><p>This means that you can find a span in the exact same way
+as you would check for linear dependence or independence (see above):
+add multiples of the vectors to each other
+until it is clear what the span will be.</p>
+
+<p>For example, let's find $\span((2,4,5), (0,-5,-9), (3,5,5))$:</p>
+
+$$\begin{align}
+\begin{bmatrix}
+    \red{2} & \red{4} & \red{5} \\
+    \blue{0} & \blue{-5} & \blue{-9} \\
+    \magenta{3} & \magenta{5} & \magenta{5} \\
+\end{bmatrix}
+&\to
+\begin{bmatrix}
+    \red{2} & \red{4} & \red{5} \\
+    \blue{0} & \blue{-5} & \blue{-9} \\
+    \green{0} & \green{-1} & \green{-\frac{5}{2}} \\
+\end{bmatrix}
+\quad
+\green{\text{new bottom}}
+=
+\magenta{\text{old bottom}}
++ \left( -\frac{3}{2} \right) \cdot 
+\red{\text{top}}
+\\
+&\to
+\begin{bmatrix}
+    \darkyellow{2} & \darkyellow{0} & \darkyellow{-5} \\
+    \blue{0} & \blue{-5} & \blue{-9} \\
+    \green{0} & \green{-1} & \green{-\frac{5}{2}} \\
+\end{bmatrix}
+\quad
+\darkyellow{\text{new top}}
+=
+\red{\text{old top}}
++ 4 \cdot 
+\green{\text{bottom}}
+\\
+&\to
+\begin{bmatrix}
+    \darkyellow{2} & \darkyellow{0} & \darkyellow{-5} \\
+    \red{0} & \red{0} & \red{\frac{7}{2}} \\
+    \green{0} & \green{-1} & \green{-\frac{5}{2}} \\
+\end{bmatrix}
+\quad
+\red{\text{new middle}}
+=
+\blue{\text{old middle}}
++ \left( -5 \right) \cdot 
+\green{\text{bottom}}
+\\
+&\to
+\begin{bmatrix}
+    \blue{2} & \blue{0} & \blue{0} \\
+    \red{0} & \red{0} & \red{\frac{7}{2}} \\
+    \green{0} & \green{-1} & \green{-\frac{5}{2}} \\
+\end{bmatrix}
+\quad
+\blue{\text{new top}}
+=
+\darkyellow{\text{old top}}
++ \frac{10}{7} \cdot 
+\red{\text{middle}}
+\\
+&\to
+\begin{bmatrix}
+    \blue{2} & \blue{0} & \blue{0} \\
+    \red{0} & \red{0} & \red{\frac{7}{2}} \\
+    \magenta{0} & \magenta{-1} & \magenta{0} \\
+\end{bmatrix}
+\quad
+\magenta{\text{new bottom}}
+=
+\green{\text{old bottom}}
++ \frac{5}{7} \cdot 
+\red{\text{middle}}
+\\
+\end{align}$$<p>This calculation shows two things:
+<ul><li>
+    The vectors are linearly independent,
+    because the resulting vectors
+    $\blue{(2,0,0)}$, $\red{(0,0,\frac{7}{2})}$ and $\magenta{(0,-1,0)}$ are linearly independent.
+    None of them is a linear combination of others;
+    for example, any linear combination of $\blue{(2,0,0)}$ and $\magenta{(0,-1,0)}$ is on the xy plane,
+    but $\red{(0,0,\frac{7}{2})}$ isn't.
+</li><li>
+    The span of the vectors is
+    $$
+    \span((2,4,5), (0,-5,-9), (3,5,5))
+    = \span(\blue{(2,0,0)}, \red{(0,0,\frac{7}{2})}, \magenta{(0,-1,0)}),
+    $$
+    which is the set of all 3D vectors,
+    because any 3D vector $(x,y,z)$ can be written as
+    $$
+    (x,y,z) = \frac{x}{2}\blue{(2,0,0)} + \frac{2y}{7}\red{(0,0,\frac{7}{2})} - z\magenta{(0,-1,0)}.
+    $$
+</li></ul>
+</p>
+
+<h2 id="multiplying-a-row">Multiplying a row<a class="headerlink" href="#multiplying-a-row" title="Link to this title">¶</a></h2><p>In the previous example, we ended up having to calculate with fractions,
+which is error-prone when calculating by hand.
+To avoid fractions, you can multiply a row by 2 whenever a fraction like $\frac{7}{2}$ appears in it.
+The same works with any other nonzero number instead of 2.</p>
+
+<p>This doesn't affect the span:
+because the span consists of all linear combinations,
+the vectors get multiplied by all numbers anyway,
+and the original length of the vectors doesn't matter.
+The same goes for linear dependence and independence.
+Let me know if this isn't clear to you and you would like to see more details.</p>
+
+<p>Here's the same calculation again, but with this trick in use:</p>
+
+$$\begin{align}
+\begin{bmatrix}
+    \red{2} & \red{4} & \red{5} \\
+    \blue{0} & \blue{-5} & \blue{-9} \\
+    \magenta{3} & \magenta{5} & \magenta{5} \\
+\end{bmatrix}
+&\to
+\begin{bmatrix}
+    \red{2} & \red{4} & \red{5} \\
+    \blue{0} & \blue{-5} & \blue{-9} \\
+    \green{0} & \green{-1} & \green{-\frac{5}{2}} \\
+\end{bmatrix}
+\quad
+\green{\text{new bottom}}
+=
+\magenta{\text{old bottom}}
++ \left( -\frac{3}{2} \right) \cdot 
+\red{\text{top}}
+\\
+&\to
+\begin{bmatrix}
+    \red{2} & \red{4} & \red{5} \\
+    \blue{0} & \blue{-5} & \blue{-9} \\
+    \darkyellow{0} & \darkyellow{-2} & \darkyellow{-5} \\
+\end{bmatrix}
+\quad
+\darkyellow{\text{new bottom}}
+= 2 \cdot 
+\green{\text{old bottom}}
+\\
+&\to
+\begin{bmatrix}
+    \magenta{2} & \magenta{0} & \magenta{-5} \\
+    \blue{0} & \blue{-5} & \blue{-9} \\
+    \darkyellow{0} & \darkyellow{-2} & \darkyellow{-5} \\
+\end{bmatrix}
+\quad
+\magenta{\text{new top}}
+=
+\red{\text{old top}}
++ 2 \cdot 
+\darkyellow{\text{bottom}}
+\\
+&\to
+\begin{bmatrix}
+    \magenta{2} & \magenta{0} & \magenta{-5} \\
+    \green{0} & \green{0} & \green{\frac{7}{2}} \\
+    \darkyellow{0} & \darkyellow{-2} & \darkyellow{-5} \\
+\end{bmatrix}
+\quad
+\green{\text{new middle}}
+=
+\blue{\text{old middle}}
++ \left( -\frac{5}{2} \right) \cdot 
+\darkyellow{\text{bottom}}
+\\
+&\to
+\begin{bmatrix}
+    \magenta{2} & \magenta{0} & \magenta{-5} \\
+    \red{0} & \red{0} & \red{7} \\
+    \darkyellow{0} & \darkyellow{-2} & \darkyellow{-5} \\
+\end{bmatrix}
+\quad
+\red{\text{new middle}}
+= 2 \cdot 
+\green{\text{old middle}}
+\\
+&\to
+\begin{bmatrix}
+    \magenta{2} & \magenta{0} & \magenta{-5} \\
+    \blue{0} & \blue{0} & \blue{1} \\
+    \darkyellow{0} & \darkyellow{-2} & \darkyellow{-5} \\
+\end{bmatrix}
+\quad
+\blue{\text{new middle}}
+= \frac{1}{7} \cdot 
+\red{\text{old middle}}
+\\
+&\to
+\begin{bmatrix}
+    \green{2} & \green{0} & \green{0} \\
+    \blue{0} & \blue{0} & \blue{1} \\
+    \darkyellow{0} & \darkyellow{-2} & \darkyellow{-5} \\
+\end{bmatrix}
+\quad
+\green{\text{new top}}
+=
+\magenta{\text{old top}}
++ 5 \cdot 
+\blue{\text{middle}}
+\\
+&\to
+\begin{bmatrix}
+    \green{2} & \green{0} & \green{0} \\
+    \blue{0} & \blue{0} & \blue{1} \\
+    \red{0} & \red{-2} & \red{0} \\
+\end{bmatrix}
+\quad
+\red{\text{new bottom}}
+=
+\darkyellow{\text{old bottom}}
++ 5 \cdot 
+\blue{\text{middle}}
+\\
+\end{align}$$<p>Now there are more steps, but less fractions.</p>
+
+<p>Note that multiplying a row by a number is optional,
+and you don't have to do it if you don't want to.
+I introduce it here only to avoid dealing with annoying fractions.
+</p>
+
+<h2 id="maximum-number-of-independent-vectors">Maximum number of independent vectors<a class="headerlink" href="#maximum-number-of-independent-vectors" title="Link to this title">¶</a></h2><p>Let's check whether the vectors $(2,1,1)$, $(1,5,1)$, $(2,2,3)$ and $(4,2,1)$
+are linearly independent or dependent.
+First, we use the first vector to make all other vectors start with zero.</p>
+
+$$\begin{align}
+\begin{bmatrix}
+    \red{2} & \red{1} & \red{1} \\
+    \blue{1} & \blue{5} & \blue{1} \\
+    \magenta{2} & \magenta{2} & \magenta{3} \\
+    \green{4} & \green{2} & \green{1} \\
+\end{bmatrix}
+&\to
+\begin{bmatrix}
+    \red{2} & \red{1} & \red{1} \\
+    \darkyellow{0} & \darkyellow{\frac{9}{2}} & \darkyellow{\frac{1}{2}} \\
+    \magenta{2} & \magenta{2} & \magenta{3} \\
+    \green{4} & \green{2} & \green{1} \\
+\end{bmatrix}
+\quad
+\darkyellow{\text{new row 2}}
+=
+\blue{\text{old row 2}}
++ \left( -\frac{1}{2} \right) \cdot 
+\red{\text{row 1}}
+\\
+&\to
+\begin{bmatrix}
+    \red{2} & \red{1} & \red{1} \\
+    \darkyellow{0} & \darkyellow{\frac{9}{2}} & \darkyellow{\frac{1}{2}} \\
+    \blue{0} & \blue{1} & \blue{2} \\
+    \green{4} & \green{2} & \green{1} \\
+\end{bmatrix}
+\quad
+\blue{\text{new row 3}}
+=
+\magenta{\text{old row 3}}
++ \left( -1 \right) \cdot 
+\red{\text{row 1}}
+\\
+&\to
+\begin{bmatrix}
+    \red{2} & \red{1} & \red{1} \\
+    \darkyellow{0} & \darkyellow{\frac{9}{2}} & \darkyellow{\frac{1}{2}} \\
+    \blue{0} & \blue{1} & \blue{2} \\
+    \magenta{0} & \magenta{0} & \magenta{-1} \\
+\end{bmatrix}
+\quad
+\magenta{\text{new row 4}}
+=
+\green{\text{old row 4}}
++ \left( -2 \right) \cdot 
+\red{\text{row 1}}
+\\
+\end{align}$$<p>We can now use the second vector to make all vectors below it start with two zeros.
+The last row already starts with two zeros, so we don't need to do anything to it.</p>
+
+$$\begin{align}
+\begin{bmatrix}
+    \red{2} & \red{1} & \red{1} \\
+    \darkyellow{0} & \darkyellow{\frac{9}{2}} & \darkyellow{\frac{1}{2}} \\
+    \blue{0} & \blue{1} & \blue{2} \\
+    \magenta{0} & \magenta{0} & \magenta{-1} \\
+\end{bmatrix}
+&\to
+\begin{bmatrix}
+    \red{2} & \red{1} & \red{1} \\
+    \darkyellow{0} & \darkyellow{\frac{9}{2}} & \darkyellow{\frac{1}{2}} \\
+    \green{0} & \green{0} & \green{\frac{17}{9}} \\
+    \magenta{0} & \magenta{0} & \magenta{-1} \\
+\end{bmatrix}
+\quad
+\green{\text{new row 3}}
+=
+\blue{\text{old row 3}}
++ \left( -\frac{2}{9} \right) \cdot 
+\darkyellow{\text{row 2}}
+\\
+\end{align}$$<p>Finally, we can use the third vector to make the last vector all zeros:</p>
+
+$$\begin{align}
+\begin{bmatrix}
+    \red{2} & \red{1} & \red{1} \\
+    \darkyellow{0} & \darkyellow{\frac{9}{2}} & \darkyellow{\frac{1}{2}} \\
+    \green{0} & \green{0} & \green{\frac{17}{9}} \\
+    \magenta{0} & \magenta{0} & \magenta{-1} \\
+\end{bmatrix}
+&\to
+\begin{bmatrix}
+    \red{2} & \red{1} & \red{1} \\
+    \darkyellow{0} & \darkyellow{\frac{9}{2}} & \darkyellow{\frac{1}{2}} \\
+    \green{0} & \green{0} & \green{\frac{17}{9}} \\
+    \blue{0} & \blue{0} & \blue{0} \\
+\end{bmatrix}
+\quad
+\blue{\text{new row 4}}
+=
+\magenta{\text{old row 4}}
++ \frac{9}{17} \cdot 
+\green{\text{row 3}}
+\\
+\end{align}$$<p>Because we ended up with a zero row,
+the vectors we started with are linearly dependent.
+However, with some handling for a few special cases,
+the same process works with <b>any</b> four 3D vectors,
+and you can always do this to end up with a matrix that has zeros in these locations:
+$$
+\begin{bmatrix}
+&&\\
+0&&\\
+0&0&\\
+0&0&0
+\end{bmatrix}
+$$
+To ensure that the first column has the needed zeros, we can do this:
+<ul><li>
+    If the first row starts with $x$ and another row starts with $y$,
+    we can set
+    $$
+    \text{new other row} = \text{old other row} + \left(-\frac y x \right) \cdot \text{first row}.
+    $$
+    This way, the first number in the second row becomes
+    $$
+    y + \left( -\frac{y}{x} \right)x = 0.
+    $$
+    However, this doesn't work if the first row already starts with zero,
+    because we needed to divide by $x$.
+</li><li>
+    If the first row starts with zero but some other row doesn't,
+    we can change the order of the rows so that the row not starting with zero is first,
+    and then proceed as above.
+    Swapping the vectors doesn't affect linear dependence or independence.
+</li><li>
+    If all rows already start with zero, we already have the zeros we needed
+    and we don't have to do anything.
+</li></ul></p>
+
+<p>Once this is done, we can ignore the first row and first column of the matrix,
+and repeat the same process with the remaining two columns and three rows.
+Because these rows already have zeros in the leftmost column,
+adding multiples of them to each other won't change the leftmost column.
+After repeating this for all columns,
+ignoring one more row every time we move on to the next column,
+we have the zeros.</p>
+
+<p>This shows that there can't be 4 linearly independent 3D vectors.
+We also can't have more than 4, because then we could pick 4 of them,
+and they would be linearly independent.
+The same process works for 2D vectors, 4D vectors, 5D vectors, 6D vectors and so on.</p>
+
+<div class="box graybox"><p>There cannot be more than $n$ linearly independent $n$-dimensional vectors.
+</p>
+
+</div><h2 id="spanning-with-just-linear-independence">Spanning with just linear independence<a class="headerlink" href="#spanning-with-just-linear-independence" title="Link to this title">¶</a></h2><p>Let $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ be linearly independent 3D vectors.
+If their span doesn't contain all 3D vectors,
+there's a 3D vector $\magenta{\vec m}$ that is not in $\span(\red{\vec u}, \blue{\vec v}, \green{\vec w})$.
+Then $\red{\vec u}$, $\blue{\vec v}$, $\green{\vec w}$ and $\magenta{\vec m}$ are linearly independent:
+<ul><li>
+    $\magenta{\vec m}$ is not a linear combination of $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$,
+    because it isn't in their span.
+</li><li>
+    If $\red{\vec u}$ was a linear combination of other vectors, as in
+    $$
+    \red{\vec u} = a\blue{\vec v} + b\green{\vec w} + c\magenta{\vec m},
+    $$
+    we have two cases, neither of which can actually happen:
+    <ul><li>
+        If $c=0$, then $\red{\vec u}$ is a linear combination of $\blue{\vec v}$ and $\green{\vec w}$.
+        This isn't possible, because $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent.
+    </li><li>
+        If $c \ne 0$, then we can divide by $c$ and solve $\magenta{\vec m}$ as a linear combination of other vectors:
+        $$
+        \magenta{\vec m} = \frac{1}{c}\red{\vec u} - \frac{a}{c}\blue{\vec v} - \frac{b}{c}\green{\vec w}.
+        $$
+        This isn't possible either, because $\magenta{\vec m}$ is not in the span of $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$.
+    </li></ul>
+</li><li>
+    If $\blue{\vec v}$ or $\green{\vec w}$ was a linear combination of other vectors,
+    we could do the same steps we did with $\red{\vec u}$.
+</li></ul></p>
+
+<p>By our previous result, it is not possible to have 4 linearly independent 3D vectors.
+This means that any span of any 3 linearly independent 3D vectors
+must contain all 3D vectors.
+The same works with any other dimension instead of 3.</p>
+
+<div class="box graybox"><p>The span of any $n$ linearly independent $n$-dimensional vectors
+is the set of all $n$-dimensional vectors.
+</p>
+
+</div><p>This is basically a generalization of $\span((1,0,0),(0,1,0),(0,0,1)) = \mathbb{R}^3$
+that works with any linearly independent vectors.
+</p>
+
+</div>
+</body>
+</html>

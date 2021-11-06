@@ -55,7 +55,7 @@ I only drew a square-shaped part of the span.
     with [slope](../analytic-plane-geometry/line-eq-slope.html#meaning-of-s-and-h) 1.
 
 asymptote:
-    unitsize(1.5cm);
+    unitsize(1.5cm );
     axises(-3,3,-3,3);
     draw((-3,-3)--(3,3), p=blue, L=Label("$\Span\left(\begin{bmatrix}1\\1\end{bmatrix}\right)$", position=Relative(1), align=SE));
     dot((1,1), L="$(1,1)$", align=cis(2), p=dotpen+deepred);
@@ -76,7 +76,7 @@ asymptote:
     Including $\red{(0,0,1)}$ basically adds a vertical direction to the span.
 
 asymptote3d:
-    unitsize(1.7cm);
+    unitsize(1.7cm );
 
     currentprojection = perspective(camera=(5,-10,6), up=Z);
     axises3d(-2, 3, -2, 3, -1, 3.5, xlabel="$x$", ylabel="$y$", zlabel="$z$");

@@ -438,8 +438,9 @@ def asymptote(match, filename):
             with open(os.path.join(tmpdir, 'image.asy'), 'w') as file:
                 file.write(fullcode)
 
+            # -render=0 solves some problems https://github.com/vectorgraphics/asymptote/issues/52#issuecomment-354281075
             subprocess.check_call(
-                ['asy', '-f', format, '--libgs=', 'image.asy'], cwd=tmpdir)
+                ['asy', '-f', format, '-render=0', 'image.asy'], cwd=tmpdir)
             cache_put(os.path.join(tmpdir, 'image.' + format), fullfilename)
 
     shutil.copy(cache_get(fullfilename), outfile)

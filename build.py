@@ -308,7 +308,7 @@ stylesheet">
         builder.outputdir, os.path.dirname(htmlfile)
     ).replace(os.sep, '/')
 
-    for css_slash_something in glob.glob('css/*.css'):
+    for css_slash_something in sorted(glob.glob('css/*.css')):
         result += f'<link rel="stylesheet" href="{relative_path_prefix}/{css_slash_something}">\n'
 
     if filename == 'content/vectors/dot-projection.txt':

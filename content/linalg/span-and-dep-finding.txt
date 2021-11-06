@@ -92,6 +92,38 @@ comment:
     are multiples of $\red{\vec u}$.
 
 
+comment:
+    ## Multiplying a vector of a span by a number
+
+    Consider a span that has a vector $\vec v$ and also a multiple $5\vec v$,
+    such as
+    $$
+    \span(\vec u,\vec v,5\vec v,\vec w).
+    $$
+    On the one hand, $5\vec v = 0\vec u + 5\vec v + 0\vec w$
+    is a linear combination of other vectors,
+    and therefore doesn't affect the span:
+    $$
+    \span(\vec u,\vec v,5\vec v,\vec w) = \span(\vec u,\vec v,\vec w).
+    $$
+    On the other hand, $\vec v = \frac{1}{5}(0\vec u + 5\vec v + 0\vec w)$
+    is also a linear combination of other vectors, so
+    $$
+    \span(\vec u,\vec v,5\vec v,\vec w) = \span(\vec u,5\vec v,\vec w).
+    $$
+    This means that
+    $$
+    \span(\vec u,\vec v,\vec w) = \span(\vec u,5\vec v,\vec w).
+    $$
+    This works the same way with any number of vectors,
+    and with any nonzero number instead of 5.
+    It doesn't work with zero, because $\span((1,0),(0,1))$ is obviously not same as $\span(0(1,0), (0,1))$, for example.
+    The derivation wouldn't work either, because we needed to divide by 5.
+
+    graybox:
+        The span doesn't change if you multiply one of the vectors by a nonzero number.
+
+
 ## Checking linear dependence/independence
 
 Using the above result, you can check whether given vectors are linearly dependent or independent

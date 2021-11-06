@@ -93,7 +93,7 @@ $$
 = h(B) = \frac 1 B.
 $$
 If we also have $\lim_{x \to a} f(x) = A$, then
-with [limit of product](limit-basics.html#limit-of-product), we get
+with [limit of product](limit-props.html#limit-of-product), we get
 $$
 \begin{align}
 \lim_{x \to a} \frac{f(x)}{g(x)}

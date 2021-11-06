@@ -6,11 +6,14 @@ import itertools
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 import textwrap
 import xml.etree.ElementTree
 
 from htmlthingy import Builder, tags
+
+from linkcheck import check_links
 
 
 # TODO: move these to htmlthingy
@@ -497,3 +500,10 @@ args = parser.parse_args()
 if args.reload_browser:
     # https://itectec.com/unixlinux/refresh-reload-active-browser-tab-from-command-line/
     subprocess.call('xdotool search --name "Math Derivations" windowactivate windowfocus key F5', shell=True)
+
+print("Checking links...")
+link_problems = check_links([(f, builder.infile2outfile(f)) for f in builder.infiles])
+if link_problems:
+    print("=== link check errors ===")
+    print("\n".join(link_problems))
+    sys.exit(1)

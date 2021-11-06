@@ -125,7 +125,7 @@ $$
 $$
 The [power rule](derivative-power-rule-1.html#derivative-of-frac-1-x)
 gives $\frac{d}{dx} x^{-1} = (-1)x^{-2}$,
-and by using that with the [chain rule](#chain-rule), we get
+and by using that with the [chain rule](derivative-chain-rule.html), we get
 $$
 \frac{d}{dx} \left( g(x)^{-1} \right) = (-1)g(x)^{-2}g'(x).
 $$

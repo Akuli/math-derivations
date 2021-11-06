@@ -14,7 +14,7 @@ jobs:
         python-version: "3.10"
     - run: sudo apt install asymptote
     - run: pip install -r requirements.txt
-    - run: python3 imagecachesync.py
+    - run: ./imagecachesync.sh
     - run: python3 build.py
     - uses: JamesIves/github-pages-deploy-action@4.1.3
       with:

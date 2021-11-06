@@ -254,23 +254,23 @@ comment:
 
 ## Counting vectors on both sides
 
-Let $\vec u$, $\vec v$ and $\vec w$ be linearly independent vectors.
+Let $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ be linearly independent vectors.
 Consider the equation
 $$
-a\vec{u}+b\vec{v}+c\vec{w} = x\vec{u}+y\vec{v}+z\vec{w}.
+\red{a\vec{u}}+\blue{b\vec{v}}+\green{c\vec{w}} = \red{x\vec{u}}+\blue{y\vec{v}}+\green{z\vec{w}}.
 $$
 This can be rewritten as
 $$
-(a-x)\vec{u} = (y-b)\vec{v} + (z-c)\vec{w}.
+\red{(a-x)\vec{u}} = \blue{(y-b)\vec{v}} + \green{(z-c)\vec{w}}.
 $$
-We must have $a-x = 0$, because otherwise we could divide by $a-x$, and we would get
+We must have $\red{a-x} = 0$, because otherwise we could divide by $a-x$, and we would get
 $$
-\vec{u} = \frac{y-b}{a-x}\vec v + \frac{z-c}{a-x}\vec w,
+\red{\vec u} = \frac{\blue{y-b}}{\red{a-x}}\blue{\vec v} + \frac{\green{z-c}}{\red{a-x}}\green{\vec w},
 $$
 which is impossible, because the vectors are linearly indepependent
-and therefore $\vec u$ can't be a linear combination of $\vec v$ and $\vec w$.
-Because $a-x=0$, we must have $a=x$,
-and we similarly get $b=y$ and $c=z$.
+and therefore $\red{\vec u}$ can't be a linear combination of $\blue{\vec v}$ and $\green{\vec w}$.
+Because $\red{a-x}=0$, we must have $\red a=\red x$,
+and we similarly get $\blue b=\blue y$ and $\green c=\green z$.
 This works the same way with any number ($n$ below) of linearly independent vectors.
 
 graybox:
@@ -332,7 +332,7 @@ we get a contradiction:
 </li></ul>
 
 So if $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent,
-then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\green{\vec w}$ must also be linearly independent:
+then $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w} + 2\blue{\vec v}$ must also be linearly independent:
 adding $2\blue{\vec v}$ to $\green{\vec w}$ preserves the linear independence.
 
 The same also works with dependent instead of independent:
@@ -483,7 +483,7 @@ Now there are more steps, but less fractions.
 
 Let's check whether the vectors $(2,1,1)$, $(1,5,1)$, $(2,2,3)$ and $(4,2,1)$
 are linearly independent or dependent.
-First, we will use the first vector to make all other vectors start with zero.
+First, we use the first vector to make all other vectors start with zero.
 
 python:
     from fractions import Fraction
@@ -557,7 +557,7 @@ To ensure that the first column has the needed zeros, we can do this:
     $$
     \text{new other row} = \text{old other row} + \left(-\frac y x \right)\text{first row}.
     $$
-    This way, the first number in the second row will become
+    This way, the first number in the second row becomes
     $$
     y + \left( -\frac{y}{x} \right)x = 0.
     $$
@@ -592,38 +592,38 @@ graybox:
 
 ## Spanning with just linear independence
 
-Let $\vec u$, $\vec v$ and $\vec w$ be linearly independent 3D vectors.
+Let $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ be linearly independent 3D vectors.
 If their span doesn't contain all 3D vectors,
-there's a 3D vector $\vec m$ that is not in $\span(\vec u, \vec v, \vec w)$.
-Then $\vec u$, $\vec v$, $\vec w$ and $\vec m$ are linearly independent:
+there's a 3D vector $\magenta{\vec m}$ that is not in $\span(\red{\vec u}, \blue{\vec v}, \green{\vec w})$.
+Then $\red{\vec u}$, $\blue{\vec v}$, $\green{\vec w}$ and $\magenta{\vec m}$ are linearly independent:
 <ul><li>
-    $\vec m$ is not a linear combination of $\vec u$, $\vec v$ and $\vec w$,
+    $\magenta{\vec m}$ is not a linear combination of $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$,
     because it isn't in their span.
 </li><li>
-    If $\vec u$ was a linear combination of other vectors, as in
+    If $\red{\vec u}$ was a linear combination of other vectors, as in
     $$
-    \vec u = a\vec v + b\vec w + c\vec m,
+    \red{\vec u} = a\blue{\vec v} + b\green{\vec w} + c\magenta{\vec m},
     $$
     we have two cases, neither of which can actually happen:
     <ul><li>
-        If $c=0$, then $\vec u$ is a linear combination of $\vec v$ and $\vec w$.
-        This isn't possible, because $\vec u$, $\vec v$ and $\vec w$ are linearly independent.
+        If $c=0$, then $\red{\vec u}$ is a linear combination of $\blue{\vec v}$ and $\green{\vec w}$.
+        This isn't possible, because $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$ are linearly independent.
     </li><li>
-        If $c \ne 0$, then we can divide by $c$ and solve $\vec m$ as a linear combination of other vectors:
+        If $c \ne 0$, then we can divide by $c$ and solve $\magenta{\vec m}$ as a linear combination of other vectors:
         $$
-        \vec m = \frac{1}{c}\vec u - \frac{a}{c}\vec v - \frac{b}{c}\vec v.
+        \magenta{\vec m} = \frac{1}{c}\red{\vec u} - \frac{a}{c}\blue{\vec v} - \frac{b}{c}\green{\vec w}.
         $$
-        This isn't possible either, because $\vec m$ is not in the span of $\vec u$, $\vec v$ and $\vec w$.
+        This isn't possible either, because $\magenta{\vec m}$ is not in the span of $\red{\vec u}$, $\blue{\vec v}$ and $\green{\vec w}$.
     </li></ul>
 </li><li>
-    If $\vec v$ or $\vec w$ was a linear combination of other vectors,
-    we could do the same steps we did with $\vec u$.
+    If $\blue{\vec v}$ or $\green{\vec w}$ was a linear combination of other vectors,
+    we could do the same steps we did with $\red{\vec u}$.
 </li></ul>
 
-So if the span of any 3 linearly independent 3D vectors
-doesn't contain all 3D vectors,
-we can add a missing vector to get 4 linearly independent vectors.
 By our previous result, it is not possible to have 4 linearly independent 3D vectors.
+This means that any span of any 3 linearly independent 3D vectors
+must contain all 3D vectors.
+The same works with any other dimension instead of 3.
 
 graybox:
     The span of any $n$ linearly independent $n$-dimensional vectors

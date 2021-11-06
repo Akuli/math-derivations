@@ -26,6 +26,10 @@ class MatrixWithRowOperations:
         self._output = []
         self._append_current_state_to_output()
 
+    def clear_output(self):
+        self._output = []
+        self._append_current_state_to_output()
+
     def _pick_color(self):
         # Goals:
         #   - Use all available colors
@@ -63,8 +67,11 @@ class MatrixWithRowOperations:
         self._output.append(r'\\')
 
     def _row_name(self, i):
-        assert len(self._rows) == 3
-        return ["top", "middle", "bottom"][i]
+        if len(self._rows) == 3:
+            return ["top", "middle", "bottom"][i]
+        if len(self._rows) > 3:
+            return f"row {i+1}"
+        raise NotImplementedError
 
     # rows[dest] += scalar*rows[src]
     def add_multiple(self, src, dest, scalar):

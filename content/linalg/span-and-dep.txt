@@ -351,6 +351,42 @@ graybox:
     adding a multiple of one vector to another doesn't affect linear dependence or independence.
 
 
+comment:
+    ## Adding multiples doesn't affect span
+
+    Consider the spans
+    $$
+    \span(\red{\vec u}, \blue{\vec v}) \quad \text{and} \quad
+    \span(\red{\vec u}, \green{\vec v + 2\vec u}).
+    $$
+    Because $\green{\vec v + 2\vec u}$ is a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
+    adding it to their span doesn't change anything:
+    $$
+    \span(\red{\vec u}, \blue{\vec v}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+    $$
+    On the other hand,
+    $$
+    \blue{\vec v} = \green{\vec v + 2\vec u} - 2\red{\vec u}
+    $$
+    is a linear combination of $\green{\vec v + 2\vec u}$ and $\red{\vec u}$, so
+    $$
+    \span(\red{\vec u}, \green{\vec v + 2\vec u}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
+    $$
+    By putting it all together, we get
+    $$
+    \span(\red{\vec u}, \blue{\vec v}) =
+    \span(\red{\vec u}, \green{\vec v + 2\vec u}).
+    $$
+    This also works with any number instead of 2, and also with more than two vectors.
+
+    graybox:
+        The span doesn't change when adding a multiple of one vector to another.
+
+    Here a multiple of a vector means the vector multiplied by some number.
+    For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
+    are multiples of $\red{\vec u}$.
+
+
 ## Checking linear dependence/independence
 
 Using the above result, you can check whether given vectors are linearly dependent or independent
@@ -443,37 +479,155 @@ python:
 Now there are more steps, but less fractions.
 
 
-comment:
-    ## Adding multiples doesn't affect span
+## Maximum number of independent vectors
 
-    Consider the spans
-    $$
-    \span(\red{\vec u}, \blue{\vec v}) \quad \text{and} \quad
-    \span(\red{\vec u}, \green{\vec v + 2\vec u}).
-    $$
-    Because $\green{\vec v + 2\vec u}$ is a linear combination of $\red{\vec u}$ and $\blue{\vec v}$,
-    adding it to their span doesn't change anything:
-    $$
-    \span(\red{\vec u}, \blue{\vec v}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
-    $$
-    On the other hand,
-    $$
-    \blue{\vec v} = \green{\vec v + 2\vec u} - 2\red{\vec u}
-    $$
-    is a linear combination of $\green{\vec v + 2\vec u}$ and $\red{\vec u}$, so
-    $$
-    \span(\red{\vec u}, \green{\vec v + 2\vec u}) = \span(\red{\vec u}, \blue{\vec v}, \green{\vec v + 2\vec u}).
-    $$
-    By putting it all together, we get
-    $$
-    \span(\red{\vec u}, \blue{\vec v}) =
-    \span(\red{\vec u}, \green{\vec v + 2\vec u}).
-    $$
-    This also works with any number instead of 2, and also with more than two vectors.
+Let's check whether the vectors $(2,1,1)$, $(1,5,1)$, $(2,2,3)$ and $(4,2,1)$
+are linearly independent or dependent.
+First, we will use the first vector to make all other vectors start with zero.
 
-    graybox:
-        The span doesn't change when adding a multiple of one vector to another.
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [2, 1, 1],
+        [1, 5, 1],
+        [2, 2, 3],
+        [4, 2, 1],
+    ])
+    matrix.add_multiple(src=0, dest=1, scalar=Fraction(-1,2))
+    matrix.add_multiple(src=0, dest=2, scalar=-1)
+    matrix.add_multiple(src=0, dest=3, scalar=-2)
+    return "$$" + matrix.get_output() + "$$"
 
-    Here a multiple of a vector means the vector multiplied by some number.
-    For example, $5\red{\vec u}$, $-2\red{\vec u}$ and $0\red{\vec u}$
-    are multiples of $\red{\vec u}$.
+We can now use the second vector to make all vectors below it start with two zeros.
+The last row already starts with two zeros, so we don't need to do anything to it.
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [2, 1, 1],
+        [1, 5, 1],
+        [2, 2, 3],
+        [4, 2, 1],
+    ])
+    matrix.add_multiple(src=0, dest=1, scalar=Fraction(-1,2))
+    matrix.add_multiple(src=0, dest=2, scalar=-1)
+    matrix.add_multiple(src=0, dest=3, scalar=-2)
+    matrix.clear_output()
+    matrix.add_multiple(src=1, dest=2, scalar=Fraction(-2,9))
+    return "$$" + matrix.get_output() + "$$"
+
+Finally, we can use the third vector to make the last vector all zeros:
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [2, 1, 1],
+        [1, 5, 1],
+        [2, 2, 3],
+        [4, 2, 1],
+    ])
+    matrix.add_multiple(src=0, dest=1, scalar=Fraction(-1,2))
+    matrix.add_multiple(src=0, dest=2, scalar=-1)
+    matrix.add_multiple(src=0, dest=3, scalar=-2)
+    matrix.add_multiple(src=1, dest=2, scalar=Fraction(-2,9))
+    matrix.clear_output()
+    matrix.add_multiple(src=2, dest=3, scalar=Fraction(9,17))
+    return "$$" + matrix.get_output() + "$$"
+
+Because we ended up with a zero row,
+the vectors we started with are linearly dependent.
+However, with some handling for a few special cases,
+the same process works with **any** four 3D vectors,
+and you can always do this to end up with a matrix that has zeros in these locations:
+$$
+\begin{bmatrix}
+&&\\
+0&&\\
+0&0&\\
+0&0&0
+\end{bmatrix}
+$$
+To ensure that the first column has the needed zeros, we can do this:
+<ul><li>
+    If the first row starts with $x$ and another row starts with $y$,
+    we can set
+    $$
+    \text{new other row} = \text{old other row} + \left(-\frac y x \right)\text{first row}.
+    $$
+    This way, the first number in the second row will become
+    $$
+    y + \left( -\frac{y}{x} \right)x = 0.
+    $$
+    However, this doesn't work if the first row already starts with zero,
+    because we needed to divide by $x$.
+</li><li>
+    If the first row starts with zero but some other row doesn't,
+    we can change the order of the rows so that the row not starting with 0 is first,
+    and then proceed as above.
+    Swapping the vectors doesn't affect linear dependence or independence.
+</li><li>
+    If all rows already start with zero, we already have the zeros we needed
+    and we don't have to do anything.
+</li></ul>
+
+Once this is done, we can ignore the first row and first column of the matrix,
+and repeat the same process with the remaining two columns and three rows.
+Because these rows already have zeros in the left column,
+adding multiples of them to each other won't change the left column.
+After repeating this for all columns,
+ignoring one more row every time we move on to the next column,
+we have the zeros.
+
+This shows that there can't be 4 linearly independent 3D vectors.
+We also can't have more than 4, because then we could pick 4 of them,
+and they would be linearly independent.
+The same process works for 2D vectors, 4D vectors, 5D vectors, 6D vectors and so on.
+
+graybox:
+    There cannot be more than $n$ linearly independent $n$-dimensional vectors.
+
+
+## Spanning with just linear independence
+
+Let $\vec u$, $\vec v$ and $\vec w$ be linearly independent 3D vectors.
+If their span doesn't contain all 3D vectors,
+there's a 3D vector $\vec m$ that is not in $\span(\vec u, \vec v, \vec w)$.
+Then $\vec u$, $\vec v$, $\vec w$ and $\vec m$ are linearly independent:
+<ul><li>
+    $\vec m$ is not a linear combination of $\vec u$, $\vec v$ and $\vec w$,
+    because it isn't in their span.
+</li><li>
+    If $\vec u$ was a linear combination of other vectors, as in
+    $$
+    \vec u = a\vec v + b\vec w + c\vec m,
+    $$
+    we have two cases, neither of which can actually happen:
+    <ul><li>
+        If $c=0$, then $\vec u$ is a linear combination of $\vec v$ and $\vec w$.
+        This isn't possible, because $\vec u$, $\vec v$ and $\vec w$ are linearly independent.
+    </li><li>
+        If $c \ne 0$, then we can divide by $c$ and solve $\vec m$ as a linear combination of other vectors:
+        $$
+        \vec m = \frac{1}{c}\vec u - \frac{a}{c}\vec v - \frac{b}{c}\vec v.
+        $$
+        This isn't possible either, because $\vec m$ is not in the span of $\vec u$, $\vec v$ and $\vec w$.
+    </li></ul>
+</li><li>
+    If $\vec v$ or $\vec w$ was a linear combination of other vectors,
+    we could do the same steps we did with $\vec u$.
+</li></ul>
+
+So if the span of any 3 linearly independent 3D vectors
+doesn't contain all 3D vectors,
+we can add a missing vector to get 4 linearly independent vectors.
+By our previous result, it is not possible to have 4 linearly independent 3D vectors.
+
+graybox:
+    The span of any $n$ linearly independent $n$-dimensional vectors
+    is the set of all $n$-dimensional vectors.
+
+This is basically a generalization of $\span((1,0,0),(0,1,0),(0,0,1)) = \mathbb{R}^3$
+that works with any linearly independent vectors.

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Matrix-vector multiplication
+<title>Inverse matrices
  - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
@@ -174,199 +174,156 @@
             <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="matrix-inverse.html">Inverse matrices</a>
         </div>
         </div>
-<h1 id="matrix-vector-multiplication">Matrix-vector multiplication<a class="headerlink" href="#matrix-vector-multiplication" title="Link to this title">¶</a></h1><p>Let $f$ be a linear function with 2D vectors as inputs.
-<a href="rotating-intro.html">Previously</a> we noticed that the whole function is completely defined by $\red{f(1,0)}$ and $\blue{f(0,1)}$;
-if you know what those are, you can calculate $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$ with any $x$ and $y$.
-We will now introduce some notation to make this easier.</p>
+<h1 id="inverse-matrices">Inverse matrices<a class="headerlink" href="#inverse-matrices" title="Link to this title">¶</a></h1><p>Let $\blue f$ be a linear function that has an inverse function $\red{f^{-1}}$
+(not all functions have an inverse function).
+We now have $\vec v = \blue{f(}\red{f^{-1}(}\vec v\red)\blue)$ for any vector $\vec v$.
+Using this, we can show that the inverse function $\red{f^{-1}}$ is also linear:
+<ul><li>
+    Because $\blue f$ is linear, we get
+    $$
+    \begin{align}
+    \vec v+\vec w
+    &= \blue{f(}\red{f^{-1}(}\vec v\red)\blue)+\blue{f(}\red{f^{-1}(}\vec w\red)\blue) \\
+    &= \blue{f(}\red{f^{-1}(}\vec v\red)+\red{f^{-1}(}\vec w\red)\blue),
+    \end{align}
+    $$
+    and applying $\red{f^{-1}}$ on both sides gives
+    $$
+    \red{f^{-1}(}\vec v+\vec w\red) = \red{f^{-1}(}\vec v\red) + \red{f^{-1}(}\vec w\red).
+    $$
+</li><li>
+    Because $\blue f$ is linear, we can also move any number $a$ inside it, so
+    $$
+    a\vec v = a\blue{f(}\red{f^{-1}(}\vec v\red)\blue)=\blue{f(}a\red{f^{-1}(}\vec v\red)\blue),
+    $$
+    and applying $\red{f^{-1}}$ on both sides gives
+    $\red{f^{-1}(}a\vec v\red) = a\red{f^{-1}(}\vec v\red)$.
+</li></ul></p>
 
-<h2 id="matrices-as-a-way-to-write-a-linear-function">Matrices as a way to write a linear function<a class="headerlink" href="#matrices-as-a-way-to-write-a-linear-function" title="Link to this title">¶</a></h2><p>It is common to write the vectors $\red{f(1,0)}$ and $\blue{f(0,1)}$ into a matrix
-so that $\red{f(1,0)}$ is the first column and $\blue{f(0,1)}$ is the second column.
-For example, for $\red{f(1,0) = (2,3)}$ and $\blue{f(0,1) = (4,5)}$,
-the matrix would be
-$$
-\begin{bmatrix} \red2&\blue4 \\ \red3&\blue5 \end{bmatrix}.
-$$
-A matrix is just a grid of numbers.
-It doesn't have to be the same size in both directions.
-For example, if $f$ takes 3D inputs and produces 2D outputs,
-so that $\red{f(1,0,0)=(2,3)}$, $\blue{f(0,1,0)=(4,5)}$ and $\green{f(0,0,1)=(6,7)}$,
-the matrix would be
-$$
-\begin{bmatrix} \red2&\blue4&\green6 \\ \red3&\blue5&\green7 \end{bmatrix}.
-$$</p>
-
-<div class="box graybox"><p>The <b>matrix</b> of a linear function $f$
-is a matrix whose columns are $f(1,0,0,\dots,0)$, $f(0,1,0,\dots,0)$, $\dots$, $f(0,0,\dots,0,1)$,
-written vertically.
+<div class="box graybox"><p>If a function is linear and its inverse function exists,
+the inverse function is also linear.
 </p>
 
-</div><p>A matrix with 2 rows and 3 columns is also called a $2 \times 3$ matrix.
-Note that the number of rows goes first, even though usually $x$ goes before $y$.
-To prevent this confusion, in these derivations I tend to say something like
-"width 3 and height 2" instead of "$2 \times 3$ matrix".</p>
+</div><p>Recall that any matrix $A$ corresponds with a linear function.
+If that function has an inverse function,
+we say that the matrix $A$ is <b>invertible</b>,
+and its <b>inverse matrix</b> $A^{-1}$
+is the matrix of the inverse function of $A$'s linear function.</p>
 
 <p>Examples:
 <ul><li>
-    Any rotation around the origin is a linear function.
-    With 90 degrees counter-clockwise,
-    $(1,0)$ rotates to $\red{(0,1)}$ and $(0,1)$ rotates to $\blue{(-1,0)}$,
-    so the matrix
+    Let
     $$
-    \begin{bmatrix} \red 0 & \blue{-1} \\ \red{1} & \blue 0 \end{bmatrix}
+    R(\theta) = \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{bmatrix}
     $$
-    represents a rotation by 90 degrees counter-clockwise.
+    be the matrix that rotates by an angle $\theta$.
+    Its inverse matrix rotates by the same angle, but in the opposite direction, so
+    $$
+    R(\theta)^{-1} = R(-\theta).
+    $$
 </li><li>
-    Rotating $(1,0)$ counter-clockwise by any angle $\theta$ gives $\red{(\cos(\theta),\sin(\theta))}$,
-    and rotating $(0,1)$ gives $\blue{(-\sin(\theta),\cos(\theta))}$.
-    This was explained in <a href="rotating-intro.html#arbitrary-angle">the previous derivation</a>.
-    The matrix representing the rotation is
-    $$
-    \begin{bmatrix} \red{\cos(\theta)} & \blue {-\sin(\theta)} \\ \red{\sin(\theta)} & \blue{\cos(\theta)} \end{bmatrix}.
-    $$
-    This is called a <b>rotation matrix</b>. If you plug in $\theta=90^\circ$, you should get the same matrix as above.
+    The inverse function of "do nothing" is "do nothing", so
+    the inverse of the identity matrix is the identity matrix,
+    $I^{-1} = I$.
 </li><li>
-    The matrix
-    $$
-    \begin{bmatrix} \red 1 & \blue{1} \\ \red{0} & \blue 1 \end{bmatrix}
-    $$
-    corresponds with a linear function $f$ for which $f(1,0)=(1,0)$ unchanged,
-    but $f(0,1)=(1,1)$ is more to the right than $(0,1)$ was originally,
-    like with <i>italic text</i>.
-    This linear function is called a <b>shear</b>.</p>
-
-<p><img width="513" height="172" class="asymptote" src="../asymptote/985b4f092bb6a12c8f3f0c6c583b9088.svg" /></p><p>For a better visualization of the shear, see
-<a href="https://www.youtube.com/watch?v=kYB8IZa5AuE&t=8m30s">this 3blue1brown video</a> starting at 8:30.
-In general, 3blue1brown's linear algebra videos are really good and you should watch them.</p>
-
-<p></li><li>
-    The function $f(x,y)=(x,y)$ (i.e. do nothing) is a linear function.
-    Because $\red{f(1,0)=(1,0)}$ and $\blue{f(0,1)=(0,1)}$, its matrix is
-    $$
-    I = \begin{bmatrix} \red 1 & \blue 0 \\ \red 0 & \blue 1 \end{bmatrix}.
-    $$
-    This matrix is called the <b>identity matrix</b>,
-    and the "do nothing" function is correspondingly called the <b>identity function</b>.
-    This also works with any other dimension instead of 2.
-    For example, the $4 \times 4$ identity matrix is
-    $$
-    I = \begin{bmatrix} 1&0&0&0 \\ 0&1&0&0 \\ 0&0&1&0 \\ 0&0&0&1 \end{bmatrix}.
-    $$
-    In linear algebra, the letter $I$ can mean an identity matrix of any size,
-    and the size should be clear from how $I$ is used.
+    The inverse of the zero matrix $O$ is undefined,
+    because the linear function corresponding to the zero matrix
+    always outputs the zero vector, regardless of what the input was.
 </li><li>
-    The <b>zero matrix</b>
-    $$
-    O = \begin{bmatrix} 0&0 \\ 0&0 \end{bmatrix}
-    $$
-    corresponds with a linear function that always outputs a zero vector.
-    As with $I$, the letter $O$ can refer to a zero matrix of any size.
+    The matrix $5I$ multiplies a vector by 5,
+    because $5I\vec v = 5\vec v$ for any vector $\vec v$
+    (see <a href="matrix-num.html#matrix-matrix-and-number-matrix-multiplication">here</a> for more details).
+    The inverse matrix should divide the vector by 5, so it is $\frac{1}{5}I$.
 </li></ul>
 </p>
 
-<h2 id="introducing-matrix-vector-multiplication">Introducing matrix-vector multiplication<a class="headerlink" href="#introducing-matrix-vector-multiplication" title="Link to this title">¶</a></h2><p>In this context, instead of writing vectors like $(10,20)$,
-they are usually written like
-$$
-\begin{bmatrix}10\\20\end{bmatrix}.
-$$
-Writing a matrix and a vector next to each other, e.g.
-$$
-\begin{bmatrix}2&4 \\ 3&5 \end{bmatrix}\begin{bmatrix}10\\20\end{bmatrix}
-$$
-means $f(\text{the vector})$, where $f$ is the linear function corresponding to the matrix.
-For example, with a 2D linear function $f$, we have $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$,
-so if $\red{f(1,0)=(2,3)}$ and $\blue{f(0,1)=(4,5)}$, we get
-$$
-\begin{align}
-f({10},{20})&={10}\red{f(1,0)}+{20}\blue{f(0,1)} \\
-= \begin{bmatrix} \red2 & \blue4 \\ \red3 & \blue5 \end{bmatrix}
-    \begin{bmatrix} {10} \\ {20} \end{bmatrix}
-&= {10}\red{\begin{bmatrix} 2 \\ 3 \end{bmatrix}} + {20}\blue{\begin{bmatrix}4 \\ 5 \end{bmatrix}}
-=\begin{bmatrix} 20+80 \\ 30+100 \end{bmatrix}
-= \begin{bmatrix} 100 \\ 130 \end{bmatrix}.
-\end{align}
-$$</p>
+<h2 id="when-does-an-inverse-matrix-exist">When does an inverse matrix exist?<a class="headerlink" href="#when-does-an-inverse-matrix-exist" title="Link to this title">¶</a></h2><p>As explained <a href="../eqs-and-funcs/inverse-funcs.html">here</a>,
+the inverse function of $f$ exists if and only if both of these conditions are met:
+<ol><li>
+    The function $f$ gives different outputs for different inputs.
+</li><li>
+    The function $f$ produces each output with some input.
+</li></ol></p>
 
-<div class="box graybox"><p><b>Multiplying a matrix and a vector</b> means
-creating a linear combination of the columns of the matrix
-with numbers from the vector as coefficients.
-This calculates $f(\text{the vector})$,
-where $f$ is the linear function corresponding to the matrix.
+<p>Let $f$ be the linear function corresponding to a matrix $A$.
+Let's look at what it would mean to get the same output for two different inputs,
+$A\red{\vec v} = A\blue{\vec w}$ with $\red{\vec v} \ne \blue{\vec w}$.
+As shown <a href="matrix-vector.html#introducing-matrix-vector-multiplication">here</a>,
+$A\red{\vec v}$ is a linear combination of $A$'s columns, with numbers from $\red{\vec v}$ as coefficients.
+So for example, if $\red{\vec v = (6,0)}$, $\blue{\vec w = (3,1)}$ and
+$$
+A = \begin{bmatrix} \magenta1 & \green3 \\ \magenta2 & \green6 \end{bmatrix},
+$$
+we would have
+$$
+\red6\begin{bmatrix} \magenta1 \\ \magenta2 \end{bmatrix}
++\red0\begin{bmatrix} \green3 \\ \green6 \end{bmatrix}
+=\blue3\begin{bmatrix} \magenta1 \\ \magenta2 \end{bmatrix}
++\blue1\begin{bmatrix} \green3 \\ \green6 \end{bmatrix}.
+$$
+Because $\red{\vec v} \ne \blue{\vec w}$, the linear combinations don't have the same coefficients.
+<a href="span-and-dep-defs.html#counting-vectors-on-both-sides">This is not possible with linearly independent vectors</a>,
+so if the columns are linearly independent,
+it is not possible to have $A\red{\vec v} = A\blue{\vec w}$ with $\red{\vec v} \ne \blue{\vec w}$.</p>
+
+<p>If the columns of a matrix are linearly dependent,
+it means that one of them is a linear combination of others,
+which then means that you can multiply the matrix with two different vectors and get the same resulting vector.
+For example, if a matrix $A$ has 3 columns $\vec{c_1},\vec{c_2},\vec{c_3}$
+and $\vec{c_1} = 4\vec{c_2}-3\vec{c_3}$, we get
+$$
+A\begin{bmatrix}1\\0\\0\end{bmatrix} = A\begin{bmatrix}0\\4\\-3\end{bmatrix}.
+$$
+So if the columns are linearly independent, there are no two different vectors that produce the same vector when multiplied with $A$,
+and if the columns are linearly dependent, there there are such vectors.</p>
+
+<div class="box graybox"><p>A matrix produces different outputs for different inputs
+if and only if the columns of the matrix are linearly independent.
 </p>
 
-</div><p>I will <a href="matrix-sum.html#added-matrices-with-matrix-vector-multiplication">later</a> explain why this operation is called multiplying.</p>
+</div><p>In other words, linear independence is needed for a matrix to be invertible,
+and it is enough to take care of condition 1.</p>
 
-<p>Examples:
+<p>Let's look at the second condition.
+Consider the set of all output vectors of the matrix;
+that is, the set of all vectors $A\vec v$, where $\vec v$ is any vector.
+Because $A\vec v$ can be any linear combination of $A$'s columns,
+this is in fact the span of $A$'s columns.</p>
+
+<div class="box graybox"><p>A matrix with height $n$ is invertible if and only if
+its columns are linearly independent and their span is the set of all $n$-dimensional vectors.
+</p>
+
+</div><p>From here, we split this into 3 cases.
+We can assume that the columns are linearly independent,
+because we will need that anyway for the first condition.
 <ul><li>
-    To rotate the vector $(2,1)$ counter-clockwise 90 degrees, you can calculate
-    $$
-    \begin{bmatrix} \red 0 & \blue{-1} \\ \red{1} & \blue 0 \end{bmatrix}
-    \begin{bmatrix} 2 \\ 1 \end{bmatrix}
-    = 2\red{\begin{bmatrix}0\\1\end{bmatrix}}+1\blue{\begin{bmatrix}-1\\0\end{bmatrix}}
-    = \begin{bmatrix}-1\\2\end{bmatrix}.
-    $$
-    This is the same result we got <a href="rotating-intro.html#90-degrees-counter-clockwise">here</a>.
+    If the matrix is an $n \times n$ matrix (same width and height, i.e. a square matrix),
+    then independentness alone is enough to guarantee that the matrix is invertible:
+    there are $n$ columns and each column is an $n$-dimensional vector,
+    and <a href="span-and-dep-finding.html#spanning-with-just-linear-independence">the span of $n$ linearly independent $n$-dimensional vectors
+    is the set of all $n$-dimensional vectors</a>.
 </li><li>
-    To rotate $(2,1)$ counter-clockwise by any angle $\theta$, we can now calculate
-    $$
-    \begin{bmatrix} \red{\cos(\theta)} & \blue {-\sin(\theta)} \\ \red{\sin(\theta)} & \blue{\cos(\theta)} \end{bmatrix}
-    \begin{bmatrix}2\\1\end{bmatrix}
-    = 2\red{\begin{bmatrix}\cos(\theta)\\ \sin(\theta)\end{bmatrix}}+1\blue{\begin{bmatrix}-\sin(\theta)\\ \cos(\theta)\end{bmatrix}}
-    = \begin{bmatrix}2\cos(\theta)-\sin(\theta)\\ 2\sin(\theta)+\cos(\theta)\end{bmatrix}.
-    $$
-    This would be difficult to do without linear algebra,
-    but this way it's easy.
+    If $\text{width} > \text{height}$,
+    the columns are $n$-dimensional vectors and there are more than $n$ columns,
+    where $n$ is the height of the matrix.
+    <a href="span-and-dep-finding.html#maximum-number-of-independent-vectors">This means that they can't be linearly independent</a>,
+    so matrices like this are not invertible.
 </li><li>
-    Applying the shear to $(1,1)$ gives
-    $$
-    \begin{bmatrix} \red 1 & \blue{1} \\ \red{0} & \blue 1 \end{bmatrix}
-    \begin{bmatrix} 1 \\ 1 \end{bmatrix}
-    = 1\red{\begin{bmatrix}1\\0\end{bmatrix}} + 1\blue{\begin{bmatrix}1\\1\end{bmatrix}}
-    = \begin{bmatrix}2\\1\end{bmatrix}.
-    $$</p>
+    If $A$ is invertible, then the inverse $A^{-1}$ is also invertible,
+    with $A$ as its inverse.
+    Consider a matrix that has width 3 and height 4.
+    It takes in 3D vectors and outputs 4D vectors,
+    so its inverse $A^{-1}$, if it exists, takes in 4D vectors and output 3D vectors,
+    and would have $A$ as its inverse matrix.
+    So $A^{-1}$ would be an invertible matrix with width 4 and height 3.
+    As shown above, this isn't possible,
+    and therefore matrices with $\text{width} < \text{height}$ can't be invertible.
+</li></ul></p>
 
-<p><img width="633" height="172" class="asymptote" src="../asymptote/875c75cbc61309a7f6017ded7c1b62a0.svg" /></p><p></li><li>
-    Multiplying a vector by the identity matrix $I$ does nothing:
-    $$
-    \begin{bmatrix} \red 1 & \blue 0 & \green 0 \\ \red 0 & \blue 1 & \green 0 \\ \red 0 & \blue 0 & \green 1 \end{bmatrix}
-    \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
-    = 1\red{\begin{bmatrix}1\\0\\0\end{bmatrix}}
-    + 2\blue{\begin{bmatrix}0\\1\\0\end{bmatrix}}
-    + 3\green{\begin{bmatrix}0\\0\\1\end{bmatrix}}
-    = \begin{bmatrix}1\\2\\3\end{bmatrix}
-    $$
-</li><li>
-    Multiplying a vector by the zero matrix $O$ always results in the zero vector:
-    $$
-    \begin{bmatrix} \red 0 & \blue 0 & \green 0 \\ \red 0 & \blue 0 & \green 0 \\ \red 0 & \blue 0 & \green 0 \end{bmatrix}
-    \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
-    = 1\red{\begin{bmatrix}0\\0\\0\end{bmatrix}}
-    + 2\blue{\begin{bmatrix}0\\0\\0\end{bmatrix}}
-    + 3\green{\begin{bmatrix}0\\0\\0\end{bmatrix}}
-    = \begin{bmatrix}0\\0\\0\end{bmatrix}
-    $$
-</li></ul>
-</p>
+<p>We can now summarize invertibility into a very simple condition:</p>
 
-<h2 id="input-and-output-dimensions">Input and output dimensions<a class="headerlink" href="#input-and-output-dimensions" title="Link to this title">¶</a></h2><p>Because the numbers in the input vector correspond with the columns of the matrix,
-there must be the same number of columns as there are numbers in the vector.
-For example, this matrix-vector multiplication is undefined,
-because the vector contains 2 numbers but the matrix has 3 columns:
-$$
-\begin{bmatrix} \red1&\blue3&\green5 \\ \red2&\blue4&\green6 \end{bmatrix} \begin{bmatrix} 7 \\ 8 \end{bmatrix}
-= 7\red{\begin{bmatrix}1 \\ 2\end{bmatrix}} + 8\blue{\begin{bmatrix}3 \\ 4\end{bmatrix}} + \text{???}\green{\begin{bmatrix}5 \\ 6\end{bmatrix}}
-$$
-Here's a matrix-vector multiplication that actually works:
-$$
-\begin{bmatrix} \red1&\blue3&\green5 \\ \red2&\blue4&\green6 \end{bmatrix} \begin{bmatrix} 7\\8\\9 \end{bmatrix}
-= 7\red{\begin{bmatrix}1 \\ 2\end{bmatrix}} + 8\blue{\begin{bmatrix}3 \\ 4\end{bmatrix}} + 9\green{\begin{bmatrix}5 \\ 6\end{bmatrix}}
-= \begin{bmatrix}76 \\ 100\end{bmatrix}
-$$
-Here the width of the matrix is 3 and the height is 2.
-It can be multiplied with 3D vectors, and the result is a 2D vector.
-This works in general.</p>
-
-<div class="box graybox"><p>The width of a matrix is the dimension of its input vectors.
-The height of a matrix is the dimension of its output vectors.
+<div class="box graybox"><p>A matrix is invertible if and only if it is a square matrix and its columns are linearly independent.
 </p>
 
 </div></div>

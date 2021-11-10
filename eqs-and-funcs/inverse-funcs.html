@@ -34,43 +34,28 @@
     <link rel="stylesheet" href="../css/animation.css">
 <link rel="stylesheet" href="../css/style.css">
 
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-            extensions: ["tex2jax.js"],
-            jax: ["input/TeX", "output/CommonHTML"],
-            tex2jax: {
-              inlineMath: [ ['$','$'] ],
-              displayMath: [ ['$$','$$'] ],
-            },
-            "HTML-CSS": { availableFonts: ["TeX"] },
-            TeX: {
-              Macros: {
-                bigvec: [ "\\overrightarrow{#1}", 1 ],
-                abs: [ "\\left| {#1} \\right|", 1 ],
-                Span: [ "\\operatorname{span}", 0 ],
-                rotate: [ "\\operatorname{rotate}", 0 ],
-                I: [ "\\vec{i}", 0 ],
-                J: [ "\\vec{j}", 0 ],
-                K: [ "\\vec{k}", 0 ],
-
-
-                // darkred is too dark, red is too bright
-                red: [ "\\color{##c00}{#1}", 1 ],
-                blue: [ "\\color{blue}{#1}", 1 ],
-                green: [ "\\color{green}{#1}", 1 ],
-                magenta: [ "\\color{magenta}{#1}", 1 ],
-
-                epsi: [ "\\varepsilon", 0 ],
-                leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
-
-                // binom doesn't work on adder's computer
-                // mybinom works, but it's too tall for inline math
-                mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
-              }
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [ ['$','$'] ],
+                displayMath: [ ['$$','$$'] ],
+                macros: {
+                    span: '\\operatorname{span}',
+                    rotate: '\\operatorname{rotate}',
+                    I: '\\vec{i}',
+                    J: '\\vec{j}',
+                    K: '\\vec{k}',
+                    // colors chosen so that they are distinguishable when together
+                    red: [ "{\\color{##c00}{#1}}", 1 ],
+                    blue: [ "{\\color{blue}{#1}}", 1 ],
+                    green: [ "{\\color{green}{#1}}", 1 ],
+                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                    darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
+                }
             }
-          });
+        };
         </script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
         </head>
 <body>
 <div id="content">
@@ -186,27 +171,16 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a><a href="../linalg/span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="../linalg/span-and-dep-finding.html">Finding span and checking linear (in)dependence</a>
+            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a><a href="../linalg/span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="../linalg/span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="../linalg/matrix-inverse.html">Inverse matrices</a>
         </div>
         </div>
-<h1 id="inverse-functions">Inverse Functions<a class="headerlink" href="#inverse-functions" title="Link to this title">¶</a></h1>
-    <div class="box redbox">
-    <p>
-        On this page, the word "function" means a function that
-        takes in a real number as its only argument,
-        and evaluates to another real number.
-        Some real numbers might not be valid inputs of the function;
-        for example, square root is a function that
-        accepts only nonnegative inputs.
-    </p>
-    </div>
-    <p>The inverse function of a function $f$ is a function that takes in a value of $f$ as an argument,
-and it answers the question "which input did $f$ take when it gave this value".
+<h1 id="inverse-functions">Inverse Functions<a class="headerlink" href="#inverse-functions" title="Link to this title">¶</a></h1><p>The inverse function of a function $f$ is a function that takes in an output of $f$ as an argument,
+and it answers the question "which input did $f$ take when it gave this output".
 In other words,
 $$
-(\text{inverse function of $f$})(f(x)) = x
+(\text{inverse function of $f$})(f(x)) = x,
 $$
-for all numbers $x$ for which $f(x)$ is defined.</p>
+for all inputs $x$ (usually numbers, but they could also be e.g. vectors).</p>
 
 <p>For example, let $f(x) = 2x$ and $g(x) = \frac{x}{2}$.
 Now $g$ is the inverse function of $f$, because
@@ -219,25 +193,42 @@ for all numbers $x$.</p>
 Be careful to not confuse this notation with powers.
 For example, $3^{-1} = \frac{1}{3}$ is a number, but
 if $f(x) = 2x$, then $f^{-1}$ is a function, given by $f^{-1}(x)=\frac{x}{2}$.
+It is not same as $f(x)^{-1} = (2x)^{-1} = \frac{1}{2x}$.
 </p>
 
-<h2 id="issues">Issues<a class="headerlink" href="#issues" title="Link to this title">¶</a></h2><p>One problem with inverse functions is that they might not be defined for all numbers,
-even if the original function is defined for all numbers.
-For example, let $f(x) = 2^x$ and $g(x) = \log_2(x)$.
-Now $f(x)$ is defined for all numbers $x$.
-From logarithms, we know that $g(f(x)) = \log_2(2^x) = x$, so $g$ is the inverse function of $f$.
-However, $g(-1)$ is undefined, because $f(x)=2^x$ is always positive;
-there is no number $x$ for which $f(x) = -1$, which is what $g(-1)$ means.</p>
+<h2 id="issues">Issues<a class="headerlink" href="#issues" title="Link to this title">¶</a></h2><p>One problem is functions that don't produce all possible outputs.
+For example, the function $f(x) = 2^x$ outputs only positive values.
+Its inverse function seems to be $g(x) = \log_2(x)$, because $g(f(x)) = \log_2(2^x) = x$.
+However, $g(-1)$ is undefined, because there is no input $x$ for which $f(x) = -1$.
+We can work around this problem and still say that $g$ is an inverse function of $f$
+by defining "an output" to mean a positive number, not any number whatsoever.
+In general, redefining the concept of "an output" solves this problem.</p>
 
-<p>Another problem is that not all functions have an inverse function.
+<p>A more fatal problem is functions that produce the same output for two different inputs,
+$f(a)=f(b)$ even though $a\ne b$.
 For example, let $f(x) = x^2$.
 Now we have $f(2) = 4 = f(-2)$, so what should $(\text{inverse function of $f$})(4)$ do?
 Should that evaluate to $2$ or $-2$?
-We don't want to just pick one choice randomly, so instead we say that it's undefined.
-However, there is an inverse function if this problem doesn't occur; that is,
-if $f(a) \ne f(b)$ for all numbers $a,b$ satisfying $a \ne b$.
+We don't want to just pick one choice randomly, so instead we say that it's undefined.</p>
+
+<p>If one or both of these problems occurs, the inverse function doesn't exist.
+If neither of them occurs,
+it means that the function gets all possible outputs,
+and no output occurs with two different inputs.
+Because there is exactly one output corresponding to each input,
+the inverse function can just find the input corresponding to a given output,
+so it exists.</p>
+
+<div class="box graybox"><p>The inverse function of $f$ exists if and only if both of the following two conditions are met:
+<ul><li>
+    The function gets all possible outputs:
+    for any output $y$, there is some corresponding input $x$ so that $f(x)=y$.
+</li><li>
+    Different inputs produce different outputs:
+    there are no two different inputs $a \ne b$ such that $f(a)=f(b)$.
+</li></ul>
 </p>
 
-</div>
+</div></div>
 </body>
 </html>

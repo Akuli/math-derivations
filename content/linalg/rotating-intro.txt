@@ -107,7 +107,7 @@ Now we can check whether we did this correctly:
     $$
     |(-y,x)| = \sqrt{(-y)^2+x^2},
     $$
-    which is simplifies to $\sqrt{x^2+y^2}$, so it has the length as $(x,y)$.
+    which is simplifies to $\sqrt{x^2+y^2}$, so it has the same length as $(x,y)$.
     This makes sense, because the length of the vector is
     the distance between origin and the corresponding point,
     and that shouldn't change when rotating.
@@ -184,9 +184,8 @@ asymptote:
 
 We can now similarly multiply $\blue{(-\sin(\theta),\cos(\theta))}$ by a number
 to rotate points on the $y$ axis.
-The minuses can cancel: when multiplying by $-\frac{1}{2}$,
-we get $(\frac{1}{2}\sin(\theta), -\frac{1}{2}\cos(\theta))$,
-with a positive $x$ coordinate.
+In the below picture, when multiplying by $-\frac{1}{2}$,
+the minuses cancel and we get $(\frac{1}{2}\sin(\theta), -\frac{1}{2}\cos(\theta))$.
 
 asymptote:
     unitsize(5.5cm);
@@ -283,7 +282,7 @@ and then used these important properties of the rotation:
 </li></ul>
 
 A **linear function**, also known as a **linear transform**,
-is any function that satisfies the last two properties.
+is any function that satisfies these two properties.
 
 graybox:
     A function $f$ taking vectors as arguments and outputting vectors

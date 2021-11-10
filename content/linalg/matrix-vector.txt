@@ -30,6 +30,8 @@ graybox:
 
 A matrix with 2 rows and 3 columns is also called a $2 \times 3$ matrix.
 Note that the number of rows goes first, even though usually $x$ goes before $y$.
+To prevent this confusion, in these derivations I tend to say something like
+"width 3 and height 2" instead of "$2 \times 3$ matrix".
 
 Examples:
 <ul><li>

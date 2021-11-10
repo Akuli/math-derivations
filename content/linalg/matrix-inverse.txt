@@ -91,7 +91,8 @@ $$
 $$
 Because $\red{\vec v} \ne \blue{\vec w}$, the linear combinations don't have the same coefficients.
 [This is not possible with linearly independent vectors](span-and-dep-defs.html#counting-vectors-on-both-sides),
-so the columns must be linearly dependent.
+so if the columns are linearly independent,
+it is not possible to have $A\red{\vec v} = A\blue{\vec w}$ with $\red{\vec v} \ne \blue{\vec w}$.
 
 If the columns of a matrix are linearly dependent,
 it means that one of them is a linear combination of others,
@@ -131,7 +132,7 @@ because we will need that anyway for the first condition.
     and [the span of $n$ linearly independent $n$-dimensional vectors
     is the set of all $n$-dimensional vectors](span-and-dep-finding.html#spanning-with-just-linear-independence).
 </li><li>
-    If a matrix is wider than it is tall,
+    If $\text{width} > \text{height}$,
     the columns are $n$-dimensional vectors and there are more than $n$ columns,
     where $n$ is the height of the matrix.
     [This means that they can't be linearly independent](span-and-dep-finding.html#maximum-number-of-independent-vectors),
@@ -143,9 +144,9 @@ because we will need that anyway for the first condition.
     It takes in 3D vectors and outputs 4D vectors,
     so its inverse $A^{-1}$, if it exists, takes in 4D vectors and output 3D vectors,
     and would have $A$ as its inverse matrix.
-    So $A^{-1}$ would be an invertible matrix that is wider (4) than it is tall (3).
+    So $A^{-1}$ would be an invertible matrix with width 4 and height 3.
     As shown above, this isn't possible,
-    and therefore matrices that are taller than they are wide aren't invertible either.
+    and therefore matrices with $\text{width} < \text{height}$ can't be invertible.
 </li></ul>
 
 We can now summarize invertibility into a very simple condition:

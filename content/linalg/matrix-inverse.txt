@@ -103,7 +103,7 @@ $$
 A\begin{bmatrix}1\\0\\0\end{bmatrix} = A\begin{bmatrix}0\\4\\-3\end{bmatrix}.
 $$
 So if the columns are linearly independent, there are no two different vectors that produce the same vector when multiplied with $A$,
-and if the columns are linearly dependent, there there are such vectors.
+and if the columns are linearly dependent, there are such vectors.
 
 graybox:
     A matrix produces different outputs for different inputs

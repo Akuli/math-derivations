@@ -51,7 +51,7 @@ graybox:
     The inverse function of $f$ exists if and only if both of the following two conditions are met:
     <ul><li>
         The function gets all possible outputs:
-        for all outputs $y$, there is some corresponding input $x$ so that $f(x)=y$.
+        for any output $y$, there is some corresponding input $x$ so that $f(x)=y$.
     </li><li>
         Different inputs produce different outputs:
         there are no two different inputs $a \ne b$ such that $f(a)=f(b)$.

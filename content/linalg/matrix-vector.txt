@@ -102,7 +102,10 @@ In general, 3blue1brown's linear algebra videos are really good and you should w
 </li></ul>
 
 
-## Matrix-vector multiplication
+comment:
+    can't have two titles both be "Matrix-vector multiplication"
+
+## Introducing matrix-vector multiplication
 
 In this context, instead of writing vectors like $(10,20)$,
 they are usually written like

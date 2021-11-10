@@ -204,6 +204,7 @@ def get_sidebar_content(txtfile):
             link("Matrix times number", "linalg/matrix-num"),
             link("Defining span and linear (in)dependence", "linalg/span-and-dep-defs"),
             link("Finding span and checking linear (in)dependence", "linalg/span-and-dep-finding"),
+            link("Inverse matrices", "linalg/matrix-inverse"),
         ])),
     ])
 

@@ -263,7 +263,6 @@ legacy_mathjax_v2_pages = [
     "content/eqs-and-funcs/how-equations-work.txt",
     "content/eqs-and-funcs/how-inequations-work.txt",
     "content/eqs-and-funcs/incdec-funcs.txt",
-    "content/eqs-and-funcs/inverse-funcs.txt",
     "content/index.txt",
     "content/plane-geometry/inscribed-angle-theorem.txt",
     "content/plane-geometry/inscribed-circle.txt",

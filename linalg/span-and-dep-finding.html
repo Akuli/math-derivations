@@ -232,7 +232,7 @@ are multiples of $\red{\vec u}$.
 </p>
 
 <h2 id="checking-linear-dependence-independence">Checking linear dependence/independence<a class="headerlink" href="#checking-linear-dependence-independence" title="Link to this title">¶</a></h2><p>Using the above result, you can check whether given vectors are linearly dependent or independent
-by repeatedly adding multiples of one vector from another.
+by repeatedly adding multiples of one vector to another.
 In this context, it is common to write the vectors in a matrix
 so that each row of the matrix represents one vector.
 The goal is to <b>get as much zeros as possible</b>,
@@ -411,20 +411,20 @@ $$\begin{align}
 <ul><li>
     The vectors are linearly independent,
     because the resulting vectors
-    $\blue{(2,0,0)}$, $\red{(0,0,\frac{7}{2})}$ and $\magenta{(0,-1,0)}$ are linearly independent.
+    $\blue{(2,0,0)}$, $\red{\left(0,0,\frac{7}{2}\right)}$ and $\magenta{(0,-1,0)}$ are linearly independent.
     None of them is a linear combination of others;
     for example, any linear combination of $\blue{(2,0,0)}$ and $\magenta{(0,-1,0)}$ is on the xy plane,
-    but $\red{(0,0,\frac{7}{2})}$ isn't.
+    but $\red{\left(0,0,\frac{7}{2}\right)}$ isn't.
 </li><li>
     The span of the vectors is
     $$
     \span((2,4,5), (0,-5,-9), (3,5,5))
-    = \span(\blue{(2,0,0)}, \red{(0,0,\frac{7}{2})}, \magenta{(0,-1,0)}),
+    = \span\left(\blue{(2,0,0)}, \red{\left(0,0,\frac{7}{2}\right)}, \magenta{(0,-1,0)}\right),
     $$
     which is the set of all 3D vectors,
     because any 3D vector $(x,y,z)$ can be written as
     $$
-    (x,y,z) = \frac{x}{2}\blue{(2,0,0)} + \frac{2y}{7}\red{(0,0,\frac{7}{2})} - z\magenta{(0,-1,0)}.
+    (x,y,z) = \frac{x}{2}\blue{(2,0,0)} - y\magenta{(0,-1,0)} + \frac{2z}{7}\red{\left(0,0,\frac{7}{2}\right)}.
     $$
 </li></ul>
 </p>
@@ -674,7 +674,7 @@ To ensure that the first column has the needed zeros, we can do this:
     $$
     \text{new other row} = \text{old other row} + \left(-\frac y x \right) \cdot \text{first row}.
     $$
-    This way, the first number in the second row becomes
+    This way, the first number in the other row becomes
     $$
     y + \left( -\frac{y}{x} \right)x = 0.
     $$
@@ -701,7 +701,7 @@ we have the zeros.</p>
 <p>This shows that there can't be 4 linearly independent 3D vectors.
 We also can't have more than 4, because then we could pick 4 of them,
 and they would be linearly independent.
-The same process works for 2D vectors, 4D vectors, 5D vectors, 6D vectors and so on.</p>
+The same process works with any other dimension $n$ instead of 3.</p>
 
 <div class="box graybox"><p>There cannot be more than $n$ linearly independent $n$-dimensional vectors.
 </p>

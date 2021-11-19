@@ -28,14 +28,14 @@ a & b \\ c & d
 $$
 is
 $$
-A^{-1} = (\text{magic number}) \begin{bmatrix} -d & b \\ c & -a \end{bmatrix},
+A^{-1} = (\text{some number}) \begin{bmatrix} -d & b \\ c & -a \end{bmatrix},
 $$
 where the top left and bottom right corner are swapped,
 and they also have minuses in front.
 
 With the correct inverse matrix, we have $A A^{-1} = I$.
 Let's see what we get if we instead use our guessed inverse matrix,
-ignoring the magic number in front for now:
+ignoring the number in front for now:
 $$
 \begin{align}
 \begin{bmatrix} \red a & \red b \\ \blue c & \blue d \end{bmatrix}

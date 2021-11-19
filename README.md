@@ -10,7 +10,7 @@ that are used in high school math.
 Environment setup (I have no idea what you should do if you don't have `apt`):
 
 ```
-$ sudo apt install asymptote linkchecker make inotify-tools
+$ sudo apt install asymptote
 $ python3 -m pip install --user wheel
 $ python3 -m venv env
 $ . env/bin/activate
@@ -23,6 +23,4 @@ Run these commands **with the virtualenv activated** as needed:
 - Building into `html` directory: `python3 build.py`
     - Add `--reload-browser` to send F5 to the browser window where math-derivations is open.
         You need `sudo apt install xdotool`.
-- Building automatically when a file is saved in the editor: `make buildloop`
-- Checking links: `make linkcheck`
 - Publishing to github pages: `python3 publish.py`

@@ -60,12 +60,13 @@ class MatrixWithRowOperations:
             self._output.append(r"\begin{bmatrix}")
             for y, (color, row) in enumerate(zip(self._current_colors, self._rows)):
                 line = " " * 4 + " & ".join(color(_stringify(v)) for v in row[s])
-                if y < len(self._rows):
+                if y < len(self._rows):  # FIXME: always true
                     line += r" \\"
                 self._output.append(line)
             self._output.append(r"\end{bmatrix}")
-            if s_index < len(slices):
-                self._output.append(r"\qquad")
+            if s_index != len(slices) - 1:
+                print(slices, repr(self._separator))
+                self._output.append(r"\qquad % lol")
 
     # rows[index] *= by
     def multiply_row(self, index, by):

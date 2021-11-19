@@ -66,7 +66,7 @@ class MatrixWithRowOperations:
             self._output.append(r"\end{bmatrix}")
             if s_index != len(slices) - 1:
                 print(slices, repr(self._separator))
-                self._output.append(r"\qquad % lol")
+                self._output.append(r"\qquad")
 
     # rows[index] *= by
     def multiply_row(self, index, by):

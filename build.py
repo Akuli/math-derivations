@@ -205,6 +205,7 @@ def get_sidebar_content(txtfile):
             link("Defining span and linear (in)dependence", "linalg/span-and-dep-defs"),
             link("Finding span and checking linear (in)dependence", "linalg/span-and-dep-finding"),
             link("Inverse matrices", "linalg/matrix-inverse"),
+            link("Transpose", "linalg/transpose"),
         ])),
     ])
 
@@ -379,6 +380,7 @@ stylesheet">
                     I: '\\vec{i}',
                     J: '\\vec{j}',
                     K: '\\vec{k}',
+                    T: '\\operatorname{T}',
                     // colors chosen so that they are distinguishable when together
                     red: [ "{\\color{##c00}{#1}}", 1 ],
                     blue: [ "{\\color{blue}{#1}}", 1 ],

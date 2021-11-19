@@ -1,0 +1,146 @@
+# Transpose
+
+The transpose of a matrix $A$, denoted with $A^{\T}$,
+is the matrix whose rows are the columns of $A$ and whose columns are the rows of $A$.
+For example:
+$$
+\begin{bmatrix}
+\red1 & \blue2 & \green3 \\
+\red4 & \blue5 & \green6
+\end{bmatrix}^{\T} =
+\begin{bmatrix}
+\red1 & \red4 \\
+\blue2 & \blue5 \\
+\green3 & \green6
+\end{bmatrix}.
+$$
+
+
+## Transpose and matrix multiplication
+
+It isn't hard to see that the transpose satisfies
+e.g. $(A+B)^{\T}=A^{\T}+B^{\T}$ and $(A-B)^{\T}=A^{\T}-B^{\T}$,
+but the way it behaves with matrix multiplication is more interesting.
+For example, let
+$$
+A=\begin{bmatrix}
+\red1 & \red2 \\
+\blue3 & \blue4
+\end{bmatrix}, \quad
+B=\begin{bmatrix}
+\magenta5 & \green6 \\
+\magenta7 & \green8
+\end{bmatrix}.
+$$
+Now
+$$
+\begin{align}
+AB &= \begin{bmatrix}
+\red1 & \red2 \\
+\blue3 & \blue4
+\end{bmatrix}
+\begin{bmatrix}
+\magenta5 & \green6 \\
+\magenta7 & \green8
+\end{bmatrix} \\
+&= \begin{bmatrix}
+\red{(1,2)} \cdot \magenta{(5,7)} & \red{(1,2)} \cdot \green{(6,8)} \\
+\blue{(3,4)} \cdot \magenta{(5,7)} & \blue{(3,4)} \cdot \green{(6,8)}
+\end{bmatrix} \\
+&= \begin{bmatrix}19 & 22\\43 & 50\end{bmatrix}.
+\end{align}
+$$
+The matrix $A^{\T} B^{\T}$ doesn't have much to do with this,
+because the numbers in $A^{\T} B^{\T}$ are dot products of
+columns from $A$ (rows of $A^{\T}$)
+and rows from $B$ (columns of $B^{\T}$),
+such as $(\red 1, \blue 3) \cdot (\magenta 5, \green 6)$.
+But by swapping the matrices, we get to use rows from $B$ and columns from $A$:
+$$
+\begin{align}
+B^{\T}A^{\T}
+&= \begin{bmatrix}
+\magenta5 & \magenta7 \\
+\green6 & \green8
+\end{bmatrix}
+\begin{bmatrix}
+\red1 & \blue3 \\
+\red2 & \blue4
+\end{bmatrix} \\
+&= \begin{bmatrix}
+\magenta{(5,7)} \cdot \red{(1,2)} & \magenta{(5,7)} \cdot \blue{(3,4)} \\
+\green{(6,8)} \cdot \red{(1,2)} & \green{(6,8)} \cdot \blue{(3,4)}
+\end{bmatrix} \\
+&= \begin{bmatrix}19 & 43\\22 & 50\end{bmatrix}.
+\end{align}
+$$
+The resulting matrices are transposes of each other, $(AB)^{\T} = B^{\T} A^{\T}$.
+It works the same way in general:
+the matrices contain the same numbers
+because they come from the same dot products,
+and they just happen to be in different places in this way.
+
+graybox:
+    If the matrix multiplication $AB$ is defined, we have $(AB)^{\T} = B^{\T} A^{\T}$.
+
+
+## Inverse of transpose
+
+Let $A$ be an invertible square matrix.
+Now $A A^{-1}$ does nothing to a vector when multiplied with it,
+so it is the identity matrix, $A A^{-1}=I$.
+We can use the above result to get
+$$
+(A^{-1})^{\T} A^{\T} = I^{\T}.
+$$
+The transpose of the identity matrix is just the identity matrix itself, e.g.
+$$
+\begin{bmatrix}
+\red1 & \blue0 & \green0 \\
+\red0 & \blue1 & \green0 \\
+\red0 & \blue0 & \green1
+\end{bmatrix}^{\T} =
+\begin{bmatrix}
+\red1 & \red0 & \red0 \\
+\blue0 & \blue1 & \blue0 \\
+\green0 & \green0 & \green1
+\end{bmatrix},
+$$
+so we have
+$$
+(A^{-1})^{\T} A^{\T} = I.
+$$
+If $A^{\T}$ is not invertible,
+it produces the same output for two different vectors,
+$A^{\T} \red v = A^{\T} \blue w$ with $\red v \ne \blue w$
+(see [the previous derivation](matrix-inverse.html#when-does-an-inverse-matrix-exist)).
+By applying $(A^{-1})^{\T}$, we now get $(A^{-1})^{\T} A^{\T} \red v = (A^{-1})^{\T} A^{\T} \blue w$,
+and because the vectors are being multiplied by the identity matrix,
+we now have $\red v = \blue w$ even though we started with $\red v \ne \blue w$.
+This means that the matrix $A^{\T}$ has to be invertible.
+We also see that its inverse matrix is $(A^{-1})^{\T}$.
+
+graybox:
+    If a matrix $A$ is invertible, its transpose is also invertible,
+    with the transpose of $A$'s inverse as its inverse.
+    $$
+    (A^{\T})^{-1} = (A^{-1})^{\T}
+    $$
+
+If $A$ is not invertible, then $A^{\T}$ can't be invertible either:
+if it was, we could take a transpose again, and then $A = (A^{\T})^{\T}$ would be invertible.
+
+graybox:
+    A matrix is invertible if and only if its transpose is invertible.
+
+Because invertibility of a square matrix means that the columns are linearly independent,
+we get a somewhat surprising result.
+
+graybox:
+    The columns of a square matrix are linearly independent
+    if and only if the rows are linearly independent.
+
+For example, [the algorithm for checking linear
+independence](span-and-dep-finding.html#checking-linear-dependence-independence)
+checks whether the rows of a matrix are linearly dependent or independent,
+so it in fact checks whether a matrix is invertible.

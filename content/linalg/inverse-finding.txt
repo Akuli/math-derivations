@@ -17,7 +17,7 @@ These steps can be used to do many different things:
 On this page, I will call adding a multiple of one row to another
 and multiplying a row by a nonzero constant
 **elementary row operations**.
-We will find one more use for them.
+We will find one more use case for them.
 
 
 ## Elementary row operations as matrix multiplication
@@ -58,7 +58,7 @@ $$
 \end{align}
 $$
 This added a multiple of the first row to the second row.
-Moving the 5 down adds to the bottom row instead:
+Moving the $5$ down adds to the bottom row instead:
 $$
 \begin{bmatrix}
 1&0&0 \\
@@ -77,7 +77,7 @@ $$
 \blue g+5\red a&\blue h+5\red b&\blue i+5\red c
 \end{bmatrix}
 $$
-Moving the $5$ right instead changes the row being multiplied and added:
+Moving the $5$ right makes the added numbers come from a different row:
 $$
 \begin{bmatrix}
 1&0&0 \\
@@ -119,15 +119,14 @@ $$
 \blue g&\blue h&\blue i
 \end{bmatrix}
 $$
-
-graybox:
-    Any elementary row operation can be viewed as
-    multiplying from left by a matrix.
-
 Because [order matters](matrix-matrix.html#order-matters),
 it is important that the matrix representing the elementary operation
 (i.e. the matrix where only one number differs from the identity matrix)
 is on the left, and the matrix whose rows are used is on the right.
+
+graybox:
+    Any elementary row operation can be viewed as
+    multiplying from left by a matrix.
 
 
 ## Finding the inverse with elementary row operations
@@ -143,8 +142,8 @@ $$
 Just like in [this derivation](transpose.html#inverse-of-transpose),
 this shows that $A$ is invertible,
 and its inverse matrix is $E_5 E_4 E_3 E_2 E_1$.
-To avoid $E_5 E_4 E_3 E_2 E_1$ as a complicated matrix multiplication,
-we can rewrite it with an extra $I$:
+To avoid having to calculate $E_5 E_4 E_3 E_2 E_1$ as a huge matrix multiplication,
+we can rewrite it with an extra $I$ at the end:
 $$
 A^{-1} = E_5 E_4 E_3 E_2 E_1 = E_5 E_4 E_3 E_2 E_1 I
 $$
@@ -155,8 +154,7 @@ For example, let's find the inverse of
 $$
 A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}.
 $$
-Because we will apply the same operations to the identity matrix,
-let's write it next to $A$ and apply the same operations to both.
+Because we will apply the same operations to $A$ and $I$, let's write them next to each other.
 
 python:
     from fractions import Fraction
@@ -167,11 +165,10 @@ python:
     ], separator=2)
     return "$$" + matrix.get_output() + "$$"
 
-The goal is to get the identity matrix on the left side
-(i.e. apply operations to $A$ so that it turns into $I$).
+Next we choose the elementary row operations to apply so that we get an identity matrix on the left side,
+i.e. $A$ has turned into the identity matrix.
 The 1 in top left corner is already correct.
-To get $0$ below it, we can add the top row to it multiplied with -3,
-which brings the bottom corner to $\blue 3 + (-3)\red 1 = 0$.
+To get $0$ below it, we notice that $\blue 3 + (-3)\red 1 = \magenta 0$.
 
 python:
     from fractions import Fraction
@@ -213,7 +210,7 @@ python:
     matrix.add_multiple(src=1, dest=0, scalar=-2)
     return "$$" + matrix.get_output() + "$$"
 
-So in total, we did these 3 steps:
+Here are all the steps:
 
 python:
     from fractions import Fraction
@@ -238,3 +235,109 @@ $$
 $$
 
 
+## Checking when it works
+
+Let's check which invertible matrices can be turned into
+the identity matrix with elementary row operations,
+i.e. when this way to compute inverse matrices works.
+
+Consider any invertible $4 \times 4$ matrix.
+Because it doesn't matter what numbers exactly it contains, I will denote "any number" with $*$.
+$$
+\begin{bmatrix}
+\red *&*&*&*\\
+\red *&*&*&*\\
+\red *&*&*&*\\
+\red *&*&*&*
+\end{bmatrix}
+$$
+Consider the left column, highlighted in red.
+It must contain some nonzero number,
+because if it was zeros only, then the columns would be linearly dependent
+and the matrix wouldn't be invertible.
+Let's say that the nonzero number is 5.
+$$
+\begin{bmatrix}
+\red*&*&*&*\\
+\red*&*&*&*\\
+\red5&*&*&*\\
+\red*&*&*&*
+\end{bmatrix}
+$$
+If the top left corner is zero, we can add the row with 5 (or whatever the nonzero number is) to it.
+This way we can ensure there's a nonzero number in the top left corner.
+Let's say it's 7.
+$$
+\begin{bmatrix}
+\red7&*&*&*\\
+\red*&*&*&*\\
+\red5&*&*&*\\
+\red*&*&*&*
+\end{bmatrix}
+$$
+Let's now multiply the top row by $\frac{1}{7}$.
+This way we get 1 in the corner, just like in an identity matrix.
+$$
+\begin{bmatrix}
+\red1&*&*&*\\
+\red*&*&*&*\\
+\red5&*&*&*\\
+\red*&*&*&*
+\end{bmatrix}
+$$
+We can now add multiples of the top row to other rows
+so that the rest of the first column becomes zeros.
+For example, adding $-5$ times the first row cancels the $5$ in the third row.
+$$
+\begin{bmatrix}
+1&*&*&*\\
+0&\red*&*&*\\
+0&\red*&*&*\\
+0&\red*&*&*
+\end{bmatrix}
+$$
+Let's now focus on the numbers in the second column except the topmost one,
+again highlighted in red.
+If they were all zero, then the second column would be $(x,0,0,0)$ with some number $x$,
+and it would be a linear combination of the first column $(1,0,0,0)$.
+Because the matrix is invertible, this isn't possible, and one of the red numbers is nonzero.
+Just like before, we can ensure that the first number is nonzero, e.g. $5$,
+and then multiply the row by e.g. $\frac{1}{5}$ to get it to $1$.
+$$
+\begin{bmatrix}
+1&*&*&*\\
+0&\red1&*&*\\
+0&\red*&*&*\\
+0&\red*&*&*
+\end{bmatrix}
+$$
+We can again zero the rest of the column this way,
+including the topmost number that we have ignored so far.
+$$
+\begin{bmatrix}
+1&0&*&*\\
+0&1&*&*\\
+0&0&\red*&*\\
+0&0&\red*&*
+\end{bmatrix}
+$$
+If the two numbers highlighted in red were both zero,
+the third column would be $(x,y,0,0)$ with some numbers $x$ and $y$,
+so it would be a linear combination of the first column $(1,0,0,0)$
+and the second column $(0,1,0,0)$.
+This isn't possible, because the columns are linearly independent,
+so one of the two red numbers is nonzero.
+As before, we can ensure that the topmost red number is nonzero.
+Let's say it's 7.
+$$
+\begin{bmatrix}
+1&0&*&*\\
+0&1&*&*\\
+0&0&\red7&*\\
+0&0&\red*&*
+\end{bmatrix}
+$$
+By continuing this process, we eventually arrive at the identity matrix.
+
+graybox:
+    The inverse of any invertible matrix can be calculated with elementary row operations.

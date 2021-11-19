@@ -207,6 +207,7 @@ def get_sidebar_content(txtfile):
             link("Inverse matrices", "linalg/matrix-inverse"),
             link("Transpose", "linalg/transpose"),
             link("Finding inverse matrices", "linalg/inverse-finding"),
+            link(r"$2 \times 2$ inverse formula", "linalg/inverse-2x2"),
         ])),
     ])
 

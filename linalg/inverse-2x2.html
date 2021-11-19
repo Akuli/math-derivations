@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Reflecting
+<title>2×2 inverse matrix formula
  - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
@@ -34,43 +34,29 @@
     <link rel="stylesheet" href="../css/animation.css">
 <link rel="stylesheet" href="../css/style.css">
 
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-            extensions: ["tex2jax.js"],
-            jax: ["input/TeX", "output/CommonHTML"],
-            tex2jax: {
-              inlineMath: [ ['$','$'] ],
-              displayMath: [ ['$$','$$'] ],
-            },
-            "HTML-CSS": { availableFonts: ["TeX"] },
-            TeX: {
-              Macros: {
-                bigvec: [ "\\overrightarrow{#1}", 1 ],
-                abs: [ "\\left| {#1} \\right|", 1 ],
-                Span: [ "\\operatorname{span}", 0 ],
-                rotate: [ "\\operatorname{rotate}", 0 ],
-                I: [ "\\vec{i}", 0 ],
-                J: [ "\\vec{j}", 0 ],
-                K: [ "\\vec{k}", 0 ],
-
-
-                // darkred is too dark, red is too bright
-                red: [ "\\color{##c00}{#1}", 1 ],
-                blue: [ "\\color{blue}{#1}", 1 ],
-                green: [ "\\color{green}{#1}", 1 ],
-                magenta: [ "\\color{magenta}{#1}", 1 ],
-
-                epsi: [ "\\varepsilon", 0 ],
-                leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
-
-                // binom doesn't work on adder's computer
-                // mybinom works, but it's too tall for inline math
-                mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
-              }
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [ ['$','$'] ],
+                displayMath: [ ['$$','$$'] ],
+                macros: {
+                    span: '\\operatorname{span}',
+                    rotate: '\\operatorname{rotate}',
+                    I: '\\vec{i}',
+                    J: '\\vec{j}',
+                    K: '\\vec{k}',
+                    T: '\\operatorname{T}',
+                    // colors chosen so that they are distinguishable when together
+                    red: [ "{\\color{##c00}{#1}}", 1 ],
+                    blue: [ "{\\color{blue}{#1}}", 1 ],
+                    green: [ "{\\color{green}{#1}}", 1 ],
+                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                    darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
+                }
             }
-          });
+        };
         </script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
         </head>
 <body>
 <div id="content">
@@ -124,25 +110,25 @@
         <input type="checkbox" id="sidebar-checkbox-7" />
         <label for="sidebar-checkbox-7">Transforming curves</label>
         <div class="dropdown">
-            <a href="reflect.html">Reflecting</a><a href="shift.html">Shifting</a><a href="stretch.html">Stretching</a>
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-8" />
         <label for="sidebar-checkbox-8">Line</label>
         <div class="dropdown">
-            <a href="line-eq-normal.html">Equation in normal form</a><a href="distance-line-point.html">Distance between line and point</a><a href="line-eq-slope.html">Equation with slope</a><a href="line-eq-slope-and-point.html">Equation from known slope and point</a><a href="angle-between-lines.html">Angle between lines</a><a href="slope-tan.html">Slope and tan</a><a href="line-eq-determinant.html">Equation with determinant</a>
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-9" />
         <label for="sidebar-checkbox-9">Parabola</label>
         <div class="dropdown">
-            <a href="parabola.html">Equation of parabola</a>
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-10" />
         <label for="sidebar-checkbox-10">Hyperbola</label>
         <div class="dropdown">
-            <a href="why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
         </div>
         
         </div>
@@ -186,40 +172,116 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Linear algebra</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a><a href="../linalg/span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="../linalg/span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="../linalg/matrix-inverse.html">Inverse matrices</a><a href="../linalg/transpose.html">Transpose</a><a href="../linalg/inverse-finding.html">Finding inverse matrices</a><a href="../linalg/inverse-2x2.html">$2 \times 2$ inverse formula</a>
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="matrix-inverse.html">Inverse matrices</a><a href="transpose.html">Transpose</a><a href="inverse-finding.html">Finding inverse matrices</a><a href="inverse-2x2.html">$2 \times 2$ inverse formula</a>
         </div>
         </div>
-<h1 id="reflecting">Reflecting<a class="headerlink" href="#reflecting" title="Link to this title">¶</a></h1><p>This is also known as mirroring and flipping.</p>
+<h1 id="2-2-inverse-matrix-formula">2×2 inverse matrix formula<a class="headerlink" href="#2-2-inverse-matrix-formula" title="Link to this title">¶</a></h1><p><a href="inverse-finding.html#finding-the-inverse-with-elementary-row-operations">Previously</a> we calculated
+$$
+\begin{bmatrix}
+1 & 2 \\ 3 & 4
+\end{bmatrix}^{-1}
+= \begin{bmatrix}
+-2 & 1 \\ \frac{3}{2} & -\frac{1}{2}
+\end{bmatrix}.
+$$
+There's a pattern in this inverse matrix.
+To see it, let's rewrite it as <a href="matrix-num.html">a multiplication with a matrix and a number</a>:
+$$
+\begin{bmatrix} 1&2 \\ 3&4 \end{bmatrix}^{-1}
+= \frac{1}{2} \begin{bmatrix} -4 & 2 \\ 3 & -1 \end{bmatrix}
+$$
+If we ignore the $\frac{1}{2}$ for now,
+we see that the resulting matrix contains the same numbers as the original matrix.
+Specifically, it seems like the inverse of a $2 \times 2$ matrix
+$$
+A = \begin{bmatrix}
+a & b \\ c & d
+\end{bmatrix}
+$$
+is
+$$
+A^{-1} = (\text{some number}) \begin{bmatrix} -d & b \\ c & -a \end{bmatrix},
+$$
+where the top left and bottom right corner are swapped,
+and they also have minuses in front.</p>
 
-<p>To reflect a point to the other side of the $y$ axis,
-simply flip the sign of the $x$ coordinate:</p>
+<p>With the correct inverse matrix, we have $A A^{-1} = I$.
+Let's see what we get if we instead use our guessed inverse matrix,
+ignoring the number in front for now:
+$$
+\begin{align}
+\begin{bmatrix} \red a & \red b \\ \blue c & \blue d \end{bmatrix}
+\begin{bmatrix} \magenta{-d} & \green b \\ \magenta c & \green{-a} \end{bmatrix}
+&= \begin{bmatrix}
+\red{(a,b)} \cdot \magenta{(-d,c)} & \red{(a,b)} \cdot \green{(b,-a)} \\
+\blue{(c,d)} \cdot \magenta{(-d,c)} & \blue{(c,d)} \cdot \green{(b,-a)}
+\end{bmatrix} \\
+&= \begin{bmatrix}
+-ad+bc & 0 \\ 0 & bc-ad
+\end{bmatrix}
+= (-ad+bc)I
+\end{align}
+$$
+Dividing both sides by $-ad+bc$ gives
+$$
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+\frac{1}{-ad+bc}
+\begin{bmatrix} -d & b \\ c & -a \end{bmatrix}
+= I.
+$$
+We have derived a formula for the inverse of a $2 \times 2$ matrix:</p>
 
-<p><img width="381" height="281" class="asymptote" src="../asymptote/3b80d722ddfba6049c5d5176f5fa24a3.svg" /></p><p>In general, reflecting a point $P=(P_x, P_y)$ gives the point $(-P_x, P_y)$,
-because $-P_x$ is what we get by flipping the sign of $P_x$.</p>
-
-<p>Let's consider what happens to the equation of a curve
-when we reflect the whole curve to the other side of the $y$ axis.
-To figure out whether a point $P$ is on the reflected curve,
-we can simply check whether its reflection $(-P_x, P_y)$ is on the original curve.
-In the below picture, $P_x$ and $Q_x$ are negative, so $-P_x$ and $-Q_x$ are positive.</p>
-
-<p><img width="591" height="312" class="asymptote" src="../asymptote/b07cba56b34441cc46456a93fd443dca.svg" /></p><p>To find the equation of the reflected curve, we do this for the point $(x,y)$;
-it is on the reflected curve if and only if its reflection $(-x, y)$ is on the original curve,
-and that's true if and only if the equation of the original curve is satisfied after replacing $x$ with $-x$.</p>
-
-<div class="box graybox"><p>Replacing $x$ with $-x$ in the equation of a curve reflects the curve about the $y$ axis.
+<div class="box graybox"><p>$$
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}^{-1}
+= \frac{1}{-ad+bc} \begin{bmatrix} -d & b \\ c & -a \end{bmatrix}
+$$
 </p>
 
-</div><p>Of course, we can do the exactly same things with $y$ instead of $x$.
-This gives the following result.</p>
+</div><h2 id="dividing-by-zero">Dividing by zero<a class="headerlink" href="#dividing-by-zero" title="Link to this title">¶</a></h2><p>Because we had to divide by $-ad+bc$, we need to consider when it is zero.
+If the original matrix $A$ is not invertible,
+<a href="matrix-inverse.html#when-does-an-inverse-matrix-exist">its columns are linearly independent</a>,
+so one of them is a linear combination of the other.
+If $(a,c) = 5(b,d)$, for example, then
+$$
+-ad+bc = -(5b)d + b(5d) = 0.
+$$
+The same works with any other number of $5$, and also if $(b,d)$ is a multiple of $(a,c)$.</p>
 
-<div class="box graybox"><p>Replacing $y$ with $-y$ in the equation of a curve reflects the curve about the $x$ axis.
+<div class="box graybox"><p>If a $2 \times 2$ matrix is not invertible,
+then the inverse matrix formula divides by zero.
 </p>
 
-</div><p>Here's an example showing what this looks like.
-The blue parabola at top right has no reflections done to it, and
-the purple parabola at bottom left has both of the above reflections combined.</p>
+</div><p>Next we figure out whether it can divide by zero even if the matrix $A$ is invertible.
+If $-ad+bc=0$, then $(-ad+bc)I$ is the zero matrix
+$$
+O = \begin{bmatrix} 0 & 0 \\ 0& 0 \end{bmatrix}.
+$$
+The above equations now give
+$$
+A
+\begin{bmatrix} -d & b \\ c & -a \end{bmatrix} = O.
+$$
+Unlike you might expect, this can happen even if $A$ is not the zero matrix;
+try $a=b=c=0$ and $d=1$ for example.
+If $A$ was invertible,
+with some inverse matrix $A^{-1}$ that the formula can't give us as it divides by zero,
+we would get
+$$
+A^{-1} A \begin{bmatrix} -d & b \\ c & -a \end{bmatrix} = A^{-1}O = O.
+$$
+Because $A^{-1}A$ is the identity matrix, multiplying by it does nothing, and we get
+$$
+\begin{bmatrix} -d & b \\ c & -a \end{bmatrix} = \begin{bmatrix} 0&0 \\ 0&0 \end{bmatrix},
+$$
+and now we get $a=b=c=d=0$, which is impossible,
+because $A$ was supposed to be invertible but the zero matrix isn't.
+This shows that we can't have $-ad+bc=0$ with an invertible matrix.</p>
 
-<p><img width="536" height="639" class="asymptote" src="../asymptote/9db6935dbca9e086b98a22ee3bb1e21e.svg" /></p></div>
+<div class="box graybox"><p>If a $2 \times 2$ matrix is invertible,
+then the inverse matrix formula does not divide by zero
+and produces the correct result.
+</p>
+
+</div></div>
 </body>
 </html>

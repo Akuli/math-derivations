@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Finding inverse matrices
+ - Math Derivations</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+    <link rel="stylesheet" href="../css/animation.css">
+<link rel="stylesheet" href="../css/style.css">
+
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+            tex: {
+                inlineMath: [ ['$','$'] ],
+                displayMath: [ ['$$','$$'] ],
+                macros: {
+                    span: '\\operatorname{span}',
+                    rotate: '\\operatorname{rotate}',
+                    I: '\\vec{i}',
+                    J: '\\vec{j}',
+                    K: '\\vec{k}',
+                    T: '\\operatorname{T}',
+                    // colors chosen so that they are distinguishable when together
+                    red: [ "{\\color{##c00}{#1}}", 1 ],
+                    blue: [ "{\\color{blue}{#1}}", 1 ],
+                    green: [ "{\\color{green}{#1}}", 1 ],
+                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                    darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
+                }
+            }
+        };
+        </script>
+        </head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Discrete math</label>
+        <div class="dropdown">
+            <a href="../discrete/sums.html">Sum formulas</a><a href="../discrete/binom.html">Binomial coefficients</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Circle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Triangle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a><a href="../plane-geometry/inscribed-circle.html">Inscribed circle</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-16" />
+        <label for="sidebar-checkbox-16">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-12" />
+        <label for="sidebar-checkbox-12">Limits</label>
+        <div class="dropdown">
+            <a href="../calc/limit-def.html">Definition of limit</a><a href="../calc/limit-basics.html">Limit basics</a><a href="../calc/limit-props.html">Limit properties</a><a href="../calc/limit-1sided.html">One-sided limits</a><a href="../calc/limit-ineq.html">Inequality and limit</a><a href="../calc/limit-vector.html">Limit of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-13" />
+        <label for="sidebar-checkbox-13">Continuity</label>
+        <div class="dropdown">
+            <a href="../calc/cont-def.html">Definitions of continuity</a><a href="../calc/cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-14" />
+        <label for="sidebar-checkbox-14">Derivative</label>
+        <div class="dropdown">
+            <a href="../calc/derivative-def.html">Definition of derivative</a><a href="../calc/derivative-notation.html">Notation for derivatives</a><a href="../calc/derivative-power-rule-1.html">Power rule, part 1</a><a href="../calc/derivative-basic-rules.html">Basic derivative rules</a><a href="../calc/derivative-chain-rule.html">Chain rule</a><a href="../calc/derivative-power-rule-2.html">Power rule, part 2</a><a href="../calc/derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="../calc/derivative-vector.html">Derivative of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-15" />
+        <label for="sidebar-checkbox-15">Integral</label>
+        <div class="dropdown">
+            <a href="../calc/integral-intro.html">Introduction to integrals</a><a href="../calc/integral-refinement.html">Refinement of partition</a><a href="../calc/integral-def.html">Defining the integral</a><a href="../calc/integral-average.html">Average</a><a href="../calc/integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="../calc/integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="../calc/integral-notation.html">More notation for integrals</a><a href="../calc/integral-rules.html">Integral rules</a><a href="../calc/integral-usub.html">U substitution</a><a href="../calc/integral-sor-volume.html">Volume of solid of revolution</a><a href="../calc/integral-sor-area.html">Area of surface of revolution</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-17" />
+        <label for="sidebar-checkbox-17">Complex numbers</label>
+        <div class="dropdown">
+            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-18" />
+        <label for="sidebar-checkbox-18">Linear algebra</label>
+        <div class="dropdown">
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="matrix-inverse.html">Inverse matrices</a><a href="transpose.html">Transpose</a><a href="inverse-finding.html">Finding inverse matrices</a><a href="inverse-2x2.html">$2 \times 2$ inverse formula</a>
+        </div>
+        </div>
+<h1 id="finding-inverse-matrices">Finding inverse matrices<a class="headerlink" href="#finding-inverse-matrices" title="Link to this title">¶</a></h1><p>In the past, we have repeatedly added multiples of vectors to each other
+until we arrive at something simpler.
+To simplify further, we also multiplied rows by nonzero constants.
+These steps can be used to do many different things:
+<ul><li>
+    <a href="span-and-dep-finding.html#checking-linear-dependence-independence">Checking whether vectors are linearly independent or dependent</a>.
+    This was the original use case.
+</li><li>
+    <a href="span-and-dep-finding.html#finding-the-span">Finding spans</a>.
+</li><li>
+    Because <a href="transpose.html#inverse-of-transpose">a matrix is invertible if and only if its rows are linearly independent</a>,
+    this can be also viewed as checking whether a matrix is invertible.
+</li></ul></p>
+
+<p>On this page, I will call adding a multiple of one row to another
+and multiplying a row by a nonzero constant
+<b>elementary row operations</b>.
+We will find one more use case for them.
+</p>
+
+<h2 id="elementary-row-operations-as-matrix-multiplication">Elementary row operations as matrix multiplication<a class="headerlink" href="#elementary-row-operations-as-matrix-multiplication" title="Link to this title">¶</a></h2><p>Consider any matrix that is just like an identity matrix,
+but with one of the zeros replaced by a different number, e.g.
+$$
+\begin{bmatrix}
+1&0&0 \\
+5&1&0 \\
+0&0&1
+\end{bmatrix}.
+$$
+Let's multiply this with any matrix of the same size:
+$$
+\begin{align}
+&~~~~~
+\begin{bmatrix}
+1&0&0 \\
+5&1&0 \\
+0&0&1
+\end{bmatrix}
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix} \\
+&= \begin{bmatrix}
+(1,0,0)\cdot(\red a,\green d,\blue g)&(1,0,0)\cdot(\red b,\green e,\blue h)&(1,0,0)\cdot(\red c,\green f,\blue i) \\
+(5,1,0)\cdot(\red a,\green d,\blue g)&(5,1,0)\cdot(\red b,\green e,\blue h)&(5,1,0)\cdot(\red c,\green f,\blue i) \\
+(0,0,1)\cdot(\red a,\green d,\blue g)&(0,0,1)\cdot(\red b,\green e,\blue h)&(0,0,1)\cdot(\red c,\green f,\blue i)
+\end{bmatrix} \\
+&= \begin{bmatrix}
+\red a&\red b&\red c \\
+\green d+5\red a&\green e+5\red b&\green f+5\red c \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+\end{align}
+$$
+This added a multiple of the first row to the second row.
+Moving the $5$ down adds to the bottom row instead:
+$$
+\begin{bmatrix}
+1&0&0 \\
+0&1&0 \\
+5&0&1
+\end{bmatrix}
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+=
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g+5\red a&\blue h+5\red b&\blue i+5\red c
+\end{bmatrix}
+$$
+Moving the $5$ right makes the added numbers come from a different row:
+$$
+\begin{bmatrix}
+1&0&0 \\
+0&1&5 \\
+0&0&1
+\end{bmatrix}
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+=
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d+5\blue g&\green e+5\blue h&\green f+5\blue i \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+$$
+By moving the location of 5, or by using a different number instead of 5,
+we can add any multiple of any row to any other row this way.</p>
+
+<p>If the $5$ is on the diagonal (i.e. where the identity matrix has $1$),
+it multiplies a row by 5 instead:
+$$
+\begin{bmatrix}
+1&0&0 \\
+0&5&0 \\
+0&0&1
+\end{bmatrix}
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+=
+\begin{bmatrix}
+\red a&\red b&\red c \\
+5\green d&5\green e&5\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+$$
+Because <a href="matrix-matrix.html#order-matters">order matters</a>,
+it is important that the matrix representing the elementary operation
+(i.e. the matrix where only one number differs from the identity matrix)
+is on the left, and the matrix whose rows are used is on the right.</p>
+
+<div class="box graybox"><p>Any elementary row operation can be viewed as
+multiplying from left by a matrix.
+</p>
+
+</div><h2 id="finding-the-inverse-with-elementary-row-operations">Finding the inverse with elementary row operations<a class="headerlink" href="#finding-the-inverse-with-elementary-row-operations" title="Link to this title">¶</a></h2><p>Let's say we start with a matrix $A$.
+By applying some elementary operation, represented by a matrix $E_1$,
+we get a matrix $E_1 A$.
+Let's say we apply 4 more elementary operations,
+and the result happens to be the identity matrix:
+$$
+E_5 E_4 E_3 E_2 E_1 A = I
+$$
+Just like in <a href="transpose.html#inverse-of-transpose">this derivation</a>,
+this shows that $A$ is invertible,
+and its inverse matrix is $E_5 E_4 E_3 E_2 E_1$.
+To avoid having to calculate $E_5 E_4 E_3 E_2 E_1$ as a huge matrix multiplication,
+we can rewrite it with an extra $I$ at the end:
+$$
+A^{-1} = E_5 E_4 E_3 E_2 E_1 = E_5 E_4 E_3 E_2 E_1 I
+$$
+So to find the inverse matrix of $A$,
+we just have to apply the same operations to the identity matrix.</p>
+
+<p>For example, let's find the inverse of
+$$
+A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}.
+$$
+Because we will apply the same operations to $A$ and $I$, let's write them next to each other.</p>
+
+$$\begin{align}
+&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \blue{3} & \blue{4} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \blue{0} & \blue{1} \\
+\end{bmatrix}
+\\
+\end{align}$$<p>Next we choose the elementary row operations to apply so that we get an identity matrix on the left side,
+i.e. $A$ has turned into the identity matrix.
+The 1 in top left corner is already correct.
+To get $0$ below it, we notice that $\blue 3 + (-3)\red 1 = \magenta 0$.</p>
+
+$$\begin{align}
+&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \blue{3} & \blue{4} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \blue{0} & \blue{1} \\
+\end{bmatrix}
+\\
+\to&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \magenta{0} & \magenta{-2} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \magenta{-3} & \magenta{1} \\
+\end{bmatrix}
+\quad
+\magenta{\text{new bottom}}
+=
+\blue{\text{old bottom}}
++ \left( -3 \right) \cdot 
+\red{\text{top}}
+\\
+\end{align}$$<p>To get 1 in the bottom right corner, we next multiply the bottom row by $-\frac{1}{2}$
+to get $(-\frac{1}{2})\magenta{(-2)} = \green 1$.</p>
+
+$$\begin{align}
+&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \magenta{0} & \magenta{-2} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \magenta{-3} & \magenta{1} \\
+\end{bmatrix}
+\\
+\to&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \green{0} & \green{1} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \green{\frac{3}{2}} & \green{-\frac{1}{2}} \\
+\end{bmatrix}
+\quad
+\green{\text{new bottom}}
+= \left( -\frac{1}{2} \right) \cdot 
+\magenta{\text{old bottom}}
+\\
+\end{align}$$<p>We can now get rid of the remaining $\red 2$:</p>
+
+$$\begin{align}
+&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \green{0} & \green{1} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \green{\frac{3}{2}} & \green{-\frac{1}{2}} \\
+\end{bmatrix}
+\\
+\to&~~~
+\begin{bmatrix}
+    \darkyellow{1} & \darkyellow{0} \\
+    \green{0} & \green{1} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \darkyellow{-2} & \darkyellow{1} \\
+    \green{\frac{3}{2}} & \green{-\frac{1}{2}} \\
+\end{bmatrix}
+\quad
+\darkyellow{\text{new top}}
+=
+\red{\text{old top}}
++ \left( -2 \right) \cdot 
+\green{\text{bottom}}
+\\
+\end{align}$$<p>Here are all the steps:</p>
+
+$$\begin{align}
+&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \blue{3} & \blue{4} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \blue{0} & \blue{1} \\
+\end{bmatrix}
+\\
+\to&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \magenta{0} & \magenta{-2} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \magenta{-3} & \magenta{1} \\
+\end{bmatrix}
+\quad
+\magenta{\text{new bottom}}
+=
+\blue{\text{old bottom}}
++ \left( -3 \right) \cdot 
+\red{\text{top}}
+\\
+\to&~~~
+\begin{bmatrix}
+    \red{1} & \red{2} \\
+    \green{0} & \green{1} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \red{1} & \red{0} \\
+    \green{\frac{3}{2}} & \green{-\frac{1}{2}} \\
+\end{bmatrix}
+\quad
+\green{\text{new bottom}}
+= \left( -\frac{1}{2} \right) \cdot 
+\magenta{\text{old bottom}}
+\\
+\to&~~~
+\begin{bmatrix}
+    \darkyellow{1} & \darkyellow{0} \\
+    \green{0} & \green{1} \\
+\end{bmatrix}
+\qquad
+\begin{bmatrix}
+    \darkyellow{-2} & \darkyellow{1} \\
+    \green{\frac{3}{2}} & \green{-\frac{1}{2}} \\
+\end{bmatrix}
+\quad
+\darkyellow{\text{new top}}
+=
+\red{\text{old top}}
++ \left( -2 \right) \cdot 
+\green{\text{bottom}}
+\\
+\end{align}$$<p>This shows that
+$$
+\begin{bmatrix}
+\red 1 & \red 2 \\ \blue 3 & \blue 4
+\end{bmatrix}^{-1}
+= \begin{bmatrix}
+\darkyellow{-2} & \darkyellow 1 \\ \green{\frac{3}{2}} & \green{-\frac{1}{2}}
+\end{bmatrix}.
+$$
+</p>
+
+<h2 id="checking-when-it-works">Checking when it works<a class="headerlink" href="#checking-when-it-works" title="Link to this title">¶</a></h2><p>Let's check which invertible matrices can be turned into
+the identity matrix with elementary row operations,
+i.e. when this way to compute inverse matrices works.</p>
+
+<p>Consider any invertible $4 \times 4$ matrix.
+Because it doesn't matter what numbers exactly it contains, I will denote "any number" with $*$.
+$$
+\begin{bmatrix}
+\red *&*&*&*\\
+\red *&*&*&*\\
+\red *&*&*&*\\
+\red *&*&*&*
+\end{bmatrix}
+$$
+Consider the left column, highlighted in red.
+It must contain some nonzero number,
+because if it was zeros only, then the columns would be linearly dependent
+and the matrix wouldn't be invertible.
+Let's say that the nonzero number is 5.
+$$
+\begin{bmatrix}
+\red*&*&*&*\\
+\red*&*&*&*\\
+\red5&*&*&*\\
+\red*&*&*&*
+\end{bmatrix}
+$$
+If the top left corner is zero, we can add the row with 5 (or whatever the nonzero number is) to it.
+This way we can ensure there's a nonzero number in the top left corner.
+Let's say it's 7.
+$$
+\begin{bmatrix}
+\red7&*&*&*\\
+\red*&*&*&*\\
+\red5&*&*&*\\
+\red*&*&*&*
+\end{bmatrix}
+$$
+Let's now multiply the top row by $\frac{1}{7}$.
+This way we get 1 in the corner, just like in an identity matrix.
+$$
+\begin{bmatrix}
+\red1&*&*&*\\
+\red*&*&*&*\\
+\red5&*&*&*\\
+\red*&*&*&*
+\end{bmatrix}
+$$
+We can now add multiples of the top row to other rows
+so that the rest of the first column becomes zeros.
+For example, adding $-5$ times the first row cancels the $5$ in the third row.
+$$
+\begin{bmatrix}
+1&*&*&*\\
+0&\red*&*&*\\
+0&\red*&*&*\\
+0&\red*&*&*
+\end{bmatrix}
+$$
+Let's now focus on the numbers in the second column except the topmost one,
+again highlighted in red.
+If they were all zero, then the second column would be $(x,0,0,0)$ with some number $x$,
+and it would be a linear combination of the first column $(1,0,0,0)$.
+Because the matrix is invertible, this isn't possible, and one of the red numbers is nonzero.
+Just like before, we can ensure that the first number is nonzero, e.g. $5$,
+and then multiply the row by e.g. $\frac{1}{5}$ to get it to $1$.
+$$
+\begin{bmatrix}
+1&*&*&*\\
+0&\red1&*&*\\
+0&\red*&*&*\\
+0&\red*&*&*
+\end{bmatrix}
+$$
+We can again zero the rest of the column this way,
+including the topmost number that we have ignored so far.
+$$
+\begin{bmatrix}
+1&0&*&*\\
+0&1&*&*\\
+0&0&\red*&*\\
+0&0&\red*&*
+\end{bmatrix}
+$$
+If the two numbers highlighted in red were both zero,
+the third column would be $(x,y,0,0)$ with some numbers $x$ and $y$,
+so it would be a linear combination of the first column $(1,0,0,0)$
+and the second column $(0,1,0,0)$.
+This isn't possible, because the columns are linearly independent,
+so one of the two red numbers is nonzero.
+As before, we can ensure that the topmost red number is nonzero.
+Let's say it's 7.
+$$
+\begin{bmatrix}
+1&0&*&*\\
+0&1&*&*\\
+0&0&\red7&*\\
+0&0&\red*&*
+\end{bmatrix}
+$$
+By continuing this process, we eventually arrive at the identity matrix.</p>
+
+<div class="box graybox"><p>The inverse of any invertible matrix can be calculated with elementary row operations.
+</p>
+
+</div></div>
+</body>
+</html>

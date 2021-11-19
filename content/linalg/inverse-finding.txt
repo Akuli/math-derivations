@@ -1,0 +1,243 @@
+# Finding inverse matrices
+
+In the past, we have repeatedly added multiples of vectors to each other
+until we arrive at something simpler.
+To simplify further, we also multiplied rows by nonzero constants
+This can be used to do many different things:
+<ul><li>
+    [Checking whether vectors are linearly independent or dependent](span-and-dep-finding.html#checking-linear-dependence-independence).
+    This was the original use case.
+</li><li>
+    [Finding spans](span-and-dep-finding.html#finding-the-span).
+</li><li>
+    Because [a matrix is invertible if and only if its rows are linearly independent](transpose.html#inverse-of-transpose),
+    this can be also viewed as checking whether a matrix is invertible.
+</li></ul>
+
+On this page, I will call adding a multiple of row to another and multiplying a row by a nonzero constant
+**elementary row operations**.
+We will use them to find inverse matrices.
+
+
+## Elementary row operations as matrix multiplication
+
+To find inverce matrices, we will use a very similar algorithm.
+First, consider any matrix that is just like an identity matrix,
+but with one of the zeros replaced by a different number, e.g.
+$$
+\begin{bmatrix}
+1&0&0 \\
+5&1&0 \\
+0&0&1
+\end{bmatrix}.
+$$
+Let's multiply this with any matrix of the same size:
+$$
+\begin{align}
+&~~~~~
+\begin{bmatrix}
+1&0&0 \\
+5&1&0 \\
+0&0&1
+\end{bmatrix}
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix} \\
+&= \begin{bmatrix}
+(1,0,0)\cdot(\red a,\green d,\blue g)&(1,0,0)\cdot(\red b,\green e,\blue h)&(1,0,0)\cdot(\red c,\green f,\blue i) \\
+(5,1,0)\cdot(\red a,\green d,\blue g)&(5,1,0)\cdot(\red b,\green e,\blue h)&(5,1,0)\cdot(\red c,\green f,\blue i) \\
+(0,0,1)\cdot(\red a,\green d,\blue g)&(0,0,1)\cdot(\red b,\green e,\blue h)&(0,0,1)\cdot(\red c,\green f,\blue i)
+\end{bmatrix} \\
+&= \begin{bmatrix}
+\red a&\red b&\red c \\
+\green d+5\red a&\green e+5\red b&\green f+5\red c \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+\end{align}
+$$
+This added a multiple of the first row to the second row.
+Moving the 5 down adds to the bottom row instead:
+$$
+\begin{bmatrix}
+1&0&0 \\
+0&1&0 \\
+5&0&1
+\end{bmatrix}
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+=
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g+5\red a&\blue h+5\red b&\blue i+5\red c
+\end{bmatrix}
+$$
+Moving the $5$ right instead changes the row being multiplied and added:
+$$
+\begin{bmatrix}
+1&0&0 \\
+0&1&5 \\
+0&0&1
+\end{bmatrix}
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+=
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d+5\blue g&\green e+5\blue h&\green f+5\blue i \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+$$
+Now we can see that by moving the location of 5,
+or by using a different number instead of 5,
+we can add any multiple of any row to any other row this way.
+
+If the $5$ is on the diagonal (i.e. where the identity matrix has $1$),
+it multiplies a row by 5 instead:
+$$
+\begin{bmatrix}
+1&0&0 \\
+0&5&0 \\
+0&0&1
+\end{bmatrix}
+\begin{bmatrix}
+\red a&\red b&\red c \\
+\green d&\green e&\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+=
+\begin{bmatrix}
+\red a&\red b&\red c \\
+5\green d&5\green e&5\green f \\
+\blue g&\blue h&\blue i
+\end{bmatrix}
+$$
+
+graybox:
+    Any elementary row operation can be viewed as
+    multiplying from left by a matrix.
+
+Because [order matters](matrix-matrix.html#order-matters),
+it is important that the matrix representing the elementary operation
+(i.e. the matrix where only one number differs from the identity matrix)
+is on the left, and the matrix whose rows are used is on the right.
+
+
+## Finding the inverse with elementary row operations
+
+Let's say we start with a matrix $A$.
+By applying some elementary operation, represented by a matrix $E_1$,
+we get a matrix $E_1 A$.
+Let's say we apply 4 more elementary operations,
+and the result happens to be the identity matrix:
+$$
+E_5 E_4 E_3 E_2 E_1 A = I
+$$
+Just like in [this derivation](transpose.html#inverse-of-transpose),
+this shows that $A$ is invertible,
+and its inverse matrix is $E_5 E_4 E_3 E_2 E_1$.
+To avoid $E_5 E_4 E_3 E_2 E_1$ as a complicated matrix multiplication,
+we can rewrite it with an extra $I$:
+$$
+A^{-1} = E_5 E_4 E_3 E_2 E_1 = E_5 E_4 E_3 E_2 E_1 I
+$$
+So to find the inverse matrix of $A$,
+we just have to apply the same operations to the identity matrix.
+
+For example, let's find the inverse of
+$$
+A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}.
+$$
+Because we will need to apply the same operations to the identity matrix,
+let's write it next to $A$ and apply the same operations to both.
+$$
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}
+\qquad \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+$$
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [1, 2, 1, 0],
+        [3, 4, 0, 1],
+    ], separator=2)
+    return "$$" + matrix.get_output() + "$$"
+
+The goal is to get the identity matrix on the left side
+(i.e. apply operations to $A$ so that it turns into $I$).
+The 1 in top left corner is already correct.
+To get $0$ below it, we can add the top row to it multiplied with -3,
+which brings the bottom corner to $\blue 3 + (-3)\red 1 = 0$.
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [1, 2, 1, 0],
+        [3, 4, 0, 1],
+    ], separator=2)
+    matrix.add_multiple(src=0, dest=1, scalar=-3)
+    return "$$" + matrix.get_output() + "$$"
+
+To get 1 in the bottom right corner, we next multiply the bottom row by $-\frac{1}{2}$
+to get $(-\frac{1}{2})\magenta{(-2)} = \green 1$.
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [1, 2, 1, 0],
+        [3, 4, 0, 1],
+    ], separator=2)
+    matrix.add_multiple(src=0, dest=1, scalar=-3)
+    matrix.clear_output()
+    matrix.multiply_row(1, by=Fraction(-1, 2))
+    return "$$" + matrix.get_output() + "$$"
+
+We can now get rid of the remaining $\red 2$:
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [1, 2, 1, 0],
+        [3, 4, 0, 1],
+    ], separator=2)
+    matrix.add_multiple(src=0, dest=1, scalar=-3)
+    matrix.multiply_row(1, by=Fraction(-1, 2))
+    matrix.clear_output()
+    matrix.add_multiple(src=1, dest=0, scalar=-2)
+    return "$$" + matrix.get_output() + "$$"
+
+So in total, we did these 3 steps:
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [1, 2, 1, 0],
+        [3, 4, 0, 1],
+    ], separator=2)
+    matrix.add_multiple(src=0, dest=1, scalar=-3)
+    matrix.multiply_row(1, by=Fraction(-1, 2))
+    matrix.add_multiple(src=1, dest=0, scalar=-2)
+    return "$$" + matrix.get_output() + "$$"
+
+This shows that
+$$
+\begin{bmatrix}
+\red 1 & \red 2 \\ \blue 3 & \blue 4
+\end{bmatrix}^{-1}
+= \begin{bmatrix}
+\darkyellow{-2} & \darkyellow 1 \\ \green{\frac{3}{2}} & \green{-\frac{1}{2}}
+\end{bmatrix}.
+$$

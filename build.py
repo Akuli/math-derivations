@@ -206,6 +206,7 @@ def get_sidebar_content(txtfile):
             link("Finding span and checking linear (in)dependence", "linalg/span-and-dep-finding"),
             link("Inverse matrices", "linalg/matrix-inverse"),
             link("Transpose", "linalg/transpose"),
+            link("Finding inverse matrices", "linalg/inverse-finding"),
         ])),
     ])
 

@@ -48,25 +48,22 @@ Notice the formulas produced this way have these properties:
   then we know the entire $(a+b)^n$ formula.
 
 The integer in front of $a^kb^{n-k}$ when expanding $(a+b)^n$ is called the **binomial coefficient**,
-and it's denoted with
-$$
-\mybinom{n}{k}.
-$$
+and it's denoted with $\binom{n}{k}$.
 So for example, because there is $3$ in front of $a^2b$ in the $(a+b)^3$ formula, we have
 $$
-\mybinom{3}{2}=3,
+\binom{3}{2}=3,
 $$
 and for all $n$, the numbers in front of $a^n$ and $b^n$ are
 $$
-\mybinom{n}{n} = 1, \quad \mybinom{n}{0} = 1.
+\binom{n}{n} = 1, \quad \binom{n}{0} = 1.
 $$
 
 graybox:
     For any numbers $a$ and $b$, we have
     $$
-    (a+b)^n = \mybinom{n}{n}a^n + \mybinom{n}{n-1}a^{n-1}b + \dots + \mybinom{n}{1} ab^{n-1} + \mybinom{n}{0}b^n,
+    (a+b)^n = \binom{n}{n}a^n + \binom{n}{n-1}a^{n-1}b + \dots + \binom{n}{1} ab^{n-1} + \binom{n}{0}b^n,
     $$
-    where each $\mybinom{n}{k}$ is an integer known as the **binomial coefficient**.
+    where each $\binom{n}{k}$ is an integer known as the **binomial coefficient**.
     This result is known as the **binomial formula**.
 
 This also works for $n=1$ and $n=0$ with all binomial coefficients being $1$, because
@@ -84,11 +81,11 @@ Next we find a way to calculate binomial coefficients.
 Let's arrange all binomial coefficients we know into a big triangle-shaped drawing like this:
 $$
 \begin{matrix}
-&&&&\mybinom{0}{0}&&&& \\
-&&&\mybinom{1}{0}&&\mybinom{1}{1}&&& \\
-&&\mybinom{2}{0}&&\mybinom{2}{1}&&\mybinom{2}{2}&& \\
-&\mybinom{3}{0}&&\mybinom{3}{1}&&\mybinom{2}{2}&&\mybinom{3}{3}& \\
-\mybinom{4}{0}&&\mybinom{4}{1}&&\mybinom{4}{2}&&\mybinom{4}{3}&&\mybinom{4}{4} \\
+&&&&\binom{0}{0}&&&& \\
+&&&\binom{1}{0}&&\binom{1}{1}&&& \\
+&&\binom{2}{0}&&\binom{2}{1}&&\binom{2}{2}&& \\
+&\binom{3}{0}&&\binom{3}{1}&&\binom{2}{2}&&\binom{3}{3}& \\
+\binom{4}{0}&&\binom{4}{1}&&\binom{4}{2}&&\binom{4}{3}&&\binom{4}{4} \\
 &&&&\vdots&&&&
 \end{matrix}
 $$
@@ -121,39 +118,39 @@ $$
 $$
 So, we noticed that
 $$
-\green{\mybinom{3}{1}}+\blue{\mybinom{3}{2}}=\red{\mybinom{4}{2}},
+\green{\binom{3}{1}}+\blue{\binom{3}{2}}=\red{\binom{4}{2}},
 $$
 and more generally, it seems like
 $$
-\green{\mybinom{n}{k}}+\blue{\mybinom{n}{k+1}}=\red{\mybinom{n+1}{k+1}}.
+\green{\binom{n}{k}}+\blue{\binom{n}{k+1}}=\red{\binom{n+1}{k+1}}.
 $$
 To see why this happens, consider
 $$
-(a+b)^n = \mybinom{n}{n}a^n + \dots + \blue{\mybinom{n}{2}}a^2b^{n-2} + \green{\mybinom{n}{1}}ab^{n-1} + \mybinom{n}{0}b^n.
+(a+b)^n = \binom{n}{n}a^n + \dots + \blue{\binom{n}{2}}a^2b^{n-2} + \green{\binom{n}{1}}ab^{n-1} + \binom{n}{0}b^n.
 $$
 Let's multiply this with $a$ and $b$:
 $$
 \begin{alignat}{9}
-(a+b)^na &= \mybinom{n}{n}a^{n+1} &+ \dots &+ \blue{\mybinom{n}{2}}a^3b^{n-1} &+ \green{\mybinom{n}{1}}a^2b^{n-1} &+ \mybinom{n}{0}ab^n \\
-(a+b)^nb &=& \mybinom{n}{n}a^nb &+ \dots &+ \blue{\mybinom{n}{2}}a^2b^{n-1} &+ \green{\mybinom{n}{1}}ab^n &+ \mybinom{n}{0}b^{n+1}& \\
+(a+b)^na &= \binom{n}{n}a^{n+1} &+ \dots &+ \blue{\binom{n}{2}}a^3b^{n-1} &+ \green{\binom{n}{1}}a^2b^{n-1} &+ \binom{n}{0}ab^n \\
+(a+b)^nb &=& \binom{n}{n}a^nb &+ \dots &+ \blue{\binom{n}{2}}a^2b^{n-1} &+ \green{\binom{n}{1}}ab^n &+ \binom{n}{0}b^{n+1}& \\
 \end{alignat}
 $$
 By adding these equations, we get
 $$
-(a+b)^{n+1} = \dots + \left( \green{\mybinom{n}{1}}+\blue{\mybinom{n}{2}} \right)a^2b^{n-1} + \dots,
+(a+b)^{n+1} = \dots + \left( \green{\binom{n}{1}}+\blue{\binom{n}{2}} \right)a^2b^{n-1} + \dots,
 $$
 where $\dots$ does not contain any $a^2b^{n-1}$. So, the number in front of $a^2b^{n-1}$ is
 $$
-\green{\mybinom{n}{1}}+\blue{\mybinom{n}{2}},
+\green{\binom{n}{1}}+\blue{\binom{n}{2}},
 $$
-and because on the other hand, there should be $\red{\mybinom{n+1}{2}}$ in front of $a^2b^{(n+1)-2}$, we get
+and because on the other hand, there should be $\red{\binom{n+1}{2}}$ in front of $a^2b^{(n+1)-2}$, we get
 $$
-\green{\mybinom{n}{1}}+\blue{\mybinom{n}{2}} = \red{\mybinom{n+1}{2}},
+\green{\binom{n}{1}}+\blue{\binom{n}{2}} = \red{\binom{n+1}{2}},
 $$
 which is the equation we wanted for $k=1$.
 It works the same way for any other $k$, and we get
 $$
-\green{\mybinom{n}{k}}+\blue{\mybinom{n}{k+1}} = \red{\mybinom{n+1}{k+1}}.
+\green{\binom{n}{k}}+\blue{\binom{n}{k+1}} = \red{\binom{n+1}{k+1}}.
 $$
 
 graybox:
@@ -204,7 +201,7 @@ These are rows $2$ and $3$ of Pascal's triangle
 when we think of the first row as row $0$ and first column of each row as column $0$.
 In other words, the number of subsets of $k$ elements in a set of $n$ elements seems to be
 $$
-\mybinom{n}{k}.
+\binom{n}{k}.
 $$
 Next we explain why this happens.
 
@@ -247,7 +244,7 @@ $$
 This shows that these $C(n,k)$ numbers are binomial coefficients, because they form Pascal's triangle.
 
 graybox:
-    A set of size $n$ has $\mybinom{n}{k}$ subsets of size $k$.
+    A set of size $n$ has $\binom{n}{k}$ subsets of size $k$.
 
 For this reason, binomial coefficients are often spelled "$n$ choose $k$";
 they represent the number of different ways to choose $k$ items from $n$ items
@@ -260,20 +257,17 @@ We still don't have a formula for calculating binomial coefficients,
 although looking them up from Pascal's triangle is easy enough for small-ish values of $n$.
 
 Consider a shop with $n$ products and a shopping bag that fits exactly $k$ products.
-The number of ways to fill the shopping bag without choosing the same product twice is then
-$$
-\mybinom{n}{k}.
-$$
+The number of ways to fill the shopping bag without choosing the same product twice is then $\binom{n}{k}$.
 To find a formula for this,
 we need a different way to calculate the number of ways to fill the shopping bag.
 
 * If $k=0$, there's only one thing you can do: leave the shop with an empty shopping bag.
   $$
-  \mybinom{n}{0} = 1
+  \binom{n}{0} = 1
   $$
 * If $k=1$, there are $n$ ways to fill the shopping bag, because you choose one of the $n$ available products.
   $$
-  \mybinom{n}{1} = n
+  \binom{n}{1} = n
   $$
 * If $k=2$, you have $n$ choices for the first product to buy,
   but only $n-1$ choices for the second product because you can't choose the same product twice.
@@ -285,7 +279,7 @@ we need a different way to calculate the number of ways to fill the shopping bag
   it's two times too big, since each subset was counted twice.
   To correct this, we must divide by 2, and we get
   $$
-  \mybinom{n}{2} = \frac{n(n-1)}{2}.
+  \binom{n}{2} = \frac{n(n-1)}{2}.
   $$
 * If $k=3$, you have $n(n-1)$ choices for the first two products, including different orders,
   and $n-2$ choices for the third product, giving a total of $n(n-1)(n-2)$ choices.
@@ -302,12 +296,12 @@ we need a different way to calculate the number of ways to fill the shopping bag
   $$
   To correct this, we must divide by 6 and we get
   $$
-  \mybinom{n}{3} = \frac{n(n-1)(n-2)}{6}.
+  \binom{n}{3} = \frac{n(n-1)(n-2)}{6}.
   $$
 
 In general,
 $$
-\mybinom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}}}{\text{number of ways to sort a set of $k$ items}},
+\binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}}}{\text{number of ways to sort a set of $k$ items}},
 $$
 where on top, we have the first $k$ numbers of $n,~ n-1,~ n-2,~ n-3,~ \dots$ multiplied.
 Next find the ways that a set of $k$ items can be sorted.
@@ -317,9 +311,9 @@ n! = n(n-1)(n-2)\dots 1,
 $$
 so for example, $5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1$. Now we get
 $$
-\mybinom{n}{n} = \frac{n!}{\text{number of ways to sort a set of $n$ items}},
+\binom{n}{n} = \frac{n!}{\text{number of ways to sort a set of $n$ items}},
 $$
-and because $\mybinom{n}{n} = 1$, we get
+and because $\binom{n}{n} = 1$, we get
 $$
 \text{number of ways to sort a set of $n$ items} = n!.
 $$
@@ -328,11 +322,11 @@ By using this with $k$ instead of $n$, we get the following result.
 graybox:
     Binomial coefficients can be calculated as
     $$
-    \mybinom{n}{k} = \frac{~~ \overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}} ~~}{k!},
+    \binom{n}{k} = \frac{~~ \overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}} ~~}{k!},
     $$
     where $k!=k(k-1)\dots3\cdot2\cdot1$ is the number of ways to sort a list of $k$ items.
 
 For example,
 $$
-\mybinom{8}{3} = \frac{8 \cdot 7 \cdot 6}{3 \cdot 2 \cdot 1} = 56.
+\binom{8}{3} = \frac{8 \cdot 7 \cdot 6}{3 \cdot 2 \cdot 1} = 56.
 $$

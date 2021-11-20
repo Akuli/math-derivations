@@ -262,7 +262,6 @@ legacy_mathjax_v2_pages = [
     "content/complex/intro.txt",
     "content/complex/mul.txt",
     "content/complex/sqrt.txt",
-    "content/discrete/binom.txt",
     "content/discrete/sums.txt",
     "content/eqs-and-funcs/how-equations-work.txt",
     "content/eqs-and-funcs/how-inequations-work.txt",

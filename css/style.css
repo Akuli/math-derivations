@@ -44,8 +44,7 @@ a:hover {
 }
 
 /* without this, sidebar stuff gets unclickable when there's math right next to it */
-/* TODO: remove div.MathJax_Display its for mathjax v2 */
-div.MathJax_Display, mjx-container {
+mjx-container {
     position: inherit !important;
 }
 

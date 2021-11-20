@@ -31,47 +31,36 @@
         }
     });
     </script>
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [ ['$','$'] ],
+            displayMath: [ ['$$','$$'] ],
+            macros: {
+                span: '\\operatorname{span}',
+                rotate: '\\operatorname{rotate}',
+                abs: [ "\\left| {#1} \\right|", 1 ],
+                bigvec: [ "\\overrightarrow{#1}", 1 ],
+                I: '\\vec{i}',
+                J: '\\vec{j}',
+                K: '\\vec{k}',
+                T: '\\operatorname{T}',
+                epsi: '\\varepsilon',
+                // colors chosen so that they are distinguishable when together
+                red: [ "{\\color{##c00}{#1}}", 1 ],
+                blue: [ "{\\color{blue}{#1}}", 1 ],
+                green: [ "{\\color{green}{#1}}", 1 ],
+                magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
+            }
+        }
+    };
+    </script>
     <link rel="stylesheet" href="../css/animation.css">
 <link rel="stylesheet" href="../css/style.css">
-
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-            extensions: ["tex2jax.js"],
-            jax: ["input/TeX", "output/CommonHTML"],
-            tex2jax: {
-              inlineMath: [ ['$','$'] ],
-              displayMath: [ ['$$','$$'] ],
-            },
-            "HTML-CSS": { availableFonts: ["TeX"] },
-            TeX: {
-              Macros: {
-                bigvec: [ "\\overrightarrow{#1}", 1 ],
-                abs: [ "\\left| {#1} \\right|", 1 ],
-                Span: [ "\\operatorname{span}", 0 ],
-                rotate: [ "\\operatorname{rotate}", 0 ],
-                I: [ "\\vec{i}", 0 ],
-                J: [ "\\vec{j}", 0 ],
-                K: [ "\\vec{k}", 0 ],
-
-
-                // darkred is too dark, red is too bright
-                red: [ "\\color{##c00}{#1}", 1 ],
-                blue: [ "\\color{blue}{#1}", 1 ],
-                green: [ "\\color{green}{#1}", 1 ],
-                magenta: [ "\\color{magenta}{#1}", 1 ],
-
-                epsi: [ "\\varepsilon", 0 ],
-                leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
-
-                // binom doesn't work on adder's computer
-                // mybinom works, but it's too tall for inline math
-                mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
-              }
-            }
-          });
-        </script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
-        </head>
+</head>
 <body>
 <div id="content">
 <div id="sidebar"><a href="../index.html">Front page</a>
@@ -394,7 +383,7 @@ $$
 \int_{-2}^2 \frac{1}{x}\ dx = \left[ \ln\abs{x} \right]_{-2}^2 = \ln\abs{2} - \ln\abs{-2} = \ln(2)-\ln(2) = 0
 $$
 This is wrong.
-Because $\frac{1}{x}$ is undefined at $0$, it's not <a href="integral-def.html">integrable</a> on $\leftsquarebracket-2,2]$,
+Because $\frac{1}{x}$ is undefined at $0$, it's not <a href="integral-def.html">integrable</a> on $[-2,2]$,
 and the <a href="integral-ftoc2.html">fundamental theorem of calculus</a> doesn't apply.
 In general, we have
 $$

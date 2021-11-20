@@ -31,33 +31,36 @@
         }
     });
     </script>
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [ ['$','$'] ],
+            displayMath: [ ['$$','$$'] ],
+            macros: {
+                span: '\\operatorname{span}',
+                rotate: '\\operatorname{rotate}',
+                abs: [ "\\left| {#1} \\right|", 1 ],
+                bigvec: [ "\\overrightarrow{#1}", 1 ],
+                I: '\\vec{i}',
+                J: '\\vec{j}',
+                K: '\\vec{k}',
+                T: '\\operatorname{T}',
+                epsi: '\\varepsilon',
+                // colors chosen so that they are distinguishable when together
+                red: [ "{\\color{##c00}{#1}}", 1 ],
+                blue: [ "{\\color{blue}{#1}}", 1 ],
+                green: [ "{\\color{green}{#1}}", 1 ],
+                magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
+            }
+        }
+    };
+    </script>
     <link rel="stylesheet" href="../css/animation.css">
 <link rel="stylesheet" href="../css/style.css">
-
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
-        <script>
-        MathJax = {
-            tex: {
-                inlineMath: [ ['$','$'] ],
-                displayMath: [ ['$$','$$'] ],
-                macros: {
-                    span: '\\operatorname{span}',
-                    rotate: '\\operatorname{rotate}',
-                    I: '\\vec{i}',
-                    J: '\\vec{j}',
-                    K: '\\vec{k}',
-                    T: '\\operatorname{T}',
-                    // colors chosen so that they are distinguishable when together
-                    red: [ "{\\color{##c00}{#1}}", 1 ],
-                    blue: [ "{\\color{blue}{#1}}", 1 ],
-                    green: [ "{\\color{green}{#1}}", 1 ],
-                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
-                    darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
-                }
-            }
-        };
-        </script>
-        </head>
+</head>
 <body>
 <div id="content">
 <div id="sidebar"><a href="../index.html">Front page</a>

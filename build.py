@@ -212,16 +212,9 @@ def get_sidebar_content(txtfile):
     ])
 
 
-# prefer mathjax v3 for everything new
-# TODO: upgrade these?
-legacy_mathjax_v2_pages = [
-]
-
-
 def get_head_extras(filename):
-    result = '''
-    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="\
-stylesheet">
+    result = r'''
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
     <script>
     // mark the selected page and open the menus leading to it
@@ -247,6 +240,33 @@ stylesheet">
         }
     });
     </script>
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [ ['$','$'] ],
+            displayMath: [ ['$$','$$'] ],
+            macros: {
+                span: '\\operatorname{span}',
+                rotate: '\\operatorname{rotate}',
+                abs: [ "\\left| {#1} \\right|", 1 ],
+                bigvec: [ "\\overrightarrow{#1}", 1 ],
+                I: '\\vec{i}',
+                J: '\\vec{j}',
+                K: '\\vec{k}',
+                T: '\\operatorname{T}',
+                epsi: '\\varepsilon',
+                // colors chosen so that they are distinguishable when together
+                red: [ "{\\color{##c00}{#1}}", 1 ],
+                blue: [ "{\\color{blue}{#1}}", 1 ],
+                green: [ "{\\color{green}{#1}}", 1 ],
+                magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
+            }
+        }
+    };
+    </script>
     '''
 
     htmlfile = builder.infile2outfile(filename)
@@ -266,76 +286,6 @@ stylesheet">
     if filename == 'content/discrete/sums.txt':
         result += f'''
         <script src="{relative_path_prefix}/js/animator.js"></script>
-        '''
-
-    if filename in legacy_mathjax_v2_pages:
-        result += r'''
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-            extensions: ["tex2jax.js"],
-            jax: ["input/TeX", "output/CommonHTML"],
-            tex2jax: {
-              inlineMath: [ ['$','$'] ],
-              displayMath: [ ['$$','$$'] ],
-            },
-            "HTML-CSS": { availableFonts: ["TeX"] },
-            TeX: {
-              Macros: {
-                bigvec: [ "\\overrightarrow{#1}", 1 ],
-                abs: [ "\\left| {#1} \\right|", 1 ],
-                Span: [ "\\operatorname{span}", 0 ],
-                rotate: [ "\\operatorname{rotate}", 0 ],
-                I: [ "\\vec{i}", 0 ],
-                J: [ "\\vec{j}", 0 ],
-                K: [ "\\vec{k}", 0 ],
-
-
-                // darkred is too dark, red is too bright
-                red: [ "\\color{##c00}{#1}", 1 ],
-                blue: [ "\\color{blue}{#1}", 1 ],
-                green: [ "\\color{green}{#1}", 1 ],
-                magenta: [ "\\color{magenta}{#1}", 1 ],
-
-                epsi: [ "\\varepsilon", 0 ],
-                leftsquarebracket: [ "[", 0 ],   // htmlthingy bug workaround
-
-                // binom doesn't work on adder's computer
-                // mybinom works, but it's too tall for inline math
-                mybinom: [ "\\begin{pmatrix} {#1} \\\\ {#2} \\end{pmatrix}", 2 ],
-              }
-            }
-          });
-        </script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js"></script>
-        '''
-    else:
-        result += r'''
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
-        <script>
-        MathJax = {
-            tex: {
-                inlineMath: [ ['$','$'] ],
-                displayMath: [ ['$$','$$'] ],
-                macros: {
-                    span: '\\operatorname{span}',
-                    rotate: '\\operatorname{rotate}',
-                    abs: [ "\\left| {#1} \\right|", 1 ],
-                    bigvec: [ "\\overrightarrow{#1}", 1 ],
-                    I: '\\vec{i}',
-                    J: '\\vec{j}',
-                    K: '\\vec{k}',
-                    T: '\\operatorname{T}',
-                    epsi: '\\varepsilon',
-                    // colors chosen so that they are distinguishable when together
-                    red: [ "{\\color{##c00}{#1}}", 1 ],
-                    blue: [ "{\\color{blue}{#1}}", 1 ],
-                    green: [ "{\\color{green}{#1}}", 1 ],
-                    magenta: [ "{\\color{magenta}{#1}}", 1 ],
-                    darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
-                }
-            }
-        };
-        </script>
         '''
 
     return result

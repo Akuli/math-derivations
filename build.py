@@ -215,10 +215,6 @@ def get_sidebar_content(txtfile):
 # prefer mathjax v3 for everything new
 # TODO: upgrade these?
 legacy_mathjax_v2_pages = [
-    "content/calc/integral-intro.txt",  # TODO: uses \leftsquarebracket, fix properly
-    "content/calc/integral-def.txt",  # TODO: uses \leftsquarebracket, fix properly
-    "content/calc/integral-rules.txt",  # TODO: uses \leftsquarebracket, fix properly
-    "content/calc/integral-sor-volume.txt",  # TODO: uses \leftsquarebracket, fix properly
 ]
 
 
@@ -352,7 +348,8 @@ old_get_title = builder.get_title
 builder.get_title = lambda path: old_get_title(path) + " - Math Derivations"
 
 
-# without this, two underscores in math make the latex code get <ul> tags
+# prevent htmlthingy from processing what's between $ or $$
+@builder.converter.add_inliner(r' \$[^ ][^$\n]*?[^ ]\$[\s,\.]')
 @builder.converter.add_inliner(r'\$\$\n[\S\s]*?\n\$\$')
 def math_handler(match, filename):
     return match.group(0)

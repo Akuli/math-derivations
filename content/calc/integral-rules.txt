@@ -225,7 +225,7 @@ $$
 \int_{-2}^2 \frac{1}{x}\ dx = \left[ \ln\abs{x} \right]_{-2}^2 = \ln\abs{2} - \ln\abs{-2} = \ln(2)-\ln(2) = 0
 $$
 This is wrong.
-Because $\frac{1}{x}$ is undefined at $0$, it's not [integrable](integral-def.html) on $\leftsquarebracket-2,2]$,
+Because $\frac{1}{x}$ is undefined at $0$, it's not [integrable](integral-def.html) on $[-2,2]$,
 and the [fundamental theorem of calculus](integral-ftoc2.html) doesn't apply.
 In general, we have
 $$

@@ -183,7 +183,7 @@ $$
 &\quad {}+ (\text{length of $I_n$})\min_{x \in I_n} \left(\pi f(x)^2\right).
 \end{align}
 $$
-This is the lower sum of $\pi f(x)^2$ on $\leftsquarebracket a,b]$ with the partition we have.
+This is the lower sum of $\pi f(x)^2$ on $[a,b]$ with the partition we have.
 Because all cylinders are inside the solid of revolution, we get
 $$
 \text{volume of solid of revolution} \ge \text{lower sum of $\pi f(x)^2$ on $[a,b]$}.
@@ -193,7 +193,7 @@ $$
 \text{volume of solid of revolution} \le \text{upper sum of $\pi f(x)^2$ on $[a,b]$}.
 $$
 Because the volume of solid of revolution is between all upper and lower sums
-of $\pi f(x)^2$ on $\leftsquarebracket a,b]$,
+of $\pi f(x)^2$ on $[a,b]$,
 by [definition of integral](integral-def.html), it must be $\int_a^b \pi f(x)^2\ dx$.
 
 graybox:

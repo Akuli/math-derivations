@@ -1,7 +1,7 @@
 # Defining the Integral
 
-Let $f$ be a function that has minimums and maximums on $\leftsquarebracket a,b]$
-and all closed subintervals of $\leftsquarebracket a,b]$.
+Let $f$ be a function that has minimums and maximums on $[a,b]$
+and all closed subintervals of $[a,b]$.
 [Last time](integral-refinement.html#upper-and-lower-sums-of-different-partitions)
 we showed that
 $$

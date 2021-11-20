@@ -385,7 +385,7 @@ but usually that doesn't work (TODO).
 These calculations tell something about the integral, but we still don't know what exactly it is.
 Next we experiment with different partitions and figure out what works best.
 
-Instead of partitioning the interval $\leftsquarebracket 0,2]$ into 5 equally sized parts,
+Instead of partitioning the interval $[0,2]$ into 5 equally sized parts,
 we now partition it into $n$ equally sized parts.
 The width of each rectangle will be $2/n$ instead of $2/5$, because $2$ is the length of the interval.
 The interval starts at $0$, so the first two partition numbers will be $0$ and $2/n$.
@@ -515,7 +515,7 @@ asymptote:
         draw((x,f(x))--(xnext,f(x)));
     }
 
-Because $f$ is increasing on the interval $\leftsquarebracket 0,2]$, we get
+Because $f$ is increasing on the interval $[0,2]$, we get
 $$
 \begin{align}
 \text{upper sum}

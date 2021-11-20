@@ -33,16 +33,16 @@ $$
 where the top left and bottom right corner are swapped,
 and they also have minuses in front.
 
-With the correct inverse matrix, we have $A A^{-1} = I$.
+With the correct inverse matrix, we have $A^{-1}A = I$.
 Let's see what we get if we instead use our guessed inverse matrix,
 ignoring the number in front for now:
 $$
 \begin{align}
-\begin{bmatrix} \red a & \red b \\ \blue c & \blue d \end{bmatrix}
-\begin{bmatrix} \magenta{-d} & \green b \\ \magenta c & \green{-a} \end{bmatrix}
+\begin{bmatrix} \red{-d} & \red b \\ \blue c & \blue{-a} \end{bmatrix}
+\begin{bmatrix} \magenta a & \green b \\ \magenta c & \green d \end{bmatrix}
 &= \begin{bmatrix}
-\red{(a,b)} \cdot \magenta{(-d,c)} & \red{(a,b)} \cdot \green{(b,-a)} \\
-\blue{(c,d)} \cdot \magenta{(-d,c)} & \blue{(c,d)} \cdot \green{(b,-a)}
+\red{(-d,b)} \cdot \magenta{(a,c)} & \red{(-d,b)} \cdot \green{(b,d)} \\
+\blue{(c,-a)} \cdot \magenta{(a,c)} & \blue{(c,-a)} \cdot \green{(b,d)}
 \end{bmatrix} \\
 &= \begin{bmatrix}
 -ad+bc & 0 \\ 0 & bc-ad
@@ -50,65 +50,50 @@ $$
 = (-ad+bc)I
 \end{align}
 $$
-Dividing both sides by $-ad+bc$ gives
+If $-ad+bc \ne 0$, we can divide by it, and we get
 $$
-\begin{bmatrix} a & b \\ c & d \end{bmatrix}
 \frac{1}{-ad+bc}
 \begin{bmatrix} -d & b \\ c & -a \end{bmatrix}
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}
 = I.
 $$
-We have derived a formula for the inverse of a $2 \times 2$ matrix:
+Just like in [this derivation](transpose.html#inverse-of-transpose),
+this shows that the original matrix $A$ is invertible,
+and we also get a formula for its inverse.
 
 graybox:
+    If $-ad+bc \ne 0$, then
     $$
     \begin{bmatrix} a & b \\ c & d \end{bmatrix}^{-1}
-    = \frac{1}{-ad+bc} \begin{bmatrix} -d & b \\ c & -a \end{bmatrix}
+    = \frac{1}{-ad+bc} \begin{bmatrix} -d & b \\ c & -a \end{bmatrix}.
     $$
 
 
 ## Dividing by zero
 
-Because we had to divide by $-ad+bc$, we need to consider when it is zero.
-If the original matrix $A$ is not invertible,
-[its columns are linearly independent](matrix-inverse.html#when-does-an-inverse-matrix-exist),
-so one of them is a linear combination of the other.
-If $(a,c) = 5(b,d)$, for example, then
+Next we check what happens if $-ad+bc=0$.
+Then $(-ad+bc)I$ is the zero matrix,
 $$
--ad+bc = -(5b)d + b(5d) = 0.
-$$
-The same works with any other number of $5$, and also if $(b,d)$ is a multiple of $(a,c)$.
-
-graybox:
-    If a $2 \times 2$ matrix is not invertible,
-    then the inverse matrix formula divides by zero.
-
-Next we figure out whether it can divide by zero even if the matrix $A$ is invertible.
-If $-ad+bc=0$, then $(-ad+bc)I$ is the zero matrix
-$$
-O = \begin{bmatrix} 0 & 0 \\ 0& 0 \end{bmatrix}.
+(-ad+bc)I = O = \begin{bmatrix} 0 & 0 \\ 0& 0 \end{bmatrix}.
 $$
 The above equations now give
 $$
-A
-\begin{bmatrix} -d & b \\ c & -a \end{bmatrix} = O.
+\begin{bmatrix} -d & b \\ c & -a \end{bmatrix}A = O.
 $$
 Unlike you might expect, this can happen even if $A$ is not the zero matrix;
 try $a=b=c=0$ and $d=1$ for example.
 If $A$ was invertible,
-with some inverse matrix $A^{-1}$ that the formula can't give us as it divides by zero,
+with some inverse matrix $A^{-1}$ that the formula can't give us because it divides by zero,
 we would get
 $$
-A^{-1} A \begin{bmatrix} -d & b \\ c & -a \end{bmatrix} = A^{-1}O = O.
+\begin{bmatrix} -d & b \\ c & -a \end{bmatrix} A A^{-1} = O A^{-1} = O.
 $$
-Because $A^{-1}A$ is the identity matrix, multiplying by it does nothing, and we get
+Because $A A^{-1}$ is the identity matrix, multiplying by it does nothing, and we get
 $$
 \begin{bmatrix} -d & b \\ c & -a \end{bmatrix} = \begin{bmatrix} 0&0 \\ 0&0 \end{bmatrix},
 $$
-and now we get $a=b=c=d=0$, which is impossible,
-because $A$ was supposed to be invertible but the zero matrix isn't.
-This shows that we can't have $-ad+bc=0$ with an invertible matrix.
+and now we get $a=b=c=d=0$, so $A$ can't be invertible.
 
 graybox:
-    If a $2 \times 2$ matrix is invertible,
-    then the inverse matrix formula does not divide by zero
-    and produces the correct result.
+    If the $2 \times 2$ inverse matrix formula divides by zero,
+    the matrix is not invertible.

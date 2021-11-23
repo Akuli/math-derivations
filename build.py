@@ -53,14 +53,10 @@ builder.infiles = sorted(
     + glob.glob('content/*/*.txt')
     + glob.glob('content/*/*/*.txt')
 )
-
 builder.infile2outfile = lambda infile: os.path.join(
     builder.outputdir,
     os.path.splitext(infile.replace('content' + os.sep, '', 1))[0] + '.html')
-
-builder.additional_files.append('css')
-builder.additional_files.append('js')
-builder.additional_files.extend(glob.glob('images/*.*'))
+builder.additional_files = ["css", "js", "images"]
 
 
 def get_sidebar_content(txtfile):
@@ -342,8 +338,6 @@ def asymptote(match, filename):
         textwrap.dedent(match.string[match.end():]))
     fullfilename = (hashlib.md5(fullcode.encode('utf-8')).hexdigest()
                     + '.' + format)
-    os.makedirs(os.path.join(builder.outputdir, 'asymptote'), exist_ok=True)
-    outfile = os.path.join(builder.outputdir, 'asymptote', fullfilename)
 
     if get_image(fullfilename) is None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -357,11 +351,9 @@ def asymptote(match, filename):
                 ['asy', '-f', format, '--libgs=', 'image.asy'], cwd=tmpdir)
             put_image(os.path.join(tmpdir, 'image.' + format), fullfilename)
 
-    shutil.copy(get_image(fullfilename), outfile)
-
     if format == 'svg':
         # figure out the correct size (lol)
-        attribs = xml.etree.ElementTree.parse(outfile).getroot().attrib
+        attribs = xml.etree.ElementTree.parse(get_image(fullfilename)).getroot().attrib
         assert attribs['width'].endswith('pt')
         assert attribs['height'].endswith('pt')
         size = (float(attribs['width'][:-2]), float(attribs['height'][:-2]))
@@ -370,7 +362,10 @@ def asymptote(match, filename):
         extrainfo = ''
 
     htmlfile = builder.infile2outfile(filename)
-    relative = os.path.relpath(outfile, os.path.dirname(htmlfile))
+    relative = os.path.relpath(
+        os.path.join(builder.outputdir, get_image(fullfilename)),
+        os.path.dirname(htmlfile),
+    )
 
     html = tags.image(relative.replace(os.sep, '/'), match.group(2))
     return html.replace('<img', '<img %s class="asymptote"' % extrainfo, 1)

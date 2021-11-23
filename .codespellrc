@@ -1,5 +1,4 @@
 [codespell]
 # axises: function name in asymptote/boilerplate.asy, changing would cause images rebuilt
 # ba: vector from B to A
-# initialy: js code has variable named initialY
-ignore-words-list = axises,ba,initialy
+ignore-words-list = axises,ba

@@ -188,13 +188,13 @@ Instead of defining it properly, I'll make a couple assumptions about how areas 
 
 <h2 id="cone-area">Cone area<a class="headerlink" href="#cone-area" title="Link to this title">¶</a></h2><p>Consider a cone with radius $r$ and side length $s$.</p>
 
-<p><img  class="asymptote" src="../asymptote/10d7af5f2d42b6777922102b34c6a2a0.png" /></p><p>Any cone can be created from a piece of paper cut to the shape of a sector of a circle.</p>
+<p><img  class="asymptote" src="../images/asy/10d7af5f2d42b6777922102b34c6a2a0.png" /></p><p>Any cone can be created from a piece of paper cut to the shape of a sector of a circle.</p>
 
-<p><img width="271" height="271" class="asymptote" src="../asymptote/0c6cde7ce12cd05210c6de7ff9598fcc.svg" /></p><p>Now the area of the cone, not including its red bottom circle, is the area of this circle sector.
+<p><img width="271" height="271" class="asymptote" src="../images/asy/0c6cde7ce12cd05210c6de7ff9598fcc.svg" /></p><p>Now the area of the cone, not including its red bottom circle, is the area of this circle sector.
 When folding the circle sector, its radius becomes the side length of the cone, so that's $s$,
 and its arc length becomes the perimeter of the cone, which is $2 \pi r$.</p>
 
-<p><img width="271" height="273" class="asymptote" src="../asymptote/f19acb4860e3931476722cedc89ad0ba.svg" /></p><p>Because $2\pi s$ is the perimeter of the entire circle, the ratio
+<p><img width="271" height="273" class="asymptote" src="../images/asy/f19acb4860e3931476722cedc89ad0ba.svg" /></p><p>Because $2\pi s$ is the perimeter of the entire circle, the ratio
 $$
 \frac{2\pi r}{2\pi s} = \frac{r}{s}
 $$
@@ -215,7 +215,7 @@ $$</p>
 where $x$ is a number between $a$ and $b$.
 Let $A(x)$ denote the area of this surface.</p>
 
-<p><img  class="asymptote" src="../asymptote/bfd4b0b4b7d52666ae00871a5bae44c7.png" /></p><p>Our goal is to calculate $A(b)$, the area between $a$ and $b$.
+<p><img  class="asymptote" src="../images/asy/bfd4b0b4b7d52666ae00871a5bae44c7.png" /></p><p>Our goal is to calculate $A(b)$, the area between $a$ and $b$.
 For doing this, we first calculate the derivative
 $$
 A'(x) = \lim_{h \to 0} \frac{A(x+h)-A(x)}{h}.
@@ -229,16 +229,16 @@ because a similar calculation works for the corresponding left limit.</p>
 <p>Let $h$ be a positive number.
 Consider the area of the "slice" between $x$ and $x+h$ (green).</p>
 
-<p><img  class="asymptote" src="../asymptote/2689d52a32c1f7daa31dcfd6fec9368c.png" /></p><p>Because $A(x+h)$ is the area between $a$ and $x+h$,
+<p><img  class="asymptote" src="../images/asy/2689d52a32c1f7daa31dcfd6fec9368c.png" /></p><p>Because $A(x+h)$ is the area between $a$ and $x+h$,
 including $A(x)$ (yellow) and the area of the slice (blue), we have
 $$
 \text{slice area} = A(x+h)-A(x).
 $$
 The slice looks almost like a part of a cone:</p>
 
-<p><img  class="asymptote" src="../asymptote/b408ec97a142b2d9358041c971b46b05.png" /></p><p>Here's what it looks like from the side:</p>
+<p><img  class="asymptote" src="../images/asy/b408ec97a142b2d9358041c971b46b05.png" /></p><p>Here's what it looks like from the side:</p>
 
-<p><img width="422" height="291" class="asymptote" src="../asymptote/7bd2ea4556024071270a279ceed64b8d.svg" /></p><p>From this view, it's easy to see that the slice is not actually a slice of the cone when the graph $y=f(x)$ is curved.
+<p><img width="422" height="291" class="asymptote" src="../images/asy/7bd2ea4556024071270a279ceed64b8d.svg" /></p><p>From this view, it's easy to see that the slice is not actually a slice of the cone when the graph $y=f(x)$ is curved.
 This means that the area of the slice of our surface of revolution
 can be different than the area of the corresponding slice of a cone.
 But for this derivation, we assume that we get the correct limit even if we use a cone slice area instead.
@@ -249,7 +249,7 @@ having to make this assumption is a downside of deriving the area formula this w
 Let $s$ denote the side length of the smaller cone, and let $p = f(x+h)-f(x)$.
 In the pictures, we have a positive $p$, because $f(x) < f(x+h)$.</p>
 
-<p><img width="383" height="209" class="asymptote" src="../asymptote/ca83f7bf26e84307207fd7b6aeb9541f.svg" /></p><p>By the Pythagorean theorem, the side length of the bigger cone is $s + \sqrt{p^2+h^2}$.
+<p><img width="383" height="209" class="asymptote" src="../images/asy/ca83f7bf26e84307207fd7b6aeb9541f.svg" /></p><p>By the Pythagorean theorem, the side length of the bigger cone is $s + \sqrt{p^2+h^2}$.
 The radiuses of the cones are $f(x)$ and $f(x)+p$, so their areas are $\pi f(x)s$ and $\pi (f(x)+p)(s+\sqrt{p^2+h^2})$.
 The difference of these areas is
 $$
@@ -335,11 +335,11 @@ $$
 \int_a^b 2\pi f(x) \sqrt{1+f'(x)^2}\ dx.
 $$</p>
 
-<p><img  class="asymptote" src="../asymptote/2e20168817de86876a2d31d6aea007e1.png" /></p></div><h2 id="example-area-of-cone-again">Example: area of cone (again)<a class="headerlink" href="#example-area-of-cone-again" title="Link to this title">¶</a></h2><p>Just like in <a href="integral-sor-volume.html#example-volume-of-cone">this example</a>,
+<p><img  class="asymptote" src="../images/asy/2e20168817de86876a2d31d6aea007e1.png" /></p></div><h2 id="example-area-of-cone-again">Example: area of cone (again)<a class="headerlink" href="#example-area-of-cone-again" title="Link to this title">¶</a></h2><p>Just like in <a href="integral-sor-volume.html#example-volume-of-cone">this example</a>,
 we get a cone with height $h$ and radius $r$ when
 the graph $y=\frac{r}{h}x$ rotates about the $x$ axis on $[0,h]$.</p>
 
-<p><img  class="asymptote" src="../asymptote/830e5fc3933b442add00089b46b239ad.png" /></p><p>By plugging in $f(x)=\frac{r}{h}x$ and $f'(x)=\frac{r}{h}$, we get
+<p><img  class="asymptote" src="../images/asy/830e5fc3933b442add00089b46b239ad.png" /></p><p>By plugging in $f(x)=\frac{r}{h}x$ and $f'(x)=\frac{r}{h}$, we get
 $$
 \begin{align}
 \int_0^h 2\pi \frac{r}{h}x \sqrt{1 + \left(\frac{r}{h}\right)^2}\ dx
@@ -358,7 +358,7 @@ By letting $s=\sqrt{h^2+r^2}$ denote the side length, we get $\pi rs$ as expecte
 <h2 id="example-area-of-ball">Example: area of ball<a class="headerlink" href="#example-area-of-ball" title="Link to this title">¶</a></h2><p>Just like in <a href="integral-sor-volume.html#example-volume-of-ball">this example</a>,
 we get a ball of radius $r$ as the curve $y=\sqrt{r^2-x^2}$ rotates about the $x$ axis on $[-r,r]$.</p>
 
-<p><img  class="asymptote" src="../asymptote/f7747ed10a8c33a10292dfe0f0d6a5bf.png" /></p><p>The derivative of the function $f(x) = \sqrt{r^2-x^2}$ is
+<p><img  class="asymptote" src="../images/asy/f7747ed10a8c33a10292dfe0f0d6a5bf.png" /></p><p>The derivative of the function $f(x) = \sqrt{r^2-x^2}$ is
 $$
 f'(x) = \frac{1}{2\sqrt{r^2-x^2}}(0-2x) = \frac{-x}{\sqrt{r^2-x^2}},
 $$
@@ -368,7 +368,7 @@ This is undefined when $x=-r$ or $x=r$,
 but if $-r < a < b < r$, then the derivative exists and is continuous on $[a,b]$.
 The corresponding area is not the area of the entire ball, but only a part of it.</p>
 
-<p><img  class="asymptote" src="../asymptote/361a98d4915217dea64540e96dc9a7bd.png" /></p><p>This area is
+<p><img  class="asymptote" src="../images/asy/361a98d4915217dea64540e96dc9a7bd.png" /></p><p>This area is
 $$
 \begin{align}
 \int_a^b 2\pi f(x) \sqrt{1+f'(x)^2}\ dx
@@ -394,7 +394,7 @@ For different ways to derive this, see <a href="https://www.youtube.com/watch?v=
 
 <h2 id="example-area-and-volume-with-y-1-x">Example: area and volume with $y=1/x$<a class="headerlink" href="#example-area-and-volume-with-y-1-x" title="Link to this title">¶</a></h2><p>Let $b > 1$. Consider the "horn" created by $y=1/x$ as it rotates about the $x$ axis on $[1,b]$.</p>
 
-<p><img  class="asymptote" src="../asymptote/9c9ba65899d7ac3ad60e9efd496287f6.png" /></p><p>The <a href="integral-sor-volume.html">volume</a> of this solid of revolution is
+<p><img  class="asymptote" src="../images/asy/9c9ba65899d7ac3ad60e9efd496287f6.png" /></p><p>The <a href="integral-sor-volume.html">volume</a> of this solid of revolution is
 $$
 \begin{align}
 \int_1^b \pi\left( \frac{1}{x} \right)^2\ dx

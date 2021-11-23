@@ -188,7 +188,7 @@ $$
 even if the lower and upper sums are from different partitions.
 Based on that, drawing all upper and lower sums on a number line looks something like this:</p>
 
-<p><img width="470" height="32" class="asymptote" src="../asymptote/433b3c0d13b6b18daa0c407349893842.svg" /></p><p>Now it is clear that there must be some number between all upper sums and lower sums.
+<p><img width="470" height="32" class="asymptote" src="../images/asy/433b3c0d13b6b18daa0c407349893842.svg" /></p><p>Now it is clear that there must be some number between all upper sums and lower sums.
 (Here "between" means that the number may be equal to upper or lower sums,
 which is the case for any function whose graph is a horizontal line.)
 However, it's not clear whether there's just one number or multiple different numbers
@@ -229,9 +229,9 @@ Unfortunately it's hard to draw a graph of this function.</p>
 the maximum of $f$ on any interval is $1$.
 For that reason, an upper sum of $f$ on $[1,2]$ looks something like this, regardless of the partition being used:</p>
 
-<p><img width="385" height="243" class="asymptote" src="../asymptote/ec700088253ab132d2e77971bdf60586.svg" /></p><p>Every interval also contains irrational numbers, so all minimums are $0$, and all lower sums looks like this:</p>
+<p><img width="385" height="243" class="asymptote" src="../images/asy/ec700088253ab132d2e77971bdf60586.svg" /></p><p>Every interval also contains irrational numbers, so all minimums are $0$, and all lower sums looks like this:</p>
 
-<p><img width="385" height="243" class="asymptote" src="../asymptote/91715f29f7e8e6ac978f61043c883003.svg" /></p><p>Because every upper sum is the square area $1^2 = 1$ and every lower sum is zero,
+<p><img width="385" height="243" class="asymptote" src="../images/asy/91715f29f7e8e6ac978f61043c883003.svg" /></p><p>Because every upper sum is the square area $1^2 = 1$ and every lower sum is zero,
 there are multiple different numbers between all upper sums and lower sums (such as $0$, $\frac{1}{2}$ and $1$),
 and so the function $f$ is not integrable.</p>
 
@@ -241,18 +241,18 @@ and so the function $f$ is not integrable.</p>
 </div><h2 id="which-functions-are-integrable">Which functions are integrable?<a class="headerlink" href="#which-functions-are-integrable" title="Link to this title">¶</a></h2><p>Suppose that a function $f$ is increasing (but not necessarily strictly increasing) on $[a,b]$.
 In other words, the graph of $f$ never goes down as you move from left to right.</p>
 
-<p><img width="427" height="332" class="asymptote" src="../asymptote/44672e1e0a508f5e0e165536561a8aa6.svg" /></p><p>Let's partition the interval $[a,b]$ into $n$ equally sized pieces and draw the upper and lower sums.
+<p><img width="427" height="332" class="asymptote" src="../images/asy/44672e1e0a508f5e0e165536561a8aa6.svg" /></p><p>Let's partition the interval $[a,b]$ into $n$ equally sized pieces and draw the upper and lower sums.
 Because $f$ is increasing, it has a maximum value on any closed interval at the right endpoint of the interval.
 Similarly it has a minimum value at the left endpoint of any closed interval.
 The upper sums look like this:</p>
 
-<p><img width="427" height="332" class="asymptote" src="../asymptote/5d840259ffeed6e72cfc7aa08baf8a1e.svg" /></p><p>Lower sums look like this:</p>
+<p><img width="427" height="332" class="asymptote" src="../images/asy/5d840259ffeed6e72cfc7aa08baf8a1e.svg" /></p><p>Lower sums look like this:</p>
 
-<p><img width="427" height="332" class="asymptote" src="../asymptote/94e11a4688ba33f0e1beead474a280c8.svg" /></p><p>Let's look at how much the upper and lower sums differ. I'll draw that with red.</p>
+<p><img width="427" height="332" class="asymptote" src="../images/asy/94e11a4688ba33f0e1beead474a280c8.svg" /></p><p>Let's look at how much the upper and lower sums differ. I'll draw that with red.</p>
 
-<p><img width="427" height="332" class="asymptote" src="../asymptote/088431c26941063f9f63ceaa83659c5d.svg" /></p><p>Now we can move all rectangles together so that they line up:</p>
+<p><img width="427" height="332" class="asymptote" src="../images/asy/088431c26941063f9f63ceaa83659c5d.svg" /></p><p>Now we can move all rectangles together so that they line up:</p>
 
-<p><img width="427" height="332" class="asymptote" src="../asymptote/f3f4fb0ee382e59a43f1544b08d86675.svg" /></p><p>This creates a big rectangle whose width is $(b-a)/n$ and height is $f(b)-f(a)$. Its area is
+<p><img width="427" height="332" class="asymptote" src="../images/asy/f3f4fb0ee382e59a43f1544b08d86675.svg" /></p><p>This creates a big rectangle whose width is $(b-a)/n$ and height is $f(b)-f(a)$. Its area is
 $$
 \text{upper sum} - \text{lower sum} = \frac{b-a}{n}(f(b)-f(a)),
 $$

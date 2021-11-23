@@ -182,7 +182,7 @@
 how to rotate a point by a given angle.
 This is useful in programming games, for example.</p>
 
-<p><img width="412" height="216" class="asymptote" src="../asymptote/3e54423bfc7b3e0fbd77ace3c4b748f6.svg" /></p><p>On this page, we assume that the center of rotation is $(0,0)$.
+<p><img width="412" height="216" class="asymptote" src="../images/asy/3e54423bfc7b3e0fbd77ace3c4b748f6.svg" /></p><p>On this page, we assume that the center of rotation is $(0,0)$.
 It simplifies rotating, and if your rotation center is not $(0,0)$,
 it isn't hard to temporarily move the points so that the center of rotation becomes $(0,0)$.
 Let me know if you need more details about how to do this.</p>
@@ -194,21 +194,21 @@ Doing it with linear algebra is a good way to learn linear algebra basics.
 
 <h2 id="90-degrees-counter-clockwise">90 degrees counter-clockwise<a class="headerlink" href="#90-degrees-counter-clockwise" title="Link to this title">¶</a></h2><p>Let's rotate the point $(2,1)$ counter-clockwise by 90 degrees.</p>
 
-<p><img width="381" height="201" class="asymptote" src="../asymptote/a3db4548a52a47906a2913acf9f8e235.svg" /></p><p>To find the rotated point, consider the triangle below it, and rotate that.</p>
+<p><img width="381" height="201" class="asymptote" src="../images/asy/a3db4548a52a47906a2913acf9f8e235.svg" /></p><p>To find the rotated point, consider the triangle below it, and rotate that.</p>
 
-<p><img width="312" height="201" class="asymptote" src="../asymptote/3ef6a57d54d3b18b94d6bae5edce1068.svg" /></p><p>The $y$ coordinate of the rotated point is $2$, because that's the length of the longer side of the triangle.
+<p><img width="312" height="201" class="asymptote" src="../images/asy/3ef6a57d54d3b18b94d6bae5edce1068.svg" /></p><p>The $y$ coordinate of the rotated point is $2$, because that's the length of the longer side of the triangle.
 The $x$ coordinate is $-1$, because the shorter side has length $1$,
 but it is now on the other side of the $y$ axis.
 This works simialrly with any other point, even if the coordinates are negative or zero.</p>
 
 <div class="box graybox"><p>The point $(x,y)$ rotated counter-clockwise by 90 degrees around $(0,0)$ is $(-y, x)$.</p>
 
-<p><img width="236" height="240" class="asymptote" src="../asymptote/f0b6bfe3cb49d77f9c7af6f0987b6fd6.svg" /></p></div><p>To check whether this makes sense, we can view the points as arrows starting from $(0,0)$,
+<p><img width="236" height="240" class="asymptote" src="../images/asy/f0b6bfe3cb49d77f9c7af6f0987b6fd6.svg" /></p></div><p>To check whether this makes sense, we can view the points as arrows starting from $(0,0)$,
 so that $(x,y)$ corresponds with $x\I+y\J$.
 In linear algebra, it is very common to not distinguish between points and arrows.
 A vector can be interpreted as a point or as an arrow, whichever is more useful.</p>
 
-<p><img width="286" height="319" class="asymptote" src="../asymptote/b6789b5dc46fa13f45f1eeb18a47d6a7.svg" /></p><p>Now we can check whether we did this correctly:
+<p><img width="286" height="319" class="asymptote" src="../images/asy/b6789b5dc46fa13f45f1eeb18a47d6a7.svg" /></p><p>Now we can check whether we did this correctly:
 <ul><li>
     The <a href="../vectors/iwi-jwj.html">dot product</a> between the vectors is
     $$
@@ -233,25 +233,25 @@ and then generalize it to work with any point.</p>
 
 <p>Let's start by rotating $(1,0)$ by any angle $\theta$.</p>
 
-<p><img width="376" height="314" class="asymptote" src="../asymptote/b1ad3de926ec422d29ae3b188b2dc688.svg" /></p><p>The rotated point is on the unit circle at angle $\theta$, so it is $\red{(\cos(\theta),\sin(\theta))}$.</p>
+<p><img width="376" height="314" class="asymptote" src="../images/asy/b1ad3de926ec422d29ae3b188b2dc688.svg" /></p><p>The rotated point is on the unit circle at angle $\theta$, so it is $\red{(\cos(\theta),\sin(\theta))}$.</p>
 
-<p><img width="385" height="314" class="asymptote" src="../asymptote/be237de6e0a1cd446f869d0d2473898e.svg" /></p><p>To rotate any point on the $x$ axis, such as $(2,0)$ or $(-\frac{1}{2}, 0)$,
+<p><img width="385" height="314" class="asymptote" src="../images/asy/be237de6e0a1cd446f869d0d2473898e.svg" /></p><p>To rotate any point on the $x$ axis, such as $(2,0)$ or $(-\frac{1}{2}, 0)$,
 we can multiply $\red{(\cos(\theta),\sin(\theta))}$ by a number to stretch it.</p>
 
-<p><img width="544" height="319" class="asymptote" src="../asymptote/ebab8cabd8ab063448d62c700e96f3a1.svg" /></p><p>To rotate $(0,1)$, we can take $\red{(\cos(\theta),\sin(\theta))}$, and rotate it by 90 degrees more.
+<p><img width="544" height="319" class="asymptote" src="../images/asy/ebab8cabd8ab063448d62c700e96f3a1.svg" /></p><p>To rotate $(0,1)$, we can take $\red{(\cos(\theta),\sin(\theta))}$, and rotate it by 90 degrees more.
 Because rotating $(x,y)$ by 90 degrees generally gives $(-y,x)$ (see above),
 we get $\blue{(-\sin(\theta),\cos(\theta))}$.</p>
 
-<p><img width="550" height="314" class="asymptote" src="../asymptote/66746ed6b22d030b8d92ef1166715644.svg" /></p><p>We can now similarly multiply $\blue{(-\sin(\theta),\cos(\theta))}$ by a number
+<p><img width="550" height="314" class="asymptote" src="../images/asy/66746ed6b22d030b8d92ef1166715644.svg" /></p><p>We can now similarly multiply $\blue{(-\sin(\theta),\cos(\theta))}$ by a number
 to rotate points on the $y$ axis.
 In the below picture, when multiplying by $-\frac{1}{2}$,
 the minuses cancel and we get $(\frac{1}{2}\sin(\theta), -\frac{1}{2}\cos(\theta))$.</p>
 
-<p><img width="563" height="412" class="asymptote" src="../asymptote/8698ea2264df4df8eac619cc820884a2.svg" /></p><p>To rotate any point $(x,y)$, we first write it as $(x,0) + (0,y)$,
+<p><img width="563" height="412" class="asymptote" src="../images/asy/8698ea2264df4df8eac619cc820884a2.svg" /></p><p>To rotate any point $(x,y)$, we first write it as $(x,0) + (0,y)$,
 thinking of $(x,0)$ and $(0,y)$ as arrows, not as points.
 We can then rotate the arrows separately.</p>
 
-<p><img width="398" height="339" class="asymptote" src="../asymptote/af4a2d2f4efe02d2116a217c463047cd.svg" /></p><div class="box graybox"><p>Any point $(x,0)$ on the $x$ axis can be rotated by first rotating $(1,0)$ and multiplying the result by $x$.</p>
+<p><img width="398" height="339" class="asymptote" src="../images/asy/af4a2d2f4efe02d2116a217c463047cd.svg" /></p><div class="box graybox"><p>Any point $(x,0)$ on the $x$ axis can be rotated by first rotating $(1,0)$ and multiplying the result by $x$.</p>
 
 <p>Any point $(0,y)$ on the $y$ axis can be rotated by first rotating $(0,1)$ and multiplying the result by $y$.</p>
 

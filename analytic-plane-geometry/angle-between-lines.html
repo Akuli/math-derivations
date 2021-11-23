@@ -181,21 +181,21 @@
 <h1 id="angle-between-lines">Angle Between Lines<a class="headerlink" href="#angle-between-lines" title="Link to this title">¶</a></h1><p>On this page, we'll derive a formula for finding the angle between two non-vertical lines.
 It looks like this:</p>
 
-<p><img width="404" height="173" class="asymptote" src="../asymptote/277c1354ce7d4c1edfe75532f76c316b.svg" /></p><p>So, the angle goes from line 1 to line 2, and
+<p><img width="404" height="173" class="asymptote" src="../images/asy/277c1354ce7d4c1edfe75532f76c316b.svg" /></p><p>So, the angle goes from line 1 to line 2, and
 it's <b>positive</b> in the above picture, because it goes counter-clockwise.
 Note that if we do this the other way, as in angle from line 2 to line 1,
 we need to go in the opposite direction and our angle is <b>negative</b>:</p>
 
-<p><img width="404" height="173" class="asymptote" src="../asymptote/5ddba4d143ca743a323c59987221a61d.svg" /></p><p>Of course, you can take the absolute value if you don't care about the direction of the angle.</p>
+<p><img width="404" height="173" class="asymptote" src="../images/asy/5ddba4d143ca743a323c59987221a61d.svg" /></p><p>Of course, you can take the absolute value if you don't care about the direction of the angle.</p>
 
 <p>Also, note that I'm always drawing the angle to the right of the lines,
 which is <b>not</b> same as e.g. this:</p>
 
-<p><img width="230" height="173" class="asymptote" src="../asymptote/8f1a82ee5a4a480e199000c14db9ca7d.svg" /></p><p>The angle between the lines is always in the open interval $(-180^\circ,180^\circ)$; that is,
+<p><img width="230" height="173" class="asymptote" src="../images/asy/8f1a82ee5a4a480e199000c14db9ca7d.svg" /></p><p>The angle between the lines is always in the open interval $(-180^\circ,180^\circ)$; that is,
 always between $\pm 180^\circ$ but never equal to $\pm 180^\circ$.
 To see why, observe that we get the largest and smallest possible angles in situations like this:</p>
 
-<p><img width="328" height="287" class="asymptote" src="../asymptote/58faa6f36484d168d8abef97ce5434b8.svg" /></p><p>Now the angle from line 1 to line 2 is just a little bit less than $180^\circ$,
+<p><img width="328" height="287" class="asymptote" src="../images/asy/58faa6f36484d168d8abef97ce5434b8.svg" /></p><p>Now the angle from line 1 to line 2 is just a little bit less than $180^\circ$,
 and the angle from line 2 to line 1 is just a little bit greater than $-180^\circ$.
 If we did this for vertical lines too, we would get angles equal to $\pm 180^\circ$,
 but we'll use slopes because that makes this easier, and vertical lines don't have slopes.
@@ -206,7 +206,7 @@ In the <a href="line-eq-slope.html#meaning-of-s-and-h">line equation derivation 
 if $s$ is the slope of a line, then $\I+s\J$ is a vector in the direction of that line,
 so the vectors $\vec a = \I+s_1\J$ and $\vec b = \I+s_2\J$ go in the directions of the lines.</p>
 
-<p><img width="230" height="190" class="asymptote" src="../asymptote/8dc5b3231c5731a063f44074790e3a74.svg" /></p><p>Next we consider the dot product $\vec a \cdot \vec b$.
+<p><img width="230" height="190" class="asymptote" src="../images/asy/8dc5b3231c5731a063f44074790e3a74.svg" /></p><p>Next we consider the dot product $\vec a \cdot \vec b$.
 We know that the
 <a href="../vectors/dot-projection.html#perpendicularness">dot product is zero if and only if
 $\vec a$ and $\vec b$ are perpendicular to each other</a>.
@@ -249,7 +249,7 @@ it only gives information about $\abs{\theta}$.</p>
 
 <p>We can simplify this formula slightly, because for any angle $\beta$, we have $\cos(-\beta) = \cos(\beta)$.</p>
 
-<p><img width="367" height="571" class="asymptote" src="../asymptote/7dbff40407caebd2c2b54c76596e09cc.svg" /></p><p>For this reason, the absolute value bars inside $\cos$ are unnecessary:</p>
+<p><img width="367" height="571" class="asymptote" src="../images/asy/7dbff40407caebd2c2b54c76596e09cc.svg" /></p><p>For this reason, the absolute value bars inside $\cos$ are unnecessary:</p>
 
 <p>$$
 \cos(\theta) = \cos(\abs{\theta}) = \frac{1+s_1s_2}{\sqrt{1+s_1^2} \sqrt{1+s_2^2}}
@@ -264,7 +264,7 @@ $$
 $$
 The absolute value of this determinant is the area of a parallelogram created by $\vec a$ and $\vec b$.</p>
 
-<p><img width="456" height="201" class="asymptote" src="../asymptote/0e36d6974d1ea81ac5583e404f00c401.svg" /></p><p>The parallelogram has side lengths $\abs{\vec a}$ and $\abs{\vec b}$,
+<p><img width="456" height="201" class="asymptote" src="../images/asy/0e36d6974d1ea81ac5583e404f00c401.svg" /></p><p>The parallelogram has side lengths $\abs{\vec a}$ and $\abs{\vec b}$,
 and one of its angles is $\abs{\theta}$ (that's the angle between the vectors, see above), so the area is (TODO)
 $$
 \abs{\vec a} \abs{\vec b} \sin(\abs{\theta}).
@@ -345,7 +345,7 @@ I mentioned this in the very beginning of this page.</p>
 If the lines are perpendicular, we have $s_1s_2 = -1$, and so $1 + s_1s_2 = 0$.
 The situation looks like this:</p>
 
-<p><img width="382" height="241" class="asymptote" src="../asymptote/0eec58c49b3e89d63ed8d620d21da0da.svg" /></p><p>In this picture, $s_1$ is negative and $s_2$ is positive,
+<p><img width="382" height="241" class="asymptote" src="../images/asy/0eec58c49b3e89d63ed8d620d21da0da.svg" /></p><p>In this picture, $s_1$ is negative and $s_2$ is positive,
 and the angle from line 1 to line 2 is $90^\circ$
 (it's positive, because it goes counter-clockwise).
 If $s_1$ is positive and $s_2$ is negative, then the angle is $-90^\circ$.
@@ -377,7 +377,7 @@ To figure out which of those it is, draw a picture.
 
 <h2 id="example">Example<a class="headerlink" href="#example" title="Link to this title">¶</a></h2><p>Let's find the angle from $y=-2x-3$ to $y=4x+5$. Here's a picture:</p>
 
-<p><img width="145" height="361" class="asymptote" src="../asymptote/551cdd79d229f82a416bead3240aa03f.svg" /></p><p>Letting $\theta$ denote the angle, we have
+<p><img width="145" height="361" class="asymptote" src="../images/asy/551cdd79d229f82a416bead3240aa03f.svg" /></p><p>Letting $\theta$ denote the angle, we have
 $$
 \tan(\theta) = \frac{4-(-2)}{1 + (-2) \cdot 4} = \frac{6}{-7} = -\frac{6}{7}.
 $$

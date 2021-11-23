@@ -181,7 +181,7 @@
 <h1 id="introduction-to-integrals">Introduction to Integrals<a class="headerlink" href="#introduction-to-integrals" title="Link to this title">¶</a></h1><p>An integral of a function $f$ on an interval $[a,b]$ means the area under the graph of $f$ between $a$ and $b$.
 In the below picture, it is the area of the green part.</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/4d18efc4a514ca8e85863b4ab10461b0.svg" /></p><p>Integrating $f$ means calculating the integral of $f$.
+<p><img width="402" height="201" class="asymptote" src="../images/asy/4d18efc4a514ca8e85863b4ab10461b0.svg" /></p><p>Integrating $f$ means calculating the integral of $f$.
 Also, "integral from $a$ to $b$" means "integral on $[a,b]$".
 The notation
 $$
@@ -192,7 +192,7 @@ means the integral of $f$ from $a$ to $b$.
 
 <p>For example, $\int_0^2 2x\ dx$ represents an area under the line $y=2x$. It looks like this:</p>
 
-<p><img width="234" height="342" class="asymptote" src="../asymptote/b9e9a9db6be6169323406b5d030716c4.svg" /></p><p>Because this is a triangle with base $2$ and height $4$, we can use the triangle area formula (TODO) to get
+<p><img width="234" height="342" class="asymptote" src="../images/asy/b9e9a9db6be6169323406b5d030716c4.svg" /></p><p>Because this is a triangle with base $2$ and height $4$, we can use the triangle area formula (TODO) to get
 $$
 \int_0^2 2x\ dx = \frac{2 \cdot 4}{2} = 4.
 $$
@@ -209,7 +209,7 @@ We'll also discuss whether all functions can be integrated.
 <h2 id="partition">Partition<a class="headerlink" href="#partition" title="Link to this title">¶</a></h2><p>Let's split the interval $[a,b]$ into finitely many smaller parts.
 In the below picture, we have 6 parts.</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/ea98c0547cf14b041350373bc5dbee97.svg" /></p><p>This kind of splitting is called a <b>partition</b> of the interval $[a,b]$.
+<p><img width="402" height="201" class="asymptote" src="../images/asy/ea98c0547cf14b041350373bc5dbee97.svg" /></p><p>This kind of splitting is called a <b>partition</b> of the interval $[a,b]$.
 The partition numbers don't need to split the partition into equally sized parts;
 the sizes may differ, like they do in the above picture.</p>
 
@@ -221,7 +221,7 @@ and that's also a valid partition.
 and draw that with a line above the interval.
 Doing this for all parts looks like this:</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/95536233eb49494020b30bd9aae9247a.svg" /></p><p>Now we see rectangles and notice that
+<p><img width="402" height="201" class="asymptote" src="../images/asy/95536233eb49494020b30bd9aae9247a.svg" /></p><p>Now we see rectangles and notice that
 $$
 \text{integral} \le \underbrace{\text{first rectangle area} + \text{second rectangle area} + \dots + \text{last rectangle area}}_{\text{upper sum}}.
 $$
@@ -240,9 +240,9 @@ Also, this works when $f$ gets negative values, even though negative areas don't
 <p>In the picture, the above inequality would also work with $<$ instead of $\le$, but this isn't always the case.
 For any function whose graph is a horizontal line, the integral will be equal to the upper sum.</p>
 
-<p><img width="381" height="201" class="asymptote" src="../asymptote/6bf3c27249d828ebae96b0d154e28746.svg" /></p><p>If we had used minimums instead, it looks like this:</p>
+<p><img width="381" height="201" class="asymptote" src="../images/asy/6bf3c27249d828ebae96b0d154e28746.svg" /></p><p>If we had used minimums instead, it looks like this:</p>
 
-<p><img width="402" height="201" class="asymptote" src="../asymptote/9da5236cd813b2a96e0fbc431f295e43.svg" /></p><p>These rectangles are different than the ones for upper sum.
+<p><img width="402" height="201" class="asymptote" src="../images/asy/9da5236cd813b2a96e0fbc431f295e43.svg" /></p><p>These rectangles are different than the ones for upper sum.
 The difference is that now we use minimums instead of maximums,
 so the rectangle area above the red line in the picture is
 $$
@@ -274,7 +274,7 @@ $$
 Let $f(x) = 3$.
 Based on the below picture, the integral should be the rectangle area $(4-2) \cdot 3 = 6$.</p>
 
-<p><img width="342" height="286" class="asymptote" src="../asymptote/7dd48c2a059e03ddb9e308577d712e03.svg" /></p><p>We choose the partition $2,3,4$.
+<p><img width="342" height="286" class="asymptote" src="../images/asy/7dd48c2a059e03ddb9e308577d712e03.svg" /></p><p>We choose the partition $2,3,4$.
 The maximum of $f$ on any interval is $3$, so we get
 $$
 \text{upper sum} = (3-2)3 + (4-3)3 = 1 \cdot 3 + 1 \cdot 3 = 6.
@@ -307,7 +307,7 @@ $$
 $$
 Let's calculate that again with upper and lower sums.</p>
 
-<p><img width="223" height="286" class="asymptote" src="../asymptote/0d009a06de29d6151f665562035b72a8.svg" /></p><p>Let $f(x)=2x$.
+<p><img width="223" height="286" class="asymptote" src="../images/asy/0d009a06de29d6151f665562035b72a8.svg" /></p><p>Let $f(x)=2x$.
 We partition the interval $[0,2]$ into 5 equally sized parts.
 Because each part has length $\frac{2}{5}$ (that is, interval length $2$ divided into $5$ equal pieces),
 the first two numbers of the partition will be $0$ and $\frac{2}{5}$.
@@ -318,7 +318,7 @@ $$
 $$
 The upper sum looks like this:</p>
 
-<p><img width="172" height="296" class="asymptote" src="../asymptote/a5ba1d323051d3eff58455600bdf563e.svg" /></p><p>Because $f$ is increasing, it gets its maximum value on any closed interval
+<p><img width="172" height="296" class="asymptote" src="../images/asy/a5ba1d323051d3eff58455600bdf563e.svg" /></p><p>Because $f$ is increasing, it gets its maximum value on any closed interval
 at the right end point of the inteval, and those are used as the upper sum rectangle heights.
 For example, the height of the first rectangle is the maximum of $f$ on $[0, 2/5]$, which is $f(2/5)$.
 By doing this for all rectangles, we get
@@ -333,7 +333,7 @@ $$
 Note that there's no $f(0)$ in the upper sum, because there's no rectangle with height $f(0)$.
 For the lower sum, there is a "flat" rectangle with height $f(0)=0$, but there's no rectangle with height $f(10/5)$.</p>
 
-<p><img width="172" height="296" class="asymptote" src="../asymptote/2d8f29fdd3574b23f4392c5064125b9e.svg" /></p><p>Now we get
+<p><img width="172" height="296" class="asymptote" src="../images/asy/2d8f29fdd3574b23f4392c5064125b9e.svg" /></p><p>Now we get
 $$
 \begin{align}
 \text{lower sum}
@@ -422,7 +422,7 @@ Unlike in the previous examples, we can't just calculate the area in the graph w
 because we don't have a formula for the area under a parabola.
 We finally have a reason for working with integrals.</p>
 
-<p><img width="257" height="420" class="asymptote" src="../asymptote/29c52282c26ada2c3c8dd803c076db63.svg" /></p><p>Let $f(x) = x^2$.
+<p><img width="257" height="420" class="asymptote" src="../images/asy/29c52282c26ada2c3c8dd803c076db63.svg" /></p><p>Let $f(x) = x^2$.
 Just like in the previous example,
 we partition the interval $[0,2]$ into $n$ equally sized parts
 $$
@@ -430,7 +430,7 @@ $$
 $$
 The upper and lower sums look like this for $n=8$:</p>
 
-<p><img width="257" height="420" class="asymptote" src="../asymptote/ed97737bbdb78df20db04d7815c6504d.svg" /></p><p><img width="257" height="420" class="asymptote" src="../asymptote/d8184a62277b12f7b749c36f74be29fe.svg" /></p><p>Because $f$ is increasing on the interval $[0,2]$, we get
+<p><img width="257" height="420" class="asymptote" src="../images/asy/ed97737bbdb78df20db04d7815c6504d.svg" /></p><p><img width="257" height="420" class="asymptote" src="../images/asy/d8184a62277b12f7b749c36f74be29fe.svg" /></p><p>Because $f$ is increasing on the interval $[0,2]$, we get
 $$
 \begin{align}
 \text{upper sum}

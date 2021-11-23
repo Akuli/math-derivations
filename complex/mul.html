@@ -245,7 +245,7 @@ $$
 $$
 Here are the vectors corresponding to $2+3i$ and $-6+4i$:</p>
 
-<p><img width="328" height="172" class="asymptote" src="../asymptote/2cc3380b49ac70d46fdb78efc7afd88c.svg" /></p><p>Let's make these observations (using <a href="angle-and-len.html">angles and lengths</a>):</p>
+<p><img width="328" height="172" class="asymptote" src="../images/asy/2cc3380b49ac70d46fdb78efc7afd88c.svg" /></p><p>Let's make these observations (using <a href="angle-and-len.html">angles and lengths</a>):</p>
 
 <ul><li>The blue angle in the picture looks like 90 degrees, and it actually is 90 degrees.
   To verify this, you can <a href="../vectors/iwi-jwj.html">calculate the dot product</a> of
@@ -257,7 +257,7 @@ the angles get added and the lengths get multiplied.</p>
 
 <p>Let's do another example. We multiply $1+i$ with itself.</p>
 
-<p><img width="257" height="257" class="asymptote" src="../asymptote/f1ed9dc0633a4002ad84e0b670fe38b2.svg" /></p><p>The angle of this complex number is 45 degrees, and its length is
+<p><img width="257" height="257" class="asymptote" src="../images/asy/f1ed9dc0633a4002ad84e0b670fe38b2.svg" /></p><p>The angle of this complex number is 45 degrees, and its length is
 $$
 \sqrt{1^2 + 1^2} = \sqrt{2}.
 $$
@@ -271,7 +271,7 @@ $$
 $$
 which is a complex number with length $2=\sqrt{2}\sqrt{2}$ and angle $90^\circ = 45^\circ+45^\circ$ as expected.</p>
 
-<p><img width="257" height="342" class="asymptote" src="../asymptote/736033ed81f655a1ab36aa6c0e0e4d6d.svg" /></p><h2 id="why-do-angles-get-added-and-lengths-get-multiplied">Why do angles get added and lengths get multiplied?<a class="headerlink" href="#why-do-angles-get-added-and-lengths-get-multiplied" title="Link to this title">¶</a></h2><p>Let's define an operation that takes in two complex numbers $z$ and $w$,
+<p><img width="257" height="342" class="asymptote" src="../images/asy/736033ed81f655a1ab36aa6c0e0e4d6d.svg" /></p><h2 id="why-do-angles-get-added-and-lengths-get-multiplied">Why do angles get added and lengths get multiplied?<a class="headerlink" href="#why-do-angles-get-added-and-lengths-get-multiplied" title="Link to this title">¶</a></h2><p>Let's define an operation that takes in two complex numbers $z$ and $w$,
 and results in another complex number that we shall denote with $z \star w$.
 (I don't think anyone else uses this notation, and I won't use it after this derivation.)
 We define the $\star$ operation to do what the multiplication $zw$ seems to do:
@@ -302,7 +302,7 @@ Let's check that the angles match too:
 If $c$ is positive, then the angle of $(ca)+(cb)i$ is the angle of $a+bi$,
 because the vector gets "stretched" to be $c$ times longer, without changing the angle.</p>
 
-<p><img width="198" height="229" class="asymptote" src="../asymptote/e396c97d31ba0a807b0fe45dff570a8f.svg" /></p><p>In this case, the angle of $c \star (a+bi)$ is
+<p><img width="198" height="229" class="asymptote" src="../images/asy/e396c97d31ba0a807b0fe45dff570a8f.svg" /></p><p>In this case, the angle of $c \star (a+bi)$ is
 $$
 (\text{angle of $a+bi$}) + \underbrace{(\text{angle of $c$})}_0,
 $$
@@ -310,7 +310,7 @@ so that too is just the angle of $a+bi$.
 </li><li>
 If $c$ is negative, then $a+bi$ and $(ca)+(cb)i$ are on the opposite sides of $0$:</p>
 
-<p><img width="238" height="229" class="asymptote" src="../asymptote/81dc22727f98f1249972afaf1f6277f3.svg" /></p><p>Because the angle of $c$ is 180 degrees,
+<p><img width="238" height="229" class="asymptote" src="../images/asy/81dc22727f98f1249972afaf1f6277f3.svg" /></p><p>Because the angle of $c$ is 180 degrees,
 the angle of $c \star (a+bi)$ is 180 degrees more than the angle of $a+bi$,
 so that too is on the opposite side of $0$.
 Again, it has the same angle as $(ca)+(cb)i$.
@@ -339,7 +339,7 @@ $$
 The following picture shows that $\rotate(v+w)=\rotate(v)+\rotate(w)$,
 because the entire triangle created by $v$, $w$ and $v+w$ gets rotated:</p>
 
-<p><img width="467" height="257" class="asymptote" src="../asymptote/78feb35b5e7beed1e934293d2bd013c5.svg" /></p><p>By multiplying both sides of $\rotate(v+w)=\rotate(v)+\rotate(w)$ with $\abs{z}$
+<p><img width="467" height="257" class="asymptote" src="../images/asy/78feb35b5e7beed1e934293d2bd013c5.svg" /></p><p>By multiplying both sides of $\rotate(v+w)=\rotate(v)+\rotate(w)$ with $\abs{z}$
 and distributing it like we usually do when multiplying vectors and numbers, we get
 $$
 \underbrace{\abs{z}\rotate(v+w)}_{z \star (v+w)}
@@ -366,7 +366,7 @@ So, our $\star$ operation really is the complex number multiplication.</p>
 </div><h2 id="de-moivre-s-formula">De Moivre's formula<a class="headerlink" href="#de-moivre-s-formula" title="Link to this title">¶</a></h2><p>Let $z$ be a complex number with angle $\theta$ and length 1.
 It is on the unit circle of radius $1$ centered at $0$, at the angle $\theta$.</p>
 
-<p><img width="371" height="371" class="asymptote" src="../asymptote/80bf2e27c3eaa34d09270c8fe447724c.svg" /></p><p>With trig, we see that $z = \cos(\theta) + i\sin(\theta)$.</p>
+<p><img width="371" height="371" class="asymptote" src="../images/asy/80bf2e27c3eaa34d09270c8fe447724c.svg" /></p><p>With trig, we see that $z = \cos(\theta) + i\sin(\theta)$.</p>
 
 <p>We calculate $z^n$ for any positive integer $n$.
 Because the length of $z$ is 1,

@@ -202,12 +202,12 @@ I'll first tell about projection.
 Let's draw $\vec v$ and $\vec w$ so that their "beginnings" are in the same place.
 Then we draw a line from the tip of $\vec v$ to $\vec w$ perpendicularly, like this:</p>
 
-<p><img width="291" height="252" class="asymptote" src="../asymptote/28e538977c5389d5f0cd0f495d9a49ca.svg" /></p><p>The projection is then the distance from the "beginnings" of the vectors to
+<p><img width="291" height="252" class="asymptote" src="../images/asy/28e538977c5389d5f0cd0f495d9a49ca.svg" /></p><p>The projection is then the distance from the "beginnings" of the vectors to
 where this line touches $\vec w$.
 In the above picture, the projection is positive, but
 if you need to "extend" $\vec v$ for drawing the line, then the projection is negative:</p>
 
-<p><img width="422" height="228" class="asymptote" src="../asymptote/13e422845f51578efeb0f4ec5fcec357.svg" /></p><p>Here's an animation showing this.</p>
+<p><img width="422" height="228" class="asymptote" src="../images/asy/13e422845f51578efeb0f4ec5fcec357.svg" /></p><p>Here's an animation showing this.</p>
 
 <p><canvas id="canvas" width=500 height=250></canvas></p>
 
@@ -234,7 +234,7 @@ but it doesn't matter, because that projection gets multiplied by $\abs{\vec 0} 
 </li><li>
 The projection of $\vec i+\vec j$ onto $2\vec i$ is $1$, so $(\vec i + \vec j) \cdot (2\vec i) = 1\abs{2\vec i} = 2$.</p>
 
-<p><img width="194" height="155" class="asymptote" src="../asymptote/bedd75949427d4e1bb07628e26c9f296.svg" /></p><p></li><li>
+<p><img width="194" height="155" class="asymptote" src="../images/asy/bedd75949427d4e1bb07628e26c9f296.svg" /></p><p></li><li>
 The projection of any vector onto itself is simply the length of the vector,
 so $\vec v \cdot \vec v = \abs{\vec v} \abs{\vec v} = \abs{\vec v}^2$,
 where the first $\abs{\vec v}$ is the projection,
@@ -243,7 +243,7 @@ being projected onto.
 </li><li>
 The projection of $\vec j$ onto $\vec i$ is zero, so $\vec j \cdot \vec i = 0$.</p>
 
-<p><img width="108" height="120" class="asymptote" src="../asymptote/87b44050f1c7ff507b70c4b53f94ca5e.svg" /></p><p></li></ul></p>
+<p><img width="108" height="120" class="asymptote" src="../images/asy/87b44050f1c7ff507b70c4b53f94ca5e.svg" /></p><p></li></ul></p>
 
 <p>You might be wondering how to calculate something like
 the projection of $2\I+3\J$ onto $4\I+5\J$.
@@ -285,7 +285,7 @@ Then the projection of $-\vec a$ onto $\vec b$ is $-p$, because
 it has the same absolute value as $p$, but with the opposite sign;
 it's positive when $p$ is negative, and negative when $p$ is positive.</p>
 
-<p><img width="314" height="229" class="asymptote" src="../asymptote/d2a93a434569389f8fdd7873546488fc.svg" /></p><p><img width="314" height="229" class="asymptote" src="../asymptote/48cc441c72899c92fece146bed18b36b.svg" /></p><p>Because the projection of $-\vec a$ onto $\vec b$ is $-p$, we get
+<p><img width="314" height="229" class="asymptote" src="../images/asy/d2a93a434569389f8fdd7873546488fc.svg" /></p><p><img width="314" height="229" class="asymptote" src="../images/asy/48cc441c72899c92fece146bed18b36b.svg" /></p><p>Because the projection of $-\vec a$ onto $\vec b$ is $-p$, we get
 $$
 (-\vec a) \cdot \vec b = -p\abs{\vec b} = -(\vec a \cdot \vec b).
 $$
@@ -296,10 +296,10 @@ Just like before, $p$ denotes the projection of $\vec a$ onto $\vec b$.
 If $p > 0$, then $\vec b$ doesn't have to be "extended" for calculating the projection onto $\vec b$,
 but extending is needed for projection onto $-\vec b$.</p>
 
-<p><img width="342" height="159" class="asymptote" src="../asymptote/76acbd263dfba4f5d6df9bea1e2d3bda.svg" /></p><p>If $p < 0$, then it's the opposite:
+<p><img width="342" height="159" class="asymptote" src="../images/asy/76acbd263dfba4f5d6df9bea1e2d3bda.svg" /></p><p>If $p < 0$, then it's the opposite:
 extending is needed for projection onto $\vec b$ but not for projection onto $-\vec b$.</p>
 
-<p><img width="342" height="159" class="asymptote" src="../asymptote/ff2d4c0249a15b55838307f3c02f5f53.svg" /></p><p>In both cases, the projection of $\vec a$ onto $-\vec b$ is $-p$, and we get
+<p><img width="342" height="159" class="asymptote" src="../images/asy/ff2d4c0249a15b55838307f3c02f5f53.svg" /></p><p>In both cases, the projection of $\vec a$ onto $-\vec b$ is $-p$, and we get
 $$
 \vec a \cdot (-\vec b) = -p\abs{-\vec b} = -p\abs{\vec b}=-(\vec a \cdot \vec b),
 $$
@@ -341,7 +341,7 @@ $$
 (We can divide by $\abs{\vec c}$ because $\vec c$ is a nonzero vector.)
 In the following picture, we have $p(\vec a + \vec b) = p(\vec a) + p(\vec b)$.</p>
 
-<p><img width="618" height="414" class="asymptote" src="../asymptote/4b48ac525e6a86cbbc8ae5b68205c764.svg" /></p><p>In this picture, we have $p(\vec a) > 0$, $p(\vec b) < 0$ and $p(\vec a) + p(\vec b) > 0$.
+<p><img width="618" height="414" class="asymptote" src="../images/asy/4b48ac525e6a86cbbc8ae5b68205c764.svg" /></p><p>In this picture, we have $p(\vec a) > 0$, $p(\vec b) < 0$ and $p(\vec a) + p(\vec b) > 0$.
 However, this works similarly in all other cases too;
 pictures look different, but we always get $p(\vec a + \vec b) = p(\vec a) + p(\vec b)$.
 Plugging into the formula for $p(\vec v)$, we get
@@ -390,7 +390,7 @@ Let $p$ be the projection of $\vec v$ onto $\vec w$.
 The projection of $\vec v$ onto $\vec w \, r$ is also $p$,
 because $\vec v$ and $\vec w \, r$ go in the same direction ($r$ is positive).</p>
 
-<p><img width="344" height="170" class="asymptote" src="../asymptote/1a98eeb7cc48bae73e71c8eba73644fd.svg" /></p><p>Now we get
+<p><img width="344" height="170" class="asymptote" src="../images/asy/1a98eeb7cc48bae73e71c8eba73644fd.svg" /></p><p>Now we get
 $$
 \vec v \cdot (\vec w \, r) = p\abs{\vec w \, r} = p\abs{\vec w}\abs{r}.
 $$

@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - master
+      - actions2
 
 jobs:
   build:

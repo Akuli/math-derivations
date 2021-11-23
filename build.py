@@ -16,20 +16,34 @@ from htmlthingy import Builder, tags
 from linkcheck import check_links
 
 
-# TODO: move these to htmlthingy
-os.makedirs('imagecache', exist_ok=True)
+def init_asycache():
+    os.makedirs('asycache', exist_ok=True)
+
+    # Move everything from images/asy/ to asycache/
+    for name in os.listdir('images/asy'):
+        if os.path.exists(os.path.join('asycache', name)):
+            with open(os.path.join('asycache', name), "rb") as file1:
+                with open(os.path.join('images/asy', name), "rb") as file2:
+                    assert file1.read() == file2.read()
+            os.remove(os.path.join('images/asy', name))
+        else:
+            shutil.move(os.path.join('images/asy', name), os.path.join('asycache', name))
 
 
-def cache_get(filename):
-    cached = os.path.join('imagecache', filename)
-    if os.path.exists(cached):
-        return cached
+init_asycache()
+
+
+def get_image(name):
+    if os.path.exists(os.path.join('asycache', name)):
+        if not os.path.exists(os.path.join('images/asy', name)):
+            shutil.copy(os.path.join('asycache', name), os.path.join('images/asy', name))
+        return os.path.join('images/asy', name)
     return None
 
 
-def cache_put(tempfilename, cachefilename):
-    os.makedirs('imagecache', exist_ok=True)
-    shutil.copy(tempfilename, os.path.join('imagecache', cachefilename))
+def put_image(tempfilename, name):
+    shutil.copy(tempfilename, os.path.join('asycache', name))
+    shutil.copy(tempfilename, os.path.join('images/asy', name))
 
 
 builder = Builder()
@@ -331,7 +345,7 @@ def asymptote(match, filename):
     os.makedirs(os.path.join(builder.outputdir, 'asymptote'), exist_ok=True)
     outfile = os.path.join(builder.outputdir, 'asymptote', fullfilename)
 
-    if cache_get(fullfilename) is None:
+    if get_image(fullfilename) is None:
         with tempfile.TemporaryDirectory() as tmpdir:
             for file in glob.glob('asymptote/*.asy'):
                 shutil.copy(file, tmpdir)
@@ -341,9 +355,9 @@ def asymptote(match, filename):
 
             subprocess.check_call(
                 ['asy', '-f', format, '--libgs=', 'image.asy'], cwd=tmpdir)
-            cache_put(os.path.join(tmpdir, 'image.' + format), fullfilename)
+            put_image(os.path.join(tmpdir, 'image.' + format), fullfilename)
 
-    shutil.copy(cache_get(fullfilename), outfile)
+    shutil.copy(get_image(fullfilename), outfile)
 
     if format == 'svg':
         # figure out the correct size (lol)

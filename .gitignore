@@ -1,4 +1,4 @@
 env/
 html/
-imagecache/
+asycache/
 __pycache__/

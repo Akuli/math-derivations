@@ -282,13 +282,13 @@ This animation shows how this goes for $n=7$:</p>
                 x,
                 y,
                 element: document.createElement('div'),
-                initialX: (
+                xInitial: (
                     (size >= 5) ?
                         sumOfIntegersUpTo(size-1)-sumOfIntegersUpTo(4) + (size-5)
                     :
                         sumOfIntegersUpTo(size-1) + (size-1)
                 ) + x - n,
-                initialY: ((size >= 5) ? 5 : 0) + y - n,
+                yInitial: ((size >= 5) ? 5 : 0) + y - n,
             }))
         );
 
@@ -298,11 +298,11 @@ This animation shows how this goes for $n=7$:</p>
     const leftCopy = range(n*n).map(i => ({x: i%n, y: Math.floor(i/n), element: document.createElement('div')}));
 
     run([
-        differentSizeSquares.map((squareList, size) => squareList.map(({x, y, initialX, initialY, element}) => ({
+        differentSizeSquares.map((squareList, size) => squareList.map(({x, y, xInitial, yInitial, element}) => ({
             type: 'create',
             element,
-            x: initialX,
-            y: initialY,
+            x: xInitial,
+            y: yInitial,
             textContent: 1,
             classes: 'square',
             css: {zIndex: 2},

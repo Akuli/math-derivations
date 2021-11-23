@@ -21,29 +21,29 @@ def init_asycache():
 
     # Move everything from images/asy/ to asycache/
     for name in os.listdir('images/asy'):
-        if os.path.exists(os.path.join('asycache', name)):
-            with open(os.path.join('asycache', name), "rb") as file1:
-                with open(os.path.join('images/asy', name), "rb") as file2:
+        if os.path.exists(f"asycache/{name}"):
+            with open(f"asycache/{name}", "rb") as file1:
+                with open(f"images/asy/{name}", "rb") as file2:
                     assert file1.read() == file2.read()
-            os.remove(os.path.join('images/asy', name))
+            os.remove(f"images/asy/{name}")
         else:
-            shutil.move(os.path.join('images/asy', name), os.path.join('asycache', name))
+            shutil.move(f"images/asy/{name}", f"asycache/{name}")
 
 
 init_asycache()
 
 
 def get_image(name):
-    if os.path.exists(os.path.join('asycache', name)):
-        if not os.path.exists(os.path.join('images/asy', name)):
-            shutil.copy(os.path.join('asycache', name), os.path.join('images/asy', name))
-        return os.path.join('images/asy', name)
+    if os.path.exists(f"asycache/{name}"):
+        if not os.path.exists(f"images/asy/{name}"):
+            shutil.copy(f"asycache/{name}", f"images/asy/{name}")
+        return f"images/asy/{name}"
     return None
 
 
 def put_image(tempfilename, name):
-    shutil.copy(tempfilename, os.path.join('asycache', name))
-    shutil.copy(tempfilename, os.path.join('images/asy', name))
+    shutil.copy(tempfilename, f"asycache/{name}")
+    shutil.copy(tempfilename, f"images/asy/{name}")
 
 
 builder = Builder()

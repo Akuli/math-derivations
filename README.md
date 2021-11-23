@@ -15,12 +15,22 @@ $ python3 -m pip install --user wheel
 $ python3 -m venv env
 $ . env/bin/activate
 (env) $ pip install -r requirements.txt
-(env) $ ./imagecachesync.sh
+(env) $ python3 build.py
 ```
 
-Run these commands **with the virtualenv activated** as needed:
+If you want `build.py` to send F5 to the browser window where math-derivations is open:
 
-- Building into `html` directory: `python3 build.py`
-    - Add `--reload-browser` to send F5 to the browser window where math-derivations is open.
-        You need `sudo apt install xdotool`.
-- Publishing to github pages: `python3 publish.py`
+```
+(env) $ sudo apt install xdotool
+(env) $ python3 build.py --reload-browser
+```
+
+To publish, run `git push`, and let Github Actions take care of the rest.
+
+If you create or modify images drawn with asymptote,
+you should commit the resulting files in `images/asy/*.png`.
+The images are committed to Git, for several reasons:
+- This makes `build.py` really fast. Rebuilding images is slow.
+- Some images are created with an old, backwards-incompatible version of asymptote.
+    If those weren't committed, I would have to upgrade them to work with newer asymptote versions too.
+- Building 3D images on github actions just doesn't work, because it apparently requires a GPU.

@@ -1,2 +1,0 @@
-#!/bin/bash
-git push origin master && . env/bin/activate && python3 publish.py 

@@ -403,14 +403,17 @@ open(os.path.join(builder.outputdir, '.nojekyll'), 'x').close()
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--reload-browser", action='store_true')
+parser.add_argument("--check-links", action='store_true')
 args = parser.parse_args()
+
 if args.reload_browser:
     # https://itectec.com/unixlinux/refresh-reload-active-browser-tab-from-command-line/
     subprocess.call('xdotool search --name "Math Derivations" windowactivate windowfocus key F5', shell=True)
 
-print("Checking links...")
-link_problems = check_links([(f, builder.infile2outfile(f)) for f in builder.infiles])
-if link_problems:
-    print("=== link check errors ===")
-    print("\n".join(link_problems))
-    sys.exit(1)
+if args.check_links:
+    print("Checking links...")
+    link_problems = check_links([(f, builder.infile2outfile(f)) for f in builder.infiles])
+    if link_problems:
+        print("=== link check errors ===")
+        print("\n".join(link_problems))
+        sys.exit(1)

@@ -28,9 +28,9 @@ If you want `build.py` to send F5 to the browser window where math-derivations i
 To publish, run `git push`, and let Github Actions take care of the rest.
 
 If you create or modify images drawn with asymptote,
-you should commit the resulting files in `images/asy/*.png`.
+you should commit the resulting files in `images/asy/`.
 The images are committed to Git, for several reasons:
 - This makes `build.py` really fast. Rebuilding images is slow.
-- Some images are created with an old, backwards-incompatible version of asymptote.
-    If those weren't committed, I would have to upgrade them to work with newer asymptote versions too.
+- Some images were created with an old, backwards-incompatible version of asymptote.
+    If those weren't committed, I would have to upgrade them to work with newer asymptote versions.
 - Building 3D images on github actions just doesn't work, because it apparently requires a GPU.

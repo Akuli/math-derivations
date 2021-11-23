@@ -221,7 +221,7 @@ asymptote:
 Let's zoom onto the square that I marked with red.
 The interval $I_y=(2.99, 3.01)$ is for the values of the function, so I'll draw it on the $y$ axis,
 and $I_x=(0.997,1.003)$ is for the inputs of the function, so I'll draw that on the $x$ axis.
-The axises should actually be quite far away from the red square that we're zooming into,
+The axes should actually be quite far away from the red square that we're zooming into,
 but I'm drawing them anyway because I want something to mark intervals and numbers onto.
 
 asymptote:

@@ -63,7 +63,7 @@ asymptote:
 The $y$ coordinate of the rotated point is $2$, because that's the length of the longer side of the triangle.
 The $x$ coordinate is $-1$, because the shorter side has length $1$,
 but it is now on the other side of the $y$ axis.
-This works simialrly with any other point, even if the coordinates are negative or zero.
+This works similarly with any other point, even if the coordinates are negative or zero.
 
 graybox:
     The point $(x,y)$ rotated counter-clockwise by 90 degrees around $(0,0)$ is $(-y, x)$.

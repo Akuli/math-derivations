@@ -15,10 +15,10 @@ asymptote:
     draw(T*rarc((0,0), 0.5, atan2(w.y, w.x), atan2(v.y, v.x)), L="$\theta$", p=deepgreen);
 
 Let's draw a circle of radius $\abs{\vec v}$ around the "beginning" of $\vec v$ and $\vec w$.
-Let's also draw axises centered on that point so that $\vec w$ goes along one of the axises.
-These might not be the same as the $x$ and $y$ axises that we use most of the time,
-because these axises can be rotated depending on how $\vec w$ is rotated,
-so I'll call them $t$ and $u$ axises instead of $x$ and $y$.
+Let's also draw axes centered on that point so that $\vec w$ goes along one of the axes.
+These might not be the same as the $x$ and $y$ axes that we use most of the time,
+because these axes can be rotated depending on how $\vec w$ is rotated,
+so I'll call them $t$ and $u$ axes instead of $x$ and $y$.
 
 asymptote:
     unitsize(2cm);
@@ -80,7 +80,7 @@ $$
 $$
 We see that there are two ways how the dot product can be zero:
 <ul><li>
-One of the vectors being dot producted is the zero vector.
+One of the vectors being dotted is the zero vector.
 </li><li>
 The cosine of the angle between the vectors is zero.
 90 degrees is the only angle between 0 and 180 degrees whose cosine is zero,

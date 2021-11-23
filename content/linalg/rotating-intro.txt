@@ -24,7 +24,7 @@ It simplifies rotating, and if your rotation center is not $(0,0)$,
 it isn't hard to temporarily move the points so that the center of rotation becomes $(0,0)$.
 Let me know if you need more details about how to do this.
 
-2D rotations can also be done [with complex numbers](../complex/mull.html),
+2D rotations can also be done [with complex numbers](../complex/mul.html),
 but that's not the point.
 Doing it with linear algebra is a good way to learn linear algebra basics.
 

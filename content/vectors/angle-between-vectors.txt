@@ -80,7 +80,7 @@ $$
 $$
 We see that there are two ways how the dot product can be zero:
 <ul><li>
-One of the vectors being dot producted is the zero vector.
+One of the vectors being dotted is the zero vector.
 </li><li>
 The cosine of the angle between the vectors is zero.
 90 degrees is the only angle between 0 and 180 degrees whose cosine is zero,

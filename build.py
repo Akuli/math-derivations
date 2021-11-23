@@ -16,20 +16,34 @@ from htmlthingy import Builder, tags
 from linkcheck import check_links
 
 
-# TODO: move these to htmlthingy
-os.makedirs('imagecache', exist_ok=True)
+def init_asycache():
+    os.makedirs('asycache', exist_ok=True)
+
+    # Move everything from images/asy/ to asycache/
+    for name in os.listdir('images/asy'):
+        if os.path.exists(f"asycache/{name}"):
+            with open(f"asycache/{name}", "rb") as file1:
+                with open(f"images/asy/{name}", "rb") as file2:
+                    assert file1.read() == file2.read()
+            os.remove(f"images/asy/{name}")
+        else:
+            shutil.move(f"images/asy/{name}", f"asycache/{name}")
 
 
-def cache_get(filename):
-    cached = os.path.join('imagecache', filename)
-    if os.path.exists(cached):
-        return cached
+init_asycache()
+
+
+def get_image(name):
+    if os.path.exists(f"asycache/{name}"):
+        if not os.path.exists(f"images/asy/{name}"):
+            shutil.copy(f"asycache/{name}", f"images/asy/{name}")
+        return f"images/asy/{name}"
     return None
 
 
-def cache_put(tempfilename, cachefilename):
-    os.makedirs('imagecache', exist_ok=True)
-    shutil.copy(tempfilename, os.path.join('imagecache', cachefilename))
+def put_image(tempfilename, name):
+    shutil.copy(tempfilename, f"asycache/{name}")
+    shutil.copy(tempfilename, f"images/asy/{name}")
 
 
 builder = Builder()
@@ -39,14 +53,10 @@ builder.infiles = sorted(
     + glob.glob('content/*/*.txt')
     + glob.glob('content/*/*/*.txt')
 )
-
 builder.infile2outfile = lambda infile: os.path.join(
     builder.outputdir,
     os.path.splitext(infile.replace('content' + os.sep, '', 1))[0] + '.html')
-
-builder.additional_files.append('css')
-builder.additional_files.append('js')
-builder.additional_files.extend(glob.glob('images/*'))
+builder.additional_files = ["css", "js", "images"]
 
 
 def get_sidebar_content(txtfile):
@@ -328,10 +338,8 @@ def asymptote(match, filename):
         textwrap.dedent(match.string[match.end():]))
     fullfilename = (hashlib.md5(fullcode.encode('utf-8')).hexdigest()
                     + '.' + format)
-    os.makedirs(os.path.join(builder.outputdir, 'asymptote'), exist_ok=True)
-    outfile = os.path.join(builder.outputdir, 'asymptote', fullfilename)
 
-    if cache_get(fullfilename) is None:
+    if get_image(fullfilename) is None:
         with tempfile.TemporaryDirectory() as tmpdir:
             for file in glob.glob('asymptote/*.asy'):
                 shutil.copy(file, tmpdir)
@@ -341,13 +349,11 @@ def asymptote(match, filename):
 
             subprocess.check_call(
                 ['asy', '-f', format, '--libgs=', 'image.asy'], cwd=tmpdir)
-            cache_put(os.path.join(tmpdir, 'image.' + format), fullfilename)
-
-    shutil.copy(cache_get(fullfilename), outfile)
+            put_image(os.path.join(tmpdir, 'image.' + format), fullfilename)
 
     if format == 'svg':
         # figure out the correct size (lol)
-        attribs = xml.etree.ElementTree.parse(outfile).getroot().attrib
+        attribs = xml.etree.ElementTree.parse(get_image(fullfilename)).getroot().attrib
         assert attribs['width'].endswith('pt')
         assert attribs['height'].endswith('pt')
         size = (float(attribs['width'][:-2]), float(attribs['height'][:-2]))
@@ -356,7 +362,10 @@ def asymptote(match, filename):
         extrainfo = ''
 
     htmlfile = builder.infile2outfile(filename)
-    relative = os.path.relpath(outfile, os.path.dirname(htmlfile))
+    relative = os.path.relpath(
+        os.path.join(builder.outputdir, get_image(fullfilename)),
+        os.path.dirname(htmlfile),
+    )
 
     html = tags.image(relative.replace(os.sep, '/'), match.group(2))
     return html.replace('<img', '<img %s class="asymptote"' % extrainfo, 1)

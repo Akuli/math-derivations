@@ -25,6 +25,12 @@ If you want `build.py` to send F5 to the browser window where math-derivations i
 (env) $ python3 build.py --reload-browser
 ```
 
+If you want to check links (also done in Github Actions):
+
+```
+(env) $ python3 build.py --check-links
+```
+
 To publish, run `git push`, and let Github Actions take care of the rest.
 
 If you create or modify images drawn with asymptote,

@@ -207,17 +207,22 @@ def get_sidebar_content(txtfile):
             link("Exponent function", 'complex/exp'),
         ])),
         dropdown("Linear algebra", join([
-            link("Introduction (rotating a vector)", "linalg/rotating-intro"),
-            link("Matrix times vector", "linalg/matrix-vector"),
-            link("Matrix times matrix", "linalg/matrix-matrix"),
-            link("Matrix plus matrix", "linalg/matrix-sum"),
-            link("Matrix times number", "linalg/matrix-num"),
-            link("Defining span and linear (in)dependence", "linalg/span-and-dep-defs"),
-            link("Finding span and checking linear (in)dependence", "linalg/span-and-dep-finding"),
-            link("Inverse matrices", "linalg/matrix-inverse"),
-            link("Transpose", "linalg/transpose"),
-            link("Finding inverse matrices", "linalg/inverse-finding"),
-            link(r"$2 \times 2$ inverse formula", "linalg/inverse-2x2"),
+            dropdown("Vectors and matrices", join([
+                link("Introduction (rotating a vector)", "linalg/rotating-intro"),
+                link("Matrix times vector", "linalg/matrix-vector"),
+                link("Matrix times matrix", "linalg/matrix-matrix"),
+                link("Matrix plus matrix", "linalg/matrix-sum"),
+                link("Matrix times number", "linalg/matrix-num"),
+                link("Defining span and linear (in)dependence", "linalg/span-and-dep-defs"),
+                link("Finding span and checking linear (in)dependence", "linalg/span-and-dep-finding"),
+                link("Inverse matrices", "linalg/matrix-inverse"),
+                link("Transpose", "linalg/transpose"),
+                link("Finding inverse matrices", "linalg/inverse-finding"),
+                link(r"$2 \times 2$ inverse formula", "linalg/inverse-2x2"),
+            ])),
+            dropdown("Determinants", join([
+                link("Defining determinants", "linalg/det-def"),
+            ])),
         ])),
     ])
 

@@ -68,32 +68,4 @@ graybox:
     = \frac{1}{-ad+bc} \begin{bmatrix} -d & b \\ c & -a \end{bmatrix}.
     $$
 
-
-## Dividing by zero
-
-Next we check what happens if $-ad+bc=0$.
-Then $(-ad+bc)I$ is the zero matrix,
-$$
-(-ad+bc)I = O = \begin{bmatrix} 0 & 0 \\ 0& 0 \end{bmatrix}.
-$$
-The above equations now give
-$$
-\begin{bmatrix} -d & b \\ c & -a \end{bmatrix}A = O.
-$$
-Unlike you might expect, this can happen even if $A$ is not the zero matrix;
-try $a=b=c=0$ and $d=1$ for example.
-If $A$ was invertible,
-with some inverse matrix $A^{-1}$ that the formula can't give us because it divides by zero,
-we would get
-$$
-\begin{bmatrix} -d & b \\ c & -a \end{bmatrix} A A^{-1} = O A^{-1} = O.
-$$
-Because $A A^{-1}$ is the identity matrix, multiplying by it does nothing, and we get
-$$
-\begin{bmatrix} -d & b \\ c & -a \end{bmatrix} = \begin{bmatrix} 0&0 \\ 0&0 \end{bmatrix},
-$$
-and now we get $a=b=c=d=0$, so $A$ can't be invertible.
-
-graybox:
-    If the $2 \times 2$ inverse matrix formula divides by zero,
-    the matrix is not invertible.
+We will [later](det-row-ops.html#determinants-and-inverse-matrices) figure out what happens if $-ad+bc=0$.

@@ -1,7 +1,3 @@
-#anim-sum-of-integers > .animation-content { --math-unit: 2em; height: calc(3*var(--math-unit)); }
-#anim-sum-of-squares > .animation-content { --math-unit: 1.75em; height: calc(21*var(--math-unit)); }
-#anim-sum-of-cubes > .animation-content { --math-unit: 1.75em; height: calc(20*var(--math-unit)); }
-
 .animation {
     margin: 20px;
 }

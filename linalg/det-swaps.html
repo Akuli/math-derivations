@@ -60,7 +60,9 @@
     </script>
     <link rel="stylesheet" href="../css/animation.css">
 <link rel="stylesheet" href="../css/style.css">
-</head>
+
+        <script src="../js/animator.js"></script>
+        </head>
 <body>
 <div id="content">
 <div id="sidebar"><a href="../index.html">Front page</a>
@@ -254,9 +256,36 @@ $$</p>
 <p>Swapping any two numbers can be done as a combination of several swaps of adjacent numbers.
 The below animation shows how this works when there are 3 numbers between the numbers being swapped.</p>
 
-<p>TODO: create animation</p>
 
-<p>The animation consists of 7 swaps:
+    <div id="animation-2d9776575090fa5fc4b61e6892a15e26"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            function run() {
+                window.animator.run("animation-2d9776575090fa5fc4b61e6892a15e26", " --math-unit: 2em; height: calc(1*var(--math-unit));", ...arguments);
+            }
+                const squares = Array(8).fill().map(() => document.createElement('div'));
+
+    run([
+        squares.map((element, i) => ({
+            type: 'create',
+            element,
+            x: i,
+            y: 0,
+            textContent: [7, 6, 8, 2, 1, 4, 3, 5][i],
+            classes: (1<i&&i<5) ? 'square color1' : (i==1||i==5) ? 'square color2' : 'square',
+        })),
+        [ {type: 'config', element: squares[5], dx: -1}, {type: 'config', element: squares[4], dx: 1} ],
+        [ {type: 'config', element: squares[5], dx: -1}, {type: 'config', element: squares[3], dx: 1} ],
+        [ {type: 'config', element: squares[5], dx: -1}, {type: 'config', element: squares[2], dx: 1} ],
+        [ {type: 'config', element: squares[5], dx: -1}, {type: 'config', element: squares[1], dx: 1} ],
+        [ {type: 'config', element: squares[1], dx: 1}, {type: 'config', element: squares[2], dx: -1} ],
+        [ {type: 'config', element: squares[1], dx: 1}, {type: 'config', element: squares[3], dx: -1} ],
+        [ {type: 'config', element: squares[1], dx: 1}, {type: 'config', element: squares[4], dx: -1} ],
+    ]);
+
+        });
+    </script>
+    <p>The animation consists of 7 swaps:
 first 3 swaps to bring the swapped numbers next to each other,
 then one swap to actually swap them,
 and then 3 more to bring them back to their original places.

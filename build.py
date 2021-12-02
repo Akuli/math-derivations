@@ -301,7 +301,7 @@ def get_head_extras(filename):
         <script src="{relative_path_prefix}/js/common.js"></script>
         <script src="{relative_path_prefix}/js/projection-demo.js"></script>
         '''
-    if filename == 'content/discrete/sums.txt':
+    if filename in ('content/discrete/sums.txt', 'content/linalg/det-swaps.txt'):
         result += f'''
         <script src="{relative_path_prefix}/js/animator.js"></script>
         '''

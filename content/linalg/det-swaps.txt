@@ -66,7 +66,26 @@ $$
 Swapping any two numbers can be done as a combination of several swaps of adjacent numbers.
 The below animation shows how this works when there are 3 numbers between the numbers being swapped.
 
-TODO: create animation
+animation: --math-unit: 2em; height: calc(1*var(--math-unit));
+    const squares = Array(8).fill().map(() => document.createElement('div'));
+
+    run([
+        squares.map((element, i) => ({
+            type: 'create',
+            element,
+            x: i,
+            y: 0,
+            textContent: [7, 6, 8, 2, 1, 4, 3, 5][i],
+            classes: (1<i&&i<5) ? 'square color1' : (i==1||i==5) ? 'square color2' : 'square',
+        })),
+        [ {type: 'config', element: squares[5], dx: -1}, {type: 'config', element: squares[4], dx: 1} ],
+        [ {type: 'config', element: squares[5], dx: -1}, {type: 'config', element: squares[3], dx: 1} ],
+        [ {type: 'config', element: squares[5], dx: -1}, {type: 'config', element: squares[2], dx: 1} ],
+        [ {type: 'config', element: squares[5], dx: -1}, {type: 'config', element: squares[1], dx: 1} ],
+        [ {type: 'config', element: squares[1], dx: 1}, {type: 'config', element: squares[2], dx: -1} ],
+        [ {type: 'config', element: squares[1], dx: 1}, {type: 'config', element: squares[3], dx: -1} ],
+        [ {type: 'config', element: squares[1], dx: 1}, {type: 'config', element: squares[4], dx: -1} ],
+    ]);
 
 The animation consists of 7 swaps:
 first 3 swaps to bring the swapped numbers next to each other,

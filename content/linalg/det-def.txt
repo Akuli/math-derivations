@@ -88,4 +88,28 @@ Based on the derivations on this page,
 what we called "$2 \times 2$ determinant" and "$3 \times 3$ determinant"
 are determinants, according to this definition.
 
-TODO: use the definition to expand arbitrary 3x3 determinant, showing why it makes sense
+TODO: explain what goes on in the following, and write it in mathjax:
+
+<pre>
+    det[[a,b,c],[d,e,f],[g,h,i]]
+
+    =color(red)(adet[[1,0,0],[d,e,f],[g,h,i]])
+    +bdet[[0,1,0],[d,e,f],[g,h,i]]
+    +cdet[[0,0,1],[d,e,f],[g,h,i]]
+
+    >---
+
+    color(red)(adet[[1,0,0],[d,e,f],[g,h,i]])
+
+    =ad[[1,0,0],[1,0,0],[g,h,i]]
+    +ae[[1,0,0],[0,1,0],[g,h,i]]
+    +af[[1,0,0],[0,0,1],[g,h,i]]
+
+    >---
+
+    ae[[1,0,0],[0,1,0],[g,h,i]]
+
+    =aegdet[[1,0,0],[0,1,0],[1,0,0]]
+    +aeh[[1,0,0],[0,1,0],[0,1,0]]
+    +aei[[1,0,0],[0,1,0],[0,0,1]]
+</pre>

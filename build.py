@@ -222,6 +222,8 @@ def get_sidebar_content(txtfile):
             ])),
             dropdown("Determinants", join([
                 link("Defining determinants", "linalg/det-def"),
+                link("Permutations and transpositions", "linalg/det-swaps"),
+                link("Calculating determinants with row operations", "linalg/det-row-ops"),
             ])),
         ])),
     ])

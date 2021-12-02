@@ -1,0 +1,215 @@
+# Calculating determinants with row operations
+
+Consider a determinant that has rows $\red{\vec v}$ and $\blue{\vec w}$,
+and possibly several other unrelated rows.
+I will lazily denote this determinant with $\det(\red{\vec v}, \blue{\vec w})$.
+Now consider $\det(\red{\vec v} +2\blue{\vec w}, \blue{\vec w})$.
+By [the linearity in the definition of determinant](det-def.html#linearity),
+we get
+$$
+\begin{align}
+\det(\red{\vec v} + 2\blue{\vec w}, \blue{\vec w})
+&= \det(\red{\vec v},\blue{\vec w}) + \det(2\blue{\vec w},\blue{\vec w}) \\
+&= \det(\red{\vec v},\blue{\vec w}) + 2\det(\blue{\vec w},\blue{\vec w}).
+\end{align}
+$$
+The second determinant is zero, because it has the same row in it twice;
+this was previously explained [here](det-def.html#defining-n-times-n-determinants).
+Therefore
+$$
+\det(\red{\vec v} + 2\blue{\vec w}, \blue{\vec w}) = \det(\red{\vec v},\blue{\vec w}).
+$$
+
+graybox:
+    Adding one row to another doesn't change the sign of the determinant.
+
+This way it is possible to compute determinants
+very similarly to [checking linear dependence and independence](span-and-dep-finding.html).
+For example, let's calculate the determinant of
+$$
+\det\begin{bmatrix}
+    -1 & -2 & 2 & 2 \\
+    3 & 0 & 3 & -2 \\
+    -1 & -1 & 3 & -1 \\
+    -2 & 0 & -2 & -1
+\end{bmatrix}.
+$$
+The second column already has many zeros.
+We can use its $\magenta{-1}$ to cancel the $\red{-2}$ in top row to zero.
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [-1, -2, 2, 2],
+        [3, 0, 3, -2],
+        [-1, -1, 3, -1],
+        [-2, 0, -2, -1],
+    ], prefix=r"\det", transformed_symbol="=")
+    matrix.add_multiple(src=2, dest=0, scalar=-2)
+    return "$$" + matrix.get_output() + "$$"
+
+Next we can use the $\darkyellow{1}$ in top left corner to make all other rows start with zero.
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [-1, -2, 2, 2],
+        [3, 0, 3, -2],
+        [-1, -1, 3, -1],
+        [-2, 0, -2, -1],
+    ], prefix=r"\det", transformed_symbol="=")
+    matrix.add_multiple(src=2, dest=0, scalar=-2)
+    matrix.clear_output()
+    matrix.add_multiple(src=0, dest=1, scalar=-3)
+    matrix.add_multiple(src=0, dest=2, scalar=1)
+    matrix.add_multiple(src=0, dest=3, scalar=2)
+    return "$$" + matrix.get_output() + "$$"
+
+The $\magenta{7}$ and $\red{-14}$ can be canceled to zero nicely.
+This leaves a $\green{5}$ as the only nonzero number in the third column,
+and we can use that to zero the rest of the third column.
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [-1, -2, 2, 2],
+        [3, 0, 3, -2],
+        [-1, -1, 3, -1],
+        [-2, 0, -2, -1],
+    ], prefix=r"\det", transformed_symbol="=")
+    matrix.add_multiple(src=2, dest=0, scalar=-2)
+    matrix.add_multiple(src=0, dest=1, scalar=-3)
+    matrix.add_multiple(src=0, dest=2, scalar=1)
+    matrix.add_multiple(src=0, dest=3, scalar=2)
+    matrix.clear_output()
+    matrix.add_multiple(src=3, dest=1, scalar=2)
+    matrix.add_multiple(src=1, dest=0, scalar=-Fraction(4,5))
+    matrix.add_multiple(src=1, dest=2, scalar=-Fraction(1,5))
+    matrix.add_multiple(src=1, dest=3, scalar=-2)
+    return "$$" + matrix.get_output() + "$$"
+
+Finally we use the $\blue{7}$ to zero other rows in the last column.
+
+python:
+    from fractions import Fraction
+    from linalg_utils import MatrixWithRowOperations
+    matrix = MatrixWithRowOperations([
+        [-1, -2, 2, 2],
+        [3, 0, 3, -2],
+        [-1, -1, 3, -1],
+        [-2, 0, -2, -1],
+    ], prefix=r"\det", transformed_symbol="=")
+    matrix.add_multiple(src=2, dest=0, scalar=-2)
+    matrix.add_multiple(src=0, dest=1, scalar=-3)
+    matrix.add_multiple(src=0, dest=2, scalar=1)
+    matrix.add_multiple(src=0, dest=3, scalar=2)
+    matrix.add_multiple(src=3, dest=1, scalar=2)
+    matrix.add_multiple(src=1, dest=0, scalar=-Fraction(4,5))
+    matrix.add_multiple(src=1, dest=2, scalar=-Fraction(1,5))
+    matrix.add_multiple(src=1, dest=3, scalar=-2)
+    matrix.clear_output()
+    matrix.add_multiple(src=3, dest=0, scalar=-Fraction(4,7))
+    matrix.add_multiple(src=3, dest=2, scalar=-Fraction(3,7))
+    return "$$" + matrix.get_output() + "$$"
+
+By linearity, we can bring the remaining numbers to front, and the determinant becomes
+$$
+\red{(-1)}\green{(-5)}\blue7\det\begin{bmatrix}
+    1&0&0&0 \\
+    0&0&1&0 \\
+    0&1&0&0 \\
+    0&0&0&1
+\end{bmatrix}.
+$$
+The remaining matrix can be turned into the identity matrix with one swap,
+so its determinant is $-1$, and we get
+$$
+\red{(-1)}\green{(-5)}\blue7(-1) = -35.
+$$
+
+
+## Determinants and linear dependence/independence
+
+If the rows of a determinant are linearly dependent,
+we can cancel one of them to zero by adding multiples of other rows into it.
+For example, if $\vec u = 2\vec v + 3\vec w$,
+then by adding row $\vec v$ to row $\vec u$ with multiplier $-2$,
+and row $\vec w$ to row $\vec u$ with multiplier $-2$,
+we get a determinant that has the row
+$$
+\vec u - 2\vec v - 3\vec w = (0,0,\dots,0).
+$$
+Because
+$$
+(0,0,\dots,0) = \red 0(0,0,\dots,0),
+$$
+and it is possible to bring the $\red 0$ in front of the determinant by linearity,
+a determinant containing a zero row is always zero.
+So, if the rows of a square matrix are linearly dependent,
+then the determinant is zero.
+
+If the rows are linearly independent,
+[the matrix can be turned into the identity matrix with elementary row operations](inverse-finding.html#checking-when-it-works).
+Adding a multiple of one row to another doesn't change the determinant at all,
+and by linearity, multiplying a row by a nonzero number
+multiples the whole determinant by the same number.
+For that reason, if the rows of a matrix $A$ are linearly independent, we have
+$$
+\det(A) = (\text{nonzero number})(\text{nonzero number})\dots (\text{nonzero number}) \det(I) \ne 0.
+$$
+
+graybox:
+    The rows of a square matrix $A$ are linearly dependent if and only if $\det(A) = 0$.
+
+
+## Determinants and inverse matrices
+
+Let $A$ be a square matrix.
+[In the past](matrix-inverse.html#when-does-an-inverse-matrix-exist),
+we have seen that a matrix $A$ is invertible if and only if
+it is a square matrix and the columns are linearly independent.
+[When working with transposes](transpose.html#inverse-of-transpose),
+we saw that the columns are linearly independent if and only if the rows are.
+Combining that with what we got above gives the following result.
+
+graybox:
+    A matrix $A$ is invertible if and only if
+    it is a square matrix and $\det(A) \ne 0$.
+
+Recall that [the formula for the inverse of a $2 \times 2$ matrix](inverse-2x2.html) is
+$$
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}^{-1}
+= \frac{1}{-ad+bc} \begin{bmatrix} -d & b \\ c & -a \end{bmatrix}.
+$$
+Let's compute the determinant like we did [right after defining it](det-def.html#defining-n-times-n-determinants).
+There are two $2 \times 2$ permutation matrices,
+$$
+\begin{bmatrix} 1&0 \\ 0&1 \end{bmatrix}
+\quad \text{and} \quad
+\begin{bmatrix} 0&1 \\ 1&0 \end{bmatrix}.
+$$
+Their determinants are $1$ and $-1$ respectively,
+because the first matrix is the identity matrix,
+and it takes one swap to turn the second one into the identity matrix.
+These determinants must be multiplied by the numbers taken from the original matrix
+where the permutation matrix has $1$, so we get
+$$
+\begin{align}
+\det\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+&= ad \cdot \underbrace{\det\begin{bmatrix} 1&0 \\ 0&1 \end{bmatrix}}_1
+    + bc\cdot \underbrace{\det\begin{bmatrix} 0&1 \\ 1&0 \end{bmatrix}}_{-1} \\
+&= ad - bc.
+\end{align}
+$$
+This is zero if and only if $-ad+bc=0$.
+
+graybox:
+    The $2 \times 2$ inverse formula divides by zero if and only if
+    the matrix is not invertible.
+
+This means that the $2 \times 2$ inverse formula works just like you would expect:
+it computes the inverse if it exists,
+and divides by zero if the inverse doesn't exist.

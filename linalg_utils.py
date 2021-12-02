@@ -13,7 +13,7 @@ def _stringify(num, parens=False):
 
 
 class MatrixWithRowOperations:
-    def __init__(self, rows, separator=None):
+    def __init__(self, rows, *, separator=None, prefix="", transformed_symbol=r"\to"):
         self._color_iter = itertools.cycle([
             r'\red{%s}'.__mod__,
             r'\blue{%s}'.__mod__,
@@ -23,12 +23,13 @@ class MatrixWithRowOperations:
         ])
         self._rows = [list(row) for row in rows]
         self._separator = separator
+        self.prefix = prefix
         self._current_colors = [next(self._color_iter) for row in self._rows]
 
         if self._separator is None:
-            self._aligned_arrow = r"&\to"
+            self._aligned_arrow = "&" + transformed_symbol
         else:
-            self._aligned_arrow = r"\to&~~~"
+            self._aligned_arrow = transformed_symbol + "&~~~"
 
         self.clear_output()
 
@@ -57,7 +58,7 @@ class MatrixWithRowOperations:
             slices = [slice(None, self._separator), slice(self._separator, None)]
 
         for s_index, s in enumerate(slices):
-            self._output.append(r"\begin{bmatrix}")
+            self._output.append(self.prefix + r"\begin{bmatrix}")
             for y, (color, row) in enumerate(zip(self._current_colors, self._rows)):
                 line = " " * 4 + " & ".join(color(_stringify(v)) for v in row[s])
                 if y < len(self._rows):  # FIXME: always true

@@ -43,7 +43,7 @@ Examples:
 
     Therefore
     $$
-    \det\begin{pmatrix}\blue0&\blue1\\\red1&\red0\end{pmatrix} = -1.
+    \det\begin{bmatrix}\blue0&\blue1\\\red1&\red0\end{bmatrix} = -1.
     $$
     This happens when swapping the rows of any $2 \times 2$ determinant.
     It also works when swapping any two rows of a $3 \times 3$ determinant:

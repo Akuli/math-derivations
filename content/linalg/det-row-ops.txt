@@ -165,7 +165,7 @@ graybox:
     The rows of a square matrix $A$ are linearly dependent if and only if $\det(A) = 0$.
 
 
-## Determinants and inverse matrices
+## Determinants and invertibility
 
 Let $A$ be a square matrix.
 [In the past](matrix-inverse.html#when-does-an-inverse-matrix-exist),

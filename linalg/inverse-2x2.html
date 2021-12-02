@@ -185,7 +185,7 @@
         <input type="checkbox" id="sidebar-checkbox-19" />
         <label for="sidebar-checkbox-19">Determinants</label>
         <div class="dropdown">
-            <a href="det-def.html">Defining determinants</a>
+            <a href="det-def.html">Defining determinants</a><a href="det-swaps.html">Permutations and transpositions</a><a href="det-row-ops.html">Calculating determinants with row operations</a>
         </div>
         
         </div>
@@ -255,33 +255,9 @@ $$
 $$
 </p>
 
-</div><h2 id="dividing-by-zero">Dividing by zero<a class="headerlink" href="#dividing-by-zero" title="Link to this title">¶</a></h2><p>Next we check what happens if $-ad+bc=0$.
-Then $(-ad+bc)I$ is the zero matrix,
-$$
-(-ad+bc)I = O = \begin{bmatrix} 0 & 0 \\ 0& 0 \end{bmatrix}.
-$$
-The above equations now give
-$$
-\begin{bmatrix} -d & b \\ c & -a \end{bmatrix}A = O.
-$$
-Unlike you might expect, this can happen even if $A$ is not the zero matrix;
-try $a=b=c=0$ and $d=1$ for example.
-If $A$ was invertible,
-with some inverse matrix $A^{-1}$ that the formula can't give us because it divides by zero,
-we would get
-$$
-\begin{bmatrix} -d & b \\ c & -a \end{bmatrix} A A^{-1} = O A^{-1} = O.
-$$
-Because $A A^{-1}$ is the identity matrix, multiplying by it does nothing, and we get
-$$
-\begin{bmatrix} -d & b \\ c & -a \end{bmatrix} = \begin{bmatrix} 0&0 \\ 0&0 \end{bmatrix},
-$$
-and now we get $a=b=c=d=0$, so $A$ can't be invertible.</p>
-
-<div class="box graybox"><p>If the $2 \times 2$ inverse matrix formula divides by zero,
-the matrix is not invertible.
+</div><p>We will <a href="det-row-ops.html#determinants-and-inverse-matrices">later</a> figure out what happens if $-ad+bc=0$.
 </p>
 
-</div></div>
+</div>
 </body>
 </html>

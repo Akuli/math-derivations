@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Law of Cosines
+<title>Permutations and transpositions
  - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
@@ -95,13 +95,13 @@
         <input type="checkbox" id="sidebar-checkbox-4" />
         <label for="sidebar-checkbox-4">Circle</label>
         <div class="dropdown">
-            <a href="inscribed-angle-theorem.html">Inscribed angle theorem</a>
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-5" />
         <label for="sidebar-checkbox-5">Triangle</label>
         <div class="dropdown">
-            <a href="law-of-sines.html">Law of sines</a><a href="law-of-cosines.html">Law of cosines</a><a href="inscribed-circle.html">Inscribed circle</a>
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a><a href="../plane-geometry/inscribed-circle.html">Inscribed circle</a>
         </div>
         
         </div>
@@ -179,101 +179,129 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Vectors and matrices</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a><a href="../linalg/span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="../linalg/span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="../linalg/matrix-inverse.html">Inverse matrices</a><a href="../linalg/transpose.html">Transpose</a><a href="../linalg/inverse-finding.html">Finding inverse matrices</a><a href="../linalg/inverse-2x2.html">$2 \times 2$ inverse formula</a>
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="matrix-inverse.html">Inverse matrices</a><a href="transpose.html">Transpose</a><a href="inverse-finding.html">Finding inverse matrices</a><a href="inverse-2x2.html">$2 \times 2$ inverse formula</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-19" />
         <label for="sidebar-checkbox-19">Determinants</label>
         <div class="dropdown">
-            <a href="../linalg/det-def.html">Defining determinants</a><a href="../linalg/det-swaps.html">Permutations and transpositions</a><a href="../linalg/det-row-ops.html">Calculating determinants with row operations</a>
+            <a href="det-def.html">Defining determinants</a><a href="det-swaps.html">Permutations and transpositions</a><a href="det-row-ops.html">Calculating determinants with row operations</a>
         </div>
         
         </div>
         </div>
-<h1 id="law-of-cosines">Law of Cosines<a class="headerlink" href="#law-of-cosines" title="Link to this title">¶</a></h1><p>Let $\vec a$, $\vec b$ and $\vec c$ be the vectors connecting the corners of any triangle
-so that $\vec a$ and $\vec b$ are pointing away from the same triangle corner.
-Let $\gamma$ be the angle at that triangle corner.</p>
-
-<p><img width="174" height="209" class="asymptote" src="../images/asy/b6c6d08f90ca721bb1620da42bafead2.svg" /></p><p>In the above picture, $-\vec b$ goes from the bottom corner to the top right corner, so
+<h1 id="permutations-and-transpositions">Permutations and transpositions<a class="headerlink" href="#permutations-and-transpositions" title="Link to this title">¶</a></h1><p>I skipped an important detail on <a href="det-def.html#defining-n-times-n-determinants">the previous page</a>.
+We calculated determinants of permutation matrices
+(i.e. matrices that have all rows of the identity matrix, but in a different order)
+by swapping the rows until we eventually got to $\det(I)=1$, e.g.
 $$
-\vec c = (-\vec b) + \vec a = \vec a - \vec b.
+\begin{align}
+\det\begin{bmatrix}
+    \red0&\red0&\red1 \\
+    \blue1&\blue0&\blue0 \\
+    \green0&\green1&\green0
+\end{bmatrix}
+&= -\det\begin{bmatrix}
+    \blue1&\blue0&\blue0 \\
+    \red0&\red0&\red1 \\
+    \green0&\green1&\green0
+\end{bmatrix} \\
+&= \det\begin{bmatrix}
+    \blue1&\blue0&\blue0 \\
+    \green0&\green1&\green0 \\
+    \red0&\red0&\red1
+\end{bmatrix} = 1.
+\end{align}
 $$
-We know that if $a$ and $b$ are numbers, then
-$$
-(a-b)^2 = a^2 - 2ab + b^2,
-$$
-and for deriving that (TODO), we only needed $(a-b)c=ac-bc$ and $ab=ba$.
-These also work with dot product of vectors instead of multiplication of numbers
-(see <a href="../vectors/dot-projection.html#dot-product-and-difference">this</a>
-and <a href="../vectors/angle-between-vectors.html#order-doesn-t-matter">this</a>),
-so the $(a-b)^2$ formula works
-if $a$ and $b$ are vectors and we replace all multiplications with dot products:
-$$
-(\vec a - \vec b)\cdot(\vec a - \vec b) = (\vec a\cdot\vec a) - 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b)
-$$
-By putting everything together, we get
-$$
-\vec c \cdot \vec c = (\vec a\cdot\vec a) - 2(\vec a\cdot\vec b) + (\vec b \cdot \vec b).
-$$
-Because $\vec a \cdot \vec a = |\vec a|^2$
-(see <a href="../vectors/dot-projection.html#defining-dot-product">here</a>)
-and similarly for all other vectors, we have
-$$
-|\vec c|^2 = |\vec a|^2 - 2(\vec a \cdot \vec b) + |\vec b|^2.
-$$
-We can
-<a href="https://akuli.github.io/math-derivations/vectors/angle-between-vectors.html">write the dot product with angle between vectors</a>
-to get
-$$
-\vec a \cdot \vec b = |\vec a| |\vec b| \cos(\gamma).
-$$
-By plugging this in we get
-$$
-|\vec c|^2 = |\vec a|^2 + |\vec b|^2 - 2|\vec a||\vec b|\cos(\gamma).
-$$
-Finally, we can define $a = |\vec a|$ and similarly for $b$ and $c$.
-These are the side lengths of the triangle.</p>
-
-<p><img width="174" height="209" class="asymptote" src="../images/asy/f6e12125d238b54debce694cf40683be.svg" /></p><div class="box graybox"><p>Let $a$, $b$ and $c$ be the sides of any triangle,
-and let $\gamma$ be the angle opposite to $c$.
-Then
-$$
-c^2 = a^2 + b^2 - 2ab\cos(\gamma).
-$$
-This is known as the <b>law of cosines</b>.
+With an even number of swaps,
+this shows that the determinant of the original matrix is $1$,
+because the sign in front flips an even number of times.
+With an odd number of swaps, we get $-1$.
+But can it possible to do an even or an odd number of swaps?
+If it is, we must make the determinant undefined,
+because it can't simultaneously be both $1$ and $-1$.
 </p>
 
-</div><p>We get other well-known things as special cases.
+<h2 id="counting-transpositions">Counting transpositions<a class="headerlink" href="#counting-transpositions" title="Link to this title">¶</a></h2><p>Let's assign the numbers $1,2,\dots,n$ to each row of the $n \times n$ identity matrix,
+so that with $n=3$ for example, $1$ means $(1,0,0)$, $2$ means $(0,1,0)$ and $3$ means $(0,0,1)$.
+Now the identity matrix is represented as $123\dots n$,
+and other permutation matrices are represented as the same numbers but possibly in a different order.
+The numbers $123\dots n$, but possibly in a different order,
+are called a <b>permutation</b>.</p>
+
+<p>Any permutation can be turned into $123\dots n$ by swapping the numbers,
+and now the question becomes
+whether there exists permutations where
+this can be done with an even number of swaps (determinant $+1$)
+and with an odd number of swaps (determinant $-1$).</p>
+
+<p>We say that a <b>transposition</b> (not to be confused with <a href="transpose.html">transpose</a>)
+is a pair of numbers in a permutation where a bigger number is before a smaller one.
+The numbers don't have to be next to each other.
+For example, the permutation $1234\dots n$ has no transpositions,
+and the permutation $1432$ has three transpositions: $43$, $42$ and $32$.</p>
+
+<p>Note that swapping two adjacent numbers (i.e. any two numbers next to each other)
+of a permutation always adds or removes one transposition,
+depending on whether the first number is bigger or smaller:
+$$
+\begin{align}
+1\green{43}2 & \quad \text{3 transpositions: }\green{43}, 32, 42 \\
+1\red{34}2 & \quad \text{2 transpositions: }32, 42
+\end{align}
+$$</p>
+
+<p>Swapping any two numbers can be done as a combination of several swaps of adjacent numbers.
+The below animation shows how this works when there are 3 numbers between the numbers being swapped.</p>
+
+<p>TODO: create animation</p>
+
+<p>The animation consists of 7 swaps:
+first 3 swaps to bring the swapped numbers next to each other,
+then one swap to actually swap them,
+and then 3 more to bring them back to their original places.
+In general, if there are $k$ unrelated numbers between the numbers you want to swap,
+you need $k+1+k = 2k+1$ swaps of adjacent elements.
+Because each swap of adjacent numbers makes the number of transpositions go from even to odd or from odd to even
+(as it increases or decreases by one),
+an odd number of swaps of adjacent elements as a whole
+makes the number of transpositions go from even to odd or from odd to even.</p>
+
+<div class="box graybox"><p><ul><li>
+    If a permutation has an even number of transpositions,
+    swapping any two numbers will make it have an odd number of transpositions.
+</li><li>
+    If a permutation has an odd number of transpositions,
+    swapping any two numbers will make it have an even number of transpositions.
+</li></ul>
 </p>
 
-<h2 id="pythagorean-theorem">Pythagorean theorem<a class="headerlink" href="#pythagorean-theorem" title="Link to this title">¶</a></h2><p>If $\gamma = 90^\circ$, then $\cos(\gamma) = 0$ and
-$$
-c^2 = a^2 + b^2.
-$$
-This is the Pythagorean theorem.</p>
+</div><p>Now consider any permutation.
+If it has an even number of transpositions,
+it is impossible to get to $123\dots n$ by doing an odd number of swaps:
+because each swap toggles between even and odd number of transpositions,
+the resulting permutation would have an odd number of transpositions,
+even though $123\dots n$ has zero (an even number) of transpositions.
+Similarly, if the permutation has an odd number of transpositions,
+it is impossible to get to $123\dots n$ by doing an even number of swaps.</p>
 
-<p><img width="192" height="249" class="asymptote" src="../images/asy/95a7336f6f999e4c1673171c54978fa8.svg" /></p><p>Alternatively, you can go back to the law of cosines derivation and use the fact that
-if $\vec a$ and $\vec b$ are perpendicular, then $\vec a \cdot \vec b = 0$.
+<p>For determinants of permutation matrices, this means:
+<ul><li>
+    If the permutation corresponding to the permutation matrix
+    has an even number of transpositions,
+    only an even number of swaps can bring the permutation matrix to the identity matrix.
+</li><li>
+    If the permutation corresponding to the permutation matrix
+    has an odd number of transpositions,
+    only an odd number of swaps can bring the permutation matrix to the identity matrix.
+</li></ul></p>
+
+<div class="box graybox"><p>When computing the determinant of a permutation matrix,
+the result does not depend on which swaps are used to get to identity matrix.
 </p>
 
-<h2 id="a-b-2-for-numbers">$(a-b)^2$ for numbers<a class="headerlink" href="#a-b-2-for-numbers" title="Link to this title">¶</a></h2><p>If $\gamma = 0$, then the triangle is flat,
-and it's a bit questionable whether we can still call it a triangle.</p>
-
-<p><img width="352" height="93" class="asymptote" src="../images/asy/4f33ddcf9f5ed9f3974d34a7876c0fc4.svg" /></p><p>The above derivation still works, and because $\cos(0)=1$, we get
-$$
-c^2 = a^2 + b^2 - 2ab.
-$$
-In the picture, $a$ is longer than $b$ so we have $c = a-b$.
-If $b$ was longer than $a$, then we would instead have $c = b-a$.
-Either way, we have $c = \abs{a-b}$ and
-$$
-c^2 = \abs{a-b}^2 = (a-b)^2.
-$$
-By putting all this together, we get
-$$
-(a-b)^2 = a^2 - 2ab + b^2,
-$$
-which is the formula that we used (and generalized) earlier on this page.
+</div><p>This shows that there are no problems with how we defined the determinant.
+Our definition works for matrices of any size.
 </p>
 
 </div>

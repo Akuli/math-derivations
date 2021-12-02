@@ -68,4 +68,4 @@ graybox:
     = \frac{1}{-ad+bc} \begin{bmatrix} -d & b \\ c & -a \end{bmatrix}.
     $$
 
-We will [later](det-row-ops.html#determinants-and-inverse-matrices) figure out what happens if $-ad+bc=0$.
+We will [later](det-row-ops.html#determinants-and-invertibility) figure out what happens if $-ad+bc=0$.

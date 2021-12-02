@@ -3,6 +3,7 @@ import argparse
 import glob
 import hashlib
 import itertools
+import json
 import os
 import shutil
 import subprocess
@@ -387,15 +388,16 @@ def python(match, filename):
 
 @builder.converter.add_multiliner(r'^animation:(.*)\n')
 def animation(match, filename):
-    the_id = match.group(1).strip()
+    inline_css = match.group(1)
     javascript = match.string[match.end():]
+    the_id = "animation-" + hashlib.md5(javascript.encode("utf-8")).hexdigest()
     # TODO: don't put script tags in middle of page, belongs to head
     return f'''
     <div id="{the_id}"></div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {{
             function run() {{
-                window.animator.run("{the_id}", ...arguments);
+                window.animator.run({json.dumps(the_id)}, {json.dumps(inline_css)}, ...arguments);
             }}
             {javascript}
         }});

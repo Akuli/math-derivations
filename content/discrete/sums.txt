@@ -12,7 +12,7 @@ $$
 $$
 This animation shows how this goes for $n=7$:
 
-animation: anim-sum-of-integers
+animation: --math-unit: 2em; height: calc(3*var(--math-unit));
     const n = 7;
     const originalSquares = Array(n).fill().map(() => document.createElement('div'));
     const copiedSquares = Array(n).fill().map(() => document.createElement('div'));
@@ -78,7 +78,7 @@ $$
 $$
 This animation shows how this goes for $n=7$:
 
-animation: anim-sum-of-squares
+animation: --math-unit: 1.75em; height: calc(21*var(--math-unit));
     function sumOfIntegersUpTo(n) { return n*(n+1)/2; }
     function range(n) { return Array(n).fill().map((junk, number) => number); }
     const n = 7;
@@ -209,7 +209,7 @@ graybox:
 
 As usual, the animation below has $n=7$.
 
-animation: anim-sum-of-cubes
+animation: --math-unit: 1.75em; height: calc(20*var(--math-unit));
     function mulString(a, b) { return `${a}⋅${b}`; }
     const n = 7;
 

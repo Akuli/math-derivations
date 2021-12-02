@@ -140,13 +140,14 @@
     }
   };
 
-  function run(elementId, steps) {
+  function run(elementId, styleString, steps) {
     const div = document.getElementById(elementId);
     div.classList.add('animation');
 
     // nested divs needed because absolute positioning is awesome
-    div.innerHTML = '<div class="animation-content"><div></div></div><button>Previous</button><button>Next</button>';
+    div.innerHTML = `<div class="animation-content"><div></div></div><button>Previous</button><button>Next</button>`;
     const [outerContentDiv, prevButton, nextButton] = div.children;
+    outerContentDiv.setAttribute('style', styleString);
     const [innerContentDiv] = outerContentDiv.children;
     const animator = new Animator(innerContentDiv, steps);
 

@@ -21,7 +21,7 @@ $$
 $$
 
 graybox:
-    Adding one row to another doesn't change the sign of the determinant.
+    Adding a multiple of one row to another doesn't affect the determinant.
 
 This way it is possible to compute determinants
 very similarly to [checking linear dependence and independence](span-and-dep-finding.html).

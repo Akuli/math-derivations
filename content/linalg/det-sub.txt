@@ -1,0 +1,14 @@
+# Subdeterminants
+
+Consider a determinant that has $1$ in the top left corner,
+and the rest of the first row is zero. For example,
+$$
+\det\begin{bmatrix}
+1&0&0&0 \\
+2&3&4&5 \\
+6&7&8&9 \\
+10&11&12&13
+\end{bmatrix}
+$$
+
+TODO: finish this derivation

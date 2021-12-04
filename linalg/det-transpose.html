@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Angle and Length
+<title>Determinant of transpose
  - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
@@ -169,7 +169,7 @@
         <input type="checkbox" id="sidebar-checkbox-17" />
         <label for="sidebar-checkbox-17">Complex numbers</label>
         <div class="dropdown">
-            <a href="intro.html">Introduction</a><a href="angle-and-len.html">Angle and length</a><a href="mul.html">Multiplication</a><a href="div.html">Division</a><a href="sqrt.html">Square root</a><a href="derivative.html">Derivative</a><a href="exp.html">Exponent function</a>
+            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-20" />
@@ -179,73 +179,169 @@
         <input type="checkbox" id="sidebar-checkbox-18" />
         <label for="sidebar-checkbox-18">Vectors and matrices</label>
         <div class="dropdown">
-            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a><a href="../linalg/span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="../linalg/span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="../linalg/matrix-inverse.html">Inverse matrices</a><a href="../linalg/transpose.html">Transpose</a><a href="../linalg/inverse-finding.html">Finding inverse matrices</a><a href="../linalg/inverse-2x2.html">$2 \times 2$ inverse formula</a>
+            <a href="rotating-intro.html">Introduction (rotating a vector)</a><a href="matrix-vector.html">Matrix times vector</a><a href="matrix-matrix.html">Matrix times matrix</a><a href="matrix-sum.html">Matrix plus matrix</a><a href="matrix-num.html">Matrix times number</a><a href="span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="matrix-inverse.html">Inverse matrices</a><a href="transpose.html">Transpose</a><a href="inverse-finding.html">Finding inverse matrices</a><a href="inverse-2x2.html">$2 \times 2$ inverse formula</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-19" />
         <label for="sidebar-checkbox-19">Determinants</label>
         <div class="dropdown">
-            <a href="../linalg/det-def.html">Defining determinants</a><a href="../linalg/det-swaps.html">Permutations and transpositions</a><a href="../linalg/det-row-ops.html">Calculating determinants with row operations</a><a href="../linalg/det-transpose.html">Determinant of transpose</a><a href="../linalg/det-matmul.html">Determinant and matrix multiplication</a>
+            <a href="det-def.html">Defining determinants</a><a href="det-swaps.html">Permutations and transpositions</a><a href="det-row-ops.html">Calculating determinants with row operations</a><a href="det-transpose.html">Determinant of transpose</a><a href="det-matmul.html">Determinant and matrix multiplication</a>
         </div>
         
         </div>
         </div>
-<h1 id="angle-and-length">Angle and Length<a class="headerlink" href="#angle-and-length" title="Link to this title">¶</a></h1><p>Instead of thinking about a complex number with $x$ and $y$ coordinates,
-as in $x + yi$, we can think of it as an angle and length of the vector.
-Just like in unit circle trig (TODO),
-a bigger angle means counter-clockwise and zero means right.</p>
+<h1 id="determinant-of-transpose">Determinant of transpose<a class="headerlink" href="#determinant-of-transpose" title="Link to this title">¶</a></h1><p>Consider any $3 \times 3$ matrix
+$$
+A = \begin{bmatrix}
+a&b&c \\
+d&e&f \\
+g&h&i
+\end{bmatrix}.
+$$
+To compute its determinant as we did <a href="det-def.html#defining-n-times-n-determinants">right after defining the determinant</a>,
+we first have to find all $3 \times 3$ permutation matrices.
+There are $3! = 6$ of them, and here they are:
+$$
+\begin{align}
+\begin{bmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{bmatrix} \quad
+\begin{bmatrix} 1&0&0 \\ 0&0&1 \\ 0&1&0 \end{bmatrix} \\\\
+\begin{bmatrix} 0&1&0 \\ 1&0&0 \\ 0&0&1 \end{bmatrix} \quad
+\begin{bmatrix} 0&1&0 \\ 0&0&1 \\ 1&0&0 \end{bmatrix} \\\\
+\begin{bmatrix} 0&0&1 \\ 1&0&0 \\ 0&1&0 \end{bmatrix} \quad
+\begin{bmatrix} 0&0&1 \\ 0&1&0 \\ 1&0&0 \end{bmatrix}
+\end{align}
+$$
+The determinants of the permutation matrices are multiplied
+by the numbers from the original matrix where the permutation matrix has $1$,
+and those results are added, so we get
+$$
+\begin{align}
+\det(A)
+&= \red{aei\det\begin{bmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{bmatrix}}
++ \red{afh\det\begin{bmatrix} 1&0&0 \\ 0&0&1 \\ 0&1&0 \end{bmatrix}} \\
+&~~+ \red{bdi\det\begin{bmatrix} 0&1&0 \\ 1&0&0 \\ 0&0&1 \end{bmatrix}}
++ \blue{bfg\det\begin{bmatrix} 0&1&0 \\ 0&0&1 \\ 1&0&0 \end{bmatrix}} \\
+&~~+ \green{cdh\det\begin{bmatrix} 0&0&1 \\ 1&0&0 \\ 0&1&0 \end{bmatrix}}
++ \red{ceg\det\begin{bmatrix} 0&0&1 \\ 0&1&0 \\ 1&0&0 \end{bmatrix}}.
+\end{align}
+$$
+Now consider what changes if we replace the original matrix with its transpose,
+and we instead compute the determinant of
+$$
+A^{\T} = \begin{bmatrix}
+a&d&g \\
+b&e&h \\
+c&f&i
+\end{bmatrix}.
+$$
+This means that we swap $b$ with $d$, $c$ with $g$ and $f$ with $h$.
+Everything marked in red will stay the same:
+because the red permutation matrices are their own transposes,
+we pick the same numbers from the original matrix in front of them,
+regardless of whether or not it is transposed.
+The blue and green matrix will pick each other's numbers from the matrix, so we get
+$$
+\begin{align}
+\det(A^{\T})
+&= \red{aei\det\begin{bmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{bmatrix}}
++ \red{afh\det\begin{bmatrix} 1&0&0 \\ 0&0&1 \\ 0&1&0 \end{bmatrix}} \\
+&~~+ \red{bdi\det\begin{bmatrix} 0&1&0 \\ 1&0&0 \\ 0&0&1 \end{bmatrix}}
++ \green{cdh}~\blue{\det\begin{bmatrix} 0&1&0 \\ 0&0&1 \\ 1&0&0 \end{bmatrix}} \\
+&~~+ \blue{bfg}~\green{\det\begin{bmatrix} 0&0&1 \\ 1&0&0 \\ 0&1&0 \end{bmatrix}}
++ \red{ceg\det\begin{bmatrix} 0&0&1 \\ 0&1&0 \\ 1&0&0 \end{bmatrix}}.
+\end{align}
+$$
+In fact, the blue and green determinant are equal,
+because both can be turned into $\det(I)=1$ with two swaps of rows.</p>
 
-<p><img width="161" height="201" class="asymptote" src="../images/asy/bc08c9fca5f697b20756b7767e0b6b4a.svg" /></p><p>The angle may be bigger than 180 degrees:</p>
-
-<p><img width="201" height="201" class="asymptote" src="../images/asy/b980340f44f77e4070ac3afa6a60303c.svg" /></p><p>Alternatively, the angle can be negative:</p>
-
-<p><img width="278" height="201" class="asymptote" src="../images/asy/12364db6eb24f676b10d2afb504024c8.svg" /></p><p>In general, angles that differ by a full turn (360 degrees or $2\pi$ radians),
-such as the ones in the above two pictures, are considered to be the same.</p>
-
-<p>Examples:</p>
-
-<p><ul><li>
-The length of $i$ is $1$. The angle of $i$ is 90 degrees, which is $\pi/2$ radians.</p>
-
-<p><img width="280" height="201" class="asymptote" src="../images/asy/36237d6657370dea14d991b2ab163a8b.svg" /></p><p></li><li>
-The length of $5$ is $5$.
-The angle is zero.</p>
-
-<p><img width="280" height="161" class="asymptote" src="../images/asy/f4164fb7fd535bf549195aa488600d68.svg" /></p><p></li><li>
-The length of $-5$ is $5$.
-The angle is 180 degrees.</p>
-
-<p><img width="320" height="161" class="asymptote" src="../images/asy/6dfc3c8f6e0c40e3d20cacb6c5bf7989.svg" /></p><p></li><li>
-The length of $0$ is $0$. The angle is undefined.
-Remember this somewhat annoying detail when you want to use the angle of a complex number.
-</li></ul></p>
-
-<p>Generally, the length of a complex number $a + bi$ is
-the <a href="../vectors/iwi-jwj.html#vector-length-formula">vector length</a> $\sqrt{a^2+b^2}$.
-The angle is more difficult to calculate.
-In computer programming, you can use <a href="https://en.wikipedia.org/wiki/Atan2">atan2</a> to calculate the angle.
-TODO: explain how to calculate angle in general
+<div class="box graybox"><p>Any $3 \times 3$ matrix $A$ satisfies $\det(A^{\T})=\det(A)$.
 </p>
 
-<h2 id="absolute-value-of-complex-number">Absolute value of complex number<a class="headerlink" href="#absolute-value-of-complex-number" title="Link to this title">¶</a></h2><p>The absolute value of a complex number $a+bi$ is defined to be its length:
+</div><p>Let's think about how this works in general with a square matrix of any size $n \times n$.
+We have $n!$ permutation matrices.
+Again, if a permutation matrix is its own transpose,
+its contribution to $\det(A)$ will remain unchanged if we replace $A$ with $A^{\T}$.
+Because the transpose of a permutation matrix is also a permutation matrix,
+we can group other permutation matrices into pairs that are each other's transposes;
+in the $3 \times 3$ case, we only had one such pair (the green and the blue determinant),
+but there can be multiple pairs.
+Just like above, if we want to get $\det(A)=\det(A^{\T})$ for all matrices $A$,
+it is enough if it works with permutation matrices,
+because then both permutation matrices of each pair will have the same determinant.</p>
+
+<p>For any permutation matrix $P$, we have
 $$
-\abs{a+bi} = \text{length of $a+bi$} = \sqrt{a^2+b^2}
+\det(P) = \begin{cases}
+    1, & \text{if it takes an even number of row swaps to turn $P$ into $I$} \\
+    -1, & \text{if it takes an odd number of row swaps to turn $P$ into $I$}.
+\end{cases}
 $$
-Because the length of a real number is its absolute value,
-this behaves as expected when $a+bi$ happens to be a real number (that is, $b=0$).
+Any swap of rows in a permutation matrix can be viewed as a swap of columns.
+For example, the operation below can be viewed as swapping the first two rows,
+or as swapping the left and right column:
+$$
+\begin{bmatrix}
+1&0&0 \\
+0&0&1 \\
+0&1&0
+\end{bmatrix}
+\to
+\begin{bmatrix}
+0&0&1 \\
+1&0&0 \\
+0&1&0
+\end{bmatrix}
+$$
+Therefore
+$$
+\det(P) = \begin{cases}
+    1, & \text{if it takes an even number of column swaps to turn $P$ into $I$} \\
+    -1, & \text{if it takes an odd number of column swaps to turn $P$ into $I$}.
+\end{cases}
+$$
+Because $\det(P)$ does not distinguish between rows and columns of $P$,
+we have $\det(P^{\T})=\det(P)$.</p>
+
+<div class="box graybox"><p>Any square matrix $A$ satisfies $\det(A^{\T})=\det(A)$.
 </p>
 
-<h2 id="argument">Argument<a class="headerlink" href="#argument" title="Link to this title">¶</a></h2><p>The notation $\arg(z)$ means an angle of a nonzero complex number $z$.
-Because $z$ has infinitely many different angles that differ from each other by a full turn $2\pi$,
-we need to somehow choose which angle is called $\arg(z)$.
-A common choice is $-\pi < \arg(z) \le \pi$:</p>
+</div><p>Examples:
+<ul><li>
+    Determinant is linear not only as a function of each row
+    (see <a href="det-def.html#defining-n-times-n-determinants">the definition</a>),
+    but also as a function of each column.
+    For example,
+    $$
+    \det\begin{bmatrix}
+    1 & \red 2 & 3 \\
+    4 & \red 6 & 1 \\
+    2 & \red 4 & 3
+    \end{bmatrix}
+    = \red2\det\begin{bmatrix}
+    1 & \red 1 & 3 \\
+    4 & \red 3 & 1 \\
+    2 & \red 2 & 3
+    \end{bmatrix}.
+    $$
+    To see why this happens, replace both matrices with their transposes.
+    This doesn't change the determinants,
+    but bringing the $\red 2$ in front turns into using linearity with rows.
+</li><li>
+    A $2 \times 2$ determinant can be thought of as the area between the two row vectors,
+    possibly with a minus sign in front depending on orientation,
+    but also as the area between the column vectors:
+    $$
+    \det\begin{bmatrix}
+        \red{v_x} & \red{v_y} \\
+        \blue{w_x} & \blue{w_y}
+    \end{bmatrix}
+    = \det\begin{bmatrix}
+        \red{v_x} & \blue{w_x} \\
+        \red{v_y} & \blue{w_y}
+    \end{bmatrix}
+    $$</p>
 
-<p><img width="377" height="297" class="asymptote" src="../images/asy/797c227d10c4991b92df3441cef4e01a.svg" /></p><p>So, $\arg(z)$ increases as $z$ rotates around $0$ counter-clockwise, but it "jumps" at $\pi$.
-It must jump somewhere, because it's periodic and so it can't increase forever.</p>
-
-<p>I <a href="sqrt.html">sometimes</a> need to represent any angle of a complex number,
-and I use $\arg(z)+n2\pi$ for that, with an arbitrary integer $n$.
-For this purpose, the choice of $\arg(z)$ doesn't matter, because we get all the possible angles anyway.
+<p><img width="229" height="229" class="asymptote" src="../images/asy/d88e3d40465eca7ccbe5c30d3efcd278.svg" /></p><p></li></ul>
 </p>
 
 </div>

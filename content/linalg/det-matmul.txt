@@ -124,7 +124,7 @@ Let's check whether it satisfies the conditions in
     \end{bmatrix}, \quad
     B = \begin{bmatrix} && \\ \vec{c_1} & \vec{c_2} & \vec{c_3} \\ && \end{bmatrix}
     $$
-    Now
+    Now (TODO: explain why $(\vec v + \vec w) \cdot \vec c = \vec v \cdot \vec c + \vec w \cdot \vec c$)
     $$
     \begin{align}
     AB &= \begin{bmatrix}

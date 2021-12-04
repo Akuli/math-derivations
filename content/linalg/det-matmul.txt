@@ -159,7 +159,7 @@ Let's check whether it satisfies the conditions in
     but with $\vec v$ or $\vec w$ instead of the row $\vec v + \vec w$.
     Dividing both sides by $\det(B)$ shows that
     $$
-    f(AB)=f(A_{\vec v} ~ B)+f(A_{\vec w} ~ B).
+    f(A)=f(A_{\vec v})+f(A_{\vec w}).
     $$
 </li></ul>
 

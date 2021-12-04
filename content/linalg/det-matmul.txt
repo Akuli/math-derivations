@@ -1,0 +1,202 @@
+# Determinant and matrix multiplication
+
+Let $A$ and $B$ be $2 \times 2$ matrices,
+and let $a > 0$ be an area of some 2D shape.
+If $B$ is applied to each point of the shape,
+the area multiplies by $\det(B)$ (TODO),
+so we get $a\det(B)$.
+If we also apply $A$, the area then becomes $a\det(B)\det(A)$.
+On the other hand, first applying $B$ and then $A$ is what the matrix $AB$ does, so
+$$
+a\det(B)\det(A)=a\det(AB),
+$$
+and dividing by $a$ gives
+$$
+\det(AB)=\det(A)\det(B).
+$$
+On the rest of this page, we show that the same works for square matrices of any size.
+
+
+## If $\det(B) \ne 0$
+
+Let $f$ be a function that takes in a square matrix and outputs a number,
+defined by
+$$
+f(A) = \frac{\det(AB)}{\det(B)}.
+$$
+For this to work, we have to assume that $\det(B) \ne 0$.
+Our goal is to show that this function computes $\det(A)$.
+Let's check whether it satisfies the conditions in
+[the definition of determinant](det-def.html#defining-n-times-n-determinants):
+<ul><li>
+    $f(I) = 1$, because it divides $\det(B)$ with itself.
+</li><li>
+    Let's consider how $AB$ changes if two rows of $A$ are swapped.
+    For example, with $2 \times 2$ matrices, if
+    $$
+    A = \begin{bmatrix}
+    \blue1 & \blue2 \\
+    \green3 & \green4
+    \end{bmatrix}
+    \quad \text{and} \quad
+    B = \begin{bmatrix}
+    \red5 & \magenta6 \\
+    \red7 & \magenta8
+    \end{bmatrix},
+    $$
+    then
+    $$
+    AB =
+    \begin{bmatrix}
+    \blue1 & \blue2 \\
+    \green3 & \green4
+    \end{bmatrix}
+    \begin{bmatrix}
+    \red5 & \magenta6 \\
+    \red7 & \magenta8
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    \blue{(1,2)}\cdot\red{(5,7)} & \blue{(1,2)}\cdot\magenta{(6,8)} \\
+    \green{(3,4)}\cdot\red{(5,7)} & \green{(3,4)}\cdot\magenta{(6,8)}
+    \end{bmatrix},
+    $$
+    and with the rows of $A$ swapped, we would get
+    $$
+    \begin{bmatrix}
+    \green3 & \green4 \\
+    \blue1 & \blue2
+    \end{bmatrix}
+    \begin{bmatrix}
+    \red5 & \magenta6 \\
+    \red7 & \magenta8
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    \green{(3,4)}\cdot\red{(5,7)} & \green{(3,4)}\cdot\magenta{(6,8)} \\
+    \blue{(1,2)}\cdot\red{(5,7)} & \blue{(1,2)}\cdot\magenta{(6,8)}
+    \end{bmatrix}.
+    $$
+    So swapping two rows in a matrix $A$ swaps the corresponding rows in $AB$:
+    $$
+    (\text{$A$ with two rows swapped})B = \text{$AB$ with two rows swapped}
+    $$
+    This works the same with square matrices of any size, and we get
+    $$
+    \begin{align}
+    f(\text{$A$ with two rows swapped})
+    &= \frac{\det(\text{$AB$ with two rows swapped})}{\det(B)} \\
+    &= \frac{-\det(AB)}{\det(B)} \\
+    &= -f(A).
+    \end{align}
+    $$
+</li><li>
+    Let $m$ be any number, and let $A$ be a square matrix.
+    Then, for any row in $A$,
+    [there is a matrix](inverse-finding.html#elementary-row-operations-as-matrix-multiplication)
+    $E$ that multiplies that row by $m$:
+    $$
+    EA = \text{$A$ with one of the rows multiplied by $m$}
+    $$
+    Because the determinant is linear as a function of each row,
+    this multiplies the determinant by $m$, so $\det(EA)=m\det(A)$,
+    and we get
+    $$
+    f(EA)=\frac{\det(EAB)}{\det(B)} =\frac{m\det(AB)}{\det(B)} = mf(A).
+    $$
+    This almost shows that the function $f$ is linear as a function of each row in $A$,
+    but not quite;
+    we still need to show that
+    $$
+    f(\text{matrix with row $\vec v + \vec w$})
+    = f(\text{matrix with row $\vec v$})
+    + f(\text{matrix with row $\vec w$}).
+    $$
+</li><li>
+    Let $A$ be a matrix where one of the rows is $\vec v + \vec w$,
+    and there are also other unrelated rows, say $(1,2,3)$ and $(4,5,6)$.
+    Let $\vec{c_1},\vec{c_2},\vec{c_3}$ denote the columns of $B$.
+    $$
+    A = \begin{bmatrix}
+        1~~~~2~~~~3 \\
+        \vec v + \vec w \\
+        4~~~~5~~~~6
+    \end{bmatrix}, \quad
+    B = \begin{bmatrix} && \\ \vec{c_1} & \vec{c_2} & \vec{c_3} \\ && \end{bmatrix}
+    $$
+    Now
+    $$
+    \begin{align}
+    AB &= \begin{bmatrix}
+        (1,2,3)\cdot\vec{c_1}&(1,2,3)\cdot\vec{c_2}&(1,2,3)\cdot\vec{c_3} \\
+        (\vec v + \vec w) \cdot \vec{c_1} &(\vec v + \vec w) \cdot \vec{c_2} &(\vec v + \vec w) \cdot \vec{c_3} \\
+        (4,5,6)\cdot\vec{c_1}&(4,5,6)\cdot\vec{c_2}&(4,5,6)\cdot\vec{c_3}
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        (1,2,3)\cdot\vec{c_1}&(1,2,3)\cdot\vec{c_2}&(1,2,3)\cdot\vec{c_3} \\
+        \vec v \cdot \vec{c_1} + \vec w \cdot \vec{c_1} & \vec v \cdot \vec{c_2} + \vec w \cdot \vec{c_2} &\vec v\cdot \vec{c_3} + \vec w\cdot \vec{c_3} \\
+        (4,5,6)\cdot\vec{c_1}&(4,5,6)\cdot\vec{c_2}&(4,5,6)\cdot\vec{c_3}
+    \end{bmatrix}.
+    \end{align}
+    $$
+    By the linearity of determinant, we get
+    $$
+    \begin{align}
+    \det(AB) &= \det\begin{bmatrix}
+        (1,2,3)\cdot\vec{c_1}&(1,2,3)\cdot\vec{c_2}&(1,2,3)\cdot\vec{c_3} \\
+        \vec v \cdot \vec{c_1} & \vec v \cdot \vec{c_2} &\vec v\cdot \vec{c_3} \\
+        (4,5,6)\cdot\vec{c_1}&(4,5,6)\cdot\vec{c_2}&(4,5,6)\cdot\vec{c_3}
+    \end{bmatrix} \\
+    &\qquad+ \det\begin{bmatrix}
+        (1,2,3)\cdot\vec{c_1}&(1,2,3)\cdot\vec{c_2}&(1,2,3)\cdot\vec{c_3} \\
+        \vec w \cdot \vec{c_1} & \vec w \cdot \vec{c_2} &\vec w\cdot \vec{c_3} \\
+        (4,5,6)\cdot\vec{c_1}&(4,5,6)\cdot\vec{c_2}&(4,5,6)\cdot\vec{c_3}
+    \end{bmatrix} \\
+    &= \det(A_{\vec v} ~ B)+\det(A_{\vec w} ~ B),
+    \end{align}
+    $$
+    where $A_{\vec v}$ and $A_{\vec w}$ are just like $A$,
+    but with $\vec v$ or $\vec w$ instead of the row $\vec v + \vec w$.
+    Dividing both sides by $\det(B)$ shows that
+    $$
+    f(AB)=f(A_{\vec v} ~ B)+f(A_{\vec w} ~ B).
+    $$
+</li></ul>
+
+Because the function $f$ satisfies the conditions in the definition of determinant,
+it must be the determinant,
+and therefore
+$$
+\det(A) = f(A) = \frac{\det(AB)}{\det(B)}
+$$
+for all square matrices $A$ of the same size as $B$.
+
+graybox:
+    If $A$ and $B$ are square matrices of the same size and $\det(B) \ne 0$,
+    then $\det(AB)=\det(A)\det(B)$.
+
+
+## If $\det(B) = 0$
+
+Let's now see what happens when the above calculations don't work due to division by zero.
+Because $\det(B)=0$,
+[the columns of $B$ are linearly dependent](det-row-ops.html#determinants-and-invertibility),
+so [$B$ does not always produce different outputs for different inputs](matrix-inverse.html#when-does-an-inverse-matrix-exist),
+i.e. there are different vectors $\vec v \ne \vec w$ so that
+$$
+B\vec v = B\vec w.
+$$
+Multiplying from left by $A$ gives
+$$
+AB\vec v = AB\vec w,
+$$
+so $AB$ is not invertible, and
+$$
+\det(AB) = 0.
+$$
+This means that $\det(AB)=\det(A)\det(B)$ works even if $\det(B)=0$;
+in that case, it says that $0=0$.
+
+graybox:
+    If $A$ and $B$ are square matrices of the same size,
+    then $\det(AB)=\det(A)\det(B)$.

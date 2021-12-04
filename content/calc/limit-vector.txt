@@ -114,7 +114,7 @@ $$
 We show that $\lim_{x \to a} \vec f(t) = \vec L$.
 Let $C$ be any output circle centered around $L$.
 We pick a rectangle inside the circle,
-rotated so that its sides are parallel with $x$ and $y$ axises,
+rotated so that its sides are parallel with $x$ and $y$ axes,
 and centered around $L$.
 (There are infinitely many such rectangles; we just pick one.)
 

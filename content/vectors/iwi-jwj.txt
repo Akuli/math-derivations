@@ -128,7 +128,7 @@ asymptote:
     unitsize(2cm);
     pair v=(3,2);
 
-    fill((0,0)--(v.x,0)--v--cycle, p=lightgreen);   // axises go on top of this
+    fill((0,0)--(v.x,0)--v--cycle, p=lightgreen);
     axises(-1,4,-1,2);
 
     draw((v.x, 0)--v);

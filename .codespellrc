@@ -1,4 +1,5 @@
 [codespell]
-# axises: function name in asymptote/boilerplate.asy, changing would cause images rebuilt
 # ba: vector from B to A
-ignore-words-list = axises,ba
+# axises: function name in asymptote/boilerplate.asy, changing would cause images rebuilt
+ignore-words-list = ba
+ignore-regex = \baxises\(

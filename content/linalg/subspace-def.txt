@@ -1,0 +1,361 @@
+# Defining subspaces
+
+TODO: add a note about needing to know spans and  linear (in)dependence first
+
+TODO: Write the following conversation into a nice derivation
+
+## Definition with adding and scaling
+
+<pre style="white-space: break-spaces">
+Akuli	ignoring matrices, what operations do we use in linear algebra anyway?
+Akuli	we have vector+vector and number*vector
+Akuli	together with those we can do linear combinations
+Akuli	ok?
+adder	ok
+Akuli	subtraction isn't really a separate operation:   v-w = v + (-1)*w
+Akuli	just consists of those two
+Akuli	ok?
+adder	yeah likewise for division 1/x
+adder	* 1/x
+adder	(correct?)
+Akuli	yeah, note that we never divide by vectors
+Akuli	so vector/2 is (1/2)*vector
+Akuli	but 2/vector is undefined and bad
+adder	ok
+Akuli	so it's really just vector+vector and number*vector
+adder	just one sec
+adder	how about dot and cross products?
+Akuli	we haven't used them yet
+adder	that still falls within *
+Akuli	hmm, yes and no
+adder	are they valid lin. alg. operations?
+Akuli	i said "ignoring matrices"
+Akuli	i should have said "ignoring matrices and a lot of other operations" :D
+adder	ok
+Akuli	but really the core of the thing is vector+vector and number*vector
+Akuli	a lot can be done with just those
+adder	ok
+Akuli	linear independence and spans, for example
+Akuli	our next concept is a subspace
+adder	what is ittttttt
+Akuli	a set of vectors can either be a subspace or not be a subspace
+Akuli	so a subspace is a set of vectors that satisfies specific conditions
+adder	is this maybe the R thing I keep seeing on #math
+Akuli	there's 3 conditions: it must be non-empty, adding vectors in the set must not produce anything outside the set, and multiplying vectors of the set by any number also must produce vectors in the set
+Akuli	so basically, it must be not a dumb corner case we want to ignore (non-empty)
+adder	ok that sounds simple
+Akuli	and when you do our two favorite operations, you don't end up outside that set, you can basically calculate with just the elements of that set without needing anything from the outside
+Akuli	definition ok?
+adder	the name checks out
+adder	yeah
+Akuli	yeah it does
+Akuli	"space" in general means something where you can work in
+Akuli	"subspace" is just a subset inside the set of all n-dimensional vectors
+Akuli	ok?
+adder	ok
+Akuli	let's explore what sets are subspaces and what aren't
+Akuli	let's start small
+Akuli	is {(1,0)} a subspace?
+Akuli	it's non-empty, that checks out
+Akuli	let's try adding
+adder	with itself?
+Akuli	well, we need to pick two subspace elements to add
+adder	there are no other vectors
+Akuli	it should work for any two
+Akuli	so we'll have to add it with itself because there's no other choice
+adder	aha ok
+Akuli	(1,0) + (1,0) = (2,0)
+Akuli	oops
+adder	then it's not because we get 2, 0
+Akuli	yeah, not a subspace
+Akuli	let's try to fix this problem by adding (2,0) there
+Akuli	{(1,0), (2,0)}
+Akuli	is this a subspace?
+adder	no, (3,0) is outside the set
+Akuli	yeah :D
+Akuli	ok, let's say it's {(1,0), (2,0), (3,0), ...}
+adder	{(0,0)} is?
+Akuli	we add all positive integers
+Akuli	good!
+Akuli	{(0,0)} is a subspace
+Akuli	it satisfies all the rules: no matter what you do you stay in that set :)
+Akuli	ok?
+adder	ok
+Akuli	so let's try to get our {(1,0)} set thing to work
+Akuli	we have to add at least all vectors like (positive_integer, 0)
+Akuli	just because of +
+Akuli	ok?
+adder	yeah
+Akuli	so let's say it's {(1,0), (2,0), (3,0), ...}
+Akuli	then it satisfies the + rule, and also is non-empty
+adder	as long as it has the null vector it's a subspace
+adder	(I think)
+Akuli	let's talk about that then
+adder	because (3,0) * (0,0) = (0,0)
+Akuli	we don't have vector*vector, only vector*number
+Akuli	but let's try {(3,0), (0,0)}
+Akuli	it's not actually a subspace
+Akuli	(3,0) + (3,0) = (6,0)
+Akuli	goes outside it again
+Akuli	ok?
+adder	but why are you not adding it up with (0,0)? why (3,0)?
+Akuli	ah, the definition was a bit unclear
+Akuli	you should be able to freely combine any vectors within the subspace
+Akuli	whatever vectors you pick, it has to stay in the subspace for it to be a subspace
+adder	aha so it must stand for any pair of vectors within the set
+Akuli	right
+Akuli	and similarly in multiplication, it must work with any vector and any number
+adder	but where do we get a number? it's a set of vectors
+Akuli	a set of vectors is a subspace if ... and (any vector from the set)*(any number) is in the set
+adder	ahaa
+adder	ok
+Akuli	so for example, our {(1,0), (2,0), ...} thing is definitely not a subspace
+Akuli	multiply by -1 and it goes boom
+Akuli	ok?
+adder	ok
+Akuli	so let's try {(any integer, 0)}
+adder	I'm starting to think a subspace doesn't exist :D
+Akuli	multiply by 1/2 and we go outside it again
+Akuli	ok?
+adder	ok
+Akuli	so let's try (any number whatsoever, 0)
+Akuli	let's try adding
+Akuli	(x, 0) + (y, 0) = (x+y, 0) = (some number, 0)
+Akuli	seems to check out
+Akuli	how about multiplying?  x*(y, 0) = (xy, 0) = (some number, 0)
+Akuli	we found a subspace! :D
+adder	wait wait wait
+adder	why are you saying 'any number' when we were working with vectors?
+Akuli	(good thing you keep interrupting me, it's been a while since i taught math)
+Akuli	our subspace candidate is now an infinite set of all vectors of the form (x,0) where x is any number whatsoever
+Akuli	so for every number there's a corresponding vector in our subspace candidate set
+adder	aaaaaaaah that's a vector
+adder	sorry
+Akuli	and now it does satisfy the properties
+adder	so wait, how does our first subspace look? name one
+Akuli	our subspace is basically the x axis
+Akuli	"a vector is in this set" just comes down to "second component of the vector is zero" which means "the vector is on the x axis"
+Akuli	and if you add/scale vectors on the x axis, surely you stay on the x axis
+Akuli	so the x axis is a subspace
+adder	ok
+Akuli	do you notice what we did?
+adder	anything different for y axis?
+Akuli	no
+Akuli	that would also be a subspace
+Akuli	hm
+Akuli	so if we take a vector (1,0) and want to make a subspace containing it, we need the whole x axis
+adder	yeah
+Akuli	at no point did we add anything unnecessary, and eventually x axis was it
+adder	ok
+Akuli	let's try with two vectors
+Akuli	say (1,0) and (0,1)
+Akuli	and let's see what do we need to put into our subspace to make one that contains both of them
+Akuli	ok?
+adder	ok
+Akuli	we need number*(1,0) and number*(0,1)
+Akuli	this is probably a quicker way to get started than adding
+Akuli	adding worked but we got confused by thinking it's some kind of integers thing, after all we needed to ditch that and take all numbers anwyay
+Akuli	ok?
+adder	ok
+Akuli	so it has to contain the whole x axis and the whole y axis
+Akuli	ok?
+adder	ok
+Akuli	this is only from number*vector rule, non-emptiness is clearly fine
+Akuli	we still need vector1+vector2 rule
+Akuli	ok?
+adder	ok
+adder	(1,1) is outside axes
+Akuli	yeah
+Akuli	but we actually do need it
+Akuli	(1,1) = (1,0) + (0,1) = subspacevector + subspacevector
+Akuli	so (1,1) has to go into our subspace too
+Akuli	ok?
+adder	ok
+Akuli	how about say (-7, 35.2)?
+Akuli	can we make that by adding x axis and y axis vectors, i.e. do we need it in the subspace?
+adder	I don't think so
+Akuli	look at this :D
+Akuli	(-7, 0)  = x axis vector
+Akuli	(0, 35.2) = y axis vector
+Akuli	adding together:
+Akuli	(-7, 35.2) = subspace vector
+Akuli	so we DO need to include that in our subspace
+Akuli	ok?
+adder	I'm a bit confused, is this still the same subspace 23:24:12 my time
+adder	subspace from
+Akuli	ok, let's backtrack a bit
+adder	the one with (1,0) and (0,1)?
+Akuli	our goal was to make the smallest possible subspace containing (1,0) and (0,1), see what do we really need to put in a subspace other than those
+Akuli	we found out that we need at least the whole x axis and the whole y axis
+adder	yeah
+Akuli	(because you can multiply (1,0) and (0,1) by a number)
+Akuli	we found out that we also need at least (1,1)  (because you can add (1,0) from x axis and (0,1) from y axis)
+Akuli	i'm saying that you might as well add (-7,0) from x axis and (0,35.2) from y axis
+adder	is the answer: a plane
+Akuli	yeah :)
+Akuli	it's the entire xy plane, i.e. the set of all 2D vectors
+Akuli	once we do that, it is obviously a subspace
+Akuli	non-empty and obviously contains everytihgn you can get by adding/multiplying its vectors
+</pre>
+
+
+## The smallest subspace that contains given vectors
+
+TODO: Some of the stuff from the previous section belong here
+
+<pre style="white-space: break-spaces">
+adder	this looks a lot like spans?
+Akuli	yes!!!
+Akuli	we just computed span((1,0),(0,1))
+adder	:DD
+Akuli	in fact: span(vectors) = smallest subspace containing all vectors
+adder	I'll brb
+Akuli	ok :)
+Akuli	send a message (or ping me) when back
+adder	ping Akuli 
+Akuli	pong
+Akuli	so we tried to make the smallest possible subspace containing some vectors and ended up with span(vectors)
+Akuli	let's try to figure out if/why this works in general
+Akuli	ok?
+adder	ok
+Akuli	so we have two sets
+Akuli	span(vectors) and smallest_subspace_containing(vectors)
+Akuli	the obvious part is:   span(vectors).issubset(smallest_subspace_containing(vectors))
+Akuli	meaning that every vector in the span is also in the subspace
+Akuli	this is because of how you can + and * within a subspace and that's all that spans do
+Akuli	ok?
+adder	ok
+Akuli	.issubset() isn't quite same as == though
+Akuli	what if the smallest subspace containing those vectors isn't just the span but also contains something else?
+Akuli	then they would be different sets but .issubset() would be happy
+Akuli	ok?
+adder	ok
+Akuli	we still have to rule out that possibility, but then we're done
+Akuli	so taking a step back, we're trying to compare the span to some subspace
+Akuli	maybe it would help to figure out if the span even is a subspace
+Akuli	ok?
+adder	ok
+Akuli	that would actually help a lot
+Akuli	every subspace has to contain the span
+Akuli	and if the span is a subspace, there can't be any smaller subspaces (because they would contain the span)
+Akuli	ok?
+adder	ok
+Akuli	so if we can see somehow that the span is a subspace, it's automatically the smallest subspace containing those vectors
+Akuli	ok?
+adder	ok
+</pre>
+
+
+## Are all subspaces just spans?
+
+<pre style="white-space: break-spaces">
+Akuli	so let's see if span(vectors) is a subspace :)
+Akuli	is it non-empty?
+adder	yes?
+Akuli	yes :D
+Akuli	now for some more interesting parts
+Akuli	does span_element+span_element stay within the span?
+Akuli	let's try
+Akuli	let's say we have 3 vectors we're making the span of:  span(u,v,w)
+Akuli	ok?
+adder	ok
+Akuli	then all span elements look like au+bv+cw
+Akuli	let's take two of those and add them together
+Akuli	a1 u + b1 v + c1 w + a2 u + b2 v + c2 w
+Akuli	ok?
+adder	ok
+Akuli	= (a1+a2)u + (b1+b2)v = (c1+c2)w
+Akuli	= (some number)u + (some number)v + (some number)w
+Akuli	= span element
+adder	so #2 good
+Akuli	yeah
+Akuli	lets do #3
+Akuli	x*(span element) = x*(au+bv+cw)
+Akuli	= (xa)u + (xb)v + (xc)w
+Akuli	= span element
+Akuli	ok?
+adder	I don't follow the last =
+Akuli	yeah ok
+Akuli	= (xa)u + (xb)v + (xc)w    (previous step)
+Akuli	= (some number)u + (some number)v + (some number)w
+Akuli	= span element
+adder	ah
+adder	o
+adder	ok
+Akuli	so #3 good :)
+adder	so #3 good too
+Akuli	so actually, "the smallest subspace containing these vectors" amounts to "the span of these vectors"
+Akuli	at least with finitely many vectors
+adder	ok :D cool
+adder	now, does this help us in computing? 
+Akuli	hm, not in any obvious way
+Akuli	we have mostly introduced a new name and an alternative definition for an existing thing
+Akuli	whether or not that turns out useful is to be seen later
+Akuli	ok?
+adder	yeah ok some terminology can't hurt
+Akuli	there's one more corner case i want to cover
+Akuli	the smallest subspace containing specific vectors is a span
+Akuli	but is any subspace in fact just a span of something?
+Akuli	could there be some subspace that isn't the span of anything?
+Akuli	let's tackle that next
+Akuli	ok?
+adder	ok
+Akuli	the subspace could be {(0,0)} first of all
+Akuli	but we can just take span((0,0)) or something to correspond with it then
+Akuli	kind of a dumb case but that seems to work
+Akuli	and in general, if something isn't working you will often find out with some simple example, so this check is a good idea anyway :)
+Akuli	ok?
+adder	ok
+Akuli	so let's say the subspace is something else than {(0,0)}, our goal is to see if it is span(something)
+Akuli	it must contain at least one nonzero vector
+Akuli	(otherwise it would be the {(0,0)} subspace as that's the only subspace containing only one vector)
+Akuli	ok?
+adder	ok
+Akuli	so some nonzero vector n is in the subspace
+Akuli	then number*n is in the subspace
+Akuli	that's just span(n)
+Akuli	ok?
+adder	ok
+Akuli	so if that's the whole subspace we're done, it turned out to be a span
+Akuli	but there could be more to the subspace than that
+Akuli	let's say there's a subspace vector s that wasn't captured by span(n)
+Akuli	so, subspace = {multiples of n, multiples of s, ...}
+Akuli	ok?
+adder	ok
+Akuli	it has to contain everything in span(n, s) then
+Akuli	(because + and * stay within the subspace)
+Akuli	and now if the subspace is span(n, s) we're done
+Akuli	ok?
+adder	ok
+Akuli	the subspace could still contain something more, say v
+Akuli	then it must contain span(n, s, v)
+Akuli	if that's the whole subspace we're done
+Akuli	ok?
+adder	ok
+Akuli	you get the idea
+Akuli	if it turns out our span thing didn't "fill" the entire subspace, we just update it and try again
+Akuli	ok?
+adder	ok
+Akuli	so the only corner case where this doesn't work would be a subspace where we add more and more things to our span, and never reach the whole subspace
+Akuli	ok?
+adder	ok
+Akuli	but here's the thing
+Akuli	at every step the vectors we're spanning are linearly independent!
+Akuli	we're never adding anything redundant to the span, that would be dependent vectors
+adder	right ok
+Akuli	every vector we add grew the span
+Akuli	and we have an upper bound for the number of independent vectors!
+Akuli	if these are n dimensional vectors, we won't go beyond span(v1,v2,...,vn)
+adder	right
+Akuli	so eventually we reach the entire subspace
+Akuli	and that's why "a subspace" really means "a span of some vectors"
+adder	:)
+Akuli	if you say "a subspace" you just don't care what those vectors are
+Akuli	i was going to define "a subspace" this way but "a span of vectors we don't know ???" just seems weird and arbitrary
+adder	ok
+Akuli	i think that's it for today :)
+adder	:D
+adder	thanks, feels good to be learning math again
+Akuli	this was fun :D
+adder	I'll be back tomorrow
+</pre>

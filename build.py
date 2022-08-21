@@ -228,6 +228,9 @@ def get_sidebar_content(txtfile):
                 link("Determinant of transpose", "linalg/det-transpose"),
                 link("Determinant and matrix multiplication", "linalg/det-matmul"),
             ])),
+            dropdown("Subspace and basis", join([
+                link("Defining subspaces and comparing to spans", "linalg/subspace-def"),
+            ])),
         ])),
     ])
 

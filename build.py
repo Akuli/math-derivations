@@ -230,6 +230,7 @@ def get_sidebar_content(txtfile):
             ])),
             dropdown("Subspace and basis", join([
                 link("Defining subspaces and comparing to spans", "linalg/subspace-def"),
+                link("Basis", "linalg/subspace-basis"),
             ])),
         ])),
     ])

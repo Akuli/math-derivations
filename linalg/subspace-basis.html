@@ -197,252 +197,252 @@
         </div>
         </div>
 <h1 id="basis">Basis<a class="headerlink" href="#basis" title="Link to this title">¶</a></h1><h2 id="definition-with-representing-vectors">Definition with representing vectors<a class="headerlink" href="#definition-with-representing-vectors" title="Link to this title">¶</a></h2><p><pre style="white-space: break-spaces">
-Mon Aug 22 20:47:00 2022	Akuli	ok :)
-Mon Aug 22 20:47:08 2022	Akuli	let's say you have some subspace
-Mon Aug 22 20:47:24 2022	Akuli	the idea is to choose a few special basis vectors so that you can represent any vector from the subspace with them
-Mon Aug 22 20:47:39 2022	Akuli	for example, if your subspace is the set of all 2D vectors, you could pick (1,0) and (0,1), aka i and j
-Mon Aug 22 20:47:41 2022	adder`	what was basis vector, something similar to unit vectors?
-Mon Aug 22 20:47:57 2022	Akuli	a basis vector is just a vector in the basis, which is a set of vectors you make up other vectors if
-Mon Aug 22 20:47:58 2022	Akuli	of
-Mon Aug 22 20:48:02 2022	Akuli	i'll define it precisely in a moment
-Mon Aug 22 20:48:16 2022	Akuli	but the idea is that these are the "building block" kind of vectors that everything is made up of
-Mon Aug 22 20:48:23 2022	adder`	ok
-Mon Aug 22 20:48:31 2022	adder`	is 2 of them enough?
-Mon Aug 22 20:48:38 2022	adder`	then we get the rest with + and *
-Mon Aug 22 20:48:41 2022	adder`	all directions
-Mon Aug 22 20:48:54 2022	adder`	we need up (or down) and right (or left)
-Mon Aug 22 20:48:55 2022	Akuli	for the set of all 2d vectors, yes two is enough
-Mon Aug 22 20:49:13 2022	Akuli	for all 3d vectors you could take (1,0,0), (0,1,0), (0,0,1) for example
-Mon Aug 22 20:49:33 2022	adder`	yeah we need something to 'push' each 'axis' (?)
-Mon Aug 22 20:49:38 2022	adder`	dimension
-Mon Aug 22 20:49:39 2022	Akuli	right, that's the idea
-Mon Aug 22 20:49:59 2022	Akuli	now i think we're ready to define what exactly is a basis, so we have something more than just an idea to work with
-Mon Aug 22 20:50:23 2022	Akuli	specifically, we'll define what "a basis of a subspace" means
-Mon Aug 22 20:50:26 2022	Akuli	a subspace can have multiple basis
-Mon Aug 22 20:50:31 2022	Akuli	...bases
-Mon Aug 22 20:50:35 2022	Akuli	this word is difficult
-Mon Aug 22 20:50:39 2022	Akuli	basis is singular, bases is plural
-Mon Aug 22 20:50:46 2022	adder	yeah
-Mon Aug 22 20:51:00 2022	Akuli	an example of an alternative (non-standard) basis for the set of 2d vectors would be (1,1) and (1,-1)
-Mon Aug 22 20:51:11 2022	Akuli	it goes up-right and down-right, basically rotated 45deg
-Mon Aug 22 20:51:16 2022	Akuli	but it works just as well as (1,0) and (0,1) would
-Mon Aug 22 20:51:20 2022	Akuli	ok?
-Mon Aug 22 20:51:22 2022	adder	ok
-Mon Aug 22 20:51:42 2022	Akuli	so here's our definition for what a basis of a subspace means (note that we can do this on any subspace)
-Mon Aug 22 20:52:12 2022	Akuli	finitely many vectors from the subspace so that any vector of the subspace can be written as a linear combination of basis vectors in exactly one way
-Mon Aug 22 20:52:49 2022	Akuli	so if your basis vectors are b1,b2,b3, then for any vector v in the subspace you can write v = a*b1 + b*b2 + c*b3
-Mon Aug 22 20:52:59 2022	Akuli	and this must be possible with only one choice of a,b,c
-Mon Aug 22 20:53:08 2022	Akuli	so you can't have multiple ways to choose a,b,c to make that work
-Mon Aug 22 20:53:12 2022	Akuli	ok?
-Mon Aug 22 20:53:19 2022	adder	ok
-Mon Aug 22 20:53:49 2022	Akuli	for the set of all n-dimensional vectors, the basis conisting of (1,0,0,...), (0,1,0,...) etc is called standard basis
-Mon Aug 22 20:53:59 2022	Akuli	so for the set of all 2D vectors it would be (1,0), (0,1)
-Mon Aug 22 20:54:13 2022	Akuli	but there can be other bases too
-Mon Aug 22 20:54:17 2022	adder	so is 'basis' just a set?
-Mon Aug 22 20:54:21 2022	Akuli	yeah, a set of vectors
-Mon Aug 22 20:54:24 2022	Akuli	almost
-Mon Aug 22 20:54:30 2022	Akuli	in many contexts, the order of the basis vectors matters
-Mon Aug 22 20:54:37 2022	Akuli	because you need to say "this coefficient corresponds to this basis vector"
-Mon Aug 22 20:54:42 2022	Akuli	and in a set you usually don't care about the order
-Mon Aug 22 20:54:46 2022	adder	yeah
-Mon Aug 22 20:54:54 2022	Akuli	but in practice it's perfectly fine to think of a basis as a finite set of vectors from the subspace
-Mon Aug 22 20:55:15 2022	Akuli	just has to have the property that you can write any subspace vector with them in only one way
-Mon Aug 22 20:55:24 2022	Akuli	ok?
-Mon Aug 22 20:55:29 2022	adder	so does this open some doors?
-Mon Aug 22 20:55:36 2022	adder	as in, can we do something new and cool with this
-Mon Aug 22 20:55:38 2022	Akuli	yeah it does, we'll explore this a bit soon
-Mon Aug 22 20:56:01 2022	Akuli	is the concept clear, and is it clear why the standard basis is in fact a basis?
-Mon Aug 22 20:56:18 2022	adder	let me try to repeat
-Mon Aug 22 20:56:21 2022	Akuli	:)
-Mon Aug 22 20:57:08 2022	adder	a basis is a collection of vectors, with which you can write any vector in a subspace using a unique combination of coefficients
-Mon Aug 22 20:57:14 2022	Akuli	awesome :)
-Mon Aug 22 20:57:22 2022	Akuli	that's exactly what it is
-Mon Aug 22 20:57:42 2022	Akuli	the subspace doesn't have to be the whole set of all 3D vectors, or all 2D vectors, or whatever
-Mon Aug 22 20:57:57 2022	Akuli	for example, the line y=x is a subspace as we discussed last time
-Mon Aug 22 20:58:04 2022	Akuli	you can view it as span((1,1)), for example
-Mon Aug 22 20:58:13 2022	Akuli	the vector (1,1) forms a basis for it
-Mon Aug 22 20:58:23 2022	Akuli	so in this case just one vector is enough to make up a basis 
-Mon Aug 22 20:58:24 2022	Akuli	ok?
-Mon Aug 22 20:58:32 2022	adder	ok
+Akuli	ok :)
+Akuli	let's say you have some subspace
+Akuli	the idea is to choose a few special basis vectors so that you can represent any vector from the subspace with them
+Akuli	for example, if your subspace is the set of all 2D vectors, you could pick (1,0) and (0,1), aka i and j
+adder`	what was basis vector, something similar to unit vectors?
+Akuli	a basis vector is just a vector in the basis, which is a set of vectors you make up other vectors if
+Akuli	of
+Akuli	i'll define it precisely in a moment
+Akuli	but the idea is that these are the "building block" kind of vectors that everything is made up of
+adder`	ok
+adder`	is 2 of them enough?
+adder`	then we get the rest with + and *
+adder`	all directions
+adder`	we need up (or down) and right (or left)
+Akuli	for the set of all 2d vectors, yes two is enough
+Akuli	for all 3d vectors you could take (1,0,0), (0,1,0), (0,0,1) for example
+adder`	yeah we need something to 'push' each 'axis' (?)
+adder`	dimension
+Akuli	right, that's the idea
+Akuli	now i think we're ready to define what exactly is a basis, so we have something more than just an idea to work with
+Akuli	specifically, we'll define what "a basis of a subspace" means
+Akuli	a subspace can have multiple basis
+Akuli	...bases
+Akuli	this word is difficult
+Akuli	basis is singular, bases is plural
+adder	yeah
+Akuli	an example of an alternative (non-standard) basis for the set of 2d vectors would be (1,1) and (1,-1)
+Akuli	it goes up-right and down-right, basically rotated 45deg
+Akuli	but it works just as well as (1,0) and (0,1) would
+Akuli	ok?
+adder	ok
+Akuli	so here's our definition for what a basis of a subspace means (note that we can do this on any subspace)
+Akuli	finitely many vectors from the subspace so that any vector of the subspace can be written as a linear combination of basis vectors in exactly one way
+Akuli	so if your basis vectors are b1,b2,b3, then for any vector v in the subspace you can write v = a*b1 + b*b2 + c*b3
+Akuli	and this must be possible with only one choice of a,b,c
+Akuli	so you can't have multiple ways to choose a,b,c to make that work
+Akuli	ok?
+adder	ok
+Akuli	for the set of all n-dimensional vectors, the basis conisting of (1,0,0,...), (0,1,0,...) etc is called standard basis
+Akuli	so for the set of all 2D vectors it would be (1,0), (0,1)
+Akuli	but there can be other bases too
+adder	so is 'basis' just a set?
+Akuli	yeah, a set of vectors
+Akuli	almost
+Akuli	in many contexts, the order of the basis vectors matters
+Akuli	because you need to say "this coefficient corresponds to this basis vector"
+Akuli	and in a set you usually don't care about the order
+adder	yeah
+Akuli	but in practice it's perfectly fine to think of a basis as a finite set of vectors from the subspace
+Akuli	just has to have the property that you can write any subspace vector with them in only one way
+Akuli	ok?
+adder	so does this open some doors?
+adder	as in, can we do something new and cool with this
+Akuli	yeah it does, we'll explore this a bit soon
+Akuli	is the concept clear, and is it clear why the standard basis is in fact a basis?
+adder	let me try to repeat
+Akuli	:)
+adder	a basis is a collection of vectors, with which you can write any vector in a subspace using a unique combination of coefficients
+Akuli	awesome :)
+Akuli	that's exactly what it is
+Akuli	the subspace doesn't have to be the whole set of all 3D vectors, or all 2D vectors, or whatever
+Akuli	for example, the line y=x is a subspace as we discussed last time
+Akuli	you can view it as span((1,1)), for example
+Akuli	the vector (1,1) forms a basis for it
+Akuli	so in this case just one vector is enough to make up a basis 
+Akuli	ok?
+adder	ok
 </pre>
 </p>
 
 <h2 id="definition-with-span-and-linear-independence">Definition with span and linear independence<a class="headerlink" href="#definition-with-span-and-linear-independence" title="Link to this title">¶</a></h2><p><pre style="white-space: break-spaces">
-Mon Aug 22 20:58:51 2022	Akuli	let's rethink the definition of a basis a bit
-Mon Aug 22 20:59:06 2022	Akuli	"every vector can be written with basis vectors" just means:   subspace = span(basis vectors)
-Mon Aug 22 20:59:19 2022	Akuli	span(basis vectors) = all vectors that can be written with them
-Mon Aug 22 20:59:28 2022	adder	ok
-Mon Aug 22 20:59:54 2022	Akuli	so if we ignore the requirement to have only one unique way to do it, a basis would be just anything whose span is the subspace
-Mon Aug 22 21:00:00 2022	Akuli	ok?
-Mon Aug 22 21:00:05 2022	adder	ok
-Mon Aug 22 21:00:10 2022	Akuli	let's think about the uniqueness a bit
-Mon Aug 22 21:00:20 2022	Akuli	say we have two basis vectors, b1 and b2
-Mon Aug 22 21:00:40 2022	Akuli	and let's say v is any vector from the subspace
-Mon Aug 22 21:00:50 2022	Akuli	then there's some a and b so that v = a*b1 + b*b2
-Mon Aug 22 21:01:17 2022	Akuli	what uniqueness is that you can't have some other alternative values, say x and y, that would work instead of a and vb:   v = x*b1 + y*b2
-Mon Aug 22 21:01:20 2022	Akuli	s/vb/b/
-Mon Aug 22 21:01:21 2022	Akuli	ok?
-Mon Aug 22 21:01:36 2022	adder	ok
-Mon Aug 22 21:01:53 2022	Akuli	so in other words it means:  if a*b1 + b*b2 = x*b1 + y*b2  (two ways to write v)
-Mon Aug 22 21:02:03 2022	Akuli	then a=x and b=y   (well actually no, there's only one way)
-Mon Aug 22 21:02:05 2022	Akuli	ok?
-Mon Aug 22 21:02:32 2022	adder	brb phone
-Mon Aug 22 21:05:41 2022	adder	sorry, dad
-Mon Aug 22 21:05:50 2022	Akuli	:)
-Mon Aug 22 21:05:55 2022	adder	anyway, does this mean that:
-Mon Aug 22 21:06:24 2022	adder	if it weren't for the uniqueness constraint, the span would break because there would be dependent vectors?
-Mon Aug 22 21:06:48 2022	Akuli	yeah it has to do with dependent/independent
-Mon Aug 22 21:07:02 2022	Akuli	in the past, we have seen that "independent" means "possible to count vectors on both sides"
-Mon Aug 22 21:07:10 2022	Akuli	which is really just a way to say "guarantees uniqueness"
-Mon Aug 22 21:07:17 2022	Akuli	ok?
-Mon Aug 22 21:07:20 2022	adder	ok
-Mon Aug 22 21:07:25 2022	Akuli	so actually
-Mon Aug 22 21:07:36 2022	Akuli	vectors form a basis if subspace = span(vectors) and the vectors are linearly independent :)
-Mon Aug 22 21:07:42 2022	Akuli	s/if/if and only if/
-Mon Aug 22 21:07:57 2022	Akuli	"space = span(vectors)" means you can write anything with them
+Akuli	let's rethink the definition of a basis a bit
+Akuli	"every vector can be written with basis vectors" just means:   subspace = span(basis vectors)
+Akuli	span(basis vectors) = all vectors that can be written with them
+adder	ok
+Akuli	so if we ignore the requirement to have only one unique way to do it, a basis would be just anything whose span is the subspace
+Akuli	ok?
+adder	ok
+Akuli	let's think about the uniqueness a bit
+Akuli	say we have two basis vectors, b1 and b2
+Akuli	and let's say v is any vector from the subspace
+Akuli	then there's some a and b so that v = a*b1 + b*b2
+Akuli	what uniqueness is that you can't have some other alternative values, say x and y, that would work instead of a and vb:   v = x*b1 + y*b2
+Akuli	s/vb/b/
+Akuli	ok?
+adder	ok
+Akuli	so in other words it means:  if a*b1 + b*b2 = x*b1 + y*b2  (two ways to write v)
+Akuli	then a=x and b=y   (well actually no, there's only one way)
+Akuli	ok?
+adder	brb phone
+adder	sorry, dad
+Akuli	:)
+adder	anyway, does this mean that:
+adder	if it weren't for the uniqueness constraint, the span would break because there would be dependent vectors?
+Akuli	yeah it has to do with dependent/independent
+Akuli	in the past, we have seen that "independent" means "possible to count vectors on both sides"
+Akuli	which is really just a way to say "guarantees uniqueness"
+Akuli	ok?
+adder	ok
+Akuli	so actually
+Akuli	vectors form a basis if subspace = span(vectors) and the vectors are linearly independent :)
+Akuli	s/if/if and only if/
+Akuli	"space = span(vectors)" means you can write anything with them
 </pre>
 </p>
 
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Link to this title">¶</a></h2><p><pre style="white-space: break-spaces">
-Mon Aug 22 21:08:08 2022	adder	can we see how an example real basis looks like
-Mon Aug 22 21:08:09 2022	Akuli	"vectors are linearly independent" means there's only one way to do it
-Mon Aug 22 21:08:21 2022	Akuli	yeah, let's do an example
-Mon Aug 22 21:08:29 2022	Akuli	with (1,0),(0,1) basis it's pretty obvious how this goes
-Mon Aug 22 21:08:37 2022	Akuli	those are independent and they span all 2D vectors
-Mon Aug 22 21:08:49 2022	Akuli	so they're a basis and we can do say (4, 5) = 4*(1,0) + 5*(0,1) and that's the only way to do it
-Mon Aug 22 21:08:58 2022	Akuli	ok?
-Mon Aug 22 21:09:17 2022	adder	ok, one more q
-Mon Aug 22 21:09:20 2022	adder	don't yell :)
-Mon Aug 22 21:09:24 2022	Akuli	:)
-Mon Aug 22 21:09:30 2022	adder	can you explain the subspace thing on this example?
-Mon Aug 22 21:09:40 2022	Akuli	the subspace in this example is just the set of all 2D vectors
-Mon Aug 22 21:10:04 2022	Akuli	let me edit the example a bit
-Mon Aug 22 21:10:17 2022	Akuli	consider XY plane as a subspace of the set of all 3D vectors
-Mon Aug 22 21:10:33 2022	Akuli	it has a basis (1,0,0),(0,1,0) and contains a vector (4,5,0)
-Mon Aug 22 21:10:42 2022	Akuli	the unique way to write (4,5,0) with the basis vectors is 4*(1,0,0) + 5*(0,1,0)
-Mon Aug 22 21:11:00 2022	Akuli	ok?
-Mon Aug 22 21:11:03 2022	adder	ok
-Mon Aug 22 21:11:11 2022	Akuli	it also has a basis (1,-1,0),(1,1,0)
-Mon Aug 22 21:11:17 2022	Akuli	those are independent vectors and they span the whole xy plane
-Mon Aug 22 21:11:17 2022	Akuli	ok?
-Mon Aug 22 21:11:47 2022	adder	ok
-Mon Aug 22 21:11:53 2022	Akuli	so there's some unique way to write (4,5,0) with them
-Mon Aug 22 21:12:09 2022	Akuli	we don't know an easy way to calculate it, although the theory so far guarantees that it exists! :D
-Mon Aug 22 21:12:25 2022	adder	ok
-Mon Aug 22 21:12:28 2022	Akuli	this is something you will surely run into later, do theorethical stuff for a bit and you realize you have a pile of existence results with no good ways to calculate :)
-Mon Aug 22 21:12:39 2022	Akuli	so we'll shift focus to calculating stuff in a moment
-Mon Aug 22 21:12:45 2022	Akuli	but for now we can just calculate it by hand
-Mon Aug 22 21:13:03 2022	Akuli	we want:   x*(1,-1,0) + y*(1,1,0) = (4,5,0)
-Mon Aug 22 21:13:21 2022	Akuli	we know this equation has a unique pair of numbers x,y satisfying it and we're trying to find it
-Mon Aug 22 21:13:22 2022	Akuli	ok?
-Mon Aug 22 21:13:26 2022	adder	ok
-Mon Aug 22 21:13:40 2022	*	adder Tourette-shouts 'counting vectors'
-Mon Aug 22 21:13:53 2022	Akuli	(x, -x, 0) + (y, y, 0) = (4, 5, 0)
-Mon Aug 22 21:13:58 2022	Akuli	(x+y, -x+y, 0) = (4, 5, 0)
-Mon Aug 22 21:14:00 2022	Akuli	ok?
-Mon Aug 22 21:14:16 2022	adder	a system
-Mon Aug 22 21:14:20 2022	Akuli	yea :)
-Mon Aug 22 21:14:27 2022	Akuli	x+y=4, -x+y=5 :)
-Mon Aug 22 21:14:35 2022	Akuli	i'll let you solve it from here :)
-Mon Aug 22 21:16:01 2022	adder	<=> y = 9/2
-Mon Aug 22 21:16:02 2022	adder	x = 4 - 9/2 = -1/2
-Mon Aug 22 21:16:10 2022	Akuli	seems about reasonable, let's try
-Mon Aug 22 21:16:24 2022	Akuli	-1/2 <i> (1,-1,0) + 9/2 </i> (1,1,0)
-Mon Aug 22 21:16:35 2022	Akuli	= (-1/2, 1/2, 0) + (9/2, 9/2, 0)
-Mon Aug 22 21:16:43 2022	Akuli	= (-1/2 + 9/2, 1/2 + 9/2, 0)
-Mon Aug 22 21:16:46 2022	Akuli	ok?
-Mon Aug 22 21:16:49 2022	adder	ok
-Mon Aug 22 21:16:56 2022	adder	= (4, 5, 0)
-Mon Aug 22 21:16:58 2022	Akuli	:)
+adder	can we see how an example real basis looks like
+Akuli	"vectors are linearly independent" means there's only one way to do it
+Akuli	yeah, let's do an example
+Akuli	with (1,0),(0,1) basis it's pretty obvious how this goes
+Akuli	those are independent and they span all 2D vectors
+Akuli	so they're a basis and we can do say (4, 5) = 4*(1,0) + 5*(0,1) and that's the only way to do it
+Akuli	ok?
+adder	ok, one more q
+adder	don't yell :)
+Akuli	:)
+adder	can you explain the subspace thing on this example?
+Akuli	the subspace in this example is just the set of all 2D vectors
+Akuli	let me edit the example a bit
+Akuli	consider XY plane as a subspace of the set of all 3D vectors
+Akuli	it has a basis (1,0,0),(0,1,0) and contains a vector (4,5,0)
+Akuli	the unique way to write (4,5,0) with the basis vectors is 4*(1,0,0) + 5*(0,1,0)
+Akuli	ok?
+adder	ok
+Akuli	it also has a basis (1,-1,0),(1,1,0)
+Akuli	those are independent vectors and they span the whole xy plane
+Akuli	ok?
+adder	ok
+Akuli	so there's some unique way to write (4,5,0) with them
+Akuli	we don't know an easy way to calculate it, although the theory so far guarantees that it exists! :D
+adder	ok
+Akuli	this is something you will surely run into later, do theorethical stuff for a bit and you realize you have a pile of existence results with no good ways to calculate :)
+Akuli	so we'll shift focus to calculating stuff in a moment
+Akuli	but for now we can just calculate it by hand
+Akuli	we want:   x*(1,-1,0) + y*(1,1,0) = (4,5,0)
+Akuli	we know this equation has a unique pair of numbers x,y satisfying it and we're trying to find it
+Akuli	ok?
+adder	ok
+*	adder Tourette-shouts 'counting vectors'
+Akuli	(x, -x, 0) + (y, y, 0) = (4, 5, 0)
+Akuli	(x+y, -x+y, 0) = (4, 5, 0)
+Akuli	ok?
+adder	a system
+Akuli	yea :)
+Akuli	x+y=4, -x+y=5 :)
+Akuli	i'll let you solve it from here :)
+adder	<=> y = 9/2
+adder	x = 4 - 9/2 = -1/2
+Akuli	seems about reasonable, let's try
+Akuli	-1/2 <i> (1,-1,0) + 9/2 </i> (1,1,0)
+Akuli	= (-1/2, 1/2, 0) + (9/2, 9/2, 0)
+Akuli	= (-1/2 + 9/2, 1/2 + 9/2, 0)
+Akuli	ok?
+adder	ok
+adder	= (4, 5, 0)
+Akuli	:)
 </pre>
 </p>
 
 <h2 id="finding-the-coefficients">Finding the coefficients<a class="headerlink" href="#finding-the-coefficients" title="Link to this title">¶</a></h2><p><pre style="white-space: break-spaces">
-Mon Aug 22 21:17:08 2022	Akuli	so this totally worked
-Mon Aug 22 21:17:15 2022	Akuli	but it involved solving a system
-Mon Aug 22 21:17:35 2022	Akuli	ideally we would have a better/quicker/cooler way to figure out the coefficients to represent a vector in a basis
-Mon Aug 22 21:17:38 2022	adder	I suspect systems get more complex in real life?
-Mon Aug 22 21:17:43 2022	Akuli	yeah
-Mon Aug 22 21:17:49 2022	Akuli	depends on what you do though
-Mon Aug 22 21:18:00 2022	Akuli	if you do some kind of statistics, you could easily have hundreds of equations or variables
-Mon Aug 22 21:18:16 2022	Akuli	if you do 3d graphics, you'll probably never get more than 3 or 4 equations or variables at a time
-Mon Aug 22 21:18:42 2022	Akuli	but either way this feels like we could improve the process of finding the coefficients
-Mon Aug 22 21:18:53 2022	Akuli	ok?
-Mon Aug 22 21:18:55 2022	adder	ok
-Mon Aug 22 21:19:01 2022	Akuli	we don't really need a better way to check if something is a basis
-Mon Aug 22 21:19:08 2022	Akuli	we already have ways to calculate spans and check (in)dependentness
-Mon Aug 22 21:19:11 2022	Akuli	ok?
-Mon Aug 22 21:19:17 2022	adder	ok
-Mon Aug 22 21:19:32 2022	Akuli	so next step is how to find those coefficients, easily
-Mon Aug 22 21:19:56 2022	Akuli	here's an idea
-Mon Aug 22 21:20:12 2022	Akuli	matrix*vector = sum(column from matrix * number from vector)
-Mon Aug 22 21:20:50 2022	Akuli	e.g. https://akuli.github.io/mathpaste/#saved:-NA5mHWpqViWmlU9l2Xm:9569e9477e69495b23f8974f4e380e4f
-Mon Aug 22 21:20:51 2022	Akuli	ok?
-Mon Aug 22 21:21:05 2022	adder	ok
-Mon Aug 22 21:21:13 2022	Akuli	doesn't this look pretty similar to what we just did?
-Mon Aug 22 21:21:33 2022	Akuli	so [(1),(3)] and [(2),(4)] correspond to basis vectors here, and the [(x),(y)] is what we try to find
-Mon Aug 22 21:21:47 2022	adder	o yeah indeed
-Mon Aug 22 21:21:49 2022	Akuli	apparently we would need to make a matrix consisting of all our basis vectors as columns
-Mon Aug 22 21:22:38 2022	Akuli	so with that matrix, the system we're solving is TheBasisMatrix*(x,y) = vector
-Mon Aug 22 21:22:55 2022	Akuli	where the vector on the right side is what we're trying to represent as a combination of the basis vectors
-Mon Aug 22 21:23:04 2022	Akuli	and (x,y) are the yet-unknown coefficients
-Mon Aug 22 21:23:04 2022	Akuli	ok?
-Mon Aug 22 21:23:16 2022	adder	right side?
-Mon Aug 22 21:23:30 2022	Akuli	TheBasisMatrix*(x,y) = vector_we_are_trying_represent
-Mon Aug 22 21:23:41 2022	adder	ah
-Mon Aug 22 21:24:31 2022	Akuli	ok so far?
-Mon Aug 22 21:24:38 2022	adder	yeah one thing 
-Mon Aug 22 21:24:47 2022	adder	when we solve this, we get what? what is this vector?
-Mon Aug 22 21:24:50 2022	adder	what are we doing?
-Mon Aug 22 21:25:08 2022	Akuli	the solution (x,y) are the coefficients to write the vector in the basis
-Mon Aug 22 21:25:20 2022	Akuli	maybe i should motivate a bit why you might be interested in doing this anyway
-Mon Aug 22 21:25:38 2022	adder	so we're finding the basis?
-Mon Aug 22 21:25:53 2022	adder	and apply this technique for each vector in it
-Mon Aug 22 21:25:54 2022	Akuli	we have chosen a basis, and we're trying to "convert" the vector to be represented with that basis
-Mon Aug 22 21:26:00 2022	Akuli	let's say you're working on a game or other physics thing where
-Mon Aug 22 21:26:10 2022	Akuli	usually you have "world coordinates"
-Mon Aug 22 21:26:15 2022	Akuli	like x,y,z axises that align with the map or whatever
-Mon Aug 22 21:26:23 2022	Akuli	and then the map contains various moving/spinning objects
-Mon Aug 22 21:26:27 2022	Akuli	ok?
-Mon Aug 22 21:26:29 2022	adder	ok
-Mon Aug 22 21:26:49 2022	Akuli	for physics, you typically want to switch to a basis where one vector is forward, another is left, a third one is up
-Mon Aug 22 21:27:05 2022	Akuli	or some other thing like that where the basis makes sense from the moving object's point of view
-Mon Aug 22 21:27:12 2022	Akuli	you want your basis vectors to make sense, basically
-Mon Aug 22 21:27:22 2022	Akuli	and not be just some world coordinates that are irrelevant if you only care about that one object
-Mon Aug 22 21:27:28 2022	Akuli	ok?
-Mon Aug 22 21:27:34 2022	adder	ok
-Mon Aug 22 21:27:47 2022	Akuli	figuring out the basis vectors is the easy part
-Mon Aug 22 21:28:00 2022	Akuli	if you know what direction it looks etc, you can quite easily calculate vectors for "front", "left" and "up" for example
-Mon Aug 22 21:28:03 2022	Akuli	ok?
-Mon Aug 22 21:28:09 2022	adder	ok
-Mon Aug 22 21:28:19 2022	Akuli	converting world coordinates to those vectors is trickier
-Mon Aug 22 21:28:25 2022	Akuli	we want:   some_world_coords = a*front + b*left + c*up
-Mon Aug 22 21:28:36 2022	Akuli	meaning:   FrontLeftUpMatrix*(a,b,c) = some_world_coords
-Mon Aug 22 21:28:45 2022	Akuli	ok?
-Mon Aug 22 21:28:48 2022	adder	ok
-Mon Aug 22 21:28:57 2022	Akuli	so at this point you could invert the matrix
-Mon Aug 22 21:29:03 2022	Akuli	matrix*(a,b,c) = vector
-Mon Aug 22 21:29:07 2022	Akuli	inversematrix*matrix*(a,b,c) = inversematrix*vector
-Mon Aug 22 21:29:10 2022	Akuli	(a,b,c) = inversematrix*vector
-Mon Aug 22 21:29:34 2022	Akuli	so as it turns out, it's just one matrix inversion and a matrix-vector multiplication to find those coeffs
-Mon Aug 22 21:29:38 2022	Akuli	ok?
-Mon Aug 22 21:30:12 2022	adder	rofl
-Mon Aug 22 21:30:21 2022	adder	how on earth can you know this come on
-Mon Aug 22 21:30:27 2022	Akuli	:D
-Mon Aug 22 21:30:37 2022	Akuli	i have used this quite a few times when making my game :)
-Mon Aug 22 21:30:57 2022	Akuli	the best part is, calculating the inverse matrix is the slowest part and you only need to do it once every time the object rotates
-Mon Aug 22 21:31:16 2022	Akuli	once you have computed that, you can transform as many vectors as you want from world coordinates to the object's coordinates using that inverse matrix
-Mon Aug 22 21:31:38 2022	Akuli	my game caches these inverse matrices, and i have a function i have to remember to call to update them whenever i have rotated things
-Mon Aug 22 21:31:39 2022	Akuli	ok?
-Mon Aug 22 21:31:57 2022	adder	yeah
-Mon Aug 22 21:32:34 2022	Akuli	i think that's about it for today :)
-Mon Aug 22 21:32:44 2022	Akuli	so we started pretty theorethical, and ended up with something very practical
-Mon Aug 22 21:33:14 2022	Akuli	there's still more to be covered from this, we have basically only "touched the surface" of using matrices to do basis vectors things
-Mon Aug 22 21:33:55 2022	Akuli	but the main takeaway is that to compute basis vectors coefficients, make a matrix of basis vectors and invert it
-Mon Aug 22 21:33:56 2022	Akuli	ok?
-Mon Aug 22 21:34:13 2022	adder	yeah
-Mon Aug 22 21:34:30 2022	Akuli	if you remember that, i think you automatically remember the highlights of the theory that led up to this point :) including some idea of what is a basis
-Mon Aug 22 21:35:34 2022	adder	ok :D
+Akuli	so this totally worked
+Akuli	but it involved solving a system
+Akuli	ideally we would have a better/quicker/cooler way to figure out the coefficients to represent a vector in a basis
+adder	I suspect systems get more complex in real life?
+Akuli	yeah
+Akuli	depends on what you do though
+Akuli	if you do some kind of statistics, you could easily have hundreds of equations or variables
+Akuli	if you do 3d graphics, you'll probably never get more than 3 or 4 equations or variables at a time
+Akuli	but either way this feels like we could improve the process of finding the coefficients
+Akuli	ok?
+adder	ok
+Akuli	we don't really need a better way to check if something is a basis
+Akuli	we already have ways to calculate spans and check (in)dependentness
+Akuli	ok?
+adder	ok
+Akuli	so next step is how to find those coefficients, easily
+Akuli	here's an idea
+Akuli	matrix*vector = sum(column from matrix * number from vector)
+Akuli	e.g. https://akuli.github.io/mathpaste/#saved:-NA5mHWpqViWmlU9l2Xm:9569e9477e69495b23f8974f4e380e4f
+Akuli	ok?
+adder	ok
+Akuli	doesn't this look pretty similar to what we just did?
+Akuli	so [(1),(3)] and [(2),(4)] correspond to basis vectors here, and the [(x),(y)] is what we try to find
+adder	o yeah indeed
+Akuli	apparently we would need to make a matrix consisting of all our basis vectors as columns
+Akuli	so with that matrix, the system we're solving is TheBasisMatrix*(x,y) = vector
+Akuli	where the vector on the right side is what we're trying to represent as a combination of the basis vectors
+Akuli	and (x,y) are the yet-unknown coefficients
+Akuli	ok?
+adder	right side?
+Akuli	TheBasisMatrix*(x,y) = vector_we_are_trying_represent
+adder	ah
+Akuli	ok so far?
+adder	yeah one thing 
+adder	when we solve this, we get what? what is this vector?
+adder	what are we doing?
+Akuli	the solution (x,y) are the coefficients to write the vector in the basis
+Akuli	maybe i should motivate a bit why you might be interested in doing this anyway
+adder	so we're finding the basis?
+adder	and apply this technique for each vector in it
+Akuli	we have chosen a basis, and we're trying to "convert" the vector to be represented with that basis
+Akuli	let's say you're working on a game or other physics thing where
+Akuli	usually you have "world coordinates"
+Akuli	like x,y,z axises that align with the map or whatever
+Akuli	and then the map contains various moving/spinning objects
+Akuli	ok?
+adder	ok
+Akuli	for physics, you typically want to switch to a basis where one vector is forward, another is left, a third one is up
+Akuli	or some other thing like that where the basis makes sense from the moving object's point of view
+Akuli	you want your basis vectors to make sense, basically
+Akuli	and not be just some world coordinates that are irrelevant if you only care about that one object
+Akuli	ok?
+adder	ok
+Akuli	figuring out the basis vectors is the easy part
+Akuli	if you know what direction it looks etc, you can quite easily calculate vectors for "front", "left" and "up" for example
+Akuli	ok?
+adder	ok
+Akuli	converting world coordinates to those vectors is trickier
+Akuli	we want:   some_world_coords = a*front + b*left + c*up
+Akuli	meaning:   FrontLeftUpMatrix*(a,b,c) = some_world_coords
+Akuli	ok?
+adder	ok
+Akuli	so at this point you could invert the matrix
+Akuli	matrix*(a,b,c) = vector
+Akuli	inversematrix*matrix*(a,b,c) = inversematrix*vector
+Akuli	(a,b,c) = inversematrix*vector
+Akuli	so as it turns out, it's just one matrix inversion and a matrix-vector multiplication to find those coeffs
+Akuli	ok?
+adder	rofl
+adder	how on earth can you know this come on
+Akuli	:D
+Akuli	i have used this quite a few times when making my game :)
+Akuli	the best part is, calculating the inverse matrix is the slowest part and you only need to do it once every time the object rotates
+Akuli	once you have computed that, you can transform as many vectors as you want from world coordinates to the object's coordinates using that inverse matrix
+Akuli	my game caches these inverse matrices, and i have a function i have to remember to call to update them whenever i have rotated things
+Akuli	ok?
+adder	yeah
+Akuli	i think that's about it for today :)
+Akuli	so we started pretty theorethical, and ended up with something very practical
+Akuli	there's still more to be covered from this, we have basically only "touched the surface" of using matrices to do basis vectors things
+Akuli	but the main takeaway is that to compute basis vectors coefficients, make a matrix of basis vectors and invert it
+Akuli	ok?
+adder	yeah
+Akuli	if you remember that, i think you automatically remember the highlights of the theory that led up to this point :) including some idea of what is a basis
+adder	ok :D
 </pre>
 </p>
 

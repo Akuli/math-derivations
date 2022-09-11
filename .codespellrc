@@ -1,5 +1,6 @@
 [codespell]
 # ba: vector from B to A
 # axises: function name in asymptote/boilerplate.asy, changing would cause images rebuilt
+# TODO: get rid of axises in ignore-words-list when i do content/linalg/subspace-basis.txt
 ignore-words-list = ba
 ignore-regex = \baxises\(

@@ -109,13 +109,15 @@ to find the directions of cross products.
 It is very rare to use left-handed coordinate systems,
 so doing cross products in a left-handed coordinate system will likely get you or someone else confused.
 For example, in many games the $z$ axis points a bit surprisingly backwards, towards the viewer.
-This is because the game developers want $x$ to be right and $y$ to be up,
-and a coordinate system like this would be left-handed if the $z$ axis pointed away from the viewer.
+This is because the game developers want a right-handed coordinate system where
+the $x$ axis points right and the $y$ axis points up:
 
 asymptote3d:
     unitsize(3cm);
     currentprojection = perspective(camera=(0.5,1,2), up=Y);
     axises3d(-0.5, 1.5, -0.5, 1.5, -0.2, 1, xlabel="$x$", ylabel="$y$", zlabel="$z$");
+
+If the $z$ axis pointed forward, this coordinate system would be left-handed.
 
 
 ## How area can be length

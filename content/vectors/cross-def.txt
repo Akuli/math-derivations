@@ -225,7 +225,7 @@ asymptote3d:
     draw(pos--(pos+v), arrow=Arrow3(size=0.6cm), L="$\vec v$", align=N, p=blue);
 
 This is how old TVs and monitors work:
-they have a <a href="https://en.wikipedia.org/wiki/Cathode-ray_tube">CRT tube</a>
+they have a [CRT tube](https://en.wikipedia.org/wiki/Cathode-ray_tube)
 that shoots electrons and guides them with a magnetic field.
 The magnetic field is created with electricity,
 and the amount of electricity used affects $|\vec B|$.

@@ -103,7 +103,9 @@ def get_sidebar_content(txtfile):
                 link(r"$\I$'s with $\I$'s, $\J$'s with $\J$'s",
                      'vectors/iwi-jwj'),
             ])),
-            link("Cross product", 'vectors/cross'),
+            dropdown("Cross product", join([
+                link("Definition", 'vectors/cross-def'),
+            ])),
         ])),
 
         dropdown("Discrete math", join([
@@ -308,7 +310,7 @@ def get_head_extras(filename):
         <script src="{relative_path_prefix}/js/common.js"></script>
         <script src="{relative_path_prefix}/js/projection-demo.js"></script>
         '''
-    if filename == 'content/vectors/cross.txt':
+    if filename == 'content/vectors/cross-def.txt':
         result += f'''
         <script src="{relative_path_prefix}/js/vendor/three.js"></script>
         <script src="{relative_path_prefix}/js/common.js"></script>

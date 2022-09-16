@@ -80,6 +80,44 @@ Using your left hand instead gives you the opposite direction,
 because it is a mirror image of your right hand.
 
 
+## Right-handed coordinate systems
+
+For the right-hand rule to work,
+you need to ensure that you are visualizing the vectors in a right-handed coordinate system,
+like this one:
+
+asymptote3d:
+    unitsize(3cm);
+    currentprojection = perspective(camera=(1,-2,1), up=Z);
+    axises3d(-0.5, 1.5, -0.2, 1.5, -0.2, 1, xlabel="$x$", ylabel="$y$", zlabel="$z$");
+
+So if you look at the coordinates with $x$ axis pointing right and $y$ axis pointing away from you
+(as typical 2D coordinate axes drawn on a piece of paper on a desk would be),
+then the $z$ axis should point upwards.
+If the $z$ axis points downwards instead, the coordinate system is left-handed,
+meaning that you have a mirror image of a right-handed coordinate system:
+
+asymptote3d:
+    unitsize(3cm);
+    currentprojection = perspective(camera=(1,-2,1), up=Z);
+    axises3d(-0.5, 1.5, -0.2, 1.5, 0.5, -0.8, xlabel="$x$", ylabel="$y$", zlabel="$z$", lefthanded=true);
+
+When visualizing vectors this way, everything is mirrored,
+so you need to use a mirror image of a right hand (e.g. your left hand)
+to find the directions of cross products.
+
+It is very rare to use left-handed coordinate systems,
+so doing cross products in a left-handed coordinate system will likely get you or someone else confused.
+For example, in many games the $z$ axis points a bit surprisingly backwards, towards the viewer.
+This is because the game developers want $x$ to be right and $y$ to be up,
+and a coordinate system like this would be left-handed if the $z$ axis pointed away from the viewer.
+
+asymptote3d:
+    unitsize(3cm);
+    currentprojection = perspective(camera=(0.5,1,2), up=Y);
+    axises3d(-0.5, 1.5, -0.5, 1.5, -0.2, 1, xlabel="$x$", ylabel="$y$", zlabel="$z$");
+
+
 ## How area can be length
 
 It may feel weird to define the length of a vector to be an area.
@@ -141,9 +179,8 @@ asymptote3d:
 
 Turns out that the magnetic field pushes the particle with force
 $$
-\vec F = q\vec v \times \vec B,
+\vec F = q\vec v \times \vec B.
 $$
-where $\vec v$ is the velocity.
 I don't know why this cross product calculates the force, and I don't really care.
 Find a physicist if you are more interested in this than I am :)
 
@@ -192,5 +229,5 @@ they have a <a href="https://en.wikipedia.org/wiki/Cathode-ray_tube">CRT tube</a
 that shoots electrons and guides them with a magnetic field.
 The magnetic field is created with electricity,
 and the amount of electricity used affects $|\vec B|$.
-This way it is possible to control how strong the force $q\vec v \times \vec b$ is
+This way it is possible to control how strong the force $q\vec v \times \vec B$ is
 and guide the electrons to hit the correct places on the screen.

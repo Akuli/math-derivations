@@ -60,7 +60,7 @@ In the above animation, these are up and down.
 We need a rule for choosing one of these directions to be the direction of $\vec v \times \vec w$.
 This rule is known as the right-hand rule.
 
-Point the index finger of your right hand along $\vec v$ and middle finger along $\vec w$,
+Point the index finger of your right hand along $\vec v$ (first vector) and middle finger along $\vec w$ (second vector),
 making sure to extend your index finger out all the way as in the picture below.
 We define the direction of $\vec v \times \vec w$ to be the direction that your thumb points to.
 

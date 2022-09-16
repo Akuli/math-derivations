@@ -1,4 +1,4 @@
-# Cross product
+# Defining Cross Product
 
 The cross product is an operation that takes in two 3D vectors,
 similarly to [dot product](dot-projection.html),
@@ -7,9 +7,9 @@ We define it like this: the cross product $\vec v \times \vec w$ is a vector who
 
 <ul><li>
     direction is perpendicular to both $\vec v$ and $\vec w$,
-    with right-hand rule used to choose one of the two perpendicular directions (see below)
+    with right-hand rule used to choose one of the two perpendicular directions (see below), and
 </li><li>
-    length is the area of a rectangle with $\vec v$ and $\vec w$ as sides.
+    length is the area of a parallelogram with $\vec v$ and $\vec w$ as sides.
 </li></ul>
 
 The animation below shows how this definition works.
@@ -50,18 +50,147 @@ The animation below shows how this definition works.
 
 </div>
 
-If the area of the rectangle with $\vec v$ and $\vec w$ as sides is nonzero,
-there are two possible directions that are perpendicular to both $\vec v$ and $\vec w$;
-these are the directions that are perpendicular to the plane that contains $\vec v$ and $\vec w$.
-We use the right-hand rule to define the direction of $\vec v \times \vec w$:
-if your index finger points along $\vec v$ and middle finger along $\vec w$,
-then your thumb indicates the direction of $\vec v \times \vec w$.
+
+## Right-hand rule
+
+If the cross product vector is zero, i.e. if the vectors $\vec v$ and $\vec w$ don't form a visible parallelogram,
+the direction doesn't matter as the result is a zero vector anyway.
+If the cross product is nonzero, there are two directions perpendicular to both $\vec v$ and $\vec w$.
+In the above animation, these are up and down.
+We need a rule for choosing one of these directions to be the direction of $\vec v \times \vec w$.
+This rule is known as the right-hand rule.
+
+Point the index finger of your right hand along $\vec v$ and middle finger along $\vec w$,
+making sure to extend your index finger out all the way as in the picture below.
+We define the direction of $\vec v \times \vec w$ to be the direction that your thumb points to.
 
 <img src="../images/right-hand-rule.png" style="width:20em;max-width:100%">
 
 <small>This picture is from [wikipedia](https://en.wikipedia.org/wiki/Right-hand_rule).</small>
 
 You may need to rotate your hand to find the direction of a cross product.
-For example, when $\vec w$ passes $\vec v$ in the above animation,
-you need to flip your hand around to keep your middle finger
-pointing in the direction of $\vec w$.
+For example, in the above animation,
+you need to flip your hand around when $\vec v$ and $\vec w$ point in the opposite directions.
+
+Keep your index finger "extended" all the way as in the picture.
+If you find yourself extending your middle finger, you should rotate your hand instead.
+
+It's important to use your right hand for this.
+Using your left hand instead gives you the opposite direction,
+because it is a mirror image of your right hand.
+
+
+## How area can be length
+
+It may feel weird to define the length of a vector to be an area.
+Mathematically this is fine,
+because the area is a number and the length can be any number.
+In other words, the mathematics doesn't care about units:
+a number doesn't need to represents metres or square metres, it is just a number.
+
+This doesn't mean that cross products are useless.
+Once we have an easy way to compute cross products,
+we will use them to calculate parallelogram areas in 3D
+and to find perpendicular directions.
+There are also plenty of uses for cross products where the resulting vector makes sense as a whole,
+and you don't use only the length or only the direction.
+In the example below, the cross product is a force that pushes a particle.
+
+
+## Cross products in physics
+
+In physics, it's common for the "length" of a vector to represent something else than distance.
+Most things with a direction and an amount tend to be represented as vectors.
+Here are a few examples:
+
+<ul><li>
+    The movement of an object is usually represented with a velocity vector $\vec v$.
+    It points in the direction where the object is moving,
+    and the "length" $|\vec v|$ is the speed of the object as metres per second.
+</li><li>
+    Let's try to move an object by pushing it.
+    This can be described with a force vector $\vec F$.
+    Its direction is the direction of pushing, and the length $|\vec F|$ describes how hard we push.
+</li><li>
+    A magnet creates a magnetic field nearby it.
+    It is also possible to create a magnetic field using electricity.
+    A magnetic field has a direction and a strength,
+    so we can represent a magnetic field as a vector $\vec B$, where $|\vec B|$ is the strength.
+</li></ul>
+
+Consider a particle that has some electric charge $q$.
+Let's shoot it into a magnetic field $\vec B$ with velocity $\vec v$.
+
+asymptote3d:
+    unitsize(3cm);
+    currentprojection = perspective(camera=(-1,1,1), up=Y);
+
+    real[] coords = { -1, -0.5, 0, 0.5, 1 };
+    for (real y : coords) {
+        for (real z : coords) {
+            draw((0,y,z)--(3,y,z), lightred+opacity(0.7), arrow=Arrow3(size=0.5cm));
+        }
+    }
+    label((3, 1, 1), L="$\vec B$", align=E, p=lightred);
+
+    triple pos = (1, 1.5, -1.5);
+    triple v = (0, -0.4, 0.4);
+
+    dot(pos, L="particle", align=N);
+    draw(pos--(pos+v), arrow=Arrow3(size=0.6cm), L="$\vec v$", align=NE, p=blue);
+
+Turns out that the magnetic field pushes the particle with force
+$$
+\vec F = q\vec v \times \vec B,
+$$
+where $\vec v$ is the velocity.
+I don't know why this cross product calculates the force, and I don't really care.
+Find a physicist if you are more interested in this than I am :)
+
+Let's assume that the charge $q$ is positive, so that
+the vector $q\vec v$ goes in the same direction as the particle
+and we can therefore ignore $q$ when figuring out the direction of the force.
+The right-hand rule shows that the force pushes the particle upwards.
+This causes the particle to turn when it is in the magnetic field.
+
+asymptote3d:
+    unitsize(3cm);
+    currentprojection = perspective(camera=(-1,1,1), up=Y);
+
+    real[] coords = { -1, -0.5, 0, 0.5, 1 };
+    for (real y : coords) {
+        for (real z : coords) {
+            draw((0,y,z)--(3,y,z), lightred+opacity(0.7), arrow=Arrow3(size=0.5cm));
+        }
+    }
+    label((3, 1, 1), L="$\vec B$", align=E, p=lightred);
+
+    triple pos = (1, 1.5, -1.5);
+    triple v = (0, -0.4, 0.4);
+
+    // numerical integration, aka hacky code from my intuition
+    triple[] curvepoints = {pos};
+    for (int i=0; i<85; ++i) {
+        pos = curvepoints[curvepoints.length-1] + v*0.1;
+        curvepoints.push(pos);
+        if (-1 < pos.y && pos.y < 1 && -1 < pos.z && pos.z < 1) {
+            v += 0.05*cross(v, (1,0,0));
+        }
+    }
+
+    path3 curvepath = curvepoints[0];
+    for (triple p : curvepoints) {
+        curvepath = curvepath..p;
+    }
+    draw(curvepath, p=smalldashes);
+
+    dot(pos);
+    draw(pos--(pos+v), arrow=Arrow3(size=0.6cm), L="$\vec v$", align=N, p=blue);
+
+This is how old TVs and monitors work:
+they have a <a href="https://en.wikipedia.org/wiki/Cathode-ray_tube">CRT tube</a>
+that shoots electrons and guides them with a magnetic field.
+The magnetic field is created with electricity,
+and the amount of electricity used affects $|\vec B|$.
+This way it is possible to control how strong the force $q\vec v \times \vec b$ is
+and guide the electrons to hit the correct places on the screen.

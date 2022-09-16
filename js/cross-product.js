@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: 0xffffff })));
   }
 
+  let previousRenderTime = new Date();
+
   function render() {
     // clear everything
     scene.children.map(object => object.id).forEach(id => scene.remove(scene.getObjectById(id)));
@@ -50,7 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
     draw90DegreeMark(fixedVector, crossProduct);
     draw90DegreeMark(movingVector, crossProduct);
 
-    movingVector.applyMatrix4(new THREE.Matrix4().makeRotationY(0.005));
+    const now = new Date();
+    const deltaTime = new Date() - previousRenderTime;
+    previousRenderTime = now;
+    movingVector.applyMatrix4(new THREE.Matrix4().makeRotationY(0.0005 * deltaTime));
 
     renderer.render(scene, camera);
 

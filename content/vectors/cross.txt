@@ -1,0 +1,38 @@
+# Cross product
+
+The cross product is an operation that takes in two 3D vectors,
+similarly to [dot product](dot-projection.html),
+but the result is a vector (the result of a dot product is a number).
+We define it like this: the cross product $\vec a \times \vec b$ is a vector whose
+
+<ul><li>
+    direction is perpendicular to both $\vec a$ and $\vec b$,
+    with right-hand rule used to choose one of the two perpendicular directions (see below)
+</li><li>
+    length is the area of a rectangle with $\vec a$ and $\vec b$ as sides.
+</li></ul>
+
+The animation below shows how this definition works.
+
+<div id="cross-demo-container" style="position:relative">
+    <div style="position:absolute;color:white;z-index:123" id="fixed-vector-text">$\vec a$</div>
+    <div style="position:absolute;color:white;z-index:123" id="moving-vector-text">$\vec b$</div>
+    <div style="position:absolute;color:white;z-index:123" id="cross-product-text">$\vec a \times \vec b$</div>
+    <div style="position:absolute;color:white;z-index:123" id="parallelogram-text">$|\vec a \times \vec b|$</div>
+</div>
+
+If the area of the rectangle with $\vec a$ and $\vec b$ as sides is nonzero,
+there are two possible directions that are perpendicular to both $\vec a$ and $\vec b$;
+these are the directions that are perpendicular to the plane that contains $\vec a$ and $\vec b$.
+We use the right-hand rule to define the direction of a cross product:
+if your index finger points along $\vec a$ and middle finger along $\vec b$,
+then your thumb indicates the direction of $\vec a$ and $\vec b$.
+
+<img src="../images/right-hand-rule.png" style="width:20em;max-width:100%">
+
+<small>This picture is from [wikipedia](https://en.wikipedia.org/wiki/Right-hand_rule).</small>
+
+You may need to rotate your hand to find the direction of a cross product.
+For example, when $\vec b$ passes $\vec a$ in the above animation,
+you need to flip your hand around to keep your middle finger
+pointing in the direction of $\vec b$.

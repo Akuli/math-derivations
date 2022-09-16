@@ -72,7 +72,7 @@ You may need to rotate your hand to find the direction of a cross product.
 For example, in the above animation,
 you need to flip your hand around when $\vec v$ and $\vec w$ point in the opposite directions.
 
-Keep your index finger "extended" all the way as in the picture.
+Make sure to "extend" your index finger all the way as in the picture.
 If you find yourself extending your middle finger, you should rotate your hand instead.
 
 It's important to use your right hand for this.

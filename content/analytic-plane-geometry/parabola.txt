@@ -267,6 +267,10 @@ y
 &= c-\frac{b^2}{4a}
 \end{align}
 $$
+Therefore
+$$
+\text{peak} = (x,y) = \left( -\frac{b}{2a}, c-\frac{b^2}{4a} \right).
+$$
 This is the same result that we got above with shifts.
 
 

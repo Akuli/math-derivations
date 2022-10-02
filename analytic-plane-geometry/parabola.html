@@ -313,7 +313,7 @@ This cancels to $y = ax^2 + bx + c$.</p>
 <div class="box graybox"><p>Any parabola $y = ax^2+bx+c$ is $y = ax^2$ but shifted.
 </p>
 
-</div><p>Let's look at what happens to the peak when we shift the parabola.</p>
+</div><h2 id="finding-the-peak">Finding the peak<a class="headerlink" href="#finding-the-peak" title="Link to this title">¶</a></h2><p>Let's look at what happens to the peak when we shift the parabola.</p>
 
 <p><img width="590" height="306" class="asymptote" src="../images/asy/21f8ce0f84bc7feb4c2be8b24a28c685.svg" /></p><p>The peak of $y = ax^2$ is at $(0,0)$, so the peak of $y = ax^2+bx+c$ is at $(s, c-as^2)$.
 Plugging in $s=-\frac{b}{2a}$ gives
@@ -333,8 +333,32 @@ $$
 $$
 </p>
 
-</div><p>If you already know the peak $x$,
-you can find the peak $y$ by using the fact that the peak is a point on the parabola;
+</div><p>If you know <a href="../calc/derivative-def.html#slope-of-tangent-line">what derivatives have to do with slope</a>,
+you can use <a href="../calc/derivative-basic-rules.html">derivative rules</a>
+to find the peak without first deriving the shift amounts $s$ and $c-as^2$.
+This method also works with many other graphs instead of just parabolas.</p>
+
+<p>Let $f(x) = ax^2+bx+c$, so that the graph $y=f(x)$ is the parabola.
+If the parabola opens up, the derivative of $f$ is negative on the left side of the peak
+and positive on the right side of the peak:</p>
+
+<p><img width="269" height="228" class="asymptote" src="../images/asy/0a82a3bd2382bee89ded6eff3def3a65.svg" /></p><p>If the parabola opens down, these are reversed:</p>
+
+<p><img width="269" height="228" class="asymptote" src="../images/asy/e2c83860b961232871f1b69c1eb66164.svg" /></p><p>In both cases, the derivative is zero only at the peak, so solving $f'(x)=0$
+gives us the location of the peak.
+$$
+\begin{align}
+\frac{d}{dx}(ax^2+bx+c) &= 0 \\
+\frac{d}{dx}(ax^2) + \frac{d}{dx}(bx) + \frac{d}{dx} c &= 0 \\
+a \cdot 2x + b + 0 &= 0 \\
+2ax+b &= 0 \\
+2ax &= -b \\
+x &= -\frac{b}{2a}
+\end{align}
+$$</p>
+
+<p>Now that we know the peak $x$,
+we can find the peak $y$ by using the fact that the peak is a point on the parabola;
 that is, you get the peak $y$ by plugging in the peak $x$ to the parabola equation $y = ax^2+bx+c$.
 $$
 \begin{align}
@@ -347,9 +371,14 @@ y
 &= c-\frac{b^2}{4a}
 \end{align}
 $$
-This is the same result as what we got above with shifts.</p>
+Therefore
+$$
+\text{peak} = (x,y) = \left( -\frac{b}{2a}, c-\frac{b^2}{4a} \right).
+$$
+This is the same result that we got above with shifts.
+</p>
 
-<p>If we know the peak of the parabola, let's call it $P$,
+<h2 id="equation-from-peak-location">Equation from peak location<a class="headerlink" href="#equation-from-peak-location" title="Link to this title">¶</a></h2><p>If we know the peak of the parabola, let's call it $P$,
 we can simply shift $y = ax^2$ horizontally by $P_x$ and vertically by $P_y$ to get the parabola equation.
 This gives the following result.</p>
 

@@ -166,6 +166,9 @@ This cancels to $y = ax^2 + bx + c$.
 graybox:
     Any parabola $y = ax^2+bx+c$ is $y = ax^2$ but shifted.
 
+
+## Finding the peak
+
 Let's look at what happens to the peak when we shift the parabola.
 
 asymptote:
@@ -204,8 +207,54 @@ graybox:
     \left( -\frac{b}{2a}, c-\frac{b^2}{4a} \right).
     $$
 
-If you already know the peak $x$,
-you can find the peak $y$ by using the fact that the peak is a point on the parabola;
+If you know [what derivatives have to do with slope](../calc/derivative-def.html#slope-of-tangent-line),
+you can use [derivative rules](../calc/derivative-basic-rules.html)
+to find the peak without first deriving the shift amounts $s$ and $c-as^2$.
+This method also works with many other graphs instead of just parabolas.
+
+Let $f(x) = ax^2+bx+c$, so that the graph $y=f(x)$ is the parabola.
+If the parabola opens up, the derivative of $f$ is negative on the left side of the peak
+and positive on the right side of the peak:
+
+asymptote:
+    unitsize(1.5cm);
+    real f(real x) { return x^2; }
+    draw(graph(f, -2, 2), p=blue, L=Label("$y=f(x)$", position=Relative(0.9), align=W));
+
+    draw((-1,-1)..(-0.9,-1)..(0,-0.3)..(0,-0.2), arrow=Arrow(4mm), p=deepgreen);
+    label((-1,-1), Label("peak", align=W), p=deepgreen);
+
+    label((-1,1), rrotate(atan(-2))*Label("negative derivative", align=W), p=blue);
+    label((1,1), rrotate(atan(2))*Label("positive derivative", align=E), p=blue);
+
+If the parabola opens down, these are reversed:
+
+asymptote:
+    unitsize(1.5cm);
+    real f(real x) { return -x^2; }
+    draw(graph(f, -2, 2), p=blue, L=Label("$y=f(x)$", position=Relative(0.9), align=W));
+
+    draw((-1,1)..(-0.9,1)..(0,0.3)..(0,0.2), arrow=Arrow(4mm), p=deepgreen);
+    label((-1,1), Label("peak", align=W), p=deepgreen);
+
+    label((-1,-1), rrotate(atan(2))*Label("positive derivative", align=W), p=blue);
+    label((1,-1), rrotate(atan(-2))*Label("negative derivative", align=E), p=blue);
+
+In both cases, the derivative is zero only at the peak, so solving $f'(x)=0$
+gives us the location of the peak.
+$$
+\begin{align}
+\frac{d}{dx}(ax^2+bx+c) &= 0 \\
+\frac{d}{dx}(ax^2) + \frac{d}{dx}(bx) + \frac{d}{dx} c &= 0 \\
+a \cdot 2x + b + 0 &= 0 \\
+2ax+b &= 0 \\
+2ax &= -b \\
+x &= -\frac{b}{2a}
+\end{align}
+$$
+
+Now that we know the peak $x$,
+we can find the peak $y$ by using the fact that the peak is a point on the parabola;
 that is, you get the peak $y$ by plugging in the peak $x$ to the parabola equation $y = ax^2+bx+c$.
 $$
 \begin{align}
@@ -218,7 +267,14 @@ y
 &= c-\frac{b^2}{4a}
 \end{align}
 $$
-This is the same result as what we got above with shifts.
+Therefore
+$$
+\text{peak} = (x,y) = \left( -\frac{b}{2a}, c-\frac{b^2}{4a} \right).
+$$
+This is the same result that we got above with shifts.
+
+
+## Equation from peak location
 
 If we know the peak of the parabola, let's call it $P$,
 we can simply shift $y = ax^2$ horizontally by $P_x$ and vertically by $P_y$ to get the parabola equation.

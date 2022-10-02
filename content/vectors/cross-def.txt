@@ -87,9 +87,10 @@ asymptote3d:
     unitsize(3cm);
     currentprojection = perspective(camera=(1,-2,1), up=Z);
     axises3d(-0.5, 1.5, -0.2, 1.5, -0.2, 1, xlabel="$x$", ylabel="$y$", zlabel="$z$");
+    draw(surface(scale(0.4, 0.7)*unitsquare, XYplane), yellow+opacity(0.8));
 
-So if you look at the coordinates with $x$ axis pointing right and $y$ axis pointing away from you
-(as typical 2D coordinate axes drawn on a piece of paper on a desk would be),
+So if you look at the coordinates with $x$ axis pointing right and $y$ axis pointing away from you,
+as typical 2D coordinate axes drawn on a piece of paper on a desk would be,
 then the $z$ axis should point upwards.
 If the $z$ axis points downwards instead, the coordinate system is left-handed,
 meaning that you have a mirror image of a right-handed coordinate system:
@@ -98,6 +99,7 @@ asymptote3d:
     unitsize(3cm);
     currentprojection = perspective(camera=(1,-2,1), up=Z);
     axises3d(-0.5, 1.5, -0.2, 1.5, 0.5, -0.8, xlabel="$x$", ylabel="$y$", zlabel="$z$", lefthanded=true);
+    draw(surface(scale(0.4, 0.7)*unitsquare, XYplane), yellow+opacity(0.8));
 
 When visualizing vectors this way, everything is mirrored,
 so you need to use a mirror image of a right hand (e.g. your left hand)
@@ -112,7 +114,8 @@ the $x$ axis points right and the $y$ axis points up:
 asymptote3d:
     unitsize(3cm);
     currentprojection = perspective(camera=(0.5,1,2), up=Y);
-    axises3d(-0.5, 1.5, -0.5, 1.5, -0.2, 1, xlabel="$x$", ylabel="$y$", zlabel="$z$");
+    axises3d(-0.5, 1.5, -0.5, 1.5, -0.5, 1, xlabel="$x$", ylabel="$y$", zlabel="$z$");
+    draw(surface(scale(0.4, 0.7)*unitsquare, XYplane), yellow+opacity(0.8));
 
 If the $z$ axis pointed forward, this coordinate system would be left-handed.
 
@@ -125,19 +128,21 @@ because the area is a number and the length can be any number.
 In other words, the mathematics doesn't care about units:
 a number doesn't need to represents metres or square metres, it is just a number.
 
-This doesn't mean that cross products are useless.
+This doesn't mean that cross products are somehow useless, or useful only for "abstract" use cases.
 Once we have an easy way to compute cross products,
-we will use them to calculate parallelogram areas in 3D
-and to find perpendicular directions.
+we can use them to calculate areas in 3D and to find perpendicular directions.
+There are other ways to calculate areas and perpendicular directions,
+but they are usually more complicated than just calculating a cross product.
+
 There are also plenty of uses for cross products where the resulting vector makes sense as a whole,
 and you don't use only the length or only the direction.
-In the example below, the cross product is a force that pushes a particle.
+We show one such use case below.
 
 
 ## Cross products in physics
 
 In physics, it's common for the "length" of a vector to represent something else than distance.
-Most things with a direction and an amount tend to be represented as vectors.
+Anything with a direction and an amount tends to be represented as a vector.
 Here are a few examples:
 
 <ul><li>
@@ -165,7 +170,7 @@ asymptote3d:
     real[] coords = { -1, -0.5, 0, 0.5, 1 };
     for (real y : coords) {
         for (real z : coords) {
-            draw((0,y,z)--(3,y,z), lightred+opacity(0.7), arrow=Arrow3(size=0.5cm));
+            draw((3,y,z)--(0,y,z), lightred+opacity(0.7), arrow=Arrow3(size=0.5cm));
         }
     }
     label((3, 1, 1), L="$\vec B$", align=E, p=lightred);
@@ -183,11 +188,13 @@ $$
 I don't know why this cross product calculates the force, and I don't really care.
 Find a physicist if you are more interested in this than I am :)
 
-Let's assume that the charge $q$ is positive, so that
-the vector $q\vec v$ goes in the same direction as the particle
-and we can therefore ignore $q$ when figuring out the direction of the force.
-The right-hand rule shows that the force pushes the particle upwards.
-This causes the particle to turn when it is in the magnetic field.
+Typically the charge $q$ is negative, so
+the vector $q\vec v$ points in the opposite direction of the particle,
+i.e. away from you and slightly up and to the left.
+Doing the right hand rule with $q\vec v$ and $\vec B$
+involves rotating your right hand to a somewhat awkward position,
+but it shows that the force pushes the particle upwards.
+This causes the particle to lift when it is in the magnetic field.
 
 asymptote3d:
     unitsize(3cm);
@@ -196,7 +203,7 @@ asymptote3d:
     real[] coords = { -1, -0.5, 0, 0.5, 1 };
     for (real y : coords) {
         for (real z : coords) {
-            draw((0,y,z)--(3,y,z), lightred+opacity(0.7), arrow=Arrow3(size=0.5cm));
+            draw((3,y,z)--(0,y,z), lightred+opacity(0.7), arrow=Arrow3(size=0.5cm));
         }
     }
     label((3, 1, 1), L="$\vec B$", align=E, p=lightred);

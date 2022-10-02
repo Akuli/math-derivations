@@ -182,6 +182,7 @@ def get_sidebar_content(txtfile):
                 link("Product rule and quotient rule",
                      'calc/derivative-product-quotient-rules'),
                 link("Derivative of vector", 'calc/derivative-vector'),
+                link(r"Derivatives of $\sin$, $\cos$ and $\tan$", 'calc/derivative-trig'),
             ])),
             dropdown("Integral", join([
                 link("Introduction to integrals", 'calc/integral-intro'),

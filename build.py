@@ -164,6 +164,7 @@ def get_sidebar_content(txtfile):
             dropdown("Limits", join([
                 link("Definition of limit", 'calc/limit-def'),
                 link("Limit basics", 'calc/limit-basics'),
+                link("Limits and bounded functions", 'calc/limit-bounded'),
                 link("Limit properties", 'calc/limit-props'),
                 link("One-sided limits", 'calc/limit-1sided'),
                 link("Inequality and limit", 'calc/limit-ineq'),

@@ -1,7 +1,7 @@
 # Trig Derivatives
 
 On this page we find $\frac{d}{dx}\sin(x)$, $\frac{d}{dx}\cos(x)$ and $\frac{d}{dx}\tan(x)$.
-For $\sin(x)$ and $\cos(x)$, we use the unit-circle definitions:
+We use the unit-circle definitions of $\sin(x)$ and $\cos(x)$:
 Interpret $x$ as an angle, and rotate that amount counter-clockwise
 on the unit circle starting at $(1,0)$.
 Then $\cos(x)$ is the $x$-coordinate of the resulting point and $\sin(x)$ is the $y$-coordinate.
@@ -14,7 +14,7 @@ asymptote:
 
     real angle = 2;
     draw((0,0)--(cos(angle),sin(angle)), p=deepgreen+smalldashes);
-    dot((cos(angle),sin(angle)), L="$(\cos(\color{red}\theta\color{green}), \sin(\color{red}\theta\color{green}))$", align=NW, p=dotpen+deepgreen);
+    dot((cos(angle),sin(angle)), L="$(\cos(\color{red}x\color{green}), \sin(\color{red}x\color{green}))$", align=NW, p=dotpen+deepgreen);
     draw(rarc((0,0),0.3, 0,angle), L=Label("angle $x$"), arrow=Arrow(3mm), p=deepred);
 
 This is confusing, because $x$ usually means the $x$ coordinate, not an angle,
@@ -24,6 +24,7 @@ On this page, and in calculus in general, we don't use degrees as the unit of th
 In fact, the resulting **derivative formulas don't work if your angles are represented as degrees**.
 Instead, we use radians, which are simply arc length on the unit circle:
 an angle $\theta$, as radians, means the angle that a unit circle arc of length $\theta$ makes.
+For example, 360 degrees would be the unit circle's circumference $2\pi$.
 
 asymptote:
     unitsize(4cm);
@@ -37,7 +38,15 @@ asymptote:
     draw(rarc((0,0),1, 0,angle), L=Label("$\quad \theta$ = arc length = angle"), arrow=Arrow(3mm), p=deepred);
 
 
-## Derivatives of $\sin$ and $\cos$, with physics
+## Derivatives of $\sin$ and $\cos$
+
+This derivation relies on some elementary physics.
+An advantage of this derivation is that it is quite short.
+A disadvantage is that because it relies on physics,
+it is not convincing from a purely mathematical point of view.
+I also wrote [another, longer derivation](derivative-trig-details.html)
+that you can read instead if you don't like relying on physics,
+but I believe this derivation is better for most readers.
 
 Let $t$ represent time as seconds.
 Let's say you are walking around in a circle of radius 1 metre so that after $t$ seconds of walking,
@@ -131,8 +140,8 @@ asymptote:
     draw((0,0)--(-1,2), arrow=Arrow(5mm), p=gray+smalldashes);
     draw((0,0)--(2,0), L="$a\I$", arrow=Arrow(5mm), p=deepred);
     draw((2,0)--(2,1), L="$b\J$", arrow=Arrow(5mm), p=deepgreen);
-    draw((0,0)--(0,2), L=Label("$b\J$", align=W), arrow=Arrow(5mm), p=deepred);
-    draw((0,2)--(-1,2), L="$-a\I$", arrow=Arrow(5mm), p=deepgreen);
+    draw((0,0)--(0,2), L=Label("$a\J$", align=W), arrow=Arrow(5mm), p=deepred);
+    draw((0,2)--(-1,2), L="$-b\I$", arrow=Arrow(5mm), p=deepgreen);
     draw(rarc((0,0),0.5, atan(1/2),atan(1/2)+pi/2),L="90deg", arrow=Arrow(3mm));
 
 Let's put it all together:
@@ -158,111 +167,6 @@ graybox:
 An advantage of this derivation is that it very clearly shows
 why one of the derivatives has a minus in front and the other doesn't:
 that comes from how 90-degree rotations work.
-A disadvantage is that because it relies on physics,
-it is not convincing from a purely mathematical point of view.
-
-
-## Derivatives of $\sin$ and $\cos$, without physics
-
-Let's define a vector-valued function $\vec v(t) = (\cos(t), \sin(t))$.
-Its derivative vector is
-$$
-\left( \frac{d}{dt}\cos(t), \frac{d}{dt}\sin(t) \right)
-= \vec v'(t) = \lim_{h \to 0} \frac{ \vec v(t+h)-\vec v(t) }{h}.
-$$
-The top of the division $\vec v(t+h)-\vec v(t)$ is a vector from $\vec v(t)$ to $\vec v(t+h)$,
-so a vector that connects two nearby unit circle points.
-I will also draw a tangent line at $\vec v(t)$.
-
-asymptote:
-    unitsize(4cm);
-    axises(-1.2, 1.6, -1.2, 1.4);
-    draw(unitcircle, p=lightblue);
-
-    real t = 2;
-    real h = 0.3;
-
-    pair tanline(real x) { return (x, 1/sin(t) - x/tan(t)); }
-    draw(tanline(-1.2)--tanline(0.5), p=gray+smalldashes);
-
-    dot((cos(t),sin(t)), L="$\vec v(t)$", align=SE, p=dotpen+deepgreen);
-    dot((cos(t+h),sin(t+h)), L="$\vec v(t+h)$", align=NW, p=dotpen+deepgreen);
-    draw((cos(t),sin(t))--(cos(t+h),sin(t+h)), p=blue, arrow=Arrow(4mm));
-
-Let's zoom in to the relevant part of this picture,
-as it's getting quite hard to see what's going on,
-and I didn't even draw $h$ yet.
-Because $t$ and $t+h$ are angles as radians,
-their difference $h$ can be interpreted as the arc length between the two unit circle points.
-Unlike the vector, the arc length $h$ goes along the circle
-and is therefore longer than the distance between two points.
-
-asymptote:
-    unitsize(30cm);
-
-    real t = 2;
-    real h = 0.3;
-    real smol = 0.05;
-
-    pair tanline(real x) { return (x, 1/sin(t) - x/tan(t)); }
-    draw(tanline(-0.8)--tanline(cos(t-smol)), p=gray+smalldashes);
-
-    draw((cos(t),sin(t))--(cos(t+h),sin(t+h)), L=rrotate(t+h/2-pi/2)*Label("$\vec v(t+h)-\vec v(t)$", align=(-cos(t+h/2),-sin(t+h/2))), p=blue, arrow=Arrow(10mm));
-    draw(rarc((0,0),1,t-smol,t+h+smol),p=lightblue);
-    draw(rarc((0,0),1,t,t+h),L="$h$",p=deepred);
-    dot((cos(t),sin(t)), L="$\vec v(t)$", align=SE, p=dotpen+deepgreen);
-    dot((cos(t+h),sin(t+h)), L="$\vec v(t+h)$", align=SE, p=dotpen+deepgreen);
-
-We now see that the vector goes almost in the direction of the tangent line.
-Similarly, the length of $\vec v(t+h)-\vec v(t)$ is almost $h$,
-so the length
-$$
-\abs{ \frac{\vec v(t+h)-\vec v(t)}{h} }
-$$
-is almost $\frac{h}{h} = 1$.
-If we assume that the errors we make when saying "almost" are small enough to not affect the limit,
-we get
-$$
-\begin{align}
-\vec v'(t)
-&= \lim_{h\to 0} \frac{\vec v(t+h)-\vec v(t)}{h} \\
-&= \lim_{h\to 0} (\text{vector of length almost 1, almost in the direction of tangent line}) \\
-&= \text{vector of length 1, in the direction of tangent line} \\
-&= \operatorname{rotate90deg}(\vec v(t)).
-\end{align}
-$$
-From here we can get the derivatives of $\sin$ and $\cos$ just like in the physics derivation above.
-But how can we ensure that our "almost" approximations are accurate enough?
-
-comment:
-    asymptote:
-        unitsize(6cm);
-
-        real t = 2;
-        real h = 0.3;
-        fill((0,0)--(cos(t),sin(t))--(cos(t+h),sin(t+h))--cycle, p=lightgreen);
-        draw((0,0)--(cos(t+h/2),sin(t+h/2)), p=gray+smalldashes);
-        draw(shift((cos(t)+cos(t+h))/2, (sin(t+h)+sin(t))/2)*scale(h/6)*rrotate(pi+t+h/2)*((1,0)--(1,1)--(0,1)));
-        dot((cos(t),sin(t)), p=dotpen+deepgreen);
-        dot((cos(t+h),sin(t+h)), p=dotpen+deepgreen);
-        draw((cos(t),sin(t))--(cos(t+h),sin(t+h)), arrow=Arrow(4mm), L=rrotate(t+h/2-pi/2)*"$\vec v(t+h)-\vec v(t)$");
-        dot((0,0), L="$(0,0)$", p=dotpen, align=S);
-        draw(rarc((0,0),0.2, 0,t), L="angle $t$", arrow=Arrow(4mm));
-
-    Two sides of this triangle have length 1 (circle radius),
-    so a line through the middle of this triangle meets the opposite side at 90 degrees.
-    The angle at the tip of the triangle is $h$, and the line splits it in half.
-    Therefore
-    $$
-    \text{angle}(\vec v(t+h)-\vec v(t)) = t+\frac{h}{2}+90^\circ,
-    $$
-    where $90^\circ$ comes from how the line meets the vector perpendicularly,
-    and should really be written in radians
-    ($\frac{2\pi}{4}$, because $2\pi$ is 360 degrees as it is the perimeter of the entire unit circle).
-
-    Let's work on the length of the limit vector next.
-
-TODO: finish this derivation if I figure out a clean way to do this
 
 
 ## Derivative of $\tan$

@@ -183,6 +183,7 @@ def get_sidebar_content(txtfile):
                      'calc/derivative-product-quotient-rules'),
                 link("Derivative of vector", 'calc/derivative-vector'),
                 link(r"Derivatives of $\sin$, $\cos$ and $\tan$", 'calc/derivative-trig'),
+                link(r"Derivatives of $\sin$ and $\cos$ without physics", 'calc/derivative-trig-details'),
             ])),
             dropdown("Integral", join([
                 link("Introduction to integrals", 'calc/integral-intro'),

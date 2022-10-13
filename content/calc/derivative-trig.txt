@@ -17,8 +17,9 @@ asymptote:
     dot((cos(angle),sin(angle)), L="$(\cos(\color{red}x\color{green}), \sin(\color{red}x\color{green}))$", align=NW, p=dotpen+deepgreen);
     draw(rarc((0,0),0.3, 0,angle), L=Label("angle $x$"), arrow=Arrow(3mm), p=deepred);
 
-This is confusing, because $x$ usually means the $x$ coordinate, not an angle,
-so we will from now on use different letters to refer to angles.
+This is confusing, because $x$ usually means the $x$ coordinate, not an angle.
+To avoid this confusion,
+I often name the angle something like $t$ or $\theta$ instead of $x$.
 
 On this page, and in calculus in general, we don't use degrees as the unit of the angle.
 In fact, the resulting **derivative formulas don't work if your angles are represented as degrees**.

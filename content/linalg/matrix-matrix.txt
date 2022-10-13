@@ -199,6 +199,7 @@ This just doesn't work.
 
 Recall that [the width of a matrix is the dimension of the input vectors
 and the height is the dimension of output vectors](matrix-vector.html#input-and-output-dimensions).
+For $AB$ to make sense, the outputs of $B$ must be valid inputs for $A$.
 
 graybox:
     The matrix multiplication $AB$ is undefined

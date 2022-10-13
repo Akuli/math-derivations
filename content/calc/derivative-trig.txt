@@ -38,15 +38,7 @@ asymptote:
     draw(rarc((0,0),1, 0,angle), L=Label("$\quad \theta$ = arc length = angle"), arrow=Arrow(3mm), p=deepred);
 
 
-## Derivatives of $\sin$ and $\cos$
-
-This derivation relies on some elementary physics.
-An advantage of this derivation is that it is quite short.
-A disadvantage is that because it relies on physics,
-it is not convincing from a purely mathematical point of view.
-I also wrote [another, longer derivation](derivative-trig-details.html)
-that you can read instead if you don't like relying on physics,
-but I believe this derivation is better for most readers.
+## Derivatives of $\sin$ and $\cos$, with physics
 
 Let $t$ represent time as seconds.
 Let's say you are walking around in a circle of radius 1 metre so that after $t$ seconds of walking,
@@ -167,6 +159,8 @@ graybox:
 An advantage of this derivation is that it very clearly shows
 why one of the derivatives has a minus in front and the other doesn't:
 that comes from how 90-degree rotations work.
+A disadvantage is that because it relies on physics,
+it is not convincing from a purely mathematical point of view.
 
 
 ## Derivative of $\tan$

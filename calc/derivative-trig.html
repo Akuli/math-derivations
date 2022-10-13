@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fundamental Theorem of Calculus, Part 1
+<title>Trig Derivatives
  - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
@@ -202,84 +202,119 @@
         
         </div>
         </div>
-<h1 id="fundamental-theorem-of-calculus-part-1">Fundamental Theorem of Calculus, Part 1<a class="headerlink" href="#fundamental-theorem-of-calculus-part-1" title="Link to this title">¶</a></h1><p>So far we have 3 calculus tools: limits, derivatives and integrals.
-We used limits for <a href="derivative-def.html">defining the derivative</a>
-and <a href="integral-intro.html#example-integral-of-2x">calculating integrals</a>,
-but so far we haven't seen any connection between integrals and derivatives.
-For a connection like that, we have two options:</p>
+<h1 id="trig-derivatives">Trig Derivatives<a class="headerlink" href="#trig-derivatives" title="Link to this title">¶</a></h1><p>On this page we find $\frac{d}{dx}\sin(x)$, $\frac{d}{dx}\cos(x)$ and $\frac{d}{dx}\tan(x)$.
+We use the unit-circle definitions of $\sin(x)$ and $\cos(x)$:
+Interpret $x$ as an angle, and rotate that amount counter-clockwise
+on the unit circle starting at $(1,0)$.
+Then $\cos(x)$ is the $x$-coordinate of the resulting point and $\sin(x)$ is the $y$-coordinate.</p>
 
-<p><ol><li>
-    Try to integrate a derivative
-</li><li>
-    Try to calculate the derivative of an integral
-</li></ol></p>
+<p><img width="387" height="297" class="asymptote" src="../images/asy/dbafb6674fe8477ac01bd214cfbc84bc.svg" /></p><p>This is confusing, because $x$ usually means the $x$ coordinate, not an angle.
+To avoid this confusion,
+I often name the angle something like $t$ or $\theta$ instead of $x$.</p>
 
-<p>We choose option 2 because it turns out to be easier.
-To calculate a derivative, we need a function that takes in a number as an argument and outputs a number.
-We can look at $\int_a^b f(x)\ dx$ as a function that takes in a number $b$, as in
-$$
-I(b) = \int_a^b f(x)\ dx,
-$$
-where I chose to name the function $I$ rather than $f$ because we already have a function named $f$,
-and $I$ reminds about how it's an integral.
-With the definition of derivative, we get
+<p>On this page, and in calculus in general, we don't use degrees as the unit of the angle.
+In fact, the resulting <b>derivative formulas don't work if your angles are represented as degrees</b>.
+Instead, we use radians, which are simply arc length on the unit circle:
+an angle $\theta$, as radians, means the angle that a unit circle arc of length $\theta$ makes.
+For example, 360 degrees would be the unit circle's circumference $2\pi$.</p>
+
+<p><img width="476" height="297" class="asymptote" src="../images/asy/e82307a2a15307cb67d7d82390605838.svg" /></p><h2 id="derivatives-of-sin-and-cos-with-physics">Derivatives of $\sin$ and $\cos$, with physics<a class="headerlink" href="#derivatives-of-sin-and-cos-with-physics" title="Link to this title">¶</a></h2><p>Let $t$ represent time as seconds.
+Let's say you are walking around in a circle of radius 1 metre so that after $t$ seconds of walking,
+the distance traveled so far is $t$ metres.
+In other words, your speed is 1 metre per second.</p>
+
+<p><img width="404" height="297" class="asymptote" src="../images/asy/892d3e63062a83b913c40aebfdb86397.svg" /></p><p>Because the arc length is the time $t$, and because the radius of the circle is 1 (metre),
+the angle on the unit circle is $t$ radians and so your location is $(\cos(t),\sin(t))$.
+The <a href="derivative-vector.html">derivative of this vector is the velocity</a>,
+i.e. a vector indicating in which direction and how fast you are moving:
 $$
 \begin{align}
-I'(b)
-&= \lim_{h \to 0} \frac{I(b+h)-I(b)}{h} \\
-&= \lim_{h \to 0} \frac{\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx}{h}.
+\text{velocity vector} &= \frac{d}{dt}(\cos(t),\sin(t)) \\
+&= \left( \frac{d}{dt}\cos(t), \frac{d}{dt}\sin(t) \right)
 \end{align}
 $$
-I will draw pictures with $h > 0$, but everything works the same way if $h < 0$.
-The integrals we have so far look like this:</p>
+So to find $\frac{d}{dt}\cos(t)$ and $\frac{d}{dt}\sin(t)$, for any number $t$,
+we only need to know the $x$ and $y$ components of the velocity vector.
+The velocity vector always points along the circle, because you are moving along the circle:</p>
 
-<p><img width="402" height="285" class="asymptote" src="../images/asy/36841e47522de6246ca18809138bb142.svg" /></p><p>In the picture, $\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx$ means taking the entire colored area,
-both green and blue parts, and subtracting the green part.
-This gives the area of the blue part, which is $\int_b^{b+h} f(x)\ dx$.
-We can also verify this by splitting the $\int_a^{b+h}$ integral into two pieces (TODO), as in
-$$
-\int_a^{b+h} f(x)\ dx - \int_a^bf(x)\ dx = \left(\int_a^bf(x)\ dx + \int_b^{b+h}f(x)\ dx\right) - \int_a^bf(x)\ dx.
-$$
-Here the $\int_a^b$ integrals cancel as expected.
-So, we get
-$$
-I'(b) = \lim_{h \to 0} \frac{\int_b^{b+h} f(x)\ dx}{h}
-= \lim_{h \to 0} \frac{\int_b^{b+h} f(x)\ dx}{(b+h)-b}.
-$$
-After $\lim$ we have the <a href="integral-average.html">integral average</a> of $f$ between $b$ and $b+h$.
-If $f$ is continuous, then its graph <a href="cont-def.html">consists of one part</a>, and the average can be written as
-$$
-\frac{\int_b^{b+h} f(x)\ dx}{h} = f(\text{some number between $b$ and $b+h$}),
-$$
-because <a href="integral-average.html#average-vs-min-and-max">the average is between the minimum and maximum</a> of $f$ between $b$ and $b+h$.</p>
+<p><img width="311" height="297" class="asymptote" src="../images/asy/ff8ff161ad864511c8c54b99c2475789.svg" /></p><p>The length of the velocity vector is 1, because your speed is 1 (metre per second).
+The length of the location vector $(\cos(t),\sin(t)) = \cos(t)\I + \sin(t)\J$ is also 1,
+because you are on the unit circle.
+Looking at the picture, it is now clear that we can get the velocity vector
+by rotating the location vector 90 degrees counter-clockwise.</p>
 
-<p><img width="563" height="273" class="asymptote" src="../images/asy/502530b4ed6ec0cf74eb1994b8aa641b.svg" /></p><p>If $f$ is continuous, then we can also
-<a href="cont-props.html#moving-limit-inside-a-continuous-function">move the limit inside it</a> and we get
-$$
-\begin{align}
-I'(b)
-&= \lim_{h \to 0} f(\text{some number between $b$ and $b+h$}) \\
-&= f\left( \lim_{h \to 0} (\text{some number between $b$ and $b+h$}) \right) \\
-&= f(b).
-\end{align}
-$$</p>
+<p>To figure out how to rotate a vector by 90 degrees,
+we first figure out how to rotate $a\I$ and $b\J$, and then any vector $a\I+b\J$
+(similarly to <a href="../linalg/rotating-intro.html">how it's done in linear algebra</a>).
+Rotating $a\I$ 90 degrees counter-clockwise gives the vector $a\J$.
+With positive $a$, it looks like this:</p>
 
-<div class="box graybox"><p>If $f$ is continuous, then the derivative of the function
+<p><img width="149" height="148" class="asymptote" src="../images/asy/bf4eee38e4e22e8644484fac5f537ad6.svg" /></p><p>With negative $a$, it looks like this:</p>
+
+<p><img width="149" height="148" class="asymptote" src="../images/asy/4ea9082cd3d543d33cac561c381ffc3a.svg" /></p><p>Rotating $b\J$ 90 degrees counter-clockwise gives the vector $-b\I$.
+With positive $b$, the vector ends up pointing left:</p>
+
+<p><img width="147" height="150" class="asymptote" src="../images/asy/824ce72b30697f961424a9359fdcf04a.svg" /></p><p>With negative $b$, the vector ends up pointing right,
+but $-b\I$ is still correct because $-b$ is now positive:</p>
+
+<p><img width="147" height="154" class="asymptote" src="../images/asy/e7c937b1ec650ad2e93266b8a9734cf6.svg" /></p><p>Any vector $a\I+b\J$ rotated 90 degrees counter-clockwise is now $-b\I+a\J$,
+because we can rotate the $a\I$ and $b\J$ parts individually.</p>
+
+<p><img width="373" height="296" class="asymptote" src="../images/asy/34984e40d077f25fb35d7e559d1b11d7.svg" /></p><p>Let's put it all together:
 $$
-I(b) = \int_a^b f(x)\ dx
+\begin{align*}
+\left( \frac{d}{dt}\cos(t), \frac{d}{dt}\sin(t) \right)
+&= \text{velocity vector} \\
+&= \operatorname{rotate90deg}(\text{location vector}) \\
+&= \operatorname{rotate90deg}(\cos(t)\I+\sin(t)\J) \\
+&= \operatorname{rotate90deg}(a\I+b\J), \quad \text{where $a=\cos(t)$ and $b=\sin(t)$} \\
+&= -b\I+a\J \\
+&= (-b,a) \\
+&= (-\sin(t),\cos(t))
+\end{align*}
 $$
-is $f(b)$.
+We can now compare the $x$ and $y$ coordinates of the first and last vectors.</p>
+
+<div class="box graybox"><p>$$
+\frac{d}{dx}\sin(x) = \cos(x), \qquad \frac{d}{dx}\cos(x) = -\sin(x)
+$$
 </p>
 
-</div><p>This is known as part 1 of the fundamental theorem of calculus.</p>
+</div><p>An advantage of this derivation is that it very clearly shows
+why one of the derivatives has a minus in front and the other doesn't:
+that comes from how 90-degree rotations work.
+A disadvantage is that because it relies on physics,
+it is not convincing from a purely mathematical point of view.
+</p>
 
-<p>This result makes sense, because the derivative essentially tells how sensitive the function is to changes in input.
-A big derivative means that changing the input of the function a little bit will change the output by a lot,
-and a small derivative means that the output won't change much.
-If $f(b)$ is big, then the graph is high above $x$ axis, and changing $b$ will change the area a lot.
-If $f(b)$ is small, then the area won't change much.</p>
+<h2 id="derivative-of-tan">Derivative of $\tan$<a class="headerlink" href="#derivative-of-tan" title="Link to this title">¶</a></h2><p>Because $\tan(x) = \frac{\sin(x)}{\cos(x)}$ (TODO), we can use
+<a href="derivative-product-quotient-rules.html#quotient-rule">the quotient rule</a>
+and plug in the derivatives of $\sin(x)$ and $\cos(x)$ that we just derived.
+$$
+\begin{align}
+\frac{d}{dx}\tan(x)
+&= \frac{d}{dx} \frac{\sin(x)}{\cos(x)} \\
+&= \frac{\left( \frac{d}{dx}\sin(x) \right) \cos(x) - \sin(x) \left( \frac{d}{dx}\cos(x) \right)}{(\cos(x))^2} \\
+&= \frac{\cos(x)\cos(x) - \sin(x)(-\sin(x))}{\cos^2(x)} \\
+&= \frac{\sin^2(x) + \cos^2(x)}{\cos^2(x)}
+\end{align}
+$$
+There are two ways to simplify this from here:</p>
 
-<p>TODO: example showing why this doesn't work for discontinuous functions
+<ul><li>Splitting the fraction into two: $\dfrac{\sin^2(x)}{\cos^2(x)} + \dfrac{\cos^2(x)}{\cos^2(x)} = \tan^2(x) + 1$</li><li>Using $\sin^2(x) + \cos^2(x) = 1$ (a well-known trigonometry result).
+</li></ul><div class="box graybox"><p>$$
+\frac{d}{dx}\tan(x) = \tan^2(x) + 1 = \frac{1}{\cos^2(x)}
+$$
+</p>
+
+</div><p>Both ways to write the derivative have their own advantages and disadvantages.
+You can use whichever is more convenient.
+For example, $\tan^2(x)+1$ is useful if you will need to compute the value of $\tan(x)$ anyway,
+but things like
+$$
+\cos(x) \cdot \frac{d}{dx} \tan(x)
+$$
+simplify better if you write the derivative as $\dfrac{1}{\cos^2(x)}$.
 </p>
 
 </div>

@@ -3,7 +3,7 @@ import boilerplate;
 
 void axises3d(real xmin, real xmax, real ymin, real ymax, real zmin, real zmax,
               string xlabel="", string ylabel="", string zlabel="",
-              real labeldistance=0.2) {
+              real labeldistance=0.2, bool lefthanded=false) {
     draw((xmin,0,0)--(xmax,0,0), arrow=Arrow3(size=0.7cm));
     label(xlabel, (xmax+labeldistance,0,0));
 
@@ -14,6 +14,6 @@ void axises3d(real xmin, real xmax, real ymin, real ymax, real zmin, real zmax,
 
     if (zmin != 0 || zmax != 0) {
         draw((0,0,zmin)--(0,0,zmax), arrow=Arrow3(size=0.7cm));
-        label(zlabel, (0,0,zmax+labeldistance));
+        label(zlabel, (0,0,zmax+(lefthanded ? -labeldistance : labeldistance)));
     }
 }

@@ -190,7 +190,7 @@ $$
 $$
 This shows that
 $$
--\epsi < b(x)s(x) < \epsi,
+-\epsi < b(x)s(x) < \epsi.
 $$
 For this to work, we need $x$ to be in both $I_x$ and $I$,
 so we can take our input interval to be whichever of the two intervals is smaller.
@@ -215,4 +215,7 @@ but this limit is now doable.
 Because $\sin(\dots)$ is the $y$ coordinate of a point on the unit circle,
 it is bounded between $-1$ and $1$.
 We also know that $\lim_{x \to 0} x = 0$
-(see [this example](limit-basics.html)).
+(see [this example](limit-basics.html)). Therefore
+$$
+\lim_{x \to 0} x \sin(3x^2+42x-69\cos(x^7)) = 0.
+$$

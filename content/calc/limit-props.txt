@@ -19,8 +19,7 @@ On this page, we figure out whether this and other similar things work.
 ## Limit of sum
 
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-We first explain at a high level why $\lim_{x \to a} (f(x)+g(x)) = A+B$,
-and then prove it in more detail.
+We explain why $\lim_{x \to a} (f(x)+g(x)) = A+B$.
 
 The definition of limit says that on some input intervals,
 we can get $f(x)$ and $g(x)$ into any output intervals centered around their limits $A$ and $B$.

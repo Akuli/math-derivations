@@ -30,7 +30,7 @@ asymptote:
     draw(graph(f, 1/size, size), blue);
     draw(graph(f, -size, -1/size), blue);
     label("$y=\frac{1}{x}$", (-2,-1.5), blue);
-    draw((0,0)--(1,0), L=Label("$(1,0)$", position=EndPoint, align=S), p=deepred+5);
+    draw((0,0)--(1,0), L=Label("$(0,1)$", position=EndPoint, align=S), p=deepred+5);
     draw(shift(0.2,size-0.5)*scale(0.8, 1.2)*unitcircle, p=red);
 
 It is also not bounded on $(-1,0)$, because there it gets arbitrarily negative values,

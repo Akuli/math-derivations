@@ -200,7 +200,7 @@ This looks like a mess, but we can now calculate each limit separately:
 * $\lim_{x \to a} AB = AB$, based on [this derivation](limit-basics.html#another-simple-example).
 * $\lim_{x \to a} Aq(x) = 0$. This is a ["bounded times small" limit](limit-bounded.html#bounded-times-small): the constant $A$ is obviously bounded, and $q(x)$ is "small" in the sense that it has limit zero.
 * $\lim_{x \to a} p(x)B = 0$. This too is a "bounded times small" limit.
-* $\lim_{x \to a} p(x)q(x) = 0$. Because $p$ and $q$ have limit zero, [they are bounded](limit-bounded.html#bounded-if-limit-exists), so this one is also a "bounded times small" limit.
+* $\lim_{x \to a} p(x)q(x) = 0$. Because $p$ and $q$ have limit zero, [they are bounded](limit-bounded.html#bounded-if-limit-exists), so this one is a "bounded times small" limit as well.
 
 By putting everything together, we get
 $$

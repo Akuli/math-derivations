@@ -16,62 +16,89 @@ where we used most of the results from [the limit basics page](limit-basics.html
 On this page, we figure out whether this and other similar things work.
 
 
-## Interval thing
-
-Before talking more about limits, we need a result about intervals.
-Suppose that $a$ and $b$ are numbers in the open interval $(-r, r)$, where $r$ is a positive number.
-What can we say about $a+b$?
-
-asymptote:
-    unitsize(4cm);
-
-    draw((-2,0)--(2,0), arrow=Arrow(5mm));
-    draw((-1,0)--(1,0), p=darkorange+5);
-
-    dot((-1,0), p=dotpen, L="$-r$", align=N);
-    dot((0,0), p=dotpen, L="$0$", align=N);
-    dot((1,0), p=dotpen, L="$r$", align=N);
-
-    dot((-0.2,0), p=dotpen+deepgreen, L="$a$", align=N);
-    dot((0.4,0), p=dotpen+deepred, L="$b$", align=N);
-
-    draw(brace_with_space((1,0), (0.02,0), 0.1), L="$r$", align=S, p=darkorange);
-    draw(brace_with_space((-0.02,0), (-1,0), 0.1), L="$r$", align=S, p=darkorange);
-
-Because $a$ and $b$ are in $(-r, r)$, we have $-r < a < r$ and $-r < b < r$.
-By combining these inequations together, we get
-$$
-(-r)+(-r) < a+b < r+r,
-$$
-which simplifies to
-$$
--2r < a+b < 2r.
-$$
-This can be written as
-$$
-a+b \in (-2r, 2r).
-$$
-So, if we have $a,b \in (-r, r)$, then we also know that $a+b \in (-2r, 2r)$.
-We'll need this result next.
-
-Usually a more general theorem called triangle inequality is used instead of this,
-but I'm using this instead because it feels somewhat more intuitive to me.
-
-
 ## Limit of sum
 
-Let's go back to the question about limits.
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-We prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.
+We first explain at a high level why $\lim_{x \to a} (f(x)+g(x)) = A+B$,
+and then prove it in more detail.
 
+The definition of limit says that on some input intervals,
+we can get $f(x)$ and $g(x)$ into any output intervals centered around their limits $A$ and $B$.
+This works for all output intervals, so we can take them to be however small we need them to be.
+In other words, we can make $f(x)$ and $g(x)$ differ from their limits by only a little bit:
+$$
+f(x) = A + \text{small error}, \quad
+g(x) = B + \text{small error}
+$$
+For example, if we choose an output interval $(A-0.2,A+0.2)$ for $f$,
+then the values of $f$ will be between $A-0.2$ and $A+0.2$,
+and so the "small error" part of $f(x)$ will be between $-0.2$ and $0.2$.
+
+asymptote:
+    unitsize(1.8cm);
+
+    draw((0,-2)--(0,2), arrow=Arrow(5mm));
+    draw((0,-1)--(0,1), p=deepgreen+7);
+    dot((0,0), p=blue, L="$A$", align=W);
+    dot((0,0.7), p=blue, L="$f(x)$", align=W);
+    draw((0.2,0)--(0.2,0.7), p=deepred+5, arrow=Arrow(3mm), L="small error");
+
+Now we get
+$$
+f(x)+g(x) = (A+B) + (\text{small error} + \text{small error}).
+$$
+If we want this to be in a given output interval centered around $A+B$,
+we need to ensure that the two errors together don't throw the value
+too far from the center of the output interval, like this:
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,-2)--(0,2), arrow=Arrow(5mm));
+    draw((0,-1)--(0,1), p=darkorange+7);
+    dot((0,0), p=blue, L="$A+B$", align=W);
+    dot((0,0.5+0.8), p=deepred, L="$f(x)+g(x)$", align=W);
+    draw((0.1,0)--(0.1,0.5), p=deepred+5, arrow=Arrow(3mm), L="error from $f$");
+    draw((0.2,0.5)--(0.2,0.5+0.8), p=deepred+5, arrow=Arrow(3mm), L="error from $g$");
+
+This seems doable, because we can choose the errors to be as small as we need.
+Specifically, 1/4 of the length of the output interval should be small enough,
+because then the two errors cannot combine to exceed half of the interval length.
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,-2)--(0,2), arrow=Arrow(5mm));
+    draw((0,-1)--(0,1), p=darkorange+7);
+    dot((0,0), p=blue, L="$A+B$", align=W);
+    dot((0,0.25+0.4), p=blue, L="$f(x)+g(x)$", align=W);
+    draw((0.1,0)--(0.1,0.25), p=deepred+5, arrow=Arrow(3mm), L="error from $f$");
+    draw((0.2,0.25)--(0.2,0.25+0.4), p=deepred+5, arrow=Arrow(3mm), L="error from $g$");
+
+The errors can be negative too, but that doesn't matter:
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,-2)--(0,2), arrow=Arrow(5mm));
+    draw((0,-1)--(0,1), p=darkorange+7);
+    dot((0,0), p=blue, L="$A+B$", align=W);
+    dot((0,0.-0.4), p=blue, L="$f(x)+g(x)$", align=W);
+    draw((0.1,0)--(0.1,0.25), p=deepred+5, arrow=Arrow(3mm), L=Label("error from $f$", align=NE, position=EndPoint));
+    draw((0.2,0.25)--(0.2,-0.4), p=deepred+5, arrow=Arrow(3mm), L="error from $g$", align=E);
+
+We are now ready to prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.
 Let $I_y$ be an open interval centered around $A+B$.
 We can write $I_y$ as $(A+B-\epsi, A+B+\epsi)$ for some positive number $\epsi$.
-By definition of limit,
-there are input intervals centered around $a$ such that
-we can fit the values of $f$ and $g$ into any output intervals around $A$ and $B$ respectively.
+By definition of limit, there are input intervals centered around $a$
+such that we can fit the values of $f$ and $g$ into any output intervals around $A$ and $B$ respectively.
 We choose the output intervals
 $\left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right)$ and $\left( B-\frac{\epsi}{2}, B+\frac{\epsi}{2} \right)$.
-The corresponding input intervals are drawn below.
+This is because the length of $I_y$ is $2\epsi$ and we want the errors to be smaller than 1/4 of that, which is
+$$
+\frac{1}{4} \cdot 2\epsi = \frac{\epsi}{2}.
+$$
+The input intervals for $f$ and $g$ are drawn below.
 
 asymptote:
     unitsize(2cm);
@@ -91,7 +118,7 @@ and the smaller interval is a subset of the bigger interval;
 this means that the bigger interval contains all numbers of the smaller interval.
 
 Let $I_x$ be the smaller input interval
-(if the input intervals are the same size, then they are the same interval,
+(if the input intervals have the same size, then they are the same interval,
 and it doesn't matter which of them is $I_x$).
 Now any number in $I_x$ is in both of the input intervals, so we have
 $$
@@ -103,19 +130,21 @@ $$
 $$
 Letting $x$ be any number in $I_x$ except $a$, we can write this as
 $$
-f(x) = A+p \quad \text{and} \quad g(x)=B+q
+\begin{align}
+&A-\frac{\epsi}{2} < f(x) < A+\frac{\epsi}{2},
+\\
+&B-\frac{\epsi}{2} < g(x) < B+\frac{\epsi}{2}.
+\end{align}
 $$
-for some numbers $p,q \in (-\frac{\epsi}{2},\frac{\epsi}{2})$.
-Now we get
+By combining these two inequalities, we get
 $$
-f(x)+g(x) = A+B+\underbrace{p+q}_{\in (-\epsi,\epsi)},
+f(x)+g(x) > \left(A-\frac{\epsi}{2}\right) + \left(B-\frac{\epsi}{2}\right) = A+B-\epsi
 $$
-where for the underbraced part,
-we used the above interval thing with $r=\frac{\epsi}{2}$ and $2r=\epsi$.
-We have
+and
 $$
-f(x)+g(x) \in (A+B-\epsi, A+B+\epsi) = I_y.
+f(x)+g(x) < \left(A+\frac{\epsi}{2}\right) + \left(B+\frac{\epsi}{2}\right) = A+B+\epsi
 $$
+Because $I_y=(A+B-\epsi, A+B+\epsi)$, this shows that $f(x)+g(x) \in I_y$.
 
 graybox:
     If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then

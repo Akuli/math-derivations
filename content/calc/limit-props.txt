@@ -86,7 +86,8 @@ asymptote:
     draw((0.1,0)--(0.1,0.25), p=deepred+5, arrow=Arrow(3mm), L=Label("error from $f$", align=NE, position=EndPoint));
     draw((0.2,0.25)--(0.2,-0.4), p=deepred+5, arrow=Arrow(3mm), L="error from $g$", align=E);
 
-We are now ready to prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.
+This already seems convincing, but let's go through it again in more detail to be sure that it works.
+In other words, we prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.
 Let $I_y$ be an open interval centered around $A+B$.
 We can write $I_y$ as $(A+B-\epsi, A+B+\epsi)$ for some positive number $\epsi$.
 By definition of limit, there are input intervals centered around $a$

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Definition of Limit
+<title>Limits and bounded functions
  - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
@@ -202,208 +202,167 @@
         
         </div>
         </div>
-<h1 id="definition-of-limit">Definition of Limit<a class="headerlink" href="#definition-of-limit" title="Link to this title">¶</a></h1>
-    <div class="box redbox">
-    <p>
-        On this page, the word "function" means a function that
-        takes in a real number as its only argument,
-        and evaluates to another real number.
-        Some real numbers might not be valid inputs of the function;
-        for example, square root is a function that
-        accepts only nonnegative inputs.
-    </p>
-    </div>
-    <p>Limit is a very important concept in calculus.
-There are two common ways to introduce it:
-teaching students to calculate limits without talking much about why they work like they do (high schools), and
-proving all the properties of limits needed very carefully with somewhat difficult proofs (university).
-I will aim for something in the middle;
-my goal is to show you how limits work without doing anything too difficult.
+<h1 id="limits-and-bounded-functions">Limits and bounded functions<a class="headerlink" href="#limits-and-bounded-functions" title="Link to this title">¶</a></h1><p>A couple limit derivations on this site rely on some functions being bounded.
+This simplifies them a lot.
+This page explains what it means for a function to be bounded
+and what that has to do with limits.</p>
+
+<p>We say that a function $f$ is bounded on an interval $I$,
+if there is a positive constant $M$ so that
+$$
+-M \le f(\text{any number in $I$}) \le M.
+$$
+Basically, this means that inside the interval $I$,
+the function does not get arbitrarily large values,
+i.e. there is some upper bound $M$ that no value exceeds.
+Functions with negative but arbitrarily "large" values are banned too.</p>
+
+<p>Examples:
+<ul><li>
+    The function $f(x) = \frac{1}{x}$ is unbounded (i.e. not bounded) on $(0,1)$.
+    No matter what number $M$ you choose,
+    some of the values of $\frac{1}{x}$ are larger than $M$.</p>
+
+<p><img width="257" height="287" class="asymptote" src="../images/asy/5e15e7425cd14ce534bbf93e7dcf4fd1.svg" /></p><p>It is also not bounded on $(-1,0)$, because there it gets arbitrarily negative values,
+some of which will be smaller than $-M$.</p>
+
+<p><img width="257" height="287" class="asymptote" src="../images/asy/453637b107d49533fc8be1e5efd88af9.svg" /></p><p></li><li>
+The same function $f(x)=\frac{1}{x}$ is bounded on any interval that doesn't go "near" $0$, such as $(1,2)$ or even $(1,\infty)$.
+For these two intervals we can choose $M=1$,
+because the graph stays between the lines $y = \pm 1$ on top of that interval.</p>
+
+<p><img width="320" height="257" class="asymptote" src="../images/asy/897f7b0308e3a8de427a65f5543136fd.svg" /></p><p></li><li>
+In the previous examples, we could just as well choose $M=2$ instead of $M=1$,
+because this gives even more “room” for the function.
+In fact, there's always multiple ways to choose the $M$ in the definition of bounded:
+if some value of $M$ works, then larger values will work as well.
+</li><li>
+    The function $g(x)=x^2$ is bounded on any finitely long interval,
+    such as $[1,2]$ (for this interval, $M=5$ works, for example).
+    It is unbounded on any infinitely long interval, such as $[3,\infty)$.</p>
+
+<p><img width="407" height="311" class="asymptote" src="../images/asy/123305beaf3f165288438d1d1c74ded2.svg" /></p><p></li></ul>
 </p>
 
-<h2 id="the-idea">The idea<a class="headerlink" href="#the-idea" title="Link to this title">¶</a></h2><p>Let's get started by plugging some numbers into the function
-$$
-f(x) = \frac{x^3-1}{x-1}.
-$$
-We notice that $f(1)$ is undefined, because that gives division by zero.
-However, if we plug in some values that are just a little bit greater than $1$, we get this:
-<table><tr>
-    <th>$x$</th>
-    <th>$f(x)$</th>
-</tr><tr>
-    <td>$1$</td><td>undefined</td>
-</tr><tr>
-    <td>$1.1$</td><td>$3.31000\dots$</td>
-</tr><tr>
-    <td>$1.01$</td><td>$3.03010\dots$</td>
-</tr><tr>
-    <td>$1.001$</td><td>$3.00300\dots$</td>
-</tr><tr>
-    <td>$1.0001$</td><td>$3.00030\dots$</td>
-</tr><tr>
-    <td>$1.00001$</td><td>$3.00003\dots$</td>
-</tr></table></p>
+<h2 id="bounded-if-limit-exists">Bounded if limit exists<a class="headerlink" href="#bounded-if-limit-exists" title="Link to this title">¶</a></h2><p>The definition of bounded is related to the definition of limit, but not quite the same.
+The definition of limit applies to all output intervals, including very small output intervals,
+whereas the definition of bounded only needs some upper bound $M$ that can be as large as needed.
+Basically, the definition of limit requires more,
+so if the definition of limit is satisfied, the function is bounded.</p>
 
-<p>The values of $f$ seem to be quite close to $3$.</p>
-
-<p>We notice a similar thing if we plug in values that are just a little bit less than $1$:
-<table><tr>
-    <th>$x$</th>
-    <th>$f(x)$</th>
-</tr><tr>
-    <td>$0.9$</td><td>$2.71000\dots$</td>
-</tr><tr>
-    <td>$0.99$</td><td>$2.97010\dots$</td>
-</tr><tr>
-    <td>$0.999$</td><td>$2.99700\dots$</td>
-</tr><tr>
-    <td>$0.9999$</td><td>$2.99970\dots$</td>
-</tr><tr>
-    <td>$0.99999$</td><td>$2.99997\dots$</td>
-</tr></table></p>
-
-<p>In this situation, we say that the limit of $f(x)$ as $x \to 1$ (read: $x$ approaches $1$, $x$ goes to $1$)
-is $3$, and we write
-$$
-\lim_{x \to 1} f(x) = 3.
-$$
-This lim notation is somewhat tall, so if it's somewhere in the middle of text,
-it's often written with the $x \to 1$ part off to the side,
-like $\lim_{x \to 1} f(x)$.</p>
-
-<p>We will work with limits a lot, and that will include proving some things about limits.
-Even though plugging in a bunch of numbers is a good way to make a guess about the limit,
-it won't suffice anymore when we want to do something more generally and we can't just plug in numbers.
-For that, we need a better definition of limit.
-</p>
-
-<h2 id="definition-with-intervals">Definition with intervals<a class="headerlink" href="#definition-with-intervals" title="Link to this title">¶</a></h2><p>Consider the open interval $(2.99, 3.01)$; that is,
-the set of all numbers between $2.99$ and $3.01$.
-The ends of this interval are $3 \pm 0.01$, and the center of the interval is $3$.
-The interval is open, which means that the end points are not included in the interval,
-$2.99 \notin (2.99, 3.01)$ and $3.01 \notin (2.99, 3.01)$.</p>
-
-<p><img width="344" height="82" class="asymptote" src="../images/asy/e50661b0a7f9f631fae245839e4d180e.svg" /></p><p>By plugging in more numbers, we notice that
-$$
-f(0.997) = 2.991009 \in (2.99, 3.01)
-$$
-and
-$$
-f(1.003) = 3.009009 \in (2.99, 3.01).
-$$
-Let's see what happens for numbers between $0.997$ and $1.003$.
-<table><tr>
-    <th>$x$</th>
-    <th>$f(x)$</th>
-</tr><tr>
-    <td>$0.997$</td><td>$2.991009 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$0.998$</td><td>$2.994004 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$0.999$</td><td>$2.997001 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$1.000$</td><td>undefined</td>
-</tr><tr>
-    <td>$1.001$</td><td>$3.003001 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$1.002$</td><td>$3.006004 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$1.003$</td><td>$3.009009 \in (2.99, 3.01)$</td>
-</tr></table></p>
-
-<p>We can't check every number between $0.997$ and $1.003$ with a calculator,
-but what seems to be happening is that
-$$
-f(\text{any number between $0.997$ and $1.003$ except $1$}) \in (2.99,3.01).
-$$
-Let $I_x=(0.997,1.003)$ denote the interval of numbers that we plug into the function, and
-let $I_y=(2.99,3.01)$   denote the interval containing the outputs of the function.
-We started with $I_y=(2.99,3.01)$, and then found an interval $I_x$ such that
-$$
-f(\text{any number in $I_x$ except $1$}) \in I_y.
-$$
-The definition of $\lim_{x \to 1} f(x) = 3$ is that we always find some $I_x$ interval,
-no matter which $I_y$ interval we choose.
-So, the definition goes as follows:
-for any open interval $I_y$ centered around $3$,
-there is some open interval $I_x$ centered around $1$ such that
-$$
-f(\text{any number in $I_x$ except $1$}) \in I_y.
-$$
-We have been looking at an example where the limit as $x$ approaches $1$ is $3$,
-but the same works for any other number $a$ being approached, and with any other limit value $L$.</p>
-
-<div class="box graybox"><p>Let $a,L \in \mathbb{R}$, and let $f$ be a function.
-The limit is defined as follows:
-we write $\lim_{x \to a} f(x) = L$, if
-for any open interval $I_y$ centered around $L$,
-there is some open interval $I_x$ centered around $a$ such that
+<p>Let's go through that idea again, but in more detail.
+The definition of limit is that for any output interval $I_y$ centered around the limit,
+there is an input interval $I_x$ centered around $a$ so that
 $$
 f(\text{any number in $I_x$ except $a$}) \in I_y.
 $$
-Here I refer to $I_x$ as the <i>input interval</i>, and I refer to $I_y$ as the <i>output interval</i>.
+Let's take any one of the infinitely many output intervals that this applies to.
+Because it is finitely long, we can choose $M$ to be large enough
+for the entire output interval to be between $-M$ and $M$, and so
+$$
+-M \le f(\text{any number in $I_x$ except $a$}) \le M.
+$$
+This works for any function that has a limit at $a$.
+It doesn't matter what the limit is, as long as it exists.</p>
+
+<div class="box graybox"><p>If the limit $\lim_{x \to a} f(x)$ exists,
+then $f$ is bounded on some interval centered around $a$, with the midpoint $a$ excluded.
 </p>
 
-</div><p>So far we have worked with $a=1$ and $L=3$.
+</div><p>An interval with the midpoint removed is no longer an interval,
+but we can still define boundedness in the same way.
+We need to exclude the midpoint because $f(a)$ might be undefined
+even if the limit $\lim_{x \to a} f(x)$ exists:
+by design, limits avoid using the value of the function at $a$,
+and only use values near $a$.
 </p>
 
-<h2 id="things-to-note">Things to note<a class="headerlink" href="#things-to-note" title="Link to this title">¶</a></h2><p>Explaining the above definition with words, it says that
-if we want to get the values of a function into any output interval (no matter how small),
-then there is an input interval that allows us to do so.</p>
+<h2 id="bounded-times-small">Bounded times small<a class="headerlink" href="#bounded-times-small" title="Link to this title">¶</a></h2><p>Not all bounded functions have a limit.
+Consider the <a href="limit-basics.html#jumping-function">"jumping function"</a>, for example.
+Basically, the problem is that the values of a bounded function
+aren't necessarily very close to each other.</p>
 
-<p>The calculations we did with a calculator and our example function $f$
-don't prove that $\lim_{x \to 1} f(x) = 3$.
-To actually prove it, we should check all the infinitely many $I_y$ intervals
-instead of just $(2.99, 3.01)$.</p>
+<p>However, if we multiply the values of a bounded function and a "small" function,
+then all values of the multiplication should be somewhat small as well.
+Multiplying with the bounded function can make the values $M$ times bigger,
+but we should be able to compensate for that
+by making the "small" function output even smaller values.
+This should cause the "bounded times small" function
+to output as small values as we need.
+This also works with negative values:
+we can basically ignore the minus signs
+because of how $-M \le f(x) \le M$ and the definition of limit are symmetric.</p>
 
-<p>The definition of a limit doesn't use $f(a)$ at all.
-In our example, we had $a=1$, and $f(a)$ was undefined;
-even that didn't matter, because we never needed to calculate $f(a)$.
-This makes sense, because limits are all about what happens <b>around</b> $a$,
-not at all about what happens at exactly $x=a$.</p>
-
-<p>If we pick a smaller $I_y$ interval that the values of the function must fit into,
-then we likely also need more restrictions for which values of the function we are considering,
-which we can do by choosing a smaller $I_x$ interval.
-This is fine; the choice of the interval $I_x$ may depend on the interval $I_y$ being used.</p>
-
-<p>The openness of the intervals isn't needed for anything.
-The same definition could be presented with closed intervals, which would include the end points,
-but open intervals are much more commonly used for this so I did it that way too.</p>
-
-<p>This definition is usually written in a slightly different way,
-and that's called the $\epsi,\delta$ definition of a limit.
-The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$, so that
+<p>Again, let's go through this idea in more detail.
+Let $s$ be a function satisfying $\lim_{x \to a} s(x) = 0$;
+this is the "small" function, and this is what "small" actually meant above.
+Let $b$ be a function that is bounded on some interval $I$ centered around $a$ with the midpoint $a$ excluded, so
 $$
-I_y = (L-\epsi,L+\epsi),
+-M \le b(\text{any number in $I$ except $a$}) \le M.
 $$
-and using the delta letter $\delta$ to denote the size of $I_x$ similarly,
+We show that
 $$
-I_x = (a-\delta,a+\delta).
+\lim_{x \to a} b(x)s(x) = 0.
+$$
+Let $I_y=(-\epsi,\epsi)$ be any output interval centered around $0$.
+We can't just use this output interval with the limit $\lim_{x \to a} s(x) = 0$,
+because we also need to compensate with $M$.
+Let's do that by taking another interval
+$$
+\left( -\frac{\epsi}{M}, \frac{\epsi}{M} \right),
+$$
+which will basically cause $s(x)$ to output values that are $M$ times smaller than we need.
+Because $\lim_{x \to a} s(x) = 0$,
+there is an input interval $I_x$ so that
+$$
+s(\text{any number in $I_x$ except $a$}) \in \left( -\frac{\epsi}{M}, \frac{\epsi}{M} \right),
+$$
+or with slightly different notation,
+$$
+-\frac{\epsi}{M} < s(\text{any number in $I_x$ except $a$}) < \frac{\epsi}{M}.
+$$
+If $x$ is any number that is
+in $I$ (the interval on which $b$ is bounded by $M$)
+and in $I_x$ (the input interval for limit of $s$), we now have
+$$
+-M \le b(x) \le M \quad \text{and} \quad -\frac{\epsi}{M} < s(x) < \frac{\epsi}{M}.
+$$
+If $s(x)$ and $b(x)$ are both positive,
+replacing them with larger values $\frac{\epsi}{M}$ and $M$
+gives us a bigger value than $s(x)b(x)$, so
+$$
+b(x)s(x) < \frac{\epsi}{M} \cdot M = \epsi.
+$$
+This also works if $b(x)=0$ or $s(x)=0$.
+If we also allow negative values, we can still do the same thing with absolute values, as in
+$$
+|b(x) s(x)| = |b(x)| |s(x)| < \epsi.
+$$
+This shows that
+$$
+-\epsi < b(x)s(x) < \epsi,
+$$
+For this to work, we need $x$ to be in both $I_x$ and $I$,
+so we can take our input interval to be whichever of the two intervals is smaller.</p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} s(x) = 0$ and $b(x)$ is bounded
+on some interval centered around $a$ with the midpoint $a$ excluded,
+then
+$$
+\lim_{x \to a} b(x)s(s) = 0.
 $$
 </p>
 
-<h2 id="graph">Graph<a class="headerlink" href="#graph" title="Link to this title">¶</a></h2><p>Let's figure out what the definition of the limit looks like in the graph of a function.
-We continue with the same example that we had earlier on this page; that is,
+</div><h2 id="example">Example<a class="headerlink" href="#example" title="Link to this title">¶</a></h2><p>We calculate
 $$
-f(x) = \frac{x^3-1}{x-1}, \quad
-I_y = (2.99, 3.01), \quad
-I_x = (0.997, 1.003).
+\lim_{x \to 0} x \sin(3x^2+42x-69\cos(x^7)).
 $$
-The graph of $f$ looks like this:</p>
-
-<p><img width="253" height="480" class="asymptote" src="../images/asy/0d28672af5bc7f354ad7396cf8fc030c.svg" /></p><p>Let's zoom onto the square that I marked with red.
-The interval $I_y=(2.99, 3.01)$ is for the values of the function, so I'll draw it on the $y$ axis,
-and $I_x=(0.997,1.003)$ is for the inputs of the function, so I'll draw that on the $x$ axis.
-The axes should actually be quite far away from the red square that we're zooming into,
-but I'm drawing them anyway because I want something to mark intervals and numbers onto.</p>
-
-<p><img width="331" height="476" class="asymptote" src="../images/asy/688854b672d9131c500e4c106292d5a4.svg" /></p><p>There's a hole in the graph because $f(1)$ is undefined; that gives division by zero.
-The dashed lines are showing which $f$ values we get
-for inputs in $I_x$.
-Note that the values of $f$ that we get by plugging in numbers from $I_x$
-don't "fill" all of $I_y$, but that doesn't matter;
-what matters is that they all go somewhere inside $I_y$.
+We haven't derived convenient rules for calculating limits yet,
+but this limit is now doable.
+Because $\sin(\dots)$ is the $y$ coordinate of a point on the unit circle,
+it is bounded between $-1$ and $1$.
+We also know that $\lim_{x \to 0} x = 0$
+(see <a href="limit-basics.html">this example</a>).
 </p>
 
 </div>

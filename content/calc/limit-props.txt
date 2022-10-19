@@ -98,7 +98,7 @@ This is because the length of $I_y$ is $2\epsi$ and we want the errors to be sma
 $$
 \frac{1}{4} \cdot 2\epsi = \frac{\epsi}{2}.
 $$
-The input intervals for $f$ and $g$ are drawn below.
+This gives us corresponding input intervals for $f$ and $g$. They are drawn below.
 
 asymptote:
     unitsize(2cm);
@@ -136,13 +136,13 @@ $$
 &B-\frac{\epsi}{2} < g(x) < B+\frac{\epsi}{2}.
 \end{align}
 $$
-By combining these two inequalities, we get
+By combining these inequalities, we get
 $$
-f(x)+g(x) > \left(A-\frac{\epsi}{2}\right) + \left(B-\frac{\epsi}{2}\right) = A+B-\epsi
+f(x)+g(x) < \left(A+\frac{\epsi}{2}\right) + \left(B+\frac{\epsi}{2}\right) = A+B+\epsi
 $$
 and
 $$
-f(x)+g(x) < \left(A+\frac{\epsi}{2}\right) + \left(B+\frac{\epsi}{2}\right) = A+B+\epsi
+f(x)+g(x) > \left(A-\frac{\epsi}{2}\right) + \left(B-\frac{\epsi}{2}\right) = A+B-\epsi.
 $$
 Because $I_y=(A+B-\epsi, A+B+\epsi)$, this shows that $f(x)+g(x) \in I_y$.
 
@@ -156,56 +156,56 @@ graybox:
 ## Limit of product
 
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-I'll show you most of the proof for $\lim_{x \to a} f(x)g(x) = AB$.
-
-Let $I_y=(AB-\epsi,AB+\epsi)$ be an open interval centered around $AB$.
-By doing same things as for the sum above, we get an input interval $I_x$ such that
-for any $x$ in $I_x$ except $a$, we get
+We calculate $\lim_{x \to a} f(x)g(x)$.
+Let's define
 $$
-f(x)=A+p \quad \text{and} \quad g(x)=B+q,
+p(x) = f(x)-A, \qquad q(x) = g(x)-B.
 $$
-where we can fit $p$ and $q$ into any interval $(-r,r)$;
-above we had $p,q \in (-\frac{\epsi}{2}, \frac{\epsi}{2})$
-but we could have used any other positive number $r$ instead of $\frac{\epsi}{2}$.
-Just like in the sum proof, it is now enough to show that by choosing $r$ wisely, we get
-$$
-f(x)g(x) = AB+\text{something in $(-\epsi,\epsi)$}.
-$$
-By expanding $f(x)g(x)$, we get
+These new functions $p$ and $q$ are what we called "errors" in the previous derivation.
+By design, they are "small" in the sense that they have limit zero.
+We can also verify this by using the limit of sum rule that we just derived above:
 $$
 \begin{align}
-f(x)g(x)
-&= (A+p)(B+q) \\
-&= A(B+q)+p(B+q) \\
-&= AB+\underbrace{Aq+pB+pq}_{\text{Want: $\in (-\epsi,\epsi)$}}.
+\lim_{x \to a} p(x)
+&= \lim_{x \to a} \Bigl( f(x) + (-A) \Bigr) \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} (-A) \\
+&= A + (-A) = 0
 \end{align}
 $$
-Fitting $Aq+pB+pq$ into $(-\epsi,\epsi)$ can be done by choosing the $r$,
-but filling in all the details results in a mess every time I do it, so I'll skip most of it here.
-However, I'll show you the ideas needed for doing that,
-and you might be able to fill in the skipped details after reading this if you are interested in them.
+and similarly
+$$
+\lim_{x \to a} q(x) = 0.
+$$
+To calculate $f(x)g(x)$,
+we first notice that $f(x)=A+p(x)$ and $g(x)=B+q(x)$:
+$$
+\begin{align}
+\lim_{x \to a} f(x)g(x)
+&= \lim_{x \to a} (A+p(x))(B+q(x)) \\
+&= \lim_{x \to a} \Bigl( AB+Aq(x)+p(x)B+p(x)q(x) \Bigr)
+\end{align}
+$$
+We can now use the limit of sum to split the limit into four simpler limits.
+We need to apply the rule three times, because it gets rid of one $+$ inside the limit every time.
+$$
+\begin{align}
+&~~~~ \lim_{x \to a} \Bigl( AB+Aq(x)+p(x)B+p(x)q(x) \Bigr) \\
+&= \lim_{x \to a} AB + \lim_{x \to a} \Bigl( Aq(x)+p(x)B+p(x)q(x) \Bigr) \\
+&= \lim_{x \to a} AB + \lim_{x \to a} Aq(x) + \lim_{x\to a} \Bigl( p(x)B+p(x)q(x) \Bigr) \\
+&= \lim_{x \to a} AB + \lim_{x \to a} Aq(x) + \lim_{x\to a} p(x)B + \lim_{x \to a} p(x)q(x)
+\end{align}
+$$
+This looks like a mess, but we can now calculate each limit separately:
 
-To fit all of $Aq+pB+pq$ into $(-\epsi,\epsi)$,
-it is enough to ensure that $Aq$, $pB$ and $pq$ are all in $(-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-This can be seen by generalizing the interval thing in the beginning of this page
-for three numbers instead of two.
+* $\lim_{x \to a} AB = AB$, based on [this derivation](limit-basics.html#another-simple-example).
+* $\lim_{x \to a} Aq(x) = 0$. This is a ["bounded times small" limit](limit-bounded.html#bounded-times-small): the constant $A$ is obviously bounded, and $q(x)$ is "small" in the sense that it has limit zero.
+* $\lim_{x \to a} p(x)B = 0$. This too is a "bounded times small" limit.
+* $\lim_{x \to a} p(x)q(x) = 0$. Because $p$ and $q$ have limit zero, [they are bounded](limit-bounded.html#bounded-if-limit-exists), so this one is also a "bounded times small" limit.
 
-Let's say that we want to make the $Aq$ part small enough,
-as in $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-If $A$ is positive, then we can pick $r = \frac{\epsi}{3A}$, because using the fact $q \in (-r,r)$ gives
-$-r < q < r$, which is same as
+By putting everything together, we get
 $$
--\frac{\epsi}{3A} < q < \frac{\epsi}{3A}.
+\lim_{x \to a} f(x)g(x) = AB + 0+0+0.
 $$
-Multiplying both sides by $A$ (assuming that it's positive) gives
-$$
--\frac{\epsi}{3} < Aq < \frac{\epsi}{3},
-$$
-so $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-
-Some of the mess comes from handling zero and negative values of $A$ and $B$,
-and the rest comes from combining the conditions ensuring that
-each of $Aq$, $pB$ and $pq$ are small enough.
 
 graybox:
     If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then

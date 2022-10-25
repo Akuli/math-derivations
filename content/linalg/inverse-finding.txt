@@ -10,8 +10,8 @@ These steps can be used to do many different things:
 </li><li>
     [Finding spans](span-and-dep-finding.html#finding-the-span).
 </li><li>
-    Because [a matrix is invertible if and only if its rows are linearly independent](transpose.html#inverse-of-transpose),
-    this can be also viewed as checking whether a matrix is invertible.
+    Because [a square matrix is invertible if and only if its rows are linearly independent](transpose.html#inverse-of-transpose),
+    this can be also viewed as checking whether a square matrix is invertible.
 </li></ul>
 
 On this page, I will call adding a multiple of one row to another

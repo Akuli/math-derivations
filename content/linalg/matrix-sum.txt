@@ -107,9 +107,9 @@ we see that they have the same second column, and so on.
 graybox:
     $(A+B)C=AC+BC$ works with matrices.
 
-This doesn't prove that we have $A(B+C)=AC+BC$,
+This doesn't prove that we have $A(B+C)=AB+AC$,
 because [the order matters](matrix-matrix.html#order-matters).
-However, we can derive $A(B+C)=AC+BC$ similarly.
+However, we can derive $A(B+C)=AB+AC$ similarly.
 For a vector $\vec v$, we get
 $$
 A(B+C)\vec v = A(B\vec v + C\vec v) = AB\vec v + AC\vec v,

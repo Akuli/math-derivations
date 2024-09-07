@@ -18,6 +18,8 @@ $ . env/bin/activate
 (env) $ python3 build.py
 ```
 
+Then open `html/index.html` in web browser. You don't need to run a server.
+
 If you want `build.py` to send F5 to the browser window where math-derivations is open:
 
 ```

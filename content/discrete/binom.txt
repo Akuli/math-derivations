@@ -1,332 +1,434 @@
 # Binomial Coefficients
 
-There are several ways to think about the binomial coefficients.
-On this page I explain some of the most common ways.
-On this page, $n$ and $k$ are integers such that $0 \le k \le n$.
+There are several ways to think about binomial coefficients.
+On this page I explain the most common ways.
 
 
-## Binomial formula
+## Definition with subsets
 
-Consider the formula
-$$
-(a+b)^2 = a^2+2ab+b^2.
-$$
-There is a similar formula for $(a+b)^3$. To get it from this one, we can calculate
-$$
-\begin{align}
-(a+b)^3 &= (a+b)^2(a+b) \\
-&= (a^2+2ab+b^2)(a+b) \\
-&= (a^2+2ab+b^2)a + (a^2+2ab+b^2)b \\
-&= a^3+2a^2b+ab^2+a^2b+2ab^2+b^3 \\
-&= a^3+3a^2b+3ab^2+b^3.
-\end{align}
-$$
-By multiplying this with $(a+b)$ again, we can get a formula for $(a+b)^4$:
-$$
-\begin{align}
-(a+b)^4 &= (a+b)^3(a+b) \\
-&= (a^3+3a^2b+3ab^2+b^3)(a+b) \\
-&= a^4+3a^3b+3a^2b^2+ab^3+a^3b+3a^2b^2+3ab^3+b^4 \\
-&= a^4+4a^3b+6a^2b^2+4ab^3+b^4
-\end{align}
-$$
-
-In general, we can make the formula for $(a+b)^n$ from the previous $(a+b)^{n-1}$ formula.
-Notice the formulas produced this way have these properties:
-
-* The formulas are sums of terms with an integer, some number of $a$'s, and some number of $b$'s multiplied.
-  For example, in $3a^2b$, the integer is $3$ and there is two $a$'s and one $b$.
-  In $a^2$, we have zero $b$'s, and the integer is $1$.
-* The total number of $a$'s and $b$'s in each term is $n$.
-  For example, $3a^2b$ contains two $a$'s and one $b$, $2+1=3=n$ in total.
-  So, if $a$ occurs $k$ times in the $(a+b)^n$ formula, as in $a^k$,
-  then $b$ occurs $n-k$ times and we have $a^kb^{n-k}$ multiplied by some integer,
-  such as $a^2b$ for $n=3$ and $k=2$.
-  This happens for all $n$ because if it happens for the previous $(a+b)^{n-1}$ formula,
-  then we end up with one more $a$ or $b$ everywhere in the $(a+b)^n$ formula.
-* If we know the integers in front of $a^k b^{n-k}$ for each $k$ in the range $0 \le k \le n$,
-  then we know the entire $(a+b)^n$ formula.
-
-The integer in front of $a^kb^{n-k}$ when expanding $(a+b)^n$ is called the **binomial coefficient**,
-and it's denoted with $\binom{n}{k}$.
-So for example, because there is $3$ in front of $a^2b$ in the $(a+b)^3$ formula, we have
-$$
-\binom{3}{2}=3,
-$$
-and for all $n$, the numbers in front of $a^n$ and $b^n$ are
-$$
-\binom{n}{n} = 1, \quad \binom{n}{0} = 1.
-$$
+Let's define binomial coefficients like this.
+Later on this page, I will explain why they are called "binomial coefficients".
 
 graybox:
-    For any numbers $a$ and $b$, we have
-    $$
-    (a+b)^n = \binom{n}{n}a^n + \binom{n}{n-1}a^{n-1}b + \dots + \binom{n}{1} ab^{n-1} + \binom{n}{0}b^n,
-    $$
-    where each $\binom{n}{k}$ is an integer known as the **binomial coefficient**.
-    This result is known as the **binomial formula**.
+    Let $n$ and $k$ be integers such that $0 \le k \le n$.
+    The binomial coefficient $\binom{n}{k}$, spelled "$n$ choose $k$",
+    is the number of subsets of size $k$ that a set of size $n$ has.
 
-This also works for $n=1$ and $n=0$ with all binomial coefficients being $1$, because
-$$
-\begin{align}
-(a+b)^1 &= 1a^1b^0 + 1a^0b^1, \\
-(a+b)^0 &= 1a^0b^0.
-\end{align}
-$$
-Next we find a way to calculate binomial coefficients.
-
-
-## Pascal's triangle
-
-Let's arrange all binomial coefficients we know into a big triangle-shaped drawing like this:
-$$
-\begin{matrix}
-&&&&\binom{0}{0}&&&& \\
-&&&\binom{1}{0}&&\binom{1}{1}&&& \\
-&&\binom{2}{0}&&\binom{2}{1}&&\binom{2}{2}&& \\
-&\binom{3}{0}&&\binom{3}{1}&&\binom{2}{2}&&\binom{3}{3}& \\
-\binom{4}{0}&&\binom{4}{1}&&\binom{4}{2}&&\binom{4}{3}&&\binom{4}{4} \\
-&&&&\vdots&&&&
-\end{matrix}
-$$
-The three dots in the bottom of the drawing mean that it goes on infinitely;
-by making more $(a+b)^n$ formulas, we can extend the triangle downwards as much as we want.
-By plugging in the numbers from the formulas we know, the triangle becomes
-$$
-\begin{matrix}
-&&&&1&&&&\\
-&&&1&&1&&&\\
-&&1&&2&&1&&\\
-&1&&3&&3&&1&\\
-1&&4&&6&&4&&1 \\
-&&&&\vdots&&&&
-\end{matrix}
-$$
-This is known as **Pascal's triangle**.
-
-If you look carefully, you might notice that whenever there's two numbers next to each other,
-their sum is below them. For example, below I colored $\green3+\blue3 = \red6$:
-$$
-\begin{matrix}
-&&&&1&&&&\\
-&&&1&&1&&&\\
-&&1&&2&&1&&\\
-&1&&\green3&&\blue3&&1&\\
-1&&4&&\red6&&4&&1 \\
-&&&&\vdots&&&&
-\end{matrix}
-$$
-So, we noticed that
-$$
-\green{\binom{3}{1}}+\blue{\binom{3}{2}}=\red{\binom{4}{2}},
-$$
-and more generally, it seems like
-$$
-\green{\binom{n}{k}}+\blue{\binom{n}{k+1}}=\red{\binom{n+1}{k+1}}.
-$$
-To see why this happens, consider
-$$
-(a+b)^n = \binom{n}{n}a^n + \dots + \blue{\binom{n}{2}}a^2b^{n-2} + \green{\binom{n}{1}}ab^{n-1} + \binom{n}{0}b^n.
-$$
-Let's multiply this with $a$ and $b$:
-$$
-\begin{alignat}{9}
-(a+b)^na &= \binom{n}{n}a^{n+1} &+ \dots &+ \blue{\binom{n}{2}}a^3b^{n-1} &+ \green{\binom{n}{1}}a^2b^{n-1} &+ \binom{n}{0}ab^n \\
-(a+b)^nb &=& \binom{n}{n}a^nb &+ \dots &+ \blue{\binom{n}{2}}a^2b^{n-1} &+ \green{\binom{n}{1}}ab^n &+ \binom{n}{0}b^{n+1}& \\
-\end{alignat}
-$$
-By adding these equations, we get
-$$
-(a+b)^{n+1} = \dots + \left( \green{\binom{n}{1}}+\blue{\binom{n}{2}} \right)a^2b^{n-1} + \dots,
-$$
-where $\dots$ does not contain any $a^2b^{n-1}$. So, the number in front of $a^2b^{n-1}$ is
-$$
-\green{\binom{n}{1}}+\blue{\binom{n}{2}},
-$$
-and because on the other hand, there should be $\red{\binom{n+1}{2}}$ in front of $a^2b^{(n+1)-2}$, we get
-$$
-\green{\binom{n}{1}}+\blue{\binom{n}{2}} = \red{\binom{n+1}{2}},
-$$
-which is the equation we wanted for $k=1$.
-It works the same way for any other $k$, and we get
-$$
-\green{\binom{n}{k}}+\blue{\binom{n}{k+1}} = \red{\binom{n+1}{k+1}}.
-$$
-
-graybox:
-    Binomial coefficients can be taken from Pascal's triangle, which can be drawn like this:
-    First draw ones at the edges.
-    Then fill in other places with sums of the two numbers above.
-    $$
-    \begin{matrix}
-    &&&&1&&&&\\
-    &&&1&&1&&&\\
-    &&1&&2&&1&&\\
-    &1&&3&&3&&1&\\
-    1&&4&&6&&4&&1 \\
-    &&&&\vdots&&&&
-    \end{matrix}
-    $$
-
-
-## Subsets
-
-Consider a set of two elements, $\{A,B\}$.
-It has these subsets:
+Here "subset" means any set whose elements are contained in the original set.
+For example, here are all subsets of the set $\{1,2,3\}$:
 
 * The empty set
-* $\{A\}$
-* $\{B\}$
-* $\{A,B\}$
+* $\{1\}$
+* $\{2\}$
+* $\{3\}$
+* $\{1,2\}$
+* $\{1,3\}$
+* $\{2,3\}$
+* $\{1,2,3\}$
 
-In particular, note that any set is a subset of itself.
-Also, the same element can't occur several times in a set, and order does not matter;
-$\{A,B\}$ and $\{B,A\}$ are the same set.
+Sets cannot contain duplicates and the order doesn't matter,
+so $\{2,1\}$ would be the same set as $\{1,2\}$,
+and $\{3,3\}$ would be the same set as $\{3\}$.
+Also note that any set is a subset of itself, and the empty set is a subset of any set.
 
-A set of 3 elements, $\{A,B,C\}$, has these subsets:
+Based on the above list, we can calculate some binomial coefficients:
 
-* The empty set
-* $\{A\}$
-* $\{B\}$
-* $\{C\}$
-* $\{A,B\}$
-* $\{A,C\}$
-* $\{B,C\}$
-* $\{A,B,C\}$
-
-Note that a set of 2 elements has 1 subset of 0 elements, 2 subsets of 1 element and 1 subset of 2 elements,
-$1\,\,2\,\,1$.
-The sizes of subsets of a set of 3 elements are $1\,\,3\,\,3\,\,1$.
-These are rows $2$ and $3$ of Pascal's triangle
-when we think of the first row as row $0$ and first column of each row as column $0$.
-In other words, the number of subsets of $k$ elements in a set of $n$ elements seems to be
-$$
-\binom{n}{k}.
-$$
-Next we explain why this happens.
-
-Let $C(n,k)$ denote the number of subsets of $k$ elements in a set of size $n$.
-Consider the triangle
-$$
-\begin{matrix}
-&&&C(0,0)&&& \\
-&&C(1,0)&&C(1,1)&& \\
-&C(2,0)&&C(2,1)&&C(2,2)& \\
-C(3,0)&&C(3,1)&&C(2,2)&&C(3,3) \\
-&&&\vdots&&&
-\end{matrix}
-$$
-Next we explain why this triangle is same as Pascal's triangle. We need to ensure two things:
-
-* This triangle has $1$ at the edges: $C(n,0)=1$ and $C(n,n)=1$
-* Each number in this triangle is the sum of the two numbers above: $C(n,k)+C(n,k+1)=C(n+1,k+1)$
-
-The first property is clear; a set of $n$ elements has
-only one subset of zero elements (empty set) and only one subset of $n$ elements (the set itself).
-For the second property, imagine going into shop that sells $n+1$ different products,
-milk and $n$ other things, with a shopping bag that fits exactly $k+1$ products.
-We calculate the number of ways how you can fill the shopping bag without choosing the same product twice:
-
-* If you choose milk, then you need to fill the shopping bag with $k$ more products,
-  chosen out of the $n$ remaining products (milk excluded).
-  This can be done in $C(n,k)$ different ways.
-* If you don't choose milk, then you need to choose $k+1$ other products to fill the shopping bag,
-  out of the $n$ non-milk products available. This can be done in $C(n,k+1)$ different ways.
-
-In total,
-$$
-\begin{align}
-C(n+1,k+1)
-&= \text{number of ways to fill shopping bag} \\
-&= \underbrace{C(n,k)}_{\text{milk}} + \underbrace{C(n,k+1)}_{\text{no milk}}.
-\end{align}
-$$
-This shows that these $C(n,k)$ numbers are binomial coefficients, because they form Pascal's triangle.
-
-graybox:
-    A set of size $n$ has $\binom{n}{k}$ subsets of size $k$.
-
-For this reason, binomial coefficients are often spelled "$n$ choose $k$";
-they represent the number of different ways to choose $k$ items from $n$ items
-when the order of the items is ignored and you can't choose the same item twice.
+* There is one subset of zero elements (the empty set), so $\binom{3}{0} = 1$. (Read this as "3 choose 0 is 1".)
+* There are three subsets of one element, so $\binom{3}{1} = 3$.
+* There are three subsets of two elements, so $\binom{3}{2} = 3$.
+* There is one subset of three elements, so $\binom{3}{3} = 1$.
 
 
 ## Formula
 
-We still don't have a formula for calculating binomial coefficients,
-although looking them up from Pascal's triangle is easy enough for small-ish values of $n$.
+Listing all subsets can be quite painful.
+For example, to calculate $\binom{7}{3}$,
+we could take a set of seven elements, say $\{A,B,C,D,E,F,G\}$,
+and find all subsets of three elements:
 
-Consider a shop with $n$ products and a shopping bag that fits exactly $k$ products.
-The number of ways to fill the shopping bag without choosing the same product twice is then $\binom{n}{k}$.
-To find a formula for this,
-we need a different way to calculate the number of ways to fill the shopping bag.
+* $\{A,B,C\}$
+* $\{A,B,D\}$
+* $\{A,B,E\}$
+* $\{A,B,F\}$
+* $\{A,B,G\}$
+* $\{A,C,D\}$
+* $\{A,C,E\}$
+* $\{A,C,F\}$
+* $\{A,C,G\}$
+* $\{A,D,E\}$
+* $\{A,D,F\}$
+* $\{A,D,G\}$
+* $\{A,E,F\}$
+* $\{A,E,G\}$
+* $\{A,F,G\}$
+* $\{B,C,D\}$
+* $\{B,C,E\}$
+* ...and many more...
 
-* If $k=0$, there's only one thing you can do: leave the shop with an empty shopping bag.
-  $$
-  \binom{n}{0} = 1
-  $$
-* If $k=1$, there are $n$ ways to fill the shopping bag, because you choose one of the $n$ available products.
-  $$
-  \binom{n}{1} = n
-  $$
-* If $k=2$, you have $n$ choices for the first product to buy,
-  but only $n-1$ choices for the second product because you can't choose the same product twice.
-  This gives a total of $n(n-1)$ choices.
-  But now we calculated $\{ \text{milk}, \text{bread} \}$ and $\{ \text{bread}, \text{milk} \}$
-  as two different subsets of the set of products in the store,
-  because you can choose milk first and then bread, or vice versa.
-  For that reason, $n(n-1)$ is not the number we are looking for;
-  it's two times too big, since each subset was counted twice.
-  To correct this, we must divide by 2, and we get
-  $$
-  \binom{n}{2} = \frac{n(n-1)}{2}.
-  $$
-* If $k=3$, you have $n(n-1)$ choices for the first two products, including different orders,
-  and $n-2$ choices for the third product, giving a total of $n(n-1)(n-2)$ choices.
-  Now every subset got counted 6 times, because there are 6 ways to sort 3 products:
-  $$
-  \begin{align}
-  \{ \text{milk},\text{bread},\text{cheese} \} \\
-  \{ \text{milk},\text{cheese},\text{bread} \} \\
-  \{ \text{cheese},\text{milk},\text{bread} \} \\
-  \{ \text{cheese},\text{bread},\text{milk} \} \\
-  \{ \text{bread},\text{cheese},\text{milk} \} \\
-  \{ \text{bread},\text{milk},\text{cheese} \}
-  \end{align}
-  $$
-  To correct this, we must divide by 6 and we get
-  $$
-  \binom{n}{3} = \frac{n(n-1)(n-2)}{6}.
-  $$
+I gave up after finding 17 different subsets, which shows that $\binom{7}{3} > 17$.
+This also shows that we need a better way to calculate binomial coefficients.
 
+Consider picking the 3 elements of the subset one by one:
+
+* The first element can be any element from the set $\{A,B,C,D,E,F,G\}$. We have 7 choices.
+* The second element cannot be the same as the first element.
+  For example, if the first element is $C$, then the second element must be picked from the set $\{A,B,D,E,F,G\}$.
+  There are 6 ways to do this.
+* The third element cannot be either of the first two, so there are 5 choices.
+
+There are 7 ways to pick the first element, $7 \cdot 6 = 42$ ways to pick the first two elements,
+and $7 \cdot 6 \cdot 5 = 210$ ways to pick all three elements.
+Therefore it looks like there are 210 subsets of 3 elements.
+
+Unfortunately this doesn't quite work.
+The 210 choices above count e.g. both $\{C,E,F\}$ and $\{E,C,F\}$:
+if you choose $C$ first, you can still choose $E$ and $F$,
+and if you choose $E$ first, you can still choose $C$ and $F$.
+
+Actually, all subsets were counted 6 times. For example, here are all the 6 ways how the set $\{A,B,C\}$ was counted:
+
+* $\{A,B,C\}$
+* $\{A,C,B\}$
+* $\{B,A,C\}$
+* $\{B,C,A\}$
+* $\{C,A,B\}$
+* $\{C,B,A\}$
+
+This means that $7 \cdot 6 \cdot 5$ is 6 times too big, and the correct value is
+$$
+\binom{7}{3} = \frac{7 \cdot 6 \cdot 5}{6} = 35.
+$$
 In general,
 $$
-\binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}}}{\text{number of ways to sort a set of $k$ items}},
+\binom{n}{k} = \frac{\overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}}}{\text{number of ways to sort a set of $k$ elements}},
 $$
 where on top, we have the first $k$ numbers of $n,~ n-1,~ n-2,~ n-3,~ \dots$ multiplied.
-Next find the ways that a set of $k$ items can be sorted.
-If $k=n$, then on top we multiply all integers between $n$ and $1$ (inclusive). We call that
+
+Next we count the number of ways how a set of $k$ elements can be sorted.
+We know that this should produce 6 for $k=3$, because above we listed all ways to sort a set of 3 elements.
+We can sort a set of $k$ items like this:
+
+* Pick the first element ($k$ choices).
+* Pick the second element to be some other element than the first ($k-1$ choices).
+* Pick the third element to be some other element than the first or second ($k-2$ choices).
+* Pick the fourth element to be some other element than the first or second or third ($k-3$ choices).
+* Continue until all elements have been chosen.
+
+For example, here's how this goes for $k=3$ and the set $\{A,B,C\}$:
+
+* Pick the first element (3 choices: $A,B,C$). Let's pick $B$.
+* Pick the second element (2 choices: $A,C$). Let's pick $C$.
+* Pick the third element (1 choice: $A$). Let's pick $A$.
+
+This produced the order $BCA$, and with other choices,
+we can get the elements in any order we want.
+There are $3 \cdot 2 \cdot 1 = 6$ ways to do the above choices,
+and hence 6 ways to sort a set of 3 elements.
+In general, there are $k!$ ways to sort a set of $k$ elements,
+where $k!$ is the **factorial** of $k$, defined by
 $$
-n! = n(n-1)(n-2)\dots 1,
+k! = k \cdot (k-1) \cdot (k-2) \cdot \dots \cdot 3 \cdot 2 \cdot 1.
 $$
-so for example, $5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1$. Now we get
-$$
-\binom{n}{n} = \frac{n!}{\text{number of ways to sort a set of $n$ items}},
-$$
-and because $\binom{n}{n} = 1$, we get
-$$
-\text{number of ways to sort a set of $n$ items} = n!.
-$$
-By using this with $k$ instead of $n$, we get the following result.
 
 graybox:
     Binomial coefficients can be calculated as
     $$
     \binom{n}{k} = \frac{~~ \overbrace{n(n-1)(n-2)\dots}^{\text{$k$ numbers multiplied}} ~~}{k!},
     $$
-    where $k!=k(k-1)\dots3\cdot2\cdot1$ is the number of ways to sort a list of $k$ items.
+    where $k!= k \cdot (k-1) \cdot \dots \cdot 3\cdot2\cdot1$ is the number of ways to sort a list of $k$ elements.
 
 For example,
 $$
-\binom{8}{3} = \frac{8 \cdot 7 \cdot 6}{3 \cdot 2 \cdot 1} = 56.
+\binom{7}{3} = \frac{7 \cdot 6 \cdot 5}{3 \cdot 2 \cdot 1} = 35,
 $$
+and
+$$
+\binom{9}{4} = \frac{9 \cdot 8 \cdot 7 \cdot 6}{4 \cdot 3 \cdot 2 \cdot 1} = 126.
+$$
+
+This result is often written as
+$$
+\binom{n}{k} = \frac{n!}{k!(n-k)!}.
+$$
+Here dividing by $(n-k)!$ deletes the last $n-k$ numbers that were multiplied into $n!$ on top, leaving only the first $k$ numbers.
+For example, with $n=9$ and $k=4$, it deletes the last 5 numbers and leaves the first 4, like this:
+$$
+\frac{9!}{4!(9-4)!} = \frac{9!}{4! \cdot 5!} = \frac{9 \cdot 8 \cdot 7 \cdot 6 \cdot \cancel{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}}{(4 \cdot 3 \cdot 2 \cdot 1) \cdot \cancel{(5 \cdot 4 \cdot 3 \cdot 2 \cdot 1)}}
+= \frac{9 \cdot 8 \cdot 7 \cdot 6}{4 \cdot 3 \cdot 2 \cdot 1}
+$$
+
+
+## Pascal's triangle
+
+Let's draw a triangle shape with ones, like this:
+$$
+\begin{matrix}
+&&&1&&&\\
+&&1&&1&&\\
+&1&& &&1&\\
+1&& && &&1\\
+\end{matrix}
+$$
+Then, whenever two numbers are next to each other, we write their sum below them (for example, $\blue{1} + \blue{1} = \red{2}$):
+$$
+\begin{matrix}
+&&&1&&&\\
+&&\blue{1}&&\blue{1}&&\\
+&1&&\red{2}&&1&\\
+1&& && &&1\\
+\end{matrix}
+$$
+<br>
+$$
+\begin{matrix}
+&&&1&&&\\
+&&1&&1&&\\
+&\blue{1}&&\blue{2}&&1&\\
+1&&\red{3}&& &&1\\
+\end{matrix}
+$$
+<br>
+$$
+\begin{matrix}
+&&&1&&&\\
+&&1&&1&&\\
+&1&&\blue{2}&&\blue{1}&\\
+1&&3&&\red{3}&&1\\
+\end{matrix}
+$$
+This is called **Pascal's triangle**.
+
+The numbers in Pascal's triangle look familiar.
+For example, the row $1,3,3,1$ is actually $\binom{3}{0},\binom{3}{1},\binom{3}{2},\binom{3}{3}$
+(see the beginning of this page).
+Let's draw the triangle a bit more:
+
+python:
+    from itertools import pairwise
+
+    yield "$$"
+    yield "\\begin{matrix}"
+
+    max_n = 7
+    row = [1]
+    for n in range(0, max_n + 1):
+        yield "&" * (max_n - n) + "&&".join(map(str, row)) + "&" * (max_n - n) + " \\\\"
+        row = [1] + [a+b for a, b in pairwise(row)] + [1]
+    yield "\\end{matrix}"
+    yield "$$"
+
+35 in the bottom row also looks familiar. It is $\binom{7}{3}$.
+In general, it looks like each row in Pascal's triangle contains the binomial coefficients $\binom{n}{k}$ with fixed $n$ and varying $k$, like this:
+$$
+\begin{matrix}
+&&&&\binom{0}{0}&&&&\\
+&&&\binom{1}{0}&&\binom{1}{1}&&&\\
+&&\binom{2}{0}&&\binom{2}{1}&&\binom{2}{2}&&\\
+&\binom{3}{0}&&\binom{3}{1}&&\binom{3}{2}&&\binom{3}{3}&\\
+&&&&\vdots&&&&
+\end{matrix}
+$$
+Consider the triangle of binomial coefficients shown above.
+For this triangle to be same as Pascal's triangle,
+it needs to satisfy the two rules we used to build Pascal's triangle:
+
+* Ones on the edges
+* Whenever two numbers are next to each other, their sum is below them
+
+The ones on the edges make sense, because $\binom{n}{0} = 1$ and $\binom{n}{n} = 1$ for any $n$.
+The sum rule is more interesting.
+For example, consider $\red{\binom{5}{3}}$.
+The numbers above it are $\blue{\binom{4}{2}}$ and $\green{\binom{4}{3}}$.
+$$
+\begin{matrix}
+&&&&&\binom{0}{0}&&&&&\\
+&&&&\binom{1}{0}&&\binom{1}{1}&&&&\\
+&&&\binom{2}{0}&&\binom{2}{1}&&\binom{2}{2}&&&\\
+&&\binom{3}{0}&&\binom{3}{1}&&\binom{3}{2}&&\binom{3}{3}&&\\
+&\binom{4}{0}&&\binom{4}{1}&&\blue{\binom{4}{2}}&&\green{\binom{4}{3}}&&\binom{4}{4}&\\
+\binom{5}{0}&&\binom{5}{1}&&\binom{5}{2}&&\red{\binom{5}{3}}&&\binom{5}{4}&&\binom{5}{5}\\
+&&&&&\vdots&&&&&
+\end{matrix}
+$$
+The binomial coefficient $\red{\binom{5}{3}}$ means that we go to a shop that sells 5 different products,
+e.g. $\{\text{apples},\text{bananas},\text{cheese},\text{donuts},\text{eggs}\}$,
+and we count the number of ways to put 3 different products to a shopping bag.
+
+* If we choose apples, then we need to fill the shopping bag with 2 more products
+  chosen out of the 4 remaining products (bananas, cheese, donuts, eggs).
+  This can be done in $\blue{\binom{4}{2}}$ different ways.
+* If we don't choose apples, then we choose all 3 products among the 4 products that are not apples.
+  This can be done in $\green{\binom{4}{3}}$ different ways.
+
+So the total number of ways to fill the shopping bag is $\blue{\binom{4}{2}} + \green{\binom{4}{3}}$.
+But we also know that it's $\red{\binom{5}{3}}$, so
+$$
+\blue{\binom{4}{2}} + \green{\binom{4}{3}} = \red{\binom{5}{3}}.
+$$
+
+The same reasoning works with any location in the triangle.
+If you buy $k$ products from a shop that sells $n$ products ($\red{\binom{n}{k}}$),
+you can either buy apples and $k-1$ other products ($\blue{\binom{n-1}{k-1}}$),
+or buy $k$ other products ($\green{\binom{n-1}{k}}$), so
+$$
+\red{\binom{n}{k}} = \blue{\binom{n-1}{k-1}} + \green{\binom{n-1}{k}}.
+$$
+
+graybox:
+    Binomial coefficients can be looked up from Pascal's triangle,
+    where we place ones on the edges and the sum of any two adjacent numbers below them.
+    If the top of the triangle is row zero column zero,
+    then $\binom{n}{k}$ is the number in row $n$ column $k$.
+
+    comment:
+        If fits, show the two triangles side by side with gap in between. If not, stack them vertically.
+
+    <div style="text-align: center; letter-spacing: 2em">
+        <div style="display: inline-block">
+            $$
+            \begin{matrix}
+            &&&&1&&&&\\
+            &&&1&&1&&&\\
+            &&1&&2&&1&&\\
+            &1&&3&&3&&1&\\
+            1&&4&&6&&4&&1\\
+            &&&&\vdots&&&&
+            \end{matrix}
+            $$
+        </div>
+        <div style="display: inline-block">
+            $$
+            \begin{matrix}
+            &&&&\binom{0}{0}&&&&\\
+            &&&\binom{1}{0}&&\binom{1}{1}&&&\\
+            &&\binom{2}{0}&&\binom{2}{1}&&\binom{2}{2}&&\\
+            &\binom{3}{0}&&\binom{3}{1}&&\binom{3}{2}&&\binom{3}{3}&\\
+            \binom{4}{0}&&\binom{4}{1}&&\binom{4}{2}&&\binom{4}{3}&&\binom{4}{4}\\
+            &&&&\vdots&&&&
+            \end{matrix}
+            $$
+        </div>
+    </div>
+
+
+## Binomial Formula
+
+I haven't explained yet why binomial coefficients are called binomial coefficients.
+
+Consider the formula
+$$
+(a+b)^2 = a^2+2ab+b^2.
+$$
+There is a similar formula for $(a+b)^3$. To get it from this one, we can multiply it by $a+b$:
+$$
+\begin{align}
+(a+b)^3 &= (a+b)(a+b)^2 \\
+&= (a+b)(a^2+2ab+b^2) \\
+&= a(a^2+2ab+b^2) + b(a^2+2ab+b^2) \\
+&= (a^3+2a^2b+ab^2)+(a^2b+2ab^2+b^3) \\
+&= a^3+3a^2b+3ab^2+b^3.
+\end{align}
+$$
+By multiplying this with $a+b$ again, we can get a formula for $(a+b)^4$:
+$$
+\begin{align}
+(a+b)^4 &= (a+b)(a+b)^3 \\
+&= (a+b)(a^3+3a^2b+3ab^2+b^3) \\
+&= (a^4+3a^3b+3a^2b^2+ab^3)+(a^3b+3a^2b^2+3ab^3+b^4) \\
+&= a^4+4a^3b+6a^2b^2+4ab^3+b^4
+\end{align}
+$$
+And again:
+$$
+\begin{align}
+(a+b)^5 &= (a+b)(a^4+4a^3b+6a^2b^2+4ab^3+b^4) \\
+&= a^5+5a^4b+10a^3b^2+10a^2b^3+5ab^4+b^5
+\end{align}
+$$
+
+It seems like the integers (coefficients) in front of $a$'s and $b$'s are rows in Pascal's triangle (e.g. $1~4~6~4~1$ for $(a+b)^4$).
+This is why binomial coefficients are called binomial coefficients:
+when raising a **binomial** $a+b$ to a power, they are the **coefficients** you need to put in front of $a$'s and $b$'s.
+
+Next I explain why the numbers in $(a+b)^n$ formulas form Pascal's triangle.
+First, let's observe some things that happen
+when a $(a+b)^n$ formula is created from the previous $(a+b)^{n-1}$ formula:
+
+* The total number of $a$'s and $b$'s in each term is $n$.
+  For example, $3a^2b$ contains two $a$'s and one $b$, so $2+1=3=n$ in total.
+  This happens for all $n$ because if it happens for the previous formula for $(a+b)^{n-1}$,
+  then the next formula for $(a+b)^n$ gets one more $a$ or $b$ everywhere.
+* The numbers in front of $a^n$ and $b^n$ are always 1 (as in $(a+b)^5 = 1a^5 + \dots$).
+  This is because anything that contains $b$ doesn't affect the $a^n$ part,
+  so $a^{n-1}$ in the previous formula simply gets multiplied by $a$,
+  and likewise $b^{n-1}$ gets multiplied with $b$.
+
+Let's build a new triangle from the coefficients of $(a+b)^n$ formulas:
+$$
+\begin{matrix}
+(a+b)^0 = 1                                             & \to & &&&&&1&&&&&\\
+(a+b)^1 = a+b                                           & \to & &&&&1&&1&&&&\\
+(a+b)^2 = a^2+2ab+b^2                                   & \to & &&&1&&2&&1&&&\\
+(a+b)^3 = a^3+3a^2b+3ab^2+b^3                           & \to & &&1&&3&&3&&1&&\\
+(a+b)^4 = a^4+\blue{4a^3b}+\green{6a^2b^2}+4ab^3+b^4    & \to & &1&&\blue{4}&&\green{6}&&4&&1&\\
+(a+b)^5 = a^5+5a^4b+\red{10a^3b^2}+10a^2b^3+5ab^4+b^5   & \to & 1&&5&&\red{10}&&10&&5&&1\\
+                                                        &\vdots&    &&&&&&&&&&
+\end{matrix}
+$$
+For this triangle to be same as Pascal's triangle,
+it needs to satisfy the two rules we used to build Pascal's triangle:
+
+* Ones on the edges
+* Whenever two numbers are next to each other, their sum is below them
+
+We get ones on the edges, because the numbers in front of $a^n$ and $b^n$ are always 1.
+
+To see why adjacent numbers are added, think about
+how we can get $\red{a^3b^2}$ in the $(a+b)^5$ formula
+when multiplying the previous formula with $a$ and $b$.
+There are only two ways how this can happen,
+and any other combination gives the wrong number of $a$'s or $b$'s:
+
+* $\green{a^2b^2}$ is multiplied by $a$ (start with one missing $a$ and multiply by $a$)
+* $\blue{a^3b}$ is multiplied by $b$ (start with one missing $b$ and multiply by $b$)
+
+These two ways bring in two adjacent numbers from the previous row, like this:
+$$
+\begin{align}
+(a+b)(a+b)^4 &= \quad a(a^4+4a^3b+\green{6a^2b^2}+4ab^3+b^4)\\
+                &\quad {}+ b(a^4+\blue{4a^3b}+6a^2b^2+4ab^3+b^4) \\
+                &= \dots + a\cdot\green{6a^2b^2} + b\cdot\blue{4a^3b} + \dots \\
+                &= \dots + (\green{6}+\blue{4})\red{a^3b^2} + \dots \\
+\end{align}
+$$
+In other words, the process of multiplying by $a+b$ combines the two numbers from the previous row of the triangle.
+
+graybox:
+    For any numbers $a$ and $b$, we have
+    $$
+    \begin{align}
+    (a+b)^n &= \binom{n}{0}a^n + \binom{n}{1}a^{n-1}b + \binom{n}{2}a^{n-2}b^2  + \dots \\
+    &+ \binom{n}{n-2}a^2b^{n-2} + \binom{n}{n-1}ab^{n-1} + \binom{n}{n}b^{n}.
+    \end{align}
+    $$
+    For example,
+    $$
+    \begin{align}
+    (a+b)^3 &= \binom{3}{0} a^3 + \binom{3}{1} a^2b + \binom{3}{2} ab^2 + \binom{3}{3} b^3 \\
+    &= a^3+3a^2b+3ab^2+b^3.
+    \end{align}
+    $$
+    This result is known as the **binomial formula**.
+
+The binomial formula is often written as
+$$
+(a+b)^n = \sum_{k=0}^n \binom{n}{k} a^k b^{n-k}.
+$$
+Here the $\sum$ symbol denotes a sum.
+It means that you plug in all values $k=0,1,2,\dots,n$ and add the results, like this:
+$$
+\binom{n}{0} a^0 b^{n-0} + \binom{n}{1} a^1 b^{n-1} + \dots + \binom{n}{n} a^n b^{n-n}
+$$
+This is the same formula as above, except that $a$ and $b$ are swapped:
+instead of starting with $a^n$ and ending with $b^n$, it starts with $b^n$ and ends with $a^n$.
+This doesn't matter because $(b+a)^n$ is same as $(a+b)^n$.

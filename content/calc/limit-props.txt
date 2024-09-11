@@ -16,62 +16,89 @@ where we used most of the results from [the limit basics page](limit-basics.html
 On this page, we figure out whether this and other similar things work.
 
 
-## Interval thing
-
-Before talking more about limits, we need a result about intervals.
-Suppose that $a$ and $b$ are numbers in the open interval $(-r, r)$, where $r$ is a positive number.
-What can we say about $a+b$?
-
-asymptote:
-    unitsize(4cm);
-
-    draw((-2,0)--(2,0), arrow=Arrow(5mm));
-    draw((-1,0)--(1,0), p=darkorange+5);
-
-    dot((-1,0), p=dotpen, L="$-r$", align=N);
-    dot((0,0), p=dotpen, L="$0$", align=N);
-    dot((1,0), p=dotpen, L="$r$", align=N);
-
-    dot((-0.2,0), p=dotpen+deepgreen, L="$a$", align=N);
-    dot((0.4,0), p=dotpen+deepred, L="$b$", align=N);
-
-    draw(brace_with_space((1,0), (0.02,0), 0.1), L="$r$", align=S, p=darkorange);
-    draw(brace_with_space((-0.02,0), (-1,0), 0.1), L="$r$", align=S, p=darkorange);
-
-Because $a$ and $b$ are in $(-r, r)$, we have $-r < a < r$ and $-r < b < r$.
-By combining these inequations together, we get
-$$
-(-r)+(-r) < a+b < r+r,
-$$
-which simplifies to
-$$
--2r < a+b < 2r.
-$$
-This can be written as
-$$
-a+b \in (-2r, 2r).
-$$
-So, if we have $a,b \in (-r, r)$, then we also know that $a+b \in (-2r, 2r)$.
-We'll need this result next.
-
-Usually a more general theorem called triangle inequality is used instead of this,
-but I'm using this instead because it feels somewhat more intuitive to me.
-
-
 ## Limit of sum
 
-Let's go back to the question about limits.
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-We prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.
+We explain why $\lim_{x \to a} (f(x)+g(x)) = A+B$.
 
+The definition of limit says that on some input intervals,
+we can get $f(x)$ and $g(x)$ into any output intervals centered around their limits $A$ and $B$.
+This works for all output intervals, so we can take them to be however small we need them to be.
+In other words, we can make $f(x)$ and $g(x)$ differ from their limits by only a little bit:
+$$
+f(x) = A + \text{small error}, \quad
+g(x) = B + \text{small error}
+$$
+For example, if we choose an output interval $(A-0.2,A+0.2)$ for $f$,
+then the values of $f$ will be between $A-0.2$ and $A+0.2$,
+and so the "small error" part of $f(x)$ will be between $-0.2$ and $0.2$.
+
+asymptote:
+    unitsize(1.8cm);
+
+    draw((0,-2)--(0,2), arrow=Arrow(5mm));
+    draw((0,-1)--(0,1), p=deepgreen+7);
+    dot((0,0), p=blue, L="$A$", align=W);
+    dot((0,0.7), p=blue, L="$f(x)$", align=W);
+    draw((0.2,0)--(0.2,0.7), p=deepred+5, arrow=Arrow(3mm), L="small error");
+
+Now we get
+$$
+f(x)+g(x) = (A+B) + (\text{small error} + \text{small error}).
+$$
+If we want this to be in a given output interval centered around $A+B$,
+we need to ensure that the two errors together don't throw the value
+too far from the center of the output interval, like this:
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,-2)--(0,2), arrow=Arrow(5mm));
+    draw((0,-1)--(0,1), p=darkorange+7);
+    dot((0,0), p=blue, L="$A+B$", align=W);
+    dot((0,0.5+0.8), p=deepred, L="$f(x)+g(x)$", align=W);
+    draw((0.1,0)--(0.1,0.5), p=deepred+5, arrow=Arrow(3mm), L="error from $f$");
+    draw((0.2,0.5)--(0.2,0.5+0.8), p=deepred+5, arrow=Arrow(3mm), L="error from $g$");
+
+This seems doable, because we can choose the errors to be as small as we need.
+Specifically, 1/4 of the length of the output interval should be small enough,
+because then the two errors cannot combine to exceed half of the interval length.
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,-2)--(0,2), arrow=Arrow(5mm));
+    draw((0,-1)--(0,1), p=darkorange+7);
+    dot((0,0), p=blue, L="$A+B$", align=W);
+    dot((0,0.25+0.4), p=blue, L="$f(x)+g(x)$", align=W);
+    draw((0.1,0)--(0.1,0.25), p=deepred+5, arrow=Arrow(3mm), L="error from $f$");
+    draw((0.2,0.25)--(0.2,0.25+0.4), p=deepred+5, arrow=Arrow(3mm), L="error from $g$");
+
+The errors can be negative too, but that doesn't matter:
+
+asymptote:
+    unitsize(3cm);
+
+    draw((0,-2)--(0,2), arrow=Arrow(5mm));
+    draw((0,-1)--(0,1), p=darkorange+7);
+    dot((0,0), p=blue, L="$A+B$", align=W);
+    dot((0,0.-0.4), p=blue, L="$f(x)+g(x)$", align=W);
+    draw((0.1,0)--(0.1,0.25), p=deepred+5, arrow=Arrow(3mm), L=Label("error from $f$", align=NE, position=EndPoint));
+    draw((0.2,0.25)--(0.2,-0.4), p=deepred+5, arrow=Arrow(3mm), L="error from $g$", align=E);
+
+This already seems convincing, but let's go through it again in more detail to be sure that it works.
+In other words, we prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.
 Let $I_y$ be an open interval centered around $A+B$.
 We can write $I_y$ as $(A+B-\epsi, A+B+\epsi)$ for some positive number $\epsi$.
-By definition of limit,
-there are input intervals centered around $a$ such that
-we can fit the values of $f$ and $g$ into any output intervals around $A$ and $B$ respectively.
+By definition of limit, there are input intervals centered around $a$
+such that we can fit the values of $f$ and $g$ into any output intervals around $A$ and $B$ respectively.
 We choose the output intervals
 $\left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right)$ and $\left( B-\frac{\epsi}{2}, B+\frac{\epsi}{2} \right)$.
-The corresponding input intervals are drawn below.
+This is because the length of $I_y$ is $2\epsi$ and we want the errors to be smaller than 1/4 of that, which is
+$$
+\frac{1}{4} \cdot 2\epsi = \frac{\epsi}{2}.
+$$
+This gives us corresponding input intervals for $f$ and $g$. They are drawn below.
 
 asymptote:
     unitsize(2cm);
@@ -91,7 +118,7 @@ and the smaller interval is a subset of the bigger interval;
 this means that the bigger interval contains all numbers of the smaller interval.
 
 Let $I_x$ be the smaller input interval
-(if the input intervals are the same size, then they are the same interval,
+(if the input intervals have the same size, then they are the same interval,
 and it doesn't matter which of them is $I_x$).
 Now any number in $I_x$ is in both of the input intervals, so we have
 $$
@@ -103,19 +130,21 @@ $$
 $$
 Letting $x$ be any number in $I_x$ except $a$, we can write this as
 $$
-f(x) = A+p \quad \text{and} \quad g(x)=B+q
+\begin{align}
+&A-\frac{\epsi}{2} < f(x) < A+\frac{\epsi}{2},
+\\
+&B-\frac{\epsi}{2} < g(x) < B+\frac{\epsi}{2}.
+\end{align}
 $$
-for some numbers $p,q \in (-\frac{\epsi}{2},\frac{\epsi}{2})$.
-Now we get
+By combining these inequalities, we get
 $$
-f(x)+g(x) = A+B+\underbrace{p+q}_{\in (-\epsi,\epsi)},
+f(x)+g(x) < \left(A+\frac{\epsi}{2}\right) + \left(B+\frac{\epsi}{2}\right) = A+B+\epsi
 $$
-where for the underbraced part,
-we used the above interval thing with $r=\frac{\epsi}{2}$ and $2r=\epsi$.
-We have
+and
 $$
-f(x)+g(x) \in (A+B-\epsi, A+B+\epsi) = I_y.
+f(x)+g(x) > \left(A-\frac{\epsi}{2}\right) + \left(B-\frac{\epsi}{2}\right) = A+B-\epsi.
 $$
+Because $I_y=(A+B-\epsi, A+B+\epsi)$, this shows that $f(x)+g(x) \in I_y$.
 
 graybox:
     If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
@@ -127,56 +156,56 @@ graybox:
 ## Limit of product
 
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-I'll show you most of the proof for $\lim_{x \to a} f(x)g(x) = AB$.
-
-Let $I_y=(AB-\epsi,AB+\epsi)$ be an open interval centered around $AB$.
-By doing same things as for the sum above, we get an input interval $I_x$ such that
-for any $x$ in $I_x$ except $a$, we get
+We calculate $\lim_{x \to a} f(x)g(x)$.
+Let's define
 $$
-f(x)=A+p \quad \text{and} \quad g(x)=B+q,
+p(x) = f(x)-A, \qquad q(x) = g(x)-B.
 $$
-where we can fit $p$ and $q$ into any interval $(-r,r)$;
-above we had $p,q \in (-\frac{\epsi}{2}, \frac{\epsi}{2})$
-but we could have used any other positive number $r$ instead of $\frac{\epsi}{2}$.
-Just like in the sum proof, it is now enough to show that by choosing $r$ wisely, we get
-$$
-f(x)g(x) = AB+\text{something in $(-\epsi,\epsi)$}.
-$$
-By expanding $f(x)g(x)$, we get
+These new functions $p$ and $q$ are what we called "errors" in the previous derivation.
+By design, they are "small" in the sense that they have limit zero.
+We can also verify this by using the limit of sum rule that we just derived above:
 $$
 \begin{align}
-f(x)g(x)
-&= (A+p)(B+q) \\
-&= A(B+q)+p(B+q) \\
-&= AB+\underbrace{Aq+pB+pq}_{\text{Want: $\in (-\epsi,\epsi)$}}.
+\lim_{x \to a} p(x)
+&= \lim_{x \to a} \Bigl( f(x) + (-A) \Bigr) \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} (-A) \\
+&= A + (-A) = 0
 \end{align}
 $$
-Fitting $Aq+pB+pq$ into $(-\epsi,\epsi)$ can be done by choosing the $r$,
-but filling in all the details results in a mess every time I do it, so I'll skip most of it here.
-However, I'll show you the ideas needed for doing that,
-and you might be able to fill in the skipped details after reading this if you are interested in them.
+and similarly
+$$
+\lim_{x \to a} q(x) = 0.
+$$
+To calculate $f(x)g(x)$,
+we first notice that $f(x)=A+p(x)$ and $g(x)=B+q(x)$:
+$$
+\begin{align}
+\lim_{x \to a} f(x)g(x)
+&= \lim_{x \to a} (A+p(x))(B+q(x)) \\
+&= \lim_{x \to a} \Bigl( AB+Aq(x)+p(x)B+p(x)q(x) \Bigr)
+\end{align}
+$$
+We can now use the limit of sum to split the limit into four simpler limits.
+We need to apply the rule three times, because it gets rid of one $+$ inside the limit every time.
+$$
+\begin{align}
+&~~~~ \lim_{x \to a} \Bigl( AB+Aq(x)+p(x)B+p(x)q(x) \Bigr) \\
+&= \lim_{x \to a} AB + \lim_{x \to a} \Bigl( Aq(x)+p(x)B+p(x)q(x) \Bigr) \\
+&= \lim_{x \to a} AB + \lim_{x \to a} Aq(x) + \lim_{x\to a} \Bigl( p(x)B+p(x)q(x) \Bigr) \\
+&= \lim_{x \to a} AB + \lim_{x \to a} Aq(x) + \lim_{x\to a} p(x)B + \lim_{x \to a} p(x)q(x)
+\end{align}
+$$
+This looks like a mess, but we can now calculate each limit separately:
 
-To fit all of $Aq+pB+pq$ into $(-\epsi,\epsi)$,
-it is enough to ensure that $Aq$, $pB$ and $pq$ are all in $(-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-This can be seen by generalizing the interval thing in the beginning of this page
-for three numbers instead of two.
+* $\lim_{x \to a} AB = AB$, based on [this derivation](limit-basics.html#another-simple-example).
+* $\lim_{x \to a} Aq(x) = 0$. This is a ["bounded times small" limit](limit-bounded.html#bounded-times-small): the constant $A$ is obviously bounded, and $q(x)$ is "small" in the sense that it has limit zero.
+* $\lim_{x \to a} p(x)B = 0$. This too is a "bounded times small" limit.
+* $\lim_{x \to a} p(x)q(x) = 0$. Because $p$ and $q$ have limit zero, [they are bounded](limit-bounded.html#bounded-if-limit-exists), so this one is a "bounded times small" limit as well.
 
-Let's say that we want to make the $Aq$ part small enough,
-as in $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-If $A$ is positive, then we can pick $r = \frac{\epsi}{3A}$, because using the fact $q \in (-r,r)$ gives
-$-r < q < r$, which is same as
+By putting everything together, we get
 $$
--\frac{\epsi}{3A} < q < \frac{\epsi}{3A}.
+\lim_{x \to a} f(x)g(x) = AB + 0+0+0.
 $$
-Multiplying both sides by $A$ (assuming that it's positive) gives
-$$
--\frac{\epsi}{3} < Aq < \frac{\epsi}{3},
-$$
-so $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-
-Some of the mess comes from handling zero and negative values of $A$ and $B$,
-and the rest comes from combining the conditions ensuring that
-each of $Aq$, $pB$ and $pq$ are small enough.
 
 graybox:
     If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then

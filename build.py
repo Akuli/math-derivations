@@ -162,6 +162,7 @@ def get_sidebar_content(txtfile):
 
         dropdown("Calculus", join([
             dropdown("Limits", join([
+                link('"Definition" by plugging in numbers', 'calc/limit-intro'),
                 link("Definition of limit", 'calc/limit-def'),
                 link("Limit basics", 'calc/limit-basics'),
                 link("Limits and bounded functions", 'calc/limit-bounded'),

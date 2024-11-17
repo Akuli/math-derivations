@@ -2,25 +2,146 @@
 
 insert-function-warning-here
 
-Limit is a very important concept in calculus.
-There are two common ways to introduce it:
-teaching students to calculate limits without talking much about why they work like they do (high schools), and
-proving all the properties of limits needed very carefully with somewhat difficult proofs (university).
-I will aim for something in the middle;
-my goal is to show you how limits work without doing anything too difficult.
+[On the previous page](limit-intro.html),
+we "defined" limits by plugging in nearby numbers.
+For example, to calculate $\lim_{x \to 3} f(x)$,
+we calculated things like $f(3.00001)$.
+
+There were several problems with this approach.
+On this page we fix them by defining limits precisely.
+**This is not easy.**
+
+That said, I have tried to make this as easy as possible.
+In my opinion, this approach is much easier
+than the standard way to teach the definition.
+If you want to learn the standard way instead,
+just go study mathematics in any university.
 
 
-## The idea
+## Defining small functions
 
-Let's get started by plugging some numbers into the function
+Usually "small" doesn't mean anything specific in mathematics,
+but in this context it's convenient to assign a meaning to it.
+
+The purpose of introducing small functions
+is to make the definition of limit easier.
+Traditionally, smallness is baked into the definition of limit,
+so it becomes one big mess that is hard to understand and work with.
+I don't want that.
+
+An open interval is **centered around $a$** if it's $(a-r, a+r)$ for some $r > 0$.
+For example, $(4,6)$ is an interval centered around $5$.
+
+Suppose $f$ is a function whose values are not negative.
+We say that $f$ is **small near $a$**,
+if for any positive "bound number" $b > 0$,
+we have $f(x) < b$ on some interval centered around $a$, excluding the midpoint $a$.
+The excluding means that we don't care about what $f(a)$ is;
+we only consider inputs around the number $a$, not exactly at $a$.
+
+Here are some examples to clarify this.
+
+<ul><li>
+The function $f(x)=(x-1)^2$ is small near $1$.
+In the picture below, I have chosen the bound number $b=0.1$,
+and indeed, the function is below that bound on some interval centered around 1,
+marked in green.
+(We could calculate what exactly that interval is, but it's not important.)
+The same works for any positive bound number
+because the graph is a [parabola](../analytic-plane-geometry/parabola.html)
+whose peak is at $(1,0)$.
+
+asymptote:
+    unitsize(3cm);
+    draw((1-sqrt(0.1),0)--(1+sqrt(0.1),0), p=green+5);
+    axises(-0.5,3,-0.5,2.5);
+    real f(real x) { return (x-1)^2; }
+    draw(graph(f, -0.5, 2.5), p=blue, L=Label("$y=(x-1)^2$", position=Relative(0.8), align=E));
+    draw((-0.5,0.1)--(3,0.1), L=Label("$y=0.1$", align=N, position=Relative(0.8)), p=gray+smalldashes);
+    dot((1,0), L="$(1,0)$", p=dotpen, align=S);
+
+Here is a zoomed-in view:
+
+asymptote:
+    unitsize(10cm);
+    draw((1-sqrt(0.1),0)--(1+sqrt(0.1),0), p=green+5);
+    axises(0.5,1.5,0,0);
+    real f(real x) { return (x-1)^2; }
+    draw(graph(f, 0.5, 1.5), p=blue);
+    draw((0.5,0.1)--(1.5,0.1), p=gray+smalldashes);
+    dot((1,0), L="$(1,0)$", p=dotpen, align=S);
+
+</li><li>
+The function $f(x)=\frac{(x-1)^3}{x-1}$ is same as the previous function,
+except that $f(1)$ is undefined.
+This means that the graph has a hole at $x=1$.
+However, smallness is defined so that $f(1)$ is ignored,
+so this function is also small near $1$.
+
+asymptote:
+    unitsize(10cm);
+    draw((1-sqrt(0.1),0)--(1+sqrt(0.1),0), p=green+5);
+    real f(real x) { return (x-1)^2; }
+    draw(graph(f, 0.5, 0.985), p=blue);
+    draw(graph(f, 1.015, 1.5), p=blue);
+    draw((0.5,0.1)--(1.5,0.1), p=gray+smalldashes);
+
+</li><li>
+The function $f(x)=x^2$ is small near zero similarly to the previous examples,
+but it is not small near 2.
+This is because $f(x) > 4$ whenever $x > 2$.
+Any interval centered around 2 will contain numbers greater than 2,
+so we can't make the function smaller than the bound number $b=4$.
+
+asymptote:
+    unitsize(2cm);
+    draw((2.2,0)--(2.2,2.2^2), p=lightgreen+smalldashes, align=S);
+    draw((1.7,0)--(2.3,0), p=green+5);
+    axises(-0.5,3,-0.5,6);
+    real f(real x) { return x^2; }
+    draw(graph(f, -0.5, sqrt(6)), p=blue, L=Label("$y=x^2$", position=Relative(0.5), align=W));
+    draw((-0.5,4)--(3.5,4), L=Label("$y=4$", align=N, position=Relative(0.9)), p=gray+smalldashes);
+    dot((2,4), L="$(2,4)$", p=dotpen, align=NW);
+    dot((2,0), L="$2$", p=dotpen, align=S);
+
+For bound numbers greater than 4, it is possible to choose a small enough interval,
+but smallness would mean that we can fit the function below **any** positive bound number.
+
+</li><li>
+The function $f(x)=0.0001$ is not small near any number.
+For example, it's not possible to make it go below the bound $b=0.00000001$.
+The same goes for any function that always outputs the same positive number.
+
+</li><li>
+The function $f(x)=0$ is small near any number. You can pick any interval centered around the number.
+
+</li></ul>
+
+If the function may get negative values,
+we need to ignore the negativity (that is, take the absolute value).
+For example, $-x^2$ is small near zero because $x^2$ is small near zero.
+Thus we arrive at the following definition of smallness.
+
+graybox:
+    A function $f$ is **small near** a number $a$, if for any $b>0$
+    (called the "bound number"),
+    there is some interval centered around $a$ such that
+    $|f(x)| < b$ on the interval excluding the midpoint $a$.
+
+Instead of $|f(x)| < b$, we could also write $-b < f(x) < b$.
+It means the same thing.
+
+
+## The Definition
+
+[On the previous page](limit-intro.html), we noticed that
 $$
-f(x) = \frac{x^3-1}{x-1}.
+\lim_{x \to 1} \frac{x^3-1}{x-1} = 3
 $$
-We notice that $f(1)$ is undefined, because that gives division by zero.
-However, if we plug in some values that are just a little bit greater than $1$, we get this:
+by plugging in numbers like this:
 <table><tr>
     <th>$x$</th>
-    <th>$f(x)$</th>
+    <th>$\frac{x^3-1}{x-1}$</th>
 </tr><tr>
     <td>$1$</td><td>undefined</td>
 </tr><tr>
@@ -33,14 +154,6 @@ However, if we plug in some values that are just a little bit greater than $1$, 
     <td>$1.0001$</td><td>$3.00030\dots$</td>
 </tr><tr>
     <td>$1.00001$</td><td>$3.00003\dots$</td>
-</tr></table>
-
-The values of $f$ seem to be quite close to $3$.
-
-We notice a similar thing if we plug in values that are just a little bit less than $1$:
-<table><tr>
-    <th>$x$</th>
-    <th>$f(x)$</th>
 </tr><tr>
     <td>$0.9$</td><td>$2.71000\dots$</td>
 </tr><tr>
@@ -53,207 +166,84 @@ We notice a similar thing if we plug in values that are just a little bit less t
     <td>$0.99999$</td><td>$2.99997\dots$</td>
 </tr></table>
 
-In this situation, we say that the limit of $f(x)$ as $x \to 1$ (read: $x$ approaches $1$, $x$ goes to $1$)
-is $3$, and we write
-$$
-\lim_{x \to 1} f(x) = 3.
-$$
-This lim notation is somewhat tall, so if it's somewhere in the middle of text,
-it's often written with the $x \to 1$ part off to the side,
-like $\lim_{x \to 1} f(x)$.
+Subtracting 3 from the values of the function gives us small numbers.
 
-We will work with limits a lot, and that will include proving some things about limits.
-Even though plugging in a bunch of numbers is a good way to make a guess about the limit,
-it won't suffice anymore when we want to do something more generally and we can't just plug in numbers.
-For that, we need a better definition of limit.
-
-
-## Definition with intervals
-
-Consider the open interval $(2.99, 3.01)$; that is,
-the set of all numbers between $2.99$ and $3.01$.
-The ends of this interval are $3 \pm 0.01$, and the center of the interval is $3$.
-The interval is open, which means that the end points are not included in the interval,
-$2.99 \notin (2.99, 3.01)$ and $3.01 \notin (2.99, 3.01)$.
-
-asymptote:
-    unitsize(300cm);
-    draw((2.98,0)--(3.02,0), arrow=Arrow(5mm));
-
-    draw((2.99,0)--(3.01,0), p=deepgreen+5);
-
-    dot((2.99,0), p=dotpen, L="$2.99$", align=S);
-    dot((3,0), p=dotpen, L="$3$", align=S);
-    dot((3.01,0), p=dotpen, L="$3.01$", align=S);
-
-    draw(brace_with_space((2.99, 0), (3, 0), 0.002), L="$0.01$", align=N, p=deepred);
-    draw(brace_with_space((3, 0), (3.01, 0), 0.002), L="$0.01$", align=N, p=deepred);
-
-By plugging in more numbers, we notice that
-$$
-f(0.997) = 2.991009 \in (2.99, 3.01)
-$$
-and
-$$
-f(1.003) = 3.009009 \in (2.99, 3.01).
-$$
-Let's see what happens for numbers between $0.997$ and $1.003$.
 <table><tr>
     <th>$x$</th>
-    <th>$f(x)$</th>
+    <th>$\frac{x^3-1}{x-1} - 3$</th>
 </tr><tr>
-    <td>$0.997$</td><td>$2.991009 \in (2.99, 3.01)$</td>
+    <td>$1$</td><td>undefined</td>
 </tr><tr>
-    <td>$0.998$</td><td>$2.994004 \in (2.99, 3.01)$</td>
+    <td>$1.1$</td><td>$0.31000\dots$</td>
 </tr><tr>
-    <td>$0.999$</td><td>$2.997001 \in (2.99, 3.01)$</td>
+    <td>$1.01$</td><td>$0.03010\dots$</td>
 </tr><tr>
-    <td>$1.000$</td><td>undefined</td>
+    <td>$1.001$</td><td>$0.00300\dots$</td>
 </tr><tr>
-    <td>$1.001$</td><td>$3.003001 \in (2.99, 3.01)$</td>
+    <td>$1.0001$</td><td>$0.00030\dots$</td>
 </tr><tr>
-    <td>$1.002$</td><td>$3.006004 \in (2.99, 3.01)$</td>
+    <td>$1.00001$</td><td>$0.00003\dots$</td>
 </tr><tr>
-    <td>$1.003$</td><td>$3.009009 \in (2.99, 3.01)$</td>
+    <td>$0.9$</td><td>$-0.29000\dots$</td>
+</tr><tr>
+    <td>$0.99$</td><td>$-0.02990\dots$</td>
+</tr><tr>
+    <td>$0.999$</td><td>$-0.00299\dots$</td>
+</tr><tr>
+    <td>$0.9999$</td><td>$-0.00029\dots$</td>
+</tr><tr>
+    <td>$0.99999$</td><td>$-0.00002\dots$</td>
 </tr></table>
 
-We can't check every number between $0.997$ and $1.003$ with a calculator,
-but what seems to be happening is that
-$$
-f(\text{any number between $0.997$ and $1.003$ except $1$}) \in (2.99,3.01).
-$$
-Let $I_x=(0.997,1.003)$ denote the interval of numbers that we plug into the function, and
-let $I_y=(2.99,3.01)$   denote the interval containing the outputs of the function.
-We started with $I_y=(2.99,3.01)$, and then found an interval $I_x$ such that
-$$
-f(\text{any number in $I_x$ except $1$}) \in I_y.
-$$
-The definition of $\lim_{x \to 1} f(x) = 3$ is that we always find some $I_x$ interval,
-no matter which $I_y$ interval we choose.
-So, the definition goes as follows:
-for any open interval $I_y$ centered around $3$,
-there is some open interval $I_x$ centered around $1$ such that
-$$
-f(\text{any number in $I_x$ except $1$}) \in I_y.
-$$
-We have been looking at an example where the limit as $x$ approaches $1$ is $3$,
-but the same works for any other number $a$ being approached, and with any other limit value $L$.
+This makes sense: "close to $3$" is same as "difference to 3 is small".
+Because we have defined precisely what small means,
+we can use this idea to define limits:
 
 graybox:
-    Let $a,L \in \mathbb{R}$, and let $f$ be a function.
-    The limit is defined as follows:
-    we write $\lim_{x \to a} f(x) = L$, if
-    for any open interval $I_y$ centered around $L$,
-    there is some open interval $I_x$ centered around $a$ such that
+    We say that function $f$ has **limit** $L$ as $x$ approaches $a$ and we write
     $$
-    f(\text{any number in $I_x$ except $a$}) \in I_y.
+    \lim_{x \to a} f(x) = L,
     $$
-    Here I refer to $I_x$ as the *input interval*, and I refer to $I_y$ as the *output interval*.
+    if $f(x)-L$ is a small function near $a$.
 
-So far we have worked with $a=1$ and $L=3$.
+Because we defined precisely what small means,
+there's nothing vague in this definition,
+and it's possible to write convincing proofs and derivations based on it.
 
+By noticing that $f(x)-L=\text{small}$ can be rewritten as $f(x)=L+\text{small}$,
+we arrive with the following alternative way to write the definition:
 
-## Things to note
+graybox:
+    We say that a function $f$ has **limit** $L$ as $x$ approaches $a$ and we write
+    $$
+    \lim_{x \to a} f(x) = L,
+    $$
+    if
+    $$
+    f(x) = L + (\text{some function that is small near $a$}).
+    $$
 
-Explaining the above definition with words, it says that
-if we want to get the values of a function into any output interval (no matter how small),
-then there is an input interval that allows us to do so.
-
-The calculations we did with a calculator and our example function $f$
-don't prove that $\lim_{x \to 1} f(x) = 3$.
-To actually prove it, we should check all the infinitely many $I_y$ intervals
-instead of just $(2.99, 3.01)$.
-
-The definition of a limit doesn't use $f(a)$ at all.
-In our example, we had $a=1$, and $f(a)$ was undefined;
-even that didn't matter, because we never needed to calculate $f(a)$.
-This makes sense, because limits are all about what happens **around** $a$,
-not at all about what happens at exactly $x=a$.
-
-If we pick a smaller $I_y$ interval that the values of the function must fit into,
-then we likely also need more restrictions for which values of the function we are considering,
-which we can do by choosing a smaller $I_x$ interval.
-This is fine; the choice of the interval $I_x$ may depend on the interval $I_y$ being used.
-
-The openness of the intervals isn't needed for anything.
-The same definition could be presented with closed intervals, which would include the end points,
-but open intervals are much more commonly used for this so I did it that way too.
-
-This definition is usually written in a slightly different way,
-and that's called the $\epsi,\delta$ definition of a limit.
-The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$, so that
-$$
-I_y = (L-\epsi,L+\epsi),
-$$
-and using the delta letter $\delta$ to denote the size of $I_x$ similarly,
-$$
-I_x = (a-\delta,a+\delta).
-$$
+In other words, if we look at the function near $a$,
+its value is close to $L$, but with a small error.
+That error (the small function) may be positive or negative.
 
 
-## Graph
+## How to explain smallness to others
 
-Let's figure out what the definition of the limit looks like in the graph of a function.
-We continue with the same example that we had earlier on this page; that is,
-$$
-f(x) = \frac{x^3-1}{x-1}, \quad
-I_y = (2.99, 3.01), \quad
-I_x = (0.997, 1.003).
-$$
-The graph of $f$ looks like this:
+By plugging in $L=0$ into the definition of limit, we see that
+$\lim_{x \to a} f(x) = 0$ is same as the function $f$ itself
+being small near $a$.
 
-asymptote:
-    unitsize(2cm);
+graybox:
+    A function $f$ is small near $a$ if and only if $\lim_{x \to a} f(x) = 0$·
 
-    real f(real x) {
-        return x^2+x+1;
-    }
+This should make sense.
+Limit zero means you get values near zero if you plug in numbers near $a$.
+Smallness means you can make the function smaller than any positive bound
+on some interval centered around $a$.
+These are different ways to express the same thing.
 
-    axises(-1, 3, -1, 7);
-    draw(graph(f, -1, 2), p=blue, L=Label("$y=f(x)$", position=Relative(0.7)));
-
-    draw((1,0)--(1,3)--(0,3), p=gray+smalldashes);
-    label((1,0), L="$1$", align=S);
-    label((0,3), L="$3$", align=W);
-
-    draw(shift(1, 3)*scale(0.05)*scale(2, 2)*shift(-0.5, -0.5)*unitsquare, p=red);
-
-Let's zoom onto the square that I marked with red.
-The interval $I_y=(2.99, 3.01)$ is for the values of the function, so I'll draw it on the $y$ axis,
-and $I_x=(0.997,1.003)$ is for the inputs of the function, so I'll draw that on the $x$ axis.
-The axes should actually be quite far away from the red square that we're zooming into,
-but I'm drawing them anyway because I want something to mark intervals and numbers onto.
-
-asymptote:
-    unitsize(300cm);
-
-    real f(real x) {
-        return x^2+x+1;
-    }
-
-    axises(0.003, 0.03, 0.003, 0.05);
-
-    transform T = shift(-0.985, -2.97);
-    transform Tx = scale(1,0)*T;   // send everything onto the x axis
-    transform Ty = scale(0,1)*T;   // send everything onto the y axis
-
-    draw(T*graph(f, 0.989, 1.006), p=blue);
-    dot(T*(1,f(1)), p=white+dotpen);
-
-    draw(Ty*( (0,2.99)--(0,3.01) ), p=deepgreen+5, L="$I_y$", align=W);
-    draw(Tx*( (0.997,0)--(1.003,0) ), p=deepred+5, L="$I_x$", align=N);
-
-    draw( (Tx*(0.997, 0)) -- (T*(0.997,f(0.997))) -- (Ty*(0,f(0.997))), p=gray+smalldashes);
-    draw( (Tx*(1.003, 0)) -- (T*(1.003,f(1.003))) -- (Ty*(0,f(1.003))), p=gray+smalldashes);
-
-    dot(Tx*(0.997,0), p=dotpen, L="0.997", align=cis(-pi/2-0.3));
-    dot(Tx*(1.003,0), p=dotpen, L="1.003", align=cis(-pi/2+0.3));
-    dot(Ty*(0,2.99), p=dotpen, L="2.99", align=W);
-    dot(Ty*(0,3.01), p=dotpen, L="3.01", align=W);
-
-There's a hole in the graph because $f(1)$ is undefined; that gives division by zero.
-The dashed lines are showing which $f$ values we get
-for inputs in $I_x$.
-Note that the values of $f$ that we get by plugging in numbers from $I_x$
-don't "fill" all of $I_y$, but that doesn't matter;
-what matters is that they all go somewhere inside $I_y$.
+This is an easy way to explain what the "smallness" means
+when you discuss the content of this page
+with someone who learned limits elsewhere.
+You can just say: smallness means the limit is zero.

@@ -163,6 +163,7 @@ def get_sidebar_content(txtfile):
         dropdown("Calculus", join([
             dropdown("Limits", join([
                 link('"Definition" by plugging in numbers', 'calc/limit-intro'),
+                link("Small functions", 'calc/limit-small'),
                 link("Definition of limit", 'calc/limit-def'),
                 link("Limit basics", 'calc/limit-basics'),
                 link("Limits and bounded functions", 'calc/limit-bounded'),
@@ -330,8 +331,13 @@ def get_head_extras(filename):
 builder.get_sidebar_content = get_sidebar_content
 builder.get_head_extras = get_head_extras
 
-old_get_title = builder.get_title
-builder.get_title = lambda path: old_get_title(path) + " - Math Derivations"
+
+# Avoid stripping quotes from titles ("Definition" of limit), add "Math Derivations" to end
+def get_title(path):
+    with open(path, "r") as file:
+        return file.readline().strip().strip("#") + " - Math Derivations"
+
+builder.get_title = get_title
 
 
 # prevent htmlthingy from processing what's between $ or $$

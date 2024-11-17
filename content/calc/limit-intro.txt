@@ -11,7 +11,13 @@ but integrals are almost always calculated using derivatives.
 There are two common ways to introduce limits:
 teaching students to calculate limits without talking much about why they work like they do (high schools), and
 proving all the properties of limits needed very carefully with somewhat difficult proofs (university).
-On this page we explore the "high school" approach
+
+The "university" approach is **not easy**,
+so we start with the "high school" approach,
+and then move on to a definition that
+resembles the "university" approach a lot but is hopefully easier.
+
+On this page, we explore the "high school" approach
 and discuss its advantages and limitations.
 
 Let's get started by plugging some numbers into the function
@@ -78,7 +84,7 @@ We have the following limit:
 $$
 \lim_{x \to 3} x = 3
 $$
-This means that if we take values of $x$ that are close to $3$ ($x \to a$),
+This means that if we take values of $x$ that are close to $3$ ($x \to 3$),
 and we do nothing to them, we get numbers that are close to $3$.
 
 Here is an even simpler example:
@@ -89,8 +95,6 @@ This means that if we first take values of $x$ that are close to $a$,
 and then throw them away and instead always take the number $5$,
 then the resulting number $5$ is close to $5$.
 Any number is considered to be close to itself.
-
-The same works for any other numbers instead of 3 and 5.
 
 
 ## Limits don't always exist
@@ -238,4 +242,4 @@ While this works, this method also has downsides:
     "Just plug in nearby numbers" is not a good definition,
     so if you try to prove something with it, the "proof" won't be convincing.
 
-To fix these problems, on [the next page](limit-def.html) we define limits precisely.
+To fix these problems, we will later define limits precisely.

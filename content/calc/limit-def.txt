@@ -2,134 +2,19 @@
 
 insert-function-warning-here
 
-[On the previous page](limit-intro.html),
-we "defined" limits by plugging in nearby numbers.
-For example, to calculate $\lim_{x \to 3} f(x)$,
-we calculated things like $f(3.00001)$.
-
+So far, we have
+["defined" limits by plugging in nearby numbers](limit-intro.html).
 There were several problems with this approach.
-On this page we fix them by defining limits precisely.
-**This is not easy.**
 
-That said, I have tried to make this as easy as possible.
+On this page we fix them by defining limits precisely.
+We use [smallness as defined on the previous page](limit-small.html)
+to simplify this.
 In my opinion, this approach is much easier
-than the standard way to teach the definition.
+than the standard way to teach the definition of limit.
 If you want to learn the standard way instead,
 just go study mathematics in any university.
 
-
-## Defining small functions
-
-Usually "small" doesn't mean anything specific in mathematics,
-but in this context it's convenient to assign a meaning to it.
-
-The purpose of introducing small functions
-is to make the definition of limit easier.
-Traditionally, smallness is baked into the definition of limit,
-so it becomes one big mess that is hard to understand and work with.
-I don't want that.
-
-An open interval is **centered around $a$** if it's $(a-r, a+r)$ for some $r > 0$.
-For example, $(4,6)$ is an interval centered around $5$.
-
-Suppose $f$ is a function whose values are not negative.
-We say that $f$ is **small near $a$**,
-if for any positive "bound number" $b > 0$,
-we have $f(x) < b$ on some interval centered around $a$, excluding the midpoint $a$.
-The excluding means that we don't care about what $f(a)$ is;
-we only consider inputs around the number $a$, not exactly at $a$.
-
-Here are some examples to clarify this.
-
-<ul><li>
-The function $f(x)=(x-1)^2$ is small near $1$.
-In the picture below, I have chosen the bound number $b=0.1$,
-and indeed, the function is below that bound on some interval centered around 1,
-marked in green.
-(We could calculate what exactly that interval is, but it's not important.)
-The same works for any positive bound number
-because the graph is a [parabola](../analytic-plane-geometry/parabola.html)
-whose peak is at $(1,0)$.
-
-asymptote:
-    unitsize(3cm);
-    draw((1-sqrt(0.1),0)--(1+sqrt(0.1),0), p=green+5);
-    axises(-0.5,3,-0.5,2.5);
-    real f(real x) { return (x-1)^2; }
-    draw(graph(f, -0.5, 2.5), p=blue, L=Label("$y=(x-1)^2$", position=Relative(0.8), align=E));
-    draw((-0.5,0.1)--(3,0.1), L=Label("$y=0.1$", align=N, position=Relative(0.8)), p=gray+smalldashes);
-    dot((1,0), L="$(1,0)$", p=dotpen, align=S);
-
-Here is a zoomed-in view:
-
-asymptote:
-    unitsize(10cm);
-    draw((1-sqrt(0.1),0)--(1+sqrt(0.1),0), p=green+5);
-    axises(0.5,1.5,0,0);
-    real f(real x) { return (x-1)^2; }
-    draw(graph(f, 0.5, 1.5), p=blue);
-    draw((0.5,0.1)--(1.5,0.1), p=gray+smalldashes);
-    dot((1,0), L="$(1,0)$", p=dotpen, align=S);
-
-</li><li>
-The function $f(x)=\frac{(x-1)^3}{x-1}$ is same as the previous function,
-except that $f(1)$ is undefined.
-This means that the graph has a hole at $x=1$.
-However, smallness is defined so that $f(1)$ is ignored,
-so this function is also small near $1$.
-
-asymptote:
-    unitsize(10cm);
-    draw((1-sqrt(0.1),0)--(1+sqrt(0.1),0), p=green+5);
-    real f(real x) { return (x-1)^2; }
-    draw(graph(f, 0.5, 0.985), p=blue);
-    draw(graph(f, 1.015, 1.5), p=blue);
-    draw((0.5,0.1)--(1.5,0.1), p=gray+smalldashes);
-
-</li><li>
-The function $f(x)=x^2$ is small near zero similarly to the previous examples,
-but it is not small near 2.
-This is because $f(x) > 4$ whenever $x > 2$.
-Any interval centered around 2 will contain numbers greater than 2,
-so we can't make the function smaller than the bound number $b=4$.
-
-asymptote:
-    unitsize(2cm);
-    draw((2.2,0)--(2.2,2.2^2), p=lightgreen+smalldashes, align=S);
-    draw((1.7,0)--(2.3,0), p=green+5);
-    axises(-0.5,3,-0.5,6);
-    real f(real x) { return x^2; }
-    draw(graph(f, -0.5, sqrt(6)), p=blue, L=Label("$y=x^2$", position=Relative(0.5), align=W));
-    draw((-0.5,4)--(3.5,4), L=Label("$y=4$", align=N, position=Relative(0.9)), p=gray+smalldashes);
-    dot((2,4), L="$(2,4)$", p=dotpen, align=NW);
-    dot((2,0), L="$2$", p=dotpen, align=S);
-
-For bound numbers greater than 4, it is possible to choose a small enough interval,
-but smallness would mean that we can fit the function below **any** positive bound number.
-
-</li><li>
-The function $f(x)=0.0001$ is not small near any number.
-For example, it's not possible to make it go below the bound $b=0.00000001$.
-The same goes for any function that always outputs the same positive number.
-
-</li><li>
-The function $f(x)=0$ is small near any number. You can pick any interval centered around the number.
-
-</li></ul>
-
-If the function may get negative values,
-we need to ignore the negativity (that is, take the absolute value).
-For example, $-x^2$ is small near zero because $x^2$ is small near zero.
-Thus we arrive at the following definition of smallness.
-
-graybox:
-    A function $f$ is **small near** a number $a$, if for any $b>0$
-    (called the "bound number"),
-    there is some interval centered around $a$ such that
-    $|f(x)| < b$ on the interval excluding the midpoint $a$.
-
-Instead of $|f(x)| < b$, we could also write $-b < f(x) < b$.
-It means the same thing.
+The tl;dr is: limit means that the difference from the limit value is small.
 
 
 ## The Definition
@@ -196,8 +81,7 @@ Subtracting 3 from the values of the function gives us small numbers.
 </tr></table>
 
 This makes sense: "close to $3$" is same as "difference to 3 is small".
-Because we have defined precisely what small means,
-we can use this idea to define limits:
+Wse can use this idea to define limits:
 
 graybox:
     We say that function $f$ has **limit** $L$ as $x$ approaches $a$ and we write

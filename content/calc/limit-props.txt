@@ -16,9 +16,32 @@ where we used most of the results from [the limit basics page](limit-basics.html
 On this page, we figure out whether this and other similar things work.
 
 
-## Interval thing
+## Properties of small functions
 
-Before talking more about limits, we need a result about intervals.
+Before talking more about limits, we need some more results about small functions,
+because [we defined limits with small functions](limit-def.html).
+Suppose that $s_1(x)$ and $s_2(x)$ are small functions near some number $a$.
+
+We show that $s_1(x) + s_2(x)$ is also a small function.
+We want $-b < s_1(x) + s_2(x) < b$ for any positive bound number $b$.
+Because $s_1(x)$ is small, there is some interval $I_1$ centered around $a$
+where it is smaller than $\frac{b}{2}$, except possibly at the center $a$:
+$$
+-\frac{b}{2} < s_1(x) < \frac{b}{2}.
+$$
+Likewise, there's some interval $I_2$ centered around $a$ where
+$$
+-\frac{b}{2} < s_2(x) < \frac{b}{2}
+$$
+The definition of smallness uses $b$ instead of $\frac{b}{2}$,
+but it works for **any** positive number.
+Because $\frac{b}{2}$ is indeed a positive number,
+we can use it with that.
+
+
+
+although this works on a different interval t
+
 Suppose that $a$ and $b$ are numbers in the open interval $(-r, r)$, where $r$ is a positive number.
 What can we say about $a+b$?
 

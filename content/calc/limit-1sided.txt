@@ -1,132 +1,222 @@
 # One-sided Limits
 
-The input interval in the [definition of limit](limit-def.html) for $\lim_{x \to a} f(x)$
-is an open interval centered around $a$.
-These input intervals are always of the form $(a-\delta, a+\delta)$,
-where $\delta$ is a positive number.
+Some functions behave differently depending on
+whether you approach a value from the left or the right.
+For example, consider $\lim_{x \to 0} f(x)$, where
+$$
+f(x) = x^2 + \frac{x}{|x|}.
+$$
+The graph of this function looks like this:
+
+asymptote:
+    unitsize(2cm);
+    axises(-2,2,-1.5,5);
+    real f(real x) { return x/abs(x) + x^2; }
+    draw(graph(f, -2, -0.01), p=blue);
+    draw(graph(f, 0.01, 2), p=blue, L="$y=f(x)$", align=E);
+
+Now $f(0)$ is undefined because it divides by zero,
+so it's tempting to analyze the behavior of $f$ with the limit $\lim_{x \to 0} f(x)$.
+If we plug in values that are just a little bit greater than $0$,
+it seems like the limit is $1$:
+
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$0$</td><td>undefined</td>
+</tr><tr>
+    <td>$0.1$</td><td>$1.01$</td>
+</tr><tr>
+    <td>$0.01$</td><td>$1.0001$</td>
+</tr><tr>
+    <td>$0.001$</td><td>$1.000001$</td>
+</tr></table>
+
+But if we plug in values that are just a little bit less than $0$,
+it seems like the limit is $-1$:
+
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$-0.1$</td><td>$0.99$</td>
+</tr><tr>
+    <td>$-0.01$</td><td>$0.9999$</td>
+</tr><tr>
+    <td>$-0.001$</td><td>$0.999999$</td>
+</tr></table>
+
+Unfortunately, [this means that the limit doesn't exist](limit-intro.txt#surprising-example).
+
+In these situations, we can use **left limits** and **right limits**.
+The left limit of this function is
+$$
+\lim_{x \to 0^-} f(x) = -1,
+$$
+and the right limit is
+$$
+\lim_{x \to 0^+} f(x) = 1.
+$$
+Here the small $-$ or $+$ describes how $x$ approach zero:
+minus means we plug in numbers slightly smaller than zero,
+and plus means slightly bigger than zero.
+
+
+## Definition
+
+To define limits, we started by definining [small functions](limit-small.html)
+like this:
+A function $f$ is small near a number $a$,
+if for any bound number $b>0$,
+there is some interval centered around $a$ such that
+$|f(x)| < b$ on the interval excluding the center $a$.
+
+Here "centered around $a$" meant that the interval is $(a-r, a+r)$ with some $r > 0$.
+To adapt this definition for left and right limits,
+we simply change the interval:
+
+graybox:
+    A function $f$ is **small on the left side of** a number $a$,
+    if for any $b>0$
+    (called the "bound number"),
+    there is some open interval $(a-r, a)$ such that
+    $|f(x)| < b$ on the interval.
+
+    A function $f$ is **small on the right side of** a number $a$,
+    if for any $b>0$
+    (called the "bound number"),
+    there is some open interval $(a, a+r)$ such that
+    $|f(x)| < b$ on the interval.
+
+This time we don't need to say anything about excluding $a$,
+because it's not included in the intervals to begin with.
+Previously it was the center.
+Previously it was included in as the center of the interval,
+but we didn't want that, because $f(a)$ is often undefined.
+
+For example, the function $f(x)=\sqrt{x}$ (defined only for $x \ge 0$)
+is small on the right side of zero.
+For $b=1$, the interval $(0, 0+r)$ looks like this:
 
 asymptote:
     unitsize(3cm);
+    real b = 1;
+    draw((0,0)--(b^2,0), p=green+5);
+    axises(-0.5,3,-0.5,2.5);
+    real f(real x) { return sqrt(x); }
+    draw(graph(f, 0, 3), p=blue, L=Label("$y=\sqrt{x}$", position=EndPoint, align=N));
+    draw((-0.5,b)--(3,b), L=Label("$y="+string(b)+"$", align=N, position=Relative(0.8)), p=gray+smalldashes);
 
-    draw((0,0)--(4,0), arrow=Arrow(5mm));
-    draw((1,0)--(3,0), p=deepred+5);
-
-    dot((1,0), p=dotpen, L="$a-\delta$", align=N);
-    dot((2,0), p=dotpen, L="$a$", align=N);
-    dot((3,0), p=dotpen, L="$a+\delta$", align=N);
-
-For a **right limit**, we instead take the interval $(a, a+\delta)$.
-We denote right limits just like the usual (both-sided) limits, but with $x \to a^+$ instead of $x \to a$.
+For $b=0.3$, it looks like this:
 
 asymptote:
     unitsize(3cm);
+    real b = 0.3;
+    draw((0,0)--(b^2,0), p=green+5);
+    axises(-0.5,3,-0.5,2.5);
+    real f(real x) { return sqrt(x); }
+    draw(graph(f, 0, 3), p=blue, L=Label("$y=\sqrt{x}$", position=EndPoint, align=N));
+    draw((-0.5,b)--(3,b), L=Label("$y="+string(b)+"$", align=N, position=Relative(0.8)), p=gray+smalldashes);
 
-    draw((0,0)--(4,0), arrow=Arrow(5mm));
-    draw((2,0)--(3,0), p=deepred+5);
-
-    dot((2,0), p=dotpen, L="$a$", align=N);
-    dot((3,0), p=dotpen, L="$a+\delta$", align=N);
-
-This is called the right limit, because on the number line,
-the input interval being used is the right half of the interval $(a-\delta, a+\delta)$.
-
-graybox:
-    The right limit is defined as follows:
-    we write $\lim_{x \to a^+} f(x) = L$, if
-    for any open interval $I_y$ centered around $L$,
-    there is an open interval $I_x=(a, a+\delta)$ (for some $\delta > 0$) such that
-    $$
-    f(\text{any number in $I_x$}) \in I_y.
-    $$
-
-Note that we don't need to say "any number in $I_x$ except $a$", like we do with both-sided limits;
-the number $a$ is not in any interval $(a, a+\delta)$.
-In the both-sided limit definition, we needed to exclude $a$ more explicitly,
-because it was in the center of an interval rather than being an end point.
-
-We define the left limit similarly.
+Now that we have small functions, we can use them to define left and right limits.
+These are just like [the usual definition](limit-def.html)
+except that we use "small on the left/right side" instead of "small near".
 
 graybox:
-    The left limit is defined as follows:
-    we write $\lim_{x \to a^-} f(x) = L$, if
-    for any open interval $I_y$ centered around $L$,
-    there is an open interval $I_x=(a-\delta, a)$ (for some $\delta > 0$) such that
+    We say that a function f has a **left limit** $L$ as $x$ approaches $a$ and we write
     $$
-    f(\text{any number in $I_x$}) \in I_y.
+    \lim_{x \to a^-} f(x) = L,
+    $$
+    if $f(x)-L$ is small on the left side of $a$, which means that
+    $$
+    f(x) = L + (\text{some function that is small on the left side of $a$}).
     $$
 
-A consequence of these definitions is that if the function $f$ is defined like
-$$
-f(x) = \begin{cases}
-    \text{left part}, & \text{if $x < 4$}; \\
-    \text{center part}, & \text{if $x = 4$}; \\
-    \text{right part}, & \text{if $x > 4$},
-\end{cases}
-$$
-then
+    We say that a function f has a **right limit** $L$ as $x$ approaches $a$ and we write
+    $$
+    \lim_{x \to a^+} f(x) = L,
+    $$
+    if $f(x)-L$ is small on the right side of $a$, which means that
+    $$
+    f(x) = L + (\text{some function that is small on the right side of $a$}).
+    $$
+
+
+## Rules
+
+When deriving rules for small functions,
+we didn't do anything that wouldn't also work with one-sided small functions.
+Basically, you can just replace "interval $I$ centered at $a$"
+with "interval $I$ on the left/right side of $a$" as needed.
+
+graybox:
+    The [rules for small functions near a number](limit-small.html) also work
+    for functions that are small on the left/right side of a number.
+
+We derived limit rules based on how small functions behave.
+Because the rules of small functions work the same for left and right limits,
+the limit rule derivations also work for left and right limits.
+
+graybox:
+    The [rules for calculating limits](limit-props.html) also work for one-sided limits.
+
+
+## Example
+
+In the beginning of this page, we guessed the left and right limits
+of the function $f(x)=x^2+\frac{x}{|x|}$ by plugging in numbers.
+Let's calculate them.
+
+When calculating the left limit,
+we only need to consider the function on intervals like $(0-r, 0)$,
+so $x$ is negative and we have $|x| = -x$.
+For example, for $x=-0.1$ this looks like $|-0.1| = 0.1 = -(-0.1)$.
+This means that $\frac{x}{|x|}$ simplifies to $\frac{x}{-x}$, which is $-1$.
+Like this:
 $$
 \begin{align}
-&\lim_{x \to 4^-} f(x) = \lim_{x \to 4^-} (\text{left part}), \\
-&\lim_{x \to 4^+} f(x) = \lim_{x \to 4^+} (\text{right part}).
+\lim_{x \to 0^-} \left( x^2 + \frac{x}{|x|} \right)
+&= \lim_{x \to 0^-} \left( x^2 + \frac{x}{-x} \right) \\
+&= \lim_{x \to 0^-} \left( x^2 + (-1) \right) \\
+&= \lim_{x \to 0^-} x^2 - \lim_{x \to 0^-} 1 \\
+&= \left( \lim_{x \to 0^-} x \right)^2 - \lim_{x \to 0^-} 1 \\
+&= 0^2 - 1 = -1
 \end{align}
 $$
-The definition of the left limit doesn't use the values of $f(x)$ for $x \ge 4$ anywhere,
-so as far as it's concerned, $f(x)$ is just the left part.
-The right limit is similar.
-Also, notice that no limit with $x \to 4$, $x \to 4^-$ or $x \to 4^+$ uses the center part;
-limits are all about what happens around $4$, not at all about what happens at exactly $x=4$.
-
-One-sided limits have all the nice properties that we have proved so far for both-sided limits;
-modifying the proofs to use one-sided limits instead of both-sided limits is easy.
-
-
-## Connection to both-sided limit
-
-Suppose that $\lim_{x \to a} f(x) = L$.
-Now, for any output interval $I_y$ centered around $L$,
-we get an input interval $I_x=(a-\delta, a+\delta)$ centered around $a$ so that
-$$
-f(\text{any number in $I_x$ except $a$}) \in I_y.
-$$
-Because any number in $(a,a+\delta)$ is also in $I_x$, we get
-$$
-f(\text{any number in $(a,a+\delta)$}) \in I_y,
-$$
-which shows that $\lim_{x \to a^+} f(x) = L$.
-Similarly we get $\lim_{x \to a^-} f(x) = L$.
-
-So, if the both-sided limit exists, then the one-sided limits exist too,
-and the values of all these limits are equal.
-However, if the one-sided limits exist, then the both-sided limit might still not exist!
-For example, let $J$ denote [the "jumping function"](limit-basics.html#jumping-function) given by
-$$
-J(x) = \begin{cases}
-    -1, & \text{if $x < 3$}; \\
-    +1, & \text{if $x \ge 3$}.
-\end{cases}
-$$
-The both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist,
-but the one-sided limits exist; they are
-$$
-\lim_{x \to 3^-} J(x) = \lim_{x \to 3^-} -1 = -1
-$$
-and
-$$
-\lim_{x \to 3^+} J(x) = \lim_{x \to 3^-} 1 = 1.
-$$
-In this case, the one-sided limits are not equal.
-Let's see what happens to the both-sided limit if the one-sided limits are equal.
-
-Suppose that $\lim_{x \to a^+} f(x) = L$ and $\lim_{x \to a^-} f(x) = L$.
-Let $I_y$ be any open interval centered around $L$.
-By the definition of the left and right limits,
-we get intervals $(a-\delta_1,a)$ and $(a,a+\delta_2)$ such that
+In the right limit, we have $|x| = x$:
 $$
 \begin{align}
-    &f(\text{any number in $(a-\delta_1,a)$}) \in I_y, \\
-    &f(\text{any number in $(a,a+\delta_2)$}) \in I_y.
+\lim_{x \to 0^-} \left( x^2 + \frac{x}{|x|} \right)
+&= \lim_{x \to 0^-} \left( x^2 + \frac{x}{x} \right) \\
+&= \lim_{x \to 0^-} \left( x^2 + 1 \right) \\
+&= \lim_{x \to 0^-} x^2 + \lim_{x \to 0^-} 1 \\
+&= \left( \lim_{x \to 0^-} x \right)^2 + \lim_{x \to 0^-} 1 \\
+&= 0^2 + 1 = 1
 \end{align}
 $$
+
+
+## Connection to both-sided limits
+
+Let $s$ be any function that is small near $a$.
+Then it is also small on the left side of $a$,
+because "small on the left side" requires less than "small near".
+For "small on the left side", you only use the left half $(a-r,a)$
+of the both-sided interval $(a-r,a+r)$.
+Similarly, $s$ is small on the right side of $a$.
+
+We show that this also works in the other direction.
+That is, if $s$ is small on the left side of $a$ and on the right side of $a$,
+then it is small near $a$.
+
+At first, this might seem wrong,
+because the interval sizes (denoted with $r$) may be different.
+For any bound number $b > 0$,
+small on the left side means that $|s(x)| < b$ on $(a-r_1,a)$, and
+small on the right side means that $|s(x)| < b$ on $(a,a+r_2)$.
+We don't necessarily have $r_1 = r_2$,
+so the interval $(a-r_1,b+r_2)$ is not centered around $a$.
 
 asymptote:
     unitsize(3cm);
@@ -135,12 +225,13 @@ asymptote:
     draw((1,0)--(2,0), p=deepred+5);
     draw((2,0)--(4,0), p=darkorange+5);
 
-    dot((1,0), p=dotpen, L="$a-\delta_1$", align=N);
+    dot((1,0), p=dotpen, L="$a-r_1$", align=N);
     dot((2,0), p=dotpen, L="$a$", align=N);
-    dot((4,0), p=dotpen, L="$a+\delta_2$", align=N);
+    dot((4,0), p=dotpen, L="$a+r_2$", align=N);
 
-Let $s$ be the smaller of $\delta_1$ and $\delta_2$ (doesn't matter which if $\delta_1 = \delta_2$).
-Let $I_x=(a-s,a+s)$; this is an open interval centered around $a$.
+However, we can let $s$ be the smaller of $r_1$ and $r_2$.
+In the picture, we take $s = r_1$, because $r_1 < r_2$.
+We then set $I = (a-s,a+s)$.
 
 asymptote:
     unitsize(3cm);
@@ -148,30 +239,39 @@ asymptote:
     draw((0,0)--(5,0), arrow=Arrow(5mm));
     draw((1,0)--(2,0), p=deepred+5);
     draw((2,0)--(4,0), p=darkorange+5);
-    draw((1,-0.15)--(3,-0.15), p=blue+5);
+    draw((1,-0.15)--(3,-0.15), p=blue+5, L=Label("$I$", align=S));
 
-    dot((1,0), p=dotpen, L="$a-\delta_1$", align=N);
+    dot((1,0), p=dotpen, L="$a-r_1$", align=N);
     dot((2,0), p=dotpen, L="$a$", align=N);
-    dot((4,0), p=dotpen, L="$a+\delta_2$", align=N);
+    dot((4,0), p=dotpen, L="$a+r_2$", align=N);
 
     dot((1,-0.15), p=dotpen, L="$a-s$", align=S);
     dot((3,-0.15), p=dotpen, L="$a+s$", align=S);
 
-The numbers on the "left half" of $I_x$ are in $(a-\delta_1,a)$
-and the numbers on the "right half" are in $(a,a+\delta_2)$, so we get
+This interval $I$ is centered around $a$,
+and every number in $I$ except $a$ is included in
+either $(a-r_1,a)$ or $(a,a+r_2)$.
+Therefore $|s(x)| < b$ on the whole $I$ except at its center $a$,
+so $s(x)$ is small near $a$.
+
+graybox:
+    A function is small near a number $a$ if and only if
+    it is small on the left side of $a$ and small on the right side of $a$.
+
+This means that $\lim_{x \to a} f(x) = L$ is the same as
 $$
-f(\text{any number in $I_x$ except $a$}) \in I_y.
+\lim_{x \to a_-} f(x) = L \quad \text{and} \quad
+\lim_{x \to a_+} f(x) = L.
 $$
+In other words, "$f(x)-L$ is small near $a$" is same as
+"$f(x)-L$ is small on the left and right right sides of $a$".
 
 graybox:
     The both-sided limit is $L$ if and only if the left and right limits are $L$.
 
-This result can be used to show more easily that the both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist;
-if that limit existed, we would get
-$$
--1 = \lim_{x \to 3^-} J(x) = \lim_{x \to 3} J(x) = \lim_{x \to 3^+} J(x) = 1,
-$$
-where the first and last equal signs come from the calculations above,
-and the rest of the equal signs come from the result.
-In general, the both-sided limit doesn't exist
-when the values of the left limit and the right limit differ.
+This result is often used show that a limit doesn't exist.
+If you successfully calculate the left and right limits,
+but you get different values,
+then the usual both-sided limit does not exist.
+If you get the same value from left and right limits,
+then the limit exists and it's that value.

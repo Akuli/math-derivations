@@ -97,7 +97,7 @@ then the resulting number $5$ is close to $5$.
 Any number is considered to be close to itself.
 
 
-## Limits don't always exist
+## Surprising example
 
 Let
 $$

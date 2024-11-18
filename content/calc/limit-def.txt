@@ -1,7 +1,5 @@
 # Definition of Limit
 
-insert-function-warning-here
-
 So far, we have
 ["defined" limits by plugging in nearby numbers](limit-intro.html).
 There were several problems with this approach.
@@ -88,9 +86,9 @@ graybox:
     $$
     \lim_{x \to a} f(x) = L,
     $$
-    if $f(x)-L$ is a small function near $a$.
+    if $f(x)-L$ is small near $a$.
 
-Because we defined precisely what small means,
+Because we defined precisely what "small near" means,
 there's nothing vague in this definition,
 and it's possible to write convincing proofs and derivations based on it.
 

@@ -16,128 +16,26 @@ where we used most of the results from [the limit basics page](limit-basics.html
 On this page, we figure out whether this and other similar things work.
 
 
-## Properties of small functions
-
-Before talking more about limits, we need some more results about small functions,
-because [we defined limits with small functions](limit-def.html).
-Suppose that $s_1(x)$ and $s_2(x)$ are small functions near some number $a$.
-
-We show that $s_1(x) + s_2(x)$ is also a small function.
-We want $-b < s_1(x) + s_2(x) < b$ for any positive bound number $b$.
-Because $s_1(x)$ is small, there is some interval $I_1$ centered around $a$
-where it is smaller than $\frac{b}{2}$, except possibly at the center $a$:
-$$
--\frac{b}{2} < s_1(x) < \frac{b}{2}.
-$$
-Likewise, there's some interval $I_2$ centered around $a$ where
-$$
--\frac{b}{2} < s_2(x) < \frac{b}{2}
-$$
-The definition of smallness uses $b$ instead of $\frac{b}{2}$,
-but it works for **any** positive number.
-Because $\frac{b}{2}$ is indeed a positive number,
-we can use it with that.
-
-
-
-although this works on a different interval t
-
-Suppose that $a$ and $b$ are numbers in the open interval $(-r, r)$, where $r$ is a positive number.
-What can we say about $a+b$?
-
-asymptote:
-    unitsize(4cm);
-
-    draw((-2,0)--(2,0), arrow=Arrow(5mm));
-    draw((-1,0)--(1,0), p=darkorange+5);
-
-    dot((-1,0), p=dotpen, L="$-r$", align=N);
-    dot((0,0), p=dotpen, L="$0$", align=N);
-    dot((1,0), p=dotpen, L="$r$", align=N);
-
-    dot((-0.2,0), p=dotpen+deepgreen, L="$a$", align=N);
-    dot((0.4,0), p=dotpen+deepred, L="$b$", align=N);
-
-    draw(brace_with_space((1,0), (0.02,0), 0.1), L="$r$", align=S, p=darkorange);
-    draw(brace_with_space((-0.02,0), (-1,0), 0.1), L="$r$", align=S, p=darkorange);
-
-Because $a$ and $b$ are in $(-r, r)$, we have $-r < a < r$ and $-r < b < r$.
-By combining these inequations together, we get
-$$
-(-r)+(-r) < a+b < r+r,
-$$
-which simplifies to
-$$
--2r < a+b < 2r.
-$$
-This can be written as
-$$
-a+b \in (-2r, 2r).
-$$
-So, if we have $a,b \in (-r, r)$, then we also know that $a+b \in (-2r, 2r)$.
-We'll need this result next.
-
-Usually a more general theorem called triangle inequality is used instead of this,
-but I'm using this instead because it feels somewhat more intuitive to me.
-
-
 ## Limit of sum
 
-Let's go back to the question about limits.
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-We prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.
-
-Let $I_y$ be an open interval centered around $A+B$.
-We can write $I_y$ as $(A+B-\epsi, A+B+\epsi)$ for some positive number $\epsi$.
-By definition of limit,
-there are input intervals centered around $a$ such that
-we can fit the values of $f$ and $g$ into any output intervals around $A$ and $B$ respectively.
-We choose the output intervals
-$\left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right)$ and $\left( B-\frac{\epsi}{2}, B+\frac{\epsi}{2} \right)$.
-The corresponding input intervals are drawn below.
-
-asymptote:
-    unitsize(2cm);
-
-    draw((0,0)--(5,0), arrow=Arrow(5mm));
-    draw((1,0.1)--(3,0.1), p=deepred+5);
-    draw((0.5,-0.1)--(3.5,-0.1), p=darkorange+5);
-
-    label((2,1), L="$a$", align=N, p=blue);
-    draw((2,1)--(2,0.2), arrow=Arrow(4mm), p=blue);
-    dot((2,0), p=dotpen+blue);
-
-[In the past](limit-basics.html#more-than-one-limit) we have used the fact that intervals like this overlap,
-but we can say more than that.
-One of the intervals is smaller and the other is bigger,
-and the smaller interval is a subset of the bigger interval;
-this means that the bigger interval contains all numbers of the smaller interval.
-
-Let $I_x$ be the smaller input interval
-(if the input intervals are the same size, then they are the same interval,
-and it doesn't matter which of them is $I_x$).
-Now any number in $I_x$ is in both of the input intervals, so we have
+According to [the definition of limit](limit-def.html),
+this means that
+$$
+f(x) = A+s_1(x) \quad \text{and} \quad g(x) = A+s_2(x),
+$$
+where $s_1$ and $s_2$ are some functions that are small near $a$. We get
 $$
 \begin{align}
-&f(\text{any number in $I_x$ except $a$}) \in \left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right),
-\\
-&g(\text{any number in $I_x$ except $a$}) \in \left( B-\frac{\epsi}{2}, B+\frac{\epsi}{2} \right).
+f(x)+g(x) &= A+s_1(x) + B+s_2(x) \\
+&= A+B+\underbrace{s_1(x)+s_2(x)}_{\text{small near $a$}}.
 \end{align}
 $$
-Letting $x$ be any number in $I_x$ except $a$, we can write this as
+Here $s_1(x)+s_2(x)$ is small near $a$
+[because it is the sum of two functions that are small near $a$](limit-small.html#sum-of-small-functions).
+According to the definition of limit, this means that
 $$
-f(x) = A+p \quad \text{and} \quad g(x)=B+q
-$$
-for some numbers $p,q \in (-\frac{\epsi}{2},\frac{\epsi}{2})$.
-Now we get
-$$
-f(x)+g(x) = A+B+\underbrace{p+q}_{\in (-\epsi,\epsi)},
-$$
-where for the underbraced part,
-we used the above interval thing with $r=\frac{\epsi}{2}$ and $2r=\epsi$.
-We have
-$$
-f(x)+g(x) \in (A+B-\epsi, A+B+\epsi) = I_y.
+\lim_{x \to a} (f(x)+g(x)) = A+B.
 $$
 
 graybox:
@@ -150,56 +48,33 @@ graybox:
 ## Limit of product
 
 Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-I'll show you most of the proof for $\lim_{x \to a} f(x)g(x) = AB$.
-
-Let $I_y=(AB-\epsi,AB+\epsi)$ be an open interval centered around $AB$.
-By doing same things as for the sum above, we get an input interval $I_x$ such that
-for any $x$ in $I_x$ except $a$, we get
+According to [the definition of limit](limit-def.html),
+this means that
 $$
-f(x)=A+p \quad \text{and} \quad g(x)=B+q,
+f(x) = A+s_1(x) \quad \text{and} \quad g(x) = A+s_2(x),
 $$
-where we can fit $p$ and $q$ into any interval $(-r,r)$;
-above we had $p,q \in (-\frac{\epsi}{2}, \frac{\epsi}{2})$
-but we could have used any other positive number $r$ instead of $\frac{\epsi}{2}$.
-Just like in the sum proof, it is now enough to show that by choosing $r$ wisely, we get
-$$
-f(x)g(x) = AB+\text{something in $(-\epsi,\epsi)$}.
-$$
-By expanding $f(x)g(x)$, we get
+where $s_1$ and $s_2$ are some functions that are small near $a$. We get
 $$
 \begin{align}
-f(x)g(x)
-&= (A+p)(B+q) \\
-&= A(B+q)+p(B+q) \\
-&= AB+\underbrace{Aq+pB+pq}_{\text{Want: $\in (-\epsi,\epsi)$}}.
+f(x)g(x) &= (A+s_1(x))(B+s_2(x)) \\
+&= A(B+s_2(x))+s_1(x)(B+s_2(x)) \\
+&= AB+As_2(x)+Bs_1(x)+s_1(x)s_2(x).
 \end{align}
 $$
-Fitting $Aq+pB+pq$ into $(-\epsi,\epsi)$ can be done by choosing the $r$,
-but filling in all the details results in a mess every time I do it, so I'll skip most of it here.
-However, I'll show you the ideas needed for doing that,
-and you might be able to fill in the skipped details after reading this if you are interested in them.
+After $AB$, we have the sum of 3 functions that are small near $a$:
 
-To fit all of $Aq+pB+pq$ into $(-\epsi,\epsi)$,
-it is enough to ensure that $Aq$, $pB$ and $pq$ are all in $(-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-This can be seen by generalizing the interval thing in the beginning of this page
-for three numbers instead of two.
+* $As_2(x)$ is small near $a$
+    [because it consists of a small function multiplied by a constant](limit-small.html#multiplying-by-constant).
+* $Bs_1(x)$ is small near $a$ for the same reason.
+* $s_1(x)s_2(x)$ is small near $a$
+    [because it is the product of two functions that are small near $a$](limit-small.html#sum-of-small-functions).
 
-Let's say that we want to make the $Aq$ part small enough,
-as in $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-If $A$ is positive, then we can pick $r = \frac{\epsi}{3A}$, because using the fact $q \in (-r,r)$ gives
-$-r < q < r$, which is same as
+Because [the sum of functions that are small near $a$ is also small near $a$](limit-small.html#sum-of-small-functions),
+we have the following:
 $$
--\frac{\epsi}{3A} < q < \frac{\epsi}{3A}.
+f(x) = AB+\underbrace{\underbrace{As_2(x)}_{\text{small}}+\underbrace{Bs_1(x)}_{\text{small}}+\underbrace{s_1(x)s_2(x)}_{\text{small}}}_{\text{small}}
 $$
-Multiplying both sides by $A$ (assuming that it's positive) gives
-$$
--\frac{\epsi}{3} < Aq < \frac{\epsi}{3},
-$$
-so $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-
-Some of the mess comes from handling zero and negative values of $A$ and $B$,
-and the rest comes from combining the conditions ensuring that
-each of $Aq$, $pB$ and $pq$ are small enough.
+Therefore $\lim_{x\to a} f(x)g(x) = AB$.
 
 graybox:
     If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
@@ -239,10 +114,75 @@ graybox:
 
 ## Limit of division
 
-Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-Is it true that
+Based on the rules we've had so far,
+you might guess that if $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
 $$
-\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{A}{B}?
+\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}.
 $$
-This is not true if $B=0$, because then we would divide by zero.
-We'll come back to the case $B \ne 0$ [later](cont-props.html#limit-of-division).
+This isn't as straight-forward as you might expect,
+so I moved this to [a separate page](limit-div.html).
+
+
+## Example
+
+With the rules we have so far, we can calculate e.g. the following limit:
+$$
+\lim_{x \to 2} (2x^2+4x+7)
+$$
+This is a sum of two $2x^2+4x$ and $7$, so we start with the rule for the limit of a sum.
+We can apply it again by viewing $2x^2+4x$ as a sum of two things.
+Like this:
+$$
+\begin{align}
+\lim_{x \to 3} (2x^2+4x+7)
+&= \lim_{x \to 3} (2x^2+4x)+ \lim_{x \to 2} 7 \\
+&= \lim_{x \to 3} 2x^2 + \lim_{x \to 3} 4x + \lim_{x \to 3} 7
+\end{align}
+$$
+As you can see, the limit of sum can also be used for the sum of more than two functions
+(in this case, 3 functions).
+
+Consider the limit of $2x^2$.
+Let's view $2x^2$ as the product of 3 things, as in $2 \cdot x \cdot x$.
+We use the rule for limit of product.
+Just like the rule for sum, it can be applied to more than two functions, like this:
+$$
+\begin{align}
+\lim_{x \to 3} 2x^2
+&= \lim_{x \to 3} (2 \cdot x \cdot x) \\
+&= \left( \lim_{x \to 3} 2 \right)\left( \lim_{x \to 3} x \right)\left( \lim_{x \to 3} x \right)
+\end{align}
+$$
+We can handle the limit of $4x$ similarly.
+Finally, we can use $\lim_{x \to 3} x = 3$ and $\lim_{x \to 2} = 2$
+(these were derived [on the limit basics page](limit-basics.html)).
+We get:
+$$
+\begin{align}
+\lim_{x \to 3} (2x^2+4x+7)
+&= \lim_{x \to 3} 2x^2 + \lim_{x \to 3} 4x + \lim_{x \to 3} 7 \\
+&= \left(\lim_{x \to 3} 2\right)\left( \lim_{x \to 3} x \right)^2
+    + \left(\lim_{x \to 3} 4 \right)\left( \lim_{x \to 3} x \right)
+    + \lim_{x \to 3} 7 \\
+&= 2 \cdot 3^2 + 4 \cdot 3 + 7 \\
+&= 37.
+\end{align}
+$$
+We can [check this by plugging in a number near 3](calc/limit-intro.html):
+$$
+2 \cdot (3.001)^2 + 4 \cdot 3.001 + 7 = 37.016002
+$$
+**We successfully calculated a limit without plugging in numbers and guessing. This is why limit rules are useful.**
+This way to calculate limits may seem like more effort,
+but it's backed by solid mathematical theory,
+so you can be sure that you didn't
+[miss some surprising behavior when plugging in numbers](limit-intro.html#surprising-example).
+
+You might notice that simply setting $x=3$ also gives the correct result:
+$$
+3 \cdot 3^2 + 4 \cdot 3 + 7 = 37
+$$
+This often works, but not always.
+There is a name for this behavior:
+we say that a function is **continuous** if its limits can be calculated this way.
+We will come back to continuity [later](cont-def.html).

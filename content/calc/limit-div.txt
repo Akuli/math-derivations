@@ -1,0 +1,137 @@
+# Limit of division
+
+On [the previous page](limit-props.html), we derived the following limit rules:
+
+* $\displaystyle \lim_{x \to a} (f(x)+g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)$
+* $\displaystyle \lim_{x \to a} (f(x)-g(x)) = \lim_{x \to a} f(x) - \lim_{x \to a} g(x)$
+* $\displaystyle \lim_{x \to a} (f(x)g(x)) = \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} g(x) \right)$
+
+Division turns out to be more complicated than other operations we covered so far.
+We will start with a simple case and then generalize the results,
+but even the simple case is quite tricky.
+
+Make sure you are familiar with [the "small near" concept](limit-small.html),
+as we will be using it quite a bit.
+
+
+## Simple case
+
+Instead of the full $\lim_{x \to a} \frac{f(x)}{g(x)}$,
+let's simplify it a bit for now.
+We assume that $\lim_{x \to a} g(x) = 1$,
+and we calculate the limit
+$$
+\lim_{x \to a} \frac{1}{g(x)}.
+$$
+First we must ensure that we don't divide by zero.
+By [definition of limit](limit-def.html), we have $g(x)=1+s(x)$,
+where $s(x)$ is some function that is small near $a$.
+Because $s(x)$ is small near $a$,
+there is some interval $I$ centered around $a$ where $-0.1 < s(x) < 0.1$ on $I$
+except at the center $a$.
+Therefore $0.9 < g(x) < 1.1$ on $I$ except at the center $a$.
+This means that if we're close enough to $a$,
+we are dividing by something bigger than $0.9$, not zero.
+
+Because $g(x)$ is close to 1,
+we guess that the limit is probably $\frac{1}{1} = 1$.
+We still need to prove that our guess is correct,
+i.e. show that $\frac{1}{g(x)}-1$ is small near $a$.
+Let's simplify it:
+$$
+\begin{align}
+\frac{1}{g(x)}-1
+&= \frac{1}{g(x)}-\frac{g(x)}{g(x)} \\
+&= \frac{1 - g(x)}{g(x)} \\
+&= \frac{1 - (1+s(x))}{g(x)} \\
+&= \frac{-s(x)}{g(x)} \\
+&= -\frac{1}{g(x)} s(x).
+\end{align}
+$$
+This is small near $a$.
+Because $g(x)$ is between $0.9$ and $1.1$,
+the $\frac{1}{g(x)}$ is between $\frac{1}{0.9} \approx 1.111$ and $\frac{1}{1.1} \approx 0.909$.
+This means that multiplying by $\frac{1}{g(x)}$ may increase the result slightly,
+but you can easily compensate for it by making $s(x)$ even smaller,
+just like [in this derivation](limit-small.html#multiplying-by-constant).
+The minus in front doesn't affect the smallness in any way.
+
+graybox:
+    If $\lim_{x \to a} g(x) = 1$, then $\lim_{x \to a} \frac{1}{g(x)} = 1$.
+
+
+## Generalizing to any limit of $g$
+
+Above we assumed that the limit of $g$ is 1.
+This isn't very useful,
+because usually the limit of a function doesn't happen to be 1.
+
+Suppose that $\lim_{x \to a} g(x) = L$ and $L \ne 0$.
+Then [the rule for limit of product](limit-props.html#limit-of-product) gives us
+$$
+\begin{align}
+\lim_{x \to a} \frac{g(x)}{L}
+&= \lim_{x \to a} \left( \frac{1}{L} g(x) \right) \\
+&= \left( \lim_{x \to a} \frac{1}{L} \right) \left( \lim_{x \to a} g(x) \right) \\
+&= \frac{1}{L} \cdot L \\
+&= 1.
+\end{align}
+$$
+This makes sense, because $g(x)$ is approximately $L$,
+so dividing it by $L$ gives a value that is approximately $\frac{L}{L} = 1$.
+
+Because the function $\frac{g(x)}{L}$ has limit 1 at $a$,
+we can use it in the above result in place of $g(x)$, and we get
+$$
+\lim_{x \to a} \frac{1}{~~\frac{g(x)}{L}~~} = 1.
+$$
+This can be rewritten as
+$$
+\lim_{x \to a} \frac{L}{g(x)} = 1.
+$$
+We can now calculate the limit of $\frac{1}{g(x)}$
+by first doing some tricks to introduce $L$ on top:
+$$
+\begin{align}
+\lim_{x \to a} \frac{1}{g(x)}
+&= \lim_{x \to a} \left( \frac{1}{L} \cdot \frac{L}{g(x)} \right) \\
+&= \left( \lim_{x \to a} \frac{1}{L} \right)\left( \lim_{x \to a} \frac{L}{g(x)} \right) \\
+&= \frac{1}{L} \cdot 1 \\
+&= \frac{1}{L}.
+\end{align}
+$$
+
+graybox:
+    If $\lim_{x \to a} g(x)$ exists and is not zero, then
+    $$
+    \lim_{x \to a} \frac{1}{g(x)} = \frac{1}{\displaystyle\lim_{x \to a} g(x)}.
+    $$
+
+The above tricks are somewhat complicated.
+To avoid them, we could have introduced a general limit $L$ into the simple case
+instead of assuming $\lim_{x \to a} g(x) = 1$ there,
+but that would mean that instead of $0.9 < g(x) < 1.1$,
+we would get something more complicated, perhaps $L-0.1 < g(x) < L+0.1$.
+Then the "simple" case would no longer be very simple.
+
+
+## Generalizing to any top
+
+We can now use [the rule for limit of product](limit-props.html#limit-of-product)
+and the previous result to calculate $\lim_{x \to a} \frac{f(x)}{g(x)}$:
+$$
+\begin{align}
+\lim_{x \to a} \frac{f(x)}{g(x)}
+&= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
+&= \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} \frac{1}{g(x)} \right) \\
+&= \left( \lim_{x \to a} f(x) \right)\frac{1}{\displaystyle\lim_{x \to a} g(x)} \\
+&= \frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}
+\end{align}
+$$
+
+graybox:
+    If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exists
+    and $\lim_{x \to a} g(x) \ne 0$, then
+    $$
+    \lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}.
+    $$

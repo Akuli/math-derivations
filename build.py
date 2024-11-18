@@ -170,8 +170,6 @@ def get_sidebar_content(txtfile):
                 link("One-sided limits", 'calc/limit-1sided'),
                 link("Inequality and limit", 'calc/limit-ineq'),
                 link("Limit of vector", 'calc/limit-vector'),
-                # I don't like the absolute value thing, commented out for now
-                #link("Absolute values in limit proofs", 'calc/limit-abs'),
             ])),
             dropdown("Continuity", join([
                 link("Definitions of continuity", 'calc/cont-def'),

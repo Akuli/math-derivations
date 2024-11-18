@@ -28,7 +28,7 @@ $$
 s_1(x)-s_2(x) = 3.
 $$
 This is not possible, because
-[$s_1(x)-s_2(x)$ is small near 2](limit-small.html#difference-of-small-functions),
+[$s_1(x)-s_2(x)$ is small](limit-small.html#difference-of-small-functions),
 but the constant $3$ is not.
 This means that a limit cannot simultaneously be $5$ and $8$.
 The same applies for any two different numbers instead of $5$ and $8$.
@@ -45,7 +45,7 @@ graybox:
 
 An important consequence of this result is that
 if there is some number that the limit equals to
-(in other words, if the limit exists, unlike in [this example](limit-intro.html#limits-don-t-always-exist)),
+(in other words, if the limit exists, unlike in [this example](limit-intro.html#surprising-example),
 then we can write things like
 $$
 \left( \lim_{x \to a} f(x) \right)^2 + 7.
@@ -62,13 +62,13 @@ which prevented us from doing that in the past.
 If we know that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist,
 then do we have
 $$
-\lim_{x \to a} (f(x) + g(x)) = \left( \lim_{x \to a} f(x) \right) + \left( \lim_{x \to a} g(x) \right)?
+\lim_{x \to a} (f(x) + g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)?
 $$
 A rule like this would be handy for calculating limits.
 With this, we could for example calculate
 $$
 \lim_{x \to 2} (x+5)
-= \left( \lim_{x \to 2} x \right) + \left( \lim_{x \to 2} 5 \right)
+= \lim_{x \to 2} x + \lim_{x \to 2} 5
 = 2+5=7,
 $$
 where we used most of the results from [the previous page](limit-basics.html).
@@ -122,9 +122,9 @@ After $AB$, we have the sum of 3 functions that are small near $a$:
     [because it consists of a small function multiplied by a constant](limit-small.html#multiplying-by-constant).
 * $Bs_1(x)$ is small near $a$ for the same reason.
 * $s_1(x)s_2(x)$ is small near $a$
-    [because it is the product of two functions that are small near $a$](limit-small.html#sum-of-small-functions).
+    [because it is the product of two small functions](limit-small.html#sum-of-small-functions).
 
-Because [the sum of functions that are small near $a$ is also small near $a$](limit-small.html#sum-of-small-functions),
+Because [the sum of small functions is also small](limit-small.html#sum-of-small-functions),
 we have the following:
 $$
 f(x) = AB+\underbrace{\underbrace{As_2(x)}_{\text{small}}+\underbrace{Bs_1(x)}_{\text{small}}+\underbrace{s_1(x)s_2(x)}_{\text{small}}}_{\text{small}}
@@ -157,7 +157,7 @@ Here we used most of the results that we have proved so far:
 </li><li>
     Limit of product: we can take the limits of $-1$ and $g(x)$ separately.
 </li><li>
-    Limit of just a number (from [the limit basics page](limit-basics.html)): the limit of $-1$ is $-1$.
+    [Limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant): the limit of $-1$ is $-1$.
 </li></ul>
 
 graybox:
@@ -172,9 +172,9 @@ graybox:
 Based on the rules we've had so far,
 you might guess that if $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
 $$
-\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}.
+\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}.
 $$
-This isn't as straight-forward as you might expect,
+This rule works, but deriving it is surprisingly difficult,
 so I moved this to [a separate page](limit-div.html).
 
 
@@ -209,8 +209,8 @@ $$
 \end{align}
 $$
 We can handle the limit of $4x$ similarly.
-Finally, we can use $\lim_{x \to 3} x = 3$ and $\lim_{x \to 2} = 2$
-(these were derived [on the limit basics page](limit-basics.html)).
+Finally, we can use $\lim_{x \to 3} x = 3$ and $\lim_{x \to 3} 2 = 2$
+(these were derived [here](limit-def.html#simple-example-limit-of-x)).
 We get:
 $$
 \begin{align}
@@ -227,7 +227,7 @@ We can [check this by plugging in a number near 3](calc/limit-intro.html):
 $$
 2 \cdot (3.001)^2 + 4 \cdot 3.001 + 7 = 37.016002
 $$
-**We successfully calculated a limit without plugging in numbers and guessing. This is why limit rules are useful.**
+**We calculated a limit without plugging in numbers and guessing.**
 This way to calculate limits may seem like more effort,
 but it's backed by solid mathematical theory,
 so you can be sure that you didn't

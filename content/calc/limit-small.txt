@@ -32,13 +32,26 @@ Here are some examples to clarify this.
 
 <ul><li>
 The function $f(x)=(x-1)^2$ is small near $1$.
-In the picture below, I have chosen the bound number $b=0.1$,
+In the picture below, I have chosen the bound number $b=0.5$,
 and indeed, the function is below that bound on some interval centered around 1,
 marked in green.
 (We could calculate what exactly that interval is, but it's not important.)
+
+asymptote:
+    unitsize(3cm);
+    draw((1-sqrt(0.5),0)--(1+sqrt(0.5),0), p=green+5);
+    axises(-0.5,3,-0.5,2.5);
+    real f(real x) { return (x-1)^2; }
+    draw(graph(f, -0.5, 2.5), p=blue, L=Label("$y=(x-1)^2$", position=Relative(0.8), align=E));
+    draw((-0.5,0.5)--(3,0.5), L=Label("$y=0.5$", align=N, position=Relative(0.8)), p=gray+smalldashes);
+    dot((1,0), L="$(1,0)$", p=dotpen, align=S);
+
 The same works for any positive bound number
 because the graph is a [parabola](../analytic-plane-geometry/parabola.html)
 whose peak is at $(1,0)$.
+For example, here's what it looks like for $b=0.1$.
+The interval needs to be changed according to the new bound number,
+but that doesn't matter.
 
 asymptote:
     unitsize(3cm);
@@ -47,17 +60,6 @@ asymptote:
     real f(real x) { return (x-1)^2; }
     draw(graph(f, -0.5, 2.5), p=blue, L=Label("$y=(x-1)^2$", position=Relative(0.8), align=E));
     draw((-0.5,0.1)--(3,0.1), L=Label("$y=0.1$", align=N, position=Relative(0.8)), p=gray+smalldashes);
-    dot((1,0), L="$(1,0)$", p=dotpen, align=S);
-
-Here is a zoomed-in view:
-
-asymptote:
-    unitsize(10cm);
-    draw((1-sqrt(0.1),0)--(1+sqrt(0.1),0), p=green+5);
-    axises(0.5,1.5,0,0);
-    real f(real x) { return (x-1)^2; }
-    draw(graph(f, 0.5, 1.5), p=blue);
-    draw((0.5,0.1)--(1.5,0.1), p=gray+smalldashes);
     dot((1,0), L="$(1,0)$", p=dotpen, align=S);
 
 </li><li>
@@ -112,7 +114,8 @@ For example, $-x^2$ is small near zero because $x^2$ is small near zero.
 Thus we arrive at the following definition of smallness.
 
 graybox:
-    A function $f$ is **small near** a number $a$, if for any $b>0$
+    A function $f$ is **small near** a number $a$,
+    if for any $b>0$
     (called the "bound number"),
     there is some interval centered around $a$ such that
     $|f(x)| < b$ on the interval excluding the center $a$.
@@ -161,7 +164,8 @@ Specifically, here's how we can prove that $5f(x)$ is small:
 * Because 5 is a positive number, we can just as well write it inside the absolute value,
     so $|5f(x)| < b$ on the interval $I$ excluding the center $3$.
 
-Because this works for any bound $b$, it shows that $5f(x)$ is small near 3.
+Because there is a suitable interval $I$ for each positive bound number $b$,
+this shows that $5f(x)$ is small near 3.
 
 This works with any other number instead of $3$.
 We can also replace 5 with any other positive number.
@@ -170,8 +174,8 @@ graybox:
     If $c$ is a positive constant and $f(x)$ is a function that is small near some number $a$,
     then $cf(x)$ is also small near $a$.
 
-Here "constant" means any number that does not depend on $x$,
-such as $3$ or $-72.6$.
+Here "positive constant" means any positive number that does not depend on $x$,
+such as $3$ or $\pi$.
 
 This is actually not limited to positive values of $c$:
 
@@ -203,7 +207,14 @@ we don't necessarily have $-0.1 < f(x)+g(x) < 0.1$.
 If, for example, $f(x)=0.09$ and $g(x)=0.09$, the sum will be $0.18$.
 
 However, we **can** conclude that $-0.2 < f(x)+g(x) < 0.2$
-by simply adding the inequalities together:
+by simply adding the inequalities:
+$$
+\begin{align}
+-0.1 &< f(x) < 0.1 \\
+-0.1 &< g(x) < 0.1
+\end{align}
+$$
+
 $$
 (-0.1) + (-0.1) < f(x) + g(x) < 0.1 + 0.1
 $$
@@ -254,7 +265,7 @@ Specifically, here's how we can prove that $f(x)+g(x)$ is small near $a$:
 * By adding the inequalities, we get $-b < f(x)+g(x) < b$ on $I$ excluding the center $a$.
 
 graybox:
-    If $f(x)$ and $g(x)$ are small near $a$, then $f(x)+g(x)$ is also small near $a$.
+    If $f(x)$ and $g(x)$ are small near some number $a$, then $f(x)+g(x)$ is also small near $a$.
 
 This also works if you have more than two small functions.
 For example, let $f_1$ and $f_2$ be functions that are small near $a$.
@@ -267,10 +278,10 @@ $$
 Hence $f_1(x)+f_2(x)+f_3(x)$ is small near $a$.
 If we add a fourth function $f_4(x)$,
 we again have the sum of two small functions.
-We can continue like this as much as needed.
+We can continue like this as long as we like.
 
 graybox:
-    If $f_1(x),f_2(x),\dots,f_n(x)$ are small near $a$,
+    If $f_1(x),f_2(x),\dots,f_n(x)$ are small near some number $a$,
     then $f_1(x)+f_2(x)+\dots+f_n(x)$ is also small near $a$.
 
 
@@ -286,7 +297,7 @@ Here $(-1)g(x)$ is a small function multiplied by the constant $-1$, and hence s
 so we have a sum of two small functions.
 
 graybox:
-    If $f(x)$ and $g(x)$ are small near $a$, then $f(x)-g(x)$ is also small near $a$.
+    If $f(x)$ and $g(x)$ are small near some number $a$, then $f(x)-g(x)$ is also small near $a$.
 
 
 ## Product of small functions
@@ -319,4 +330,10 @@ Specifically, here's how it goes:
 * We now get $|f(x)g(x)| < b$ on $I$ excluding the center $3$.
 
 graybox:
-    If $f(x)$ and $g(x)$ are small near $a$, then $f(x)g(x)$ is also small near $a$.
+    If $f(x)$ and $g(x)$ are small near some number $a$, then $f(x)g(x)$ is also small near $a$.
+
+Just like with sum, this also works with more than two functions:
+
+graybox:
+    If $f_1(x),f_2(x),\dots,f_n(x)$ are small near some number $a$,
+    then $f_1(x)f_2(x)\dots f_n(x)$ is also small near $a$.

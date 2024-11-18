@@ -79,7 +79,7 @@ Subtracting 3 from the values of the function gives us small numbers.
 </tr></table>
 
 This makes sense: "close to $3$" is same as "difference to 3 is small".
-Wse can use this idea to define limits:
+We can use this idea to define limits:
 
 graybox:
     We say that function $f$ has **limit** $L$ as $x$ approaches $a$ and we write
@@ -117,7 +117,7 @@ $\lim_{x \to a} f(x) = 0$ is same as the function $f$ itself
 being small near $a$.
 
 graybox:
-    A function $f$ is small near $a$ if and only if $\lim_{x \to a} f(x) = 0$·
+    A function $f$ is small near a number $a$ if and only if $\lim_{x \to a} f(x) = 0$·
 
 This should make sense.
 Limit zero means you get values near zero if you plug in numbers near $a$.
@@ -136,6 +136,9 @@ You can just say: smallness means the limit is zero.
 We prove that $\lim_{x \to 4} x = 4$.
 We need to show that $x-4$ is a small function near $4$.
 This is true, because $y=x-4$ is a line that goes through the point $(4,0)$.
+For a bound number $b > 0$, we can draw the lines $y=\pm b$
+and take the interval where the original $y=x-4$ line
+is between the $y = \pm b$ lines.
 
 asymptote:
     unitsize(1.5cm);
@@ -152,7 +155,7 @@ asymptote:
     label(position=(5.2,-2), L="$(4,0)$", align=S, p=deepred);
 
 The same works with any positive bound $b$.
-For a smaller bound, we just take a smaller interval:
+For a smaller bound, we get a smaller interval:
 
 asymptote:
     unitsize(1.5cm);

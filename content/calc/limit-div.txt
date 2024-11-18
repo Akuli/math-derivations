@@ -17,7 +17,7 @@ as we will be using it quite a bit.
 ## Simple case
 
 Instead of the full $\lim_{x \to a} \frac{f(x)}{g(x)}$,
-let's simplify it a bit for now.
+let's simplify a bit for now.
 We assume that $\lim_{x \to a} g(x) = 1$,
 and we calculate the limit
 $$

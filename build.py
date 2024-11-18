@@ -165,7 +165,6 @@ def get_sidebar_content(txtfile):
                 link('"Definition" by plugging in numbers', 'calc/limit-intro'),
                 link("Small functions", 'calc/limit-small'),
                 link("Definition of limit", 'calc/limit-def'),
-                link("Limit basics", 'calc/limit-basics'),
                 link("Limit properties", 'calc/limit-props'),
                 link("Limit of division", 'calc/limit-div'),
                 link("One-sided limits", 'calc/limit-1sided'),

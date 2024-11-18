@@ -129,3 +129,63 @@ This is an easy way to explain what the "smallness" means
 when you discuss the content of this page
 with someone who learned limits elsewhere.
 You can just say: smallness means the limit is zero.
+
+
+## Simple example: limit of $x$
+
+We prove that $\lim_{x \to 4} x = 4$.
+We need to show that $x-4$ is a small function near $4$.
+This is true, because $y=x-4$ is a line that goes through the point $(4,0)$.
+
+asymptote:
+    unitsize(1.5cm);
+    real b = 0.7;
+    draw((4-b,0)--(4+b,0), p=green+5);
+    axises(-0.5,6.5,-5,2);
+    real f(real x) { return x-4; }
+    draw(graph(f, -0.5, 6), p=blue, L=Label("$y=x-4$", position=Relative(0.3), align=E));
+
+    draw((-0.5,b)--(6,b), L=Label("$y=b$", align=N, position=Relative(0.3)), p=gray+smalldashes);
+    draw((-0.5,-b)--(6,-b), L=Label("$y=-b$", align=S, position=Relative(0.3)), p=gray+smalldashes);
+
+    draw((5.2,-2)..(5.2,-1.9)..(4.3,-0.3)..(4.2,-0.2), arrow=Arrow(4mm), p=deepred);
+    label(position=(5.2,-2), L="$(4,0)$", align=S, p=deepred);
+
+The same works with any positive bound $b$.
+For a smaller bound, we just take a smaller interval:
+
+asymptote:
+    unitsize(1.5cm);
+    real b = 0.3;
+    draw((4-b,0)--(4+b,0), p=green+5);
+    axises(-0.5,6.5,-5,2);
+    real f(real x) { return x-4; }
+    draw(graph(f, -0.5, 6), p=blue, L=Label("$y=x-4$", position=Relative(0.3), align=E));
+
+    draw((-0.5,b)--(6,b), L=Label("$y=b$", align=N, position=Relative(0.3)), p=gray+smalldashes);
+    draw((-0.5,-b)--(6,-b), L=Label("$y=-b$", align=S, position=Relative(0.3)), p=gray+smalldashes);
+
+If you don't want to rely on pictures,
+you can instead calculate the interval needed for the smallness.
+Consider any positive bound number $b$.
+For $x-4$ to be small, it must be between $-b$ and $-b$, as in $-b < x-4 < b$.
+By adding 4 on all sides, we see that this is same as $4-b < x < 4+b$,
+so the bound works on the interval $(4-b, 4+b)$.
+It is centered around 4 as expected.
+
+This works similarly for any other number instead of $4$.
+
+graybox:
+    For any number $a$, we have $\lim_{x \to a} x = a$.
+
+
+## Even simpler example: limit of a constant
+
+We have $\lim_{x \to 3} 5 = 5$,
+because according to the definition of limit,
+it means that $5-5$ is a small function.
+It is always zero, which is a small function.
+This works the same if we replace $3$ and $5$ with any other numbers.
+
+graybox:
+    For all numbers $a$ and $b$, we have $\lim_{x \to a} b = b$.

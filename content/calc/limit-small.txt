@@ -9,6 +9,12 @@ Traditionally, smallness is baked into the definition of limit,
 so it becomes one big mess that is hard to understand and work with.
 I don't want that.
 
+The smallness defined here is not a "standard" concept.
+If you discuss the content of this site with someone who knows limits
+but doesn't read this site,
+you can tell them that "small" means the limit is zero.
+This will be explained [later](limit-def.html#how-to-explain-smallness-to-others).
+
 
 ## Definition
 

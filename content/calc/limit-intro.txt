@@ -16,7 +16,6 @@ The "university" approach is **not easy**,
 so we start with the "high school" approach,
 and then move on to a definition that
 resembles the "university" approach a lot but is hopefully easier.
-
 On this page, we explore the "high school" approach
 and discuss its advantages and limitations.
 
@@ -91,10 +90,12 @@ Here is an even simpler example:
 $$
 \lim_{x \to 3} 5 = 5
 $$
-This means that if we first take values of $x$ that are close to $a$,
+This means that if we first take values of $x$ that are close to $3$,
 and then throw them away and instead always take the number $5$,
 then the resulting number $5$ is close to $5$.
 Any number is considered to be close to itself.
+
+Of course, these also work with any other numbers instead of 3 and 5.
 
 
 ## Surprising example
@@ -130,7 +131,7 @@ asymptote:
     unitsize(3cm);
     axises(-1.2,2,-1.2,1.5);
     draw(unitcircle);
-    dot((cos(pi/3),sin(pi/3)), L="$(0.866, 0.5)$", p=dotpen+deepred, align=(N+NE));
+    dot((cos(pi/3),sin(pi/3)), L="$(0.5, 0.866)$", p=dotpen+deepred, align=(N+NE));
     draw(arc((0,0), 1.1, 0, 60), p=blue, arrow=Arrow(0.5cm));
 
 Let's try to calculate

@@ -1,0 +1,27 @@
+# Limit of Difference
+
+Suppose that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist.
+By noticing that $f(x)-g(x) = f(x) + (-1)g(x)$, we get
+$$
+\begin{align}
+\lim_{x \to a} (f(x)-g(x))
+&= \lim_{x \to a} \Bigl( f(x) + (-1)g(x) \Bigr) \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} \Bigl( (-1)g(x) \Bigr) \\
+&= \lim_{x \to a} f(x) + \underbrace{\Bigl( \lim_{x \to a} (-1) \Bigr)}_{-1}\Bigl( \lim_{x \to a} g(x) \Bigr) \\
+&= \lim_{x \to a} f(x) - \lim_{x \to a} g(x).
+\end{align}
+$$
+Here we used most of the results that we have proved so far:
+<ul><li>
+    [Limit of sum](limit-sum.html): we can take the limits of $f(x)$ and $(-1)g(x)$ separately.
+</li><li>
+    [Limit of product](limit-product.html): we can take the limits of $-1$ and $g(x)$ separately.
+</li><li>
+    [Limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant): the limit of $-1$ is $-1$.
+</li></ul>
+
+graybox:
+    If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
+    $$
+    \lim_{x \to a} (f(x)-g(x)) = \lim_{x \to a} f(x) - \lim_{x \to a} g(x).
+    $$

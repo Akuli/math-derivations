@@ -163,9 +163,11 @@ def get_sidebar_content(txtfile):
         dropdown("Calculus", join([
             dropdown("Limits", join([
                 link('"Definition" by plugging in numbers', 'calc/limit-intro'),
-                #link("Small functions", 'calc/limit-small'),  # TODO: remove
                 link("Definition of limit", 'calc/limit-def'),
-                link("Limit properties", 'calc/limit-props'),
+                link("Uniqueness", 'calc/limit-unique'),
+                link("Limit of sum", 'calc/limit-sum'),
+                link("Limit of product", 'calc/limit-product'),
+                link("Limit of difference", 'calc/limit-diff'),
                 link("Limit of division", 'calc/limit-div'),
                 link("One-sided limits", 'calc/limit-1sided'),
                 link("Inequality and limit", 'calc/limit-ineq'),

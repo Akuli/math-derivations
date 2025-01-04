@@ -1,0 +1,236 @@
+# Limit of Product
+
+redbox:
+    Make sure that you know our [definition of limit](limit-def.html).
+    In particular, make sure you know the precise meanings of "close enough to" and "$\approx$".
+
+We find a rule for calculating the limit of the product of two functions, as in
+$$
+\lim_{x \to a} f(x)g(x).
+$$
+This is somewhat similar to [limit of sum](limit-sum.html),
+but more complicated than simply using half of the desired precision.
+To do this without making a big mess,
+we first consider simple cases and then use them to show how this works in general.
+
+
+## Both limits zero
+
+Let's start with a simple case. Suppose that
+$$
+\lim_{x \to a} f(x) = 0 \quad \text{and} \quad \lim_{x \to a} g(x) = 0.
+$$
+We show that $\lim_{x \to a} f(x)g(x) = 0$.
+This shouldn't be surprising: it basically says "small * small = small".
+
+Let $p > 0$ be any precision.
+We need to show that $f(x)g(x) \approx 0$ with precision $p$ when $x$ is close enough to $a$.
+
+If $x$ is close enough to $a$, we have $f(x) \approx 0$ with precision $p$, and $g(x) \approx 0$ with precision $0.1$.
+(You will soon see why I chose these precisions.)
+This means that
+$$
+-p < f(x) < p \quad \text{and} \quad -0.1 < g(x) < 0.1.
+$$
+Multiplying by $g(x)$ brings numbers closer to zero.
+For example, if $g(x) = -0.05$, then $g(x) \cdot 40 = -2$,
+and $-2$ is much closer to zero than $40$.
+(Also, the sign flips if $g(x)$ is negative.)
+
+This means that if we multiply $f(x)$ by $g(x)$, we stay between $-p$ and $p$,
+because we go even closer to zero:
+$$
+-p < f(x)g(x) < p
+$$
+This means that $f(x)g(x) \approx 0$ with precision $p$.
+
+graybox:
+    If $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = 0$,
+    then
+    $$
+    \lim_{x \to a} f(x)g(x) = 0.
+    $$
+
+
+## Constant times limit zero
+
+Next, let's assume one function has limit zero, and the other function is a constant.
+Suppose that $\lim_{x \to a} f(x) = 0$. We show that
+$$
+\lim_{x \to a} 4f(x) = 0.
+$$
+
+At first this seems wrong.
+For example, consider the precision $p=0.1$.
+If $-0.1 < f(x) < 0.1$, we don't necessarily have $-0.1 < 4f(x) < 0.1$.
+If, for example, $f(x)=0.09$, then $4f(x) = 0.36$.
+
+However, we **can** conclude that $-0.4 < 4f(x) < 0.4$
+by simply multiplying the inequality by 4.
+The precision also gets multiplied 4, making it less precise.
+
+The trick is to make $f(x)$ close to zero within **one fourth** of the desired precision $p$,
+so that once multiplied, we get the precision $p$.
+For example, we have $f(x) \approx 0$ with precision $0.025$ when $x$ is close enough to $a$,
+so $4f(x) \approx 0$ with precision $0.1$.
+
+This works with any precision $p > 0$ in place of $0.1$.
+Also, there's nothing special about the number 4:
+this works the same way with any other positive number.
+
+graybox:
+    If $\lim_{x \to a} f(x) = 0$ and $c > 0$ is a positive constant, then
+    $$
+    \lim_{x \to a} cf(x) = 0.
+    $$
+
+The "one fourth of the desired precision" part doesn't work as expected if $c$ is not positive.
+However, this still works with any constant $c$, and it doesn't have to be positive:
+<ul><li>
+    If $c=0$, we are looking at $\lim_{x \to a} 0 = 0$, which is
+    [the limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant).
+</li><li>
+    If $c$ is negative, we get an extra minus sign in front, but it doesn't matter.
+    If $cf(x) \approx 0$, then also $-cf(x) \approx 0$ with the same precision,
+    because the minus doesn't affect the distance to zero.
+</li></ul>
+
+graybox:
+    If $\lim_{x \to a} f(x) = 0$ and $c$ is any constant, then
+    $$
+    \lim_{x \to a} cf(x) = 0.
+    $$
+
+
+## Putting it all together
+
+Now we are ready to figure out what happens if the limits of $f$ and $g$ are any numbers,
+not necessarily zero.
+Suppose that
+$$
+\lim_{x \to a} f(x) = A \quad \text{and} \quad \lim_{x \to a} g(x) = B,
+$$
+where $A$ and $B$ may be any numbers.
+
+Consider the following "error functions":
+$$
+E_1(x) = f(x)-A \quad \text{and} \quad E_2(x) = g(x)-B
+$$
+Or equivalently:
+$$
+f(x) = A + E_1(x) \quad \text{and} \quad g(x) = B + E_2(x)
+$$
+This means that $f(x)$ is basically the limit $A$,
+but it comes with an additional error $E_1(x)$.
+
+These errors are small in the sense that their limits are zero.
+There are many ways to see this.
+For example, we can use [limit of sum](limit-sum.html) together with
+[limit of constant](limit-def.html#even-simpler-example-limit-of-a-constant):
+$$
+\begin{align}
+\lim_{x \to a} E_1(x)
+&= \lim_{x \to a} \Bigl( f(x)-A \Bigr) \\
+&= \lim_{x \to a} \Bigl( f(x) + (-A) \Bigr) \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} (-A) \\
+&= A + (-A) \\
+&= 0
+\end{align}
+$$
+The same works for $E_2(x)$.
+We can now look at the limit of $f(x)g(x)$.
+$$
+\begin{align}
+\lim_{x \to a} f(x)g(x) 
+&= \lim_{x \to a} \Bigl(A + E_1(x)\Bigr)\Bigl(B + E_2(x)\Bigr) \\
+&= \lim_{x \to a} \Bigl(A\bigl(B + E_2(x)\bigr) + E_1(x)\bigl(B + E_2(x)\bigr)\Bigr) \\
+&= \lim_{x \to a} \Bigl( AB + AE_2(x) + E_1(x)B + E_1(x)E_2(x) \Bigr)
+\end{align}
+$$
+With limit of sum, this becomes:
+$$
+\lim_{x \to a} f(x)g(x) 
+= \lim_{x \to a} AB + \lim_{x \to a}AE_2(x) + \lim_{x \to a}E_1(x)B + \lim_{x \to a}E_1(x)E_2(x)
+$$
+Let's look at each part separately using other results derived so far.
+
+<ul><li>
+    $\lim_{x \to a} AB = AB$. This is the limit of a constant.
+</li><li>
+    $\lim_{x \to a}AE_2(x) = 0$, because $A$ is a constant and the limit of $E_2(x)$ is zero.
+</li><li>
+    $\lim_{x \to a}E_1(x)B = 0$, because $B$ is a constant and the limit of $E_1(x)$ is zero.
+</li><li>
+    $\lim_{x \to a}E_1(x)E_2(x) = 0$, because we are multiplying two functions whose limits are zero.
+</li></ul>
+
+Now we get
+$$
+\lim_{x \to a} f(x)g(x) = AB+0+0+0 = AB.
+$$
+
+graybox:
+    If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
+    $$
+    \lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right) \left( \lim_{x \to a} g(x) \right).
+    $$
+
+Together with limit of constant, this rule covers everything derived on this page.
+**I don't recommend memorizing other rules on this page**,
+because they were needed only to get this rule.
+
+
+## Example
+
+With the limit rules we have so far, we can calculate e.g. the following limit:
+$$
+\lim_{x \to 2} (2x^2+4x+7)
+$$
+Let's start with [limit of sum](limit-sum.txt):
+$$
+\lim_{x \to 3} (2x^2+4x+7) = \lim_{x \to 3} 2x^2 + \lim_{x \to 3} 4x + \lim_{x \to 3} 7
+$$
+Consider the limit of $2x^2$.
+Let's view $2x^2$ as the product of 3 things, as in $2 \cdot x \cdot x$.
+We use the rule for limit of product.
+Just like the rule for sum, it can be applied to more than two functions, like this:
+$$
+\begin{align}
+\lim_{x \to 3} 2x^2
+&= \lim_{x \to 3} (2 \cdot x \cdot x) \\
+&= \left( \lim_{x \to 3} 2 \right)\left( \lim_{x \to 3} x \right)\left( \lim_{x \to 3} x \right)
+\end{align}
+$$
+We can handle the limit of $4x$ similarly.
+Finally, we can use $\lim_{x \to 3} x = 3$ (derived [here](limit-def.html#simple-example-limit-of-x))
+and limit of constant.
+Like this:
+$$
+\begin{align}
+\lim_{x \to 3} (2x^2+4x+7)
+&= \lim_{x \to 3} 2x^2 + \lim_{x \to 3} 4x + \lim_{x \to 3} 7 \\
+&= \left(\lim_{x \to 3} 2\right)\left( \lim_{x \to 3} x \right)^2
+    + \left(\lim_{x \to 3} 4 \right)\left( \lim_{x \to 3} x \right)
+    + \lim_{x \to 3} 7 \\
+&= 2 \cdot 3^2 + 4 \cdot 3 + 7 \\
+&= 37.
+\end{align}
+$$
+We can [check this by plugging in a number near 3](calc/limit-intro.html):
+$$
+2 \cdot (3.001)^2 + 4 \cdot 3.001 + 7 = 37.016002
+$$
+**We calculated a limit without plugging in numbers and guessing.**
+This way to calculate limits may seem like more effort,
+but it's backed by solid mathematical theory,
+so you can be sure that you didn't
+[miss some surprising behavior when plugging in numbers](limit-intro.html#surprising-example).
+
+You might notice that simply setting $x=3$ also gives the correct result:
+$$
+3 \cdot 3^2 + 4 \cdot 3 + 7 = 37
+$$
+This often works, but not always.
+There is a name for this behavior:
+we say that a function is **continuous** if its limits can be calculated this way.
+We will come back to continuity [later](cont-def.html).

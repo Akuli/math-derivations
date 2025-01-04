@@ -1,0 +1,52 @@
+# Uniqueness of Limit
+
+redbox:
+    Make sure that you know our [definition of limit](limit-def.html).
+    In particular, make sure you know the precise meanings of "close enough to" and "$\approx$".
+
+Can we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ for the same function $f$?
+
+If you think of the notation such that $\lim_{x \to 2} f(x)$ by itself is a thing,
+then this is obviously not possible;
+there's no way how something could be equal to $5$ and $8$ at the same time.
+However, that's not how we have defined the limit.
+The definition doesn't say anything about what $\lim_{x \to 2} f(x)$ by itself is;
+it only tells what setting that equal to something means,
+such as $\lim_{x \to 2} f(x) = 5$.
+
+Suppose $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ for the same function $f$.
+Then, for any precision $p_1 > 0$, we have $f(x) \approx 5$ with precision $p_1$
+when $x$ is close enough to $a$.
+Also, for any precision $p_2 > 0$, we have $f(x) \approx 8$ with precision $p_2$
+when $x$ is close enough to $a$.
+
+For example, if we choose the precisions $p_1=p_2=0.1$,
+we see that $4.9 < f(x) < 5.1$ and $7.9 < f(x) < 8.1$ whenever $x$ is close enough to $a$.
+This is not possible: no number can be less than $5.1$ and greater than $7.9$.
+This means that a limit cannot simultaneously be $5$ and $8$.
+
+The same applies for any two different numbers instead of $5$ and $8$
+as long as we pick a reasonable precision.
+
+graybox:
+    A limit can't be equal to two different numbers.
+
+Also, the limit can't be equal to **more** than two different numbers, because
+if a limit was equal to more than two different numbers, then we could pick two of those numbers;
+the limit would be equal to them, and that's impossible by the above result.
+
+graybox:
+    A limit can be equal to at most one number.
+
+An important consequence of this result is that
+if there is some number that the limit equals to
+(in other words, if the limit exists, unlike in [this example](limit-intro.html#surprising-example),
+then we can write things like
+$$
+\left( \lim_{x \to a} f(x) \right)^2 + 7.
+$$
+This is a shorthand for letting $L$ be the only number for which $\lim_{x \to a} f(x) = L$,
+and then writing $L^2+7$.
+We can think of $\lim_{x \to a} f(x)$ as a number,
+because we know that it can't be equal to multiple different numbers,
+which prevented us from doing that in the past.

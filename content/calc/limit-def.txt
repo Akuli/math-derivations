@@ -11,8 +11,12 @@ On this page we fix them by defining limits precisely.
 Before defining limits, we define what "close enough to" means in this context.
 This concept will simplify the definition of limit a lot.
 
+An **open interval** is denoted with $(a,b)$, where $a < b$, and it means all numbers strictly between $a$ and $b$.
+For example, "$x$ is in the interval $(4,5)$" means same as $4 < x < 5$.
+
 We say that an open interval is **centered around** $a$ if it's $(a-r, a+r)$ with some $r > 0$.
 For example, $(4,6)$ is centered around $5$.
+Here $r$ is sometimes called the **radius** of the interval.
 
 The saying "$x$ is **close enough to** $a$" means same as
 "$x$ is in some open interval centered around $a$ and $x \ne a$".
@@ -50,7 +54,7 @@ asymptote:
 
 </li><li>
 We have $0 < x^2 < 0.1$ when $x$ is close enough to zero.
-The $0 < x^2$ part is false when $x=0$ because then it says that $0 < 0$.
+The $0 < x^2$ part is false when $x=0$, because then it says $0 < 0$.
 However, this doesn't matter,
 because the center $0$ is ignored in the definition of "close enough to".
 
@@ -59,7 +63,7 @@ asymptote:
     draw((-sqrt(0.1),0)--(+sqrt(0.1),0), p=green+5);
     axises(-1.5,1.5,-0.5,2.5);
     real f(real x) { return x^2; }
-    draw(graph(f, -1.5, 1.5), p=blue, L=Label("$y=\frac{(x-1)^3}{x-1}$", position=Relative(0.9), align=W));
+    draw(graph(f, -1.5, 1.5), p=blue, L=Label("$y=x^2$", position=Relative(0.9), align=W));
     draw((-1.5,0.1)--(1.5,0.1), L=Label("$y=0.1$", align=N, position=Relative(0.9)), p=gray+smalldashes);
     dot((1,0), L="$1$", p=dotpen, align=S);
 
@@ -110,11 +114,9 @@ Let $a$ and $b$ be any numbers, and let $p$ be a positive number.
 We say that $a \approx b$ **with precision** $p$, if $b-p < a < b+p$.
 For example, $x \approx 3$ with precision $0.1$ means that $2.9 < x < 3.1$.
 
-Note that numbers can be added or subtracted on both sides of $\approx$
-without changing the precision.
-For example, $x \approx 2$ with precision $p$ is same as $x+1 \approx 3$ with precision $p$.
-In other words, $x \in (2-p,2+p)$ is 
-
+This is similar to the "close enough to" concept, but not quite the same.
+Specifically, "$x$ is close enough to $a$" means that $x \approx a$ with some precision,
+but also requires $x \ne a$.
 
 
 ## The Definition
@@ -180,76 +182,16 @@ Let $p > 0$ be any precision.
 We want to show that $x \approx 3$ with precision $p$
 when $x$ is close enough to $3$.
 
-This seems very obviously true, but it can be also confirmed easily from a graph.
-Consider any precision $p > 0$ and the lines $y = 3 \pm p$
-(e.g. $y=2.9$ and $y=3.1$, if the precision is $0.1$).
-The line $y=x$ is between them when $x$ is close enough to 3.
+This is quite easy. Consider the interval $(3-p, 3+p)$.
+If $x$ is close enough to $3$, it is in $(3-p, 3+p)$, and $x \ne 3$.
+This means that $3-p < x < 3+p$, so we have $x \approx 3$ with precision $p$.
+(We didn't need $x \ne 3$ for anything.)
 
-asymptote:
-    unitsize(2.5cm);
-    real p = 0.3;
-    draw((3-p,0)--(3+p,0), p=green+5);
-    axises(-0.5,4,-0.5,4);
-    draw((-0.5,-0.5)--(3.5,3.5), p=blue, L="$y=x$");
-    draw((-0.5,3+p)--(3.5,3+p), L=Label("$y=3+p$", align=N, position=Relative(0.4)), p=gray+smalldashes);
-    draw((-0.5,3-p)--(3.5,3-p), L=Label("$y=3-p$", align=S, position=Relative(0.4)), p=gray+smalldashes);
-    dot((3,0), L="$3$", p=dotpen, align=S);
-    draw((3-p,0)--(3-p,3-p), p=green+smalldashes);
-    draw((3+p,0)--(3+p,3+p), p=green+smalldashes);
+graybox:
+    We have $\lim_{x \to 3} x = 3$.
 
-
-
-
-
-The distance from the limit is $|x-3|$.
-Here's what the graph of $|x-3|$ looks like:
-
-The graph consists of the lines $y=3-x$ and $y=x-3$,
-and both of these lines go through the point $(3,0)$:
-
-* If $x < 3$, the distance between $x$ and $3$ is $3-x$.
-    For example, the distance between $0.5$ and $3$ is $3-0.5 = 2.5$.
-* If $x > 3$, the distance between $x$ and $3$ is $x-3$.
-    For example, the distance between $3.5$ and $3$ is $3.5-3 = 0.5$.
-
-Let $\epsi$ be any positive number.
-Consider the line $y=\epsi$.
-In the graph below, I have drawn the line $y=\epsi$ with $\epsi=0.5$.
-
-asymptote:
-    unitsize(2.5cm);
-    real b = 0.5;
-    draw((3-b,0)--(3+b,0), p=green+5);
-    axises(-0.5,4.5,-0.5,2.5);
-    real f(real x) { return abs(x-3); }
-    draw(graph(f, 1, 4), p=blue, L=Label("$y=x-3$", position=EndPoint, align=N));
-
-    draw((-0.5,b)--(4,b), L=Label("$y="+string(b)+"$", align=N, position=Relative(0.3)), p=gray+smalldashes);
-    dot((3,0), L="$3$", p=dotpen, align=S);
-
-As you can see, we have
-$$
-|x - 3| < 0.5
-$$
-when $x$ is close enough to $3$.
-This also works if we replace $0.5$ with any other positive number, e.g. $0.1$:
-
-asymptote:
-    unitsize(2.5cm);
-    real b = 0.1;
-    draw((3-b,0)--(3+b,0), p=green+5);
-    axises(-0.5,4.5,-0.5,2.5);
-    real f(real x) { return abs(x-3); }
-    draw(graph(f, 1, 4), p=blue, L=Label("$y=x-3$", position=EndPoint, align=N));
-
-    draw((-0.5,b)--(4,b), L=Label("$y="+string(b)+"$", align=N, position=Relative(0.3)), p=gray+smalldashes);
-
-In other words, for any positive number $\epsi$ we have $|x-3| < \epsi$ when $x$ is close enough to 3.
-This means that
-$$
-\lim_{x \to 3} x = 3.
-$$
-This works similarly for any other number instead of $3$.
+Of course, there's nothing special about the number 3.
+The same works with any other number.
 
 graybox:
     For any number $a$, we have $\lim_{x \to a} x = a$.
@@ -258,10 +200,9 @@ graybox:
 ## Even simpler example: limit of a constant
 
 We have $\lim_{x \to 3} 5 = 5$,
-because according to the definition of limit,
-it means that $5-5$ is a small function.
-It is always zero, which is a small function.
-This works the same if we replace $3$ and $5$ with any other numbers.
+because $5 \approx 5$ with any precision, regardless of what $x$ is.
 
 graybox:
-    For all numbers $a$ and $b$, we have $\lim_{x \to a} b = b$.
+    We have $\lim_{x \to 3} 5 = 5$.
+
+    More generally, for all numbers $a$ and $b$, we have $\lim_{x \to a} b = b$.

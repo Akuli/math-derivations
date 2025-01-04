@@ -1,0 +1,85 @@
+# Limit of Sum
+
+redbox:
+    Make sure that you know our [definition of limit](limit-def.html).
+    In particular, make sure you know the precise meanings of "close enough to" and "$\approx$".
+
+If we know that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist,
+then do we have
+$$
+\lim_{x \to a} (f(x) + g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)?
+$$
+A rule like this would be useful for calculating limits.
+With this, we could for example calculate
+$$
+\lim_{x \to 2} (x+5)
+= \lim_{x \to 2} x + \lim_{x \to 2} 5
+= 2+5=7,
+$$
+where we used the examples at the end of [the limit definition page](limit-def.html#simple-example-limit-of-x).
+
+Suppose that $\lim_{x \to a} f(x) = 2$ and $\lim_{x \to a} g(x) = 5$.
+This means that for any precision $p > 0$, we have
+$f(x) \approx 2$ and $g(x) \approx 5$ with precision $p$ whenever $x$ is close enough to $a$.
+We want to show that for any precision $p > 0$,
+we have $f(x)+g(x) \approx 7$ with precision $p$ whenever $x$ is close enough to $a$.
+
+At first this seems wrong.
+For example, consider the precision $p=0.1$.
+If $1.9 < f(x) < 2.1$ and $4.9 < g(x) < 5.1$,
+we don't necessarily have $6.9 < f(x)+g(x) < 7.1$.
+If, for example, $f(x)=2.09$ and $g(x)=5.09$, the sum will be $7.18$.
+
+However, we **can** conclude that $6.8 < f(x)+g(x) < 7.2$
+by simply adding the inequalities:
+$$
+\begin{align}
+1.9 &< f(x) < 2.1 \\
+4.9 &< g(x) < 5.1
+\end{align}
+$$
+
+$$
+\underbrace{1.9 + 4.9}_{=6.8} < f(x) + g(x) < \underbrace{2.1 + 5.1}_{=7.2}
+$$
+This means that $f(x)+g(x) \approx 7$ with precision $0.2$.
+In general, the precision gets multiplied two, making it less precise.
+
+The trick is to make $f(x)$ and $g(x)$ close to their limits within **half** of the desired precision $p$,
+so that once added, we get the precision $p$.
+For example, $f(x) \approx 2$ with precision $0.05$ and $f(x) \approx 5$ with precision $0.05$
+when $x$ is close enough to $a$.
+Now we can conclude that $f(x)+g(x) \approx 7$ with precision $0.1$.
+
+The same works for any precision instead of $0.1$.
+
+graybox:
+    If $\lim_{x \to a} f(x) = 2$ and $\lim_{x \to a} g(x) = 5$, then
+    $$
+    \lim_{x \to a} (f(x) + g(x)) = 7.
+    $$
+
+Of course, this also works if we replace $2$ and $5$ with any other numbers:
+
+graybox:
+    If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
+    $$
+    \lim_{x \to a} (f(x) + g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x).
+    $$
+
+
+## More than two functions
+
+If you have more than two functions added,
+you can think of it as "first function + everything else" and then apply the above two-function version.
+For example:
+$$
+\begin{align}
+&~~~~~ \lim_{x \to a} \Bigl(f(x)+g(x)+h(x)+i(x)\Bigr) \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} \Bigl(g(x)+h(x)+i(x)\Bigr) \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} g(x) + \lim_{x \to a} \Bigl(h(x)+i(x)\Bigr) \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} g(x) + \lim_{x \to a} h(x) + \lim_{x \to a} i(x) \\
+\end{align}
+$$
+So, if you have any number of things added inside a limit,
+you can simply take the limit of each thing separately.

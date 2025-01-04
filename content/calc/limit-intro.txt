@@ -243,4 +243,4 @@ While this works, this method also has downsides:
     "Just plug in nearby numbers" is not a good definition,
     so if you try to prove something with it, the "proof" won't be convincing.
 
-To fix these problems, we will later define limits precisely.
+To fix these problems, next we will limits precisely.

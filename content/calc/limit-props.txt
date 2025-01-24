@@ -1,7 +1,7 @@
 # Limit Properties
 
 Make sure that you know our [definition of limit](limit-def.html)
-and **what exactly small means** in the definition.
+and what exactly small means in the definition.
 
 ## More than one limit
 

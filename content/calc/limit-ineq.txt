@@ -1,75 +1,40 @@
 # Inequality and Limit
 
-Suppose that $f(x) \le g(x)$ for all numbers $x$ except $a$,
+Suppose that $f(x) \le g(x)$ for all numbers $x$,
 and suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
 Let's see what we can say about $A$ and $B$.
-It seems reasonable to expect $A \le B$,
-so let's see what happens if that's false, and we have $A > B$ instead.
+It seems reasonable to expect $A \le B$.
 
-Let $D=A-B$ denote the difference of the limits $A$ and $B$.
-We have $A > B$, so $D$ is positive.
-By the definitions of the limits,
-there's an input interval of $f$ corresponding to the output interval $(A-\frac{D}{3}, A+\frac{D}{3})$,
-and there's an input interval of $g$ corresponding to the output interval $(B-\frac{D}{3}, B+\frac{D}{3})$·
-
-asymptote:
-    unitsize(2cm);
-
-    draw((0,3)--(0,10.5), arrow=Arrow(5mm));
-    draw((0,4)--(0,6), p=purple+5);
-    draw((0,7)--(0,9), p=deepgreen+5);
-
-    dot((0,4), p=dotpen);
-    dot((0,5), p=dotpen, L="$B$", align=W);
-    dot((0,6), p=dotpen);
-    dot((0,7), p=dotpen);
-    dot((0,8), p=dotpen, L="$A$", align=W);
-    dot((0,9), p=dotpen);
-
-    real spacing = 0.05;
-    for (int y = 4; y < 9; ++y) {
-        draw(brace_with_space((0,y+1-spacing), (0,y+spacing), 0.2), p=darkorange, L="$\frac{D}{3}$", align=E);
-    }
-
-    draw(brace_with_space((0,8), (0,5), 0.7), p=deepred, L="$D$", align=E);
-
-asymptote:
-    unitsize(2cm);
-
-    draw((0,0)--(5,0), arrow=Arrow(5mm));
-    draw((1,-0.1)--(3,-0.1), p=deepred+5);
-    draw((0.5,-0.2)--(3.5,-0.2), p=darkorange+5);
-
-    dot((2,0), p=dotpen+blue, L="$a$", align=N);
-
-Just like [before](limit-basics.html#more-than-one-limit), the input intervals overlap,
-and there are numbers not equal to $a$ that are in both of the input intervals.
-Letting $o$ be one of these "overlap numbers", we get
+Let's see what happens if we instead have $A > B$, e.g. $A=5$ and $B=3$.
+Suppose that $f(x) \le g(x)$, but $\lim_{x \to a} f(x) = 5$ and $\lim_{x \to a} g(x) = 3$.
+Let $s_1(x) = f(x) - 5$ and $s_2(x) = g(x) - 3$;
+these are small near $a$ according to the definition of limit.
+We have
 $$
-f(o) \in \left( A-\frac{D}{3}, A+\frac{D}{3} \right), \qquad
-g(o) \in \left( B-\frac{D}{3}, B+\frac{D}{3} \right).
+\begin{align}
+s_2(x)-s_1(x) &= (g(x) - 3) - (f(x) - 5) \\
+&= g(x) - 3 - f(x) + 5 \\
+&= 2+g(x)-f(x).
+\end{align}
 $$
-This leads to
+Here $g(x)-f(x)$ is not negative because $f(x) \le g(x)$.
+This means that if we simply remove it,
+the right side of the equation will either stay the same or become smaller:
 $$
-f(o) > g(o),
+s_2(x)-s_1(x) \ge 2
 $$
-which is impossible; we assumed that $f(x) \le g(x)$ whenever $x \ne a$, and we also have $o \ne a$.
+This is not possible, because
+[$s_2(x)-s_1(x)$ is small near $a$](limit-small.html#difference-of-small-functions).
+This means that some of its values will be smaller than $2$.
+A similar thing happens with any $A$ and $B$ where the $A$ is bigger,
+so we must have $A \le B$.
 
-We didn't even need the assumption that $f(x) \le g(x)$ for **all** $x$.
-Instead, it was enough that we found one overlap number, which gave the desired result.
-Instead of assuming that $f(x) \le g(x)$ for all $x$,
-we could assume that there's some open interval $I$ centered around $a$ in which $f(x) \le g(x)$;
-then we can choose $o$ such that it's in both input intervals and in $I$.
-
-asymptote:
-    unitsize(2cm);
-
-    draw((-1,0)--(6,0), arrow=Arrow(5mm));
-    draw((1,-0.1)--(3,-0.1), p=deepred+5);
-    draw((0.5,-0.2)--(3.5,-0.2), p=darkorange+5);
-    draw((0,0)--(4,0), p=deepgreen+5, L=Label("$I$", align=N, position=Relative(0.8)));
-
-    dot((2,0), p=dotpen+blue, L="$a$", align=N);
+We don't actually need $f(x) \le g(x)$ for all numbers $x$.
+It's enough if it works on some interval centered around $a$,
+because if a function is small near $a$,
+then any such interval will contain some of its small values
+(specifically, values less than $A-B$).
+Just one of them would be enough to show that we cannot have $A > B$.
 
 graybox:
     If $f(x) \le g(x)$ for all numbers $x$ in some open interval centered around $a$,
@@ -77,6 +42,8 @@ graybox:
     then $\lim_{x \to a} f(x) \le \lim_{x \to b} g(x)$.
 
 Note that $f(x) < g(x)$ does **not** imply $\lim_{x \to a} f(x) < \lim_{x \to a} g(x)$.
+The limits may be equal even if the functions are not!
+
 For example, let $f(x) = 0$ and
 $$
 g(x) = \begin{cases}

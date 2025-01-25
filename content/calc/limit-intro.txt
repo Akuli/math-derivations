@@ -107,7 +107,7 @@ $$
 Most calculators have a $\sin(\dots)$ function,
 but I will explain what it does in case you're not familiar with it.
 To calculate $f(x)$, you take a 180 degree angle, divide it by $x$,
-and then rotate by the resulting angle along the unit circle counter-clockwise,
+and then rotate by the resulting angle along the unit circle (radius 1) counter-clockwise,
 starting from the right.
 Then $f(x)$ is the $y$ coordinate of the point where you end up.
 The $x$ coordniate is ignored.

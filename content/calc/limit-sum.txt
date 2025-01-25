@@ -31,7 +31,7 @@ we don't necessarily have $6.9 < f(x)+g(x) < 7.1$.
 If, for example, $f(x)=2.09$ and $g(x)=5.09$, the sum will be $7.18$.
 
 However, we **can** conclude that $6.8 < f(x)+g(x) < 7.2$
-by simply adding the inequalities:
+by combining the inequalities:
 $$
 \begin{align}
 1.9 &< f(x) < 2.1 \\

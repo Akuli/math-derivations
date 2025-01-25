@@ -14,7 +14,10 @@ we start with a simple case and then generalize the result.
 
 ## Simple case
 
-Suppose that $\lim_{x \to a} g(x) = 4$. We show that
+Suppose that $\lim_{x \to a} g(x) = 4$.
+We calculate the limit of $\frac{1}{g(x)}$.
+
+We show that
 $$
 \lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}.
 $$
@@ -23,10 +26,10 @@ To see why, let's take a small enough precision, e.g. $0.1$.
 If $x$ is close enough to $a$, we now get $g(x) \approx 4$ with precision $0.1$,
 which means that $3.9 < g(x) < 4.1$, so $g(x)$ is surely positive.
 
-Let $p > 0$ be any precision.
-We want to show that $\frac{1}{g(x)} \approx \frac{1}{4}$ with precision $p$
-when $x$ is close enough to $a$.
-Let's start by looking at how far apart $\frac{1}{g(x)}$ and $\frac{1}{4}$ are by subtracting them:
+We suspect that the limit of $\frac{1}{g(x)}$ is probably $\frac{1}{4}$,
+because $g(x)$ is close to $4$.
+Let's compare these by subtracting the limit from the function.
+(We used the same trick to derive [the limit of product](limit-product.html).)
 $$
 \begin{align}
 \frac{1}{g(x)} - \frac{1}{4}
@@ -34,6 +37,7 @@ $$
 &= \frac{4-g(x)}{4g(x)}
 \end{align}
 $$
+Let $p > 0$ be any precision.
 On top, we have $4-g(x)$.
 If $x$ is close enough to $a$, we have $g(x) \approx 4$ with precision $p$,
 which means that the distance between $g(x)$ and $4$ is less than $p$:
@@ -45,12 +49,16 @@ $$
 4g(x) > 4 \cdot 3.9 = 15.6.
 $$
 This means that $4g(x)$ is so big that dividing by it brings numbers closer to zero,
-and hence anything that is between $-p$ and $p$ to begin with will stay between $-p$ and $p$:
+and hence anything that is between $-p$ and $p$ will stay between $-p$ and $p$:
 $$
 -p < \frac{4-g(x)}{4g(x)} < p
 $$
-Because $\frac{4-g(x)}{4g(x)}$ is the difference between $\frac{1}{g(x)}$ and $\frac{1}{4}$,
-this shows that $\frac{1}{g(x)} \approx \frac{1}{4}$ with precision $p$, so
+Because $\frac{4-g(x)}{4g(x)} = \frac{1}{g(x)} - \frac{1}{4}$, we get:
+$$
+-p < \frac{1}{g(x)} - \frac{1}{4} < p
+$$
+This shows that
+$\frac{1}{g(x)} \approx \frac{1}{4}$ with precision $p$ when $x$ is close enough to $a$, so
 $$
 \lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}.
 $$
@@ -59,7 +67,7 @@ graybox:
     If $\lim_{x \to a} g(x) = 4$, then $\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}$.
 
 
-## General case
+## Slightly more general case
 
 Unfortunately, the above doesn't work very nicely
 if we replace $4$ with other numbers.
@@ -67,51 +75,72 @@ This is the part that causes problems:
 $$
 4g(x) > 4 \cdot 3.9 = 15.6
 $$
-If instead of $15.6$, we get a number that is smaller than 1,
-then dividing by it doesn't bring closer to zero as expected.
+Instead of $15.6$, we might get a number that is smaller than 1.
+Then dividing by it doesn't bring things closer to zero as expected.
 For example, dividing by $0.5$ is same as multiplying by two.
-This could be fixed by choosing a smaller precision to begin with,
-as we've done [in the past](limit-of-sum.html).
+A negative limit value would also cause problems.
 
-Replacing $4$ with a negative number also has some issues.
-It would bring in minus signs that would need to be handled somehow.
+These problems could be fixed or worked around (feel free to try if you want),
+but IMO it's not worth the effort, because there is an easier way.
+Suppose that the limit of $g(x)$ is any nonzero number $B \ne 0$.
+The idea is to adjust the function $g(x)$ so that instead of $B$, we get $4$.
 
-We could do all this, but there is an easier/lazier way.
-Suppose that the limit of $g(x)$ is some nonzero number $B \ne 0$.
-Then, by [limit of product](limit-product.html), the limit of $\frac{1}{B}g(x)$ is
+Let's try dividing by the original function by its limit $B$.
+Using [limit of product](limit-product.html), we get
 $$
 \begin{align}
-\lim_{x \to a} \frac{1}{B}g(x)
+\lim_{x \to a} \frac{g(x)}{B}
+&= \lim_{x \to a} \frac{1}{B} g(x) \\
 &= \left( \lim_{x \to a} \frac{1}{B} \right) \left( \lim_{x \to a} g(x) \right) \\
-&= \frac{1}{B} \cdot B = 1,
+&= \frac{1}{B} \cdot B = 1.
 \end{align}
 $$
-and the limit of $\frac{4}{B}g(x)$ is
+If we also multiply by 4, we get
 $$
 \begin{align}
-\lim_{x \to a} \frac{4}{B}g(x)
+\lim_{x \to a} \frac{4g(x)}{B}
+&= \lim_{x \to a} \frac{4}{B} g(x) \\
 &= \left( \lim_{x \to a} \frac{4}{B} \right) \left( \lim_{x \to a} g(x) \right) \\
 &= \frac{4}{B} \cdot B = 4.
 \end{align}
 $$
-Therefore, if we can get $\frac{4}{B}$ in front of $g(x)$,
-we can use the above result, as in
-$$
-\lim_{x \to a} \frac{1}{\frac{4}{B}g(x)} = \frac{1}{4}.
-$$
-Using this idea, let's calculate the limit of $\frac{f(x)}{g(x)}$,
-where $\lim_{x \to a} f(x) = A$:
+Therefore, if we can get the constant $\frac{4}{B}$ in front of $g(x)$,
+we know how to calculate the limit: it's $\frac{1}{4}$.
+It is quite easy to get the constant in front,
+because in division, you can multiply the top and bottom by anything you want,
+and it doesn't affect anything.
+Like this:
 $$
 \begin{align}
-\lim_{x \to a} \frac{f(x)}{g(x)}
-&= \lim_{x \to a} \frac{\frac{4}{B}f(x)}{\frac{4}{B}g(x)} \\
-&= \lim_{x \to a} \left( \frac{4}{B} \cdot f(x) \cdot \frac{1}{\frac{4}{B}g(x)} \right) \\
-&= \left( \lim_{x \to a} \frac{4}{B} \right) \left( \lim_{x \to a} f(x) \right) \left( \lim_{x \to a} \frac{1}{\frac{4}{B}g(x)} \right) \\
-&= \frac{4}{B}A\frac{1}{4}
-= \frac{A}{B}
+\lim_{x \to a} \frac{1}{g(x)}
+&= \lim_{x \to a} \frac{\frac{4}{B}}{\frac{4}{B}g(x)} \\
+&= \lim_{x \to a} \frac{4}{B} \frac{1}{\frac{4}{B}g(x)} \\
+&= \left( \lim_{x \to a} \frac{4}{B} \right) \left( \lim_{x \to a} \frac{1}{\frac{4}{B}g(x)} \right) \\
+&= \frac{4}{B} \cdot \frac{1}{4} \\
+&= B.
 \end{align}
 $$
 Here we used [limit of product](limit-product.html) and [limit of constant](limit-def.html#even-simpler-example-limit-of-a-constant).
+
+graybox:
+    If $\lim_{x \to a} g(x)$ exists and is not zero, then
+    $$
+    \lim_{x \to a} \frac{1}{g(x)} = \frac{1}{\displaystyle\lim_{x \to a} g(x)}.
+    $$
+
+
+## General case
+
+Any division $\frac{f(x)}{g(x)}$ can be viewed as a multiplication $f(x) \frac{1}{g(x)}$.
+In this case, that's useful because we can apply [limit of product](limit-product.html):
+$$
+\begin{align}
+\lim_{x \to a} \frac{f(x)}{g(x)}
+&= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
+&= \left( \lim_{x \to a} f(x) \right) \left( \frac{1}{g(x)} \right) \\
+&= \frac{\lim_{x \to a} f(x)}{\lim{x \to a} g(x)}
+\end{align}
+$$
 
 graybox:
     If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exists

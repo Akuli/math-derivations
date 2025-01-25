@@ -2,182 +2,240 @@
 
 redbox:
     Make sure that you know our [definition of limit](limit-def.html).
-    In particular, make sure you know the precise meanings of "close enough to" and "$\approx$".
 
 We find a rule for calculating the limit of the product of two functions, as in
 $$
-\lim_{x \to a} f(x)g(x).
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr).
 $$
-This is somewhat similar to [limit of sum](limit-sum.html),
-but more complicated than simply using half of the desired precision.
-To do this without making a big mess,
-we first consider simple cases and then use them to show how this works in general.
+This is similar to [the limit of sum](limit-sum.html), but more difficult.
 
 
-## Both limits zero
+## "Error functions"
 
-Let's start with a simple case. Suppose that
-$$
-\lim_{x \to a} f(x) = 0 \quad \text{and} \quad \lim_{x \to a} g(x) = 0.
-$$
-We show that $\lim_{x \to a} f(x)g(x) = 0$.
-This shouldn't be surprising: it basically says "small * small = small".
+(The title is in quotes, because the term "error function"
+often refers to [a different thing](https://en.wikipedia.org/wiki/Error_function).)
 
-Let $p > 0$ be any precision.
-We need to show that $f(x)g(x) \approx 0$ with precision $p$ when $x$ is close enough to $a$.
-
-If $x$ is close enough to $a$, we have $f(x) \approx 0$ with precision $p$, and $g(x) \approx 0$ with precision $0.1$.
-(You will soon see why I chose these precisions.)
-This means that
-$$
--p < f(x) < p \quad \text{and} \quad -0.1 < g(x) < 0.1.
-$$
-Multiplying by $g(x)$ brings numbers closer to zero.
-For example, if $g(x) = -0.05$, then $g(x) \cdot 40 = -2$,
-and $-2$ is much closer to zero than $40$.
-(Also, the sign flips if $g(x)$ is negative.)
-
-This means that if we multiply $f(x)$ by $g(x)$, we stay between $-p$ and $p$,
-because we go even closer to zero:
-$$
--p < f(x)g(x) < p
-$$
-This means that $f(x)g(x) \approx 0$ with precision $p$.
-
-graybox:
-    If $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = 0$,
-    then
-    $$
-    \lim_{x \to a} f(x)g(x) = 0.
-    $$
-
-
-## Constant times limit zero
-
-Next, let's assume one function has limit zero, and the other function is a constant.
-Suppose that $\lim_{x \to a} f(x) = 0$. We show that
-$$
-\lim_{x \to a} 4f(x) = 0.
-$$
-
-At first this seems wrong.
-For example, consider the precision $p=0.1$.
-If $-0.1 < f(x) < 0.1$, we don't necessarily have $-0.1 < 4f(x) < 0.1$.
-If, for example, $f(x)=0.09$, then $4f(x) = 0.36$.
-
-However, we **can** conclude that $-0.4 < 4f(x) < 0.4$
-by simply multiplying the inequality by 4.
-The precision also gets multiplied 4, making it less precise.
-
-The trick is to make $f(x)$ close to zero within **one fourth** of the desired precision $p$,
-so that once multiplied, we get the precision $p$.
-For example, we have $f(x) \approx 0$ with precision $0.025$ when $x$ is close enough to $a$,
-so $4f(x) \approx 0$ with precision $0.1$.
-
-This works with any precision $p > 0$ in place of $0.1$.
-Also, there's nothing special about the number 4:
-this works the same way with any other positive number.
-
-graybox:
-    If $\lim_{x \to a} f(x) = 0$ and $c > 0$ is a positive constant, then
-    $$
-    \lim_{x \to a} cf(x) = 0.
-    $$
-
-The "one fourth of the desired precision" part doesn't work as expected if $c$ is not positive.
-However, this still works with any constant $c$, and it doesn't have to be positive:
-<ul><li>
-    If $c=0$, we are looking at $\lim_{x \to a} 0 = 0$, which is
-    [the limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant).
-</li><li>
-    If $c$ is negative, we get an extra minus sign in front, but it doesn't matter.
-    If $cf(x) \approx 0$, then also $-cf(x) \approx 0$ with the same precision,
-    because the minus doesn't affect the distance to zero.
-</li></ul>
-
-graybox:
-    If $\lim_{x \to a} f(x) = 0$ and $c$ is any constant, then
-    $$
-    \lim_{x \to a} cf(x) = 0.
-    $$
-
-
-## Putting it all together
-
-Now we are ready to figure out what happens if the limits of $f$ and $g$ are any numbers,
-not necessarily zero.
 Suppose that
 $$
-\lim_{x \to a} f(x) = A \quad \text{and} \quad \lim_{x \to a} g(x) = B,
+\lim_{x \to a} f(x) = 3.
 $$
-where $A$ and $B$ may be any numbers.
+Let's define the following function:
+$$
+E_f(x) = f(x)-3
+$$
+This "error function" measures how far away the function is from its limit,
+and in which direction.
+For example, if $f(x) = 2.99$, then $E_f(x) = -0.01$,
+which means that $f(x)$ is quite close to its limit, and less than its limit.
 
-Consider the following "error functions":
-$$
-E_1(x) = f(x)-A \quad \text{and} \quad E_2(x) = g(x)-B
-$$
-Or equivalently:
-$$
-f(x) = A + E_1(x) \quad \text{and} \quad g(x) = B + E_2(x)
-$$
-This means that $f(x)$ is basically the limit $A$,
-but it comes with an additional error $E_1(x)$.
-
-These errors are small in the sense that their limits are zero.
-There are many ways to see this.
-For example, we can use [limit of sum](limit-sum.html) together with
-[limit of constant](limit-def.html#even-simpler-example-limit-of-a-constant):
+Let's now take the limit of $E_f$ using [the limit of sum](limit-of-sum.html):
 $$
 \begin{align}
-\lim_{x \to a} E_1(x)
-&= \lim_{x \to a} \Bigl( f(x)-A \Bigr) \\
-&= \lim_{x \to a} \Bigl( f(x) + (-A) \Bigr) \\
-&= \lim_{x \to a} f(x) + \lim_{x \to a} (-A) \\
-&= A + (-A) \\
+\lim_{x \to a} E_f(x)
+&= \lim_{x \to a} (f(x)-3) \\
+&= \lim_{x \to a} (f(x) + (-3)) \\
+&= \lim_{x \to a} f(x) + \lim_{x\to a} (-3)
+\end{align}
+$$
+The limit of $f(x)$ is $3$,
+and according to [limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant),
+the limit of $-3$ is simply $-3$, so we get:
+$$
+\lim_{x \to a} E_f(x) = 3 + (-3) = 0.
+$$
+This shouldn't be surprising:
+"limit is zero" is basically a precise way to say "small".
+
+It is also possible to rearrange the definition $E_f(x) = f(x)-3$ into this:
+$$
+f(x) = 3 + E_f(x)
+$$
+This should also make sense.
+It says that $f(x)$ consists of the limit value $3$ and a small additional error.
+
+We will use these "error functions" below.
+Of course, the limit doesn't have to be $3$:
+this trick can be used whenever a function has any limit.
+
+
+## Simple case: both limits are positive integers
+
+Suppose that
+$$
+\lim_{x \to a} f(x) = 3 \quad \text{and} \quad \lim_{x \to a} g(x) = 5.
+$$
+We calculate the limit of $f(x)g(x)$.
+
+Let's start by defining the following "error functions":
+$$
+\begin{align}
+E_f(x) &= f(x)-3 \\
+E_g(x) &= g(x)-5
+\end{align}
+$$
+And rearranging them:
+$$
+\begin{align}
+f(x) &= 3 + E_f(x) \\
+g(x) &= 5 + E_g(x)
+\end{align}
+$$
+We can now start calculating the limit of $f(x)g(x)$:
+$$
+\begin{align}
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr)
+&= \lim_{x \to a} (3+E_f(x))(5+E_g(x)) \\
+&= \lim_{x \to a} \Bigl(15 + 3E_g(x) + 5E_f(x) + E_f(x)E_g(x) \Bigl)
+\end{align}
+$$
+We ended up with 4 things added,
+so we can use [the limit of sum](limit-of-sum.html) to split them into separate limits:
+$$
+\begin{align}
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr)
+&= \lim_{x \to a} 15  + \lim_{x \to a} 3E_g(x) + \lim_{x \to a} 5E_f(x) + \lim_{x \to a} \bigl(E_f(x)E_g(x)\bigr)
+\end{align}
+$$
+The first three limits are easy:
+
+<ul><li>
+    The limit of $15$ is simply $15$ by [limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant).
+</li><li>
+    The limit of $3E_g(x)$ can be calculated as a limit of sum:
+    $$
+    \begin{align}
+    \lim_{x \to a} 3E_g(x)
+    &= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x)\Bigr) \\
+    &= \lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x) \\
+    &= 0+0+0 \\
+    &= 0
+    \end{align}
+    $$
+</li><li>
+    The limit of $5E_g(x)$ can be calculated similarly, and it is also zero.
+</li></ul>
+
+We now have:
+$$
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr) = 15 + \lim_{x \to a} \bigl( E_f(x)E_g(x) \bigr)
+$$
+The limit of $E_f(x)$ is zero, so if $x$ is close enough to $a$,
+we have $E_f(x) \approx 0$ with precision $0.1$.
+(This works with any precision. Let's just pick $0.1$).
+This means that
+$$
+-0.1 < E_f(x) < 0.1.
+$$
+Multiplying by $E_f(x)$ brings numbers closer to zero.
+For example, if $E_f(x) = -0.05$, then $E_f(x) \cdot 40 = -2$,
+and $-2$ is much closer to zero than $40$.
+(Also, the sign flips if $E_f(x)$ is negative.)
+
+Let's now look at $E_f(x)E_g(x)$.
+The limit of $E_g(x)$ is zero, which means that for any precision $p > 0$,
+we have $E_g(x) \approx 0$ when $x$ is close enough to $a$.
+However, multiplying $E_f(x)$ brings the value even closer to zero,
+so we also have $E_f(x)E_g(x) \approx 0$ with precision $p$.
+Therefore
+$$
+\lim_{x \to a} \bigl( E_f(x)E_g(x)\bigr) = 0.
+$$
+
+graybox:
+    If $\lim_{x \to a} f(x) = 3$ and $\lim_{x \to a} g(x) = 5$, then
+    $$
+    \lim_{x \to a} f(x)g(x) = 15.
+    $$
+
+This result shouldn't feel very surprising.
+It says that if $f(x)$ is close to 3 and $g(x)$ is close to 5,
+then $f(x)g(x)$ is close to 15.
+
+Of course, the same reasoning works with any positive integers instead of 3 and 5.
+We need positive integers for the step where we did $3E_g(x) = E_g(x)+E_g(x)+E_g(x)$.
+
+graybox:
+    If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ are positive integers, then
+    $$
+    \lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} g(x) \right).
+    $$
+
+
+## They don't need to be integers
+
+Suppose that
+$$
+\lim_{x \to a} f(x) = 3.14 \quad \text{and} \quad \lim_{x \to a} g(x) = 6.9.
+$$
+We calculate the limit of $f(x)g(x)$.
+
+The above calculation mostly works as is,
+but this part needs to be modified a bit:
+$$
+\begin{align}
+\lim_{x \to a} 3E_g(x)
+&= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x)\Bigr) \\
+&= \lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x) \\
+&= 0+0+0 \\
 &= 0
 \end{align}
 $$
-The same works for $E_2(x)$.
-We can now look at the limit of $f(x)g(x)$.
+The problem is that we get $3.14E_g(x)$ instead of $3E_g(x)$.
+We can still split it up similarly, but $0.14 E_g(x)$ will remain.
 $$
 \begin{align}
-\lim_{x \to a} f(x)g(x) 
-&= \lim_{x \to a} \Bigl(A + E_1(x)\Bigr)\Bigl(B + E_2(x)\Bigr) \\
-&= \lim_{x \to a} \Bigl(A\bigl(B + E_2(x)\bigr) + E_1(x)\bigl(B + E_2(x)\bigr)\Bigr) \\
-&= \lim_{x \to a} \Bigl( AB + AE_2(x) + E_1(x)B + E_1(x)E_2(x) \Bigr)
+\lim_{x \to a} 3.14E_g(x)
+&= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x) + 0.14E_g(x)\Bigr)
 \end{align}
 $$
-With limit of sum, this becomes:
+However, multiplying by $0.14$ makes numbers smaller because it's less than $1$,
+so the limit of $0.14E_g(x)$ is also zero:
 $$
-\lim_{x \to a} f(x)g(x) 
-= \lim_{x \to a} AB + \lim_{x \to a}AE_2(x) + \lim_{x \to a}E_1(x)B + \lim_{x \to a}E_1(x)E_2(x)
+\begin{align}
+\lim_{x \to a} 3.14E_g(x)
+&= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x) + 0.14E_g(x)\Bigr) \\
+&= 0+0+0+0 \\
+&= 0
+\end{align}
 $$
-Let's look at each part separately using other results derived so far.
+We will also need the limit of $6.9E_f(x)$, and that's zero for the same reason.
+This works with any positive numbers instead of $3.14$ and $6.9$.
 
-<ul><li>
-    $\lim_{x \to a} AB = AB$. This is the limit of a constant.
-</li><li>
-    $\lim_{x \to a}AE_2(x) = 0$, because $A$ is a constant and the limit of $E_2(x)$ is zero.
-</li><li>
-    $\lim_{x \to a}E_1(x)B = 0$, because $B$ is a constant and the limit of $E_1(x)$ is zero.
-</li><li>
-    $\lim_{x \to a}E_1(x)E_2(x) = 0$, because we are multiplying two functions whose limits are zero.
-</li></ul>
+graybox:
+    If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ are positive, then
+    $$
+    \lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} g(x) \right).
+    $$
 
-Now we get
+
+## They don't need to be positive
+
+Our limit calculation works fine if one or both of the limits is zero.
+In that case, we get something like $\lim_{x \to a} 0E_g(x)$,
+which is actually [the limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant).
+
+For a negative limit, we get something like
 $$
-\lim_{x \to a} f(x)g(x) = AB+0+0+0 = AB.
+\lim_{x \to a} -3.14E_g(x).
 $$
+We already know that the limit of $3.14E_g(x)$ will be zero (see above).
+The minus sign in front doesn't matter:
+if $3.14E_g(x) \approx 0$ with some precision,
+then also $-3.14E_g(x) \approx 0$ with the same precision,
+because the minus sign flips to the opposite side of zero without affecting the distance.
+Therefore
+$$
+\lim_{x \to a} -3.14E_g(x) = 0
+$$
+and the calculation works as expected.
 
 graybox:
     If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
     $$
-    \lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right) \left( \lim_{x \to a} g(x) \right).
+    \lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} g(x) \right).
     $$
 
-Together with limit of constant, this rule covers everything derived on this page.
-**I don't recommend memorizing other rules on this page**,
-because they were needed only to get this rule.
+This is known as the rule for the limit of a product.
 
 
 ## Example
@@ -203,7 +261,7 @@ $$
 $$
 We can handle the limit of $4x$ similarly.
 Finally, we can use $\lim_{x \to 3} x = 3$ (derived [here](limit-def.html#simple-example-limit-of-x))
-and limit of constant.
+and [limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant).
 Like this:
 $$
 \begin{align}

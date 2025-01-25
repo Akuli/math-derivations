@@ -15,7 +15,7 @@ An **open interval** is denoted with $(a,b)$, where $a < b$, and it means all nu
 For example, "$x$ is in the interval $(4,5)$" means same as $4 < x < 5$.
 
 We say that an open interval is **centered around** $a$ if it's $(a-r, a+r)$ with some $r > 0$.
-For example, $(4,6)$ is centered around $5$.
+For example, $(4,5)$ is centered around $4.5$.
 Here $r$ is sometimes called the **radius** of the interval.
 
 The saying "$x$ is **close enough to** $a$" means same as

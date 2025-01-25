@@ -116,7 +116,7 @@ $$
 &= \lim_{x \to a} \frac{4}{B} \frac{1}{\frac{4}{B}g(x)} \\
 &= \left( \lim_{x \to a} \frac{4}{B} \right) \left( \lim_{x \to a} \frac{1}{\frac{4}{B}g(x)} \right) \\
 &= \frac{4}{B} \cdot \frac{1}{4} \\
-&= B.
+&= \frac{1}{B}.
 \end{align}
 $$
 Here we used [limit of product](limit-product.html) and [limit of constant](limit-def.html#even-simpler-example-limit-of-a-constant).
@@ -137,7 +137,7 @@ $$
 \lim_{x \to a} \frac{f(x)}{g(x)}
 &= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
 &= \left( \lim_{x \to a} f(x) \right) \left( \lim_{x \to a} \frac{1}{g(x)} \right) \\
-&= \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}
+&= \frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}
 \end{align}
 $$
 

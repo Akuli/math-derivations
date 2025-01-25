@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Definition of Limit
- - Math Derivations</title>
+<title> Definition of Limit - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
@@ -149,7 +148,7 @@
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-bounded.html">Limits and bounded functions</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="limit-intro.html">"Definition" by plugging in numbers</a><a href="limit-def.html">Definition of limit</a><a href="limit-unique.html">Uniqueness</a><a href="limit-sum.html">Limit of sum</a><a href="limit-product.html">Limit of product</a><a href="limit-diff.html">Limit of difference</a><a href="limit-div.html">Limit of division</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
@@ -202,34 +201,78 @@
         
         </div>
         </div>
-<h1 id="definition-of-limit">Definition of Limit<a class="headerlink" href="#definition-of-limit" title="Link to this title">¶</a></h1>
-    <div class="box redbox">
-    <p>
-        On this page, the word "function" means a function that
-        takes in a real number as its only argument,
-        and evaluates to another real number.
-        Some real numbers might not be valid inputs of the function;
-        for example, square root is a function that
-        accepts only nonnegative inputs.
-    </p>
-    </div>
-    <p>Limit is a very important concept in calculus.
-There are two common ways to introduce it:
-teaching students to calculate limits without talking much about why they work like they do (high schools), and
-proving all the properties of limits needed very carefully with somewhat difficult proofs (university).
-I will aim for something in the middle;
-my goal is to show you how limits work without doing anything too difficult.
+<h1 id="definition-of-limit">Definition of Limit<a class="headerlink" href="#definition-of-limit" title="Link to this title">¶</a></h1><p>So far, we have
+<a href="limit-intro.html">"defined" limits by plugging in nearby numbers</a>.
+There were several problems with this approach.
+On this page we fix them by defining limits precisely.
 </p>
 
-<h2 id="the-idea">The idea<a class="headerlink" href="#the-idea" title="Link to this title">¶</a></h2><p>Let's get started by plugging some numbers into the function
+<h2 id="close-enough-to">Close enough to<a class="headerlink" href="#close-enough-to" title="Link to this title">¶</a></h2><p>Before defining limits, we define what "close enough to" means in this context.
+This concept will simplify the definition of limit a lot.</p>
+
+<p>An <b>open interval</b> is denoted with $(a,b)$, where $a < b$, and it means all numbers strictly between $a$ and $b$.
+For example, "$x$ is in the interval $(4,5)$" means same as $4 < x < 5$.</p>
+
+<p>We say that an open interval is <b>centered around</b> $a$ if it's $(a-r, a+r)$ with some $r > 0$.
+For example, $(4,5)$ is centered around $4.5$.
+Here $r$ is sometimes called the <b>radius</b> of the interval.</p>
+
+<p>The saying "$x$ is <b>close enough to</b> $a$" means same as
+"$x$ is in some open interval centered around $a$ and $x \ne a$".</p>
+
+<p>Examples:</p>
+
+<p><ul><li>
+We have $\frac{(x-1)^3}{x-1} < 1$ on the interval $(0, 2)$ (marked in green),
+except at its center $1$ where the function divides by zero.
+Therefore we can say that $\frac{(x-1)^3}{x-1} < 1$ when $x$ is close enough to $1$.</p>
+
+<p><img width="274" height="257" class="asymptote" src="../images/asy/096183ee08f7359692f2746348f3bffa.svg" /></p><p></li><li>
+We also have $\frac{(x-1)^3}{x-1} < 0.1$ when $x$ is close enough to 1.
+(We could calculate what exactly the interval centered around 1 is,
+but it's not important.)</p>
+
+<p><img width="300" height="257" class="asymptote" src="../images/asy/ae7c2202f71b00468e4bda3eb1cf07e0.svg" /></p><p></li><li>
+We have $0 < x^2 < 0.1$ when $x$ is close enough to zero.
+The $0 < x^2$ part is false when $x=0$, because then it says $0 < 0$.
+However, this doesn't matter,
+because the center $0$ is ignored in the definition of "close enough to".</p>
+
+<p><img width="270" height="257" class="asymptote" src="../images/asy/fe36503177b6cb08957c5e66c8e55112.svg" /></p><p></li><li>
+We have $x^2 < 0.1$ when $x$ is close enough to zero.
+This also happens to work when $x=0$, but it doesn't matter,
+because $x=0$ is ignored anyway.</p>
+
+<p></li><li>
+We do <b>not</b> have $x^2 < 4$ when $x$ is close enough to 2.
+This is because $x^2 > 4$ whenever $x > 2$,
+and any interval centered around 2 will contain numbers greater than 2.</p>
+
+<p><img width="236" height="371" class="asymptote" src="../images/asy/98c0c8e5c6ddf265ea8d9d260e9b193e.svg" /></p><p></li><li>
+We have $x^2 < 5$ when $x$ is close enough to 2.
+For example, the interval $(1.8, 2.2)$ works,
+because the values will be smaller than $(2.2)^2 = 4.84$.</p>
+
+<p><img width="293" height="371" class="asymptote" src="../images/asy/01a63cf91ccfded380ecf6aa00c2c476.svg" /></p><p></li></ul>
+</p>
+
+<h2 id="approx-with-precision">$\approx$ with precision<a class="headerlink" href="#approx-with-precision" title="Link to this title">¶</a></h2><p>Let $a$ and $b$ be any numbers, and let $p$ be a positive number.
+We say that $a \approx b$ <b>with precision</b> $p$, if $b-p < a < b+p$.
+For example, $x \approx 3$ with precision $0.1$ means that $2.9 < x < 3.1$.</p>
+
+<p>This is similar to the "close enough to" concept, but not quite the same.
+Specifically, "$x$ is close enough to $a$" means that $x \approx a$ with some precision,
+but also requires $x \ne a$.
+</p>
+
+<h2 id="the-definition">The Definition<a class="headerlink" href="#the-definition" title="Link to this title">¶</a></h2><p><a href="limit-intro.html">On the previous page</a>, we noticed that
 $$
-f(x) = \frac{x^3-1}{x-1}.
+\lim_{x \to 1} \frac{x^3-1}{x-1} = 3
 $$
-We notice that $f(1)$ is undefined, because that gives division by zero.
-However, if we plug in some values that are just a little bit greater than $1$, we get this:
+by plugging in numbers like this:
 <table><tr>
     <th>$x$</th>
-    <th>$f(x)$</th>
+    <th>$\frac{x^3-1}{x-1}$</th>
 </tr><tr>
     <td>$1$</td><td>undefined</td>
 </tr><tr>
@@ -242,14 +285,6 @@ However, if we plug in some values that are just a little bit greater than $1$, 
     <td>$1.0001$</td><td>$3.00030\dots$</td>
 </tr><tr>
     <td>$1.00001$</td><td>$3.00003\dots$</td>
-</tr></table></p>
-
-<p>The values of $f$ seem to be quite close to $3$.</p>
-
-<p>We notice a similar thing if we plug in values that are just a little bit less than $1$:
-<table><tr>
-    <th>$x$</th>
-    <th>$f(x)$</th>
 </tr><tr>
     <td>$0.9$</td><td>$2.71000\dots$</td>
 </tr><tr>
@@ -262,150 +297,55 @@ However, if we plug in some values that are just a little bit greater than $1$, 
     <td>$0.99999$</td><td>$2.99997\dots$</td>
 </tr></table></p>
 
-<p>In this situation, we say that the limit of $f(x)$ as $x \to 1$ (read: $x$ approaches $1$, $x$ goes to $1$)
-is $3$, and we write
-$$
-\lim_{x \to 1} f(x) = 3.
-$$
-This lim notation is somewhat tall, so if it's somewhere in the middle of text,
-it's often written with the $x \to 1$ part off to the side,
-like $\lim_{x \to 1} f(x)$.</p>
+<p>The resulting values are approximately 3, but let's be more specific by specifying how close to 3 the values are.</p>
 
-<p>We will work with limits a lot, and that will include proving some things about limits.
-Even though plugging in a bunch of numbers is a good way to make a guess about the limit,
-it won't suffice anymore when we want to do something more generally and we can't just plug in numbers.
-For that, we need a better definition of limit.
+<p>Limit means that we can choose any precision we want, no matter how small.
+For example, we have $\frac{x^3-1}{x-1} \approx 3$ with precision $0.01$
+(that is, $2.99 < \frac{x^3-1}{x-1} < 3.01$),
+if $x$ is close enough to 1.
+The point is that we can use any precision we want, such as $0.00000000001$.</p>
+
+<div class="box graybox"><p>We say that the function $f$ has <b>limit</b> $L$ as $x$ approaches $a$ and we write
+$$
+\lim_{x \to a} f(x) = L,
+$$
+if for any precision $p > 0$,
+we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$.
 </p>
 
-<h2 id="definition-with-intervals">Definition with intervals<a class="headerlink" href="#definition-with-intervals" title="Link to this title">¶</a></h2><p>Consider the open interval $(2.99, 3.01)$; that is,
-the set of all numbers between $2.99$ and $3.01$.
-The ends of this interval are $3 \pm 0.01$, and the center of the interval is $3$.
-The interval is open, which means that the end points are not included in the interval,
-$2.99 \notin (2.99, 3.01)$ and $3.01 \notin (2.99, 3.01)$.</p>
-
-<p><img width="344" height="82" class="asymptote" src="../images/asy/e50661b0a7f9f631fae245839e4d180e.svg" /></p><p>By plugging in more numbers, we notice that
-$$
-f(0.997) = 2.991009 \in (2.99, 3.01)
-$$
-and
-$$
-f(1.003) = 3.009009 \in (2.99, 3.01).
-$$
-Let's see what happens for numbers between $0.997$ and $1.003$.
-<table><tr>
-    <th>$x$</th>
-    <th>$f(x)$</th>
-</tr><tr>
-    <td>$0.997$</td><td>$2.991009 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$0.998$</td><td>$2.994004 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$0.999$</td><td>$2.997001 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$1.000$</td><td>undefined</td>
-</tr><tr>
-    <td>$1.001$</td><td>$3.003001 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$1.002$</td><td>$3.006004 \in (2.99, 3.01)$</td>
-</tr><tr>
-    <td>$1.003$</td><td>$3.009009 \in (2.99, 3.01)$</td>
-</tr></table></p>
-
-<p>We can't check every number between $0.997$ and $1.003$ with a calculator,
-but what seems to be happening is that
-$$
-f(\text{any number between $0.997$ and $1.003$ except $1$}) \in (2.99,3.01).
-$$
-Let $I_x=(0.997,1.003)$ denote the interval of numbers that we plug into the function, and
-let $I_y=(2.99,3.01)$   denote the interval containing the outputs of the function.
-We started with $I_y=(2.99,3.01)$, and then found an interval $I_x$ such that
-$$
-f(\text{any number in $I_x$ except $1$}) \in I_y.
-$$
-The definition of $\lim_{x \to 1} f(x) = 3$ is that we always find some $I_x$ interval,
-no matter which $I_y$ interval we choose.
-So, the definition goes as follows:
-for any open interval $I_y$ centered around $3$,
-there is some open interval $I_x$ centered around $1$ such that
-$$
-f(\text{any number in $I_x$ except $1$}) \in I_y.
-$$
-We have been looking at an example where the limit as $x$ approaches $1$ is $3$,
-but the same works for any other number $a$ being approached, and with any other limit value $L$.</p>
-
-<div class="box graybox"><p>Let $a,L \in \mathbb{R}$, and let $f$ be a function.
-The limit is defined as follows:
-we write $\lim_{x \to a} f(x) = L$, if
-for any open interval $I_y$ centered around $L$,
-there is some open interval $I_x$ centered around $a$ such that
-$$
-f(\text{any number in $I_x$ except $a$}) \in I_y.
-$$
-Here I refer to $I_x$ as the <i>input interval</i>, and I refer to $I_y$ as the <i>output interval</i>.
+</div><p>Because we defined precisely what "$\approx$ with precision" and "close enough to" mean,
+there's nothing vague in this definition,
+so it's possible to write convincing proofs and derivations based on it.
 </p>
 
-</div><p>So far we have worked with $a=1$ and $L=3$.
+<h2 id="simple-example-limit-of-x">Simple example: limit of $x$<a class="headerlink" href="#simple-example-limit-of-x" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to 3} x = 3$.</p>
+
+<p>Let $p > 0$ be any precision.
+We want to show that $x \approx 3$ with precision $p$
+when $x$ is close enough to $3$.</p>
+
+<p>This is quite easy. Consider the interval $(3-p, 3+p)$.
+If $x$ is close enough to $3$, it is in $(3-p, 3+p)$, and $x \ne 3$.
+This means that $3-p < x < 3+p$, so we have $x \approx 3$ with precision $p$.
+(We didn't need $x \ne 3$ for anything.)</p>
+
+<div class="box graybox"><p>We have $\lim_{x \to 3} x = 3$.
 </p>
 
-<h2 id="things-to-note">Things to note<a class="headerlink" href="#things-to-note" title="Link to this title">¶</a></h2><p>Explaining the above definition with words, it says that
-if we want to get the values of a function into any output interval (no matter how small),
-then there is an input interval that allows us to do so.</p>
+</div><p>Of course, there's nothing special about the number 3.
+The same works with any other number.</p>
 
-<p>The calculations we did with a calculator and our example function $f$
-don't prove that $\lim_{x \to 1} f(x) = 3$.
-To actually prove it, we should check all the infinitely many $I_y$ intervals
-instead of just $(2.99, 3.01)$.</p>
-
-<p>The definition of a limit doesn't use $f(a)$ at all.
-In our example, we had $a=1$, and $f(a)$ was undefined;
-even that didn't matter, because we never needed to calculate $f(a)$.
-This makes sense, because limits are all about what happens <b>around</b> $a$,
-not at all about what happens at exactly $x=a$.</p>
-
-<p>If we pick a smaller $I_y$ interval that the values of the function must fit into,
-then we likely also need more restrictions for which values of the function we are considering,
-which we can do by choosing a smaller $I_x$ interval.
-This is fine; the choice of the interval $I_x$ may depend on the interval $I_y$ being used.</p>
-
-<p>The openness of the intervals isn't needed for anything.
-The same definition could be presented with closed intervals, which would include the end points,
-but open intervals are much more commonly used for this so I did it that way too.</p>
-
-<p>This definition is usually written in a slightly different way,
-and that's called the $\epsi,\delta$ definition of a limit.
-The name comes from using the greek epsilon letter $\epsi$ to denote the size of $I_y$, so that
-$$
-I_y = (L-\epsi,L+\epsi),
-$$
-and using the delta letter $\delta$ to denote the size of $I_x$ similarly,
-$$
-I_x = (a-\delta,a+\delta).
-$$
+<div class="box graybox"><p>For any number $a$, we have $\lim_{x \to a} x = a$.
 </p>
 
-<h2 id="graph">Graph<a class="headerlink" href="#graph" title="Link to this title">¶</a></h2><p>Let's figure out what the definition of the limit looks like in the graph of a function.
-We continue with the same example that we had earlier on this page; that is,
-$$
-f(x) = \frac{x^3-1}{x-1}, \quad
-I_y = (2.99, 3.01), \quad
-I_x = (0.997, 1.003).
-$$
-The graph of $f$ looks like this:</p>
+</div><h2 id="even-simpler-example-limit-of-a-constant">Even simpler example: limit of a constant<a class="headerlink" href="#even-simpler-example-limit-of-a-constant" title="Link to this title">¶</a></h2><p>We have $\lim_{x \to 3} 5 = 5$,
+because $5 \approx 5$ with any precision, regardless of what $x$ is.</p>
 
-<p><img width="253" height="480" class="asymptote" src="../images/asy/0d28672af5bc7f354ad7396cf8fc030c.svg" /></p><p>Let's zoom onto the square that I marked with red.
-The interval $I_y=(2.99, 3.01)$ is for the values of the function, so I'll draw it on the $y$ axis,
-and $I_x=(0.997,1.003)$ is for the inputs of the function, so I'll draw that on the $x$ axis.
-The axes should actually be quite far away from the red square that we're zooming into,
-but I'm drawing them anyway because I want something to mark intervals and numbers onto.</p>
+<div class="box graybox"><p>We have $\lim_{x \to 3} 5 = 5$.</p>
 
-<p><img width="331" height="476" class="asymptote" src="../images/asy/688854b672d9131c500e4c106292d5a4.svg" /></p><p>There's a hole in the graph because $f(1)$ is undefined; that gives division by zero.
-The dashed lines are showing which $f$ values we get
-for inputs in $I_x$.
-Note that the values of $f$ that we get by plugging in numbers from $I_x$
-don't "fill" all of $I_y$, but that doesn't matter;
-what matters is that they all go somewhere inside $I_y$.
+<p>More generally, for all numbers $a$ and $b$, we have $\lim_{x \to a} b = b$.
 </p>
 
-</div>
+</div></div>
 </body>
 </html>

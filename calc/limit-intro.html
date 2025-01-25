@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> "Definition" of limit by plugging in numbers - Math Derivations</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <script>
+    // mark the selected page and open the menus leading to it
+    // this is easier to write in javascript than in python
+    document.addEventListener('DOMContentLoaded', () => {
+        let thisPage = window.location.href.split('#')[0];
+        if (thisPage.endsWith('/')) {
+            thisPage += 'index.html';
+        }
+
+        const [selectedLink] = [...document.querySelectorAll('#sidebar a')]
+            .filter(a => (a.href === thisPage));
+        selectedLink.classList.add('this-page-or-section');
+
+        let dropdown = selectedLink.parentElement;
+        while (dropdown.classList.contains('dropdown')) {
+            const label = dropdown.previousElementSibling;
+            const checkbox = label.previousElementSibling;
+            label.classList.add('this-page-or-section');
+            checkbox.checked = true;
+
+            dropdown = dropdown.parentElement;
+        }
+    });
+    </script>
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [ ['$','$'] ],
+            displayMath: [ ['$$','$$'] ],
+            macros: {
+                span: '\\operatorname{span}',
+                rotate: '\\operatorname{rotate}',
+                abs: [ "\\left| {#1} \\right|", 1 ],
+                bigvec: [ "\\overrightarrow{#1}", 1 ],
+                I: '\\vec{i}',
+                J: '\\vec{j}',
+                K: '\\vec{k}',
+                T: '\\operatorname{T}',
+                epsi: '\\varepsilon',
+                // colors chosen so that they are distinguishable when together
+                red: [ "{\\color{##c00}{#1}}", 1 ],
+                blue: [ "{\\color{blue}{#1}}", 1 ],
+                green: [ "{\\color{green}{#1}}", 1 ],
+                magenta: [ "{\\color{magenta}{#1}}", 1 ],
+                darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
+            }
+        }
+    };
+    </script>
+    <link rel="stylesheet" href="../css/animation.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div id="content">
+<div id="sidebar"><a href="../index.html">Front page</a>
+        <input type="checkbox" id="sidebar-checkbox-0" />
+        <label for="sidebar-checkbox-0">Equations and functions</label>
+        <div class="dropdown">
+            <a href="../eqs-and-funcs/inverse-funcs.html">Inverse functions</a><a href="../eqs-and-funcs/how-equations-work.html">How solving equations works</a><a href="../eqs-and-funcs/incdec-funcs.html">Strictly increasing/decreasing functions</a><a href="../eqs-and-funcs/how-inequations-work.html">How solving inequalities works</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-3" />
+        <label for="sidebar-checkbox-3">Vectors</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-1" />
+        <label for="sidebar-checkbox-1">Dot product</label>
+        <div class="dropdown">
+            <a href="../vectors/dot-projection.html">Projection</a><a href="../vectors/angle-between-vectors.html">Angle between vectors</a><a href="../vectors/iwi-jwj.html">$\I$'s with $\I$'s, $\J$'s with $\J$'s</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-2" />
+        <label for="sidebar-checkbox-2">Cross product</label>
+        <div class="dropdown">
+            <a href="../vectors/cross-def.html">Definition</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-4" />
+        <label for="sidebar-checkbox-4">Discrete math</label>
+        <div class="dropdown">
+            <a href="../discrete/sums.html">Sum formulas</a><a href="../discrete/binom.html">Binomial coefficients</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-7" />
+        <label for="sidebar-checkbox-7">Plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-5" />
+        <label for="sidebar-checkbox-5">Circle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/inscribed-angle-theorem.html">Inscribed angle theorem</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-6" />
+        <label for="sidebar-checkbox-6">Triangle</label>
+        <div class="dropdown">
+            <a href="../plane-geometry/law-of-sines.html">Law of sines</a><a href="../plane-geometry/law-of-cosines.html">Law of cosines</a><a href="../plane-geometry/inscribed-circle.html">Inscribed circle</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-12" />
+        <label for="sidebar-checkbox-12">Analytic plane geometry</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-8" />
+        <label for="sidebar-checkbox-8">Transforming curves</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/reflect.html">Reflecting</a><a href="../analytic-plane-geometry/shift.html">Shifting</a><a href="../analytic-plane-geometry/stretch.html">Stretching</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-9" />
+        <label for="sidebar-checkbox-9">Line</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/line-eq-normal.html">Equation in normal form</a><a href="../analytic-plane-geometry/distance-line-point.html">Distance between line and point</a><a href="../analytic-plane-geometry/line-eq-slope.html">Equation with slope</a><a href="../analytic-plane-geometry/line-eq-slope-and-point.html">Equation from known slope and point</a><a href="../analytic-plane-geometry/angle-between-lines.html">Angle between lines</a><a href="../analytic-plane-geometry/slope-tan.html">Slope and tan</a><a href="../analytic-plane-geometry/line-eq-determinant.html">Equation with determinant</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-10" />
+        <label for="sidebar-checkbox-10">Parabola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/parabola.html">Equation of parabola</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-11" />
+        <label for="sidebar-checkbox-11">Hyperbola</label>
+        <div class="dropdown">
+            <a href="../analytic-plane-geometry/why-its-hyperbola.html">Why is $y=\frac{1}{x}$ a hyperbola?</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-17" />
+        <label for="sidebar-checkbox-17">Calculus</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-13" />
+        <label for="sidebar-checkbox-13">Limits</label>
+        <div class="dropdown">
+            <a href="limit-intro.html">"Definition" by plugging in numbers</a><a href="limit-def.html">Definition of limit</a><a href="limit-unique.html">Uniqueness</a><a href="limit-sum.html">Limit of sum</a><a href="limit-product.html">Limit of product</a><a href="limit-diff.html">Limit of difference</a><a href="limit-div.html">Limit of division</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-14" />
+        <label for="sidebar-checkbox-14">Continuity</label>
+        <div class="dropdown">
+            <a href="cont-def.html">Definitions of continuity</a><a href="cont-props.html">Continuity properties</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-15" />
+        <label for="sidebar-checkbox-15">Derivative</label>
+        <div class="dropdown">
+            <a href="derivative-def.html">Definition of derivative</a><a href="derivative-notation.html">Notation for derivatives</a><a href="derivative-power-rule-1.html">Power rule, part 1</a><a href="derivative-basic-rules.html">Basic derivative rules</a><a href="derivative-chain-rule.html">Chain rule</a><a href="derivative-power-rule-2.html">Power rule, part 2</a><a href="derivative-product-quotient-rules.html">Product rule and quotient rule</a><a href="derivative-vector.html">Derivative of vector</a><a href="derivative-trig.html">Derivatives of $\sin$, $\cos$ and $\tan$</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-16" />
+        <label for="sidebar-checkbox-16">Integral</label>
+        <div class="dropdown">
+            <a href="integral-intro.html">Introduction to integrals</a><a href="integral-refinement.html">Refinement of partition</a><a href="integral-def.html">Defining the integral</a><a href="integral-average.html">Average</a><a href="integral-ftoc1.html">Fundamental theorem of calculus, part 1</a><a href="integral-ftoc2.html">Fundamental theorem of calculus, part 2</a><a href="integral-notation.html">More notation for integrals</a><a href="integral-rules.html">Integral rules</a><a href="integral-usub.html">U substitution</a><a href="integral-sor-volume.html">Volume of solid of revolution</a><a href="integral-sor-area.html">Area of surface of revolution</a>
+        </div>
+        
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-18" />
+        <label for="sidebar-checkbox-18">Complex numbers</label>
+        <div class="dropdown">
+            <a href="../complex/intro.html">Introduction</a><a href="../complex/angle-and-len.html">Angle and length</a><a href="../complex/mul.html">Multiplication</a><a href="../complex/div.html">Division</a><a href="../complex/sqrt.html">Square root</a><a href="../complex/derivative.html">Derivative</a><a href="../complex/exp.html">Exponent function</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-22" />
+        <label for="sidebar-checkbox-22">Linear algebra</label>
+        <div class="dropdown">
+            
+        <input type="checkbox" id="sidebar-checkbox-19" />
+        <label for="sidebar-checkbox-19">Vectors and matrices</label>
+        <div class="dropdown">
+            <a href="../linalg/rotating-intro.html">Introduction (rotating a vector)</a><a href="../linalg/matrix-vector.html">Matrix times vector</a><a href="../linalg/matrix-matrix.html">Matrix times matrix</a><a href="../linalg/matrix-sum.html">Matrix plus matrix</a><a href="../linalg/matrix-num.html">Matrix times number</a><a href="../linalg/span-and-dep-defs.html">Defining span and linear (in)dependence</a><a href="../linalg/span-and-dep-finding.html">Finding span and checking linear (in)dependence</a><a href="../linalg/matrix-inverse.html">Inverse matrices</a><a href="../linalg/transpose.html">Transpose</a><a href="../linalg/inverse-finding.html">Finding inverse matrices</a><a href="../linalg/inverse-2x2.html">$2 \times 2$ inverse formula</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-20" />
+        <label for="sidebar-checkbox-20">Determinants</label>
+        <div class="dropdown">
+            <a href="../linalg/det-def.html">Defining determinants</a><a href="../linalg/det-swaps.html">Permutations and transpositions</a><a href="../linalg/det-row-ops.html">Calculating determinants with row operations</a><a href="../linalg/det-transpose.html">Determinant of transpose</a><a href="../linalg/det-matmul.html">Determinant and matrix multiplication</a>
+        </div>
+        
+        <input type="checkbox" id="sidebar-checkbox-21" />
+        <label for="sidebar-checkbox-21">Subspace and basis</label>
+        <div class="dropdown">
+            <a href="../linalg/subspace-def.html">Defining subspaces and comparing to spans</a><a href="../linalg/subspace-basis.html">Basis</a>
+        </div>
+        
+        </div>
+        </div>
+<h1 id="definition-of-limit-by-plugging-in-numbers">"Definition" of limit by plugging in numbers<a class="headerlink" href="#definition-of-limit-by-plugging-in-numbers" title="Link to this title">¶</a></h1>
+    <div class="box redbox">
+    <p>
+        On this page, the word "function" means a function that
+        takes in a real number as its only argument,
+        and evaluates to another real number.
+        Some real numbers might not be valid inputs of the function;
+        for example, square root is a function that
+        accepts only nonnegative inputs.
+    </p>
+    </div>
+    <p>Limit is a very important concept in calculus.
+Basically, all calculus is based on limits.
+<a href="derivative-def.html">The definition of derivative</a> contains a limit.
+<a href="integral-def.html">The definition of integral</a> doesn't directly use limits,
+but integrals are almost always calculated using derivatives.</p>
+
+<p>There are two common ways to introduce limits:
+teaching students to calculate limits without talking much about why they work like they do (high schools), and
+proving all the properties of limits needed very carefully with somewhat difficult proofs (university).</p>
+
+<p>The "university" approach is <b>not easy</b>,
+so we start with the "high school" approach,
+and then move on to a definition that
+resembles the "university" approach a lot but is hopefully easier.
+On this page, we explore the "high school" approach
+and discuss its advantages and limitations.</p>
+
+<p>Let's get started by plugging some numbers into the function
+$$
+f(x) = \frac{x^3-1}{x-1}.
+$$
+We notice that $f(1)$ is undefined, because that gives division by zero.
+However, if we plug in some values that are just a little bit greater than $1$, we get this:
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$1$</td><td>undefined</td>
+</tr><tr>
+    <td>$1.1$</td><td>$3.31000\dots$</td>
+</tr><tr>
+    <td>$1.01$</td><td>$3.03010\dots$</td>
+</tr><tr>
+    <td>$1.001$</td><td>$3.00300\dots$</td>
+</tr><tr>
+    <td>$1.0001$</td><td>$3.00030\dots$</td>
+</tr><tr>
+    <td>$1.00001$</td><td>$3.00003\dots$</td>
+</tr></table></p>
+
+<p>The values of $f$ seem to be quite close to $3$.</p>
+
+<p>We notice a similar thing if we plug in values that are just a little bit less than $1$:
+<table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$0.9$</td><td>$2.71000\dots$</td>
+</tr><tr>
+    <td>$0.99$</td><td>$2.97010\dots$</td>
+</tr><tr>
+    <td>$0.999$</td><td>$2.99700\dots$</td>
+</tr><tr>
+    <td>$0.9999$</td><td>$2.99970\dots$</td>
+</tr><tr>
+    <td>$0.99999$</td><td>$2.99997\dots$</td>
+</tr></table></p>
+
+<p>In this situation, we say that the limit of $f(x)$ as $x \to 1$ (read: $x$ approaches $1$, $x$ goes to $1$)
+is $3$, and we write
+$$
+\lim_{x \to 1} f(x) = 3.
+$$
+This lim notation is somewhat tall, so if it's somewhere in the middle of text,
+it's often written with the $x \to 1$ part off to the side,
+like $\lim_{x \to 1} f(x)$.</p>
+
+<p>To write a limit, you don't need to give a name to the function ($f$ in this case):
+you can also write
+$$
+\lim_{x \to 1} \frac{x^3-1}{x-1} = 3.
+$$
+Here the purpose of naming the function $f(x)$ was to avoid having to write $\frac{x^3-1}{x-1}$ many times.
+</p>
+
+<h2 id="simple-examples">Simple examples<a class="headerlink" href="#simple-examples" title="Link to this title">¶</a></h2><p>We have the following limit:
+$$
+\lim_{x \to 3} x = 3
+$$
+This means that if we take values of $x$ that are close to $3$ ($x \to 3$),
+and we do nothing to them, we get numbers that are close to $3$.</p>
+
+<p>Here is an even simpler example:
+$$
+\lim_{x \to 3} 5 = 5
+$$
+This means that if we first take values of $x$ that are close to $3$,
+and then throw them away and instead always take the number $5$,
+then the resulting number $5$ is close to $5$.
+Any number is considered to be close to itself.</p>
+
+<p>Of course, these also work with any other numbers instead of 3 and 5.
+</p>
+
+<h2 id="surprising-example">Surprising example<a class="headerlink" href="#surprising-example" title="Link to this title">¶</a></h2><p>Let
+$$
+f(x) = \sin\left( \frac{180^\circ}{x} \right).
+$$
+Most calculators have a $\sin(\dots)$ function,
+but I will explain what it does in case you're not familiar with it.
+To calculate $f(x)$, you take a 180 degree angle, divide it by $x$,
+and then rotate by the resulting angle along the unit circle (radius 1) counter-clockwise,
+starting from the right.
+Then $f(x)$ is the $y$ coordinate of the point where you end up.
+The $x$ coordniate is ignored.</p>
+
+<p>For example, $f(2) = 1$, because we rotate by $\frac{180}{2}=90$ degrees
+and land at the point $(0,1)$, which has $y$ coordinate $1$.</p>
+
+<p><img width="418" height="232" class="asymptote" src="../images/asy/2096e2b41bdb3b3e3910fb3774945c09.svg" /></p><p>Similarly, to calculate $f(3)$ we rotate by $\frac{180}{3}=60$ degrees
+and land in a point where the $y$ coordinate is about 0.866, so $f(3) \approx 0.866$:</p>
+
+<p><img width="274" height="232" class="asymptote" src="../images/asy/5abcb9e640ca45db3d8708597838a635.svg" /></p><p>Let's try to calculate
+$$
+\lim_{x \to 0} f(x).
+$$
+This means that we plug in numbers close to zero. Like this:</p>
+
+<p><table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$0.1$</td><td>$0$</td>
+</tr><tr>
+    <td>$0.01$</td><td>$0$</td>
+</tr><tr>
+    <td>$0.001$</td><td>$0$</td>
+</tr><tr>
+    <td>$0.0001$</td><td>$0$</td>
+</tr><tr>
+    <td>$0.00001$</td><td>$0$</td>
+</tr></table></p>
+
+<p>The function is outputting zero, so it seems that the limit is zero.
+Let's also try negative numbers:</p>
+
+<p><table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$-0.1$</td><td>$0$</td>
+</tr><tr>
+    <td>$-0.01$</td><td>$0$</td>
+</tr><tr>
+    <td>$-0.001$</td><td>$0$</td>
+</tr><tr>
+    <td>$-0.0001$</td><td>$0$</td>
+</tr><tr>
+    <td>$-0.00001$</td><td>$0$</td>
+</tr></table></p>
+
+<p>We still get zero, so it is tempting to conclude that the limit is zero,
+but actually, <b>the limit is not zero</b>.
+To see why, consider the following (carefully chosen) sequence of small numbers.
+(To get the next $x$, I divided the previous $x$ by 5.)
+It causes the function to always output the value $1$:</p>
+
+<p><table><tr>
+    <th>$x$</th>
+    <th>$f(x)$</th>
+</tr><tr>
+    <td>$2$</td><td>$1$</td>
+</tr><tr>
+    <td>$0.4$</td><td>$1$</td>
+</tr><tr>
+    <td>$0.08$</td><td>$1$</td>
+</tr><tr>
+    <td>$0.016$</td><td>$1$</td>
+</tr><tr>
+    <td>$0.0032$</td><td>$1$</td>
+</tr><tr>
+    <td>$0.00064$</td><td>$1$</td>
+</tr><tr>
+    <td>$0.000128$</td><td>$1$</td>
+</tr></table></p>
+
+<p>Now it seems like the limit should be 1.</p>
+
+<p>The behavior of this function seems confusing.
+To get a better idea of it, let's draw a graph of it:</p>
+
+<p><img width="246" height="201" class="asymptote" src="../images/asy/dd1b2bbf1e95610d2ba2ffef4b747701.svg" /></p><p>The function oscillates between $\pm 1$ infinitely many times near zero.
+This happens because $\frac{180^\circ}{x}$ is very large for small values of $x$.
+For example,
+$$
+\frac{180}{0.0001} = 1800000 = 5000 \cdot 360.
+$$
+This means 5000 full turns around the circle.
+As we make $x$ even smaller, we spin around the circle infinitely many times,
+and that's the bouncing you see in the graph.</p>
+
+<p>In this situation, we say that the limit <b>doesn't exist</b> or <b>is undefined</b>.</p>
+
+<div class="box graybox"><p>A limit might not exist.
+</p>
+
+</div><h2 id="problems">Problems<a class="headerlink" href="#problems" title="Link to this title">¶</a></h2><p>So far we have calculated limits by plugging in nearby numbers.
+While this works, this method also has downsides:</p>
+
+<ul><li>In complicated cases, you might not notice some behavior of the function.
+    See the above example.</li><li>There's no good way to plug in nearby numbers
+    if the limit contains unknown variables,
+    e.g. $\lim_{x \to a} (bx+c)$.
+    Solving unknown things later is a very powerful technique in math,
+    so it's important that it works.</li><li>It's hard to prove anything about limits this way.
+    "Just plug in nearby numbers" is not a good definition,
+    so if you try to prove something with it, the "proof" won't be convincing.
+</li></ul><p>To fix these problems, next we will limits precisely.
+</p>
+
+</div>
+</body>
+</html>

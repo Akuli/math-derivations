@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>One-sided Limits
- - Math Derivations</title>
+<title> One-sided Limits - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
@@ -149,7 +148,7 @@
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-bounded.html">Limits and bounded functions</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="limit-intro.html">"Definition" by plugging in numbers</a><a href="limit-def.html">Definition of limit</a><a href="limit-unique.html">Uniqueness</a><a href="limit-sum.html">Limit of sum</a><a href="limit-product.html">Limit of product</a><a href="limit-diff.html">Limit of difference</a><a href="limit-div.html">Limit of division</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
@@ -202,40 +201,32 @@
         
         </div>
         </div>
-<h1 id="one-sided-limits">One-sided Limits<a class="headerlink" href="#one-sided-limits" title="Link to this title">¶</a></h1><p>The input interval in the <a href="limit-def.html">definition of limit</a> for $\lim_{x \to a} f(x)$
-is an open interval centered around $a$.
-These input intervals are always of the form $(a-\delta, a+\delta)$,
-where $\delta$ is a positive number.</p>
+<h1 id="one-sided-limits">One-sided Limits<a class="headerlink" href="#one-sided-limits" title="Link to this title">¶</a></h1><p>In <a href="limit-def.html">our definition of limit</a>, "$x$ close enough to $a$" means that
+$x$ is in some interval centered around $a$, but $x \ne a$.
+This means that the interval is $(a-r, a+r)$, where $r$ is a positive number.</p>
 
-<p><img width="344" height="35" class="asymptote" src="../images/asy/ba6de4b27824d1f9cf3418f037314388.svg" /></p><p>For a <b>right limit</b>, we instead take the interval $(a, a+\delta)$.
+<p><img width="342" height="35" class="asymptote" src="../images/asy/2fc45de006cee332273b641870049d42.svg" /></p><p>For a <b>right limit</b>, we instead take the interval $(a, a+r)$,
+In other words, we only consider the $x$ values where $x > a$.
 We denote right limits just like the usual (both-sided) limits, but with $x \to a^+$ instead of $x \to a$.</p>
 
-<p><img width="344" height="34" class="asymptote" src="../images/asy/0851d60d5304ffe041d35087703af11b.svg" /></p><p>This is called the right limit, because on the number line,
-the input interval being used is the right half of the interval $(a-\delta, a+\delta)$.</p>
+<p><img width="342" height="34" class="asymptote" src="../images/asy/0a907f22b57842eca709070b1e8332ff.svg" /></p><p>This is called the right limit, because on the number line,
+the interval being used is the right half of the original $(a-r, a+r)$.</p>
 
-<div class="box graybox"><p>The right limit is defined as follows:
-we write $\lim_{x \to a^+} f(x) = L$, if
-for any open interval $I_y$ centered around $L$,
-there is an open interval $I_x=(a, a+\delta)$ (for some $\delta > 0$) such that
+<div class="box graybox"><p>The right limit is defined as follows: we write
+$$\lim_{x \to a^+} f(x) = L,
 $$
-f(\text{any number in $I_x$}) \in I_y.
-$$
+if for any precision $p > 0$,
+we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$ and $x > a$.
 </p>
 
-</div><p>Note that we don't need to say "any number in $I_x$ except $a$", like we do with both-sided limits;
-the number $a$ is not in any interval $(a, a+\delta)$.
-In the both-sided limit definition, we needed to exclude $a$ more explicitly,
-because it was in the center of an interval rather than being an end point.</p>
+</div><p>We define the left limit similarly.</p>
 
-<p>We define the left limit similarly.</p>
-
-<div class="box graybox"><p>The left limit is defined as follows:
-we write $\lim_{x \to a^-} f(x) = L$, if
-for any open interval $I_y$ centered around $L$,
-there is an open interval $I_x=(a-\delta, a)$ (for some $\delta > 0$) such that
+<div class="box graybox"><p>The left limit is defined as follows: we write
 $$
-f(\text{any number in $I_x$}) \in I_y.
+\lim_{x \to a^-} f(x) = L,
 $$
+if for any precision $p > 0$,
+we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$ and $x < a$.
 </p>
 
 </div><p>A consequence of these definitions is that if the function $f$ is defined like
@@ -259,35 +250,42 @@ The right limit is similar.
 Also, notice that no limit with $x \to 4$, $x \to 4^-$ or $x \to 4^+$ uses the center part;
 limits are all about what happens around $4$, not at all about what happens at exactly $x=4$.</p>
 
-<p>One-sided limits have all the nice properties that we have proved so far for both-sided limits;
-modifying the proofs to use one-sided limits instead of both-sided limits is easy.
+<p>One-sided limits have all the nice properties that we have proved so far for both-sided limits.
+Modifying the proofs to use one-sided limits instead of both-sided limits is easy.
+For example, replace "close enough to $a$" with "close enough to $a$ on the right side".
 </p>
 
 <h2 id="connection-to-both-sided-limit">Connection to both-sided limit<a class="headerlink" href="#connection-to-both-sided-limit" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x) = L$.
-Now, for any output interval $I_y$ centered around $L$,
-we get an input interval $I_x=(a-\delta, a+\delta)$ centered around $a$ so that
+This means that for any precision $p > 0$,
+we have $f(x) \approx L$ with precision $p$
+when $x$ is close enough to $a$.
+Because this works with any $x$ that is close to $a$,
+it obviously works with any $x$ that is close to $a$ on the right side.
+Hence we also have
 $$
-f(\text{any number in $I_x$ except $a$}) \in I_y.
+\lim_{x \to a^+} f(x) = L,
 $$
-Because any number in $(a,a+\delta)$ is also in $I_x$, we get
+and similarly
 $$
-f(\text{any number in $(a,a+\delta)$}) \in I_y,
+\lim_{x \to a^-} f(x) = L.
 $$
-which shows that $\lim_{x \to a^+} f(x) = L$.
-Similarly we get $\lim_{x \to a^-} f(x) = L$.</p>
+So, if the both-sided limit exists, then the one-sided limits exist too,
+and the values of all these limits are equal.</p>
 
-<p>So, if the both-sided limit exists, then the one-sided limits exist too,
-and the values of all these limits are equal.
-However, if the one-sided limits exist, then the both-sided limit might still not exist!
-For example, let $J$ denote <a href="limit-basics.html#jumping-function">the "jumping function"</a> given by
+<p>However, if the one-sided limits exist, then the both-sided limit might still not exist!
+For example, let $J$ denote the "jumping function" given by
 $$
 J(x) = \begin{cases}
     -1, & \text{if $x < 3$}; \\
     +1, & \text{if $x \ge 3$}.
 \end{cases}
-$$
-The both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist,
-but the one-sided limits exist; they are
+$$</p>
+
+<p>This function "jumps" at $x=3$:</p>
+
+<p><img width="424" height="252" class="asymptote" src="../images/asy/08d5146f296cfbfb2c4178b65a15a5bb.svg" /></p><p>The both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist,
+because the function would need to be close to its limit on both sides of $3$.
+However, the one-sided limits exist. They are
 $$
 \lim_{x \to 3^-} J(x) = \lim_{x \to 3^-} -1 = -1
 $$
@@ -299,37 +297,26 @@ In this case, the one-sided limits are not equal.
 Let's see what happens to the both-sided limit if the one-sided limits are equal.</p>
 
 <p>Suppose that $\lim_{x \to a^+} f(x) = L$ and $\lim_{x \to a^-} f(x) = L$.
-Let $I_y$ be any open interval centered around $L$.
-By the definition of the left and right limits,
-we get intervals $(a-\delta_1,a)$ and $(a,a+\delta_2)$ such that
-$$
-\begin{align}
-    &f(\text{any number in $(a-\delta_1,a)$}) \in I_y, \\
-    &f(\text{any number in $(a,a+\delta_2)$}) \in I_y.
-\end{align}
-$$</p>
+Then for any precision $p > 0$, we have $f(x) \approx L$ with precision $p$
+if $x$ is close enough to $a$ on the left side, or on the right side.
+The corresponding intervals look like this:</p>
 
-<p><img width="429" height="36" class="asymptote" src="../images/asy/526d921d6e2d6f1b4736e4d8f415bbf8.svg" /></p><p>Let $s$ be the smaller of $\delta_1$ and $\delta_2$ (doesn't matter which if $\delta_1 = \delta_2$).
-Let $I_x=(a-s,a+s)$; this is an open interval centered around $a$.</p>
+<p><img width="427" height="37" class="asymptote" src="../images/asy/0f94b6b3208d4b5077ab6235e23b451b.svg" /></p><p>Let $s$ be the smaller of $r_1$ and $r_2$ (doesn't matter which if $r_1 = r_2$).</p>
 
-<p><img width="429" height="71" class="asymptote" src="../images/asy/c6ebf7476705f1a399eb570b65a9c284.svg" /></p><p>The numbers on the "left half" of $I_x$ are in $(a-\delta_1,a)$
-and the numbers on the "right half" are in $(a,a+\delta_2)$, so we get
-$$
-f(\text{any number in $I_x$ except $a$}) \in I_y.
-$$</p>
+<p><img width="427" height="75" class="asymptote" src="../images/asy/7ba8774c482fd0902bba8ce3bf562263.svg" /></p><p>Using the interval $(a-s,a+s)$ for the concept of close enough,
+we see that $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$,
+regardless of which side it's on.
+So if the left limit and right limit are both $L$,
+the usual both-sided limit is also $L$.</p>
 
 <div class="box graybox"><p>The both-sided limit is $L$ if and only if the left and right limits are $L$.
 </p>
 
-</div><p>This result can be used to show more easily that the both-sided limit $\lim_{x \to 3} J(x)$ doesn't exist;
-if that limit existed, we would get
-$$
--1 = \lim_{x \to 3^-} J(x) = \lim_{x \to 3} J(x) = \lim_{x \to 3^+} J(x) = 1,
-$$
-where the first and last equal signs come from the calculations above,
-and the rest of the equal signs come from the result.
-In general, the both-sided limit doesn't exist
-when the values of the left limit and the right limit differ.
+</div><p>This result is often used to show that a both-sided limit doesn't exist.
+For example, $\lim_{x \to 3} J(x)$ cannot exist,
+because the left limit is $-1$ and the right limit is $1$.
+If the both-sided limit existed,
+it would need to be equal to $-1$ and equal to $1$, which is <a href="limit-unique.html">not possible</a>.
 </p>
 
 </div>

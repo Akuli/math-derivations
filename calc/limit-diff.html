@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Limit Properties
- - Math Derivations</title>
+<title> Limit of Difference - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
@@ -149,7 +148,7 @@
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-bounded.html">Limits and bounded functions</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="limit-intro.html">"Definition" by plugging in numbers</a><a href="limit-def.html">Definition of limit</a><a href="limit-unique.html">Uniqueness</a><a href="limit-sum.html">Limit of sum</a><a href="limit-product.html">Limit of product</a><a href="limit-diff.html">Limit of difference</a><a href="limit-div.html">Limit of division</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
@@ -202,157 +201,7 @@
         
         </div>
         </div>
-<h1 id="limit-properties">Limit Properties<a class="headerlink" href="#limit-properties" title="Link to this title">¶</a></h1><p>If we know that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist,
-then do we have
-$$
-\lim_{x \to a} (f(x) + g(x)) = \left( \lim_{x \to a} f(x) \right) + \left( \lim_{x \to a} g(x) \right)?
-$$
-A rule like this would be handy for calculating limits.
-With this, we could for example calculate
-$$
-\lim_{x \to 2} (x+5)
-= \left( \lim_{x \to 2} x \right) + \left( \lim_{x \to 2} 5 \right)
-= 2+5=7,
-$$
-where we used most of the results from <a href="limit-basics.html">the limit basics page</a>.
-On this page, we figure out whether this and other similar things work.
-</p>
-
-<h2 id="interval-thing">Interval thing<a class="headerlink" href="#interval-thing" title="Link to this title">¶</a></h2><p>Before talking more about limits, we need a result about intervals.
-Suppose that $a$ and $b$ are numbers in the open interval $(-r, r)$, where $r$ is a positive number.
-What can we say about $a+b$?</p>
-
-<p><img width="458" height="76" class="asymptote" src="../images/asy/28b3907efb5313491e79c7000984dff5.svg" /></p><p>Because $a$ and $b$ are in $(-r, r)$, we have $-r < a < r$ and $-r < b < r$.
-By combining these inequations together, we get
-$$
-(-r)+(-r) < a+b < r+r,
-$$
-which simplifies to
-$$
--2r < a+b < 2r.
-$$
-This can be written as
-$$
-a+b \in (-2r, 2r).
-$$
-So, if we have $a,b \in (-r, r)$, then we also know that $a+b \in (-2r, 2r)$.
-We'll need this result next.</p>
-
-<p>Usually a more general theorem called triangle inequality is used instead of this,
-but I'm using this instead because it feels somewhat more intuitive to me.
-</p>
-
-<h2 id="limit-of-sum">Limit of sum<a class="headerlink" href="#limit-of-sum" title="Link to this title">¶</a></h2><p>Let's go back to the question about limits.
-Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-We prove that $\lim_{x \to a} (f(x)+g(x)) = A+B$.</p>
-
-<p>Let $I_y$ be an open interval centered around $A+B$.
-We can write $I_y$ as $(A+B-\epsi, A+B+\epsi)$ for some positive number $\epsi$.
-By definition of limit,
-there are input intervals centered around $a$ such that
-we can fit the values of $f$ and $g$ into any output intervals around $A$ and $B$ respectively.
-We choose the output intervals
-$\left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right)$ and $\left( B-\frac{\epsi}{2}, B+\frac{\epsi}{2} \right)$.
-The corresponding input intervals are drawn below.</p>
-
-<p><img width="287" height="86" class="asymptote" src="../images/asy/80c336e2bbd28d8d77d047bbe353d71b.svg" /></p><p><a href="limit-basics.html#more-than-one-limit">In the past</a> we have used the fact that intervals like this overlap,
-but we can say more than that.
-One of the intervals is smaller and the other is bigger,
-and the smaller interval is a subset of the bigger interval;
-this means that the bigger interval contains all numbers of the smaller interval.</p>
-
-<p>Let $I_x$ be the smaller input interval
-(if the input intervals are the same size, then they are the same interval,
-and it doesn't matter which of them is $I_x$).
-Now any number in $I_x$ is in both of the input intervals, so we have
-$$
-\begin{align}
-&f(\text{any number in $I_x$ except $a$}) \in \left( A-\frac{\epsi}{2}, A+\frac{\epsi}{2} \right),
-\\
-&g(\text{any number in $I_x$ except $a$}) \in \left( B-\frac{\epsi}{2}, B+\frac{\epsi}{2} \right).
-\end{align}
-$$
-Letting $x$ be any number in $I_x$ except $a$, we can write this as
-$$
-f(x) = A+p \quad \text{and} \quad g(x)=B+q
-$$
-for some numbers $p,q \in (-\frac{\epsi}{2},\frac{\epsi}{2})$.
-Now we get
-$$
-f(x)+g(x) = A+B+\underbrace{p+q}_{\in (-\epsi,\epsi)},
-$$
-where for the underbraced part,
-we used the above interval thing with $r=\frac{\epsi}{2}$ and $2r=\epsi$.
-We have
-$$
-f(x)+g(x) \in (A+B-\epsi, A+B+\epsi) = I_y.
-$$</p>
-
-<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
-$$
-\lim_{x \to a} (f(x) + g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x).
-$$
-</p>
-
-</div><h2 id="limit-of-product">Limit of product<a class="headerlink" href="#limit-of-product" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-I'll show you most of the proof for $\lim_{x \to a} f(x)g(x) = AB$.</p>
-
-<p>Let $I_y=(AB-\epsi,AB+\epsi)$ be an open interval centered around $AB$.
-By doing same things as for the sum above, we get an input interval $I_x$ such that
-for any $x$ in $I_x$ except $a$, we get
-$$
-f(x)=A+p \quad \text{and} \quad g(x)=B+q,
-$$
-where we can fit $p$ and $q$ into any interval $(-r,r)$;
-above we had $p,q \in (-\frac{\epsi}{2}, \frac{\epsi}{2})$
-but we could have used any other positive number $r$ instead of $\frac{\epsi}{2}$.
-Just like in the sum proof, it is now enough to show that by choosing $r$ wisely, we get
-$$
-f(x)g(x) = AB+\text{something in $(-\epsi,\epsi)$}.
-$$
-By expanding $f(x)g(x)$, we get
-$$
-\begin{align}
-f(x)g(x)
-&= (A+p)(B+q) \\
-&= A(B+q)+p(B+q) \\
-&= AB+\underbrace{Aq+pB+pq}_{\text{Want: $\in (-\epsi,\epsi)$}}.
-\end{align}
-$$
-Fitting $Aq+pB+pq$ into $(-\epsi,\epsi)$ can be done by choosing the $r$,
-but filling in all the details results in a mess every time I do it, so I'll skip most of it here.
-However, I'll show you the ideas needed for doing that,
-and you might be able to fill in the skipped details after reading this if you are interested in them.</p>
-
-<p>To fit all of $Aq+pB+pq$ into $(-\epsi,\epsi)$,
-it is enough to ensure that $Aq$, $pB$ and $pq$ are all in $(-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-This can be seen by generalizing the interval thing in the beginning of this page
-for three numbers instead of two.</p>
-
-<p>Let's say that we want to make the $Aq$ part small enough,
-as in $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.
-If $A$ is positive, then we can pick $r = \frac{\epsi}{3A}$, because using the fact $q \in (-r,r)$ gives
-$-r < q < r$, which is same as
-$$
--\frac{\epsi}{3A} < q < \frac{\epsi}{3A}.
-$$
-Multiplying both sides by $A$ (assuming that it's positive) gives
-$$
--\frac{\epsi}{3} < Aq < \frac{\epsi}{3},
-$$
-so $Aq \in (-\frac{\epsi}{3}, \frac{\epsi}{3})$.</p>
-
-<p>Some of the mess comes from handling zero and negative values of $A$ and $B$,
-and the rest comes from combining the conditions ensuring that
-each of $Aq$, $pB$ and $pq$ are small enough.</p>
-
-<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
-$$
-\lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right) \left( \lim_{x \to a} g(x) \right).
-$$
-</p>
-
-</div><h2 id="limit-of-difference">Limit of difference<a class="headerlink" href="#limit-of-difference" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist.
+<h1 id="limit-of-difference">Limit of Difference<a class="headerlink" href="#limit-of-difference" title="Link to this title">¶</a></h1><p>Suppose that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist.
 By noticing that $f(x)-g(x) = f(x) + (-1)g(x)$, we get
 $$
 \begin{align}
@@ -365,11 +214,11 @@ $$
 $$
 Here we used most of the results that we have proved so far:
 <ul><li>
-    Limit of sum: we can take the limits of $f(x)$ and $(-1)g(x)$ separately.
+    <a href="limit-sum.html">Limit of sum</a>: we can take the limits of $f(x)$ and $(-1)g(x)$ separately.
 </li><li>
-    Limit of product: we can take the limits of $-1$ and $g(x)$ separately.
+    <a href="limit-product.html">Limit of product</a>: we can take the limits of $-1$ and $g(x)$ separately.
 </li><li>
-    Limit of just a number (from <a href="limit-basics.html">the limit basics page</a>): the limit of $-1$ is $-1$.
+    <a href="limit-def.html#even-simpler-example-limit-of-a-constant">Limit of a constant</a>: the limit of $-1$ is $-1$.
 </li></ul></p>
 
 <div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
@@ -378,15 +227,6 @@ $$
 $$
 </p>
 
-</div><h2 id="limit-of-division">Limit of division<a class="headerlink" href="#limit-of-division" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x) = A$ and $\lim_{x \to a} g(x) = B$.
-Is it true that
-$$
-\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{A}{B}?
-$$
-This is not true if $B=0$, because then we would divide by zero.
-We'll come back to the case $B \ne 0$ <a href="cont-props.html#limit-of-division">later</a>.
-</p>
-
-</div>
+</div></div>
 </body>
 </html>

@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Limit Basics
- - Math Derivations</title>
+<title> Limit of division - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
@@ -149,7 +148,7 @@
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-bounded.html">Limits and bounded functions</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="limit-intro.html">"Definition" by plugging in numbers</a><a href="limit-def.html">Definition of limit</a><a href="limit-unique.html">Uniqueness</a><a href="limit-sum.html">Limit of sum</a><a href="limit-product.html">Limit of product</a><a href="limit-diff.html">Limit of difference</a><a href="limit-div.html">Limit of division</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
@@ -202,200 +201,147 @@
         
         </div>
         </div>
-<h1 id="limit-basics">Limit Basics<a class="headerlink" href="#limit-basics" title="Link to this title">¶</a></h1><p>Make sure that you know the <a href="limit-def.html">definition of limit</a>.</p>
-
-<p>If the proofs presented on this page feel too boring, difficult or abstract, don't give up now.
-Limits are a tool that we need for doing fun, easy and non-abstract things,
-and we're currently building the tool.
+<h1 id="limit-of-division">Limit of division<a class="headerlink" href="#limit-of-division" title="Link to this title">¶</a></h1><div class="box redbox"><p>Make sure that you know our <a href="limit-def.html">definition of limit</a>.
+In particular, make sure you know the precise meanings of "close enough to" and "$\approx$".
 </p>
 
-<h2 id="simple-example">Simple example<a class="headerlink" href="#simple-example" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to \red4} x = \green4$.
-I'm using more colors than usual, because the number $4$ appears in two places with two different meanings;
-we're saying that the limit of $x$ as $x \to \red4$ is $\green4$.</p>
-
-<p>Let $f(x) = x$.
-We need to show that for any open interval $\green{I_y}$ centered around $\green4$,
-there is some open interval $\red{I_x}$ centered around $\red4$ such that
+</div><p>We find a rule for calculating the limit of two functions divided by each other, as in
 $$
-f(\text{any number in $\red{I_x}$ except $\red4$}) \in \green{I_y}.
+\lim_{x \to a} \frac{f(x)}{g(x)}.
+$$
+Similarly to <a href="limit-product.html">limit of product</a>,
+we start with a simple case and then generalize the result.
+</p>
+
+<h2 id="simple-case">Simple case<a class="headerlink" href="#simple-case" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} g(x) = 4$.
+We calculate the limit of $\frac{1}{g(x)}$.</p>
+
+<p>We show that
+$$
+\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}.
+$$
+This doesn't divide by zero if $x$ is close enough to $a$.
+To see why, let's take a small enough precision, e.g. $0.1$.
+If $x$ is close enough to $a$, we now get $g(x) \approx 4$ with precision $0.1$,
+which means that $3.9 < g(x) < 4.1$, so $g(x)$ is surely positive.</p>
+
+<p>We suspect that the limit of $\frac{1}{g(x)}$ is probably $\frac{1}{4}$,
+because $g(x)$ is close to $4$.
+Let's compare these by subtracting the limit from the function.
+(We used the same trick to derive <a href="limit-product.html">the limit of product</a>.)
+$$
+\begin{align}
+\frac{1}{g(x)} - \frac{1}{4}
+&= \frac{4}{4g(x)} - \frac{g(x)}{4g(x)} \\
+&= \frac{4-g(x)}{4g(x)}
+\end{align}
+$$
+Let $p > 0$ be any precision.
+On top, we have $4-g(x)$.
+If $x$ is close enough to $a$, we have $g(x) \approx 4$ with precision $p$,
+which means that the distance between $g(x)$ and $4$ is less than $p$:
+$$
+-p < 4-g(x) < p
+$$
+On bottom, we have $4g(x)$. If $x$ is close enough to $a$, we have $g(x) > 3.9$, so
+$$
+4g(x) > 4 \cdot 3.9 = 15.6.
+$$
+This means that $4g(x)$ is so big that dividing by it brings numbers closer to zero,
+and hence anything that is between $-p$ and $p$ will stay between $-p$ and $p$:
+$$
+-p < \frac{4-g(x)}{4g(x)} < p
+$$
+Because $\frac{4-g(x)}{4g(x)} = \frac{1}{g(x)} - \frac{1}{4}$, we get:
+$$
+-p < \frac{1}{g(x)} - \frac{1}{4} < p
+$$
+This shows that
+$\frac{1}{g(x)} \approx \frac{1}{4}$ with precision $p$ when $x$ is close enough to $a$, so
+$$
+\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}.
 $$</p>
 
-<p>Let $\green{I_y}$ be any open interval centered around $\green4$.
-Now we can choose $\red{I_x}$ however we want.
-We choose $\red{I_x} = \green{I_y}$, which is fine, because we need an open interval centered around $\red4$,
-and $\green{I_y}$ is an open interval centered around $\green4$.
-(We need something else for more complicated functions than $f(x)=x$.)
-Now
-$$
-f(\text{any number in $\red{I_x}$ except $\red4$}) \in \red{I_x} = \green{I_y}.
-$$
-Here we used the fact that $f(x) = x$ for all $x$;
-if we put something into $f$, it comes out unchanged,
-so any number in $\red{I_x}$ comes out as a number in $\red{I_x}$.
-The proof is done.</p>
-
-<p>Summarizing: if we want to fit the values of $f(x)=x$ into some interval,
-then we can do that by using the same interval for the inputs of the function.</p>
-
-<p>The graph $y=f(x)$ is in this case just $y=x$, and
-<a href="../analytic-plane-geometry/line-eq-slope.html">that's a line with slope $1$</a>.</p>
-
-<p><img width="343" height="324" class="asymptote" src="../images/asy/781b345e2427c4a2645c0ef8ff99071c.svg" /></p><p>The proof works similarly for any other number instead of $4$.</p>
-
-<div class="box graybox"><p>For all numbers $a$, we have $\lim_{x \to a} x = a$.
+<div class="box graybox"><p>If $\lim_{x \to a} g(x) = 4$, then $\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}$.
 </p>
 
-</div><h2 id="another-simple-example">Another simple example<a class="headerlink" href="#another-simple-example" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to \red3} \blue5 = \green5$.
-This looks a little bit confusing, but it is of the same form as the equation in the definition of limit;
-the $f(x)$ in definition of limit is $\blue5$, and the value of the limit is $\green5$.
-So, we can let $\blue{f(x) = 5}$ and then prove that
+</div><h2 id="slightly-more-general-case">Slightly more general case<a class="headerlink" href="#slightly-more-general-case" title="Link to this title">¶</a></h2><p>Unfortunately, the above doesn't work very nicely
+if we replace $4$ with other numbers.
+This is the part that causes problems:
 $$
-\lim_{x \to \red3} \blue{f(x)} = \green5.
+4g(x) > 4 \cdot 3.9 = 15.6
 $$
-Let $\green{I_y}$ be any open interval centered around $\green5$.
-We choose $\red{I_x} = (2, 4)$, which is an open interval centered around $\red3$.
-Now
+Instead of $15.6$, we might get a number that is smaller than 1.
+Then dividing by it doesn't bring things closer to zero as expected.
+For example, dividing by $0.5$ is same as multiplying by two.
+A negative limit value would also cause problems.</p>
+
+<p>These problems could be fixed or worked around (feel free to try if you want),
+but IMO it's not worth the effort, because there is an easier way.
+Suppose that the limit of $g(x)$ is any nonzero number $B \ne 0$.
+The idea is to adjust the function $g(x)$ so that instead of $B$, we get $4$.</p>
+
+<p>Let's try dividing by the original function by its limit $B$.
+Using <a href="limit-product.html">limit of product</a>, we get
 $$
-f(\text{any number in $\red{I_x}$ except $\red3$}) = \blue5 = \green5 \in \green{I_y},
+\begin{align}
+\lim_{x \to a} \frac{g(x)}{B}
+&= \lim_{x \to a} \frac{1}{B} g(x) \\
+&= \left( \lim_{x \to a} \frac{1}{B} \right) \left( \lim_{x \to a} g(x) \right) \\
+&= \frac{1}{B} \cdot B = 1.
+\end{align}
 $$
-where in the last step, we used the fact that $\green{I_y}$ contains $\green5$;
-this must be the case, because $\green{I_y}$ is an interval centered around $\green5$.
-The proof is done.</p>
+If we also multiply by 4, we get
+$$
+\begin{align}
+\lim_{x \to a} \frac{4g(x)}{B}
+&= \lim_{x \to a} \frac{4}{B} g(x) \\
+&= \left( \lim_{x \to a} \frac{4}{B} \right) \left( \lim_{x \to a} g(x) \right) \\
+&= \frac{4}{B} \cdot B = 4.
+\end{align}
+$$
+Therefore, if we can get the constant $\frac{4}{B}$ in front of $g(x)$,
+we know how to calculate the limit: it's $\frac{1}{4}$.
+It is quite easy to get the constant in front,
+because in division, you can multiply the top and bottom by anything you want,
+and it doesn't affect anything.
+Like this:
+$$
+\begin{align}
+\lim_{x \to a} \frac{1}{g(x)}
+&= \lim_{x \to a} \frac{\frac{4}{B}}{\frac{4}{B}g(x)} \\
+&= \lim_{x \to a} \frac{4}{B} \frac{1}{\frac{4}{B}g(x)} \\
+&= \left( \lim_{x \to a} \frac{4}{B} \right) \left( \lim_{x \to a} \frac{1}{\frac{4}{B}g(x)} \right) \\
+&= \frac{4}{B} \cdot \frac{1}{4} \\
+&= B.
+\end{align}
+$$
+Here we used <a href="limit-product.html">limit of product</a> and <a href="limit-def.html#even-simpler-example-limit-of-a-constant">limit of constant</a>.</p>
 
-<p>Summarizing: if we want to fit the values of the function $f(x)=5$ into some interval around $5$,
-then we can do that by choosing a very simple interval for the inputs of the function.</p>
-
-<p>The graph $y=\blue5$ is <a href="../analytic-plane-geometry/line-eq-slope.html">a line with slope $0$</a>,
-so a horizontal line.</p>
-
-<p><img width="264" height="298" class="asymptote" src="../images/asy/819b9ec42cad9d57f2c4fbd5e929c697.svg" /></p><p>This proof works the same if we replace $5$ with some other number.
-We can also get it to work if we replace $\red3$ with some other number,
-but we need to choose $\red{I_x}$ accordingly.
-In general, if replace $\red3$ with $\red a$, then we can pick $\red{I_x} = (\red a-1, \red a+1)$;
-this is an open interval centered around $\red a$, which is all that we need for this.</p>
-
-<div class="box graybox"><p>For all numbers $a$ and $b$, we have $\lim_{x \to a} b = b$.
+<div class="box graybox"><p>If $\lim_{x \to a} g(x)$ exists and is not zero, then
+$$
+\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{\displaystyle\lim_{x \to a} g(x)}.
+$$
 </p>
 
-</div><h2 id="jumping-function">Jumping function<a class="headerlink" href="#jumping-function" title="Link to this title">¶</a></h2><p>Let's define the "jumping function" $J$ by
+</div><h2 id="general-case">General case<a class="headerlink" href="#general-case" title="Link to this title">¶</a></h2><p>Any division $\frac{f(x)}{g(x)}$ can be viewed as a multiplication $f(x) \frac{1}{g(x)}$.
+In this case, that's useful because we can apply <a href="limit-product.html">limit of product</a>:
 $$
-J(x) = \begin{cases}
-    -1, & \text{if $x < 3$}; \\
-    +1, & \text{if $x \ge 3$}.
-\end{cases}
-$$
-This function "jumps" at $x=3$.</p>
-
-<p><img width="424" height="252" class="asymptote" src="../images/asy/08d5146f296cfbfb2c4178b65a15a5bb.svg" /></p><p>What can we say about $\lim_{x \to 3} J(x)$?
-We don't know much yet, so let's say that $\lim_{x \to 3} J(x) = b$,
-for some number $b$, and see what happens.
-Now the definition of limit says that for any interval $I_y$ centered around $b$,
-there is an interval $I_x$ centered around $3$ such that
-$$
-J(\text{any number in $I_x$ except $3$}) \in I_y.
-$$
-For any $I_y$, we get some $I_x$ interval that contains
-numbers that are greater than $3$ and numbers that are less than $3$.</p>
-
-<p><img width="258" height="57" class="asymptote" src="../images/asy/3b52af96b4f708e17473b1db84ad82fd.svg" /></p><p>By definition of $J$, the corresponding $J$ values are $+1$ and $-1$, and we get
-$$
-+1 \in I_y, \quad -1 \in I_y.
-$$
-So, for any open interval $I_y$ centered around $b$, we have $+1 \in I_y$ and $-1 \in I_y$.
-This must also work for small $I_y$ intervals, such as $I_y = (b-0.1, b+0.1)$.
-However, $(b-0.1, b+0.1)$ is a very short interval, of length $0.2$,
-so it can't contain both of $+1$ and $-1$,
-regardless of what number $b$ is.</p>
-
-<p><img width="384" height="429" class="asymptote" src="../images/asy/e6696999c19c16305fca1a5426132461.svg" /></p><p>There must be a mistake somewhere, and most of the above steps are quite convincing;
-the only thing that can be wrong is saying that $\lim_{x \to 3} J(x) = b$.</p>
-
-<p>Summarizing: there is no number $b$ such that $\lim_{x \to 3} J(x) = b$,
-because if there was such $b$, then there would be very small intervals around $b$ containing $+1$ and $-1$.</p>
-
-<p>In this case, we say that the limit $\lim_{x \to 3} J(x)$ does not exist.
-Saying that the limit exists means that there is some number $b$ such that $\lim_{x \to 3} J(x) = b$;
-that's the opposite of what we have here.</p>
-
-<div class="box graybox"><p>A limit might not exist.
-</p>
-
-</div><h2 id="more-than-one-limit">More than one limit<a class="headerlink" href="#more-than-one-limit" title="Link to this title">¶</a></h2><p>Can we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ for the same function $f$?</p>
-
-<p>If you think of the notation such that $\lim_{x \to 2} f(x)$ by itself is a thing,
-then this is obviously not possible;
-there's no way how something could be equal to $5$ and $8$ at the same time.
-However, that's not how we have defined the limit.
-The definition doesn't say anything about what $\lim_{x \to 2} f(x)$ by itself is;
-it only tells what setting that equal to something means,
-such as $\lim_{x \to 2} f(x) = 5$.</p>
-
-<p>Let's see what happens if we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$.
-By choosing $I_y=(4,6)$ in the definition of $\lim_{x \to 2} f(x) = 5$,
-we get an open interval $I_x$ centered at $2$ such that
-$$
-f(\text{any number in $I_x$ except $2$}) \in (4,6).
-$$
-By choosing $I_y=(7,9)$ in the definition of $\lim_{x \to 2} f(x) = 8$,
-we get another open interval $J_x$ centered at $2$ such that
-$$
-f(\text{any number in $J_x$ except $2$}) \in (7,9).
+\begin{align}
+\lim_{x \to a} \frac{f(x)}{g(x)}
+&= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
+&= \left( \lim_{x \to a} f(x) \right) \left( \frac{1}{g(x)} \right) \\
+&= \frac{\lim_{x \to a} f(x)}{\lim{x \to a} g(x)}
+\end{align}
 $$</p>
 
-<p><img width="67" height="301" class="asymptote" src="../images/asy/6653fd0be352e85261720d3f139a8068.svg" /></p><p><img width="287" height="120" class="asymptote" src="../images/asy/8ff4aee2777d37ff37ecf56e0706db90.svg" /></p><p>The intervals $I_x$ and $J_x$ overlap, so there are numbers that are in <b>both</b> of $I_x$ and $J_x$.
-If $o$ is one of these "overlap numbers", then we get
+<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exists
+and $\lim_{x \to a} g(x) \ne 0$, then
 $$
-f(o) \in (4,6) \quad \text{and} \quad f(o) \in (7,9),
+\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}.
 $$
-which is impossible.</p>
-
-<p>Again, we arrived at something impossible, so we made a mistake somewhere along the way.
-The mistake is assuming that we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$.
-So, having $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ at the same time is impossible.</p>
-
-<p>Summarizing: we can't have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ at the same time,
-because that would mean that some values of $f(x)$ are in a small interval around $5$
-but also in a small interval around $8$.</p>
-
-<p>This works the same if we replace $2$ with any other number.
-Replacing $5$ and $8$ with other numbers is a bit more tricky.</p>
-
-<p>Let's say that we want to replace $5$ and $8$ with two <b>different</b> numbers $a$ and $b$; that is, we have
-$\lim_{x \to 2} f(x) = a$,
-$\lim_{x \to 2} f(x) = b$, and
-$a \ne b$.
-Above we used the intervals $(4,6)$ and $(7,9)$, because they are intervals around $5$ and $8$ respectively,
-and there are no numbers that are in both intervals.
-So, we need open intervals centered around $a$ and $b$ such that they have no points in common.
-Letting $D$ denote the distance between $a$ and $b$ (positive because $a \ne b$),
-the intervals $(a-\frac{D}{3}, a+\frac{D}{3})$ and $(b-\frac{D}{3}, b+\frac{D}{3})$ work for this.</p>
-
-<p><img width="118" height="429" class="asymptote" src="../images/asy/a93b00874f9062cbacdc5d74a46f73b8.svg" /></p><p>With all this, we see how this generalizes for any two different numbers $a$ and $b$.</p>
-
-<div class="box graybox"><p>A limit can't be equal to two different numbers.
 </p>
 
-</div><p>Also, the limit can't be equal to <b>more</b> than two different numbers, because
-if a limit was equal to more than two different numbers, then we could pick two of those numbers;
-the limit would be equal to them, and that's impossible by the above result.</p>
-
-<div class="box graybox"><p>A limit can be equal to at most one number.
-</p>
-
-</div><p>An important consequence of this result is that
-if there is some number that the limit equals to
-(in other words, if the limit exists, unlike in the jump example above),
-then we can write things like
-$$
-\left( \lim_{x \to a} f(x) \right)^2 + 7.
-$$
-This is a shorthand for letting $L$ be the only number for which $\lim_{x \to a} f(x) = L$,
-and then writing $L^2+7$.
-We can think of $\lim_{x \to a} f(x)$ as a number,
-because we know that it can't be equal to multiple different numbers,
-which prevented us from doing that in the past.
-</p>
-
-</div>
+</div></div>
 </body>
 </html>

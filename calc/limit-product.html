@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Limits and bounded functions
- - Math Derivations</title>
+<title> Limit of Product - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
@@ -149,7 +148,7 @@
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-bounded.html">Limits and bounded functions</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="limit-intro.html">"Definition" by plugging in numbers</a><a href="limit-def.html">Definition of limit</a><a href="limit-unique.html">Uniqueness</a><a href="limit-sum.html">Limit of sum</a><a href="limit-product.html">Limit of product</a><a href="limit-diff.html">Limit of difference</a><a href="limit-div.html">Limit of division</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
@@ -202,170 +201,286 @@
         
         </div>
         </div>
-<h1 id="limits-and-bounded-functions">Limits and bounded functions<a class="headerlink" href="#limits-and-bounded-functions" title="Link to this title">¶</a></h1><p>A couple limit derivations on this site rely on some functions being bounded.
-This simplifies them a lot.
-This page explains what it means for a function to be bounded
-and what that has to do with limits.</p>
+<h1 id="limit-of-product">Limit of Product<a class="headerlink" href="#limit-of-product" title="Link to this title">¶</a></h1><div class="box redbox"><p>Make sure that you know our <a href="limit-def.html">definition of limit</a>.
+</p>
 
-<p>We say that a function $f$ is bounded on an interval $I$,
-if there is a positive constant $M$ so that
+</div><p>We find a rule for calculating the limit of the product of two functions, as in
 $$
--M \le f(\text{any number in $I$}) \le M.
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr).
 $$
-Basically, this means that inside the interval $I$,
-the function does not get arbitrarily large values,
-i.e. there is some upper bound $M$ that no value exceeds.
-Functions with negative but arbitrarily "large" values are banned too.</p>
+This is similar to <a href="limit-sum.html">the limit of sum</a>, but more difficult.
+</p>
 
-<p>Examples:
-<ul><li>
-    The function $f(x) = \frac{1}{x}$ is unbounded (i.e. not bounded) on $(0,1)$.
-    No matter what number $M$ you choose,
-    some of the values of $\frac{1}{x}$ are larger than $M$.</p>
+<h2 id="error-functions">"Error functions"<a class="headerlink" href="#error-functions" title="Link to this title">¶</a></h2><p>(The title is in quotes, because the term "error function"
+often refers to <a href="https://en.wikipedia.org/wiki/Error_function">a different thing</a>.)</p>
 
-<p><img width="257" height="287" class="asymptote" src="../images/asy/bc413aea53c24d0585a4f3e37f8bab79.svg" /></p><p>It is also not bounded on $(-1,0)$, because there it gets arbitrarily negative values,
-some of which will be smaller than $-M$.</p>
+<p>Suppose that
+$$
+\lim_{x \to a} f(x) = 3.
+$$
+Let's define the following function:
+$$
+E_f(x) = f(x)-3
+$$
+This "error function" measures how far away the function is from its limit,
+and in which direction.
+For example, if $f(x) = 2.99$, then $E_f(x) = -0.01$,
+which means that $f(x)$ is quite close to its limit, and less than its limit.</p>
 
-<p><img width="257" height="287" class="asymptote" src="../images/asy/453637b107d49533fc8be1e5efd88af9.svg" /></p><p></li><li>
-The same function $f(x)=\frac{1}{x}$ is bounded on any interval that doesn't go "near" $0$, such as $(1,2)$ or even $(1,\infty)$.
-For these two intervals we can choose $M=1$,
-because the graph stays between the lines $y = \pm 1$ on top of that interval.</p>
+<p>Let's now take the limit of $E_f$ using <a href="limit-of-sum.html">the limit of sum</a>:
+$$
+\begin{align}
+\lim_{x \to a} E_f(x)
+&= \lim_{x \to a} (f(x)-3) \\
+&= \lim_{x \to a} (f(x) + (-3)) \\
+&= \lim_{x \to a} f(x) + \lim_{x\to a} (-3)
+\end{align}
+$$
+The limit of $f(x)$ is $3$,
+and according to <a href="limit-def.html#even-simpler-example-limit-of-a-constant">limit of a constant</a>,
+the limit of $-3$ is simply $-3$, so we get:
+$$
+\lim_{x \to a} E_f(x) = 3 + (-3) = 0.
+$$
+This shouldn't be surprising:
+"limit is zero" is basically a precise way to say "small".</p>
 
-<p><img width="320" height="257" class="asymptote" src="../images/asy/897f7b0308e3a8de427a65f5543136fd.svg" /></p><p></li><li>
-In the previous examples, we could just as well choose $M=2$ instead of $M=1$,
-because this gives even more “room” for the function.
-In fact, there's always multiple ways to choose the $M$ for a bounded function:
-if some value of $M$ works, then all larger values will work too.
+<p>It is also possible to rearrange the definition $E_f(x) = f(x)-3$ into this:
+$$
+f(x) = 3 + E_f(x)
+$$
+This should also make sense.
+It says that $f(x)$ consists of the limit value $3$ and a small additional error.</p>
+
+<p>We will use these "error functions" below.
+Of course, the limit doesn't have to be $3$:
+this trick can be used whenever a function has any limit.
+</p>
+
+<h2 id="simple-case-both-limits-are-positive-integers">Simple case: both limits are positive integers<a class="headerlink" href="#simple-case-both-limits-are-positive-integers" title="Link to this title">¶</a></h2><p>Suppose that
+$$
+\lim_{x \to a} f(x) = 3 \quad \text{and} \quad \lim_{x \to a} g(x) = 5.
+$$
+We calculate the limit of $f(x)g(x)$.</p>
+
+<p>Let's start by defining the following "error functions":
+$$
+\begin{align}
+E_f(x) &= f(x)-3 \\
+E_g(x) &= g(x)-5
+\end{align}
+$$
+And rearranging them:
+$$
+\begin{align}
+f(x) &= 3 + E_f(x) \\
+g(x) &= 5 + E_g(x)
+\end{align}
+$$
+We can now start calculating the limit of $f(x)g(x)$:
+$$
+\begin{align}
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr)
+&= \lim_{x \to a} (3+E_f(x))(5+E_g(x)) \\
+&= \lim_{x \to a} \Bigl(15 + 3E_g(x) + 5E_f(x) + E_f(x)E_g(x) \Bigl)
+\end{align}
+$$
+We ended up with 4 things added,
+so we can use <a href="limit-of-sum.html">the limit of sum</a> to split them into separate limits:
+$$
+\begin{align}
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr)
+&= \lim_{x \to a} 15  + \lim_{x \to a} 3E_g(x) + \lim_{x \to a} 5E_f(x) + \lim_{x \to a} \bigl(E_f(x)E_g(x)\bigr)
+\end{align}
+$$
+The first three limits are easy:</p>
+
+<p><ul><li>
+    The limit of $15$ is simply $15$ by <a href="limit-def.html#even-simpler-example-limit-of-a-constant">limit of a constant</a>.
 </li><li>
-    The function $g(x)=x^2$ is bounded on any finitely long interval,
-    such as $[1,2]$ (for this interval, $M=5$ works, for example).
-    It is unbounded on any infinitely long interval, such as $[3,\infty)$.</p>
+    The limit of $3E_g(x)$ can be calculated as a limit of sum:
+    $$
+    \begin{align}
+    \lim_{x \to a} 3E_g(x)
+    &= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x)\Bigr) \\
+    &= \lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x) \\
+    &= 0+0+0 \\
+    &= 0
+    \end{align}
+    $$
+</li><li>
+    The limit of $5E_g(x)$ can be calculated similarly, and it is also zero.
+</li></ul></p>
 
-<p><img width="407" height="311" class="asymptote" src="../images/asy/123305beaf3f165288438d1d1c74ded2.svg" /></p><p></li></ul>
-</p>
+<p>We now have:
+$$
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr) = 15 + \lim_{x \to a} \bigl( E_f(x)E_g(x) \bigr)
+$$
+The limit of $E_f(x)$ is zero, so if $x$ is close enough to $a$,
+we have $E_f(x) \approx 0$ with precision $0.1$.
+(This works with any precision. Let's just pick $0.1$).
+This means that
+$$
+-0.1 < E_f(x) < 0.1.
+$$
+Multiplying by $E_f(x)$ brings numbers closer to zero.
+For example, if $E_f(x) = -0.05$, then $E_f(x) \cdot 40 = -2$,
+and $-2$ is much closer to zero than $40$.
+(Also, the sign flips if $E_f(x)$ is negative.)</p>
 
-<h2 id="bounded-if-limit-exists">Bounded if limit exists<a class="headerlink" href="#bounded-if-limit-exists" title="Link to this title">¶</a></h2><p>The definition of bounded is related to the definition of limit, but not quite the same.
-The definition of limit applies to all output intervals, including very small output intervals,
-whereas the definition of bounded only needs some upper bound $M$ that can be as large as needed.
-Basically, the definition of limit requires more,
-so if the definition of limit is satisfied, the function is bounded.</p>
+<p>Let's now look at $E_f(x)E_g(x)$.
+The limit of $E_g(x)$ is zero, which means that for any precision $p > 0$,
+we have $E_g(x) \approx 0$ when $x$ is close enough to $a$.
+However, multiplying $E_f(x)$ brings the value even closer to zero,
+so we also have $E_f(x)E_g(x) \approx 0$ with precision $p$.
+Therefore
+$$
+\lim_{x \to a} \bigl( E_f(x)E_g(x)\bigr) = 0.
+$$</p>
 
-<p>Let's go through that idea again, but in more detail.
-The definition of limit is that for any output interval $I_y$ centered around the limit,
-there is an input interval $I_x$ centered around $a$ so that
+<div class="box graybox"><p>If $\lim_{x \to a} f(x) = 3$ and $\lim_{x \to a} g(x) = 5$, then
 $$
-f(\text{any number in $I_x$ except $a$}) \in I_y.
-$$
-Let's take any one of the infinitely many output intervals that this applies to.
-Because it is finitely long, we can choose $M$ to be large enough
-for the entire output interval to be between $-M$ and $M$, and so
-$$
--M \le f(\text{any number in $I_x$ except $a$}) \le M.
-$$
-This works for any function that has a limit at $a$.
-It doesn't matter what the limit is, as long as it exists.</p>
-
-<div class="box graybox"><p>If the limit $\lim_{x \to a} f(x)$ exists,
-then $f$ is bounded on some interval centered around $a$, with the midpoint $a$ excluded.
-</p>
-
-</div><p>An interval with the midpoint removed is no longer an interval,
-but we can still define boundedness in the same way.
-We need to exclude the midpoint because $f(a)$ might be undefined
-even if the limit $\lim_{x \to a} f(x)$ exists:
-by design, limits avoid using the value of the function at $a$,
-and only use values near $a$.
-</p>
-
-<h2 id="bounded-times-small">Bounded times small<a class="headerlink" href="#bounded-times-small" title="Link to this title">¶</a></h2><p>Not all bounded functions have a limit.
-Consider the <a href="limit-basics.html#jumping-function">"jumping function"</a>, for example.
-Basically, the problem is that the values of a bounded function
-aren't necessarily very close to each other.</p>
-
-<p>However, if we multiply the values of a bounded function and a "small" function,
-then all values of the multiplication should be somewhat small as well.
-Multiplying with the bounded function can make the values $M$ times bigger,
-but we should be able to compensate for that
-by making the "small" function output even smaller values.
-This should cause the "bounded times small" function
-to output as small values as we need.
-This also works with negative values:
-we can basically ignore the minus signs
-because of how $-M \le f(x) \le M$ and the definition of limit are symmetric.</p>
-
-<p>Again, let's go through this idea in more detail.
-Let $s$ be a function satisfying $\lim_{x \to a} s(x) = 0$;
-this is the "small" function, and this is what "small" actually meant above.
-Let $b$ be a function that is bounded on some interval $I$ centered around $a$ with the midpoint $a$ excluded, so
-$$
--M \le b(\text{any number in $I$ except $a$}) \le M.
-$$
-We show that
-$$
-\lim_{x \to a} b(x)s(x) = 0.
-$$
-Let $I_y=(-\epsi,\epsi)$ be any output interval centered around $0$.
-We can't just use this output interval with the limit $\lim_{x \to a} s(x) = 0$,
-because we also need to compensate with $M$.
-Let's do that by taking another interval
-$$
-\left( -\frac{\epsi}{M}, \frac{\epsi}{M} \right),
-$$
-which will basically cause $s(x)$ to output values that are $M$ times smaller than we need.
-Because $\lim_{x \to a} s(x) = 0$,
-there is an input interval $I_x$ so that
-$$
-s(\text{any number in $I_x$ except $a$}) \in \left( -\frac{\epsi}{M}, \frac{\epsi}{M} \right),
-$$
-or with slightly different notation,
-$$
--\frac{\epsi}{M} < s(\text{any number in $I_x$ except $a$}) < \frac{\epsi}{M}.
-$$
-If $x$ is any number that is
-in $I$ (the interval on which $b$ is bounded by $M$)
-and in $I_x$ (the input interval for limit of $s$), we now have
-$$
--M \le b(x) \le M \quad \text{and} \quad -\frac{\epsi}{M} < s(x) < \frac{\epsi}{M}.
-$$
-If $s(x)$ and $b(x)$ are both positive,
-replacing them with larger values $\frac{\epsi}{M}$ and $M$
-gives us a bigger value than $s(x)b(x)$, so
-$$
-b(x)s(x) < \frac{\epsi}{M} \cdot M = \epsi.
-$$
-This also works if $b(x)=0$ or $s(x)=0$.
-If we also allow negative values, we can still do the same thing with absolute values, as in
-$$
-|b(x) s(x)| = |b(x)| |s(x)| < \epsi.
-$$
-This shows that
-$$
--\epsi < b(x)s(x) < \epsi.
-$$
-For this to work, we need $x$ to be in both $I_x$ and $I$,
-so we can take our input interval to be whichever of the two intervals is smaller.</p>
-
-<div class="box graybox"><p>If $\lim_{x \to a} s(x) = 0$ and $b(x)$ is bounded
-on some interval centered around $a$ with the midpoint $a$ excluded,
-then
-$$
-\lim_{x \to a} b(x)s(s) = 0.
+\lim_{x \to a} f(x)g(x) = 15.
 $$
 </p>
 
-</div><h2 id="example">Example<a class="headerlink" href="#example" title="Link to this title">¶</a></h2><p>We calculate
+</div><p>This result shouldn't feel very surprising.
+It says that if $f(x)$ is close to 3 and $g(x)$ is close to 5,
+then $f(x)g(x)$ is close to 15.</p>
+
+<p>Of course, the same reasoning works with any positive integers instead of 3 and 5.
+We need positive integers for the step where we did $3E_g(x) = E_g(x)+E_g(x)+E_g(x)$.</p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ are positive integers, then
 $$
-\lim_{x \to 0} x \sin(3x^2+42x-69\cos(x^7)).
+\lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} g(x) \right).
 $$
-We haven't derived convenient rules for calculating limits yet,
-but this limit is now doable.
-Because $\sin(\dots)$ is the $y$ coordinate of a point on the unit circle,
-it is bounded between $-1$ and $1$.
-We also know that $\lim_{x \to 0} x = 0$
-(see <a href="limit-basics.html">this example</a>). Therefore
+</p>
+
+</div><h2 id="they-don-t-need-to-be-integers">They don't need to be integers<a class="headerlink" href="#they-don-t-need-to-be-integers" title="Link to this title">¶</a></h2><p>Suppose that
 $$
-\lim_{x \to 0} x \sin(3x^2+42x-69\cos(x^7)) = 0.
+\lim_{x \to a} f(x) = 3.14 \quad \text{and} \quad \lim_{x \to a} g(x) = 6.9.
 $$
+We calculate the limit of $f(x)g(x)$.</p>
+
+<p>The above calculation mostly works as is,
+but this part needs to be modified a bit:
+$$
+\begin{align}
+\lim_{x \to a} 3E_g(x)
+&= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x)\Bigr) \\
+&= \lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x) \\
+&= 0+0+0 \\
+&= 0
+\end{align}
+$$
+The problem is that we get $3.14E_g(x)$ instead of $3E_g(x)$.
+We can still split it up similarly, but $0.14 E_g(x)$ will remain.
+$$
+\begin{align}
+\lim_{x \to a} 3.14E_g(x)
+&= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x) + 0.14E_g(x)\Bigr)
+\end{align}
+$$
+However, multiplying by $0.14$ makes numbers smaller because it's less than $1$,
+so the limit of $0.14E_g(x)$ is also zero:
+$$
+\begin{align}
+\lim_{x \to a} 3.14E_g(x)
+&= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x) + 0.14E_g(x)\Bigr) \\
+&= 0+0+0+0 \\
+&= 0
+\end{align}
+$$
+We will also need the limit of $6.9E_f(x)$, and that's zero for the same reason.
+This works with any positive numbers instead of $3.14$ and $6.9$.</p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ are positive, then
+$$
+\lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} g(x) \right).
+$$
+</p>
+
+</div><h2 id="they-don-t-need-to-be-positive">They don't need to be positive<a class="headerlink" href="#they-don-t-need-to-be-positive" title="Link to this title">¶</a></h2><p>Our limit calculation works fine if one or both of the limits is zero.
+In that case, we get something like $\lim_{x \to a} 0E_g(x)$,
+which is actually <a href="limit-def.html#even-simpler-example-limit-of-a-constant">the limit of a constant</a>.</p>
+
+<p>For a negative limit, we get something like
+$$
+\lim_{x \to a} -3.14E_g(x).
+$$
+We already know that the limit of $3.14E_g(x)$ will be zero (see above).
+The minus sign in front doesn't matter:
+if $3.14E_g(x) \approx 0$ with some precision,
+then also $-3.14E_g(x) \approx 0$ with the same precision,
+because the minus sign flips to the opposite side of zero without affecting the distance.
+Therefore
+$$
+\lim_{x \to a} -3.14E_g(x) = 0
+$$
+and the calculation works as expected.</p>
+
+<div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist, then
+$$
+\lim_{x \to a} f(x)g(x) = \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} g(x) \right).
+$$
+</p>
+
+</div><p>This is known as the rule for the limit of a product.
+</p>
+
+<h2 id="example">Example<a class="headerlink" href="#example" title="Link to this title">¶</a></h2><p>With the limit rules we have so far, we can calculate e.g. the following limit:
+$$
+\lim_{x \to 2} (2x^2+4x+7)
+$$
+Let's start with <a href="limit-sum.txt">limit of sum</a>:
+$$
+\lim_{x \to 3} (2x^2+4x+7) = \lim_{x \to 3} 2x^2 + \lim_{x \to 3} 4x + \lim_{x \to 3} 7
+$$
+Consider the limit of $2x^2$.
+Let's view $2x^2$ as the product of 3 things, as in $2 \cdot x \cdot x$.
+We use the rule for limit of product.
+Just like the rule for sum, it can be applied to more than two functions, like this:
+$$
+\begin{align}
+\lim_{x \to 3} 2x^2
+&= \lim_{x \to 3} (2 \cdot x \cdot x) \\
+&= \left( \lim_{x \to 3} 2 \right)\left( \lim_{x \to 3} x \right)\left( \lim_{x \to 3} x \right)
+\end{align}
+$$
+We can handle the limit of $4x$ similarly.
+Finally, we can use $\lim_{x \to 3} x = 3$ (derived <a href="limit-def.html#simple-example-limit-of-x">here</a>)
+and <a href="limit-def.html#even-simpler-example-limit-of-a-constant">limit of a constant</a>.
+Like this:
+$$
+\begin{align}
+\lim_{x \to 3} (2x^2+4x+7)
+&= \lim_{x \to 3} 2x^2 + \lim_{x \to 3} 4x + \lim_{x \to 3} 7 \\
+&= \left(\lim_{x \to 3} 2\right)\left( \lim_{x \to 3} x \right)^2
+    + \left(\lim_{x \to 3} 4 \right)\left( \lim_{x \to 3} x \right)
+    + \lim_{x \to 3} 7 \\
+&= 2 \cdot 3^2 + 4 \cdot 3 + 7 \\
+&= 37.
+\end{align}
+$$
+We can <a href="calc/limit-intro.html">check this by plugging in a number near 3</a>:
+$$
+2 \cdot (3.001)^2 + 4 \cdot 3.001 + 7 = 37.016002
+$$
+<b>We calculated a limit without plugging in numbers and guessing.</b>
+This way to calculate limits may seem like more effort,
+but it's backed by solid mathematical theory,
+so you can be sure that you didn't
+<a href="limit-intro.html#surprising-example">miss some surprising behavior when plugging in numbers</a>.</p>
+
+<p>You might notice that simply setting $x=3$ also gives the correct result:
+$$
+3 \cdot 3^2 + 4 \cdot 3 + 7 = 37
+$$
+This often works, but not always.
+There is a name for this behavior:
+we say that a function is <b>continuous</b> if its limits can be calculated this way.
+We will come back to continuity <a href="cont-def.html">later</a>.
 </p>
 
 </div>

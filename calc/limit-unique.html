@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Absolute Values in Limit Proofs
- - Math Derivations</title>
+<title> Uniqueness of Limit - Math Derivations</title>
 
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
 
@@ -149,7 +148,7 @@
         <input type="checkbox" id="sidebar-checkbox-13" />
         <label for="sidebar-checkbox-13">Limits</label>
         <div class="dropdown">
-            <a href="limit-def.html">Definition of limit</a><a href="limit-basics.html">Limit basics</a><a href="limit-bounded.html">Limits and bounded functions</a><a href="limit-props.html">Limit properties</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
+            <a href="limit-intro.html">"Definition" by plugging in numbers</a><a href="limit-def.html">Definition of limit</a><a href="limit-unique.html">Uniqueness</a><a href="limit-sum.html">Limit of sum</a><a href="limit-product.html">Limit of product</a><a href="limit-diff.html">Limit of difference</a><a href="limit-div.html">Limit of division</a><a href="limit-1sided.html">One-sided limits</a><a href="limit-ineq.html">Inequality and limit</a><a href="limit-vector.html">Limit of vector</a>
         </div>
         
         <input type="checkbox" id="sidebar-checkbox-14" />
@@ -202,159 +201,58 @@
         
         </div>
         </div>
-<h1 id="absolute-values-in-limit-proofs">Absolute Values in Limit Proofs<a class="headerlink" href="#absolute-values-in-limit-proofs" title="Link to this title">¶</a></h1><p>So far we have used intervals centered around a given number when working with limits.
-It's more common to write the definition of limit with absolute values.
-The idea with that is that if $r$ is positive,
-then $x \in (-r, r)$ is same as $\abs{x} < r$;
-the absolute value of $x$ is the distance between $x$ and $0$,
-and both of these are ways to say that the distance is less than $r$.</p>
-
-<p><img width="230" height="32" class="asymptote" src="../images/asy/0055fb9944ef32ea0d74404725532dff.svg" /></p><p>The distance between <b>any</b> two numbers can be calculated by subtracting the numbers,
-but you need to be careful with the order of subtracting.
-For example, the distance between $5$ and $7$ is $7 - 5 = 2$, not $5 - 7 = -2$.
-So, if you put the numbers in the wrong order, the distance comes out with an unwanted minus sign in front;
-to avoid that, we can wrap everything in absolute values and calculate
-$$
-\abs{5-7} = \abs{-2} = 2.
-$$
-In general, the distance between any numbers $a$ and $b$ is $\abs{a-b}$, and now the order doesn't matter.</p>
-
-<p>As a sanity check, we can plug in $b=0$,
-and now it says that the distance between $a$ and zero is $\abs{a}$, which is correct.
-If we plug in $a=0$ instead, it says that the distance between $b$ and zero is $\abs{-b}$.
-This is also correct because we know that $\abs{-b} = \abs{b}$;
-absolute value discards the sign anyway, so the sign inside absolute value doesn't matter.</p>
-
-<p>If $A$ is any number, then we can write $x \in (A-r, A+r)$ as $\abs{x - A} < r$;
-both of these are ways to say that the distance is less than $r$.</p>
-
-<p><img width="344" height="34" class="asymptote" src="../images/asy/05a9270f73876baa89adc6884717fd4b.svg" /></p><div class="box graybox"><p>Let $A$ be any number, and let $r$ be positive.
-Then $x \in (A-r, A+r)$ if and only if $\abs{A-x} < r$.
+<h1 id="uniqueness-of-limit">Uniqueness of Limit<a class="headerlink" href="#uniqueness-of-limit" title="Link to this title">¶</a></h1><div class="box redbox"><p>Make sure that you know our <a href="limit-def.html">definition of limit</a>.
+In particular, make sure you know the precise meanings of "close enough to" and "$\approx$".
 </p>
 
-</div><p>Sometimes absolute values are easier to work with than intervals of numbers.
-We'll see examples of this next.
+</div><p>Can we have $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ for the same function $f$?</p>
+
+<p>If you think of the notation such that $\lim_{x \to 2} f(x)$ by itself is a thing,
+then this is obviously not possible;
+there's no way how something could be equal to $5$ and $8$ at the same time.
+However, that's not how we have defined the limit.
+The definition doesn't say anything about what $\lim_{x \to 2} f(x)$ by itself is;
+it only tells what setting that equal to something means,
+such as $\lim_{x \to 2} f(x) = 5$.</p>
+
+<p>Suppose $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ for the same function $f$.
+Then, for any precision $p_1 > 0$, we have $f(x) \approx 5$ with precision $p_1$
+when $x$ is close enough to $a$.
+Also, for any precision $p_2 > 0$, we have $f(x) \approx 8$ with precision $p_2$
+when $x$ is close enough to $a$.</p>
+
+<p>For example, if we choose the precisions $p_1=p_2=0.1$,
+we see that $4.9 < f(x) < 5.1$ and $7.9 < f(x) < 8.1$ whenever $x$ is close enough to $a$.
+This is not possible: no number can be less than $5.1$ and greater than $7.9$.
+This means that a limit cannot simultaneously be $5$ and $8$.</p>
+
+<p>The same applies for any two different numbers instead of $5$ and $8$
+as long as we pick a reasonable precision.</p>
+
+<div class="box graybox"><p>A limit can't be equal to two different numbers.
 </p>
 
-<h2 id="limit-of-square-root">Limit of square root<a class="headerlink" href="#limit-of-square-root" title="Link to this title">¶</a></h2><p>Let $a$ be a positive number. We prove that $\lim_{x \to a} \sqrt{x} = \sqrt{a}$.</p>
+</div><p>Also, the limit can't be equal to <b>more</b> than two different numbers, because
+if a limit was equal to more than two different numbers, then we could pick two of those numbers;
+the limit would be equal to them, and that's impossible by the above result.</p>
 
-<p>Let $I_y=(\sqrt{a}-\epsi, \sqrt{a}+\epsi)$ be any open interval centered around $\sqrt{a}$.
-Our goal is to choose an input interval centered around $a$ so that
-for any number $x$ in the input interval except $a$, we have $\sqrt{x} \in I_y$.</p>
-
-<p>The idea of the proof is that
-we can make the distance between $\sqrt{a}$ and $\sqrt{x}$ smaller than $\epsi$ by calculating
-$$
-\begin{align}
-\abs{\sqrt{x} - \sqrt{a}}
-&= \abs{\frac{(\sqrt{x} - \sqrt{a})(\sqrt{x} + \sqrt{a})}{\sqrt{x} + \sqrt{a}}} \\
-&= \abs{\frac{(\sqrt{x})^2 - (\sqrt{a})^2}{\sqrt{x} + \sqrt{a}}} \\
-&= \abs{\frac{x-a}{\sqrt{x} + \sqrt{a}}} \\
-&= \frac{\abs{x-a}}{\sqrt{x} + \sqrt{a}}.
-\end{align}
-$$
-The bottom of this fraction can't be smaller than $\sqrt{a}$.
-We also don't have division by zero, because $a$ is positive and so $\sqrt{a}$ is also positive.
-We get
-$$
-\sqrt{x} + \sqrt{a} \ge \sqrt{a} > 0,
-$$
-and from there we get
-$$
-\frac{\abs{x-a}}{\sqrt{x}+\sqrt{a}} \le \frac{\abs{x-a}}{\sqrt{a}}.
-$$
-Notice that the sign of the inequation flipped;
-this is because the fraction is smaller when the bottom is bigger.</p>
-
-<p>All this can be made smaller than $\epsi$ by ensuring that $\abs{x-a}$ is small enough,
-and we can do that with a clever choice of the input interval, such as $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$.
-With that, having $x$ in the input interval means $\abs{x-a} < \sqrt{a}\epsi$,
-and we get
-$$
-\abs{\sqrt{x}-\sqrt{a}}
-= \frac{\abs{x-a}}{\sqrt{x}+\sqrt{a}}
-\le \frac{\abs{x-a}}{\sqrt{a}}
-< \frac{\sqrt{a}\epsi}{\sqrt{a}}
-= \epsi.
-$$
-This shows that
-$$
-\sqrt{x} \in (\sqrt{a}-\epsi, \sqrt{a}+\epsi) = I_y.
-$$</p>
-
-<p>We have one more problem that needs to be fixed:
-to do $\sqrt{x}$, we must ensure that $x$ is not negative.
-If $a - \sqrt{a}\epsi < 0$, then $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$ contains negative numbers,
-and we can't use that as the input interval.</p>
-
-<p><img width="560" height="41" class="asymptote" src="../images/asy/d339a130032932a723f726f533e26ab9.svg" /></p><p>In this case, we use the interval $(0, 2a)$ instead;
-any number in $(0,2a)$ is also in $(a-\sqrt{a}\epsi, a+\sqrt{a}\epsi)$,
-and the rest of the proof works the same.</p>
-
-<div class="box graybox"><p>For any positive number $a$, we have $\lim_{x \to a} \sqrt{x} = \sqrt{a}$.
+<div class="box graybox"><p>A limit can be equal to at most one number.
 </p>
 
-</div><h2 id="limit-of-square-root-at-zero">Limit of square root at zero<a class="headerlink" href="#limit-of-square-root-at-zero" title="Link to this title">¶</a></h2><p>We can't calculate $\lim_{x \to 0} \sqrt{x}$, because
-any input interval around $0$ contains negative numbers.
-However, we can use a <a href="limit-1sided.html">right limit</a>.
-Let's prove that $\lim_{x \to 0^+} \sqrt{x} = 0$.</p>
-
-<p>Let $I_y = (0-\epsi, 0+\epsi) = (-\epsi, \epsi)$ be any open interval centered around $0$.
-We choose $I_x = (0, \epsi^2)$.
-Now for any $x \in I_x$, we get
+</div><p>An important consequence of this result is that
+if there is some number that the limit equals to
+(in other words, if the limit exists, unlike in <a href="limit-intro.html#surprising-example">this example</a>,
+then we can write things like
 $$
-0 < x < \epsi^2,
+\left( \lim_{x \to a} f(x) \right)^2 + 7.
 $$
-and applying square roots gives
-$$
-\sqrt{0} < \sqrt{x} < \sqrt{\epsi^2}.
-$$
-This leads to
-$$
--\epsi < 0 < \sqrt{x} < \epsi,
-$$
-which shows that $x \in (-\epsi, \epsi) = I_y$.</p>
-
-<div class="box graybox"><p>We have $\lim_{x \to 0^+} \sqrt{x} = 0$.
+This is a shorthand for letting $L$ be the only number for which $\lim_{x \to a} f(x) = L$,
+and then writing $L^2+7$.
+We can think of $\lim_{x \to a} f(x)$ as a number,
+because we know that it can't be equal to multiple different numbers,
+which prevented us from doing that in the past.
 </p>
 
-</div><h2 id="limit-of-frac-1-x">Limit of $\frac 1 x$<a class="headerlink" href="#limit-of-frac-1-x" title="Link to this title">¶</a></h2><p>Let $a$ be a positive number.
-I'll show you most of the proof for $\lim_{x \to a} \frac 1 x = \frac 1 a$.
-I'll skip many things that are similar to the <a href="#limit-of-square-root">square root proof</a> above.</p>
-
-<p>Let $(\frac 1 a - \epsi, \frac 1 a + \epsi)$ be any open interval centered around $\frac 1 a$.
-As always, our goal is to choose an appropriate input interval around $a$.
-Assuming that any $x$ in the input interval except $a$ is positive, we calculate
-$$
-\abs{\frac 1 x - \frac 1 a}
-= \abs{\frac{a}{xa} - \frac{x}{xa}}
-= \abs{\frac{a-x}{xa}}
-= \frac{\abs{a-x}}{a} \frac 1 x.
-$$
-To make sure that $\frac 1 x$ is small enough,
-we can choose the input interval so that it's a subset of $(\frac 1 2 a, \frac 3 2 a)$,
-just like in the square root proof.
-Doing this also ensures that $x$ is positive.</p>
-
-<p><img width="514" height="71" class="asymptote" src="../images/asy/dc00086275beea5500e194c8bedf9982.svg" /></p><p>This guarantees that $x$ is large enough,
-$$
-x > \frac 1 2 a,
-$$
-which leads to $\frac 1 x$ being small enough,
-$$
-\frac 1 x < \frac{1}{\frac 1 2 a} = \frac{2}{a}.
-$$
-Putting everything together, we get
-$$
-\abs{\frac 1 x - \frac 1 a} = \frac{\abs{a-x}}{a}\frac 1 x < \frac{\abs{a-x}}{a} \frac{2}{a}.
-$$
-Rest of the proof can be done by choosing $I_x$ so that this cancels nicely to $\epsi$,
-again just like in the square root proof.
-There's a similar proof for negative $a$ values.</p>
-
-<div class="box graybox"><p>For any $a \ne 0$, we have $\lim_{x \to a} \frac 1 x = \frac 1 a$.
-</p>
-
-</div></div>
+</div>
 </body>
 </html>

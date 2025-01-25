@@ -8,8 +8,7 @@ We find a rule for calculating the limit of two functions divided by each other,
 $$
 \lim_{x \to a} \frac{f(x)}{g(x)}.
 $$
-Similarly to [limit of product](limit-product.html),
-we start with a simple case and then generalize the result.
+We start with a simple case and then generalize the result.
 
 
 ## Simple case

@@ -45,7 +45,7 @@ but it's not important.)
 
 asymptote:
     unitsize(3cm);
-    draw((sqrt(0.1),0)--(sqrt(0.1),0), p=green+5);
+    draw((-sqrt(0.1),0)--(sqrt(0.1),0), p=green+5);
     axises(-1.5,2,-0.5,2.5);
     real f(real x) { return x^2; }
     draw(graph(f, -1.5, 1.5), p=blue, L=Label("$y=\frac{x^3}{x}$", position=Relative(0.9), align=W));
@@ -64,7 +64,6 @@ asymptote:
     real f(real x) { return x^2; }
     draw(graph(f, -1.5, 1.5), p=blue, L=Label("$y=x^2$", position=Relative(0.9), align=W));
     draw((-1.5,0.1)--(1.5,0.1), L=Label("$y=0.1$", align=N, position=Relative(0.9)), p=gray+smalldashes);
-    dot((1,0), L="$1$", p=dotpen, align=S);
 
 </li><li>
 We have $x^2 < 0.1$ when $x$ is close enough to zero.

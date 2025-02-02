@@ -21,8 +21,8 @@ $$
 \lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}.
 $$
 This doesn't divide by zero if $x$ is close enough to $a$.
-To see why, let's take a small enough precision, e.g. $0.1$.
-If $x$ is close enough to $a$, we now get $g(x) \approx 4$ with precision $0.1$,
+To see why, let's take a small enough tolerance, e.g. $0.1$.
+If $x$ is close enough to $a$, we now get $g(x) \approx 4$ with tolerance $0.1$,
 which means that $3.9 < g(x) < 4.1$, so $g(x)$ is surely positive.
 
 We suspect that the limit of $\frac{1}{g(x)}$ is probably $\frac{1}{4}$,
@@ -36,28 +36,28 @@ $$
 &= \frac{4-g(x)}{4g(x)}
 \end{align}
 $$
-Let $p > 0$ be any precision.
+Let $t > 0$ be any tolerance.
 On top, we have $4-g(x)$.
-If $x$ is close enough to $a$, we have $g(x) \approx 4$ with precision $p$,
-which means that the distance between $g(x)$ and $4$ is less than $p$:
+If $x$ is close enough to $a$, we have $g(x) \approx 4$ with tolerance $t$,
+which means that the distance between $g(x)$ and $4$ is less than $t$:
 $$
--p < 4-g(x) < p
+-t < 4-g(x) < t
 $$
 On bottom, we have $4g(x)$. If $x$ is close enough to $a$, we have $g(x) > 3.9$, so
 $$
 4g(x) > 4 \cdot 3.9 = 15.6.
 $$
 This means that $4g(x)$ is so big that dividing by it brings numbers closer to zero,
-and hence anything that is between $-p$ and $p$ will stay between $-p$ and $p$:
+and hence anything that is between $-t$ and $t$ will stay between $-t$ and $t$:
 $$
--p < \frac{4-g(x)}{4g(x)} < p
+-t < \frac{4-g(x)}{4g(x)} < t
 $$
 Because $\frac{4-g(x)}{4g(x)} = \frac{1}{g(x)} - \frac{1}{4}$, we get:
 $$
--p < \frac{1}{g(x)} - \frac{1}{4} < p
+-t < \frac{1}{g(x)} - \frac{1}{4} < t
 $$
 This shows that
-$\frac{1}{g(x)} \approx \frac{1}{4}$ with precision $p$ when $x$ is close enough to $a$, so
+$\frac{1}{g(x)} \approx \frac{1}{4}$ with tolerance $t$ when $x$ is close enough to $a$, so
 $$
 \lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}.
 $$

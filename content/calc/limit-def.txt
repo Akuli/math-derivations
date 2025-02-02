@@ -107,14 +107,14 @@ asymptote:
 </li></ul>
 
 
-## $\approx$ with precision
+## $\approx$ with tolerance
 
-Let $a$ and $b$ be any numbers, and let $p$ be a positive number.
-We say that $a \approx b$ **with precision** $p$, if $b-p < a < b+p$.
-For example, $x \approx 3$ with precision $0.1$ means that $2.9 < x < 3.1$.
+Let $a$ and $b$ be any numbers, and let $t$ be a positive number.
+We say that $a \approx b$ **with tolerance** $t$, if $b-t < a < b+t$.
+For example, $x \approx 3$ with tolerance $0.1$ means that $2.9 < x < 3.1$.
 
 This is similar to the "close enough to" concept, but not quite the same.
-Specifically, "$x$ is close enough to $a$" means that $x \approx a$ with some precision,
+Specifically, "$x$ is close enough to $a$" means that $x \approx a$ with some tolerance,
 but also requires $x \ne a$.
 
 
@@ -154,21 +154,21 @@ by plugging in numbers like this:
 
 The resulting values are approximately 3, but let's be more specific by specifying how close to 3 the values are.
 
-Limit means that we can choose any precision we want, no matter how small.
-For example, we have $\frac{x^3-1}{x-1} \approx 3$ with precision $0.01$
+Limit means that we can choose any tolerance we want, no matter how small.
+For example, we have $\frac{x^3-1}{x-1} \approx 3$ with tolerance $0.01$
 (that is, $2.99 < \frac{x^3-1}{x-1} < 3.01$),
 if $x$ is close enough to 1.
-The point is that we can use any precision we want, such as $0.00000000001$.
+The point is that we can use any tolerance we want, such as $0.00000000001$.
 
 graybox:
     We say that the function $f$ has **limit** $L$ as $x$ approaches $a$ and we write
     $$
     \lim_{x \to a} f(x) = L,
     $$
-    if for any precision $p > 0$,
-    we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$.
+    if for any tolerance $t > 0$,
+    we have $f(x) \approx L$ with tolerance $t$ when $x$ is close enough to $a$.
 
-Because we defined precisely what "$\approx$ with precision" and "close enough to" mean,
+Because we defined precisely what "$\approx$ with tolerance" and "close enough to" mean,
 there's nothing vague in this definition,
 so it's possible to write convincing proofs and derivations based on it.
 
@@ -177,13 +177,13 @@ so it's possible to write convincing proofs and derivations based on it.
 
 We prove that $\lim_{x \to 3} x = 3$.
 
-Let $p > 0$ be any precision.
-We want to show that $x \approx 3$ with precision $p$
+Let $t > 0$ be any tolerance.
+We want to show that $x \approx 3$ with tolerance $t$
 when $x$ is close enough to $3$.
 
-This is quite easy. Consider the interval $(3-p, 3+p)$.
-If $x$ is close enough to $3$, it is in $(3-p, 3+p)$, and $x \ne 3$.
-This means that $3-p < x < 3+p$, so we have $x \approx 3$ with precision $p$.
+This is quite easy. Consider the interval $(3-t, 3+t)$.
+If $x$ is close enough to $3$, it is in $(3-t, 3+t)$, and $x \ne 3$.
+This means that $3-t < x < 3+t$, so we have $x \approx 3$ with tolerance $t$.
 (We didn't need $x \ne 3$ for anything.)
 
 graybox:
@@ -199,7 +199,7 @@ graybox:
 ## Even simpler example: limit of a constant
 
 We have $\lim_{x \to 3} 5 = 5$,
-because $5 \approx 5$ with any precision, regardless of what $x$ is.
+because $5 \approx 5$ with any tolerance, regardless of what $x$ is.
 
 graybox:
     We have $\lim_{x \to 3} 5 = 5$.

@@ -19,13 +19,13 @@ $$
 where we used the examples at the end of [the limit definition page](limit-def.html#simple-example-limit-of-x).
 
 Suppose that $\lim_{x \to a} f(x) = 2$ and $\lim_{x \to a} g(x) = 5$.
-This means that for any precision $p > 0$, we have
-$f(x) \approx 2$ and $g(x) \approx 5$ with precision $p$ whenever $x$ is close enough to $a$.
-We want to show that for any precision $p > 0$,
-we have $f(x)+g(x) \approx 7$ with precision $p$ whenever $x$ is close enough to $a$.
+This means that for any tolerance $t > 0$, we have
+$f(x) \approx 2$ and $g(x) \approx 5$ with tolerance $t$ whenever $x$ is close enough to $a$.
+We want to show that for any tolerance $t > 0$,
+we have $f(x)+g(x) \approx 7$ with tolerance $t$ whenever $x$ is close enough to $a$.
 
 At first this seems wrong.
-For example, consider the precision $p=0.1$.
+For example, consider the tolerance $t=0.1$.
 If $1.9 < f(x) < 2.1$ and $4.9 < g(x) < 5.1$,
 we don't necessarily have $6.9 < f(x)+g(x) < 7.1$.
 If, for example, $f(x)=2.09$ and $g(x)=5.09$, the sum will be $7.18$.
@@ -42,16 +42,16 @@ $$
 $$
 \underbrace{1.9 + 4.9}_{=6.8} < f(x) + g(x) < \underbrace{2.1 + 5.1}_{=7.2}
 $$
-This means that $f(x)+g(x) \approx 7$ with precision $0.2$.
-In general, the precision gets multiplied two, making it less precise.
+This means that $f(x)+g(x) \approx 7$ with tolerance $0.2$.
+In general, the tolerance gets multiplied two, making it less precise.
 
-The trick is to make $f(x)$ and $g(x)$ close to their limits within **half** of the desired precision $p$,
-so that once added, we get the precision $p$.
-For example, $f(x) \approx 2$ with precision $0.05$ and $f(x) \approx 5$ with precision $0.05$
+The trick is to make $f(x)$ and $g(x)$ close to their limits within **half** of the desired tolerance $t$,
+so that once added, we get the tolerance $t$.
+For example, $f(x) \approx 2$ with tolerance $0.05$ and $f(x) \approx 5$ with tolerance $0.05$
 when $x$ is close enough to $a$.
-Now we can conclude that $f(x)+g(x) \approx 7$ with precision $0.1$.
+Now we can conclude that $f(x)+g(x) \approx 7$ with tolerance $0.1$.
 
-The same works for any precision instead of $0.1$.
+The same works for any tolerance instead of $0.1$.
 
 graybox:
     If $\lim_{x \to a} f(x) = 2$ and $\lim_{x \to a} g(x) = 5$, then

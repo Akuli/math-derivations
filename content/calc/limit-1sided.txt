@@ -34,8 +34,8 @@ graybox:
     The right limit is defined as follows: we write
     $$\lim_{x \to a^+} f(x) = L,
     $$
-    if for any precision $p > 0$,
-    we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$ and $x > a$.
+    if for any tolerance $t > 0$,
+    we have $f(x) \approx L$ with tolerance $t$ when $x$ is close enough to $a$ and $x > a$.
 
 We define the left limit similarly.
 
@@ -44,8 +44,8 @@ graybox:
     $$
     \lim_{x \to a^-} f(x) = L,
     $$
-    if for any precision $p > 0$,
-    we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$ and $x < a$.
+    if for any tolerance $t > 0$,
+    we have $f(x) \approx L$ with tolerance $t$ when $x$ is close enough to $a$ and $x < a$.
 
 A consequence of these definitions is that if the function $f$ is defined like
 $$
@@ -76,8 +76,8 @@ For example, replace "close enough to $a$" with "close enough to $a$ on the righ
 ## Connection to both-sided limit
 
 Suppose that $\lim_{x \to a} f(x) = L$.
-This means that for any precision $p > 0$,
-we have $f(x) \approx L$ with precision $p$
+This means that for any tolerance $t > 0$,
+we have $f(x) \approx L$ with tolerance $t$
 when $x$ is close enough to $a$.
 Because this works with any $x$ that is close to $a$,
 it obviously works with any $x$ that is close to $a$ on the right side.
@@ -127,7 +127,7 @@ In this case, the one-sided limits are not equal.
 Let's see what happens to the both-sided limit if the one-sided limits are equal.
 
 Suppose that $\lim_{x \to a^+} f(x) = L$ and $\lim_{x \to a^-} f(x) = L$.
-Then for any precision $p > 0$, we have $f(x) \approx L$ with precision $p$
+Then for any tolerance $t > 0$, we have $f(x) \approx L$ with tolerance $t$
 if $x$ is close enough to $a$ on the left side, or on the right side.
 The corresponding intervals look like this:
 
@@ -160,7 +160,7 @@ asymptote:
     dot((3,-0.15), p=dotpen, L="$a+s$", align=S);
 
 Using the interval $(a-s,a+s)$ for the concept of close enough,
-we see that $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$,
+we see that $f(x) \approx L$ with tolerance $t$ when $x$ is close enough to $a$,
 regardless of which side it's on.
 So if the left limit and right limit are both $L$,
 the usual both-sided limit is also $L$.

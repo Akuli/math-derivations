@@ -15,18 +15,18 @@ it only tells what setting that equal to something means,
 such as $\lim_{x \to 2} f(x) = 5$.
 
 Suppose $\lim_{x \to 2} f(x) = 5$ and $\lim_{x \to 2} f(x) = 8$ for the same function $f$.
-Then, for any precision $p_1 > 0$, we have $f(x) \approx 5$ with precision $p_1$
+Then, for any tolerance $t_1 > 0$, we have $f(x) \approx 5$ with tolerance $t_1$
 when $x$ is close enough to $a$.
-Also, for any precision $p_2 > 0$, we have $f(x) \approx 8$ with precision $p_2$
+Also, for any tolerance $t_2 > 0$, we have $f(x) \approx 8$ with tolerance $t_2$
 when $x$ is close enough to $a$.
 
-For example, if we choose the precisions $p_1=p_2=0.1$,
+For example, if we choose the tolerances $t_1=t_2=0.1$,
 we see that $4.9 < f(x) < 5.1$ and $7.9 < f(x) < 8.1$ whenever $x$ is close enough to $a$.
 This is not possible: no number can be less than $5.1$ and greater than $7.9$.
 This means that a limit cannot simultaneously be $5$ and $8$.
 
 The same applies for any two different numbers instead of $5$ and $8$
-as long as we pick a reasonable precision.
+as long as we pick a reasonable tolerance.
 
 graybox:
     A limit can't be equal to two different numbers.

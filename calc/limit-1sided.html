@@ -215,8 +215,8 @@ the interval being used is the right half of the original $(a-r, a+r)$.</p>
 <div class="box graybox"><p>The right limit is defined as follows: we write
 $$\lim_{x \to a^+} f(x) = L,
 $$
-if for any precision $p > 0$,
-we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$ and $x > a$.
+if for any tolerance $t > 0$,
+we have $f(x) \approx L$ with tolerance $t$ when $x$ is close enough to $a$ and $x > a$.
 </p>
 
 </div><p>We define the left limit similarly.</p>
@@ -225,8 +225,8 @@ we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$ and 
 $$
 \lim_{x \to a^-} f(x) = L,
 $$
-if for any precision $p > 0$,
-we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$ and $x < a$.
+if for any tolerance $t > 0$,
+we have $f(x) \approx L$ with tolerance $t$ when $x$ is close enough to $a$ and $x < a$.
 </p>
 
 </div><p>A consequence of these definitions is that if the function $f$ is defined like
@@ -256,8 +256,8 @@ For example, replace "close enough to $a$" with "close enough to $a$ on the righ
 </p>
 
 <h2 id="connection-to-both-sided-limit">Connection to both-sided limit<a class="headerlink" href="#connection-to-both-sided-limit" title="Link to this title">¶</a></h2><p>Suppose that $\lim_{x \to a} f(x) = L$.
-This means that for any precision $p > 0$,
-we have $f(x) \approx L$ with precision $p$
+This means that for any tolerance $t > 0$,
+we have $f(x) \approx L$ with tolerance $t$
 when $x$ is close enough to $a$.
 Because this works with any $x$ that is close to $a$,
 it obviously works with any $x$ that is close to $a$ on the right side.
@@ -297,14 +297,14 @@ In this case, the one-sided limits are not equal.
 Let's see what happens to the both-sided limit if the one-sided limits are equal.</p>
 
 <p>Suppose that $\lim_{x \to a^+} f(x) = L$ and $\lim_{x \to a^-} f(x) = L$.
-Then for any precision $p > 0$, we have $f(x) \approx L$ with precision $p$
+Then for any tolerance $t > 0$, we have $f(x) \approx L$ with tolerance $t$
 if $x$ is close enough to $a$ on the left side, or on the right side.
 The corresponding intervals look like this:</p>
 
 <p><img width="427" height="37" class="asymptote" src="../images/asy/0f94b6b3208d4b5077ab6235e23b451b.svg" /></p><p>Let $s$ be the smaller of $r_1$ and $r_2$ (doesn't matter which if $r_1 = r_2$).</p>
 
 <p><img width="427" height="75" class="asymptote" src="../images/asy/7ba8774c482fd0902bba8ce3bf562263.svg" /></p><p>Using the interval $(a-s,a+s)$ for the concept of close enough,
-we see that $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$,
+we see that $f(x) \approx L$ with tolerance $t$ when $x$ is close enough to $a$,
 regardless of which side it's on.
 So if the left limit and right limit are both $L$,
 the usual both-sided limit is also $L$.</p>

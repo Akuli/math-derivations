@@ -232,13 +232,13 @@ We also have $\frac{x^3}{x} < 0.1$ when $x$ is close enough to $0$.
 (We could calculate what exactly the interval centered around $0$ is,
 but it's not important.)</p>
 
-<p><img width="300" height="257" class="asymptote" src="../images/asy/bcd8099179ce8c0f13b0b27dd9c92558.svg" /></p><p></li><li>
+<p><img width="300" height="257" class="asymptote" src="../images/asy/62525593794cef52de96053f6a5bebc8.svg" /></p><p></li><li>
 We have $0 < x^2 < 0.1$ when $x$ is close enough to zero.
 The $0 < x^2$ part is false when $x=0$, because then it says $0 < 0$.
 However, this doesn't matter,
 because the center $0$ is ignored in the definition of "close enough to".</p>
 
-<p><img width="270" height="257" class="asymptote" src="../images/asy/fe36503177b6cb08957c5e66c8e55112.svg" /></p><p></li><li>
+<p><img width="270" height="257" class="asymptote" src="../images/asy/68612373037e0973ddd4850c0a254fe9.svg" /></p><p></li><li>
 We have $x^2 < 0.1$ when $x$ is close enough to zero.
 This also happens to work when $x=0$, but it doesn't matter,
 because $x=0$ is ignored anyway.</p>
@@ -256,12 +256,12 @@ because the values will be smaller than $(2.2)^2 = 4.84$.</p>
 <p><img width="293" height="371" class="asymptote" src="../images/asy/01a63cf91ccfded380ecf6aa00c2c476.svg" /></p><p></li></ul>
 </p>
 
-<h2 id="approx-with-precision">$\approx$ with precision<a class="headerlink" href="#approx-with-precision" title="Link to this title">¶</a></h2><p>Let $a$ and $b$ be any numbers, and let $p$ be a positive number.
-We say that $a \approx b$ <b>with precision</b> $p$, if $b-p < a < b+p$.
-For example, $x \approx 3$ with precision $0.1$ means that $2.9 < x < 3.1$.</p>
+<h2 id="approx-with-tolerance">$\approx$ with tolerance<a class="headerlink" href="#approx-with-tolerance" title="Link to this title">¶</a></h2><p>Let $a$ and $b$ be any numbers, and let $t$ be a positive number.
+We say that $a \approx b$ <b>with tolerance</b> $t$, if $b-t < a < b+t$.
+For example, $x \approx 3$ with tolerance $0.1$ means that $2.9 < x < 3.1$.</p>
 
 <p>This is similar to the "close enough to" concept, but not quite the same.
-Specifically, "$x$ is close enough to $a$" means that $x \approx a$ with some precision,
+Specifically, "$x$ is close enough to $a$" means that $x \approx a$ with some tolerance,
 but also requires $x \ne a$.
 </p>
 
@@ -299,34 +299,34 @@ by plugging in numbers like this:
 
 <p>The resulting values are approximately 3, but let's be more specific by specifying how close to 3 the values are.</p>
 
-<p>Limit means that we can choose any precision we want, no matter how small.
-For example, we have $\frac{x^3-1}{x-1} \approx 3$ with precision $0.01$
+<p>Limit means that we can choose any tolerance we want, no matter how small.
+For example, we have $\frac{x^3-1}{x-1} \approx 3$ with tolerance $0.01$
 (that is, $2.99 < \frac{x^3-1}{x-1} < 3.01$),
 if $x$ is close enough to 1.
-The point is that we can use any precision we want, such as $0.00000000001$.</p>
+The point is that we can use any tolerance we want, such as $0.00000000001$.</p>
 
 <div class="box graybox"><p>We say that the function $f$ has <b>limit</b> $L$ as $x$ approaches $a$ and we write
 $$
 \lim_{x \to a} f(x) = L,
 $$
-if for any precision $p > 0$,
-we have $f(x) \approx L$ with precision $p$ when $x$ is close enough to $a$.
+if for any tolerance $t > 0$,
+we have $f(x) \approx L$ with tolerance $t$ when $x$ is close enough to $a$.
 </p>
 
-</div><p>Because we defined precisely what "$\approx$ with precision" and "close enough to" mean,
+</div><p>Because we defined precisely what "$\approx$ with tolerance" and "close enough to" mean,
 there's nothing vague in this definition,
 so it's possible to write convincing proofs and derivations based on it.
 </p>
 
 <h2 id="simple-example-limit-of-x">Simple example: limit of $x$<a class="headerlink" href="#simple-example-limit-of-x" title="Link to this title">¶</a></h2><p>We prove that $\lim_{x \to 3} x = 3$.</p>
 
-<p>Let $p > 0$ be any precision.
-We want to show that $x \approx 3$ with precision $p$
+<p>Let $t > 0$ be any tolerance.
+We want to show that $x \approx 3$ with tolerance $t$
 when $x$ is close enough to $3$.</p>
 
-<p>This is quite easy. Consider the interval $(3-p, 3+p)$.
-If $x$ is close enough to $3$, it is in $(3-p, 3+p)$, and $x \ne 3$.
-This means that $3-p < x < 3+p$, so we have $x \approx 3$ with precision $p$.
+<p>This is quite easy. Consider the interval $(3-t, 3+t)$.
+If $x$ is close enough to $3$, it is in $(3-t, 3+t)$, and $x \ne 3$.
+This means that $3-t < x < 3+t$, so we have $x \approx 3$ with tolerance $t$.
 (We didn't need $x \ne 3$ for anything.)</p>
 
 <div class="box graybox"><p>We have $\lim_{x \to 3} x = 3$.
@@ -339,7 +339,7 @@ The same works with any other number.</p>
 </p>
 
 </div><h2 id="even-simpler-example-limit-of-a-constant">Even simpler example: limit of a constant<a class="headerlink" href="#even-simpler-example-limit-of-a-constant" title="Link to this title">¶</a></h2><p>We have $\lim_{x \to 3} 5 = 5$,
-because $5 \approx 5$ with any precision, regardless of what $x$ is.</p>
+because $5 \approx 5$ with any tolerance, regardless of what $x$ is.</p>
 
 <div class="box graybox"><p>We have $\lim_{x \to 3} 5 = 5$.</p>
 

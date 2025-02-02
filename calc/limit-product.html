@@ -317,8 +317,8 @@ $$
 \lim_{x \to a} \Bigl( f(x)g(x) \Bigr) = 15 + \lim_{x \to a} \bigl( E_f(x)E_g(x) \bigr)
 $$
 The limit of $E_f(x)$ is zero, so if $x$ is close enough to $a$,
-we have $E_f(x) \approx 0$ with precision $0.1$.
-(This works with any precision. Let's just pick $0.1$).
+we have $E_f(x) \approx 0$ with tolerance $0.1$.
+(This works with any tolerance. Let's just pick $0.1$).
 This means that
 $$
 -0.1 < E_f(x) < 0.1.
@@ -329,10 +329,10 @@ and $-2$ is much closer to zero than $40$.
 (Also, the sign flips if $E_f(x)$ is negative.)</p>
 
 <p>Let's now look at $E_f(x)E_g(x)$.
-The limit of $E_g(x)$ is zero, which means that for any precision $p > 0$,
+The limit of $E_g(x)$ is zero, which means that for any tolerance $t > 0$,
 we have $E_g(x) \approx 0$ when $x$ is close enough to $a$.
 However, multiplying by $E_f(x)$ brings the value even closer to zero,
-so we also have $E_f(x)E_g(x) \approx 0$ with precision $p$.
+so we also have $E_f(x)E_g(x) \approx 0$ with tolerance $t$.
 Therefore
 $$
 \lim_{x \to a} \bigl( E_f(x)E_g(x)\bigr) = 0.
@@ -411,8 +411,8 @@ $$
 $$
 We already know that the limit of $3.14E_g(x)$ will be zero (see above).
 The minus sign in front doesn't matter:
-if $3.14E_g(x) \approx 0$ with some precision,
-then also $-3.14E_g(x) \approx 0$ with the same precision,
+if $3.14E_g(x) \approx 0$ with some tolerance,
+then also $-3.14E_g(x) \approx 0$ with the same tolerance,
 because the minus sign flips to the opposite side of zero without affecting the distance.
 Therefore
 $$

@@ -16,10 +16,6 @@ We start with a simple case and then generalize the result.
 Suppose that $\lim_{x \to a} g(x) = 4$.
 We calculate the limit of $\frac{1}{g(x)}$.
 
-We show that
-$$
-\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{4}.
-$$
 This doesn't divide by zero if $x$ is close enough to $a$.
 To see why, let's take a small enough tolerance, e.g. $0.1$.
 If $x$ is close enough to $a$, we now get $g(x) \approx 4$ with tolerance $0.1$,
@@ -27,8 +23,8 @@ which means that $3.9 < g(x) < 4.1$, so $g(x)$ is surely positive.
 
 We suspect that the limit of $\frac{1}{g(x)}$ is probably $\frac{1}{4}$,
 because $g(x)$ is close to $4$.
-Let's compare these by subtracting the limit from the function.
-(We used the same trick to derive [the limit of product](limit-product.html).)
+Let's compare $\frac{1}{g(x)}$ and $\frac{1}{4}$ by subtracting them.
+(We used a similar trick to derive [the limit of product](limit-product.html).)
 $$
 \begin{align}
 \frac{1}{g(x)} - \frac{1}{4}
@@ -84,7 +80,7 @@ but IMO it's not worth the effort, because there is an easier way.
 Suppose that the limit of $g(x)$ is any nonzero number $B \ne 0$.
 The idea is to adjust the function $g(x)$ so that instead of $B$, we get $4$.
 
-Let's try dividing by the original function by its limit $B$.
+Let's try dividing the original function by its limit $B$.
 Using [limit of product](limit-product.html), we get
 $$
 \begin{align}
@@ -137,6 +133,7 @@ $$
 \lim_{x \to a} \frac{f(x)}{g(x)}
 &= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
 &= \left( \lim_{x \to a} f(x) \right) \left( \lim_{x \to a} \frac{1}{g(x)} \right) \\
+&= \left( \lim_{x \to a} f(x) \right) \frac{1}{\displaystyle\lim_{x \to a} g(x)} \\
 &= \frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}
 \end{align}
 $$

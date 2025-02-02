@@ -47,7 +47,7 @@ In general, the tolerance gets multiplied two, making it less precise.
 
 The trick is to make $f(x)$ and $g(x)$ close to their limits within **half** of the desired tolerance $t$,
 so that once added, we get the tolerance $t$.
-For example, $f(x) \approx 2$ with tolerance $0.05$ and $f(x) \approx 5$ with tolerance $0.05$
+For example, $f(x) \approx 2$ with tolerance $0.05$ and $g(x) \approx 5$ with tolerance $0.05$
 when $x$ is close enough to $a$.
 Now we can conclude that $f(x)+g(x) \approx 7$ with tolerance $0.1$.
 
@@ -87,4 +87,45 @@ you can simply take the limit of each thing separately.
 
 ## Example
 
-TODO
+We calculate
+$$
+\lim_{x \to 2} (4x + 8).
+$$
+In [the next derivation](limit-product.html),
+we will look into calculating the limit of a product like $4x$.
+But we don't know that yet, so let's rewrite it as a sum:
+$$
+4x = x+x+x+x
+$$
+Now we get
+$$
+\begin{align}
+\lim_{x \to 2} (4x + 8)
+&= \lim_{x \to 2} (x+x+x+x + 8) \\
+&= \left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} 8 \right).
+\end{align}
+$$
+From [these examples](limit-def.html#simple-example-limit-of-x),
+we get $\lim_{x \to 2} x = 2$ and $\lim_{x \to 2} 8 = 8$.
+Plugging these in gives
+$$
+\lim_{x \to 2} (4x + 8) = 2+2+2+2+8 = 16.
+$$
+We can [check this by plugging in a number near 2](limit-intro.html):
+$$
+4 \cdot 2.001 + 8 = 16.004
+$$
+**We calculated a limit without plugging in numbers and guessing.**
+This way to calculate limits may seem like more effort,
+but it's backed by solid mathematical theory,
+so you can be sure that you didn't
+[miss some surprising behavior when plugging in numbers](limit-intro.html#surprising-example).
+
+You might notice that simply setting $x=2$ also gives the correct result:
+$$
+4 \cdot 2 + 8 = 16
+$$
+This often works, but not always.
+There is a name for this behavior:
+we say that a function is **continuous** if its limits can be calculated this way.
+We will come back to continuity [later](cont-def.html).

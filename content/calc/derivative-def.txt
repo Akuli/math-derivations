@@ -181,7 +181,8 @@ $$
 \text{slope of tangent line} = \lim_{h \to 0} \frac{(1+h)^2 - 1^2}{h}
 $$
 Calculating this limit is straight-forward
-(expand the top, cancel a lot of things and then use [limit properties](limit-props.html)).
+(expand the top, cancel a lot of things,
+and then use [limit of sum](limit-sum.html) and [limit of product](limit-product.html)).
 
 
 ## The definition

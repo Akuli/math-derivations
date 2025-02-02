@@ -227,7 +227,7 @@ and in which direction.
 For example, if $f(x) = 2.99$, then $E_f(x) = -0.01$,
 which means that $f(x)$ is quite close to its limit, and less than its limit.</p>
 
-<p>Let's now take the limit of $E_f$ using <a href="limit-of-sum.html">the limit of sum</a>:
+<p>Let's now take the limit of $E_f$ using <a href="limit-sum.html">the limit of sum</a>:
 $$
 \begin{align}
 \lim_{x \to a} E_f(x)
@@ -286,7 +286,7 @@ $$
 \end{align}
 $$
 We ended up with 4 things added,
-so we can use <a href="limit-of-sum.html">the limit of sum</a> to split them into separate limits:
+so we can use <a href="limit-sum.html">the limit of sum</a> to split them into separate limits:
 $$
 \begin{align}
 \lim_{x \to a} \Bigl( f(x)g(x) \Bigr)
@@ -392,7 +392,10 @@ $$
 &= 0
 \end{align}
 $$
-We will also need the limit of $6.9E_f(x)$, and that's zero for the same reason.
+We will also need the limit of $6.9E_f(x)$, and that's zero for the same reason, so we get
+$$
+\lim_{x \to a} \Bigl( f(x)g(x) \Bigr) = 3.14 \cdot 6.9 = 21.666.
+$$
 This works with any positive numbers instead of $3.14$ and $6.9$.</p>
 
 <div class="box graybox"><p>If $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ are positive, then
@@ -433,7 +436,7 @@ $$
 $$
 \lim_{x \to 2} (2x^2+4x+7)
 $$
-Let's start with <a href="limit-sum.txt">limit of sum</a>:
+Let's start with <a href="limit-sum.html">limit of sum</a>:
 $$
 \lim_{x \to 3} (2x^2+4x+7) = \lim_{x \to 3} 2x^2 + \lim_{x \to 3} 4x + \lim_{x \to 3} 7
 $$
@@ -463,24 +466,10 @@ $$
 &= 37.
 \end{align}
 $$
-We can <a href="calc/limit-intro.html">check this by plugging in a number near 3</a>:
+We can <a href="limit-intro.html">check this by plugging in a number near 3</a>:
 $$
 2 \cdot (3.001)^2 + 4 \cdot 3.001 + 7 = 37.016002
 $$
-<b>We calculated a limit without plugging in numbers and guessing.</b>
-This way to calculate limits may seem like more effort,
-but it's backed by solid mathematical theory,
-so you can be sure that you didn't
-<a href="limit-intro.html#surprising-example">miss some surprising behavior when plugging in numbers</a>.</p>
-
-<p>You might notice that simply setting $x=3$ also gives the correct result:
-$$
-3 \cdot 3^2 + 4 \cdot 3 + 7 = 37
-$$
-This often works, but not always.
-There is a name for this behavior:
-we say that a function is <b>continuous</b> if its limits can be calculated this way.
-We will come back to continuity <a href="cont-def.html">later</a>.
 </p>
 
 </div>

@@ -248,7 +248,7 @@ In general, the tolerance gets multiplied two, making it less precise.</p>
 
 <p>The trick is to make $f(x)$ and $g(x)$ close to their limits within <b>half</b> of the desired tolerance $t$,
 so that once added, we get the tolerance $t$.
-For example, $f(x) \approx 2$ with tolerance $0.05$ and $f(x) \approx 5$ with tolerance $0.05$
+For example, $f(x) \approx 2$ with tolerance $0.05$ and $g(x) \approx 5$ with tolerance $0.05$
 when $x$ is close enough to $a$.
 Now we can conclude that $f(x)+g(x) \approx 7$ with tolerance $0.1$.</p>
 
@@ -283,7 +283,48 @@ So, if you have any number of things added inside a limit,
 you can simply take the limit of each thing separately.
 </p>
 
-<h2 id="example">Example<a class="headerlink" href="#example" title="Link to this title">¶</a></h2><p>TODO
+<h2 id="example">Example<a class="headerlink" href="#example" title="Link to this title">¶</a></h2><p>We calculate
+$$
+\lim_{x \to 2} (4x + 8).
+$$
+In <a href="limit-product.html">the next derivation</a>,
+we will look into calculating the limit of a product like $4x$.
+But we don't know that yet, so let's rewrite it as a sum:
+$$
+4x = x+x+x+x
+$$
+Now we get
+$$
+\begin{align}
+\lim_{x \to 2} (4x + 8)
+&= \lim_{x \to 2} (x+x+x+x + 8) \\
+&= \left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} 8 \right).
+\end{align}
+$$
+From <a href="limit-def.html#simple-example-limit-of-x">these examples</a>,
+we get $\lim_{x \to 2} x = 2$ and $\lim_{x \to 2} 8 = 8$.
+Plugging these in gives
+$$
+\lim_{x \to 2} (4x + 8) = 2+2+2+2+8 = 16.
+$$
+We can <a href="limit-intro.html">check this by plugging in a number near 2</a>:
+$$
+4 \cdot 2.001 + 8 = 16.004
+$$
+<b>We calculated a limit without plugging in numbers and guessing.</b>
+This way to calculate limits may seem like more effort,
+but it's backed by solid mathematical theory,
+so you can be sure that you didn't
+<a href="limit-intro.html#surprising-example">miss some surprising behavior when plugging in numbers</a>.</p>
+
+<p>You might notice that simply setting $x=2$ also gives the correct result:
+$$
+4 \cdot 2 + 8 = 16
+$$
+This often works, but not always.
+There is a name for this behavior:
+we say that a function is <b>continuous</b> if its limits can be calculated this way.
+We will come back to continuity <a href="cont-def.html">later</a>.
 </p>
 
 </div>

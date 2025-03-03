@@ -2,3 +2,6 @@ env/
 html/
 asycache/
 __pycache__/
+node_modules/
+katex_cache.txt
+bun.lock

@@ -271,6 +271,7 @@ def get_head_extras(filename):
     });
     </script>
 
+    <!--
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
     <script>
     MathJax = {
@@ -297,6 +298,7 @@ def get_head_extras(filename):
         }
     };
     </script>
+    -->
     '''
 
     htmlfile = builder.infile2outfile(filename)
@@ -341,9 +343,43 @@ builder.get_title = get_title
 
 # prevent htmlthingy from processing what's between $ or $$
 @builder.converter.add_inliner(r' \$[^ ][^$\n]*?[^ ]\$[\s,\.]')
-@builder.converter.add_inliner(r'\$\$\n[\S\s]*?\n\$\$')
 def math_handler(match, filename):
     return match.group(0)
+
+
+if not os.path.isdir("node_modules/katex"):
+    subprocess.check_call(["bun", "install"])
+
+try:
+    with open("katex_cache.txt", "r") as file:
+        katex_cache = {key: value for key, value in (line.split(" ", 1) for line in file.readlines())}
+except FileNotFoundError:
+    katex_cache = {}
+
+
+def katex(latex, mode):
+    command = ["bun", "x", "katex", "--format", "mathml", "--no-throw-on-error"]
+
+    assert mode == "display" or mode == "inline"
+    if mode == "display":
+        command.append("--display-mode")
+
+    cache_key = hashlib.md5((str(command) + latex).encode('utf-8')).hexdigest()
+    if cache_key in katex_cache:
+        return katex_cache[cache_key]
+
+    # This is slow. Cache avoids it when possible.
+    result = subprocess.check_output(command, input=latex, text=True).replace("\n", "")
+
+    katex_cache[cache_key] = result
+    with open("katex_cache.txt", "a") as f:
+        print(cache_key, result, file=f)
+    return result
+
+
+@builder.converter.add_inliner(r'\$\$\n([\S\s]*?)\n\$\$')
+def display_style_katex(match, filename):
+    return katex(match.group(1), "display")
 
 
 @builder.converter.add_multiliner(r'^insert-function-warning-here\n')

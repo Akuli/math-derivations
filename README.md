@@ -5,9 +5,17 @@ to read the content of this site.
 The site contains derivations and proofs for math things
 that are used in high school math.
 
+
 ## Commands for writing stuff to this site
 
-Environment setup (I have no idea what you should do if you don't have `apt`):
+[Install bun by following their official instructions.](https://bun.sh/)
+We need bun (or other JS runtime) for [KaTeX](https://katex.org/),
+which converts math formulas from a somewhat human-readable LaTeX syntax to MathML.
+The MathML is then embedded to the HTML pages.
+(It would also be possible to tell the browser to build MathML,
+but I want the site to load as fast as possible, and using KaTeX that way seemed too complicated.)
+
+Run these commands once you have installed Bun (I have no idea what you should do if you don't have `apt`):
 
 ```
 $ sudo apt install asymptote

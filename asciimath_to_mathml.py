@@ -7,12 +7,17 @@ from collections.abc import Iterator
 from typing import Self
 
 
+# It is hard to find good info about MathML. Good sources I've found so far:
+#   - MDN
+#   - https://www.math-it.org/Publikationen/MathML.html
+
+
 class MathSyntaxError(Exception):
     pass
 
 
 def tokenize(asciimath: str) -> Iterator[str]:
-    token_regex = r'[0-9]+\.[0-9]+|[0-9]+|sqrt|\w|\+-|>=|<=|[+\-*/()<>=^. \n]|\".*?\"'
+    token_regex = r'[0-9]+\.[0-9]+|[0-9]+|sqrt|lim|\w|\+-|>=|<=|->|[+\-*/()<>=^.,; \n]|\".*?\"'
     prev_end = 0
 
     for m in re.finditer(token_regex, asciimath):
@@ -63,7 +68,7 @@ class Variable:
     def is_tall(self) -> bool:
         return False
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         yield "<mi>"
         yield html.escape(self.name)
         yield "</mi>"
@@ -79,7 +84,7 @@ class Number:
     def is_tall(self) -> bool:
         return False
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         yield "<mn>"
         yield html.escape(self.value)
         yield "</mn>"
@@ -96,9 +101,9 @@ class Text:
     def is_tall(self) -> bool:
         return False
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         yield "<mtext>"
-        yield html.escape(self.value)
+        yield html.escape(self.value).replace(" ", "&nbsp;")
         yield "</mtext>"
 
     def unwrap_parens(self) -> Self:
@@ -112,10 +117,11 @@ class SimpleOperator:
     def is_tall(self) -> bool:
         return False
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         mapping = {
             "+-": "&plusmn;",
             "-": "&minus;",
+            "->": "&rarr;",
         }
         yield "<mo>"
         yield mapping.get(self.text) or html.escape(self.text)
@@ -133,14 +139,14 @@ class Parentheses:
     def is_tall(self) -> bool:
         return self.between_parens.is_tall()
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         if self.is_tall():
             mo_params = ""
         else:
             mo_params = "stretchy=false"
 
         yield f"<mo {mo_params}>(</mo>"
-        yield from self.between_parens.mathml()
+        yield from self.between_parens.mathml(small)
         yield f"<mo {mo_params}>)</mo>"
 
     def unwrap_parens(self) -> Row:
@@ -156,10 +162,10 @@ class Division:
     def is_tall(self) -> bool:
         return True
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         yield "<mfrac>"
-        yield from self.top.unwrap_parens().mathml()
-        yield from self.bottom.unwrap_parens().mathml()
+        yield from self.top.unwrap_parens().mathml(small)
+        yield from self.bottom.unwrap_parens().mathml(small)
         yield "</mfrac>"
 
     def unwrap_parens(self) -> Self:
@@ -176,14 +182,13 @@ class Power:
         # TODO: not always true, consider x^(x^(x^(x^x)))
         return False
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         yield "<msup>"
-        yield from self.base.unwrap_parens().mathml()
-        yield from self.exponent.unwrap_parens().mathml()
+        yield from self.base.unwrap_parens().mathml(small)
+        yield from self.exponent.unwrap_parens().mathml(small=True)
         yield "</msup>"
 
     def unwrap_parens(self) -> Self:
-        
         return self
 
 
@@ -197,11 +202,37 @@ class Root:
         # TODO: does this produce good looking results?
         return True
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         assert self.which_root is None  # TODO
         yield "<msqrt>"
-        yield from self.under_root.unwrap_parens().mathml()
+        yield from self.under_root.unwrap_parens().mathml(small)
         yield "</msqrt>"
+
+    def unwrap_parens(self) -> Self:
+        return self
+
+
+# lim_subscript
+@dataclass
+class Limit:
+    subscript: Element
+
+    def is_tall(self) -> bool:
+        return True
+
+    def mathml(self, small: bool) -> Iterator[str]:
+        if small:
+            yield "<msub>"
+        else:
+            yield "<munder>"
+
+        yield "<mo>lim</mo>"
+        yield from self.subscript.unwrap_parens().mathml(small=True)
+
+        if small:
+            yield "</msub>"
+        else:
+            yield "</munder>"
 
     def unwrap_parens(self) -> Self:
         return self
@@ -215,10 +246,10 @@ class Row:
     def is_tall(self) -> bool:
         return any(elem.is_tall() for elem in self.elements)
 
-    def mathml(self) -> Iterator[str]:
+    def mathml(self, small: bool) -> Iterator[str]:
         yield "<mrow>"
         for el in self.elements:
-            yield from el.mathml()
+            yield from el.mathml(small)
         yield "</mrow>"
 
 
@@ -256,7 +287,7 @@ def parse_element(tokens: Iterator[str]) -> Element:
     if re.fullmatch(r"[^\W\d]", token):
         # Wordy but no digits, e.g. "x"
         return Variable(name=token)
-    if token in {"=", "-", "+-", "."}:
+    if token in {"=", "-", "+-", ".", ",", "->", "+"}:
         return SimpleOperator(text=token)
 
     # Parenthesized parts must be elementary so that you can do x^(1 + 2)
@@ -282,6 +313,10 @@ def parse_row(tokens: Iterator[str]) -> Row:
                 result.append(Root(which_root=None, under_root=parse_element(tokens)))
             case 'root':
                 result.append(Root(which_root=parse_element(tokens), under_root=parse_element(tokens)))
+            case 'lim':
+                if next(tokens, None) != "_":
+                    raise MathSyntaxError("missing lower limit for lim_(...)")
+                result.append(Limit(parse_element(tokens)))
             case '/':
                 if not result:
                     raise MathSyntaxError("division with no left side")
@@ -302,9 +337,13 @@ def asciimath_to_mathml(asciimath: str, inline: bool) -> str:
     raw_tokens = tokenize(asciimath)
     checked_tokens = validate_parens(raw_tokens)
     parsed = parse_row(checked_tokens)
-    return "<math>" + "".join(parsed.mathml()) + "</math>"
+
+    if inline:
+        return "<math display=inline>" + "".join(parsed.mathml(small=True)) + "</math>"
+    else:
+        return "<math display=block>" + "".join(parsed.mathml(small=False)) + "</math>"
 
 
 if __name__ == "__main__":
     parsed = parse_row(validate_parens(tokenize("x = (-b+-sqrt(b^2-4ac))/(2a)")))
-    print("".join(parsed.mathml()))
+    print("".join(parsed.mathml(small=False)))

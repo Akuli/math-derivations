@@ -440,10 +440,19 @@ def old_math_handler(match, filename):
 
 
 @builder.converter.add_multiliner(r'^math:\n')
-def asciimath_handler(match, filename):
+def big_math(match, filename):
     the_math = match.string[match.end():]
     try:
         return "<div class='math-centering-wrapper'>" + asciimath_to_mathml(the_math, inline=False) + "</div>"
+    except MathSyntaxError as e:
+        sys.exit(f"math syntax error in {filename}: {e}")
+
+
+@builder.converter.add_inliner(r'`.+?`')
+def inline_math(match, filename):
+    the_math = match.group(0).strip('`')
+    try:
+        return asciimath_to_mathml(the_math, inline=True)
     except MathSyntaxError as e:
         sys.exit(f"math syntax error in {filename}: {e}")
 

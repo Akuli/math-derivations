@@ -11,90 +11,98 @@ You might know that
 math:
     "speed" = "distance" / "time".
 
-For example, if we move $3$ metres during $2$ seconds,
-then the speed would be $\frac 3 2 = 1.5$ metres per second.
-This is actually not quite right; the **average** speed is distance divided by time, $1.5$ metres per second,
+For example, if we move `3` metres during `2` seconds,
+then the speed would be `3/2 = 1.5` metres per second.
+This is actually not quite right; the **average** speed is distance divided by time, `1.5` metres per second,
 but your actual speed might vary during those 2 seconds.
 
 To approximate the actual speed, we can do the same thing with a small time interval.
-For example, if we move $0.2$ metres during $0.1$ seconds,
-then the average speed during the $0.1$ seconds is
-$$
-\frac{0.2\text{ metres}}{0.1\text{ seconds}} = 2\text{ metres per second},
-$$
+For example, if we move `0.2` metres during `0.1` seconds,
+then the average speed during the `0.1` seconds is
+
+math:
+    (0.2" metres")/(0.1" seconds") = 2" metres per second",
+
 which measures your speed quite accurately.
 To get the exact speed, we can do
-$$
-\text{speed} = \lim_{\text{time} \to 0} \frac{\text{distance}}{\text{time}}.
-$$
+
+math:
+    "speed" = lim_("time" -> 0) "distance"/"time".
+
 By definition of limit,
 we can approximate the limit to any precision we want by measuring with a small enough time interval,
 so it must be your speed.
 
-Let $t$ denote time as seconds, and let $w(t)$ denote the distance that you have walked at time $t$.
-Let $h$ be the length of the time interval (above we had examples with $h=2$ and $h=0.1$).
-Consider the two moments at time $t$, and a little bit after it, at time $t+h$.
-The corresponding walked distances are $w(t)$ and $w(t+h)$, so
+Let `t` denote time as seconds, and let `w(t)` denote the distance that you have walked at time `t`.
+Let `h` be the length of the time interval (above we had examples with `h=2` and `h=0.1`).
+Consider the two moments at time `t`, and a little bit after it, at time `t+h`.
+The corresponding walked distances are `w(t)` and `w(t+h)`, so
 the distance walked during the time interval is
-$$
-\text{distance} = w(t+h) - w(t).
-$$
+
+math:
+    "distance" = w(t+h) - w(t).
+
 Plugging everything in, we get
-$$
-\text{speed}
-= \lim_{\text{time} \to 0} \frac{\text{distance}}{\text{time}}
-= \lim_{h \to 0} \frac{w(t+h)-w(t)}{h}.
-$$
-Here $h \to 0$ means that $h$ can be negative;
-that means measuring the distance between a moment just a little bit before $t$ and the moment $t$.
+
+math:
+    "speed" = lim_("time" -> 0) "distance"/"time" = lim_(h -> 0) (w(t+h)-w(t))/h.
+
+Here `h -> 0` means that `h` can be negative;
+that means measuring the distance between a moment just a little bit before `t` and the moment `t`.
 
 
 ## Download speed
 
 Let's say that we are downloading a big file.
 You might know that
-$$
-\text{downloading speed} = \frac{\text{amount of downloaded data}}{\text{time spent downloading}}.
-$$
-For example, if $3\text{MB}$ gets downloaded in $2$ seconds,
-then the download speed would be $\frac 3 2 = 1.5$ megabytes per second.
-This is not quite right; the **average** speed is amount of data divided by time, $1.5$ megabytes per second,
+
+math:
+    "downloading speed" = "amount of downloaded data" / "time spent downloading".
+
+For example, if `3"MB"` gets downloaded in `2` seconds,
+then the download speed would be `3/2 = 1.5` megabytes per second.
+This is not quite right; the **average** speed is amount of data divided by time, `1.5` megabytes per second,
 but the actual downloading speed might vary during those 2 seconds.
 
 To approximate the actual downloading speed, we can do the same thing with a small time interval.
-For example, if we download $0.2\text{MB}$ during $0.1$ seconds,
-then the average downloading speed during the $0.1$ seconds is
-$$
-\frac{0.2\text{MB}}{0.1\text{ seconds}} = 2\text{MB per second},
-$$
+For example, if we download `0.2"MB"` during `0.1` seconds,
+then the average downloading speed during the `0.1` seconds is
+
+math:
+    (0.2"MB")/(0.1" seconds") = 2"MB per second",
+
 which measures the downloading speed quite accurately.
 To get the exact speed, we can do
-$$
-\text{downloading speed} = \lim_{\text{time} \to 0} \frac{\text{amount of downloaded data}}{\text{time}}.
-$$
+
+math:
+    "downloading speed" = lim_("time" -> 0) "amount of downloaded data" / "time".
+
 By definition of limit,
 we can approximate the limit to any precision we want by measuring with a small enough time interval,
 so it must be the downloading speed.
 
-Let $t$ denote time as seconds, and let $D(t)$ denote the amount of data downloaded at time $t$.
-Let $h$ be the length of the time interval (above we had examples with $h=2$ and $h=0.1$).
-Consider the two moments at time $t$, and a little bit after it, at time $t+h$.
-The corresponding amounts of downloaded data are $D(t)$ and $D(t+h)$, so
+Let `t` denote time as seconds, and let `D(t)` denote the amount of data downloaded at time `t`.
+Let `h` be the length of the time interval (above we had examples with `h=2` and `h=0.1`).
+Consider the two moments at time `t`, and a little bit after it, at time `t+h`.
+The corresponding amounts of downloaded data are `D(t)` and `D(t+h)`, so
 the data downloaded during the time interval is
-$$
-\text{amount of downloaded data} = D(t+h) - D(t).
-$$
+
+math:
+    "amount of downloaded data" = D(t+h) - D(t).
+
 Plugging everything in, we get
-$$
-\begin{align}
-\text{downloading speed}
-&= \lim_{\text{time} \to 0} \frac{\text{amount of downloaded data}}{\text{time}} \\
-&= \lim_{h \to 0} \frac{D(t+h) - D(t)}{h}.
-\end{align}
-$$
-Here $h \to 0$ means that $h$ can be negative;
+
+comment:
+    TODO: align this properly
+
+math:
+    "downloading speed"
+    = lim_(time -> 0) "amount of downloaded data" / "time"
+    = lim_(h -> 0) (D(t+h) - D(t))/h.
+
+Here `h -> 0` means that `h` can be negative;
 that means calculating the amount of data downloaded
-between a moment just a little bit before $t$ and the moment $t$.
+between a moment just a little bit before `t` and the moment `t`.
 
 
 ## Slope of tangent line

@@ -7,9 +7,10 @@ To motivate the definition of derivative, we show several different examples.
 
 Let's say that you're walking along a line.
 You might know that
-$$
-\text{speed} = \frac{\text{distance}}{\text{time}}.
-$$
+
+math:
+    "speed" = "distance" / "time".
+
 For example, if we move $3$ metres during $2$ seconds,
 then the speed would be $\frac 3 2 = 1.5$ metres per second.
 This is actually not quite right; the **average** speed is distance divided by time, $1.5$ metres per second,

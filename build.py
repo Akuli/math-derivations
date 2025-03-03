@@ -15,6 +15,7 @@ import xml.etree.ElementTree
 from htmlthingy import Builder, tags
 
 from linkcheck import check_links
+from asciimath_to_mathml import asciimath_to_mathml, MathSyntaxError
 
 
 def init_asycache():
@@ -242,6 +243,95 @@ def get_sidebar_content(txtfile):
     ])
 
 
+USES_OLD_MATH = [
+    "content/analytic-plane-geometry/angle-between-lines.txt",
+    "content/analytic-plane-geometry/distance-line-point.txt",
+    "content/analytic-plane-geometry/line-eq-determinant.txt",
+    "content/analytic-plane-geometry/line-eq-normal.txt",
+    "content/analytic-plane-geometry/line-eq-slope-and-point.txt",
+    "content/analytic-plane-geometry/line-eq-slope.txt",
+    "content/analytic-plane-geometry/parabola.txt",
+    "content/analytic-plane-geometry/reflect.txt",
+    "content/analytic-plane-geometry/shift.txt",
+    "content/analytic-plane-geometry/slope-tan.txt",
+    "content/analytic-plane-geometry/stretch.txt",
+    "content/analytic-plane-geometry/why-its-hyperbola.txt",
+    "content/calc/cont-def.txt",
+    "content/calc/cont-props.txt",
+    "content/calc/derivative-basic-rules.txt",
+    "content/calc/derivative-chain-rule.txt",
+#    "content/calc/derivative-def.txt",
+    "content/calc/derivative-notation.txt",
+    "content/calc/derivative-power-rule-1.txt",
+    "content/calc/derivative-power-rule-2.txt",
+    "content/calc/derivative-product-quotient-rules.txt",
+    "content/calc/derivative-trig.txt",
+    "content/calc/derivative-vector.txt",
+    "content/calc/integral-average.txt",
+    "content/calc/integral-def.txt",
+    "content/calc/integral-ftoc1.txt",
+    "content/calc/integral-ftoc2.txt",
+    "content/calc/integral-intro.txt",
+    "content/calc/integral-notation.txt",
+    "content/calc/integral-refinement.txt",
+    "content/calc/integral-rules.txt",
+    "content/calc/integral-sor-area.txt",
+    "content/calc/integral-sor-volume.txt",
+    "content/calc/integral-usub.txt",
+    "content/calc/limit-1sided.txt",
+    "content/calc/limit-def.txt",
+    "content/calc/limit-diff.txt",
+    "content/calc/limit-div.txt",
+    "content/calc/limit-ineq.txt",
+    "content/calc/limit-intro.txt",
+    "content/calc/limit-product.txt",
+    "content/calc/limit-sum.txt",
+    "content/calc/limit-unique.txt",
+    "content/calc/limit-vector.txt",
+    "content/complex/angle-and-len.txt",
+    "content/complex/derivative.txt",
+    "content/complex/div.txt",
+    "content/complex/exp.txt",
+    "content/complex/intro.txt",
+    "content/complex/mul.txt",
+    "content/complex/sqrt.txt",
+    "content/discrete/binom.txt",
+    "content/discrete/sums.txt",
+    "content/eqs-and-funcs/how-equations-work.txt",
+    "content/eqs-and-funcs/how-inequations-work.txt",
+    "content/eqs-and-funcs/incdec-funcs.txt",
+    "content/eqs-and-funcs/inverse-funcs.txt",
+    "content/index.txt",
+    "content/linalg/det-def.txt",
+    "content/linalg/det-matmul.txt",
+    "content/linalg/det-row-ops.txt",
+    "content/linalg/det-sub.txt",
+    "content/linalg/det-swaps.txt",
+    "content/linalg/det-transpose.txt",
+    "content/linalg/inverse-2x2.txt",
+    "content/linalg/inverse-finding.txt",
+    "content/linalg/matrix-inverse.txt",
+    "content/linalg/matrix-matrix.txt",
+    "content/linalg/matrix-num.txt",
+    "content/linalg/matrix-sum.txt",
+    "content/linalg/matrix-vector.txt",
+    "content/linalg/rotating-intro.txt",
+    "content/linalg/span-and-dep-defs.txt",
+    "content/linalg/span-and-dep-finding.txt",
+    "content/linalg/subspace-basis.txt",
+    "content/linalg/subspace-def.txt",
+    "content/linalg/transpose.txt",
+    "content/plane-geometry/inscribed-angle-theorem.txt",
+    "content/plane-geometry/inscribed-circle.txt",
+    "content/plane-geometry/law-of-cosines.txt",
+    "content/plane-geometry/law-of-sines.txt",
+    "content/vectors/angle-between-vectors.txt",
+    "content/vectors/cross-def.txt",
+    "content/vectors/dot-projection.txt",
+    "content/vectors/iwi-jwj.txt",
+]
+
+
 def get_head_extras(filename):
     result = r'''
     <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
@@ -270,7 +360,10 @@ def get_head_extras(filename):
         }
     });
     </script>
+    '''
 
+    if filename in USES_OLD_MATH:
+        result += r'''
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
     <script>
     MathJax = {
@@ -342,8 +435,17 @@ builder.get_title = get_title
 # prevent htmlthingy from processing what's between $ or $$
 @builder.converter.add_inliner(r' \$[^ ][^$\n]*?[^ ]\$[\s,\.]')
 @builder.converter.add_inliner(r'\$\$\n[\S\s]*?\n\$\$')
-def math_handler(match, filename):
+def old_math_handler(match, filename):
     return match.group(0)
+
+
+@builder.converter.add_multiliner(r'^math:\n')
+def asciimath_handler(match, filename):
+    the_math = match.string[match.end():]
+    try:
+        return "<div class='math-centering-wrapper'>" + asciimath_to_mathml(the_math, inline=False) + "</div>"
+    except MathSyntaxError as e:
+        sys.exit(f"math syntax error in {filename}: {e}")
 
 
 @builder.converter.add_multiliner(r'^insert-function-warning-here\n')

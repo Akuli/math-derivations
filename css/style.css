@@ -43,9 +43,18 @@ a:hover {
     }
 }
 
-/* without this, sidebar stuff gets unclickable when there's math right next to it */
+/* without this, sidebar stuff gets unclickable when there's math right next to it
+TODO: remove when new math transition is complete
+*/
 mjx-container {
     position: inherit !important;
+}
+
+/* Used to center the math to middle of available space */
+div.math-centering-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1, h2, h3, h4, h5, h6 {

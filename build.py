@@ -347,8 +347,14 @@ def math_handler(match, filename):
     return match.group(0)
 
 
+# I don't have bun in PATH because my editor doesn't load ~/.bashrc when running programs.
+bun = shutil.which("bun") or shutil.which(os.path.expanduser("~/.bun/bin/bun"))
+if not bun:
+    sys.exit("Error: bun is not installed (see README)")
+
+
 if not os.path.isdir("node_modules/katex"):
-    subprocess.check_call(["bun", "install"])
+    subprocess.check_call([bun, "install"])
 
 try:
     with open("katex_cache.txt", "r") as file:
@@ -358,7 +364,7 @@ except FileNotFoundError:
 
 
 def katex(latex, mode):
-    command = ["bun", "x", "katex", "--format", "mathml", "--no-throw-on-error"]
+    command = [bun, "x", "katex", "--format", "mathml", "--no-throw-on-error"]
 
     assert mode == "display" or mode == "inline"
     if mode == "display":

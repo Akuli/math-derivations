@@ -388,6 +388,11 @@ def display_style_katex(match, filename):
     return katex(match.group(1), "display")
 
 
+@builder.converter.add_inliner(r'\$(.*?)\$')
+def inline_katex(match, filename):
+    return katex(match.group(1), "inline")
+
+
 @builder.converter.add_multiliner(r'^insert-function-warning-here\n')
 def function_warning(match, filename):
     return '''

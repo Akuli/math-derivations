@@ -1,2 +1,2 @@
-git+https://github.com/Akuli/htmlthingy@9f554e9d8e9bc11acb4aeb43e14b76ee1b164c59
+git+https://github.com/Akuli/htmlthingy@c02c016b09ff06980fd9e40b4f40e41b52884f29
 beautifulsoup4==4.9.1

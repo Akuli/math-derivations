@@ -394,7 +394,12 @@ def katex(latex, mode):
         return katex_cache[cache_key]
 
     # This is slow. Cache avoids it when possible.
-    result = subprocess.check_output(command, input=latex, text=True).replace("\n", "")
+    result = subprocess.check_output(command, input=latex, text=True)
+
+    # Make it one-line so it can be saved to cache.
+    # Can't simply delete newlines, must replace with space, because deleting
+    # them breaks SVGs that katex places in the HTML.
+    result = result.strip().replace("\n", " ")
 
     katex_cache[cache_key] = result
     with open("katex_cache.txt", "a") as f:

@@ -28,7 +28,11 @@ $ . env/bin/activate
 
 Then open `html/index.html` in web browser. You don't need to run a server.
 
-If you want `build.py` to send F5 to the browser window where math-derivations is open:
+When you run `build.py` for the first time,
+it uses KaTeX to render each math in the whole site to HTML.
+This is very slow, but the results are cached, so running the build again is much faster.
+
+You can tell `build.py` to send F5 to the browser window where math-derivations is open:
 
 ```
 (env) $ sudo apt install xdotool

@@ -35,7 +35,7 @@ In general, redefining the concept of "an output" solves this problem.
 A more fatal problem is functions that produce the same output for two different inputs,
 $f(a)=f(b)$ even though $a\ne b$.
 For example, let $f(x) = x^2$.
-Now we have $f(2) = 4 = f(-2)$, so what should $(\text{inverse function of $f$})(4)$ do?
+Now we have $f(2) = 4 = f(-2)$, so what should $(\text{inverse function of }f)(4)$ do?
 Should that evaluate to $2$ or $-2$?
 We don't want to just pick one choice randomly, so instead we say that it's undefined.
 

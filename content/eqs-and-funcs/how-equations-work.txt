@@ -18,14 +18,14 @@ for example, if $A$ is false, then $B$ can't be true because that would imply th
 At a higher level, $A$ and $B$ have the same "truth value", either both true or both false.
 This means that we can solve an equation like this:
 $$
-\begin{align}
+\begin{align*}
 \text{equation we want to solve}
 &\iff \text{something} \\
 &\iff \text{something} \\
 &\qquad \vdots \\
 &\iff \text{something} \\
 &\iff x = 5 \text{ or } x = 7
-\end{align}
+\end{align*}
 $$
 This guarantees that $x=5$ and $x=7$ are the solutions of the equation, and there are no other solutions;
 the original equation is true if $x$ is $5$ or $7$, and otherwise it's false.

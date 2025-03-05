@@ -57,7 +57,7 @@ builder.infiles = sorted(
 builder.infile2outfile = lambda infile: os.path.join(
     builder.outputdir,
     os.path.splitext(infile.replace('content' + os.sep, '', 1))[0] + '.html')
-builder.additional_files = ["css", "js", "images"]
+builder.additional_files = ["css", "js", "images", "katex-dist"]
 
 
 def get_sidebar_content(txtfile):
@@ -309,6 +309,9 @@ def get_head_extras(filename):
     for css_slash_something in sorted(glob.glob('css/*.css')):
         result += f'<link rel="stylesheet" href="{relative_path_prefix}/{css_slash_something}">\n'
 
+    # Some things like \vec{x} display incorrectly without KaTeX CSS files
+    result += f'<link rel="stylesheet" href="{relative_path_prefix}/katex-dist/katex.min.css">\n'
+
     if filename == 'content/vectors/dot-projection.txt':
         result += f'''
         <script src="{relative_path_prefix}/js/vendor/three.js"></script>
@@ -341,30 +344,46 @@ def get_title(path):
 builder.get_title = get_title
 
 
-# prevent htmlthingy from processing what's between $ or $$
-@builder.converter.add_inliner(r' \$[^ ][^$\n]*?[^ ]\$[\s,\.]')
-def math_handler(match, filename):
-    return match.group(0)
-
-
 # I don't have bun in PATH because my editor doesn't load ~/.bashrc when running programs.
 bun = shutil.which("bun") or shutil.which(os.path.expanduser("~/.bun/bin/bun"))
 if not bun:
     sys.exit("Error: bun is not installed (see README)")
 
-
+# Install katex. Could install based on package.json but this is simpler.
+# Version must be hard-coded so that this doesn't break by itself.
 if not os.path.isdir("node_modules/katex"):
-    subprocess.check_call([bun, "install"])
+    subprocess.check_call([bun, "install", "katex@0.16.21"])
+
+# Decide which resource files to include from katex, copy to temporary katex-dist directory.
+try:
+    shutil.rmtree("katex-dist")
+except FileNotFoundError:
+    pass
+os.mkdir("katex-dist")
+shutil.copy("node_modules/katex/dist/katex.min.css", "katex-dist/")
+shutil.copytree("node_modules/katex/dist/fonts", "katex-dist/fonts")
 
 try:
     with open("katex_cache.txt", "r") as file:
-        katex_cache = {key: value for key, value in (line.split(" ", 1) for line in file.readlines())}
+        katex_cache = {key: value.strip() for key, value in (line.split(" ", 1) for line in file.readlines())}
 except FileNotFoundError:
     katex_cache = {}
 
+katex_macros = {
+    r"\I": r"\vec{i}",
+    r"\J": r"\vec{j}",
+}
+
 
 def katex(latex, mode):
-    command = [bun, "x", "katex", "--format", "mathml", "--no-throw-on-error"]
+    command = [bun, "x", "katex", "--no-throw-on-error"]
+
+    # Tell katex only about the macros that are used.
+    # This way introducing a new macro doesn't cause all katexes to be recompiled.
+    for original, replacement in katex_macros.items():
+        if original in latex:
+            command.append("--macro")
+            command.append(original + ":" + replacement)
 
     assert mode == "display" or mode == "inline"
     if mode == "display":
@@ -388,7 +407,7 @@ def display_style_katex(match, filename):
     return katex(match.group(1), "display")
 
 
-@builder.converter.add_inliner(r'\$(.*?)\$')
+@builder.converter.add_inliner(r'\$(.+?)\$')
 def inline_katex(match, filename):
     return katex(match.group(1), "inline")
 

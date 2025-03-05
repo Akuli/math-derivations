@@ -48,17 +48,18 @@ mjx-container {
     position: inherit !important;
 }
 
-/* Add vertical space around display-style (non-inline) maths */
-math[display="block"] {
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
 /*
-A hack to ensure that a wide math doesn't go next to the sidebar if it doesn't fit.
-Instead, I want it to move down below the sidebar where there's room for it.
+This does one of two good things for display-style maths near the beginning of
+a page.
+
+If the math is so wide that it doesn't go next to the sidebar, it is moved down
+below the sidebar so that there is blank space next to the sidebar.
+
+If the math is narrow enough to fit next to the sidebar, the sidebar is
+clickable even in the places that are next to the math. By default, the math
+somehow intercepts clicks for anything aligned with it.
 */
-span.katex:has(math[display="block"]) {
+span.katex-display {
     display: table;  /* I tried all values and this is the only one that does what I want. */
     margin-left: auto;
     margin-right: auto;

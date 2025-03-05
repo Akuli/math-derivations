@@ -479,7 +479,7 @@ def asymptote(match, filename):
 
 @builder.converter.add_multiliner(r'^python:\n')
 def python(match, filename):
-    namespace = {}
+    namespace = {"katex": katex}
     exec("def get_the_string():\n" + match.string[match.end():], namespace)
     return eval("get_the_string()", namespace)
 

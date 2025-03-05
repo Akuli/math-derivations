@@ -206,16 +206,15 @@ Let's draw the triangle a bit more:
 python:
     from itertools import pairwise
 
-    yield "$$"
-    yield "\\begin{matrix}"
+    latex = "\\begin{matrix}"
 
     max_n = 7
     row = [1]
     for n in range(0, max_n + 1):
-        yield "&" * (max_n - n) + "&&".join(map(str, row)) + "&" * (max_n - n) + " \\\\"
+        latex += "&" * (max_n - n) + "&&".join(map(str, row)) + "&" * (max_n - n) + " \\\\"
         row = [1] + [a+b for a, b in pairwise(row)] + [1]
-    yield "\\end{matrix}"
-    yield "$$"
+    latex += "\\end{matrix}"
+    yield from katex(latex, "display")
 
 35 in the bottom row also looks familiar. It is $\binom{7}{3}$.
 In general, it looks like each row in Pascal's triangle contains the binomial coefficients $\binom{n}{k}$ with fixed $n$ and varying $k$, like this:
@@ -284,30 +283,30 @@ graybox:
         If fits, show the two triangles side by side with gap in between. If not, stack them vertically.
 
     <div style="text-align: center; letter-spacing: 2em">
-        <div style="display: inline-block">
-            $$
-            \begin{matrix}
-            &&&&1&&&&\\
-            &&&1&&1&&&\\
-            &&1&&2&&1&&\\
-            &1&&3&&3&&1&\\
-            1&&4&&6&&4&&1\\
-            &&&&\vdots&&&&
-            \end{matrix}
-            $$
-        </div>
-        <div style="display: inline-block">
-            $$
-            \begin{matrix}
-            &&&&\binom{0}{0}&&&&\\
-            &&&\binom{1}{0}&&\binom{1}{1}&&&\\
-            &&\binom{2}{0}&&\binom{2}{1}&&\binom{2}{2}&&\\
-            &\binom{3}{0}&&\binom{3}{1}&&\binom{3}{2}&&\binom{3}{3}&\\
-            \binom{4}{0}&&\binom{4}{1}&&\binom{4}{2}&&\binom{4}{3}&&\binom{4}{4}\\
-            &&&&\vdots&&&&
-            \end{matrix}
-            $$
-        </div>
+    <div style="display: inline-block; letter-spacing: normal">
+    $$
+    \begin{matrix}
+    &&&&1&&&&\\
+    &&&1&&1&&&\\
+    &&1&&2&&1&&\\
+    &1&&3&&3&&1&\\
+    1&&4&&6&&4&&1\\
+    &&&&\vdots&&&&
+    \end{matrix}
+    $$
+    </div>
+    <div style="display: inline-block; letter-spacing: normal">
+    $$
+    \begin{matrix}
+    &&&&\binom{0}{0}&&&&\\
+    &&&\binom{1}{0}&&\binom{1}{1}&&&\\
+    &&\binom{2}{0}&&\binom{2}{1}&&\binom{2}{2}&&\\
+    &\binom{3}{0}&&\binom{3}{1}&&\binom{3}{2}&&\binom{3}{3}&\\
+    \binom{4}{0}&&\binom{4}{1}&&\binom{4}{2}&&\binom{4}{3}&&\binom{4}{4}\\
+    &&&&\vdots&&&&
+    \end{matrix}
+    $$
+    </div>
     </div>
 
 

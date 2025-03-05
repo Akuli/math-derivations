@@ -158,7 +158,7 @@ def get_sidebar_content(txtfile):
                      'analytic-plane-geometry/parabola'),
             ])),
             dropdown("Hyperbola", join([
-                link(r"Why is $y=\frac{1}{x}$ a hyperbola?",
+                link("Why is y=1/x a hyperbola?",
                      'analytic-plane-geometry/why-its-hyperbola'),
             ])),
         ])),
@@ -376,6 +376,7 @@ katex_macros = {
     r"\I": r"\vec{i}",
     r"\J": r"\vec{j}",
     r"\abs": r"\left| #1 \right|",
+    r"\bigvec": r"\overrightarrow{#1}",
 }
 
 

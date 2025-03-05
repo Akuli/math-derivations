@@ -242,13 +242,13 @@ graybox:
 
 So for example, to rotate $(2,\frac{1}{2})$, we would calculate
 $$
-\begin{align}
+\begin{align*}
 \rotate\left(2,\frac{1}{2}\right)
 &= \rotate(2,0)+\rotate\left(0,\frac{1}{2}\right) \\
 &= 2\red{\rotate(1,0)}+\frac{1}{2}\blue{\rotate(0,1)} \\
 &= 2\red{(\cos(\theta),\sin(\theta))}+\frac{1}{2}\blue{(-\sin(\theta),\cos(\theta))} \\
 &= \left( 2\cos(\theta)-\frac{1}{2}\sin(\theta), 2\sin(\theta)+\frac{1}{2}\cos(\theta) \right).
-\end{align}
+\end{align*}
 $$
 
 

@@ -33,10 +33,10 @@ If, for example, $f(x)=2.09$ and $g(x)=5.09$, the sum will be $7.18$.
 However, we **can** conclude that $6.8 < f(x)+g(x) < 7.2$
 by combining the inequalities:
 $$
-\begin{align}
+\begin{align*}
 1.9 &< f(x) < 2.1 \\
 4.9 &< g(x) < 5.1
-\end{align}
+\end{align*}
 $$
 
 $$
@@ -74,12 +74,12 @@ If you have more than two functions added,
 you can think of it as "first function + everything else" and then apply the above two-function version.
 For example:
 $$
-\begin{align}
+\begin{align*}
 &~~~~~ \lim_{x \to a} \Bigl(f(x)+g(x)+h(x)+i(x)\Bigr) \\
 &= \lim_{x \to a} f(x) + \lim_{x \to a} \Bigl(g(x)+h(x)+i(x)\Bigr) \\
 &= \lim_{x \to a} f(x) + \lim_{x \to a} g(x) + \lim_{x \to a} \Bigl(h(x)+i(x)\Bigr) \\
 &= \lim_{x \to a} f(x) + \lim_{x \to a} g(x) + \lim_{x \to a} h(x) + \lim_{x \to a} i(x) \\
-\end{align}
+\end{align*}
 $$
 So, if you have any number of things added inside a limit,
 you can simply take the limit of each thing separately.
@@ -99,11 +99,11 @@ $$
 $$
 Now we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to 2} (4x + 8)
 &= \lim_{x \to 2} (x+x+x+x + 8) \\
 &= \left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} x \right)+\left( \lim_{x \to 2} 8 \right).
-\end{align}
+\end{align*}
 $$
 From [these examples](limit-def.html#simple-example-limit-of-x),
 we get $\lim_{x \to 2} x = 2$ and $\lim_{x \to 2} 8 = 8$.

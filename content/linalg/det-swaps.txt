@@ -5,7 +5,7 @@ We calculated determinants of permutation matrices
 (i.e. matrices that have all rows of the identity matrix, but in a different order)
 by swapping the rows until we eventually got to $\det(I)=1$, e.g.
 $$
-\begin{align}
+\begin{align*}
 \det\begin{bmatrix}
     \red0&\red0&\red1 \\
     \blue1&\blue0&\blue0 \\
@@ -21,7 +21,7 @@ $$
     \green0&\green1&\green0 \\
     \red0&\red0&\red1
 \end{bmatrix} = 1.
-\end{align}
+\end{align*}
 $$
 With an even number of swaps,
 this shows that the determinant of the original matrix is $1$,
@@ -57,10 +57,10 @@ Note that swapping two adjacent numbers (i.e. any two numbers next to each other
 of a permutation always adds or removes one transposition,
 depending on whether the first number is bigger or smaller:
 $$
-\begin{align}
+\begin{align*}
 1\green{43}2 & \quad \text{3 transpositions: }\green{43}, 32, 42 \\
 1\red{34}2 & \quad \text{2 transpositions: }32, 42
-\end{align}
+\end{align*}
 $$
 
 Swapping any two numbers can be done as a combination of several swaps of adjacent numbers.

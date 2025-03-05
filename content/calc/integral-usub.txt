@@ -46,14 +46,14 @@ If it isn't, then you need to use some other technique instead.
 Because the derivative of $x^2$ is $2x$ and we have that in the integral, we can use the substitution $u=x^2$.
 Then we get $\frac{du}{dx}=2x$ and
 $$
-\begin{align}
+\begin{align*}
 \int 2x\cos(x^2)\ dx
 &= \int \cos(x^2)2x\ dx \\
 &= \int\cos(u)\frac{du}{dx}\ dx \\
 &= \int\cos(u)\ du \\
 &= \sin(u)+C \\
 &= \sin(x^2)+C.
-\end{align}
+\end{align*}
 $$
 We can check this by calculating
 $$
@@ -108,13 +108,13 @@ $$
 $$
 If we now substitute $u=\cos(x)$, we get $\frac{du}{dx}=-\sin(x)$ and
 $$
-\begin{align}
+\begin{align*}
 \int \frac{\sin(x)}{\cos(x)}\ dx
 &= \int \frac{1}{u}(-1)\frac{du}{dx}\ dx \\
 &= (-1)\int \frac{1}{u}\ du \\
 &= -\ln\abs{u}+C \\
 &= -\ln\abs{\cos(x)}+C.
-\end{align}
+\end{align*}
 $$
 
 
@@ -152,10 +152,10 @@ graybox:
 
 For example, by substituting $u=x^2$ and $\frac{du}{dx}=2x$, we get
 $$
-\begin{align}
+\begin{align*}
 \int_0^{\sqrt{\pi}} 2x\cos(x^2)\ dx
 &= \int_0^{\sqrt{\pi}} \cos(u)\frac{du}{dx}\ dx \\
 &= \int_{0^2}^{(\sqrt{\pi})^2} \cos(u)\ du \\
 &= \sin(\pi)-\sin(0) = 0.
-\end{align}
+\end{align*}
 $$

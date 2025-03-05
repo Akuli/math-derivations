@@ -20,7 +20,7 @@ for all real numbers $a,b,c \in \mathbb{R}$ and complex numbers $v,w,z \in \math
 On the rest of this page, I will call this the **wish list**.
 Using the wish list, we can multiply any two complex numbers $a + bi$ and $x + yi$:
 $$
-\begin{align}
+\begin{align*}
 (a + bi)(x + yi)
 &= (a + bi)x + (a + bi)(yi) \\
 &= ax + (bi)x + (a + bi)(yi) \\
@@ -30,7 +30,7 @@ $$
 &= ax + bxi + ayi + by(-1) \\
 &= ax + bxi + ayi + (-by) \\
 &= (ax - by) + (bx + ay)i
-\end{align}
+\end{align*}
 $$
 I don't recommend memorizing the resulting formula.
 To calculate a complex number multiplication like $(2+3i)(4-5i)$,
@@ -288,12 +288,12 @@ graybox:
 
 By plugging in $n=2$ to De Moivre's formula and using $(a+b)^2=a^2+2ab+b^2$, we get
 $$
-\begin{align}
+\begin{align*}
 \cos(2\theta) + i\sin(2\theta)
 &= (\cos(\theta) + i\sin(\theta))^2 \\
 &= (\cos(\theta))^2 + 2\cos(\theta)i\sin(\theta) + (i\sin(\theta))^2 \\
 &= \cos^2(\theta) - \sin^2(\theta) + 2\sin(\theta)\cos(\theta)i,
-\end{align}
+\end{align*}
 $$
 where the minus in front of $\sin^2(\theta)$ came from $i^2=-1$.
 By comparing the real parts and imaginary parts
@@ -303,10 +303,10 @@ on both sides, we get the following result.
 graybox:
     For any angle $\theta$, we have
     $$
-    \begin{align}
+    \begin{align*}
     \cos(2\theta) &= \cos^2(\theta) - \sin^2(\theta), \\
     \sin(2\theta) &= 2\sin(\theta)\cos(\theta).
-    \end{align}
+    \end{align*}
     $$
 
 A similar derivation can be used to write $\sin(n\theta)$ and $\cos(n\theta)$

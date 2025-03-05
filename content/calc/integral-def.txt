@@ -236,11 +236,11 @@ $$
 $$
 so we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{n \to \infty} (\text{upper sum} - \text{lower sum})
 &= \lim_{n \to \infty} \left( \frac{b-a}{n}(f(b)-f(a)) \right) \\
 &= 0(f(b)-f(a)) = 0.
-\end{align}
+\end{align*}
 $$
 This means that there exists upper sums and lower sums that are as close to each other as we want.
 For that reason, there can't be multiple different numbers between all upper and lower sums.

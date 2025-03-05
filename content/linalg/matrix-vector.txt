@@ -122,14 +122,14 @@ means $f(\text{the vector})$, where $f$ is the linear function corresponding to 
 For example, with a 2D linear function $f$, we have $f(x,y)=x\red{f(1,0)}+y\blue{f(0,1)}$,
 so if $\red{f(1,0)=(2,3)}$ and $\blue{f(0,1)=(4,5)}$, we get
 $$
-\begin{align}
+\begin{align*}
 f({10},{20})&={10}\red{f(1,0)}+{20}\blue{f(0,1)} \\
 = \begin{bmatrix} \red2 & \blue4 \\ \red3 & \blue5 \end{bmatrix}
     \begin{bmatrix} {10} \\ {20} \end{bmatrix}
 &= {10}\red{\begin{bmatrix} 2 \\ 3 \end{bmatrix}} + {20}\blue{\begin{bmatrix}4 \\ 5 \end{bmatrix}}
 =\begin{bmatrix} 20+80 \\ 30+100 \end{bmatrix}
 = \begin{bmatrix} 100 \\ 130 \end{bmatrix}.
-\end{align}
+\end{align*}
 $$
 
 graybox:

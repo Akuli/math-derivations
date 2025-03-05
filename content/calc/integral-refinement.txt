@@ -171,12 +171,12 @@ asymptote:
 
 Now we get
 $$
-\begin{align}
+\begin{align*}
 \text{lower sum of $f$ with $P_1$}
 &\le \text{lower sum of $f$ with refinement} \\
 &\le \text{upper sum of $f$ with refinement} \\
 &\le \text{upper sum of $f$ with $P_2$}.
-\end{align}
+\end{align*}
 $$
 
 graybox:

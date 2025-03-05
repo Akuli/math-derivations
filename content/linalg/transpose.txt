@@ -34,7 +34,7 @@ B=\begin{bmatrix}
 $$
 Now
 $$
-\begin{align}
+\begin{align*}
 AB &= \begin{bmatrix}
 \red1 & \red2 \\
 \blue3 & \blue4
@@ -48,7 +48,7 @@ AB &= \begin{bmatrix}
 \blue{(3,4)} \cdot \magenta{(5,7)} & \blue{(3,4)} \cdot \green{(6,8)}
 \end{bmatrix} \\
 &= \begin{bmatrix}19 & 22\\43 & 50\end{bmatrix}.
-\end{align}
+\end{align*}
 $$
 The matrix $A^{\T} B^{\T}$ doesn't have much to do with this,
 because the numbers in $A^{\T} B^{\T}$ are dot products of
@@ -57,7 +57,7 @@ and rows from $B$ (columns of $B^{\T}$),
 such as $(\red 1, \blue 3) \cdot (\magenta 5, \green 6)$.
 But by swapping the matrices, we get to use rows from $B$ and columns from $A$:
 $$
-\begin{align}
+\begin{align*}
 B^{\T}A^{\T}
 &= \begin{bmatrix}
 \magenta5 & \magenta7 \\
@@ -72,7 +72,7 @@ B^{\T}A^{\T}
 \green{(6,8)} \cdot \red{(1,2)} & \green{(6,8)} \cdot \blue{(3,4)}
 \end{bmatrix} \\
 &= \begin{bmatrix}19 & 43\\22 & 50\end{bmatrix}.
-\end{align}
+\end{align*}
 $$
 The resulting matrices are transposes of each other, $(AB)^{\T} = B^{\T} A^{\T}$.
 It works the same way in general:

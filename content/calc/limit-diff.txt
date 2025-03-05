@@ -3,13 +3,13 @@
 Suppose that $\lim_{x \to a} f(x)$ and $\lim_{x \to a} g(x)$ exist.
 By noticing that $f(x)-g(x) = f(x) + (-1)g(x)$, we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} (f(x)-g(x))
 &= \lim_{x \to a} \Bigl( f(x) + (-1)g(x) \Bigr) \\
 &= \lim_{x \to a} f(x) + \lim_{x \to a} \Bigl( (-1)g(x) \Bigr) \\
 &= \lim_{x \to a} f(x) + \underbrace{\Bigl( \lim_{x \to a} (-1) \Bigr)}_{-1}\Bigl( \lim_{x \to a} g(x) \Bigr) \\
 &= \lim_{x \to a} f(x) - \lim_{x \to a} g(x).
-\end{align}
+\end{align*}
 $$
 Here we used most of the results that we have proved so far:
 <ul><li>

@@ -37,7 +37,7 @@ With the correct inverse matrix, we have $A^{-1}A = I$.
 Let's see what we get if we instead use our guessed inverse matrix,
 ignoring the number in front for now:
 $$
-\begin{align}
+\begin{align*}
 \begin{bmatrix} \red{-d} & \red b \\ \blue c & \blue{-a} \end{bmatrix}
 \begin{bmatrix} \magenta a & \green b \\ \magenta c & \green d \end{bmatrix}
 &= \begin{bmatrix}
@@ -48,7 +48,7 @@ $$
 -ad+bc & 0 \\ 0 & bc-ad
 \end{bmatrix}
 = (-ad+bc)I
-\end{align}
+\end{align*}
 $$
 If $-ad+bc \ne 0$, we can divide by it, and we get
 $$

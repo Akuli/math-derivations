@@ -100,13 +100,13 @@ $$
 $$
 By calculating [left and right limits](limit-1sided.html), we get
 $$
-\begin{align}
+\begin{align*}
 &\lim_{x \to 0^+} g(x) = \lim_{x \to 0^+} x = 0 \\
 &\lim_{x \to 0^-} g(x)
     = \lim_{x \to 0^-} -x
     = \underbrace{\left( \lim_{x \to 0^-} -1 \right)}_{-1} \, \underbrace{\left( \lim_{x \to 0^-} x \right)}_0
     = 0,
-\end{align}
+\end{align*}
 $$
 which shows that $\lim_{x \to 0} g(x)$ is also $0$.
 So, even though $f(x) < g(x)$ for all $x \in \mathbb{R}$, the limits of $f$ and $g$ are equal.

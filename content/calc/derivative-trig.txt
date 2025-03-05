@@ -61,10 +61,10 @@ the angle on the unit circle is $t$ radians and so your location is $(\cos(t),\s
 The [derivative of this vector is the velocity](derivative-vector.html),
 i.e. a vector indicating in which direction and how fast you are moving:
 $$
-\begin{align}
+\begin{align*}
 \text{velocity vector} &= \frac{d}{dt}(\cos(t),\sin(t)) \\
 &= \left( \frac{d}{dt}\cos(t), \frac{d}{dt}\sin(t) \right)
-\end{align}
+\end{align*}
 $$
 So to find $\frac{d}{dt}\cos(t)$ and $\frac{d}{dt}\sin(t)$, for any number $t$,
 we only need to know the $x$ and $y$ components of the velocity vector.
@@ -170,13 +170,13 @@ Because $\tan(x) = \frac{\sin(x)}{\cos(x)}$ (TODO), we can use
 [the quotient rule](derivative-product-quotient-rules.html#quotient-rule)
 and plug in the derivatives of $\sin(x)$ and $\cos(x)$ that we just derived.
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx}\tan(x)
 &= \frac{d}{dx} \frac{\sin(x)}{\cos(x)} \\
 &= \frac{\left( \frac{d}{dx}\sin(x) \right) \cos(x) - \sin(x) \left( \frac{d}{dx}\cos(x) \right)}{(\cos(x))^2} \\
 &= \frac{\cos(x)\cos(x) - \sin(x)(-\sin(x))}{\cos^2(x)} \\
 &= \frac{\sin^2(x) + \cos^2(x)}{\cos^2(x)}
-\end{align}
+\end{align*}
 $$
 There are two ways to simplify this from here:
 

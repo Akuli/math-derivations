@@ -33,7 +33,7 @@ $$
 If the first matrix is multiplied by $c$,
 that multiplies the resulting matrix by $c$.
 $$
-\begin{align}
+\begin{align*}
 \begin{bmatrix} \red1c&\red3c \\ \magenta2c&\magenta4c \end{bmatrix}
 \begin{bmatrix} \blue5&\green7 \\ \blue6&\green8  \end{bmatrix}
 &= \begin{bmatrix}
@@ -48,7 +48,7 @@ $$
     \red1 \cdot \blue5 + \red3 \cdot \blue6 & \red1 \cdot \green7 + \red3 \cdot \green8 \\
     \magenta2 \cdot \blue5 + \magenta4 \cdot \blue6 & \magenta2 \cdot \green7 + \magenta4 \cdot \green8
 \end{bmatrix}
-\end{align}
+\end{align*}
 $$
 Multiplying the second matrix by $c$ does the same thing,
 so we get the following result:
@@ -90,14 +90,14 @@ $$
 $$
 and
 $$
-\begin{align}
+\begin{align*}
 \red{\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}}
 - \blue{\begin{bmatrix} 5 & 7 \\ 6 & 8 \end{bmatrix}}
 &= \red{\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}}
 + \begin{bmatrix} -\blue 5 & -\blue 7 \\ -\blue 6 & -\blue8 \end{bmatrix} \\
 &= \begin{bmatrix} \red1+(-\blue5) & \red3+(-\blue7) \\ \red2+(-\blue6) & \red4+(-\blue8) \end{bmatrix} \\
 &= \begin{bmatrix} \red1-\blue5 & \red3-\blue7 \\ \red2-\blue6 & \red4-\blue8 \end{bmatrix}.
-\end{align}
+\end{align*}
 $$
 Subtraction also works with matrix multiplication like you would expect:
 we have

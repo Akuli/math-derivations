@@ -7,11 +7,11 @@ Now consider $\det(\red{\vec v} +2\blue{\vec w}, \blue{\vec w})$.
 By [the linearity in the definition of determinant](det-def.html#linearity),
 we get
 $$
-\begin{align}
+\begin{align*}
 \det(\red{\vec v} + 2\blue{\vec w}, \blue{\vec w})
 &= \det(\red{\vec v},\blue{\vec w}) + \det(2\blue{\vec w},\blue{\vec w}) \\
 &= \det(\red{\vec v},\blue{\vec w}) + 2\det(\blue{\vec w},\blue{\vec w}).
-\end{align}
+\end{align*}
 $$
 The second determinant is zero, because it has the same row in it twice;
 this was previously explained [here](det-def.html#defining-n-times-n-determinants).
@@ -197,12 +197,12 @@ and it takes one swap to turn the second one into the identity matrix.
 These determinants must be multiplied by the numbers taken from the original matrix
 where the permutation matrix has $1$, so we get
 $$
-\begin{align}
+\begin{align*}
 \det\begin{bmatrix} a & b \\ c & d \end{bmatrix}
 &= ad \cdot \underbrace{\det\begin{bmatrix} 1&0 \\ 0&1 \end{bmatrix}}_1
     + bc\cdot \underbrace{\det\begin{bmatrix} 0&1 \\ 1&0 \end{bmatrix}}_{-1} \\
 &= ad - bc.
-\end{align}
+\end{align*}
 $$
 This is zero if and only if $-ad+bc=0$.
 

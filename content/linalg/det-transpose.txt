@@ -12,20 +12,20 @@ To compute its determinant as we did [right after defining the determinant](det-
 we first have to find all $3 \times 3$ permutation matrices.
 There are $3! = 6$ of them, and here they are:
 $$
-\begin{align}
+\begin{align*}
 \begin{bmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{bmatrix} \quad
 \begin{bmatrix} 1&0&0 \\ 0&0&1 \\ 0&1&0 \end{bmatrix} \\\\
 \begin{bmatrix} 0&1&0 \\ 1&0&0 \\ 0&0&1 \end{bmatrix} \quad
 \begin{bmatrix} 0&1&0 \\ 0&0&1 \\ 1&0&0 \end{bmatrix} \\\\
 \begin{bmatrix} 0&0&1 \\ 1&0&0 \\ 0&1&0 \end{bmatrix} \quad
 \begin{bmatrix} 0&0&1 \\ 0&1&0 \\ 1&0&0 \end{bmatrix}
-\end{align}
+\end{align*}
 $$
 The determinants of the permutation matrices are multiplied
 by the numbers from the original matrix where the permutation matrix has $1$,
 and those results are added, so we get
 $$
-\begin{align}
+\begin{align*}
 \det(A)
 &= \red{aei\det\begin{bmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{bmatrix}}
 + \red{afh\det\begin{bmatrix} 1&0&0 \\ 0&0&1 \\ 0&1&0 \end{bmatrix}} \\
@@ -33,7 +33,7 @@ $$
 + \blue{bfg\det\begin{bmatrix} 0&1&0 \\ 0&0&1 \\ 1&0&0 \end{bmatrix}} \\
 &~~+ \green{cdh\det\begin{bmatrix} 0&0&1 \\ 1&0&0 \\ 0&1&0 \end{bmatrix}}
 + \red{ceg\det\begin{bmatrix} 0&0&1 \\ 0&1&0 \\ 1&0&0 \end{bmatrix}}.
-\end{align}
+\end{align*}
 $$
 Now consider what changes if we replace the original matrix with its transpose,
 and we instead compute the determinant of
@@ -51,7 +51,7 @@ we pick the same numbers from the original matrix in front of them,
 regardless of whether or not it is transposed.
 The blue and green matrix will pick each other's numbers from the matrix, so we get
 $$
-\begin{align}
+\begin{align*}
 \det(A^{\T})
 &= \red{aei\det\begin{bmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{bmatrix}}
 + \red{afh\det\begin{bmatrix} 1&0&0 \\ 0&0&1 \\ 0&1&0 \end{bmatrix}} \\
@@ -59,7 +59,7 @@ $$
 + \green{cdh}~\blue{\det\begin{bmatrix} 0&1&0 \\ 0&0&1 \\ 1&0&0 \end{bmatrix}} \\
 &~~+ \blue{bfg}~\green{\det\begin{bmatrix} 0&0&1 \\ 1&0&0 \\ 0&1&0 \end{bmatrix}}
 + \red{ceg\det\begin{bmatrix} 0&0&1 \\ 0&1&0 \\ 1&0&0 \end{bmatrix}}.
-\end{align}
+\end{align*}
 $$
 In fact, the blue and green determinant are equal,
 because both can be turned into $\det(I)=1$ with two swaps of rows.

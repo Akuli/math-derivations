@@ -11,12 +11,12 @@ Let's see what happens with other numbers instead of $2$.
 
 By using the definition of derivative with $f(x)=x$, we get
 $$
-\begin{align}
+\begin{align*}
 f'(x) &= \lim_{h \to 0} \frac{(x+h)-x}{h} \\
 &= \lim_{h \to 0} \frac{h}{h}
 = \lim_{h \to 0} 1
 = 1.
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -45,11 +45,11 @@ which looks like it really should be $1$, and indeed it is $1$.
 Let $a$ be any number, and let $f(x) = a$.
 With the definition of derivative, we get
 $$
-\begin{align}
+\begin{align*}
 f'(x) &= \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} \\
 &= \lim_{h \to 0} \frac{a-a}{h} \\
 &= \lim_{h \to 0} 0 = 0.
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -83,7 +83,7 @@ and then using the formula for $(a+b)^2$.
 
 By using the definition of derivative with $f(x)=x^3$, we get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} x^3
 &= \lim_{h \to 0} \frac{(x+h)^3-x^3}{h} \\
 &= \lim_{h \to 0} \frac{x^3+3x^2h+3xh^2+h^3-x^3}{h} \\
@@ -91,7 +91,7 @@ $$
 &= \lim_{h \to 0} (3x^2+3xh+h^2) \\
 &= \lim_{h \to 0} 3x^2 + \lim_{h \to 0} 3xh + \lim_{h \to 0} h^2 \\
 &= 3x^2+0+0.
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -116,18 +116,18 @@ and that corresponds with how $3x^2 = 0$ if and only if $x=0$.
 
 For any numbers $a$ and $b$, by adding and subtracting the same things, we get
 $$
-\begin{align}
+\begin{align*}
 a^7-b^7 = a^7 &{}+ a^6b + a^5b^2 + a^4b^3 + a^3b^4 + a^2b^5 + ab^6 \\
 &{}- a^6b - a^5b^2 - a^4b^3 - a^3b^4 - a^2b^5 - ab^6 - b^7.
-\end{align}
+\end{align*}
 $$
 Everything on the top row contains $a$ and everything on the bottom row contains $b$, so
 by factoring, we get
 $$
-\begin{align}
+\begin{align*}
 a^7-b^7 = a(a^6 &{}+ a^5b + a^4b^2 + a^3b^3 + a^2b^4 + ab^5 + b^6) \\
 &{}- b(a^6 + a^5b + a^4b^2 + a^3b^3 + a^2b^4 + ab^5 + b^6).
-\end{align}
+\end{align*}
 $$
 The parenthesized parts are now the same, so we have
 $$
@@ -139,15 +139,15 @@ $$
 $$
 By using this with $a=x+h$ and $b=x$, we get
 $$
-\begin{align}
+\begin{align*}
 \frac{(x+h)^7-x^7}{(x+h)-x}
 &=(x+h)^6 + (x+h)^5x + (x+h)^4x^2 \\
 &\qquad + (x+h)^3x^3 + (x+h)^2x^4 + (x+h)x^5 + x^6.
-\end{align}
+\end{align*}
 $$
 Here $(x+h)-x = h$, so this is same as what we have in the definition of derivative, and we get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} x^7
 &= \lim_{h \to 0} \frac{(x+h)^7-x^7}{h} \\
 &= \lim_{h \to 0} \Bigl( (x+h)^6 + (x+h)^5x + (x+h)^4x^2 \\
@@ -156,7 +156,7 @@ $$
 &\qquad + (x+0)^3x^3 + (x+0)^2x^4 + (x+0)x^5 + x^6 \\
 &= x^6+x^6+x^6+x^6+x^6+x^6+x^6 \\
 &= 7x^6.
-\end{align}
+\end{align*}
 $$
 This works the same for any other positive integer instead of $7$.
 
@@ -182,7 +182,7 @@ Let's see whether this formula works for other values of $n$.
 
 From the definition of derivative, we get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} \frac 1 x
 &= \lim_{h \to 0} \frac{ \frac{1}{x+h} - \frac 1 x }{h} \\
 &= \lim_{h \to 0} \frac{ \frac{x}{(x+h)x} - \frac{x+h}{(x+h)x} }{h} \\
@@ -191,7 +191,7 @@ $$
 &= \lim_{h \to 0} \frac{-h}{(x+h)xh} \\
 &= \lim_{h \to 0} \frac{-1}{(x+h)x} \\
 &= \frac{-1}{(x+0)x} = \frac{-1}{x^2}.
-\end{align}
+\end{align*}
 $$
 By noticing that $\frac 1 x = x^{-1}$ and $\frac{-1}{x^2} = (-1)x^{-2}$, we get
 $$
@@ -206,7 +206,7 @@ graybox:
 
 From the definition of derivative, we get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} \sqrt{x}
 &= \lim_{h \to 0} \frac{ \sqrt{x+h} - \sqrt{x} }{h} \\
 &= \lim_{h \to 0} \frac{ (\sqrt{x+h} - \sqrt{x})(\sqrt{x+h} + \sqrt{x}) }{h(\sqrt{x+h} + \sqrt{x})} \\
@@ -215,7 +215,7 @@ $$
 &= \lim_{h \to 0} \frac{h}{h(\sqrt{x+h} + \sqrt{x})} \\
 &= \lim_{h \to 0} \frac{1}{\sqrt{x+h} + \sqrt{x}} \\
 &= \frac{1}{\sqrt{x+0} + \sqrt{x}} = \frac{1}{2\sqrt{x}}.
-\end{align}
+\end{align*}
 $$
 By noticing that $\sqrt{x} = x^{1/2}$ and $\frac{1}{2\sqrt{x}} = \frac 1 2 x^{-1/2}$, we get
 $$

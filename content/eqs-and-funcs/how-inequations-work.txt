@@ -35,12 +35,12 @@ graybox:
 Of course, this works similarly for inequations with $ > $ instead of $ < $.
 It even works for inequations having $\le$ or $\ge$, because
 $$
-\begin{align}
+\begin{align*}
 x \ge y
 &\iff \text{we do NOT have $\underbrace{x < y}_{\substack{\text{equivalent} \\ \text{with:} \\ f(x) < f(y)}}$} \\
 &\iff \text{we do NOT have $f(x) < f(y)$} \\
 &\iff f(x) \ge f(y).
-\end{align}
+\end{align*}
 $$
 We assumed that the function $f$ is strictly increasing, so
 by the previous result, $x < y$ and $f(x) < f(y)$ are equivalent.

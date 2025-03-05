@@ -26,11 +26,11 @@ because $g(x)$ is close to $4$.
 Let's compare $\frac{1}{g(x)}$ and $\frac{1}{4}$ by subtracting them.
 (We used a similar trick to derive [the limit of product](limit-product.html).)
 $$
-\begin{align}
+\begin{align*}
 \frac{1}{g(x)} - \frac{1}{4}
 &= \frac{4}{4g(x)} - \frac{g(x)}{4g(x)} \\
 &= \frac{4-g(x)}{4g(x)}
-\end{align}
+\end{align*}
 $$
 Let $t > 0$ be any tolerance.
 On top, we have $4-g(x)$.
@@ -83,21 +83,21 @@ The idea is to adjust the function $g(x)$ so that instead of $B$, we get $4$.
 Let's try dividing the original function by its limit $B$.
 Using [limit of product](limit-product.html), we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} \frac{g(x)}{B}
 &= \lim_{x \to a} \frac{1}{B} g(x) \\
 &= \left( \lim_{x \to a} \frac{1}{B} \right) \left( \lim_{x \to a} g(x) \right) \\
 &= \frac{1}{B} \cdot B = 1.
-\end{align}
+\end{align*}
 $$
 If we also multiply by 4, we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} \frac{4g(x)}{B}
 &= \lim_{x \to a} \frac{4}{B} g(x) \\
 &= \left( \lim_{x \to a} \frac{4}{B} \right) \left( \lim_{x \to a} g(x) \right) \\
 &= \frac{4}{B} \cdot B = 4.
-\end{align}
+\end{align*}
 $$
 Therefore, if we can get the constant $\frac{4}{B}$ in front of $g(x)$,
 we know how to calculate the limit:
@@ -109,14 +109,14 @@ because in division, you can multiply the top and bottom by anything nonzero you
 and it doesn't affect anything.
 Like this:
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} \frac{1}{g(x)}
 &= \lim_{x \to a} \frac{\frac{4}{B}}{\frac{4}{B}g(x)} \\
 &= \lim_{x \to a} \frac{4}{B} \frac{1}{\frac{4}{B}g(x)} \\
 &= \left( \lim_{x \to a} \frac{4}{B} \right) \left( \lim_{x \to a} \frac{1}{\frac{4}{B}g(x)} \right) \\
 &= \frac{4}{B} \cdot \frac{1}{4} \\
 &= \frac{1}{B}.
-\end{align}
+\end{align*}
 $$
 Here we used [limit of product](limit-product.html) and [limit of constant](limit-def.html#even-simpler-example-limit-of-a-constant).
 
@@ -132,13 +132,13 @@ graybox:
 Any division $\frac{f(x)}{g(x)}$ can be viewed as a multiplication $f(x) \frac{1}{g(x)}$.
 In this case, that's useful because we can apply [limit of product](limit-product.html):
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} \frac{f(x)}{g(x)}
 &= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
 &= \left( \lim_{x \to a} f(x) \right) \left( \lim_{x \to a} \frac{1}{g(x)} \right) \\
 &= \left( \lim_{x \to a} f(x) \right) \frac{1}{\displaystyle\lim_{x \to a} g(x)} \\
 &= \frac{\displaystyle\lim_{x \to a} f(x)}{\displaystyle\lim_{x \to a} g(x)}
-\end{align}
+\end{align*}
 $$
 
 graybox:

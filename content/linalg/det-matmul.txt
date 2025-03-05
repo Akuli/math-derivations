@@ -83,12 +83,12 @@ Let's check whether it satisfies the conditions in
     $$
     This works the same with square matrices of any size, and we get
     $$
-    \begin{align}
+    \begin{align*}
     f(\text{$A$ with two rows swapped})
     &= \frac{\det(\text{$AB$ with two rows swapped})}{\det(B)} \\
     &= \frac{-\det(AB)}{\det(B)} \\
     &= -f(A).
-    \end{align}
+    \end{align*}
     $$
 </li><li>
     Let $m$ be any number, and let $A$ be a square matrix.
@@ -126,7 +126,7 @@ Let's check whether it satisfies the conditions in
     $$
     Now (TODO: explain why $(\vec v + \vec w) \cdot \vec c = \vec v \cdot \vec c + \vec w \cdot \vec c$)
     $$
-    \begin{align}
+    \begin{align*}
     AB &= \begin{bmatrix}
         (1,2,3)\cdot\vec{c_1}&(1,2,3)\cdot\vec{c_2}&(1,2,3)\cdot\vec{c_3} \\
         (\vec v + \vec w) \cdot \vec{c_1} &(\vec v + \vec w) \cdot \vec{c_2} &(\vec v + \vec w) \cdot \vec{c_3} \\
@@ -137,11 +137,11 @@ Let's check whether it satisfies the conditions in
         \vec v \cdot \vec{c_1} + \vec w \cdot \vec{c_1} & \vec v \cdot \vec{c_2} + \vec w \cdot \vec{c_2} &\vec v\cdot \vec{c_3} + \vec w\cdot \vec{c_3} \\
         (4,5,6)\cdot\vec{c_1}&(4,5,6)\cdot\vec{c_2}&(4,5,6)\cdot\vec{c_3}
     \end{bmatrix}.
-    \end{align}
+    \end{align*}
     $$
     By the linearity of determinant, we get
     $$
-    \begin{align}
+    \begin{align*}
     \det(AB) &= \det\begin{bmatrix}
         (1,2,3)\cdot\vec{c_1}&(1,2,3)\cdot\vec{c_2}&(1,2,3)\cdot\vec{c_3} \\
         \vec v \cdot \vec{c_1} & \vec v \cdot \vec{c_2} &\vec v\cdot \vec{c_3} \\
@@ -153,7 +153,7 @@ Let's check whether it satisfies the conditions in
         (4,5,6)\cdot\vec{c_1}&(4,5,6)\cdot\vec{c_2}&(4,5,6)\cdot\vec{c_3}
     \end{bmatrix} \\
     &= \det(A_{\vec v} ~ B)+\det(A_{\vec w} ~ B),
-    \end{align}
+    \end{align*}
     $$
     where $A_{\vec v}$ and $A_{\vec w}$ are just like $A$,
     but with $\vec v$ or $\vec w$ instead of the row $\vec v + \vec w$.

@@ -146,10 +146,10 @@ $I_x$ as the output interval of $\lim_{x \to a} f(x) = L_x$ and
 $I_y$ as the output interval of $\lim_{x \to a} f(x) = L_y$,
 we get two open input intervals centered around $a$ such that
 $$
-\begin{align}
+\begin{align*}
 &f(\text{any number in the first input interval except $a$}) \in I_x, \\
 &g(\text{any number in the second input interval except $a$}) \in I_y.
-\end{align}
+\end{align*}
 $$
 
 asymptote:
@@ -163,10 +163,10 @@ asymptote:
 One of these input intervals is a subset of the other. Let $I_t$ denote that "smaller" interval.
 Now any number in $I_t$ is in **both** input intervals, and we have
 $$
-\begin{align}
+\begin{align*}
 &f(\text{any number in $I_t$ except $a$}) \in I_x, \\
 &g(\text{any number in $I_t$ except $a$}) \in I_y.
-\end{align}
+\end{align*}
 $$
 This means that
 $$

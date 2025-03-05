@@ -85,11 +85,11 @@ $$
 $$
 Plugging everything in, we get
 $$
-\begin{align}
+\begin{align*}
 \text{downloading speed}
 &= \lim_{\text{time} \to 0} \frac{\text{amount of downloaded data}}{\text{time}} \\
 &= \lim_{h \to 0} \frac{D(t+h) - D(t)}{h}.
-\end{align}
+\end{align*}
 $$
 Here $h \to 0$ means that $h$ can be negative;
 that means calculating the amount of data downloaded
@@ -200,14 +200,14 @@ many other things that can be described with a derivative.
 
 For example, let $f(x) = x^2$. The derivative of $f$ at any number $a$ is
 $$
-\begin{align}
+\begin{align*}
 \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}
 &= \lim_{h \to 0} \frac{(a+h)^2 - a^2}{h} \\
 &= \lim_{h \to 0} \frac{a^2 + 2ah + h^2 - a^2}{h} \\
 &= \lim_{h \to 0} \frac{2ah + h^2}{h} \\
 &= \lim_{h \to 0} (2a + h) \\
 &= \lim_{h \to 0} 2a + \lim_{h \to 0} h = 2a.
-\end{align}
+\end{align*}
 $$
 Here are several ways to interpret the result:
 <ul><li>

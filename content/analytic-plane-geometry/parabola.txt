@@ -29,11 +29,11 @@ If the peak of a parabola is at the origin,
 then the origin $(0,0)$ must be a point on the parabola,
 which means that it must satisfy the equation of the parabola:
 $$
-\begin{align}
+\begin{align*}
 y &= ax^2+bx+c \\
 0 &= a \cdot 0^2 + b \cdot 0+c \\
 0 &= c
-\end{align}
+\end{align*}
 $$
 So, if a parabola $y=ax^2+bx+c$ has its peak at origin, then it must have $c=0$,
 that is, the parabola is actually just $y=ax^2+bx$.
@@ -63,22 +63,22 @@ asymptote:
 
 We can find all touching places by setting $y=0$ in the parabola equation $y=ax^2+bx$.
 $$
-\begin{align}
+\begin{align*}
 0 = ax^2+bx& \\
 0 = (ax+b)x& \\
 ax+b = 0 \text{ or }& x=0 \\
 ax = -b \text{ or }& x=0 \\
 x = -\frac{b}{a} \text{ or }& x=0
-\end{align}
+\end{align*}
 $$
 (We can divide by $a$ because $a$ is nonzero; see the beginning of this page.)
 If the peak is at $(0,0)$, then there should be only one solution,
 which means that these two solutions should actually be the same solution:
 $$
-\begin{align}
+\begin{align*}
 -\frac{b}{a} &= 0 \\
 b &= 0
-\end{align}
+\end{align*}
 $$
 So, what remains from our parabola equation is just $y = ax^2$.
 
@@ -192,13 +192,13 @@ asymptote:
 The peak of $y = ax^2$ is at $(0,0)$, so the peak of $y = ax^2+bx+c$ is at $(s, c-as^2)$.
 Plugging in $s=-\frac{b}{2a}$ gives
 $$
-\begin{align}
+\begin{align*}
 \text{peak}
 &= (s, c-as^2) \\
 &= \left( -\frac{b}{2a}, c-a\left( -\frac{b}{2a} \right)^2 \right) \\
 &= \left( -\frac{b}{2a}, c-a\frac{b^2}{4a^2} \right) \\
 &= \left( -\frac{b}{2a}, c-\frac{b^2}{4a} \right).
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -243,21 +243,21 @@ asymptote:
 In both cases, the derivative is zero only at the peak, so solving $f'(x)=0$
 gives us the location of the peak.
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx}(ax^2+bx+c) &= 0 \\
 \frac{d}{dx}(ax^2) + \frac{d}{dx}(bx) + \frac{d}{dx} c &= 0 \\
 a \cdot 2x + b + 0 &= 0 \\
 2ax+b &= 0 \\
 2ax &= -b \\
 x &= -\frac{b}{2a}
-\end{align}
+\end{align*}
 $$
 
 Now that we know the peak $x$,
 we can find the peak $y$ by using the fact that the peak is a point on the parabola;
 that is, you get the peak $y$ by plugging in the peak $x$ to the parabola equation $y = ax^2+bx+c$.
 $$
-\begin{align}
+\begin{align*}
 y
 &= a\left( -\frac{b}{2a} \right)^2+b\left( -\frac{b}{2a} \right)+c \\
 &= a\frac{b^2}{4a^2}-\frac{b^2}{2a}+c \\
@@ -265,7 +265,7 @@ y
 &= \frac{b^2-2b^2}{4a}+c \\
 &= \frac{-b^2}{4a}+c \\
 &= c-\frac{b^2}{4a}
-\end{align}
+\end{align*}
 $$
 Therefore
 $$

@@ -7,11 +7,11 @@ Using this, we can show that the inverse function $\red{f^{-1}}$ is also linear:
 <ul><li>
     Because $\blue f$ is linear, we get
     $$
-    \begin{align}
+    \begin{align*}
     \vec v+\vec w
     &= \blue{f(}\red{f^{-1}(}\vec v\red)\blue)+\blue{f(}\red{f^{-1}(}\vec w\red)\blue) \\
     &= \blue{f(}\red{f^{-1}(}\vec v\red)+\red{f^{-1}(}\vec w\red)\blue),
-    \end{align}
+    \end{align*}
     $$
     and applying $\red{f^{-1}}$ on both sides gives
     $$

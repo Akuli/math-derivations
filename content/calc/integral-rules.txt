@@ -16,11 +16,11 @@ graybox:
 On the other hand, $\frac{d}{dx}\cos(x) = -\sin(x)$, with an annoying minus sign.
 To get rid of that, we can add another minus sign in front of $\cos(x)$, and the minuses will cancel:
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx}(-\cos(x))
 &= (-1)\frac{d}{dx}\cos(x)\\
 &= (-1)(-\sin(x)) = \sin(x)
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -59,13 +59,13 @@ graybox:
 Each $\int \dots \ dx$ on the right side creates its own $+C$,
 so technically using this rule should look like this:
 $$
-\begin{align}
+\begin{align*}
 \int (2x+\cos(x))\ dx
 &= \int 2x\ dx + \int \cos(x)\ dx \\
 &= (x^2+C_1)+(\sin(x)+C_2) \\
 &= x^2+\sin(x)+\underbrace{(C_1+C_2)}_{\text{let's call this $C$}} \\
 &= x^2+\sin(x)+C
-\end{align}
+\end{align*}
 $$
 Here $C_1$ came from $\int 2x\ dx$ and $C_2$ came from $\int \cos(x)\ dx$.
 Letting $C=C_1+C_2$ simplified the result.
@@ -81,13 +81,13 @@ For using [part 2 of the fundamental theorem of calculus](integral-ftoc2.html),
 we assume that $f$ and $g$ are continuous and they have antiderivatives $F$ and $G$.
 Then, with [handy notation](integral-notation.html#new-notation-for-f-b-f-a), we get
 $$
-\begin{align}
+\begin{align*}
 \int_a^b (f(x)+g(x))\ dx
 &= \left[ F(x)+G(x) \right]_a^b \\
 &= (F(b)+G(b))-(F(a)+G(a)) \\
 &= F(b)-F(a)+G(b)-G(a) \\
 &= \int_a^bf(x)\ dx + \int_a^bg(x)\ dx.
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -141,13 +141,13 @@ $$
 
 For integrals (not antiderivatives), we get
 $$
-\begin{align}
+\begin{align*}
 \int_a^b kf(x)\ dx
 &= \left[ kF(x) \right]_a^b \\
 &= kF(b)-kF(a) \\
 &= k(F(b)-F(a)) \\
 &= k\int_a^b f(x)\ dx,
-\end{align}
+\end{align*}
 $$
 and in this calculation, nothing breaks if $k=0$.
 

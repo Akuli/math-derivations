@@ -153,11 +153,11 @@ about 1.8 mebibytes per second.
 Because [download speed is derivative of downloaded data](derivative-def.html#download-speed),
 part 2 of fundamental theorem of calculus says that
 $$
-\begin{align}
+\begin{align*}
 &~~~~ \int_a^b \text{download speed}\ dx \\
 &= (\text{downloaded data at time $b$}) - (\text{downloaded data at time $a$}) \\
 &= \text{how much data was downloaded between $a$ and $b$}.
-\end{align}
+\end{align*}
 $$
 For example, this area tells how much data was downloaded between "50 seconds ago" and "30 seconds ago":
 

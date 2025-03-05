@@ -12,11 +12,11 @@ because $a\I+b\J$ is the normal vector of the line, and it appears in the equati
 
 Let's solve the normal form line equation $ax+by+c=0$ for $y$:
 $$
-\begin{align}
+\begin{align*}
 ax+by+c &= 0 \\
 by &= -ax-c \\
 y &= -\frac{a}{b}x - \frac{c}{b}
-\end{align}
+\end{align*}
 $$
 By letting $s=-\frac{a}{b}$ and $h=-\frac{c}{b}$, we get
 $$
@@ -29,11 +29,11 @@ Now consider any line equation for which the above doesn't work; that is,
 any line equation $ax+by+c=0$ with $b=0$.
 Because at least one of $a$ and $b$ is nonzero, $a$ must be nonzero, so we can divide by it:
 $$
-\begin{align}
+\begin{align*}
 ax+0y+c &= 0 \\
 ax &= -c \\
 x &= -\frac{c}{a}
-\end{align}
+\end{align*}
 $$
 This is the equation of a vertical line, so all lines lacking an equation like $y=sx+h$ are vertical.
 This means that any non-vertical line has an equation like $y=sx+h$.
@@ -44,11 +44,11 @@ graybox:
 This also goes the other way:
 any equation like $y=sx+h$ is the equation of a non-vertical line, because we can rewrite it like this:
 $$
-\begin{align}
+\begin{align*}
 y &= sx+h \\
 y-sx-h &= 0 \\
 (-s)x + 1y + (-h) &= 0
-\end{align}
+\end{align*}
 $$
 This is the equation of a line with normal vector $(-s)\I+1\J$.
 This can't be a vertical line, because

@@ -22,11 +22,11 @@ where I chose to name the function $I$ rather than $f$ because we already have a
 and $I$ reminds about how it's an integral.
 With the definition of derivative, we get
 $$
-\begin{align}
+\begin{align*}
 I'(b)
 &= \lim_{h \to 0} \frac{I(b+h)-I(b)}{h} \\
 &= \lim_{h \to 0} \frac{\int_a^{b+h} f(x)\ dx - \int_a^b f(x)\ dx}{h}.
-\end{align}
+\end{align*}
 $$
 I will draw pictures with $h > 0$, but everything works the same way if $h < 0$.
 The integrals we have so far look like this:
@@ -96,12 +96,12 @@ asymptote:
 If $f$ is continuous, then we can also
 [move the limit inside it](cont-props.html#moving-limit-inside-a-continuous-function) and we get
 $$
-\begin{align}
+\begin{align*}
 I'(b)
 &= \lim_{h \to 0} f(\text{some number between $b$ and $b+h$}) \\
 &= f\left( \lim_{h \to 0} (\text{some number between $b$ and $b+h$}) \right) \\
 &= f(b).
-\end{align}
+\end{align*}
 $$
 
 graybox:

@@ -227,10 +227,10 @@ because in that case, all dot products of $\pm \vec a$ and $\pm \vec b$ are zero
 graybox:
     For all vectors $\vec a$ and $\vec b$, we have
     $$
-    \begin{align}
+    \begin{align*}
     (-\vec a) \cdot \vec b &= -(\vec a \cdot \vec b), \\
     \vec a \cdot (-\vec b) &= -(\vec a \cdot \vec b).
-    \end{align}
+    \end{align*}
     $$
 
 On the rest of this page, these rules are used for getting other results to work with negative numbers.
@@ -307,13 +307,13 @@ graybox:
 By combining the dot product of sum with moving minuses to front,
 we see that the rule for $(\vec a + \vec b) \cdot \vec c$ also works with $-$ instead of $+$:
 $$
-\begin{align}
+\begin{align*}
 (\vec a - \vec b) \cdot \vec c
 &= (\vec a + (-\vec b))\cdot\vec c \\
 &= \vec a \cdot \vec c + (-\vec b)\cdot \vec c \\
 &= \vec a \cdot \vec c + (-(\vec b \cdot \vec c)) \\
 &= \vec a \cdot \vec c - \vec b \cdot \vec c \\
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -362,13 +362,13 @@ We needed the positiviness of $r$ above.
 If $r$ is negative, we have $r=-\abs{r}$,
 and by bringing minuses to front and using the above result with $\abs{r}$, we get
 $$
-\begin{align}
+\begin{align*}
 \vec v \cdot (\vec w \, r)
 &= \vec v \cdot (-\vec w\abs{r}) \\
 &= -(\vec v \cdot (\vec w\abs{r})) \\
 &= -(\vec v \cdot \vec w)\abs{r} \\
 &= (\vec v \cdot \vec w)r.
-\end{align}
+\end{align*}
 $$
 If $r=0$, then we still have $\vec v \cdot (\vec w \, r) = (\vec v \cdot \vec w)r$,
 because that's just $0=0$.

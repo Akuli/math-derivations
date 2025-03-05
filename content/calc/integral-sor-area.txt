@@ -186,14 +186,14 @@ By the Pythagorean theorem, the side length of the bigger cone is $s + \sqrt{p^2
 The radiuses of the cones are $f(x)$ and $f(x)+p$, so their areas are $\pi f(x)s$ and $\pi (f(x)+p)(s+\sqrt{p^2+h^2})$.
 The difference of these areas is
 $$
-\begin{align}
+\begin{align*}
 \text{cone slice area}
 &= \pi f(x+h)\left(s+\sqrt{p^2+h^2}\right) - \pi f(x)s \\
 &= \pi(f(x)+p)\left(s+\sqrt{p^2+h^2}\right) - \pi f(x)s \\
 &= \pi\left(f(x)s + f(x)\sqrt{p^2+h^2} + ps + p\sqrt{p^2+h^2}\right) - \pi f(x)s \\
 &= \pi f(x)s + \pi f(x)\sqrt{p^2+h^2} + \pi ps + \pi p\sqrt{p^2+h^2} - \pi f(x)s \\
 &= \pi f(x)\sqrt{p^2+h^2} + \pi ps + \pi p\sqrt{p^2+h^2}.
-\end{align}
+\end{align*}
 $$
 The two triangles have two same angles
 (90 degrees in bottom right and the angle at their left corner),
@@ -203,11 +203,11 @@ $$
 $$
 This gives $ps=f(x)\sqrt{p^2+h^2}$, so
 $$
-\begin{align}
+\begin{align*}
 \text{cone slice area}
 &= 2\pi f(x)\sqrt{p^2+h^2} + \pi p\sqrt{p^2+h^2} \\
 &= \pi(2f(x)+p)\sqrt{p^2+h^2}.
-\end{align}
+\end{align*}
 $$
 We assumed that $p > 0$, but this also works if $p < 0$, and the derivation for that case is similar.
 If $p=0$, we have a cylinder with radius $f(x)$ and height $h$ instead of cones, and the area of the cylinder is
@@ -216,21 +216,21 @@ $$
 $$
 So, the above equation works for all values of $p$, and now we get
 $$
-\begin{align}
+\begin{align*}
 A'(x)
 &= \lim_{h \to 0^+} \frac{A(x+h)-A(x)}{h} \\
 &= \lim_{h \to 0^+} \frac{\text{cone slice area}}{h} \\
 &= \lim_{h \to 0^+} \frac{\pi(2f(x)+p)\sqrt{p^2+h^2}}{\sqrt{h^2}} \\
 &= \lim_{h \to 0^+} \left( \pi(2f(x)+p)\sqrt{\frac{p^2+h^2}{h^2}} \right) \\
 &= \lim_{h \to 0^+} \left( \pi(2f(x)+p)\sqrt{\left( \frac{p}{h} \right)^2+1} \right).
-\end{align}
+\end{align*}
 $$
 With limit rules and continuity of square root, we get
 $$
-\begin{align}
+\begin{align*}
 A'(x)
 &= \pi\left( 2f(x)+\lim_{h \to 0^+}p \right)\sqrt{\left( \lim_{h \to 0^+} \frac{p}{h} \right)^2+1}.
-\end{align}
+\end{align*}
 $$
 Here
 $$
@@ -238,12 +238,12 @@ $$
 $$
 is the derivative of $f$, assuming it exists. Also, if $f$ is continuous, we have
 $$
-\begin{align}
+\begin{align*}
 \lim_{h \to 0^+} p
 &= \lim_{h \to 0^+} f(x+h) - \lim_{h \to 0^+} f(x) \\
 &= f\left(\lim_{h \to 0^+}(x+h)\right) - f(x) \\
 &= f(x+0) - f(x) = 0.
-\end{align}
+\end{align*}
 $$
 By putting all this together, we get
 $$
@@ -302,7 +302,7 @@ asymptote3d:
 
 By plugging in $f(x)=\frac{r}{h}x$ and $f'(x)=\frac{r}{h}$, we get
 $$
-\begin{align}
+\begin{align*}
 \int_0^h 2\pi \frac{r}{h}x \sqrt{1 + \left(\frac{r}{h}\right)^2}\ dx
 &= 2\pi \frac{r}{h}\sqrt{1 + \frac{r^2}{h^2}}\int_0^h x \ dx \\
 &= 2\pi \frac{r}{h}\sqrt{1 + \frac{r^2}{h^2}}\left[ \frac{1}{2} x^2 \right]_0^h \\
@@ -311,7 +311,7 @@ $$
 &= \pi r\sqrt{h^2}\sqrt{1 + \frac{r^2}{h^2}} \\
 &= \pi r\sqrt{h^2\left( 1 + \frac{r^2}{h^2} \right)} \\
 &= \pi r\sqrt{h^2+r^2}.
-\end{align}
+\end{align*}
 $$
 By letting $s=\sqrt{h^2+r^2}$ denote the side length, we get $\pi rs$ as expected.
 
@@ -359,7 +359,7 @@ asymptote3d:
 
 This area is
 $$
-\begin{align}
+\begin{align*}
 \int_a^b 2\pi f(x) \sqrt{1+f'(x)^2}\ dx
 &= \int_a^b 2\pi f(x) \sqrt{1+f'(x)^2}\ dx \\
 &= \int_a^b 2\pi \sqrt{r^2-x^2} \sqrt{1+\frac{x^2}{r^2-x^2}}\ dx \\
@@ -367,7 +367,7 @@ $$
 &= \int_a^b 2\pi \sqrt{r^2-x^2} \frac{\sqrt{r^2}}{\sqrt{r^2-x^2}}\ dx \\
 &= \int_a^b 2\pi r\ dx
 = \left[ 2\pi rx \right]_a^b = 2\pi rb - 2\pi ra.
-\end{align}
+\end{align*}
 $$
 To get the area of the entire ball, we can take limits with $a \to -r^+$ and $b \to r^-$, and we get
 $$
@@ -401,13 +401,13 @@ asymptote3d:
 
 The [volume](integral-sor-volume.html) of this solid of revolution is
 $$
-\begin{align}
+\begin{align*}
 \int_1^b \pi\left( \frac{1}{x} \right)^2\ dx
 &= \pi\int_1^b x^{-2}\ dx
 = \pi\left[ \frac{1}{-1} x^{-1} \right]_1^b \\
 &= \pi\left( -\frac{1}{b}-(-1) \right)
 = \pi-\frac{\pi}{b}.
-\end{align}
+\end{align*}
 $$
 This is always less than $\pi$, no matter how long the horn is.
 On the other hand, because
@@ -416,11 +416,11 @@ $$
 $$
 the area of the surface of revolution is
 $$
-\begin{align}
+\begin{align*}
 \text{area}
 = \int_1^b 2\pi\frac{1}{x}\sqrt{1+\left((-1)x^{-2}\right)^2}\ dx
 = 2\pi\int_1^b \frac{1}{x}\sqrt{1+\frac{1}{x^4}}\ dx.
-\end{align}
+\end{align*}
 $$
 Calculating this integral is difficult, but because $\frac{1}{x^4} > 0$,
 we have $\sqrt{1 + \frac{1}{x^4}} > 1$, and so

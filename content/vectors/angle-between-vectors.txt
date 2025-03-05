@@ -72,11 +72,11 @@ $$
 </li><li>
 Let's check when the dot product is zero:
 $$
-\begin{align}
+\begin{align*}
 \vec v \cdot \vec w &= 0 \\
 \abs{\vec v} \abs{\vec w} \cos(\theta) &= 0 \\
 \abs{\vec v}=0 \text{ or }  \abs{\vec w}=0 & \text{ or } \cos(\theta)=0
-\end{align}
+\end{align*}
 $$
 We see that there are two ways how the dot product can be zero:
 <ul><li>

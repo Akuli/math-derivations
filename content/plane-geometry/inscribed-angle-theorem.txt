@@ -117,12 +117,12 @@ asymptote:
 
 The sum of all angles drawn to the center of the circle is $360^\circ$, so
 $$
-\begin{align}
+\begin{align*}
 \green{\text{green angle}}
 &= 360^\circ - (180^\circ - 2\alpha) - (180^\circ - 2\beta) \\
 &= 360^\circ - 180^\circ - 180^\circ + 2\alpha + 2\beta \\
 &= 2\underbrace{(\alpha + \beta)}_{\blue{\text{blue angle}}}.
-\end{align}
+\end{align*}
 $$
 
 comment:

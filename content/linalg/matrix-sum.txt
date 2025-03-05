@@ -8,11 +8,11 @@ $$
 $$
 Let's extend this to matrices of any size like this:
 $$
-\begin{align}
+\begin{align*}
 \red{\begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}}
 + \blue{\begin{bmatrix} 7 & 9 & 11 \\ 8 & 10 & 12 \end{bmatrix}}
 &= \begin{bmatrix} \red1+\blue7 & \red3+\blue9 & \red5+\blue{11} \\ \red2+\blue8 & \red4+\blue{10} & \red6+\blue{12} \end{bmatrix}.
-\end{align}
+\end{align*}
 $$
 Note that $A+B$ is undefined if the matrices $A$ and $B$ have different sizes,
 because then you can't choose the corresponding elements from them.
@@ -22,7 +22,7 @@ because then you can't choose the corresponding elements from them.
 
 If we multiply the matrix above with a vector, e.g. $\green{(13,14,15)}$, we get
 $$
-\begin{align}
+\begin{align*}
 &~~~~ \begin{bmatrix} \red1+\blue7 & \red3+\blue9 & \red5+\blue{11} \\ \red2+\blue8 & \red4+\blue{10} & \red6+\blue{12} \end{bmatrix}
 \begin{bmatrix}\green{13}\\\green{14}\\\green{15}\end{bmatrix} \\
 &= \green{13}\begin{bmatrix} \red1+\blue7 \\ \red2+\blue8 \end{bmatrix}
@@ -35,11 +35,11 @@ $$
 %    \green{13}(\red1+\blue7) + \green{14}(\red3+\blue9) + \green{15}(\red5+\blue{11}) \\
 %    \green{13}(\red2+\blue8) + \green{14}(\red4+\blue{10}) + \green{15}(\red6+\blue{12})
 &= \begin{bmatrix}512\\596\end{bmatrix}.
-\end{align}
+\end{align*}
 $$
 If we multiply the vector separately with the two original matrices, we get
 $$
-\begin{align}
+\begin{align*}
 &~~~~ \red{\begin{bmatrix} 1 & 3 & 5 \\ 2 & 4 & 6 \end{bmatrix}}\begin{bmatrix}\green{13}\\\green{14}\\\green{15}\end{bmatrix}
 + \blue{\begin{bmatrix} 7 & 9 & 11 \\ 8 & 10 & 12 \end{bmatrix}}\begin{bmatrix}\green{13}\\\green{14}\\\green{15}\end{bmatrix} \\
 &= \green{13}\red{\begin{bmatrix} 1 \\ 2 \end{bmatrix}}
@@ -52,7 +52,7 @@ $$
 + \green{14}\left(\red{\begin{bmatrix} 3 \\ 4 \end{bmatrix}}+\blue{\begin{bmatrix} 9 \\ 10 \end{bmatrix}}\right)
 + \green{15}\left(\red{\begin{bmatrix} 5 \\ 6 \end{bmatrix}}+\blue{\begin{bmatrix} 11 \\ 12 \end{bmatrix}}\right) \\
 &= \begin{bmatrix}512\\596\end{bmatrix}.
-\end{align}
+\end{align*}
 $$
 We got the same result, and this works in general
 whenever the sizes of the matrices and the vector are correct.

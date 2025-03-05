@@ -34,20 +34,20 @@ $$
 $$
 By bringing it all together, we get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} x^n
 &= (-1)\left( x^{\abs{n}} \right)^{-2} \abs{n}x^{\abs{n} - 1} \\
 &= -\abs{n}x^{(-2)\abs{n}}x^{\abs{n} - 1}.
-\end{align}
+\end{align*}
 $$
 Because $n$ is negative, we have $n = -\abs{n}$ and $\abs{n} = -n$, so
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} x^n
 = nx^{2n}x^{-n - 1}
 = nx^{2n-n-1}
 = nx^{n-1}.
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -67,13 +67,13 @@ $$
 $$
 The [chain rule](derivative-chain-rule.html) gives
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} x^{a/b}
 &= \frac{d}{dx} \left( x^a \right)^{1/b} \\
 &= \frac{1}{b} \left( x^a \right)^{1/b\ -1} ax^{a-1} \\
 &= \frac{a}{b} x^{a  ( 1/b\ -1 )} x^{a-1} \\
 &= \frac{a}{b} x^{a  ( 1/b\ -1 ) + (a-1)}.
-\end{align}
+\end{align*}
 $$
 Simplifying the power of $x$ gives
 $$

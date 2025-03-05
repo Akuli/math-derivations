@@ -92,12 +92,12 @@ $$
 $$
 By [multiplying with conjugate of bottom](div.html#how-to-divide-without-angles-and-lengths), we get
 $$
-\begin{align}
+\begin{align*}
 \frac{f(x)}{\cos(x)+i\sin(x)}
 &= \frac{f(x)(\cos(x)-i\sin(x))}{(\cos(x)+i\sin(x))(\cos(x)-i\sin(x))} \\
 &= \frac{f(x)(\cos(x)-i\sin(x))}{\cos^2(x) - i^2\sin^2(x)} \\
 &= f(x)(\cos(x)-i\sin(x)),
-\end{align}
+\end{align*}
 $$
 where the bottom became $\cos^2(x)+\sin^2(x)=1$.
 Another way to see why this happens is to consider what multiplying $\cos(x)+i\sin(x)$ with its conjugate does;
@@ -107,7 +107,7 @@ because $\cos(x)+i\sin(x)$ is on the origin-centered unit circle.
 
 Now [we can use the product rule](derivative.html#derivative-rules) and $f'(x)=if(x)$ to get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx}\left( \frac{f(x)}{\cos(x)+i\sin(x)} \right)
 &= \frac{d}{dx}\Bigl( f(x)(\cos(x)-i\sin(x)) \Bigr) \\
 &= f'(x)(\cos(x)-i\sin(x)) + f(x)\frac{d}{dx}\left( \cos(x)-i\sin(x) \right) \\
@@ -115,17 +115,17 @@ $$
 &= f(x)(i\cos(x)-i^2\sin(x)) - f(x)(\sin(x)+i\cos(x)) \\
 &= f(x)(i\cos(x)+\sin(x)) - f(x)(i\cos(x)+\sin(x)) \\
 &= 0.
-\end{align}
+\end{align*}
 $$
 Because the derivative is zero, $\frac{f(x)}{\cos(x)+i\sin(x)}$ must be a constant.
 To find the value of that constant, we can plug in $x=0$, and we get
 $$
-\begin{align}
+\begin{align*}
 \frac{f(x)}{\cos(x)+i\sin(x)}
 &= \text{constant} \\
 &= \frac{f(0)}{\cos(0)+i\sin(0)} \\
 &= \frac{1}{1} = 1.
-\end{align}
+\end{align*}
 $$
 Now we can multiply both sides by $\cos(x)+i\sin(x)$ and we get
 $$
@@ -276,12 +276,12 @@ Other well-known rules for the exponent function follow from this rule. Examples
 * Because $e^{-w}e^w=e^{-w+w}=e^0=1$, we have $e^{-w}=1/e^w$.
 * For a positive integer $n$, we get
     $$
-    \begin{align}
+    \begin{align*}
     \underbrace{e^z e^z e^z e^z \dots e^z}_{\text{$n$ times}}
     &= e^{z+z}\underbrace{e^z e^z \dots e^z}_{\text{$n-2$ times}} \\
     &= e^{z+z+z}\underbrace{e^z \dots e^z}_{\text{$n-3$ times}} \\
     &= e^{z+z+z+\dots+z},
-    \end{align}
+    \end{align*}
     $$
     where we used $e^ze^w=e^{z+w}$ several times, depending on what number $n$ is.
     So, $n$ copies of $e^z$ multiplied is same as $e^{z+z+\dots+z}$,

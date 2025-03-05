@@ -77,10 +77,10 @@ asymptote:
 
 We can add and subtract any 2D vectors $a\I+b\J$ and $x\I+y\J$ with these rules:
 $$
-\begin{align}
+\begin{align*}
 (a\I + b\J) + (x\I + y\J) &= (a+x)\I + (b+y)\J \\
 (a\I + b\J) - (x\I + y\J) &= (a-x)\I + (b-y)\J
-\end{align}
+\end{align*}
 $$
 Multiplying a real number $c$ and a 2D vector works like this:
 $$
@@ -93,10 +93,10 @@ graybox:
     Let $a+bi$ and $x+yi$ be complex numbers, and let $c$ be a real number.
     Addition and subtraction of complex numbers is defined like this:
     $$
-    \begin{align}
+    \begin{align*}
     (a + bi) + (x + yi) &= (a+x) + (b+y)i \\
     (a + bi) - (x + yi) &= (a-x) + (b-y)i
-    \end{align}
+    \end{align*}
     $$
     Multiplying a real number and a complex number is defined like this:
     $$

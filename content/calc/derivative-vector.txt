@@ -30,21 +30,21 @@ and some other letter such as $\vec r$ for the location.
 Let $\vec v(t) = (f(t), g(t))$.
 With the definition of derivative, we get
 $$
-\begin{align}
+\begin{align*}
 \vec v'(t)
 &= \lim_{h \to 0} \frac{\vec v(t+h) - \vec v(t)}{h} \\
 &= \lim_{h \to 0} \frac{(f(t+h), g(t+h)) - (f(t), g(t))}{h}.
-\end{align}
+\end{align*}
 $$
 Let's switch to using the $\I$ and $\J$ notation of vectors. Now we get
 $$
-\begin{align}
+\begin{align*}
 \vec v'(t)
 &= \lim_{h \to 0} \frac{( f(t+h)\I + g(t+h)\J ) - ( f(t)\I + g(t)\J )}{h} \\
 &= \lim_{h \to 0} \frac{f(t+h)\I + g(t+h)\J - f(t)\I - g(t)\J}{h} \\
 &= \lim_{h \to 0} \frac{(f(t+h) - f(t))\I + (g(t+h) - g(t))\J}{h} \\
 &= \lim_{h \to 0} \left( \frac{f(t+h) - f(t)}{h}\I + \frac{g(t+h) - g(t)}{h}\J \right).
-\end{align}
+\end{align*}
 $$
 By [taking limits of $\I$ and $\J$ parts
 separately](limit-vector.html#taking-limits-of-i-and-j-parts-separately), we get

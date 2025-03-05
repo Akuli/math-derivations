@@ -83,12 +83,12 @@ $\vec a$ and $\vec b$ are perpendicular to each other](../vectors/dot-projection
 These vectors go in the directions of the lines, so
 here's the condition for the perpendicularity of the lines:
 $$
-\begin{align}
+\begin{align*}
 \vec a \cdot \vec b &= 0 \\
 (\I+s_1\J) \cdot (\I+s_2\J) &= 0 \\
 1 \cdot 1 + s_1s_2 &= 0 \\
 s_1s_2 &= -1
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -108,12 +108,12 @@ We need absolute value here, because the angle between two vectors can't be nega
 but $\theta$ can be negative, and that just means that it goes in a different direction (see above).
 Solving for $\cos(\abs{\theta})$, we get
 $$
-\begin{align}
+\begin{align*}
 \cos(\abs{\theta})
 &= \frac{\vec a \cdot \vec b}{\abs{\vec a} \abs{\vec b}} \\
 &= \frac{1+s_1s_2}{\abs{\I+s_1\J} \abs{\I+s_2\J}} \\
 &= \frac{1+s_1s_2}{\sqrt{1+s_1^2} \sqrt{1+s_2^2}}. \\
-\end{align}
+\end{align*}
 $$
 This is a usable formula, but it contains an ugly square root mess in the denominator;
 we'll create a nicer formula soon.
@@ -219,10 +219,10 @@ Again, we ended up with a formula that contains an ugly square root mess.
 
 Now we have two formulas with ugly square root messes.
 $$
-\begin{align}
+\begin{align*}
 \cos(\theta) &= \frac{1+s_1s_2}{\sqrt{1+s_1^2}\sqrt{1+s_2^2}} \qquad \text{First Ugly Angle Formula} \\
 \sin(\theta) &= \frac{s_2-s_1 }{\sqrt{1+s_1^2}\sqrt{1+s_2^2}} \qquad \text{Second Ugly Angle Formula}
-\end{align}
+\end{align*}
 $$
 
 The ugly mess cancels away if we divide these formulas by each other:

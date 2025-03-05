@@ -16,19 +16,19 @@ Let's find the equation of a line with slope $s$ going through the point $P=(P_x
 The equation is $y = sx+h$, where $h$ is an unknown number.
 The point $P$ must be on the line, so it must satisfy the equation of the line:
 $$
-\begin{align}
+\begin{align*}
 P_y &= sP_x + h \\
 P_y - sP_x &= h
-\end{align}
+\end{align*}
 $$
 We can plug this into the line equation:
 $$
-\begin{align}
+\begin{align*}
 y &= sx+h \\
 y &= sx+P_y-sP_x \\
 y-P_y &= sx-sP_x \\
 y-P_y &= s(x-P_x)
-\end{align}
+\end{align*}
 $$
 
 graybox:

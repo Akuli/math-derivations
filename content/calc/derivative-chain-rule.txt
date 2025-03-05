@@ -125,13 +125,13 @@ E_g(h) = \Bigl( g(x+h)-g(x) \Bigr) - g'(x)h.
 $$
 We notice that
 $$
-\begin{align}
+\begin{align*}
 \lim_{h \to 0} \frac{E_g(h)}{h}
 &= \lim_{h \to 0} \frac{g(x+h)-g(x)-g'(x)h}{h} \\
 &= \lim_{h \to 0} \left( \frac{g(x+h)-g(x)}{h} - \frac{g'(x)h}{h} \right) \\
 &= \lim_{h \to 0} \frac{g(x+h)-g(x)}{h} - \lim_{h \to 0} g'(x) \\
 &= g'(x) - g'(x) = 0.
-\end{align}
+\end{align*}
 $$
 We also get
 $$
@@ -149,10 +149,10 @@ $$
 where we also use $n$ instead of $h$, because we already used $h$ when working with $g$.
 By doing the same things for this approximation, we get a function $E_f$ satisfying
 $$
-\begin{align}
+\begin{align*}
 \lim_{n \to 0} \frac{E_f(n)}{n} &= 0, \\
 f(g(x)+n) &= f(g(x)) + f'(g(x))n + E_f(n).
-\end{align}
+\end{align*}
 $$
 
 
@@ -180,24 +180,24 @@ f(g(x+h))-f(g(x)) = f'(g(x))q(h) + E_f(q(h)).
 $$
 Now we can calculate
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} f(g(x))
 &= \lim_{h \to 0} \frac{f(g(x+h))-f(g(x))}{h} \\
 &= \lim_{h \to 0} \frac{f'(g(x))q(h) + E_f(q(h))}{h} \\
 &= \lim_{h \to 0} \left( f'(g(x)) \frac{q(h)}{h} + \frac{E_f(q(h))}{h} \right) \\
 &= f'(g(x)) \left( \lim_{h \to 0} \frac{q(h)}{h} \right) + \lim_{h \to 0} \frac{E_f(q(h))}{h}.
-\end{align}
+\end{align*}
 $$
 Now we just need to calculate the two limits.
 For the first one, we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{h \to 0} \frac{q(h)}{h}
 &= \lim_{h \to 0} \frac{g'(x)h + E_g(h)}{h} \\
 &= \lim_{h \to 0} \left( g'(x) + \frac{E_g(h)}{h} \right) \\
 &= \underbrace{\lim_{h \to 0} g'(x)}_{g'(x)} + \underbrace{\lim_{h \to 0} \frac{E_g(h)}{h}}_0 \\
 &= g'(x),
-\end{align}
+\end{align*}
 $$
 so
 $$
@@ -233,7 +233,7 @@ C(n)n = E_f(n),
 $$
 because $E_f(0) = 0$ (why?), and if $n \ne 0$, then $C(n) = \frac{E_f(n)}{n}$.
 By using this with $n=q(h)$, we can calculate the tricky limit, and it gives
-\begin{align}
+\begin{align*}
 \lim_{h \to 0} \frac{E_f(q(h))}{h}
 &= \lim_{h \to 0} \frac{C(q(h))q(h)}{h} \\
 &= \left( \lim_{h \to 0} C(q(h)) \right) \underbrace{\left( \lim_{h \to 0} \frac{q(h)}{h} \right)}_{g'(x)} \\
@@ -241,7 +241,7 @@ By using this with $n=q(h)$, we can calculate the tricky limit, and it gives
 &= C\left( \lim_{h \to 0} \left( \frac{q(h)}{h} h \right) \right) g'(x) \\
 &= C\left( \left( \lim_{h \to 0} \frac{q(h)}{h} \right) \left( \lim_{h \to 0} h \right) \right) g'(x) \\
 &= \underbrace{C\Bigl( g'(h) \cdot 0 \Bigr)}_{C(0)=0} g'(x) = 0.
-\end{align}
+\end{align*}
 Here we used the fact that $C$ is continuous at $0$
 by [bringing the limit inside it](cont-props.html#moving-limit-inside-a-continuous-function).
 This is why we needed continuity.
@@ -269,12 +269,12 @@ Examples:
     $$
     and with [these rules](derivative-basic-rules.html), we get
     $$
-    \begin{align}
+    \begin{align*}
     \frac{d}{dx} \left( 9x^2+6x+1 \right)
     &= 9 \cdot \frac{d}{dx} x^2 + 6 \cdot \frac{d}{dx} x + \frac{d}{dx} 1 \\
     &= 9 \cdot 2x + 6 \cdot 1 + 0 \\
     &= 18x + 6.
-    \end{align}
+    \end{align*}
     $$
 </li><li>
     Similarly, we get

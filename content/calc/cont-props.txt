@@ -95,12 +95,12 @@ $$
 If we also have $\lim_{x \to a} f(x) = A$, then
 with [limit of product](limit-props.html#limit-of-product), we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} \frac{f(x)}{g(x)}
 &= \lim_{x \to a} \left( f(x) \frac{1}{g(x)} \right) \\
 &= \left( \lim_{x \to a} f(x) \right)\left( \lim_{x \to a} \frac{1}{g(x)} \right) \\
 &= A \cdot \frac 1 B = \frac A B.
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -118,13 +118,13 @@ Now we finally know how to calculate limits with division in them.
 Let $f$ and $g$ be functions that are continuous at some number $a$. Let $h(x) = f(x)+g(x)$.
 Then, with [limit of sum](limit-props.html#limit-of-sum), we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} h(x)
 &= \lim_{x \to a} (f(x)+g(x))\\
 &= \left( \lim_{x \to a} f(x) \right) + \left( \lim_{x \to a} g(x) \right) \\
 &= f(a) + g(a) \\
 &= h(a),
-\end{align}
+\end{align*}
 $$
 which shows that $h$ is also continuous at $a$.
 We have very similar limit properties for subtracting, multiplying and dividing, so
@@ -147,12 +147,12 @@ suppose that $g$ is continuous at $a$ and $f$ is continuous at $g(a)$.
 Let $h(x) = f(g(x))$.
 Then, by moving the limit inside $f$ (see above), we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} h(x)
 &= \lim_{x \to a} f(g(x)) \\
 &= f\left( \lim_{x \to a} g(x) \right) \\
 &= f(g(a)) = h(a).
-\end{align}
+\end{align*}
 $$
 This shows that $h$ is continuous at $a$.
 

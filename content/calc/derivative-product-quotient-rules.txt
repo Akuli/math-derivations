@@ -18,19 +18,19 @@ $$
 which makes sense, given that $p(h)$ is the difference of $f(x)$ and $f(x+h)$.
 Similarly, we let $q(h) = g(x+h)-g(x)$, and we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{h \to 0} \frac{q(h)}{h} &= g'(x), \\
 g(x+h) &= g(x)+q(h).
-\end{align}
+\end{align*}
 $$
 Now we get
 $$
-\begin{align}
+\begin{align*}
 \blue{f(x+h)}\green{g(x+h)}
 &= \blue{(f(x) + p(h))}\green{(g(x) + q(h))} \\
 &= \blue{f(x)}\green{g(x)} + \blue{p(h)}\green{g(x)}
     + \blue{f(x)}\green{q(h)} + \blue{p(h)}\green{q(h)}.
-\end{align}
+\end{align*}
 $$
 Subtracting $\blue{f(x)}\green{g(x)}$ on both sides gives
 $$
@@ -69,7 +69,7 @@ asymptote:
 
 Now we get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} (f(x)g(x))
 &= \lim_{h \to 0} \frac{\blue{f(x+h)}\green{g(x+h)} - \blue{f(x)}\green{g(x)}}{h} \\
 &= \lim_{h \to 0} \frac{\blue{p(h)}\green{g(x)} + \blue{f(x)}\green{q(h)} + \blue{p(h)}\green{q(h)}}{h} \\
@@ -81,7 +81,7 @@ $$
         + \frac{\blue{p(h)}}{h} \frac{\green{q(h)}}{h} h \right) \\
 &= f'(x)g(x) + f(x)g'(x) + f'(x)g'(x) \cdot 0 \\
 &= f'(x)g(x) + f(x)g'(x).
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -131,7 +131,7 @@ $$
 $$
 By bringing all this together, we get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} \frac{f(x)}{g(x)}
 &= \frac{d}{dx} \left( f(x)g(x)^{-1} \right) \\
 &= f'(x)g(x)^{-1} + f(x) \cdot \frac{d}{dx} \left( g(x)^{-1} \right) \\
@@ -139,7 +139,7 @@ $$
 &= \frac{f'(x)}{g(x)} + (-1)\frac{f(x)g'(x)}{g(x)^2} \\
 &= \frac{f'(x)g(x)}{g(x)^2} - \frac{f(x)g'(x)}{g(x)^2} \\
 &= \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}.
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -184,13 +184,13 @@ $$
 Without the quotient rule, the calculation looks like this
 (see the derivation of the quotient rule for explanations):
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} \left( \frac{x^2}{x+x^{-1}} \right)
 &= \frac{d}{dx} \left( x^2(x+x^{-1})^{-1} \right) \\
 &= 2x(x+x^{-1})^{-1} + x^2 \cdot \frac{d}{dx}\left( (x+x^{-1})^{-1} \right) \\
 &= 2x(x+x^{-1})^{-1} + x^2(-1)(x+x^{-1})^{-2} \cdot \frac{d}{dx}(x + x^{-1}) \\
 &= 2x(x+x^{-1})^{-1} + x^2(-1)(x+x^{-1})^{-2} \left( 1 + (-1)x^{-2} \right)
-\end{align}
+\end{align*}
 $$
 Both of these results simplify to
 $$

@@ -30,12 +30,12 @@ which means that $f(x)$ is quite close to its limit, and less than its limit.
 
 Let's now take the limit of $E_f$ using [the limit of sum](limit-sum.html):
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} E_f(x)
 &= \lim_{x \to a} (f(x)-3) \\
 &= \lim_{x \to a} (f(x) + (-3)) \\
 &= \lim_{x \to a} f(x) + \lim_{x\to a} (-3)
-\end{align}
+\end{align*}
 $$
 The limit of $f(x)$ is $3$,
 and according to [limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant),
@@ -68,33 +68,33 @@ We calculate the limit of $f(x)g(x)$.
 
 Let's start by defining the following "error functions":
 $$
-\begin{align}
+\begin{align*}
 E_f(x) &= f(x)-3 \\
 E_g(x) &= g(x)-5
-\end{align}
+\end{align*}
 $$
 And rearranging them:
 $$
-\begin{align}
+\begin{align*}
 f(x) &= 3 + E_f(x) \\
 g(x) &= 5 + E_g(x)
-\end{align}
+\end{align*}
 $$
 We can now start calculating the limit of $f(x)g(x)$:
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} \Bigl( f(x)g(x) \Bigr)
 &= \lim_{x \to a} (3+E_f(x))(5+E_g(x)) \\
 &= \lim_{x \to a} \Bigl(15 + 3E_g(x) + 5E_f(x) + E_f(x)E_g(x) \Bigl)
-\end{align}
+\end{align*}
 $$
 We ended up with 4 things added,
 so we can use [the limit of sum](limit-sum.html) to split them into separate limits:
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} \Bigl( f(x)g(x) \Bigr)
 &= \lim_{x \to a} 15  + \lim_{x \to a} 3E_g(x) + \lim_{x \to a} 5E_f(x) + \lim_{x \to a} \bigl(E_f(x)E_g(x)\bigr)
-\end{align}
+\end{align*}
 $$
 The first three limits are easy:
 
@@ -103,13 +103,13 @@ The first three limits are easy:
 </li><li>
     The limit of $3E_g(x)$ can be calculated as a limit of sum:
     $$
-    \begin{align}
+    \begin{align*}
     \lim_{x \to a} 3E_g(x)
     &= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x)\Bigr) \\
     &= \lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x) \\
     &= 0+0+0 \\
     &= 0
-    \end{align}
+    \end{align*}
     $$
 </li><li>
     The limit of $5E_g(x)$ can be calculated similarly, and it is also zero.
@@ -172,31 +172,31 @@ We calculate the limit of $f(x)g(x)$.
 The above calculation mostly works as is,
 but this part needs to be modified a bit:
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} 3E_g(x)
 &= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x)\Bigr) \\
 &= \lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x)+\lim_{x \to a} E_g(x) \\
 &= 0+0+0 \\
 &= 0
-\end{align}
+\end{align*}
 $$
 The problem is that we get $3.14E_g(x)$ instead of $3E_g(x)$.
 We can still split it up similarly, but $0.14 E_g(x)$ will remain.
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} 3.14E_g(x)
 &= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x) + 0.14E_g(x)\Bigr)
-\end{align}
+\end{align*}
 $$
 However, multiplying by $0.14$ makes numbers smaller because it's less than $1$,
 so the limit of $0.14E_g(x)$ is also zero:
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} 3.14E_g(x)
 &= \lim_{x \to a} \Bigl(E_g(x)+E_g(x)+E_g(x) + 0.14E_g(x)\Bigr) \\
 &= 0+0+0+0 \\
 &= 0
-\end{align}
+\end{align*}
 $$
 We will also need the limit of $6.9E_f(x)$, and that's zero for the same reason, so we get
 $$
@@ -256,18 +256,18 @@ Let's view $2x^2$ as the product of 3 things, as in $2 \cdot x \cdot x$.
 We use the rule for limit of product.
 Just like the rule for sum, it can be applied to more than two functions, like this:
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to 3} 2x^2
 &= \lim_{x \to 3} (2 \cdot x \cdot x) \\
 &= \left( \lim_{x \to 3} 2 \right)\left( \lim_{x \to 3} x \right)\left( \lim_{x \to 3} x \right)
-\end{align}
+\end{align*}
 $$
 We can handle the limit of $4x$ similarly.
 Finally, we can use $\lim_{x \to 3} x = 3$ (derived [here](limit-def.html#simple-example-limit-of-x))
 and [limit of a constant](limit-def.html#even-simpler-example-limit-of-a-constant).
 Like this:
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to 3} (2x^2+4x+7)
 &= \lim_{x \to 3} 2x^2 + \lim_{x \to 3} 4x + \lim_{x \to 3} 7 \\
 &= \left(\lim_{x \to 3} 2\right)\left( \lim_{x \to 3} x \right)^2
@@ -275,7 +275,7 @@ $$
     + \lim_{x \to 3} 7 \\
 &= 2 \cdot 3^2 + 4 \cdot 3 + 7 \\
 &= 37.
-\end{align}
+\end{align*}
 $$
 We can [check this by plugging in a number near 3](limit-intro.html):
 $$

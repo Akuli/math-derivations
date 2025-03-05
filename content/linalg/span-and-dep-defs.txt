@@ -118,12 +118,12 @@ To see when that happens, we split this into two cases:
     we can replace it with a linear combination of other vectors.
     For example, if $\blue{\vec w = 2\vec{v_1} + 3\vec{v_2} - 2\vec{v_3}}$, we get
     $$
-    \begin{align}
+    \begin{align*}
     \green{\vec{v_1} + 4\vec{v_2} + 7\vec{v_3}} + 6\blue{\vec w}
     &= \green{\vec{v_1} + 4\vec{v_2} + 7\vec{v_3}} + 6\blue{( 2\vec{v_1} + 3\vec{v_2} - 2\vec{v_3})} \\
     &= (\green{1} + 6 \cdot \blue2)\vec{v_1} + (\green{4} + 6 \cdot \blue3)\vec{v_2} + (\green7 + 6 \cdot \blue{(-2)}) \vec{v_3} \\
     &= 13\vec{v_1} + 22\vec{v_2} - 5\vec{v_3},
-    \end{align}
+    \end{align*}
     $$
     which is a vector in the old span.
     Because any vector in the new span is also in the old span,

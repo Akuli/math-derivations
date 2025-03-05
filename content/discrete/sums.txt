@@ -54,12 +54,12 @@ This sum doubles when we make a copy of each square, but
 it doesn't change in other ways because the numbers get added when squares merge together.
 We ended up with $n+1=8$ showing $n$ times, once in each of the $n$ squares, so
 $$
-\begin{align}
+\begin{align*}
 1+2+3+\dots+n
 &= \text{sum of numbers in the beginning} \\
 &= \frac{1}{2}(\text{sum of numbers at end of animation}) \\
 &= \frac{1}{2}n(n+1).
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -189,14 +189,14 @@ there are $n$ rows, $n$ columns and $1$ diagonal of squares showing $1+2+\dots+n
 This means that we have $1+2+\dots+n$, repeated $2n+1$ times.
 With these things and the result from the previous derivation, we get
 $$
-\begin{align}
+\begin{align*}
 1^2 + 2^2 + \dots + n^2
 &= \text{sum of numbers in the beginning} \\
 &= \frac{1}{3}(\text{sum of numbers at end of animation}) \\
 &= \frac{1}{3}(2n+1)(1+2+\dots+n) \\
 &= \frac{1}{3}(2n+1)\frac{n(n+1)}{2} \\
 &= \frac{n(n+1)(2n+1)}{6}.
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -313,12 +313,12 @@ For that reason, the number of copies is $1+2+\dots+n$;
 we have $1+2+\dots+n$ copies of $1+2+\dots+n$.
 This means that the sum of all numbers is
 $$
-\begin{align}
+\begin{align*}
 (1+2+\dots+n)(1+2+\dots+n)
 &= (1+2+\dots+n)^2 \\
 &= \left( \frac{n(n+1)}{2} \right)^2 \\
 &= \frac{n^2(n+1)^2}{4},
-\end{align}
+\end{align*}
 $$
 where the first result on this page was used to calculate $1+2+\dots+n$.
 

@@ -33,7 +33,7 @@ $$
 $$
 Let's multiply this with any matrix of the same size:
 $$
-\begin{align}
+\begin{align*}
 &~~~~~
 \begin{bmatrix}
 1&0&0 \\
@@ -55,7 +55,7 @@ $$
 \green d+5\red a&\green e+5\red b&\green f+5\red c \\
 \blue g&\blue h&\blue i
 \end{bmatrix}
-\end{align}
+\end{align*}
 $$
 This added a multiple of the first row to the second row.
 Moving the $5$ down adds to the bottom row instead:

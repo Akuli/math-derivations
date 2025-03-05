@@ -17,17 +17,17 @@ just like with real numbers.
 Because of how [multiplication adds angles and multiplies lengths](mul.html#why-do-angles-get-added-and-lengths-get-multiplied),
 this means that
 $$
-\begin{align}
+\begin{align*}
 \abs{\sqrt{z}}^2 &= \abs{z}, \\
 2(\text{angle of $\sqrt{z}$}) &= \text{angle of $z$}.
-\end{align}
+\end{align*}
 $$
 Solving for the length and angle of $\sqrt{z}$, we get
 $$
-\begin{align}
+\begin{align*}
 \abs{\sqrt{z}} &= \sqrt{\abs{z}}, \\
 \text{angle of $\sqrt{z}$} &= \frac{\text{angle of $z$}}{2}.
-\end{align}
+\end{align*}
 $$
 As usual, if $z = 0$, the angle equation is not needed because the length formula gives $\sqrt{0}=0$.
 Any nonzero complex number $z \ne 0$ has infinitely many angles, differing from each other by $2\pi$,
@@ -256,20 +256,20 @@ From the second equation, we see that then $x$ and $y$ are nonzero too.
 So, we can divide by $x$ and we get $y = \frac{b}{2x}$ from the second equation.
 Let's plug that into the first equation:
 $$
-\begin{align}
+\begin{align*}
 x^2 - \left( \frac{b}{2x} \right)^2 &= a \\
 x^2 - \frac{b^2}{4x^2} &= a \\
 (x^2)^2 - \frac{b^2}{4} &= ax^2 \\
 (x^2)^2 - ax^2 - \frac{b^2}{4} &= 0
-\end{align}
+\end{align*}
 $$
 By applying the quadratic formula (TODO) with $x^2$ instead of $x$, we get
 $$
-\begin{align}
+\begin{align*}
 x^2
 &= \frac{-(-a) \pm\sqrt{(-a)^2 - 4\left(-\frac{b^2}{4}\right)}}{2} \\
 &= \frac{a\pm\sqrt{a^2+b^2}}{2} = \frac{a\pm r}{2},
-\end{align}
+\end{align*}
 $$
 where $r = \sqrt{a^2+b^2}$ is the length of $a+bi$.
 Because $b$ is a nonzero real number, we have $b^2 > 0$ and so
@@ -323,10 +323,10 @@ let $z$ be a complex number on the origin-centered unit circle with angle $\thet
 Like in the [derivation of de Moivre's formula](mul.html#de-moivre-s-formula),
 $z^2$ is also on the unit circle with angle $2\theta$, and we have
 $$
-\begin{align}
+\begin{align*}
 z&=\cos(\theta) + i\sin(\theta), \\
 z^2&=\cos(2\theta)+i\sin(2\theta).
-\end{align}
+\end{align*}
 $$
 
 asymptote:
@@ -354,27 +354,27 @@ $$
 $$
 By comparing real and imaginary parts, we get
 $$
-\begin{align}
+\begin{align*}
 \cos(\theta) &= \pm \sqrt{\frac{1+\cos(2\theta)}{2}} \\
 \sin(\theta) &= \pm \sqrt{\frac{1-\cos(2\theta)}{2}},
-\end{align}
+\end{align*}
 $$
 where we combined the two $\pm$ signs into another $\pm$ sign for the imaginary part of the right side.
 Finally, to get rid of all $\pm$ signs and square roots, we can square both sides to get
 $$
-\begin{align}
+\begin{align*}
 \cos^2(\theta) &= \frac{1+\cos(2\theta)}{2} \\
 \sin^2(\theta) &= \frac{1-\cos(2\theta)}{2}.
-\end{align}
+\end{align*}
 $$
 
 graybox:
     For all angles $\theta$, we have
     $$
-    \begin{align}
+    \begin{align*}
     \cos^2(\theta) &= \frac{1+\cos(2\theta)}{2}, \\
     \sin^2(\theta) &= \frac{1-\cos(2\theta)}{2}.
-    \end{align}
+    \end{align*}
     $$
 
 comment:

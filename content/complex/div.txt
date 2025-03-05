@@ -101,12 +101,12 @@ x + yi = \frac{1+2i}{3+4i},
 $$
 which gives
 $$
-\begin{align}
+\begin{align*}
 1+2i
 &= (x+yi)(3+4i) \\
 &= 3x + 4xi + 3yi + 4yi^2 \\
 &= 3x - 4y + (4x + 3y)i.
-\end{align}
+\end{align*}
 $$
 Comparing the real and imaginary parts on both sides gives
 $$

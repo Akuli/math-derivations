@@ -23,10 +23,10 @@ graybox:
     where $f$ and $g$ are real-valued and the input $x$ is a real number.
     Then
     $$
-    \begin{align}
+    \begin{align*}
     \lim_{x \to a} h(x) &= \left( \lim_{x \to a} f(x) \right) + i\left( \lim_{x \to a} g(x) \right), \\
     h'(x) &= f'(x)+ig'(x),
-    \end{align}
+    \end{align*}
     $$
     where the limit or derivative on the left side exists
     if and only if both limits or derivatives on the right side exists.
@@ -54,12 +54,12 @@ f(x) = f_1(x)+if_2(x) \quad \text{and} \quad g(x) = g_1(x)+ig_2(x),
 $$
 where $f_1$, $f_2$, $g_1$ and $g_2$ are real-valued, and now we have
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} f_1(x) &= A, \\
 \lim_{x \to a} f_2(x) &= B, \\
 \lim_{x \to a} g_1(x) &= C, \\
 \lim_{x \to a} g_2(x) &= D.
-\end{align}
+\end{align*}
 $$
 By expanding and grouping real and imaginary parts together, we get
 $$
@@ -68,20 +68,20 @@ $$
 By calculating limits of real and imaginary parts separately
 and then applying limit rules for real-valued functions, we get
 $$
-\begin{align}
+\begin{align*}
 \lim_{x \to a} (f(x)+g(x))
 &= \lim_{x \to a}(f_1(x)+g_1(x))+i\lim_{x \to a}(f_2(x)+g_2(x)) \\
 &= \left(\lim_{x \to a}f_1(x)+\lim_{x \to a}g_1(x)\right)+i\left(\lim_{x \to a}f_2(x)+\lim_{x \to a}g_2(x)\right) \\
 &= A+C+i(B+D).
-\end{align}
+\end{align*}
 $$
 On the other hand, we have
 $$
-\begin{align}
+\begin{align*}
 \left(\lim_{x \to a} f(x)\right)+\left(\lim_{x \to a} g(x)\right)
 &= (A+Bi)+(C+Di) \\
 &= (A+C)+i(B+D),
-\end{align}
+\end{align*}
 $$
 so
 $$

@@ -9,7 +9,7 @@ How about $\frac{d}{dx}(3x^2-4x+5)$?
 
 Suppose that the derivatives $\frac{d}{dx} f(x)$ and $\frac{d}{dx} g(x)$ exist. Then
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} (f(x)+g(x))
 &= \lim_{h \to 0} \frac{(f(x+h)+g(x+h))-(f(x)+g(x))}{h} \\
 &= \lim_{h \to 0} \frac{f(x+h)+g(x+h)-f(x)-g(x)}{h} \\
@@ -17,7 +17,7 @@ $$
 &= \lim_{h \to 0} \left( \frac{f(x+h)-f(x)}{h} + \frac{g(x+h)-g(x)}{h} \right) \\
 &= \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} + \lim_{h \to 0} \frac{g(x+h)-g(x)}{h} \\
 &= \frac{d}{dx} f(x) + \frac{d}{dx} g(x).
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -33,14 +33,14 @@ Let $c$ be a constant (that is, any number that does not depend on $x$).
 Suppose that $\frac{d}{dx} f(x)$ exists.
 Then
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} (cf(x))
 &= \lim_{h \to 0} \frac{cf(x+h)-cf(x)}{h} \\
 &= \lim_{h \to 0} \frac{c(f(x+h)-f(x))}{h} \\
 &= \lim_{h \to 0} c\frac{f(x+h)-f(x)}{h} \\
 &= \left( \lim_{h \to 0} c \right) \left( \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} \right) \\
 &= c\frac{d}{dx} f(x).
-\end{align}
+\end{align*}
 $$
 
 graybox:
@@ -65,13 +65,13 @@ $$
 Suppose that the derivatives $\frac{d}{dx} f(x)$ and $\frac{d}{dx} g(x)$ exist.
 Then by using the above results, we get
 $$
-\begin{align}
+\begin{align*}
 \frac{d}{dx} (f(x)-g(x))
 &= \frac{d}{dx} \Bigl( f(x) + (-1)g(x)\Bigr) \\
 &= \frac{d}{dx} f(x) + \frac{d}{dx} \Bigl( (-1)g(x)\Bigr) \\
 &= \frac{d}{dx} f(x) + (-1) \frac{d}{dx} g(x) \\
 &= \frac{d}{dx} f(x) - \frac{d}{dx} g(x).
-\end{align}
+\end{align*}
 $$
 
 graybox:

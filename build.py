@@ -81,6 +81,9 @@ def get_sidebar_content(txtfile):
         </div>
         ''' % (checkbox_id, checkbox_id, title, content)
 
+    i = katex(r'\I', 'inline')
+    j = katex(r'\J', 'inline')
+
     join = ''.join
     return join([
         link("Front page", 'index'),
@@ -100,7 +103,7 @@ def get_sidebar_content(txtfile):
             dropdown("Dot product", join([
                 link("Projection", 'vectors/dot-projection'),
                 link("Angle between vectors", 'vectors/angle-between-vectors'),
-                link(r"$\I$'s with $\I$'s, $\J$'s with $\J$'s",
+                link(f"{i}'s with {i}'s, {j}'s with {j}'s",
                      'vectors/iwi-jwj'),
             ])),
             dropdown("Cross product", join([
@@ -372,6 +375,7 @@ except FileNotFoundError:
 katex_macros = {
     r"\I": r"\vec{i}",
     r"\J": r"\vec{j}",
+    r"\abs": r"\left| #1 \right|",
 }
 
 

@@ -388,10 +388,10 @@ because no matter how parentheses are added, the result is the same either way.
 
 Can we also do the addition thing on the right side of the dot product? Something like this:
 $$
-\vec a \cdot (\vec b + \vec c) \mathop{=}^{?} \vec a \cdot \vec b + \vec a \cdot \vec c
+\vec a \cdot (\vec b + \vec c) \overset{?}{=} \vec a \cdot \vec b + \vec a \cdot \vec c
 $$
 How about multiplying by a number on the left side?
 $$
-(r\vec a) \cdot \vec b \mathop{=}^{?} r(\vec a \cdot \vec b)
+(r\vec a) \cdot \vec b \overset{?}{=} r(\vec a \cdot \vec b)
 $$
 The answer will be clear to you after reading [the next derivation](angle-between-vectors.html).

@@ -34,7 +34,7 @@ $$
 where we also need to assume $z \ne 0$ for using the angle of $z$.
 So, if both $z$ and $w$ are nonzero, there is one and only one complex number
 that gives $z$ when multiplied with $w$;
-it's the complex number whose length is $\abs{z}/\abs{w}$ and angle is $(\text{angle of $z$}) - (\text{angle of $w$})$.
+it's the complex number whose length is $\abs{z}/\abs{w}$ and angle is $(\text{angle of }z) - (\text{angle of }w)$.
 We can call that $z/w$.
 
 With real numbers, we also have $0/b = 0$ whenever $b \ne 0$.
@@ -54,10 +54,12 @@ it's always true for all complex numbers or for no complex numbers, depending on
 graybox:
     Complex number division is defined whenever we are not dividing by zero.
     When dividing, you can subtract the angles and divide the lengths:
+    $$
     \begin{align*}
     \text{angle of $\frac{z}{w}$} &= (\text{angle of $z$})-(\text{angle of $w$}) \\
     \abs{\frac{z}{w}} &= \frac{\abs{z}}{\abs{w}}
     \end{align*}
+    $$
 
 Subtracting angles and dividing lengths should make sense,
 because when multiplying, we add angles and multiply lengths;

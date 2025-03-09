@@ -1,4 +1,4 @@
-# Trig Derivatives
+# Derivatives of sin, cos and tan
 
 On this page we find $\frac{d}{dx}\sin(x)$, $\frac{d}{dx}\cos(x)$ and $\frac{d}{dx}\tan(x)$.
 We use the unit-circle definitions of $\sin(x)$ and $\cos(x)$:

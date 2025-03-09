@@ -190,7 +190,7 @@ def get_sidebar_content(txtfile):
                 link("Product rule and quotient rule",
                      'calc/derivative-product-quotient-rules'),
                 link("Derivative of vector", 'calc/derivative-vector'),
-                link(r"Derivatives of $\sin$, $\cos$ and $\tan$", 'calc/derivative-trig'),
+                link(r"Derivatives of sin, cos and tan", 'calc/derivative-trig'),
             ])),
             dropdown("Integral", join([
                 link("Introduction to integrals", 'calc/integral-intro'),
@@ -375,8 +375,12 @@ except FileNotFoundError:
 katex_macros = {
     r"\I": r"\vec{i}",
     r"\J": r"\vec{j}",
+    r"\K": r"\vec{k}",
     r"\abs": r"\left| #1 \right|",
     r"\bigvec": r"\overrightarrow{#1}",
+    r"\epsi": r"\varepsilon",
+    r"\rotate": r"\operatorname{rotate}",
+    r"\magenta": r"\color{magenta}",
 }
 
 

@@ -95,7 +95,9 @@ $$
 $$
 
 graybox:
-    $$\frac{d}{dx} x^3 = 3x^2$$
+    $$
+    \frac{d}{dx} x^3 = 3x^2
+    $$
 
 The graph $y=x^3$ looks like this:
 

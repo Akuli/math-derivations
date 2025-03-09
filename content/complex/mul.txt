@@ -242,10 +242,12 @@ So, our $\star$ operation really is the complex number multiplication.
 
 graybox:
     When multiplying complex numbers, we can add the angles and multiply the lengths:
+    $$
     \begin{align*}
     \text{angle of $zw$} &= (\text{angle of $z$})+(\text{angle of $w$}) \\
     \abs{zw} &= \abs{z}\,\abs{w}
     \end{align*}
+    $$
 
 
 ## De Moivre's formula

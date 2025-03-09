@@ -273,35 +273,6 @@ def get_head_extras(filename):
         }
     });
     </script>
-
-    <!--
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
-    <script>
-    MathJax = {
-        tex: {
-            inlineMath: [ ['$','$'] ],
-            displayMath: [ ['$$','$$'] ],
-            macros: {
-                span: '\\operatorname{span}',
-                rotate: '\\operatorname{rotate}',
-                abs: [ "\\left| {#1} \\right|", 1 ],
-                bigvec: [ "\\overrightarrow{#1}", 1 ],
-                I: '\\vec{i}',
-                J: '\\vec{j}',
-                K: '\\vec{k}',
-                T: '\\operatorname{T}',
-                epsi: '\\varepsilon',
-                // colors chosen so that they are distinguishable when together
-                red: [ "{\\color{##c00}{#1}}", 1 ],
-                blue: [ "{\\color{blue}{#1}}", 1 ],
-                green: [ "{\\color{green}{#1}}", 1 ],
-                magenta: [ "{\\color{magenta}{#1}}", 1 ],
-                darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
-            }
-        }
-    };
-    </script>
-    -->
     '''
 
     htmlfile = builder.infile2outfile(filename)
@@ -381,6 +352,10 @@ katex_macros = {
     r"\epsi": r"\varepsilon",
     r"\rotate": r"\operatorname{rotate}",
     r"\magenta": r"\color{magenta}",
+#                span: '\\operatorname{span}',
+#                T: '\\operatorname{T}',
+#                // colors chosen so that they are distinguishable when together
+#                darkyellow: [ "{\\color{##ac5f00}{#1}}", 1 ],
 }
 
 

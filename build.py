@@ -416,7 +416,7 @@ def katex(latex, mode):
     return result
 
 
-@builder.converter.add_inliner(r'\$\$\n([\S\s]*?)\n\$\$')
+@builder.converter.add_inliner(r'\$\$\n([\S\s]*?)\n *\$\$')
 def display_style_katex(match, filename):
     return katex(match.group(1), "display")
 
